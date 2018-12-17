@@ -1,0 +1,27 @@
+{
+  "name": "kubernetes-spec",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/tommy351/kubernetes-spec-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint --project . --exclude 'gen/**/*.ts'",
+    "generate": "ts-node scripts/generate.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.15",
+    "@types/yargs": "^12.0.1",
+    "prettier": "^1.15.3",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.2.2",
+    "yargs": "^12.0.5"
+  }
+}
