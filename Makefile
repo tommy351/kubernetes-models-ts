@@ -10,7 +10,7 @@ $(swagger_path):
 	curl -L https://raw.githubusercontent.com/kubernetes/kubernetes/v$(KUBERNETES_VERSION)/api/openapi-spec/swagger.json > $@
 
 gen/openapi: $(swagger_path)
-	docker run --rm -v $(CURRDIR):/local $(OPENAPI_GENERATOR_CLI) generate \
+	docker run --rm -v $(CURDIR):/local $(OPENAPI_GENERATOR_CLI) generate \
 		-i /local/$(swagger_path) \
 		-g typescript-node \
 		--skip-validate-spec \

@@ -1,8 +1,8 @@
 {
-  "name": "kubernetes-spec",
+  "name": "kubernetes-models",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/tommy351/kubernetes-spec-ts",
+  "repository": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {

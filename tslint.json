@@ -5,6 +5,6 @@
     "prettier": true
   },
   "linterOptions": {
-    "exclude": ["dist", "gen"]
+    "exclude": ["dist/**/*", "gen/**/*"]
   }
 }
