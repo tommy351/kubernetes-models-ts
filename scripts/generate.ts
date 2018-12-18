@@ -1,6 +1,6 @@
-import yargs from "yargs";
 import fs from "fs";
-import { join, relative, resolve, dirname, extname } from "path";
+import { dirname, extname, join, relative, resolve } from "path";
+import yargs from "yargs";
 
 const { readFile, access, mkdir, writeFile } = fs.promises;
 
@@ -18,8 +18,8 @@ const { argv } = yargs
     required: true
   });
 
-const modelPath = resolve(argv.model);
-const outputPath = resolve(argv.output);
+const modelDir = resolve(argv.model);
+const outputDir = resolve(argv.output);
 
 function camelCase(input: string, chars: string) {
   let output = "";
@@ -54,7 +54,7 @@ function getClassName(s: string) {
 }
 
 function getModelPath(name: string) {
-  return join(modelPath, getFileName(name) + ".ts");
+  return join(modelDir, getFileName(name) + ".ts");
 }
 
 function trimPrefix(s: string, prefix: string) {
@@ -78,7 +78,7 @@ function trimSuffix(s: string, suffix: string) {
 function set(obj: any, key: string, value: any) {
   const dot = key.indexOf(".");
 
-  if (!~dot) {
+  if (dot === -1) {
     obj[key] = value;
     return obj;
   }
@@ -104,11 +104,15 @@ async function mkdirAll(path: string) {
   try {
     await mkdir(path);
   } catch (err) {
-    if (err.code !== "EEXIST") throw err;
+    if (err.code !== "EEXIST") {
+      throw err;
+    }
   }
 }
 
 async function walkTree(tree: any, dir: string) {
+  const output = [];
+
   if (typeof tree === "string") {
     const path = dir + ".ts";
     const className = getClassName(tree);
@@ -118,10 +122,8 @@ async function walkTree(tree: any, dir: string) {
       extname(modelPath)
     );
 
-    const output = [
-      `import {${className}} from '${importPath}';`,
-      `export default ${className};`
-    ];
+    output.push(`import {${className}} from '${importPath}';`);
+    output.push(`export default ${className};`);
 
     await mkdirAll(dirname(path));
     await writeFile(path, output.join("\n"));
@@ -129,7 +131,6 @@ async function walkTree(tree: any, dir: string) {
     return;
   }
 
-  const output = [];
   const indexPath = join(dir, "index.ts");
 
   for (const key of Object.keys(tree)) {
@@ -162,7 +163,9 @@ async function main() {
     try {
       await access(getModelPath(key));
       definitions.push(key);
-    } catch (e) {}
+    } catch (e) {
+      // ignore errors
+    }
   }
 
   const tree: { [key: string]: any } = {};
@@ -171,7 +174,7 @@ async function main() {
     set(tree, trimPrefix(key, "io.k8s."), key);
   }
 
-  await walkTree(tree, outputPath);
+  await walkTree(tree, outputDir);
 }
 
 main().catch(err => {

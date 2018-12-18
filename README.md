@@ -1,4 +1,4 @@
-# kubernetes-spec-ts
+# kubernetes-models-ts
 
 ## Build
 
