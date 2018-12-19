@@ -1,6 +1,6 @@
 {
   "name": "kubernetes-models",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Kubernetes models",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "repository": "https://github.com/tommy351/kubernetes-models-ts",
