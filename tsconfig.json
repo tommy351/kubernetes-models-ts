@@ -13,8 +13,7 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "declaration": true
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"]
 }

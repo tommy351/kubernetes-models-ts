@@ -21,9 +21,6 @@ gen/ts: gen/openapi $(swagger_path)
 		--model gen/openapi/model \
 		--output $@
 
-dist: gen/ts
-	npm run build -- -b tsconfig.build.json
-
 .PHONY: clean
 clean:
 	rm -rf gen dist

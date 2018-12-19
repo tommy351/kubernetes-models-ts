@@ -1,4 +1,4 @@
-# kubernetes-models-ts
+# kubernetes-models
 
 ## Install
 
@@ -14,11 +14,4 @@ import { Pod } from "kubernetes-models/api/core/v1";
 const pod = new Pod({
   //
 });
-```
-
-## Build
-
-```sh
-make gen/ts
-lerna run build
 ```
