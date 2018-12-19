@@ -3,8 +3,6 @@ OPENAPI_GENERATOR_CLI = openapitools/openapi-generator-cli:v3.3.4
 
 swagger_path = gen/swagger-$(KUBERNETES_VERSION).json
 
-gen: gen/openapi gen/ts
-
 $(swagger_path):
 	mkdir -p $(dir $@)
 	curl -L https://raw.githubusercontent.com/kubernetes/kubernetes/v$(KUBERNETES_VERSION)/api/openapi-spec/swagger.json > $@
@@ -22,6 +20,9 @@ gen/ts: gen/openapi $(swagger_path)
 		--file $(swagger_path) \
 		--model gen/openapi/model \
 		--output $@
+
+dist: gen/ts
+	npm run build -- -b tsconfig.build.json
 
 .PHONY: clean
 clean:

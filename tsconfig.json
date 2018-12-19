@@ -14,8 +14,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "outDir": "dist"
+    "declaration": true
   },
-  "exclude": ["node_modules", "gen/openapi/*.json"]
+  "exclude": ["node_modules"]
 }

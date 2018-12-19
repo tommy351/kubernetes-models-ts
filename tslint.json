@@ -3,7 +3,8 @@
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "prettier": true,
-    "no-console": false
+    "no-console": false,
+    "curly": false
   },
   "linterOptions": {
     "exclude": ["dist/**/*", "gen/**/*"]
