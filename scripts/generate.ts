@@ -1,8 +1,8 @@
-import fs from "fs";
 import { dirname, extname, join, relative, resolve } from "path";
 import yargs from "yargs";
-
-const { readFile, access, mkdir, writeFile } = fs.promises;
+import { access, readFile, writeFile } from "./fs";
+import { set } from "./object";
+import { camelCase, trimPrefix, trimSuffix, upperFirst } from "./string";
 
 const { argv } = yargs
   .option("file", {
@@ -21,30 +21,6 @@ const { argv } = yargs
 const modelDir = resolve(argv.model);
 const outputDir = resolve(argv.output);
 
-function camelCase(input: string, chars: string) {
-  let output = "";
-  let upper = false;
-
-  for (const s of input) {
-    if (chars.includes(s)) {
-      upper = true;
-    } else {
-      output += upper ? s.toUpperCase() : s;
-      upper = false;
-    }
-  }
-
-  return output;
-}
-
-function upperFirst(s: string) {
-  return s[0].toUpperCase() + s.substring(1);
-}
-
-function lowerFirst(s: string) {
-  return s[0].toLowerCase() + s.substring(1);
-}
-
 function getFileName(s: string) {
   return camelCase(s, ".");
 }
@@ -55,59 +31,6 @@ function getClassName(s: string) {
 
 function getModelPath(name: string) {
   return join(modelDir, getFileName(name) + ".ts");
-}
-
-function trimPrefix(s: string, prefix: string) {
-  if (s.substring(0, prefix.length) === prefix) {
-    return s.substring(prefix.length);
-  }
-
-  return s;
-}
-
-function trimSuffix(s: string, suffix: string) {
-  const end = s.length - suffix.length;
-
-  if (s.substring(end) === suffix) {
-    return s.substring(0, end);
-  }
-
-  return s;
-}
-
-function set(obj: any, key: string, value: any) {
-  const dot = key.indexOf(".");
-
-  if (dot === -1) {
-    obj[key] = value;
-    return obj;
-  }
-
-  const firstKey = key.substring(0, dot);
-  const restKey = key.substring(dot + 1);
-
-  obj[firstKey] = obj[firstKey] || {};
-  set(obj[firstKey], restKey, value);
-
-  return obj;
-}
-
-async function mkdirAll(path: string) {
-  const parent = dirname(path);
-
-  try {
-    await access(parent);
-  } catch (err) {
-    await mkdirAll(parent);
-  }
-
-  try {
-    await mkdir(path);
-  } catch (err) {
-    if (err.code !== "EEXIST") {
-      throw err;
-    }
-  }
 }
 
 async function walkTree(tree: any, dir: string) {
@@ -125,7 +48,6 @@ async function walkTree(tree: any, dir: string) {
     output.push(`import {${className}} from '${importPath}';`);
     output.push(`export default ${className};`);
 
-    await mkdirAll(dirname(path));
     await writeFile(path, output.join("\n"));
     console.log(`Generated: ${path}`);
     return;
@@ -147,7 +69,6 @@ async function walkTree(tree: any, dir: string) {
     await walkTree(value, path);
   }
 
-  await mkdirAll(dir);
   await writeFile(indexPath, output.join("\n"));
   console.log(`Generated: ${indexPath}`);
 }
