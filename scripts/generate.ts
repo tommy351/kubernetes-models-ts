@@ -127,9 +127,29 @@ function transformImport(
   return ts.createImportDeclaration(
     node.decorators,
     node.modifiers,
-    node.importClause,
+    transformIdentifier(ctx, node.importClause), // ts.visitEachChild(node.importClause, visitImportClause(ctx), ctx),
     ts.createLiteral(relativePath)
   );
+}
+
+function transformIdentifier<T extends ts.Node>(
+  ctx: ts.TransformationContext,
+  root?: T
+) {
+  function visit(node: ts.Node): ts.Node {
+    // Add "I" prefix to identifiers
+    if (ts.isIdentifier(node)) {
+      const name = node.getText();
+
+      if (classNameMap.has(name)) {
+        return ts.createIdentifier("I" + name);
+      }
+    }
+
+    return ts.visitEachChild(node, visit, ctx);
+  }
+
+  return ts.visitEachChild(root, visit, ctx);
 }
 
 function transformClass(
@@ -155,14 +175,25 @@ function transformClass(
     if (!ts.isPropertyDeclaration(n)) return;
     if (hasModifier(n, ts.SyntaxKind.StaticKeyword)) return;
 
-    classMembers.push(n);
+    const propertyType = transformIdentifier(ctx, n.type);
+
+    classMembers.push(
+      ts.createProperty(
+        n.decorators,
+        n.modifiers,
+        n.name,
+        n.questionToken,
+        propertyType,
+        n.initializer
+      )
+    );
 
     interfaceMembers.push(
       ts.createPropertySignature(
         n.modifiers,
         n.name,
         n.questionToken,
-        n.type,
+        propertyType,
         n.initializer
       )
     );
