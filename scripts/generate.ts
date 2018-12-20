@@ -1,4 +1,12 @@
-import { basename, dirname, extname, join, relative, resolve } from "path";
+import {
+  basename,
+  dirname,
+  extname,
+  join,
+  relative,
+  resolve,
+  posix
+} from "path";
 import * as ts from "typescript";
 import yargs from "yargs";
 import { access, readFile, writeFile } from "./fs";
@@ -12,9 +20,9 @@ interface IModelTree {
 
 interface IKubernetesMeta {
   name: string;
-  group: string;
-  kind: string;
-  version: string;
+  group?: string;
+  kind?: string;
+  version?: string;
 }
 
 const { argv } = yargs
@@ -125,7 +133,10 @@ function transformImport(
 
   const sourcePath = getOutputPath(sourceMeta.name);
   const targetPath = getOutputPath(moduleMeta.name);
-  let relativePath = relative(dirname(sourcePath), targetPath);
+  let relativePath = relative(dirname(sourcePath), targetPath).replace(
+    /\\/g,
+    posix.sep
+  );
 
   if (!relativePath.startsWith(".")) {
     relativePath = "./" + relativePath;
@@ -235,8 +246,8 @@ function transformClass(
               return ts.createIf(
                 ts.createBinary(
                   dataAccess,
-                  ts.SyntaxKind.ExclamationEqualsToken,
-                  ts.createNull()
+                  ts.SyntaxKind.ExclamationEqualsEqualsToken,
+                  ts.createIdentifier("undefined")
                 ),
                 ts.createBlock([
                   ts.createExpressionStatement(
@@ -256,6 +267,8 @@ function transformClass(
   );
 
   // Add toJSON method
+  const toJSONOutput = ts.createIdentifier("output");
+
   classMembers.push(
     ts.createMethod(
       undefined,
@@ -267,33 +280,46 @@ function transformClass(
       [],
       undefined,
       ts.createBlock([
-        ts.createReturn(
-          ts.createObjectLiteral(
-            interfaceMembers.map(member => {
-              const memberName = ts.createStringLiteral(
-                unquote((member.name && member.name.getText()) as string)
-              );
-              const memberAccess = ts.createElementAccess(
-                ts.createThis(),
-                memberName
-              );
-
-              return ts.createSpreadAssignment(
-                ts.createConditional(
-                  ts.createBinary(
-                    memberAccess,
-                    ts.SyntaxKind.EqualsEqualsEqualsToken,
-                    ts.createIdentifier("undefined")
-                  ),
-                  ts.createIdentifier("undefined"),
-                  ts.createObjectLiteral([
-                    ts.createPropertyAssignment(memberName, memberAccess)
-                  ])
-                )
-              );
-            })
+        ts.createVariableStatement(
+          undefined,
+          ts.createVariableDeclarationList(
+            [
+              ts.createVariableDeclaration(
+                toJSONOutput,
+                ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
+                ts.createObjectLiteral()
+              )
+            ],
+            ts.NodeFlags.Const
           )
-        )
+        ),
+        ...interfaceMembers.map(member => {
+          const memberName = ts.createStringLiteral(
+            unquote((member.name && member.name.getText()) as string)
+          );
+          const memberAccess = ts.createElementAccess(
+            ts.createThis(),
+            memberName
+          );
+
+          return ts.createIf(
+            ts.createBinary(
+              memberAccess,
+              ts.SyntaxKind.ExclamationEqualsEqualsToken,
+              ts.createIdentifier("undefined")
+            ),
+            ts.createBlock([
+              ts.createExpressionStatement(
+                ts.createBinary(
+                  ts.createElementAccess(toJSONOutput, memberName),
+                  ts.SyntaxKind.EqualsToken,
+                  memberAccess
+                )
+              )
+            ])
+          );
+        }),
+        ts.createReturn(toJSONOutput)
       ])
     )
   );
@@ -347,15 +373,13 @@ function createClassProperty(
   // Set default value of "apiVersion" and "kind" properties
   switch (name) {
     case "apiVersion":
-      if (meta.version) {
-        initializer = ts.createLiteral(
-          `${meta.group ? `${meta.group}/` : ""}${meta.version}`
-        );
-      }
+      const apiVersion = getAPIVersion(meta);
+      if (apiVersion) initializer = ts.createLiteral(apiVersion);
       break;
 
     case "kind":
-      if (meta.kind) initializer = ts.createLiteral(meta.kind);
+      const kind = getAPIKind(meta);
+      if (kind) initializer = ts.createLiteral(kind);
       break;
   }
 
@@ -369,16 +393,26 @@ function createClassProperty(
   );
 }
 
+function getAPIVersion({ group, version }: IKubernetesMeta) {
+  if (!version) return;
+  if (!group) return version;
+  return `${group}/${version}`;
+}
+
+function getAPIKind(meta: IKubernetesMeta) {
+  return meta.kind;
+}
+
 async function writeIndexFile(tree: IModelTree, name: string) {
   const outputPath = join(getOutputPath(name), "index.ts");
   const output = Object.keys(tree).reduce((acc: string[], key) => {
     if (typeof tree[key] === "string") {
-      return [...acc, `export * from './${key}';`];
+      return [...acc, `export * from "./${key}";`];
     }
 
     return [
       ...acc,
-      `import * as ${key} from './${key}';`,
+      `import * as ${key} from "./${key}";`,
       `export { ${key} };`
     ];
   }, []);
