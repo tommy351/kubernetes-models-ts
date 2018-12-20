@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - lts/*
+  - node
+
+services:
+  - docker
+
+cache:
+  yarn: true
+
+install:
+  - npm install lerna -g
+  - yarn install --frozen-lockfile
+  - lerna bootstrap
+
+script:
+  - npm run lint
+  - make gen/ts
+  - lerna run build

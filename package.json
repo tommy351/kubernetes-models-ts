@@ -6,7 +6,7 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "tslint --project . --exclude 'gen/**/*.ts'",
+    "lint": "tslint --project .",
     "generate": "ts-node scripts/generate.ts"
   },
   "dependencies": {

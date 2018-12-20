@@ -13,7 +13,6 @@ gen/openapi: $(swagger_path)
 		-g typescript-node \
 		--skip-validate-spec \
 		-o /local/$@
-	rm -rf $@/api.ts $@/git_push.sh $@/api $@/model/models.ts
 
 gen/ts: gen/openapi $(swagger_path)
 	npm run generate -- \
