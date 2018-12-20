@@ -194,13 +194,30 @@ function transformClass(
               const memberName = ts.createStringLiteral(
                 unquote((member.name && member.name.getText()) as string)
               );
+              const thisAccess = ts.createElementAccess(
+                ts.createThis(),
+                memberName
+              );
+              const dataAccess = ts.createElementAccess(
+                classCtorData,
+                memberName
+              );
 
-              return ts.createExpressionStatement(
+              return ts.createIf(
                 ts.createBinary(
-                  ts.createElementAccess(ts.createThis(), memberName),
-                  ts.SyntaxKind.EqualsToken,
-                  ts.createElementAccess(classCtorData, memberName)
-                )
+                  dataAccess,
+                  ts.SyntaxKind.ExclamationEqualsToken,
+                  ts.createNull()
+                ),
+                ts.createBlock([
+                  ts.createExpressionStatement(
+                    ts.createBinary(
+                      thisAccess,
+                      ts.SyntaxKind.EqualsToken,
+                      dataAccess
+                    )
+                  )
+                ])
               );
             })
           )
@@ -227,10 +244,23 @@ function transformClass(
               const memberName = ts.createStringLiteral(
                 unquote((member.name && member.name.getText()) as string)
               );
+              const memberAccess = ts.createElementAccess(
+                ts.createThis(),
+                memberName
+              );
 
-              return ts.createPropertyAssignment(
-                memberName,
-                ts.createElementAccess(ts.createThis(), memberName)
+              return ts.createSpreadAssignment(
+                ts.createConditional(
+                  ts.createBinary(
+                    memberAccess,
+                    ts.SyntaxKind.EqualsEqualsEqualsToken,
+                    ts.createIdentifier("undefined")
+                  ),
+                  ts.createIdentifier("undefined"),
+                  ts.createObjectLiteral([
+                    ts.createPropertyAssignment(memberName, memberAccess)
+                  ])
+                )
               );
             })
           )
