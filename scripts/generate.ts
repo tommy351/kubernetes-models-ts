@@ -10,6 +10,13 @@ interface IModelTree {
   [key: string]: IModelTree | string;
 }
 
+interface IKubernetesMeta {
+  name: string;
+  group: string;
+  kind: string;
+  version: string;
+}
+
 const { argv } = yargs
   .option("file", {
     description: "Path of OpenAPI spec",
@@ -28,7 +35,7 @@ const modelDir = resolve(argv.model);
 const outputDir = resolve(argv.output);
 
 const modelTree: IModelTree = {};
-const classNameMap = new Map<string, string>();
+const classMetaMap = new Map<string, IKubernetesMeta>();
 
 function getFileName(s: string) {
   return camelCase(s, ".");
@@ -108,16 +115,16 @@ function transformImport(
   const modulePath = unquote(node.moduleSpecifier.getText());
   if (!modulePath.startsWith("./")) return node;
 
-  const moduleName = classNameMap.get(upperFirst(trimPrefix(modulePath, "./")));
-  if (!moduleName) return node;
+  const moduleMeta = classMetaMap.get(upperFirst(trimPrefix(modulePath, "./")));
+  if (!moduleMeta) return node;
 
-  const sourceName = classNameMap.get(
+  const sourceMeta = classMetaMap.get(
     upperFirst(basename(sf.fileName, extname(sf.fileName)))
   );
-  if (!sourceName) return node;
+  if (!sourceMeta) return node;
 
-  const sourcePath = getOutputPath(sourceName);
-  const targetPath = getOutputPath(moduleName);
+  const sourcePath = getOutputPath(sourceMeta.name);
+  const targetPath = getOutputPath(moduleMeta.name);
   let relativePath = relative(dirname(sourcePath), targetPath);
 
   if (!relativePath.startsWith(".")) {
@@ -141,7 +148,7 @@ function transformIdentifier<T extends ts.Node>(
     if (ts.isIdentifier(node)) {
       const name = node.getText();
 
-      if (classNameMap.has(name)) {
+      if (classMetaMap.has(name)) {
         return ts.createIdentifier("I" + name);
       }
     }
@@ -160,10 +167,10 @@ function transformClass(
   const className = node.name && node.name.getText();
   if (!className) return;
 
-  const name = classNameMap.get(className);
-  if (!name) return;
+  const meta = classMetaMap.get(className);
+  if (!meta) return;
 
-  const shortName = name.split(".").pop();
+  const shortName = meta.name.split(".").pop();
   if (!shortName) return;
 
   const classMembers: ts.ClassElement[] = [];
@@ -177,16 +184,7 @@ function transformClass(
 
     const propertyType = transformIdentifier(ctx, n.type);
 
-    classMembers.push(
-      ts.createProperty(
-        n.decorators,
-        n.modifiers,
-        n.name,
-        n.questionToken,
-        propertyType,
-        n.initializer
-      )
-    );
+    classMembers.push(createClassProperty(meta, n, propertyType));
 
     interfaceMembers.push(
       ts.createPropertySignature(
@@ -338,6 +336,39 @@ function transformClass(
   ]);
 }
 
+function createClassProperty(
+  meta: IKubernetesMeta,
+  node: ts.PropertyDeclaration,
+  typeNode?: ts.TypeNode
+) {
+  const name = unquote(node.name.getText());
+  let { initializer } = node;
+
+  // Set default value of "apiVersion" and "kind" properties
+  switch (name) {
+    case "apiVersion":
+      if (meta.version) {
+        initializer = ts.createLiteral(
+          `${meta.group ? `${meta.group}/` : ""}${meta.version}`
+        );
+      }
+      break;
+
+    case "kind":
+      if (meta.kind) initializer = ts.createLiteral(meta.kind);
+      break;
+  }
+
+  return ts.createProperty(
+    node.decorators,
+    node.modifiers,
+    node.name,
+    node.questionToken,
+    typeNode,
+    initializer
+  );
+}
+
 async function writeIndexFile(tree: IModelTree, name: string) {
   const outputPath = join(getOutputPath(name), "index.ts");
   const output = Object.keys(tree).reduce((acc: string[], key) => {
@@ -356,6 +387,16 @@ async function writeIndexFile(tree: IModelTree, name: string) {
   console.log("Generated:", outputPath);
 }
 
+function getKubernetesGroupVersionKind(def: any) {
+  const data = def["x-kubernetes-group-version-kind"];
+
+  if (Array.isArray(data)) {
+    return data[0];
+  }
+
+  return data;
+}
+
 async function main() {
   // Read OpenAPI spec
   const spec = JSON.parse(await readFile(argv.file, "utf8"));
@@ -363,11 +404,15 @@ async function main() {
   for (const key of Object.keys(spec.definitions)) {
     const className = getClassName(key);
     const modelPath = getModelPath(key);
+    const def = spec.definitions[key];
 
     try {
       await access(modelPath);
       set(modelTree, trimPrefix(key, "io.k8s."), key);
-      classNameMap.set(className, key);
+      classMetaMap.set(className, {
+        ...getKubernetesGroupVersionKind(def),
+        name: key
+      });
     } catch (err) {
       // ignore errors
     }
