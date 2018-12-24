@@ -7,13 +7,13 @@ node_js:
 services:
   - docker
 
-cache:
-  yarn: true
+cache: npm
 
 install:
-  - npm install lerna -g
-  - yarn install --frozen-lockfile
-  - lerna bootstrap
+  - npm ci
+
+before_script:
+  - npm run bootstrap
 
 script:
   - npm run lint
