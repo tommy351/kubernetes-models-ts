@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc"
   },
+  "keywords": ["kubernetes"],
   "dependencies": {
     "tslib": "^1.9.3"
   },
