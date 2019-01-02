@@ -23,6 +23,13 @@ interface IKubernetesMeta {
   group?: string;
   kind?: string;
   version?: string;
+  properties?: { [key: string]: IOpenAPIProperty };
+}
+
+interface IOpenAPIProperty {
+  description?: string;
+  type?: string;
+  $ref?: string;
 }
 
 const { argv } = yargs
@@ -193,7 +200,21 @@ function transformClass(
     if (!ts.isPropertyDeclaration(n)) return;
     if (hasModifier(n, ts.SyntaxKind.StaticKeyword)) return;
 
-    const propertyType = transformIdentifier(ctx, n.type);
+    const propName = unquote(n.name.getText());
+    const propDef = meta.properties && meta.properties[propName];
+    let propertyType: ts.TypeNode | undefined;
+
+    switch (propDef && propDef.$ref) {
+      case "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString":
+        propertyType = ts.createUnionTypeNode([
+          ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+          ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
+        ]);
+        break;
+
+      default:
+        propertyType = transformIdentifier(ctx, n.type);
+    }
 
     classMembers.push(createClassProperty(meta, n, propertyType));
 
@@ -445,7 +466,8 @@ async function main() {
       set(modelTree, trimPrefix(key, "io.k8s."), key);
       classMetaMap.set(className, {
         ...getKubernetesGroupVersionKind(def),
-        name: key
+        name: key,
+        properties: def.properties
       });
     } catch (err) {
       // ignore errors
