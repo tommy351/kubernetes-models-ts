@@ -12,10 +12,7 @@ cache: npm
 install:
   - npm ci
 
-before_script:
-  - npm run bootstrap
-
 script:
   - npm run lint
   - make gen/ts
-  - lerna run build
+  - npm run build
