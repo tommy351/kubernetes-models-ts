@@ -19,6 +19,7 @@
     "build": "tsc --build tsconfig.build.json"
   },
   "dependencies": {
+    "ajv": "^6.7.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

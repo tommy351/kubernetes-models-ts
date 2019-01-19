@@ -14,5 +14,4 @@ install:
 
 script:
   - npm run lint
-  - make gen/ts
-  - npm run build
+  - make dist

@@ -1,35 +1,11 @@
-import {
-  basename,
-  dirname,
-  extname,
-  join,
-  relative,
-  resolve,
-  posix
-} from "path";
-import * as ts from "typescript";
 import yargs from "yargs";
-import { access, readFile, writeFile } from "./fs";
+import { readFile, writeFile } from "./fs";
+import { camelCase, trimPrefix, upperFirst, trimSuffix } from "./string";
+import { join, relative, dirname, posix } from "path";
 import { set } from "./object";
-import { camelCase, trimPrefix, unquote, upperFirst } from "./string";
-import { hasModifier } from "./ts";
 
-interface IModelTree {
-  [key: string]: IModelTree | string;
-}
-
-interface IKubernetesMeta {
-  name: string;
-  group?: string;
-  kind?: string;
-  version?: string;
-  properties?: { [key: string]: IOpenAPIProperty };
-}
-
-interface IOpenAPIProperty {
-  description?: string;
-  type?: string;
-  $ref?: string;
+interface DefinitionTree {
+  [key: string]: string | DefinitionTree;
 }
 
 const { argv } = yargs
@@ -37,446 +13,251 @@ const { argv } = yargs
     description: "Path of OpenAPI spec",
     required: true
   })
-  .option("model", {
-    description: "Path of the model folder",
-    required: true
-  })
   .option("output", {
     description: "Output path",
     required: true
   });
 
-const modelDir = resolve(argv.model);
-const outputDir = resolve(argv.output);
+function collectRef(input: any): string[] {
+  const refs = Object.keys(input).map(key => {
+    const val = input[key];
 
-const modelTree: IModelTree = {};
-const classMetaMap = new Map<string, IKubernetesMeta>();
-
-function getFileName(s: string) {
-  return camelCase(s, ".");
-}
-
-function getClassName(s: string) {
-  return upperFirst(camelCase(s, "."));
-}
-
-function getModelPath(name: string) {
-  return join(modelDir, getFileName(name) + ".ts");
-}
-
-function getOutputPath(name: string) {
-  return join(outputDir, ...trimPrefix(name, "io.k8s.").split("."));
-}
-
-async function walkModelTree(tree: IModelTree, prefix: string = "") {
-  await writeIndexFile(tree, prefix);
-
-  for (const key of Object.keys(tree)) {
-    const child = tree[key];
-
-    if (typeof child === "string") {
-      await writeClassFile(child);
-    } else {
-      await walkModelTree(child, prefix + key + ".");
-    }
-  }
-}
-
-async function writeClassFile(name: string) {
-  const sourcePath = getModelPath(name);
-  const sourceText = await readFile(sourcePath, "utf8");
-  const sourceFile = ts.createSourceFile(
-    sourcePath,
-    sourceText,
-    ts.ScriptTarget.ES2015,
-    true,
-    ts.ScriptKind.TS
-  );
-  const printer = ts.createPrinter();
-  const result = ts.transform(sourceFile, [transform]);
-  const output = printer.printFile(result.transformed[0] as ts.SourceFile);
-  const outputPath = getOutputPath(name) + ".ts";
-
-  await writeFile(outputPath, output);
-  console.log("Generated:", outputPath);
-}
-
-function transform(ctx: ts.TransformationContext) {
-  return (sf: ts.SourceFile) => {
-    function visit(node: ts.Node): ts.Node {
-      if (ts.isImportDeclaration(node)) {
-        return transformImport(ctx, sf, node);
-      }
-
-      if (ts.isClassDeclaration(node)) {
-        return (
-          (transformClass(ctx, sf, node) as any) ||
-          ts.createNotEmittedStatement(node)
-        );
-      }
-
-      return node;
+    if (key === "$ref" && typeof val === "string") {
+      const ref = val.replace("#/definitions/", "");
+      return [ref];
     }
 
-    return ts.visitEachChild(sf, visit, ctx);
-  };
-}
-
-function transformImport(
-  ctx: ts.TransformationContext,
-  sf: ts.SourceFile,
-  node: ts.ImportDeclaration
-) {
-  const modulePath = unquote(node.moduleSpecifier.getText());
-  if (!modulePath.startsWith("./")) return node;
-
-  const moduleMeta = classMetaMap.get(upperFirst(trimPrefix(modulePath, "./")));
-  if (!moduleMeta) return node;
-
-  const sourceMeta = classMetaMap.get(
-    upperFirst(basename(sf.fileName, extname(sf.fileName)))
-  );
-  if (!sourceMeta) return node;
-
-  const sourcePath = getOutputPath(sourceMeta.name);
-  const targetPath = getOutputPath(moduleMeta.name);
-  let relativePath = relative(dirname(sourcePath), targetPath).replace(
-    /\\/g,
-    posix.sep
-  );
-
-  if (!relativePath.startsWith(".")) {
-    relativePath = "./" + relativePath;
-  }
-
-  return ts.createImportDeclaration(
-    node.decorators,
-    node.modifiers,
-    transformIdentifier(ctx, node.importClause), // ts.visitEachChild(node.importClause, visitImportClause(ctx), ctx),
-    ts.createLiteral(relativePath)
-  );
-}
-
-function transformIdentifier<T extends ts.Node>(
-  ctx: ts.TransformationContext,
-  root?: T
-) {
-  function visit(node: ts.Node): ts.Node {
-    // Add "I" prefix to identifiers
-    if (ts.isIdentifier(node)) {
-      const name = node.getText();
-
-      if (classMetaMap.has(name)) {
-        return ts.createIdentifier("I" + name);
-      }
+    if (typeof val === "object" && !Array.isArray(val)) {
+      return collectRef(val);
     }
 
-    return ts.visitEachChild(node, visit, ctx);
-  }
-
-  return ts.visitEachChild(root, visit, ctx);
-}
-
-function transformClass(
-  ctx: ts.TransformationContext,
-  sf: ts.SourceFile,
-  node: ts.ClassDeclaration
-) {
-  const className = node.name && node.name.getText();
-  if (!className) return;
-
-  const meta = classMetaMap.get(className);
-  if (!meta) return;
-
-  const shortName = meta.name.split(".").pop();
-  if (!shortName) return;
-
-  const classMembers: ts.ClassElement[] = [];
-  const interfaceMembers: ts.TypeElement[] = [];
-  const interfaceName = "I" + className;
-
-  // Pick properties from the class
-  ts.forEachChild(node, n => {
-    if (!ts.isPropertyDeclaration(n)) return;
-    if (hasModifier(n, ts.SyntaxKind.StaticKeyword)) return;
-
-    const propName = unquote(n.name.getText());
-    const propDef = meta.properties && meta.properties[propName];
-    let propertyType: ts.TypeNode | undefined;
-
-    switch (propDef && propDef.$ref) {
-      case "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString":
-        propertyType = ts.createUnionTypeNode([
-          ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-          ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
-        ]);
-        break;
-
-      default:
-        propertyType = transformIdentifier(ctx, n.type);
-    }
-
-    classMembers.push(createClassProperty(meta, n, propertyType));
-
-    interfaceMembers.push(
-      ts.createPropertySignature(
-        n.modifiers,
-        n.name,
-        n.questionToken,
-        propertyType,
-        n.initializer
-      )
-    );
+    return [];
   });
 
-  const classCtorData = ts.createIdentifier("data");
-
-  // Add constructor
-  classMembers.push(
-    ts.createConstructor(
-      undefined,
-      undefined,
-      [
-        ts.createParameter(
-          undefined,
-          undefined,
-          undefined,
-          classCtorData,
-          ts.createToken(ts.SyntaxKind.QuestionToken),
-          ts.createIdentifier(interfaceName) as any,
-          undefined
-        )
-      ],
-      ts.createBlock([
-        ts.createIf(
-          classCtorData,
-          ts.createBlock(
-            interfaceMembers.map(member => {
-              const memberName = ts.createStringLiteral(
-                unquote((member.name && member.name.getText()) as string)
-              );
-              const thisAccess = ts.createElementAccess(
-                ts.createThis(),
-                memberName
-              );
-              const dataAccess = ts.createElementAccess(
-                classCtorData,
-                memberName
-              );
-
-              return ts.createIf(
-                ts.createBinary(
-                  dataAccess,
-                  ts.SyntaxKind.ExclamationEqualsEqualsToken,
-                  ts.createIdentifier("undefined")
-                ),
-                ts.createBlock([
-                  ts.createExpressionStatement(
-                    ts.createBinary(
-                      thisAccess,
-                      ts.SyntaxKind.EqualsToken,
-                      dataAccess
-                    )
-                  )
-                ])
-              );
-            })
-          )
-        )
-      ])
-    )
-  );
-
-  // Add toJSON method
-  const toJSONOutput = ts.createIdentifier("output");
-
-  classMembers.push(
-    ts.createMethod(
-      undefined,
-      undefined,
-      undefined,
-      "toJSON",
-      undefined,
-      undefined,
-      [],
-      undefined,
-      ts.createBlock([
-        ts.createVariableStatement(
-          undefined,
-          ts.createVariableDeclarationList(
-            [
-              ts.createVariableDeclaration(
-                toJSONOutput,
-                ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword),
-                ts.createObjectLiteral()
-              )
-            ],
-            ts.NodeFlags.Const
-          )
-        ),
-        ...interfaceMembers.map(member => {
-          const memberName = ts.createStringLiteral(
-            unquote((member.name && member.name.getText()) as string)
-          );
-          const memberAccess = ts.createElementAccess(
-            ts.createThis(),
-            memberName
-          );
-
-          return ts.createIf(
-            ts.createBinary(
-              memberAccess,
-              ts.SyntaxKind.ExclamationEqualsEqualsToken,
-              ts.createIdentifier("undefined")
-            ),
-            ts.createBlock([
-              ts.createExpressionStatement(
-                ts.createBinary(
-                  ts.createElementAccess(toJSONOutput, memberName),
-                  ts.SyntaxKind.EqualsToken,
-                  memberAccess
-                )
-              )
-            ])
-          );
-        }),
-        ts.createReturn(toJSONOutput)
-      ])
-    )
-  );
-
-  return ts.createNodeArray([
-    // Declare the interface
-    ts.createInterfaceDeclaration(
-      node.decorators,
-      node.modifiers,
-      interfaceName,
-      node.typeParameters,
-      node.heritageClauses,
-      interfaceMembers
-    ),
-    // Declare the class
-    ts.createClassDeclaration(
-      node.decorators,
-      node.modifiers,
-      className,
-      node.typeParameters,
-      [
-        ...(node.heritageClauses || []),
-        ts.createHeritageClause(ts.SyntaxKind.ImplementsKeyword, [
-          ts.createExpressionWithTypeArguments(undefined, ts.createIdentifier(
-            interfaceName
-          ) as any)
-        ])
-      ],
-      classMembers
-    ),
-    // Export aliases
-    ts.createExportDeclaration(
-      undefined,
-      undefined,
-      ts.createNamedExports([
-        ts.createExportSpecifier(interfaceName, "I" + shortName),
-        ts.createExportSpecifier(className, shortName)
-      ])
-    )
-  ]);
+  return refs.reduce((acc, x) => acc.concat(x), [] as string[]);
 }
 
-function createClassProperty(
-  meta: IKubernetesMeta,
-  node: ts.PropertyDeclaration,
-  typeNode?: ts.TypeNode
-) {
-  const name = unquote(node.name.getText());
-  let { initializer } = node;
+function getClassName(name: string): string {
+  return upperFirst(camelCase(name, ".-"));
+}
 
-  // Set default value of "apiVersion" and "kind" properties
-  switch (name) {
-    case "apiVersion":
-      const apiVersion = getAPIVersion(meta);
-      if (apiVersion) initializer = ts.createLiteral(apiVersion);
-      break;
+function getInterfaceName(name: string): string {
+  return "I" + getClassName(name);
+}
 
-    case "kind":
-      const kind = getAPIKind(meta);
-      if (kind) initializer = ts.createLiteral(kind);
-      break;
+function getShortClassName(name: string): string {
+  const s = name.split(".");
+  return s[s.length - 1];
+}
+
+function getShortInterfaceName(name: string): string {
+  return "I" + getShortClassName(name);
+}
+
+function trimDefPrefix(name: string) {
+  return trimPrefix(name, "io.k8s.");
+}
+
+function getOutputPath(name: string): string {
+  return join(argv.output, ...trimDefPrefix(name).split("."));
+}
+
+function commentize(s: string): string {
+  let output = "/**\n";
+
+  for (const line of s.split("\n")) {
+    output += " * " + line.replace(/\*\//g, "\\*\\/") + "\n";
   }
 
-  return ts.createProperty(
-    node.decorators,
-    node.modifiers,
-    node.name,
-    node.questionToken,
-    typeNode,
-    initializer
-  );
+  output += " */\n";
+  return output;
 }
 
-function getAPIVersion({ group, version }: IKubernetesMeta) {
-  if (!version) return;
-  if (!group) return version;
-  return `${group}/${version}`;
-}
+function compileDefinition(key: string, def: any): string {
+  const interfaceName = getInterfaceName(key);
+  const className = getClassName(key);
+  let output = "";
 
-function getAPIKind(meta: IKubernetesMeta) {
-  return meta.kind;
-}
+  if (typeof def.description === "string") {
+    output += commentize(def.description);
+  }
 
-async function writeIndexFile(tree: IModelTree, name: string) {
-  const outputPath = join(getOutputPath(name), "index.ts");
-  const output = Object.keys(tree).reduce((acc: string[], key) => {
-    if (typeof tree[key] === "string") {
-      return [...acc, `export * from "./${key}";`];
+  if (!def.type && !def.$ref) def.type = "object";
+
+  const content = compileType(def);
+
+  if (def.type === "object") {
+    let classContent =
+      trimSuffix(content.trim(), "}") +
+      compileClassCtor(key, def) +
+      compileClassJSON(key, def) +
+      "}";
+
+    const gvk = def["x-kubernetes-group-version-kind"];
+
+    if (gvk && gvk.length) {
+      const { group, version, kind } = gvk[0];
+
+      classContent = classContent.replace(
+        `"apiVersion"?: string;`,
+        `apiVersion = "${group ? group + "/" : ""}${version}";`
+      );
+
+      classContent = classContent.replace(
+        `"kind"?: string;`,
+        `kind = "${kind}";`
+      );
     }
 
-    return [
-      ...acc,
-      `import * as ${key} from "./${key}";`,
-      `export { ${key} };`
-    ];
-  }, []);
-
-  await writeFile(outputPath, output.join("\n"));
-  console.log("Generated:", outputPath);
-}
-
-function getKubernetesGroupVersionKind(def: any) {
-  const data = def["x-kubernetes-group-version-kind"];
-
-  if (Array.isArray(data)) {
-    return data[0];
+    output += `export interface ${interfaceName} ${content}\n`;
+    output += `export class ${className} implements ${interfaceName} ${classContent}\n`;
+  } else {
+    output += `export type ${interfaceName} = ${content};\n`;
+    output += `export type ${className} = ${interfaceName};\n`;
   }
 
-  return data;
+  output += `export { ${interfaceName} as ${getShortInterfaceName(key)} };\n`;
+  output += `export { ${className} as ${getShortClassName(key)} };\n`;
+
+  return output;
 }
 
-async function main() {
-  // Read OpenAPI spec
-  const spec = JSON.parse(await readFile(argv.file, "utf8"));
+function compileType(def: any): string {
+  if (typeof def.$ref === "string") {
+    return getInterfaceName(trimPrefix(def.$ref, "#/definitions/"));
+  }
 
-  for (const key of Object.keys(spec.definitions)) {
-    const className = getClassName(key);
-    const modelPath = getModelPath(key);
-    const def = spec.definitions[key];
+  switch (def.type) {
+    case "object":
+      const { required = [], properties = {}, additionalProperties } = def;
+      let output = "{\n";
 
-    try {
-      await access(modelPath);
-      set(modelTree, trimPrefix(key, "io.k8s."), key);
-      classMetaMap.set(className, {
-        ...getKubernetesGroupVersionKind(def),
-        name: key,
-        properties: def.properties
-      });
-    } catch (err) {
-      // ignore errors
+      for (const key of Object.keys(properties)) {
+        const prop = properties[key];
+
+        if (typeof prop.description === "string") {
+          output += commentize(prop.description);
+        }
+
+        output += `"${key}"`;
+        if (!~required.indexOf(key)) output += "?";
+        output += ": " + compileType(prop) + ";\n";
+      }
+
+      if (additionalProperties) {
+        output += `[key: string]: ${compileType(additionalProperties)};\n`;
+      }
+
+      output += "}";
+      return output;
+
+    case "string":
+      switch (def.format) {
+        case "int-or-string":
+          return "string | number";
+
+        default:
+          return "string";
+      }
+
+    case "number":
+    case "integer":
+      return "number";
+
+    case "boolean":
+      return "boolean";
+
+    case "array":
+      return `Array<${compileType(def.items)}>`;
+
+    case "null":
+      return "null";
+  }
+
+  return "any";
+}
+
+function compileClassCtor(name: string, def: any): string {
+  let output = `constructor(data?: ${getInterfaceName(name)}) {\n`;
+  output += "if (data) {\n";
+
+  if (typeof def.properties === "object") {
+    for (const key of Object.keys(def.properties)) {
+      output += `if (data["${key}"] !== undefined) this["${key}"] = data["${key}"];\n`;
+    }
+  } else {
+    output += `for (const key of Object.keys(data)) {
+      if ((data as any)[key] !== undefined) (this as any)[key] = (data as any)[key];
+    }\n`;
+  }
+
+  output += "}\n";
+  output += "}\n";
+  return output;
+}
+
+function compileClassJSON(name: string, { properties }: any): string {
+  if (typeof properties !== "object") return "";
+
+  let output = `toJSON() {\n`;
+  output += "const output: any = {};\n";
+
+  for (const key of Object.keys(properties)) {
+    output += `if (this["${key}"] !== undefined) output["${key}"] = this["${key}"];\n`;
+  }
+
+  output += "return output;\n";
+  output += "}\n";
+  return output;
+}
+
+async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
+  let output = "";
+
+  for (const key of Object.keys(tree)) {
+    const val = tree[key];
+
+    if (typeof val === "string") {
+      output += `export * from "./${key}";\n`;
+    } else {
+      const exportedName = camelCase(key, "-");
+      output += `import * as ${exportedName} from "./${key}";\n`;
+      output += `export { ${exportedName} };\n`;
+      await writeIndexFiles(val, name + key + ".");
     }
   }
 
-  await walkModelTree(modelTree);
+  const path = join(getOutputPath(name), "index.ts");
+  console.log("Generating:", path);
+  await writeFile(path, output);
 }
 
-main().catch(err => {
-  console.error(err);
-});
+(async () => {
+  const { definitions } = JSON.parse(await readFile(argv.file, "utf8"));
+  const tree: DefinitionTree = {};
+
+  for (const key of Object.keys(definitions)) {
+    const def = definitions[key];
+    const path = getOutputPath(key) + ".ts";
+    let content = "";
+
+    for (const ref of new Set(collectRef(def))) {
+      let importPath = relative(dirname(path), getOutputPath(ref));
+
+      if (!importPath.startsWith(".")) {
+        importPath = "./" + importPath;
+      }
+
+      importPath = importPath.replace(/\\/g, posix.sep);
+      content += `import { ${getInterfaceName(ref)} } from '${importPath}';\n`;
+    }
+
+    content += compileDefinition(key, def);
+
+    console.log("Generating:", path);
+    await writeFile(path, content);
+    set(tree, trimDefPrefix(key), key);
+  }
+
+  await writeIndexFiles(tree);
+})().catch(console.error);
