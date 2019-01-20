@@ -12,6 +12,12 @@ export const ajv = new Ajv({
 
 export { ValidationError };
 
+export function addSchema(id: string, schema: any) {
+  if (!ajv.getSchema(id)) {
+    ajv.addSchema(schema, id);
+  }
+}
+
 function intFormat(bits: number): FormatDefinition {
   return {
     validate(input: number) {

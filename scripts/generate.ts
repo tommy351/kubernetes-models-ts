@@ -240,12 +240,7 @@ function compileAddSchema(name: string, def: any): string {
     output += `${getAddSchemaName(ref)}();\n`;
   }
 
-  output += `
-if (!ajv.getSchema("${name}")) {
-  ajv.addSchema(${getSchemaName(name)}, "${name}");
-}
-`;
-
+  output += `addSchema("${name}", ${getSchemaName(name)});\n`;
   output += "}\n";
   return output;
 }
@@ -282,7 +277,7 @@ async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
 
     // Import ajv
     const ajvPath = relative(dirname(getOutputPath(key)), getAjvPath());
-    content += `import { ajv } from "${ajvPath}";\n`;
+    content += `import { addSchema } from "${ajvPath}";\n`;
 
     for (const ref of collectRefs(key, def)) {
       let importPath = relative(dirname(path), getOutputPath(ref));
