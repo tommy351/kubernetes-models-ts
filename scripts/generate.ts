@@ -108,27 +108,13 @@ function compileDefinition(key: string, def: any): string {
   const content = compileType(def);
 
   if (def.type === "object") {
-    let classContent = `${trimSuffix(content.trim(), "}")}
+    const basePath = relative(dirname(getOutputPath(key)), getBasePath());
+    const classContent = `${trimSuffix(content.trim(), "}")}
 protected [SCHEMA_ID] = "${key}";
 protected [ADD_SCHEMA] = ${getAddSchemaName(key)};
+
+${compileClassCtor(key, def)}
 }`;
-
-    const basePath = relative(dirname(getOutputPath(key)), getBasePath());
-    const gvk = def["x-kubernetes-group-version-kind"];
-
-    if (gvk && gvk.length) {
-      const { group, version, kind } = gvk[0];
-
-      classContent = classContent.replace(
-        `"apiVersion"?: string;`,
-        `apiVersion = "${group ? group + "/" : ""}${version}";`
-      );
-
-      classContent = classContent.replace(
-        `"kind"?: string;`,
-        `kind = "${kind}";`
-      );
-    }
 
     output += `
 import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "${basePath}";
@@ -243,6 +229,22 @@ function compileAddSchema(name: string, def: any): string {
   output += `addSchema("${name}", ${getSchemaName(name)});\n`;
   output += "}\n";
   return output;
+}
+
+function compileClassCtor(name: string, def: any): string {
+  const gvk = def["x-kubernetes-group-version-kind"];
+  if (!gvk || !gvk.length) return "";
+
+  const { group, version, kind } = gvk[0];
+
+  return `
+constructor(data?: ${getInterfaceName(name)}) {
+  super({
+    apiVersion: "${group ? group + "/" : ""}${version}",
+    kind: "${kind}",
+    ...data
+  } as any);
+}`;
 }
 
 async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
