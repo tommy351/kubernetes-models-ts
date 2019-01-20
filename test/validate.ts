@@ -34,7 +34,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "string", format: "int-or-string" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 
@@ -48,7 +48,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "integer", format: "int32" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 
@@ -65,7 +65,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "integer", format: "int64" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 
@@ -84,7 +84,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "number", format: "float" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 
@@ -96,7 +96,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "number", format: "double" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 
@@ -108,7 +108,7 @@ describe("validate", () => {
         return () => {
           expect(
             ajv.validate({ type: "string", format: "byte" }, input)
-          ).to.equal(expected);
+          ).to.eql(expected);
         };
       }
 

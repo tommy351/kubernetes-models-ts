@@ -7,7 +7,12 @@ describe("class", () => {
     let deployment: Deployment;
 
     beforeEach(() => {
-      deployment = new Deployment();
+      deployment = new Deployment({
+        metadata: {
+          name: "test"
+        },
+        spec: undefined
+      });
     });
 
     it("should set apiVersion", () => {
@@ -16,6 +21,24 @@ describe("class", () => {
 
     it("should set kind", () => {
       expect(deployment).to.haveOwnProperty("kind", "Deployment");
+    });
+
+    it("should set metadata", () => {
+      expect(deployment.metadata).to.eql({ name: "test" });
+    });
+
+    it("should not set sepc", () => {
+      expect(deployment).not.to.haveOwnProperty("spec");
+    });
+
+    it("toJSON", () => {
+      expect(deployment.toJSON()).to.eql({
+        apiVersion: "apps/v1",
+        kind: "Deployment",
+        metadata: {
+          name: "test"
+        }
+      });
     });
   });
 

@@ -69,6 +69,10 @@ function getAjvPath() {
   return join(argv.output, "ajv");
 }
 
+function getBasePath() {
+  return join(argv.output, "base");
+}
+
 function trimDefPrefix(name: string) {
   return trimPrefix(name, "io.k8s.");
 }
@@ -104,13 +108,12 @@ function compileDefinition(key: string, def: any): string {
   const content = compileType(def);
 
   if (def.type === "object") {
-    let classContent =
-      trimSuffix(content.trim(), "}") +
-      compileClassCtor(key, def) +
-      compileClassJSON(key, def) +
-      compileClassValidate(key, def) +
-      "}";
+    let classContent = `${trimSuffix(content.trim(), "}")}
+protected [SCHEMA_ID] = "${key}";
+protected [ADD_SCHEMA] = ${getAddSchemaName(key)};
+}`;
 
+    const basePath = relative(dirname(getOutputPath(key)), getBasePath());
     const gvk = def["x-kubernetes-group-version-kind"];
 
     if (gvk && gvk.length) {
@@ -128,9 +131,11 @@ function compileDefinition(key: string, def: any): string {
     }
 
     output += `
+import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "${basePath}";
+
 ${comment}export interface ${interfaceName} ${content}
 
-${comment}export class ${className} implements ${interfaceName} ${classContent}
+${comment}export class ${className} extends BaseModel<${interfaceName}> implements ${interfaceName} ${classContent}
 `;
   } else {
     output += `
@@ -205,54 +210,6 @@ function compileType(def: any): string {
   return "any";
 }
 
-function compileClassCtor(name: string, def: any): string {
-  let output = `constructor(data?: ${getInterfaceName(name)}) {\n`;
-  output += "if (data) {\n";
-
-  if (typeof def.properties === "object") {
-    for (const key of Object.keys(def.properties)) {
-      output += `if (data["${key}"] !== undefined) this["${key}"] = data["${key}"];\n`;
-    }
-  } else {
-    output += `for (const key of Object.keys(data)) {
-      if ((data as any)[key] !== undefined) (this as any)[key] = (data as any)[key];
-    }\n`;
-  }
-
-  output += "}\n";
-  output += "}\n";
-  return output;
-}
-
-function compileClassJSON(name: string, { properties }: any): string {
-  if (typeof properties !== "object") return "";
-
-  let output = `toJSON() {\n`;
-  output += "const output: any = {};\n";
-
-  for (const key of Object.keys(properties)) {
-    output += `if (this["${key}"] !== undefined) output["${key}"] = this["${key}"];\n`;
-  }
-
-  output += "return output;\n";
-  output += "}\n";
-  return output;
-}
-
-function compileClassValidate(name: string, def: any): string {
-  const output = `validate() {
-${getAddSchemaName(name)}();
-
-if (!ajv.validate("${name}", this) && ajv.errors) {
-  const err = new ValidationError(ajv.errors);
-  err.message = ajv.errorsText(ajv.errors);
-  throw err;
-}
-}`;
-
-  return output;
-}
-
 function compileSchema(name: string, def: any): string {
   function changeRef(obj: any) {
     const output: any = {};
@@ -325,7 +282,7 @@ async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
 
     // Import ajv
     const ajvPath = relative(dirname(getOutputPath(key)), getAjvPath());
-    content += `import { ajv, ValidationError } from "${ajvPath}";\n`;
+    content += `import { ajv } from "${ajvPath}";\n`;
 
     for (const ref of collectRefs(key, def)) {
       let importPath = relative(dirname(path), getOutputPath(ref));
