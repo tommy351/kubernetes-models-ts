@@ -19,6 +19,17 @@
     "build": "tsc --build tsconfig.build.json",
     "test": "mocha -r ts-node/register test/**/*.ts"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --project . --fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "ajv": "^6.7.0",
     "big-integer": "^1.6.40",
@@ -30,6 +41,8 @@
     "@types/node": "^10.12.15",
     "@types/yargs": "^12.0.1",
     "chai": "^4.2.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
     "mocha": "^5.2.0",
     "prettier": "^1.15.3",
     "ts-node": "^7.0.1",
