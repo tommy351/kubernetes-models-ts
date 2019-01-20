@@ -17,16 +17,20 @@
     "lint": "tslint --project .",
     "generate": "ts-node scripts/generate.ts",
     "build": "tsc --build tsconfig.build.json",
-    "test": "ava"
+    "test": "mocha -r ts-node/register test/**/*.ts"
   },
   "dependencies": {
     "ajv": "^6.7.0",
+    "big-integer": "^1.6.40",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.15",
     "@types/yargs": "^12.0.1",
-    "ava": "^1.1.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
     "prettier": "^1.15.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
@@ -34,14 +38,5 @@
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.2.2",
     "yargs": "^12.0.5"
-  },
-  "ava": {
-    "compileEnhancements": false,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
   }
 }

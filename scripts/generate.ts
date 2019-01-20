@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import { readFile, writeFile } from "./fs";
+import { readFile, writeFile, copyDir } from "./fs";
 import { camelCase, trimPrefix, upperFirst, trimSuffix } from "./string";
 import { join, relative, dirname, posix } from "path";
 import { set } from "./object";
@@ -314,29 +314,6 @@ async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
   await writeFile(path, output);
 }
 
-async function writeAjvFile() {
-  const path = getAjvPath() + ".ts";
-
-  console.log("Generating:", path);
-  await writeFile(
-    path,
-    `import Ajv, { ValidationError } from "ajv";
-
-export const ajv = new Ajv();
-export { ValidationError };
-
-function checkInt(s: string): boolean {
-  return Number.isInteger(parseInt(s, 10));
-}
-
-ajv.addFormat('int32', checkInt);
-ajv.addFormat('int64', checkInt);
-
-ajv.addFormat('int-or-string', () => true);
-`
-  );
-}
-
 (async () => {
   const { definitions } = JSON.parse(await readFile(argv.file, "utf8"));
   const tree: DefinitionTree = {};
@@ -372,5 +349,5 @@ ${getAddSchemaName(ref)}
   }
 
   await writeIndexFiles(tree);
-  await writeAjvFile();
+  await copyDir(join(__dirname, "..", "src"), argv.output);
 })().catch(console.error);
