@@ -1,11 +1,9 @@
 language: node_js
 
 node_js:
-  - lts/*
-  - node
-
-services:
-  - docker
+  - 8
+  - 10
+  - 11
 
 cache: npm
 
@@ -15,3 +13,4 @@ install:
 script:
   - npm run lint
   - make dist
+  - npm test

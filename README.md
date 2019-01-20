@@ -19,6 +19,5 @@ const pod = new Pod({
 ## Build
 
 ```sh
-make gen/ts
-lerna run build
+make dist
 ```

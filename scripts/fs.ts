@@ -1,7 +1,12 @@
 import fs from "fs";
 import { dirname } from "path";
+import { promisify } from "util";
 
-const { access, mkdir, writeFile: fsWriteFile, readFile } = fs.promises;
+export const access = promisify(fs.access);
+export const mkdir = promisify(fs.mkdir);
+export const readFile = promisify(fs.readFile);
+
+const fsWriteFile = promisify(fs.writeFile);
 
 export async function mkdirAll(path: string) {
   const parent = dirname(path);
@@ -25,5 +30,3 @@ export async function writeFile(path: string, content: any) {
   await mkdirAll(dirname(path));
   await fsWriteFile(path, content);
 }
-
-export { access, mkdir, readFile };

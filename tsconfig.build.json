@@ -2,9 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "declaration": true,
-    "sourceMap": true,
-    "strictPropertyInitialization": false
+    "declaration": true
   },
   "include": ["gen/ts"]
 }
