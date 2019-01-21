@@ -33,6 +33,7 @@
   "dependencies": {
     "ajv": "^6.7.0",
     "big-integer": "^1.6.40",
+    "is-plain-object": "^2.0.4",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

@@ -1,11 +1,26 @@
 import { ajv, ValidationError } from "./ajv";
+import isPlainObject from "is-plain-object";
 
 export const SCHEMA_ID = Symbol("SCHEMA_ID");
 export const ADD_SCHEMA = Symbol("ADD_SCHEMA");
 
+function filterUndefinedValues(data: unknown): unknown {
+  if (Array.isArray(data)) {
+    return data.map(filterUndefinedValues);
+  }
+
+  if (isPlainObject(data)) {
+    return setDefinedProps(data, {});
+  }
+
+  return data;
+}
+
 function setDefinedProps(src: any, dst: any) {
   for (const key of Object.keys(src)) {
-    if (src[key] !== undefined) dst[key] = src[key];
+    if (src[key] !== undefined) {
+      dst[key] = filterUndefinedValues(src[key]);
+    }
   }
 
   return dst;

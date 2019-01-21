@@ -10,8 +10,7 @@ describe("class", () => {
       deployment = new Deployment({
         metadata: {
           name: "test"
-        },
-        spec: undefined
+        }
       });
     });
 
@@ -79,6 +78,54 @@ describe("class", () => {
 
     it("should override apiVersion", () => {
       expect(pod).to.haveOwnProperty("kind", "bar");
+    });
+  });
+
+  describe("toJSON", () => {
+    it("should not set undefined props", () => {
+      const json = new Pod({
+        spec: undefined
+      }).toJSON();
+
+      expect(json).to.eql({
+        apiVersion: "v1",
+        kind: "Pod"
+      });
+    });
+
+    it("should not set undefined props in an object", () => {
+      const json = new Pod({
+        spec: {
+          nodeName: undefined
+        } as any
+      }).toJSON();
+
+      expect(json).to.eql({
+        apiVersion: "v1",
+        kind: "Pod",
+        spec: {}
+      });
+    });
+
+    it("should not set undefined props in an array", () => {
+      const json = new Pod({
+        spec: {
+          containers: [
+            {
+              name: "foo",
+              image: undefined
+            }
+          ]
+        }
+      }).toJSON();
+
+      expect(json).to.eql({
+        apiVersion: "v1",
+        kind: "Pod",
+        spec: {
+          containers: [{ name: "foo" }]
+        }
+      });
     });
   });
 });
