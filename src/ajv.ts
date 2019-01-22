@@ -5,7 +5,6 @@ import bigInteger from "big-integer";
 const rBase64 = /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
 
 export const ajv = new Ajv({
-  coerceTypes: true,
   extendRefs: "fail",
   format: "full"
 });
@@ -33,15 +32,6 @@ function intFormat(bits: number): FormatDefinition {
 
 ajv.addFormat("int32", intFormat(32));
 ajv.addFormat("int64", intFormat(64));
-
-ajv.addFormat("int-or-string", {
-  type: "string",
-  validate(input: string) {
-    const n = +input;
-    if (isNaN(n)) return true;
-    return Number.isInteger(n);
-  }
-});
 
 ajv.addFormat("float", {
   type: "number",

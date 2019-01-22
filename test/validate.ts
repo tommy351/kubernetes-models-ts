@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { Pod } from "../gen/ts/api/core/v1/Pod";
+import { Service } from "../gen/ts/api/core/v1/Service";
 import { ajv, ValidationError } from "../src/ajv";
 
 describe("validate", () => {
@@ -28,21 +29,26 @@ describe("validate", () => {
     });
   });
 
+  describe("Service", () => {
+    function test(targetPort: any) {
+      return () => {
+        const svc = new Service({
+          spec: {
+            ports: [{ port: 80, targetPort }]
+          }
+        });
+
+        svc.validate();
+        expect(svc.spec!.ports![0].targetPort).to.equal(targetPort);
+      };
+    }
+
+    it("should be able to use number in targetPort", test(80));
+
+    it("should be able to use string in targetPort", test("http"));
+  });
+
   describe("format", () => {
-    describe("int-or-string", () => {
-      function test(input: any, expected: boolean) {
-        return () => {
-          expect(
-            ajv.validate({ type: "string", format: "int-or-string" }, input)
-          ).to.eql(expected);
-        };
-      }
-
-      it("should pass when given string", test("foo", true));
-      it("should pass when given integer", test(123, true));
-      it("should fail when given float", test(123.456, false));
-    });
-
     describe("int32", () => {
       function test(input: number, expected: boolean) {
         return () => {

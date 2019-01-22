@@ -215,7 +215,17 @@ function compileSchema(name: string, def: any): string {
     return output;
   }
 
-  const schema = changeRef(def);
+  let schema: any;
+
+  // Rewrite schemas for some special types
+  if (name === "io.k8s.apimachinery.pkg.util.intstr.IntOrString") {
+    schema = {
+      oneOf: [{ type: "string" }, { type: "integer", format: "int32" }]
+    };
+  } else {
+    schema = changeRef(def);
+  }
+
   return JSON.stringify(schema, null, "  ");
 }
 
