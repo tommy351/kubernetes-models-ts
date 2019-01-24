@@ -3,6 +3,9 @@ import { readFile, writeFile, copyDir } from "./fs";
 import { camelCase, trimPrefix, upperFirst, trimSuffix } from "./string";
 import { join, relative, dirname, posix } from "path";
 import { set } from "./object";
+import randomstring from "randomstring";
+
+const idMap: { [key: string]: string } = {};
 
 interface DefinitionTree {
   [key: string]: string | DefinitionTree;
@@ -58,11 +61,11 @@ function getShortInterfaceName(name: string): string {
 }
 
 function getSchemaName(name: string): string {
-  return getClassName(name) + "Schema";
+  return idMap[name] + "S";
 }
 
 function getAddSchemaName(name: string): string {
-  return getClassName(name) + "AddSchema";
+  return idMap[name] + "A";
 }
 
 function getAjvPath() {
@@ -292,9 +295,31 @@ async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
   await writeFile(path, output);
 }
 
+function generateDefId(defs: any) {
+  const generatedIds = new Map<string, boolean>();
+
+  function generate(): string {
+    const id = randomstring.generate({
+      length: 4,
+      charset: "alphabetic"
+    });
+
+    if (generatedIds.has(id)) return generate();
+
+    generatedIds.set(id, true);
+    return id;
+  }
+
+  for (const key of Object.keys(defs)) {
+    idMap[key] = generate();
+  }
+}
+
 (async () => {
   const { definitions } = JSON.parse(await readFile(argv.file, "utf8"));
   const tree: DefinitionTree = {};
+
+  generateDefId(definitions);
 
   for (const key of Object.keys(definitions)) {
     const def = definitions[key];
