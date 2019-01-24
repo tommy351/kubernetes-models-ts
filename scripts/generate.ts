@@ -89,7 +89,8 @@ function commentize(s: string): string {
   let output = "/**\n";
 
   for (const line of s.split("\n")) {
-    output += " * " + line.replace(/\*\//g, "\\*\\/") + "\n";
+    output +=
+      " * " + line.replace(/\*/g, "\\*").replace(/\*\//g, "*\\/") + "\n";
   }
 
   output += " */\n";
