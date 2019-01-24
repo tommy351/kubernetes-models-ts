@@ -110,7 +110,11 @@ function compileDefinition(key: string, def: any): string {
   if (def.type === "object") {
     const basePath = relative(dirname(getOutputPath(key)), getBasePath());
     const classContent = `${trimSuffix(content.trim(), "}")}
+
+/** @internal */
 protected [SCHEMA_ID] = "${key}";
+
+/** @internal */
 protected [ADD_SCHEMA] = ${getAddSchemaName(key)};
 
 ${compileClassCtor(key, def)}
@@ -132,8 +136,12 @@ ${comment}export type ${className} = ${interfaceName};
   }
 
   output += `
+/** @internal */
 export const ${getSchemaName(key)}: object = ${compileSchema(key, def)};
+
+/** @internal */
 export function ${getAddSchemaName(key)}() ${compileAddSchema(key, def)}
+
 export { ${interfaceName} as ${getShortInterfaceName(key)} };
 export { ${className} as ${getShortClassName(key)} };
 `;
@@ -201,6 +209,11 @@ function compileSchema(name: string, def: any): string {
     const output: any = {};
 
     for (const key of Object.keys(obj)) {
+      // Remove description and kubernetes attributes
+      if (key === "description" || key.startsWith("x-kubernetes-")) {
+        continue;
+      }
+
       let val = obj[key];
 
       if (key === "$ref" && typeof val === "string") {

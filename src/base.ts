@@ -1,7 +1,10 @@
 import { ajv, ValidationError } from "./ajv";
 import isPlainObject from "is-plain-object";
 
+/** @internal */
 export const SCHEMA_ID = Symbol("SCHEMA_ID");
+
+/** @internal */
 export const ADD_SCHEMA = Symbol("ADD_SCHEMA");
 
 function filterUndefinedValues(data: unknown): unknown {
@@ -27,7 +30,10 @@ function setDefinedProps(src: any, dst: any) {
 }
 
 export abstract class BaseModel<T> {
+  /** @internal */
   protected abstract [SCHEMA_ID]: string;
+
+  /** @internal */
   protected abstract [ADD_SCHEMA]: () => void;
 
   constructor(data?: T) {
