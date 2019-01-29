@@ -11,6 +11,12 @@ interface DefinitionTree {
   [key: string]: string | DefinitionTree;
 }
 
+interface GVK {
+  group: string;
+  kind: string;
+  version: string;
+}
+
 const { argv } = yargs
   .option("file", {
     description: "Path of OpenAPI spec",
@@ -98,6 +104,18 @@ function commentize(s: string): string {
 
   output += " */\n";
   return output;
+}
+
+function getGVK(data: any): GVK | undefined {
+  const gvk = data["x-kubernetes-group-version-kind"];
+  if (!gvk || !gvk.length) return;
+
+  return gvk[0];
+}
+
+function getAPIVersion({ group, version }: GVK): string {
+  if (!group) return version;
+  return `${group}/${version}`;
 }
 
 function compileDefinition(key: string, def: any): string {
@@ -259,16 +277,14 @@ function compileAddSchema(name: string, def: any): string {
 }
 
 function compileClassCtor(name: string, def: any): string {
-  const gvk = def["x-kubernetes-group-version-kind"];
-  if (!gvk || !gvk.length) return "";
-
-  const { group, version, kind } = gvk[0];
+  const gvk = getGVK(def);
+  if (!gvk) return "";
 
   return `
 constructor(data?: ${getInterfaceName(name)}) {
   super({
-    apiVersion: "${group ? group + "/" : ""}${version}",
-    kind: "${kind}",
+    apiVersion: "${getAPIVersion(gvk)}",
+    kind: "${gvk.kind}",
     ...data
   } as any);
 }`;
@@ -291,6 +307,46 @@ async function writeIndexFiles(tree: DefinitionTree, name: string = "") {
   }
 
   const path = join(getOutputPath(name), "index.ts");
+  console.log("Generating:", path);
+  await writeFile(path, output);
+}
+
+async function writeResolveFile(defs: any) {
+  const pathMap: { [key: string]: string } = {};
+  const importPathMapId = "IMPORT_PATH_MAP";
+
+  for (const key of Object.keys(defs)) {
+    const gvk = getGVK(defs[key]);
+
+    if (gvk) {
+      const apiVersion = getAPIVersion(gvk);
+
+      if (!pathMap[apiVersion]) {
+        const parts = trimDefPrefix(key).split(".");
+        parts.pop();
+        pathMap[apiVersion] = parts.join("/");
+      }
+    }
+  }
+
+  const output = `const ${importPathMapId}: { [key: string]: string } = ${JSON.stringify(
+    pathMap,
+    null,
+    "  "
+  )};
+
+export function getImportPath(
+  apiVersion: string,
+  kind?: string
+): string | undefined {
+  const path = ${importPathMapId}[apiVersion];
+  if (!path) return;
+  if (!kind) return path;
+  return path + "/" + kind;
+}
+`;
+
+  const path = getOutputPath("resolve") + ".ts";
   console.log("Generating:", path);
   await writeFile(path, output);
 }
@@ -352,5 +408,6 @@ ${getAddSchemaName(ref)}
   }
 
   await writeIndexFiles(tree);
+  await writeResolveFile(definitions);
   await copyDir(join(__dirname, "..", "src"), argv.output);
 })().catch(console.error);
