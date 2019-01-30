@@ -1,0 +1,66 @@
+version: 2.1
+
+commands:
+  npm_install:
+    steps:
+      - restore_cache:
+          key: npm-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-{{ checksum "package-lock.json" }}
+  test_unit:
+    description: Run unit tests
+    steps:
+      - run:
+          name: Build
+          command: make dist
+      - run:
+          name: Unit tests
+          command: npm run test -- --reporter mocha-junit-reporter
+          environment:
+            MOCHA_FILE: reports/junit/results.xml
+      - store_test_results:
+          path: reports/junit
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - npm_install
+      - run:
+          name: Lint
+          command: npm run lint
+  test_node_8:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - npm_install
+      - test_unit
+  test_node_10:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - npm_install
+      - test_unit
+  test_node_11:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - npm_install
+      - test_unit
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - lint
+      - test_node_8
+      - test_node_10
+      - test_node_11
