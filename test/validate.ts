@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { Pod } from "../gen/ts/api/core/v1/Pod";
 import { Service } from "../gen/ts/api/core/v1/Service";
 import { ajv, ValidationError } from "../src/ajv";
+import { JSONSchemaProps } from "../gen/ts/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1";
 
 describe("validate", () => {
   describe("when validation passed", () => {
@@ -39,13 +40,33 @@ describe("validate", () => {
         });
 
         svc.validate();
-        expect(svc.spec!.ports![0].targetPort).to.equal(targetPort);
+        expect(svc.spec!.ports![0].targetPort).to.eql(targetPort);
       };
     }
 
     it("should be able to use number in targetPort", test(80));
 
     it("should be able to use string in targetPort", test("http"));
+  });
+
+  describe("JSONSchemaProps", () => {
+    function test(value: any) {
+      return () => {
+        const props = new JSONSchemaProps({
+          default: value
+        });
+
+        props.validate();
+        expect(props.default).to.eql(value);
+      };
+    }
+
+    it("should pass when type = string", test("str"));
+    it("should pass when type = boolean", test(true));
+    it("should pass when type = int", test(123));
+    it("should pass when type = float", test(46.93));
+    it("should pass when type = array", test(["a", "b", "c"]));
+    it("should pass when type = object", test({ a: "b", c: "d" }));
   });
 
   describe("format", () => {

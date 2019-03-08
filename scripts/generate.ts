@@ -253,12 +253,19 @@ function compileSchema(name: string, def: any): string {
   let schema: any;
 
   // Rewrite schemas for some special types
-  if (name === "io.k8s.apimachinery.pkg.util.intstr.IntOrString") {
-    schema = {
-      oneOf: [{ type: "string" }, { type: "integer", format: "int32" }]
-    };
-  } else {
-    schema = changeRef(def);
+  switch (name) {
+    case "io.k8s.apimachinery.pkg.util.intstr.IntOrString":
+      schema = {
+        oneOf: [{ type: "string" }, { type: "integer", format: "int32" }]
+      };
+      break;
+
+    case "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSON":
+      schema = {};
+      break;
+
+    default:
+      schema = changeRef(def);
   }
 
   return JSON.stringify(schema, null, "  ");
