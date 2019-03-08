@@ -102,6 +102,10 @@ function commentize(s: string): string {
       " * " + line.replace(/\*/g, "\\*").replace(/\*\//g, "*\\/") + "\n";
   }
 
+  if (s.toLowerCase().startsWith("deprecated")) {
+    output += " * @deprecated\n";
+  }
+
   output += " */\n";
   return output;
 }
