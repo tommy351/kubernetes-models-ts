@@ -389,6 +389,8 @@ function generateDefId(defs: any) {
   generateDefId(definitions);
 
   for (const key of Object.keys(definitions)) {
+    if (key.startsWith("io.k8s.kubernetes.")) continue;
+
     const def = definitions[key];
     const path = getOutputPath(key) + ".ts";
     let content = "";
