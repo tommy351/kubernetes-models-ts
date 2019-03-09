@@ -15,7 +15,7 @@ npm install kubernetes-models
 ## Usage
 
 ```js
-import { Pod } from "kubernetes-models/api/core/v1";
+import { Pod } from "kubernetes-models/v1";
 
 // Create a new instance
 const pod = new Pod({
@@ -30,6 +30,8 @@ const pod = new Pod({
 // Validate against JSON schema
 pod.validate();
 ```
+
+See [examples](examples) folder for more examples.
 
 ## Build
 
