@@ -29,12 +29,12 @@ function setDefinedProps(src: any, dst: any) {
   return dst;
 }
 
-export abstract class BaseModel<T> {
+export class BaseModel<T> {
   /** @internal */
-  protected abstract [SCHEMA_ID]: string;
+  protected [SCHEMA_ID]: string;
 
   /** @internal */
-  protected abstract [ADD_SCHEMA]: () => void;
+  protected [ADD_SCHEMA]: () => void;
 
   constructor(data?: T) {
     if (data) {
