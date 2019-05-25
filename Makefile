@@ -1,4 +1,4 @@
-KUBERNETES_VERSION = 1.13.1
+KUBERNETES_VERSION = 1.14.2
 
 swagger_path = gen/swagger-$(KUBERNETES_VERSION).json
 
