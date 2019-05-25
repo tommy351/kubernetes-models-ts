@@ -15,6 +15,7 @@ export interface Property {
   properties?: { [key: string]: Property };
   required?: string[];
   additionalProperties?: Property;
+  enum: any[];
   [key: string]: any;
 }
 
@@ -54,12 +55,34 @@ function collectRefs(data: any): readonly string[] {
 export class Definition {
   public readonly gvk: readonly GroupVersionKind[];
 
-  public constructor(public readonly id: string, public readonly schema: Property) {
+  public constructor(
+    public readonly id: string,
+    public readonly schema: Property
+  ) {
     if (!schema.type && !schema.$ref) {
       schema.type = "object";
     }
 
     this.gvk = schema["x-kubernetes-group-version-kind"] || [];
+
+    if (schema.type === "object" && this.gvk.length) {
+      const { properties = {}, required = [] } = schema;
+
+      schema.properties = {
+        ...properties,
+        apiVersion: {
+          ...properties.apiVersion,
+          type: "string",
+          enum: [this.getAPIVersion()]
+        },
+        kind: {
+          ...properties.kind,
+          type: "string",
+          enum: [this.getKind()]
+        }
+      };
+      schema.required = [...new Set([...required, "apiVersion", "kind"])];
+    }
   }
 
   public getGVK(): GroupVersionKind | undefined {

@@ -57,30 +57,6 @@ describe("class", () => {
     });
   });
 
-  describe("given apiVersion", () => {
-    let pod: Pod;
-
-    beforeEach(() => {
-      pod = new Pod({ apiVersion: "foo" });
-    });
-
-    it("should override apiVersion", () => {
-      expect(pod).to.haveOwnProperty("apiVersion", "foo");
-    });
-  });
-
-  describe("given apiVersion", () => {
-    let pod: Pod;
-
-    beforeEach(() => {
-      pod = new Pod({ kind: "bar" });
-    });
-
-    it("should override apiVersion", () => {
-      expect(pod).to.haveOwnProperty("kind", "bar");
-    });
-  });
-
   describe("toJSON", () => {
     it("should not set undefined props", () => {
       const json = new Pod({

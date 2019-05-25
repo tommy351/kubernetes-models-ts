@@ -7,6 +7,10 @@ export const SCHEMA_ID = Symbol("SCHEMA_ID");
 /** @internal */
 export const ADD_SCHEMA = Symbol("ADD_SCHEMA");
 
+type ModelData<T> = T extends { apiVersion: any; kind: any }
+  ? Pick<T, Exclude<keyof T, "apiVersion" | "kind">>
+  : T;
+
 function setDefinedProps(src: any, dst: any): any {
   for (const key of Object.keys(src)) {
     if (src[key] !== undefined) {
@@ -37,7 +41,7 @@ export class BaseModel<T> {
   /** @internal */
   protected [ADD_SCHEMA]: () => void;
 
-  public constructor(data?: T) {
+  public constructor(data?: ModelData<T>) {
     if (data) {
       setDefinedProps(data, this);
     }
