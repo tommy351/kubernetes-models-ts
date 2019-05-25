@@ -61,6 +61,10 @@ function compileType(def: Property): string {
       return output;
 
     case "string":
+      if (def.enum && def.enum.length) {
+        return def.enum.map(x => JSON.stringify(x)).join(" | ");
+      }
+
       switch (def.format) {
         case "int-or-string":
           return "string | number";
@@ -90,21 +94,6 @@ function compileType(def: Property): string {
   return "any";
 }
 
-function compileClassCtor(def: Definition): string {
-  if (!def.getGVK()) {
-    return "";
-  }
-
-  return `
-constructor(data?: ${def.getInterfaceName()}) {
-  super({
-    apiVersion: "${def.getAPIVersion()}",
-    kind: "${def.getKind()}",
-    ...data
-  } as any);
-}`;
-}
-
 function generate(def: Definition): GenerateResult {
   const typing = compileType(def.schema);
   let content = "";
@@ -123,9 +112,20 @@ import { ${getInterfaceName(ref)} } from "./${getClassName(ref)}";
   }
 
   if (def.schema.type === "object") {
-    const classContent = `${trimSuffix(trimComment(typing.trim()), "}")}
-${compileClassCtor(def)}
+    const gvk = def.getGVK();
+    let classContent = typing;
+
+    if (gvk) {
+      classContent = `${trimSuffix(trimComment(typing.trim()), "}")}
+static apiVersion: ${def.getInterfaceName()}["apiVersion"] = "${def.getAPIVersion()}";
+static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
 }`;
+
+      classContent = classContent.replace(
+        /"(apiVersion|kind)": "([^"]+)";/g,
+        `$1: ${def.getInterfaceName()}["$1"] = ${def.getClassName()}["$1"];`
+      );
+    }
 
     content += `
 import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "../_src/base";

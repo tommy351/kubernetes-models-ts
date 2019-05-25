@@ -50,7 +50,7 @@
     "lint-staged": "^8.1.0",
     "mocha": "^5.2.0",
     "mocha-junit-reporter": "^1.18.0",
-    "prettier": "^1.15.3",
+    "prettier": "^1.17.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.4.5",
     "yargs": "^12.0.5"
