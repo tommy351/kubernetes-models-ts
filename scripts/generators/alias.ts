@@ -11,7 +11,7 @@ interface KeyMap {
   [key: string]: string | KeyMap;
 }
 
-function deepGet(obj: any, keys: ReadonlyArray<string>): any {
+function deepGet(obj: any, keys: readonly string[]): any {
   const [key, ...rest] = keys;
 
   if (!rest.length) {
@@ -21,7 +21,7 @@ function deepGet(obj: any, keys: ReadonlyArray<string>): any {
   return deepGet(obj[key], rest);
 }
 
-function deepSet(obj: any, keys: ReadonlyArray<string>, value: any) {
+function deepSet(obj: any, keys: readonly string[], value: any): void {
   const [key, ...rest] = keys;
 
   if (rest.length) {
@@ -35,7 +35,7 @@ function deepSet(obj: any, keys: ReadonlyArray<string>, value: any) {
 function generate(
   map: KeyMap,
   parent: string = ""
-): ReadonlyArray<GenerateResult> {
+): readonly GenerateResult[] {
   const path = parent + "index.ts";
   let children: GenerateResult[] = [];
   let content = "";
@@ -62,7 +62,7 @@ function generate(
 }
 
 function buildGVKMap(
-  defs: ReadonlyArray<Definition>
+  defs: readonly Definition[]
 ): { [key: string]: string } {
   const map: { [key: string]: string } = {};
 
@@ -86,8 +86,8 @@ function buildGVKMap(
 }
 
 export async function generateAliases(
-  defs: ReadonlyArray<Definition>
-): Promise<ReadonlyArray<GenerateResult>> {
+  defs: readonly Definition[]
+): Promise<readonly GenerateResult[]> {
   const map: KeyMap = {};
   const gvkMap = buildGVKMap(defs);
   const prefix = "io.k8s.";

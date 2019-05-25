@@ -11,7 +11,7 @@ export const ajv = new Ajv({
 
 export { ValidationError };
 
-export function addSchema(id: string, schema: any) {
+export function addSchema(id: string, schema: any): void {
   if (!ajv.getSchema(id)) {
     ajv.addSchema(schema, id);
   }

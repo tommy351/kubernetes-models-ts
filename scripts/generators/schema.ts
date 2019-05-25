@@ -2,7 +2,7 @@ import { Definition, GenerateResult, Property } from "../types";
 import { trimRefPrefix, getClassName } from "../string";
 
 function compileSchema(def: Definition): string {
-  function changeRef(obj: Property) {
+  function changeRef(obj: Property): any {
     const output: any = {};
 
     for (const key of Object.keys(obj)) {
@@ -80,7 +80,7 @@ export function addSchema() ${compileAddSchema(def)}
 }
 
 export async function generateSchemas(
-  defs: ReadonlyArray<Definition>
-): Promise<ReadonlyArray<GenerateResult>> {
+  defs: readonly Definition[]
+): Promise<readonly GenerateResult[]> {
   return defs.map(generate);
 }

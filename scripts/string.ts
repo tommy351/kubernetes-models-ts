@@ -1,14 +1,14 @@
 const QUOTES = `'"`;
 
-export function upperFirst(s: string) {
+export function upperFirst(s: string): string {
   return s[0].toUpperCase() + s.substring(1);
 }
 
-export function lowerFirst(s: string) {
+export function lowerFirst(s: string): string {
   return s[0].toLowerCase() + s.substring(1);
 }
 
-export function camelCase(input: string, chars: string) {
+export function camelCase(input: string, chars: string): string {
   let output = "";
   let upper = false;
 
@@ -24,7 +24,7 @@ export function camelCase(input: string, chars: string) {
   return output;
 }
 
-export function trimPrefix(s: string, prefix: string) {
+export function trimPrefix(s: string, prefix: string): string {
   if (s.substring(0, prefix.length) === prefix) {
     return s.substring(prefix.length);
   }
@@ -32,7 +32,7 @@ export function trimPrefix(s: string, prefix: string) {
   return s;
 }
 
-export function trimSuffix(s: string, suffix: string) {
+export function trimSuffix(s: string, suffix: string): string {
   const end = s.length - suffix.length;
 
   if (s.substring(end) === suffix) {
@@ -42,7 +42,7 @@ export function trimSuffix(s: string, suffix: string) {
   return s;
 }
 
-export function unquote(s: string) {
+export function unquote(s: string): string {
   const first = s[0];
   if (QUOTES.indexOf(first) === -1) return s;
   if (s[s.length - 1] !== first) return s;
@@ -67,6 +67,6 @@ export function getShortInterfaceName(s: string): string {
   return "I" + getShortClassName(s);
 }
 
-export function trimRefPrefix(ref: string) {
+export function trimRefPrefix(ref: string): string {
   return trimPrefix(ref, "#/definitions/");
 }

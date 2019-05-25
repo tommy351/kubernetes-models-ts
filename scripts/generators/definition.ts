@@ -27,7 +27,7 @@ function commentize(
   return output;
 }
 
-function trimComment(s: string) {
+function trimComment(s: string): string {
   return s.replace(/\/\*{2}[\s\S]+?\*\//g, "");
 }
 
@@ -160,7 +160,7 @@ export {
 }
 
 export async function generateDefinitions(
-  defs: ReadonlyArray<Definition>
-): Promise<ReadonlyArray<GenerateResult>> {
+  defs: readonly Definition[]
+): Promise<readonly GenerateResult[]> {
   return defs.map(generate);
 }

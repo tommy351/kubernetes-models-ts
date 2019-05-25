@@ -11,7 +11,7 @@ export const copyFile = promisify(fs.copyFile);
 
 const fsWriteFile = promisify(fs.writeFile);
 
-export async function mkdirAll(path: string) {
+export async function mkdirAll(path: string): Promise<void> {
   const parent = dirname(path);
 
   try {
@@ -29,12 +29,12 @@ export async function mkdirAll(path: string) {
   }
 }
 
-export async function writeFile(path: string, content: any) {
+export async function writeFile(path: string, content: any): Promise<void> {
   await mkdirAll(dirname(path));
   await fsWriteFile(path, content);
 }
 
-export async function copyDir(src: string, dst: string) {
+export async function copyDir(src: string, dst: string): Promise<void> {
   const files = await readDir(src);
 
   await mkdirAll(dst);

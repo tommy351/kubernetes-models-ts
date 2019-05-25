@@ -1,9 +1,9 @@
 import {
-  trimPrefix,
   getClassName,
   getInterfaceName,
   getShortClassName,
-  getShortInterfaceName
+  getShortInterfaceName,
+  trimRefPrefix
 } from "./string";
 
 export interface Property {
@@ -30,14 +30,10 @@ export interface GenerateResult {
 }
 
 export type GenerateFunc = (
-  defs: ReadonlyArray<Definition>
-) => Promise<ReadonlyArray<GenerateResult>>;
+  defs: readonly Definition[]
+) => Promise<readonly GenerateResult[]>;
 
-function trimRefPrefix(ref: string) {
-  return trimPrefix(ref, "#/definitions/");
-}
-
-function collectRefs(data: any): ReadonlyArray<string> {
+function collectRefs(data: any): readonly string[] {
   const refs = Object.keys(data).map(key => {
     const val = data[key];
 
@@ -56,9 +52,9 @@ function collectRefs(data: any): ReadonlyArray<string> {
 }
 
 export class Definition {
-  public readonly gvk: ReadonlyArray<GroupVersionKind>;
+  public readonly gvk: readonly GroupVersionKind[];
 
-  constructor(public readonly id: string, public readonly schema: Property) {
+  public constructor(public readonly id: string, public readonly schema: Property) {
     if (!schema.type && !schema.$ref) {
       schema.type = "object";
     }
