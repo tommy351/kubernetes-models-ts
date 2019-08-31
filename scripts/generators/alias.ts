@@ -32,10 +32,7 @@ function deepSet(obj: any, keys: readonly string[], value: any): void {
   }
 }
 
-function generate(
-  map: KeyMap,
-  parent: string = ""
-): readonly GenerateResult[] {
+function generate(map: KeyMap, parent = ""): readonly GenerateResult[] {
   const path = parent + "index.ts";
   let children: GenerateResult[] = [];
   let content = "";
@@ -61,9 +58,7 @@ function generate(
   return [{ path, content }, ...children];
 }
 
-function buildGVKMap(
-  defs: readonly Definition[]
-): { [key: string]: string } {
+function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
   const map: { [key: string]: string } = {};
 
   for (const def of defs) {

@@ -15,11 +15,13 @@ const generators: GenerateFunc[] = [
 const { argv } = yargs
   .option("file", {
     description: "Path of OpenAPI spec",
-    required: true
+    required: true,
+    type: "string"
   })
   .option("output", {
     description: "Output path",
-    required: true
+    required: true,
+    type: "string"
   });
 
 (async () => {
