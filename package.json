@@ -18,7 +18,7 @@
     "lint": "eslint . --ext .js,.ts",
     "build": "tsc -b packages/openapi-generate && lerna run build --stream && node scripts/build.js",
     "watch": "npm run build -- --watch",
-    "clean": "node scripts/build.js --clean",
+    "clean": "lerna run clean && node scripts/build.js --clean",
     "bootstrap": "lerna bootstrap"
   },
   "husky": {

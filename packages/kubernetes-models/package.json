@@ -12,7 +12,8 @@
   "main": "index.js",
   "scripts": {
     "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.15.3/api/openapi-spec/swagger.json --output ./gen",
-    "prepack": "cp package.json dist/"
+    "prepack": "cp package.json dist/",
+    "clean": "del gen"
   },
   "publishConfig": {
     "access": "public",
@@ -25,6 +26,7 @@
     "@kubernetes-models/base": "^0.0.1"
   },
   "devDependencies": {
-    "@kubernetes-models/openapi-generate": "^0.0.1"
+    "@kubernetes-models/openapi-generate": "^0.0.1",
+    "del-cli": "^2.0.0"
   }
 }
