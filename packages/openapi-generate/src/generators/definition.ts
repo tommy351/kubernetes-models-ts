@@ -128,7 +128,7 @@ static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
     }
 
     content += `
-import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "../_src/base";
+import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "@kubernetes-models/base";
 import { addSchema } from "../_schemas/${def.getClassName()}";
 
 ${comment}export interface ${def.getInterfaceName()} ${typing}

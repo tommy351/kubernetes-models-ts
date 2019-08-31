@@ -1,0 +1,26 @@
+{
+  "name": "@kubernetes-models/openapi-generate",
+  "version": "0.0.1",
+  "description": "Generate Kubernetes models from OpenAPI schema.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "openapi-generate": "bin/openapi-generate.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@kubernetes-models/read-input": "^0.0.1",
+    "make-dir": "^3.0.0",
+    "yargs": "^14.0.0"
+  },
+  "devDependencies": {
+    "@types/yargs": "^13.0.2"
+  }
+}

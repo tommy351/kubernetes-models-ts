@@ -1,10 +1,13 @@
-import yargs from "yargs";
-import { readFile, writeFile, copyDir } from "./fs";
-import { join } from "path";
+import { writeFile } from "fs";
+import { join, dirname } from "path";
+import makeDir from "make-dir";
+import { promisify } from "util";
 import { Definition, GenerateFunc } from "./types";
 import { generateDefinitions } from "./generators/definition";
 import { generateAliases } from "./generators/alias";
 import { generateSchemas } from "./generators/schema";
+
+const writeFileAsync = promisify(writeFile);
 
 const generators: GenerateFunc[] = [
   generateDefinitions,
@@ -12,20 +15,13 @@ const generators: GenerateFunc[] = [
   generateAliases
 ];
 
-const { argv } = yargs
-  .option("file", {
-    description: "Path of OpenAPI spec",
-    required: true,
-    type: "string"
-  })
-  .option("output", {
-    description: "Output path",
-    required: true,
-    type: "string"
-  });
+export interface GenerateOptions {
+  input: string;
+  outputPath: string;
+}
 
-(async () => {
-  const { definitions } = JSON.parse(await readFile(argv.file, "utf8"));
+export async function generate(options: GenerateOptions): Promise<void> {
+  const { definitions } = JSON.parse(options.input);
   const arr = Object.keys(definitions)
     .filter(id => !id.startsWith("io.k8s.kubernetes."))
     .map(id => new Definition(id, definitions[id]));
@@ -39,11 +35,12 @@ const { argv } = yargs
         throw new Error(`Path conflict: ${file.path}`);
       }
 
-      await writeFile(join(argv.output, file.path), file.content);
+      const path = join(options.outputPath, file.path);
+
+      await makeDir(dirname(path));
+      await writeFileAsync(path, file.content);
       generatedPaths.add(file.path);
       console.log("Generating:", file.path);
     }
   }
-
-  await copyDir(join(__dirname, "..", "src"), join(argv.output, "_src"));
-})().catch(console.error);
+}

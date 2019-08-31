@@ -1,0 +1,28 @@
+{
+  "name": "@kubernetes-models/read-input",
+  "version": "0.0.1",
+  "main": "dist",
+  "description": "Read input from file, URL or stdin.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "base-x": "^3.0.6",
+    "find-cache-dir": "^3.0.0",
+    "get-stdin": "^7.0.0",
+    "hasha": "^5.0.0",
+    "make-dir": "^3.0.0",
+    "request-promise-native": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/find-cache-dir": "^2.0.0",
+    "@types/request-promise-native": "^1.0.16"
+  }
+}

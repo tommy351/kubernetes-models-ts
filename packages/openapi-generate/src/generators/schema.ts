@@ -59,7 +59,7 @@ function compileAddSchema(def: Definition): string {
 }
 
 function generate(def: Definition): GenerateResult {
-  let content = `import { addSchema as add } from "../_src/ajv";
+  let content = `import { addSchema as add } from "@kubernetes-models/base";
 `;
 
   for (const ref of def.getRefs()) {

@@ -10,19 +10,18 @@ commands:
           paths:
             - node_modules
           key: npm-{{ checksum "package-lock.json" }}
+  pretest:
+    steps:
+      - run:
+          name: Bootstrap
+          command: npm run bootstrap -- --no-ci
+      - run:
+          name: Build
+          command: npm run build
   test_unit:
     description: Run unit tests
     steps:
-      - run:
-          name: Build
-          command: make dist
-      - run:
-          name: Unit tests
-          command: npm run test -- --reporter mocha-junit-reporter
-          environment:
-            MOCHA_FILE: reports/junit/results.xml
-      - store_test_results:
-          path: reports/junit
+      - pretest
 
 jobs:
   lint:

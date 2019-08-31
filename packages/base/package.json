@@ -1,0 +1,22 @@
+{
+  "name": "@kubernetes-models/base",
+  "version": "0.0.1",
+  "main": "dist",
+  "description": "Base model and validation library for Kubernetes models.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "big-integer": "^1.6.44",
+    "is-plain-object": "^3.0.0",
+    "tslib": "^1.10.0"
+  }
+}

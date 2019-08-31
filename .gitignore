@@ -1,4 +1,7 @@
 node_modules/
-/dist/
-/gen/
 /.idea/
+/packages/*/package-lock.json
+*.tsbuildinfo
+/packages/*/dist/
+/packages/*/gen/
+*.log

@@ -1,0 +1,30 @@
+{
+  "name": "kubernetes-models",
+  "version": "0.6.1",
+  "description": "Kubernetes models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.15.3/api/openapi-spec/swagger.json --output ./gen",
+    "prepack": "cp package.json dist/"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes"
+  ],
+  "dependencies": {
+    "@kubernetes-models/base": "^0.0.1"
+  },
+  "devDependencies": {
+    "@kubernetes-models/openapi-generate": "^0.0.1"
+  }
+}

@@ -1,6 +1,7 @@
 {
   "name": "kubernetes-models",
   "version": "0.6.1",
+  "private": true,
   "description": "Kubernetes models",
   "repository": {
     "type": "git",
@@ -15,9 +16,10 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
-    "generate": "ts-node scripts/generate.ts",
-    "build": "tsc --build tsconfig.build.json",
-    "test": "mocha -r ts-node/register test/**/*.ts"
+    "build": "tsc -b packages/openapi-generate && lerna run build --stream && node scripts/build.js",
+    "watch": "npm run build -- --watch",
+    "clean": "node scripts/build.js --clean",
+    "bootstrap": "lerna bootstrap"
   },
   "husky": {
     "hooks": {
@@ -30,30 +32,18 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "ajv": "^6.10.2",
-    "big-integer": "^1.6.44",
-    "is-plain-object": "^3.0.0",
-    "tslib": "^1.10.0"
-  },
   "devDependencies": {
-    "@types/chai": "^4.2.0",
-    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.3",
-    "@types/yargs": "^13.0.2",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
-    "chai": "^4.2.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^3.0.4",
+    "lerna": "^3.16.4",
     "lint-staged": "^9.2.5",
-    "mocha": "^6.2.0",
-    "mocha-junit-reporter": "^1.23.1",
     "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
-    "typescript": "~3.5.3",
-    "yargs": "^14.0.0"
+    "typescript": "~3.5.3"
   }
 }

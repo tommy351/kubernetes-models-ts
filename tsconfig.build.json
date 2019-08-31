@@ -1,9 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
     "declaration": true,
-    "stripInternal": true
-  },
-  "include": ["gen/ts"]
+    "composite": true
+  }
 }

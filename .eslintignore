@@ -1,2 +1,4 @@
-/dist/
-/gen/
+dist/
+/coverage/
+node_modules/
+gen/

@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "gen",
+    "outDir": "dist"
+  },
+  "references": [{ "path": "../base" }, { "path": "../openapi-generate" }]
+}

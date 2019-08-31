@@ -1,2 +1,3 @@
-/gen/
-/packages/kubernetes-models/
+dist/
+node_modules/
+gen/
