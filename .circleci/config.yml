@@ -48,9 +48,9 @@ jobs:
       - checkout
       - npm_install
       - test_unit
-  test_node_11:
+  test_node_12:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     steps:
       - checkout
       - npm_install
@@ -63,4 +63,4 @@ workflows:
       - lint
       - test_node_8
       - test_node_10
-      - test_node_11
+      - test_node_12
