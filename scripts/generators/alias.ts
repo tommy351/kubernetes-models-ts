@@ -5,7 +5,7 @@ import {
   getClassName,
   getShortClassName
 } from "../string";
-import { relative } from "path";
+import { posix } from "path";
 
 interface KeyMap {
   [key: string]: string | KeyMap;
@@ -41,7 +41,10 @@ function generate(map: KeyMap, parent = ""): readonly GenerateResult[] {
     const val = map[key];
 
     if (typeof val === "string") {
-      const target = relative(parent, "_definitions/" + getClassName(val));
+      const target = posix.relative(
+        parent,
+        "_definitions/" + getClassName(val)
+      );
       content += `export * from "${target}";\n`;
       children.push({
         path: parent + getShortClassName(val) + ".ts",
