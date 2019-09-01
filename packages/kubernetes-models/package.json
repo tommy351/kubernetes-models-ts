@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.15.3/api/openapi-spec/swagger.json --output ./gen",
-    "prepack": "cp package.json dist/",
+    "prepack": "cp package.json README.md dist/",
     "clean": "rimraf gen"
   },
   "publishConfig": {
