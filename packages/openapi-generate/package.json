@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/openapi-generate",
-  "version": "0.0.2-alpha.0",
+  "version": "0.1.0",
   "description": "Generate Kubernetes models from OpenAPI schema.",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@kubernetes-models/read-input": "^0.0.2-alpha.0",
+    "@kubernetes-models/read-input": "^0.1.0",
     "make-dir": "^3.0.0",
     "yargs": "^14.0.0"
   },
