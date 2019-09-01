@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/contour",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Contour models",
   "repository": {
     "type": "git",
@@ -24,13 +24,13 @@
     "contour"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.1.1",
+    "@kubernetes-models/base": "^0.1.2",
     "@kubernetes-models/validate": "^0.1.1",
-    "kubernetes-models": "^0.7.1",
+    "kubernetes-models": "^0.7.2",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "^0.0.1",
+    "@kubernetes-models/crd-generate": "^0.1.0",
     "rimraf": "^3.0.0"
   }
 }

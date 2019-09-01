@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/read-input",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist",
   "description": "Read input from file, URL or stdin.",
   "repository": {
