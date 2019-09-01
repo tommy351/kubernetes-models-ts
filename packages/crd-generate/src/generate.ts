@@ -55,6 +55,9 @@ interface OpenAPIV3Schema {
   required?: string[];
   items?: OpenAPIV3Schema;
   enum?: any[];
+
+  // non-standard
+  $literal?: string;
 }
 
 interface GenerateDefinitionOptions {
@@ -70,6 +73,10 @@ export interface GenerateResult {
 }
 
 function compileType(schema: OpenAPIV3Schema): string {
+  if (schema.$literal) {
+    return schema.$literal;
+  }
+
   if (!schema.type) {
     if (schema.properties) {
       schema.type = "object";
@@ -143,6 +150,7 @@ async function generateDefinition(
   const path = join(options.group, options.version, options.kind) + ".ts";
   const apiVersion = `${options.group}/${options.version}`;
   const schema = options.validation.openAPIV3Schema;
+  const metadataTypeName = "IObjectMeta";
   const { properties = {}, required = [] } = schema;
   const interfaceName = "I" + options.kind;
   const className = options.kind;
@@ -158,6 +166,10 @@ async function generateDefinition(
       ...properties.kind,
       type: "string",
       enum: [options.kind]
+    },
+    metadata: {
+      ...properties.metadata,
+      $literal: metadataTypeName
     }
   };
   schema.required = [...new Set([...required, "apiVersion", "kind"])];
@@ -177,6 +189,7 @@ static kind: ${interfaceName}["kind"] = "${options.kind}";
     path,
     content: `import { Model } from "@kubernetes-models/base";
 import { register } from "@kubernetes-models/validate";
+import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
 
 export interface ${interfaceName} ${typing}
 

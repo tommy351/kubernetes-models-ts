@@ -1,6 +1,6 @@
 {
   "name": "kubernetes-models",
-  "version": "0.6.1",
+  "version": "0.0.0",
   "private": true,
   "description": "Kubernetes models",
   "repository": {
@@ -18,7 +18,7 @@
     "lint": "eslint . --ext .js,.ts",
     "build": "tsc -b packages/openapi-generate packages/crd-generate && lerna run build --stream && node scripts/build.js",
     "watch": "npm run build -- --watch",
-    "clean": "lerna run clean && node scripts/build.js --clean",
+    "clean": "node scripts/build.js --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",
     "test": "jest",
     "codecov": "codecov"

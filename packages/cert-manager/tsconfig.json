@@ -3,12 +3,17 @@
   "compilerOptions": {
     "rootDir": "gen",
     "outDir": "dist",
-    "sourceMap": false
+    "sourceMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "kubernetes-models/*": ["../kubernetes-models/dist/*"]
+    }
   },
   "include": ["gen"],
   "references": [
     { "path": "../base" },
     { "path": "../validate" },
-    { "path": "../crd-generate" }
+    { "path": "../crd-generate" },
+    { "path": "../kubernetes-models" }
   ]
 }
