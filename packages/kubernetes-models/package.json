@@ -23,7 +23,8 @@
     "kubernetes"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.0.1"
+    "@kubernetes-models/base": "^0.0.1",
+    "@kubernetes-models/validate": "^0.0.1"
   },
   "devDependencies": {
     "@kubernetes-models/openapi-generate": "^0.0.1",

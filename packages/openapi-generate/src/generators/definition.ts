@@ -128,15 +128,14 @@ static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
     }
 
     content += `
-import { BaseModel, SCHEMA_ID, ADD_SCHEMA } from "@kubernetes-models/base";
+import { Model } from "@kubernetes-models/base";
 import { addSchema } from "../_schemas/${def.getClassName()}";
 
 ${comment}export interface ${def.getInterfaceName()} ${typing}
 
-${comment}export class ${def.getClassName()} extends BaseModel<${def.getInterfaceName()}> implements ${def.getInterfaceName()} ${classContent}
+${comment}export class ${def.getClassName()} extends Model<${def.getInterfaceName()}> implements ${def.getInterfaceName()} ${classContent}
 
-${def.getClassName()}.prototype[SCHEMA_ID] = "${def.id}";
-${def.getClassName()}.prototype[ADD_SCHEMA] = addSchema;
+Model.setSchema(${def.getClassName()}, "${def.id}", addSchema);
 `;
   } else {
     content += `

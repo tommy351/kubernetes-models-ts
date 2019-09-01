@@ -1,8 +1,8 @@
 {
-  "name": "@kubernetes-models/base",
+  "name": "@kubernetes-models/validate",
   "version": "0.0.1",
   "main": "dist",
-  "description": "Base model and validation library for Kubernetes models.",
+  "description": "Validation library for Kubernetes models.",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
@@ -14,8 +14,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@kubernetes-models/validate": "^0.0.1",
-    "is-plain-object": "^3.0.0",
+    "ajv": "^6.10.2",
+    "big-integer": "^1.6.44",
     "tslib": "^1.10.0"
   }
 }

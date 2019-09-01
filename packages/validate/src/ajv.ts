@@ -1,4 +1,4 @@
-import Ajv, { ValidationError, FormatDefinition } from "ajv";
+import Ajv, { FormatDefinition } from "ajv";
 import bigInteger from "big-integer";
 
 // From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15
@@ -9,9 +9,7 @@ export const ajv = new Ajv({
   format: "full"
 });
 
-export { ValidationError };
-
-export function addSchema(id: string, schema: any): void {
+export function register(id: string, schema: any): void {
   if (!ajv.getSchema(id)) {
     ajv.addSchema(schema, id);
   }

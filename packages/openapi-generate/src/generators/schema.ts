@@ -53,13 +53,13 @@ function compileAddSchema(def: Definition): string {
     output += `${getClassName(ref)}();\n`;
   }
 
-  output += `add("${def.id}", schema);\n`;
+  output += `register("${def.id}", schema);\n`;
   output += "}\n";
   return output;
 }
 
 function generate(def: Definition): GenerateResult {
-  let content = `import { addSchema as add } from "@kubernetes-models/base";
+  let content = `import { register } from "@kubernetes-models/validate";
 `;
 
   for (const ref of def.getRefs()) {

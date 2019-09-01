@@ -1,15 +1,8 @@
-import { ajv, ValidationError } from "./ajv";
 import isPlainObject from "is-plain-object";
+import { validate } from "@kubernetes-models/validate";
 
-/** @internal */
-export const SCHEMA_ID = Symbol("SCHEMA_ID");
-
-/** @internal */
-export const ADD_SCHEMA = Symbol("ADD_SCHEMA");
-
-type ModelData<T> = T extends { apiVersion: any; kind: any }
-  ? Omit<T, "apiVersion" | "kind">
-  : T;
+const SCHEMA_ID = Symbol("SCHEMA_ID");
+const ADD_SCHEMA = Symbol("ADD_SCHEMA");
 
 function setDefinedProps(src: any, dst: any): any {
   for (const key of Object.keys(src)) {
@@ -34,7 +27,13 @@ function filterUndefinedValues(data: unknown): unknown {
   return data;
 }
 
-export class BaseModel<T> {
+type ModelData<T> = T extends { apiVersion: any; kind: any }
+  ? Omit<T, "apiVersion" | "kind">
+  : T;
+
+type ModelConstructor<T> = new () => Model<T>;
+
+export class Model<T> {
   /** @internal */
   protected [SCHEMA_ID]: string;
 
@@ -52,12 +51,22 @@ export class BaseModel<T> {
   }
 
   public validate(): void {
-    this[ADD_SCHEMA]();
+    const id = this[SCHEMA_ID];
+    if (!id) return;
 
-    if (!ajv.validate(this[SCHEMA_ID], this) && ajv.errors) {
-      const err = new ValidationError(ajv.errors);
-      err.message = ajv.errorsText(ajv.errors);
-      throw err;
+    if (typeof this[ADD_SCHEMA] === "function") {
+      this[ADD_SCHEMA]();
     }
+
+    validate(id, this);
+  }
+
+  public static setSchema<T>(
+    ctor: ModelConstructor<T>,
+    id: string,
+    addSchema: () => void
+  ): void {
+    ctor.prototype[SCHEMA_ID] = id;
+    ctor.prototype[ADD_SCHEMA] = addSchema;
   }
 }
