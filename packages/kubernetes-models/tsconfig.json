@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "rootDir": "gen",
-    "outDir": "dist"
+    "outDir": "dist",
+    "sourceMap": false
   },
   "references": [
     { "path": "../base" },

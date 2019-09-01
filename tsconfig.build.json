@@ -1,8 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
-    "composite": true
+    "sourceMap": true
   },
   "exclude": ["**/__tests__/**"]
 }
