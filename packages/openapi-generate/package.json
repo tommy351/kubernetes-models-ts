@@ -15,6 +15,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "/bin/",
+    "/dist/"
+  ],
   "dependencies": {
     "@kubernetes-models/read-input": "^0.1.0",
     "make-dir": "^3.0.0",
