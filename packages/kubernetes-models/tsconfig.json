@@ -5,6 +5,7 @@
     "outDir": "dist",
     "sourceMap": false
   },
+  "include": ["gen"],
   "references": [
     { "path": "../base" },
     { "path": "../validate" },
