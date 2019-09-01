@@ -4,7 +4,6 @@
     "rootDir": "gen",
     "outDir": "dist"
   },
-  "include": ["gen"],
   "references": [
     { "path": "../base" },
     { "path": "../validate" },
