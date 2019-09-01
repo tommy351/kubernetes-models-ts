@@ -33,12 +33,6 @@ pod.validate();
 
 See [examples](examples) folder for more examples.
 
-## Build
-
-```sh
-make dist
-```
-
 ## License
 
 MIT
