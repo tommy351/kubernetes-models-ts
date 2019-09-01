@@ -1,7 +1,7 @@
 {
-  "name": "@kubernetes-models/openapi-generate",
-  "version": "0.1.1",
-  "description": "Generate Kubernetes models from OpenAPI schema.",
+  "name": "@kubernetes-models/crd-generate",
+  "version": "0.0.1",
+  "description": "Generate Kubernetes models for custom resource definitions (CRD).",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "dist",
   "bin": {
-    "openapi-generate": "bin/openapi-generate.js"
+    "crd-generate": "bin/crd-generate.js"
   },
   "publishConfig": {
     "access": "public"
@@ -23,11 +23,13 @@
   "dependencies": {
     "@kubernetes-models/read-input": "^0.1.1",
     "@kubernetes-models/string-util": "^0.0.1",
+    "js-yaml": "^3.13.1",
     "make-dir": "^3.0.0",
     "tslib": "^1.10.0",
     "yargs": "^14.0.0"
   },
   "devDependencies": {
+    "@types/js-yaml": "^3.12.1",
     "@types/yargs": "^13.0.2"
   }
 }

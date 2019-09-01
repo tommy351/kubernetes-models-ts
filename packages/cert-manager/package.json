@@ -1,6 +1,6 @@
 {
-  "name": "kubernetes-models",
-  "version": "0.7.1",
+  "name": "@kubernetes-models/cert-manager",
+  "version": "0.0.1",
   "description": "Kubernetes models",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.15.3/api/openapi-spec/swagger.json --output ./gen",
+    "build": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.9.1/deploy/manifests/00-crds.yaml --output ./gen",
     "prepack": "cp package.json README.md dist/",
     "clean": "rimraf gen"
   },
@@ -20,7 +20,8 @@
     "directory": "dist"
   },
   "keywords": [
-    "kubernetes"
+    "kubernetes",
+    "cert-manager"
   ],
   "dependencies": {
     "@kubernetes-models/base": "^0.1.1",
@@ -28,7 +29,7 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@kubernetes-models/openapi-generate": "^0.1.1",
+    "@kubernetes-models/crd-generate": "^0.0.1",
     "rimraf": "^3.0.0"
   }
 }

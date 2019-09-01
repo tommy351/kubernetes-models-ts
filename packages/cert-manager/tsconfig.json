@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "gen",
+    "outDir": "dist",
+    "sourceMap": false
+  },
+  "include": ["gen"],
+  "references": [
+    { "path": "../base" },
+    { "path": "../validate" },
+    { "path": "../crd-generate" }
+  ]
+}

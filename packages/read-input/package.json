@@ -22,7 +22,8 @@
     "get-stdin": "^7.0.0",
     "hasha": "^5.0.0",
     "make-dir": "^3.0.0",
-    "request-promise-native": "^1.0.7"
+    "request-promise-native": "^1.0.7",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@types/find-cache-dir": "^2.0.0",

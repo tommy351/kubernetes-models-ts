@@ -15,7 +15,7 @@ export interface Property {
   properties?: { [key: string]: Property };
   required?: string[];
   additionalProperties?: Property;
-  enum: any[];
+  enum?: any[];
   [key: string]: any;
 }
 

@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
-    "build": "tsc -b packages/openapi-generate && lerna run build --stream && node scripts/build.js",
+    "build": "tsc -b packages/openapi-generate packages/crd-generate && lerna run build --stream && node scripts/build.js",
     "watch": "npm run build -- --watch",
     "clean": "lerna run clean && node scripts/build.js --clean",
     "bootstrap": "lerna bootstrap",

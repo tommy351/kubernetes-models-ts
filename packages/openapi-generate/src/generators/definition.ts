@@ -1,35 +1,10 @@
-import { Definition, GenerateResult, Property } from "../types";
 import {
-  trimRefPrefix,
-  getInterfaceName,
-  getClassName,
+  formatComment,
+  stripComment,
   trimSuffix
-} from "../string";
-
-function commentize(
-  content: string,
-  props?: { [key: string]: boolean }
-): string {
-  let output = "/**\n";
-
-  for (const line of content.split("\n")) {
-    output +=
-      " * " + line.replace(/\*/g, "\\*").replace(/\*\//g, "*\\/") + "\n";
-  }
-
-  if (props) {
-    for (const key of Object.keys(props)) {
-      if (props[key]) output += ` * @${key}\n`;
-    }
-  }
-
-  output += " */\n";
-  return output;
-}
-
-function trimComment(s: string): string {
-  return s.replace(/\/\*{2}[\s\S]+?\*\//g, "");
-}
+} from "@kubernetes-models/string-util";
+import { Definition, GenerateResult, Property } from "../types";
+import { trimRefPrefix, getInterfaceName, getClassName } from "../string";
 
 function compileType(def: Property): string {
   if (typeof def.$ref === "string") {
@@ -45,7 +20,7 @@ function compileType(def: Property): string {
         const prop = properties[key];
 
         if (typeof prop.description === "string") {
-          output += commentize(prop.description);
+          output += formatComment(prop.description);
         }
 
         output += `"${key}"`;
@@ -100,7 +75,7 @@ function generate(def: Definition): GenerateResult {
   let comment = "";
 
   if (def.schema.description) {
-    comment = commentize(def.schema.description, {
+    comment = formatComment(def.schema.description, {
       deprecated: def.schema.description.toLowerCase().startsWith("deprecated")
     });
   }
@@ -113,10 +88,10 @@ import { ${getInterfaceName(ref)} } from "./${getClassName(ref)}";
 
   if (def.schema.type === "object") {
     const gvk = def.getGVK();
-    let classContent = typing;
+    let classContent = stripComment(typing.trim());
 
     if (gvk) {
-      classContent = `${trimSuffix(trimComment(typing.trim()), "}")}
+      classContent = `${trimSuffix(classContent, "}")}
 static apiVersion: ${def.getInterfaceName()}["apiVersion"] = "${def.getAPIVersion()}";
 static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
 }`;

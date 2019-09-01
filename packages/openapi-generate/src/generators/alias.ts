@@ -1,10 +1,6 @@
+import { camelCase, trimPrefix } from "@kubernetes-models/string-util";
 import { Definition, GenerateResult } from "../types";
-import {
-  trimPrefix,
-  camelCase,
-  getClassName,
-  getShortClassName
-} from "../string";
+import { getClassName, getShortClassName } from "../string";
 import { posix } from "path";
 
 interface KeyMap {
