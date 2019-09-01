@@ -31,8 +31,6 @@ const pod = new Pod({
 pod.validate();
 ```
 
-See [examples](examples) folder for more examples.
-
 ## License
 
 MIT
