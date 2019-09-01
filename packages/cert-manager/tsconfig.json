@@ -3,11 +3,7 @@
   "compilerOptions": {
     "rootDir": "gen",
     "outDir": "dist",
-    "sourceMap": false,
-    "baseUrl": ".",
-    "paths": {
-      "kubernetes-models/*": ["../kubernetes-models/dist/*"]
-    }
+    "sourceMap": false
   },
   "include": ["gen"],
   "references": [

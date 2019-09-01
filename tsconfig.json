@@ -9,6 +9,10 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "kubernetes-models/*": ["packages/kubernetes-models/dist/*"]
+    }
   }
 }
