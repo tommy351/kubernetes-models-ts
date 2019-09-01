@@ -19,7 +19,8 @@
     "build": "tsc -b packages/openapi-generate && lerna run build --stream && node scripts/build.js",
     "watch": "npm run build -- --watch",
     "clean": "lerna run clean && node scripts/build.js --clean",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -33,16 +34,21 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^24.0.18",
     "@types/node": "^12.7.3",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-jest": "^22.16.0",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^3.0.4",
+    "jest": "^24.9.0",
+    "jest-junit": "^8.0.0",
     "lerna": "^3.16.4",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "~3.5.3"
   }
