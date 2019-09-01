@@ -33,6 +33,29 @@ pod.validate();
 
 See [examples](examples) folder for more examples.
 
+## Packages
+
+### Models
+
+- [kubernetes-models](packages/kubernetes-models) - Kubernetes models.
+
+### 3rd-party Models
+
+- [@kubernetes-models/cert-manager](packages/cert-manager) - [cert-manager](https://github.com/jetstack/cert-manager) models.
+- [@kubernetes-models/contour](packages/contour) - [Contour](https://github.com/heptio/contour) models.
+
+### Generators
+
+- [@kubernetes-models/crd-generate](packages/crd-generate) - Generate Kubernetes models for custom resource definitions (CRD).
+- [@kubernetes-models/openapi-generate](packages/openapi-generate) - Generate Kubernetes models from OpenAPI schema.
+
+### Utilities
+
+- [@kubernetes-models/base](packages/base) - Base model for Kubernetes models.
+- [@kubernetes-models/read-input](packages/read-input) - Read input from file, URL or stdin.
+- [@kubernetes-models/string-util](packages/string-util) - Utility functions for strings.
+- [@kubernetes-models/validate](packages/validate) - Validation library for Kubernetes models.
+
 ## License
 
 MIT

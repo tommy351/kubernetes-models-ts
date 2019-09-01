@@ -1,7 +1,7 @@
 {
   "name": "@kubernetes-models/contour",
   "version": "0.0.1",
-  "description": "Kubernetes models",
+  "description": "Contour models",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
@@ -21,7 +21,7 @@
   },
   "keywords": [
     "kubernetes",
-    "cert-manager"
+    "contour"
   ],
   "dependencies": {
     "@kubernetes-models/base": "^0.1.1",

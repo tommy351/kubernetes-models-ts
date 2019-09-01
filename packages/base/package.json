@@ -2,7 +2,7 @@
   "name": "@kubernetes-models/base",
   "version": "0.1.1",
   "main": "dist",
-  "description": "Base model and validation library for Kubernetes models.",
+  "description": "Base model for Kubernetes models.",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
