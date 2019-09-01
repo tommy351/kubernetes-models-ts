@@ -1,6 +1,11 @@
 {
   "packages": ["packages/*"],
   "version": "independent",
+  "command": {
+    "publish": {
+      "allowBranch": "release"
+    }
+  },
   "ignoreChanges": [
     "**/__tests__/**",
     "**/__fixtures__/**",
