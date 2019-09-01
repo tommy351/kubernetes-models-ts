@@ -20,7 +20,8 @@
     "watch": "npm run build -- --watch",
     "clean": "lerna run clean && node scripts/build.js --clean",
     "bootstrap": "lerna bootstrap",
-    "test": "jest"
+    "test": "jest",
+    "codecov": "codecov"
   },
   "husky": {
     "hooks": {
@@ -38,6 +39,7 @@
     "@types/node": "^12.7.3",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "codecov": "^3.5.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-jest": "^22.16.0",

@@ -22,6 +22,16 @@ commands:
     description: Run unit tests
     steps:
       - pretest
+      - run:
+          name: Unit tests
+          command: npm run test -- --coverage --maxWorkers=2 --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT: reports/junit/results.xml
+      - store_test_results:
+          path: reports/junit
+      - run:
+          name: Upload coverage
+          command: npm run codecov
 
 jobs:
   lint:
