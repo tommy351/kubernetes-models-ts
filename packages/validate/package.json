@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/validate",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "main": "dist",
   "description": "Validation library for Kubernetes models.",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/base",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "main": "dist",
   "description": "Base model and validation library for Kubernetes models.",
   "repository": {
@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@kubernetes-models/validate": "^0.0.1",
+    "@kubernetes-models/validate": "^0.0.2-alpha.0",
     "is-plain-object": "^3.0.0",
     "tslib": "^1.10.0"
   }

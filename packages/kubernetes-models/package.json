@@ -1,6 +1,6 @@
 {
   "name": "kubernetes-models",
-  "version": "0.6.1",
+  "version": "0.6.2-alpha.0",
   "description": "Kubernetes models",
   "repository": {
     "type": "git",
@@ -23,11 +23,11 @@
     "kubernetes"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.0.1",
-    "@kubernetes-models/validate": "^0.0.1"
+    "@kubernetes-models/base": "^0.0.2-alpha.0",
+    "@kubernetes-models/validate": "^0.0.2-alpha.0"
   },
   "devDependencies": {
-    "@kubernetes-models/openapi-generate": "^0.0.1",
+    "@kubernetes-models/openapi-generate": "^0.0.2-alpha.0",
     "rimraf": "^3.0.0"
   }
 }
