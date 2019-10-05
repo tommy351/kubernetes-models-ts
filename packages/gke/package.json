@@ -1,0 +1,35 @@
+{
+  "name": "@kubernetes-models/gke",
+  "version": "0.0.1",
+  "description": "Kubernetes GKE models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Rueian <rueiancsie@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "crd-generate --input ./crd/backendconfigs.yaml --output ./gen",
+    "prepack": "cp package.json README.md dist/",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes"
+  ],
+  "dependencies": {
+    "@kubernetes-models/base": "^0.1.2",
+    "@kubernetes-models/validate": "^0.1.1",
+    "kubernetes-models": "^0.7.2",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "^0.1.0",
+    "rimraf": "^3.0.0"
+  }
+}
