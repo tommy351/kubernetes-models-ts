@@ -37,6 +37,7 @@ describe("validate", () => {
         });
 
         svc.validate();
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         expect(svc.spec!.ports![0].targetPort).toEqual(targetPort);
       };
     }
