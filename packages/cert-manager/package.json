@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.9.1/deploy/manifests/00-crds.yaml --output ./gen",
+    "build": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml --output ./gen",
     "prepack": "cp package.json README.md dist/",
     "clean": "rimraf gen"
   },
