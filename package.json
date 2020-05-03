@@ -20,8 +20,7 @@
     "watch": "npm run build -- --watch",
     "clean": "node scripts/build.js --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",
-    "test": "jest",
-    "codecov": "codecov"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -39,14 +38,12 @@
     "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
-    "codecov": "^3.6.1",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-jest": "^22.19.0",
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
-    "jest-junit": "^8.0.0",
     "lerna": "^3.17.0",
     "lint-staged": "^9.4.2",
     "prettier": "^1.18.2",
