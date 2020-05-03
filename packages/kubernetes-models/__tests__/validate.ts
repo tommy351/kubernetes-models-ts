@@ -11,7 +11,7 @@ describe("validate", () => {
         }
       });
 
-      pod.validate();
+      expect(() => pod.validate()).not.toThrow();
     });
   });
 
@@ -28,8 +28,8 @@ describe("validate", () => {
   });
 
   describe("Service", () => {
-    function buildTest(targetPort: any) {
-      return () => {
+    describe.each([[80], ["http"]])("when targetPort = %p", (targetPort) => {
+      it("should pass", () => {
         const svc = new Service({
           spec: {
             ports: [{ port: 80, targetPort }]
@@ -37,33 +37,28 @@ describe("validate", () => {
         });
 
         svc.validate();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        expect(svc.spec!.ports![0].targetPort).toEqual(targetPort);
-      };
-    }
-
-    it("should be able to use number in targetPort", buildTest(80));
-
-    it("should be able to use string in targetPort", buildTest("http"));
+        expect(svc.spec?.ports?.[0].targetPort).toEqual(targetPort);
+      });
+    });
   });
 
   describe("JSONSchemaProps", () => {
-    function buildTest(value: any) {
-      return () => {
+    describe.each([
+      ["string", "str"],
+      ["boolean", true],
+      ["int", 123],
+      ["float", 46.93],
+      ["array", ["a", "b", "c"]],
+      ["object", { a: "b", c: "d" }]
+    ])("when type = %s", (_, value) => {
+      it("should pass", () => {
         const props = new JSONSchemaProps({
           default: value
         });
 
         props.validate();
         expect(props.default).toEqual(value);
-      };
-    }
-
-    it("should pass when type = string", buildTest("str"));
-    it("should pass when type = boolean", buildTest(true));
-    it("should pass when type = int", buildTest(123));
-    it("should pass when type = float", buildTest(46.93));
-    it("should pass when type = array", buildTest(["a", "b", "c"]));
-    it("should pass when type = object", buildTest({ a: "b", c: "d" }));
+      });
+    });
   });
 });

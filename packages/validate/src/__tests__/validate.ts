@@ -10,7 +10,7 @@ describe("validate", () => {
   });
 
   it("success", () => {
-    validate(id, 46);
+    expect(() => validate(id, 46)).not.toThrow();
   });
 
   it("failed", () => {

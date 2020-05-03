@@ -46,7 +46,7 @@ describe("validate", () => {
   describe("when schema is not set", () => {
     it("should do nothing", () => {
       const model = new Model();
-      model.validate();
+      expect(() => model.validate()).not.toThrow();
     });
   });
 

@@ -14,7 +14,7 @@ describe("validate", () => {
         }
       });
 
-      config.validate();
+      expect(() => config.validate()).not.toThrow();
     });
   });
 
