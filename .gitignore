@@ -1,6 +1,5 @@
 node_modules/
 /.idea/
-/packages/*/package-lock.json
 *.tsbuildinfo
 /packages/*/dist/
 /packages/*/gen/
