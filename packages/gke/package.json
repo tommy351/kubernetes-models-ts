@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/gke",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Kubernetes GKE models",
   "repository": {
     "type": "git",
@@ -23,13 +23,13 @@
     "kubernetes"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.1.2",
-    "@kubernetes-models/validate": "^0.1.1",
-    "kubernetes-models": "^0.7.3",
+    "@kubernetes-models/base": "^0.1.3",
+    "@kubernetes-models/validate": "^0.1.2",
+    "kubernetes-models": "^0.8.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "^0.1.1",
+    "@kubernetes-models/crd-generate": "^0.1.2",
     "rimraf": "^3.0.0"
   }
 }
