@@ -1,4 +1,4 @@
-import { Certificate } from "../gen/certmanager.k8s.io/v1alpha1/Certificate";
+import { Certificate } from "../gen/cert-manager.io/v1alpha3/Certificate";
 
 describe("Certificate", () => {
   let cert: Certificate;
@@ -11,13 +11,6 @@ describe("Certificate", () => {
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
-        acme: {
-          config: [
-            {
-              domains: ["foo.example.com"]
-            }
-          ]
-        },
         issuerRef: {
           name: "letsencrypt-prod",
           kind: "Issuer"
@@ -27,7 +20,7 @@ describe("Certificate", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(cert).toHaveProperty("apiVersion", "certmanager.k8s.io/v1alpha1");
+    expect(cert).toHaveProperty("apiVersion", "cert-manager.io/v1alpha3");
   });
 
   it("should set kind", () => {
@@ -40,7 +33,7 @@ describe("Certificate", () => {
 
   it("toJSON", () => {
     expect(cert.toJSON()).toEqual({
-      apiVersion: "certmanager.k8s.io/v1alpha1",
+      apiVersion: "cert-manager.io/v1alpha3",
       kind: "Certificate",
       metadata: {
         name: "foo"
@@ -48,13 +41,6 @@ describe("Certificate", () => {
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
-        acme: {
-          config: [
-            {
-              domains: ["foo.example.com"]
-            }
-          ]
-        },
         issuerRef: {
           name: "letsencrypt-prod",
           kind: "Issuer"
