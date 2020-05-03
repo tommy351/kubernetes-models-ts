@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "crd-generate --input https://raw.githubusercontent.com/heptio/contour/v0.15.0/examples/common/common.yaml --output ./gen",
+    "build": "crd-generate --input https://raw.githubusercontent.com/projectcontour/contour/v1.4.0/examples/contour/01-crds.yaml --output ./gen",
     "prepack": "cp package.json README.md dist/",
     "clean": "rimraf gen"
   },
