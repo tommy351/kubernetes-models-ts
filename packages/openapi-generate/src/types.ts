@@ -35,7 +35,7 @@ export type GenerateFunc = (
 ) => Promise<readonly GenerateResult[]>;
 
 function collectRefs(data: any): readonly string[] {
-  const refs = Object.keys(data).map(key => {
+  const refs = Object.keys(data).map((key) => {
     const val = data[key];
 
     if (key === "$ref" && typeof val === "string") {
@@ -128,6 +128,6 @@ export class Definition {
   }
 
   public getRefs(): Set<string> {
-    return new Set(collectRefs(this.schema).filter(x => x !== this.id));
+    return new Set(collectRefs(this.schema).filter((x) => x !== this.id));
   }
 }

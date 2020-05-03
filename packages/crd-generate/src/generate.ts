@@ -86,7 +86,7 @@ function compileType(schema: OpenAPIV3Schema): string {
   }
 
   switch (schema.type) {
-    case "object":
+    case "object": {
       const { properties = {}, required = [], additionalProperties } = schema;
       let output = "{\n";
 
@@ -109,10 +109,11 @@ function compileType(schema: OpenAPIV3Schema): string {
       output += "}";
 
       return output;
+    }
 
     case "string":
       if (schema.enum && schema.enum.length) {
-        return schema.enum.map(x => JSON.stringify(x)).join(" | ");
+        return schema.enum.map((x) => JSON.stringify(x)).join(" | ");
       }
 
       switch (schema.format) {
@@ -252,7 +253,7 @@ async function generateCRD(
 export async function generate(options: GenerateOptions): Promise<void> {
   const data: CustomResourceDefinition[] = yaml
     .safeLoadAll(options.input)
-    .filter(x => x != null && typeof x === "object")
+    .filter((x) => x != null && typeof x === "object")
     .filter(({ apiVersion }) => apiVersion === "apiextensions.k8s.io/v1beta1")
     .filter(({ kind }) => kind === "CustomResourceDefinition");
   const generatedPaths = new Set<string>();

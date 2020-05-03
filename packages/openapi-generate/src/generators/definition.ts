@@ -12,7 +12,7 @@ function compileType(def: Property): string {
   }
 
   switch (def.type) {
-    case "object":
+    case "object": {
       const { required = [], properties = {}, additionalProperties } = def;
       let output = "{\n";
 
@@ -34,10 +34,11 @@ function compileType(def: Property): string {
 
       output += "}";
       return output;
+    }
 
     case "string":
       if (def.enum && def.enum.length) {
-        return def.enum.map(x => JSON.stringify(x)).join(" | ");
+        return def.enum.map((x) => JSON.stringify(x)).join(" | ");
       }
 
       switch (def.format) {

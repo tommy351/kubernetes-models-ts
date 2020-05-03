@@ -8,7 +8,7 @@ describe("validate", () => {
           iap: {
             enabled: true,
             oauthclientCredentials: {
-                secretName: 'oauth-secret'
+              secretName: "oauth-secret"
             }
           }
         }
@@ -22,7 +22,7 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new BackendConfig({
         spec: {
-            iap: {} as any
+          iap: {} as any
         }
       });
 

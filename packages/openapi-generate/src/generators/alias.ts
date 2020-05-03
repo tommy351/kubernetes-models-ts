@@ -66,10 +66,7 @@ function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
       if (gvk.group) key = gvk.group + "/" + key;
 
       if (!map[key]) {
-        const val = def.id
-          .split(".")
-          .slice(0, -1)
-          .join(".");
+        const val = def.id.split(".").slice(0, -1).join(".");
 
         map[key] = val;
       }

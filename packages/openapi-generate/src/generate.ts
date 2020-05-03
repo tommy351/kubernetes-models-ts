@@ -23,8 +23,8 @@ export interface GenerateOptions {
 export async function generate(options: GenerateOptions): Promise<void> {
   const { definitions } = JSON.parse(options.input);
   const arr = Object.keys(definitions)
-    .filter(id => !id.startsWith("io.k8s.kubernetes."))
-    .map(id => new Definition(id, definitions[id]));
+    .filter((id) => !id.startsWith("io.k8s.kubernetes."))
+    .map((id) => new Definition(id, definitions[id]));
   const generatedPaths = new Set<string>();
 
   for (const fn of generators) {
