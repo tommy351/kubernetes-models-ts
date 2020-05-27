@@ -7,7 +7,7 @@
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
   },
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
-  "author": "Rueian <rueiancsie@gmail.com>",
+  "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io)",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
