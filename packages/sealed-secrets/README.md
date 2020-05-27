@@ -13,7 +13,7 @@ npm install @kubernetes-models/sealed-secrets
 ## Usage
 
 ```js
-import { SealedSecret } from "@kubernetes-models/sealed-secrets/gen/bitnami.com/v1alpha1/SealedSecret";
+import { SealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
 
 const route = new SealedSecret({
   metadata: {
