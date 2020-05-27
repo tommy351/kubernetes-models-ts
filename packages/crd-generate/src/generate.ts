@@ -55,6 +55,7 @@ interface OpenAPIV3Schema {
   required?: string[];
   items?: OpenAPIV3Schema;
   enum?: any[];
+  deprecated?: boolean;
 
   // non-standard
   $literal?: string;
@@ -94,7 +95,11 @@ function compileType(schema: OpenAPIV3Schema): string {
         const prop = properties[key];
 
         if (typeof prop.description === "string") {
-          output += formatComment(prop.description);
+          output += formatComment(prop.description, {
+            deprecated:
+              prop.deprecated ||
+              prop.description.toLowerCase().startsWith("deprecated")
+          });
         }
 
         output += `"${key}"`;
