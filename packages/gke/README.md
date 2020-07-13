@@ -27,7 +27,7 @@ const route = new BackendConfig({
     iap: {
       enabled: true,
       oauthclientCredentials: {
-          secretName: 'iap-oauth-secret'
+        secretName: "iap-oauth-secret"
       }
     }
   }
