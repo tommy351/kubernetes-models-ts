@@ -19,7 +19,7 @@ via [BackendConfig](https://cloud.google.com/kubernetes-engine/docs/concepts/bac
 ```js
 import { BackendConfig } from "@kubernetes-models/gke/cloud.google.com/v1beta1/BackendConfig";
 
-const route = new BackendConfig({
+const config = new BackendConfig({
   metadata: {
     name: "iap-example"
   },
@@ -34,7 +34,26 @@ const route = new BackendConfig({
 });
 
 // Validate against JSON schema
-route.validate();
+config.validate();
+```
+
+### Config Connector
+
+```js
+import { SpannerInstance } from "@kubernetes-models/gke/spanner.cnrm.cloud.google.com/v1beta1/SpannerInstance";
+
+const instance = new SpannerInstance({
+  metadata: {
+    name: "spanner-example"
+  },
+  spec: {
+    config: "regional-us-west1",
+    displayName: "Spanner Example",
+    numNodes: 1
+  }
+});
+
+instance.validate();
 ```
 
 ## License
