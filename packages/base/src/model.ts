@@ -47,7 +47,13 @@ export class Model<T> {
   }
 
   public toJSON(): any {
-    return setDefinedProps(this, {});
+    const { apiVersion, kind, ...data } = this as any;
+    const result = {};
+
+    setDefinedProps({ apiVersion, kind }, result);
+    setDefinedProps(data, result);
+
+    return result;
   }
 
   public validate(): void {

@@ -40,6 +40,22 @@ describe("toJSON", () => {
       }
     });
   });
+
+  it("should move apiVersion and kind to the front", () => {
+    const json = new Model({
+      foo: "bar",
+      apiVersion: "v1",
+      kind: "Pod",
+      bar: "baz"
+    } as any).toJSON();
+
+    expect(Object.entries(json)).toEqual([
+      ["apiVersion", "v1"],
+      ["kind", "Pod"],
+      ["foo", "bar"],
+      ["bar", "baz"]
+    ]);
+  });
 });
 
 describe("validate", () => {
