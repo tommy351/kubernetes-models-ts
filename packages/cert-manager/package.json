@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/cert-manager",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "cert-manager models",
   "repository": {
     "type": "git",
@@ -26,9 +26,9 @@
     "cert-manager"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.1.3",
+    "@kubernetes-models/base": "^0.1.4",
     "@kubernetes-models/validate": "^0.1.2",
-    "kubernetes-models": "^0.8.0",
+    "kubernetes-models": "^0.8.1",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
