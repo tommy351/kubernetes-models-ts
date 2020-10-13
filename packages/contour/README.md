@@ -13,10 +13,10 @@ npm install @kubernetes-models/contour
 ## Usage
 
 ```js
-import { IngressRoute } from "@kubernetes-models/contour/contour.heptio.com/v1beta1/IngressRoute";
+import { HTTPProxy } from "@kubernetes-models/contour/projectcontour.io/v1";
 
-// Create a new ingress route
-const route = new IngressRoute({
+// Create a new HTTP proxy
+const route = new HTTPProxy({
   metadata: {
     name: "foo"
   },
@@ -26,7 +26,11 @@ const route = new IngressRoute({
     },
     routes: [
       {
-        match: "/",
+        conditions: [
+          {
+            prefix: "/"
+          }
+        ],
         services: [
           {
             name: "foo",
