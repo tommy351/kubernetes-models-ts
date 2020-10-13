@@ -259,7 +259,11 @@ export async function generate(options: GenerateOptions): Promise<void> {
   const data: CustomResourceDefinition[] = yaml
     .safeLoadAll(options.input)
     .filter((x) => x != null && typeof x === "object")
-    .filter(({ apiVersion }) => apiVersion === "apiextensions.k8s.io/v1beta1")
+    .filter(({ apiVersion }) =>
+      ["apiextensions.k8s.io/v1beta1", "apiextensions.k8s.io/v1"].includes(
+        apiVersion
+      )
+    )
     .filter(({ kind }) => kind === "CustomResourceDefinition");
   const generatedPaths = new Set<string>();
 
