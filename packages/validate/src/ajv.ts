@@ -9,7 +9,8 @@ export const ajv = new Ajv({
   format: "full"
 });
 
-export function register(id: string, schema: any): void {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function register(id: string, schema: object): void {
   if (!ajv.getSchema(id)) {
     ajv.addSchema(schema, id);
   }

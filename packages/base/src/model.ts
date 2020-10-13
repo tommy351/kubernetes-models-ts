@@ -1,4 +1,4 @@
-import isPlainObject from "is-plain-object";
+import { isPlainObject } from "is-plain-object";
 import { validate } from "@kubernetes-models/validate";
 
 const SCHEMA_ID = Symbol("SCHEMA_ID");

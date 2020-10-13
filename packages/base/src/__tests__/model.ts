@@ -68,7 +68,7 @@ describe("validate", () => {
 
   describe("when schema is set", () => {
     it("works", () => {
-      class MyModel extends Model<{}> {}
+      class MyModel extends Model<unknown> {}
       const addSchema = jest.fn();
       register("foo", {});
       Model.setSchema(MyModel, "foo", addSchema);
