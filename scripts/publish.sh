@@ -4,4 +4,4 @@ set -Eeuo pipefail
 
 npm run clean
 npm run build
-lerna publish
+npx lerna publish
