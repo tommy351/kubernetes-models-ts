@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es2018",
     "module": "commonjs",
     "preserveConstEnums": true,
     "strict": true,
@@ -11,6 +11,8 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "lib": ["es2018"],
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "kubernetes-models/*": ["packages/kubernetes-models/dist/*"]
     }
