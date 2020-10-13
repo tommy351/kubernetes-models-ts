@@ -8,6 +8,7 @@ import {
   stripComment,
   trimSuffix
 } from "@kubernetes-models/string-util";
+import mapValues from "lodash.mapvalues";
 
 const writeFileAsync = promisify(writeFile);
 
@@ -56,6 +57,10 @@ interface OpenAPIV3Schema {
   items?: OpenAPIV3Schema;
   enum?: any[];
   deprecated?: boolean;
+  minimum?: number;
+  maximum?: number;
+  exclusiveMinimum?: boolean | number;
+  exclusiveMaximum?: boolean | number;
 
   // non-standard
   $literal?: string;
@@ -73,11 +78,7 @@ export interface GenerateResult {
   content: string;
 }
 
-function compileType(schema: OpenAPIV3Schema): string {
-  if (schema.$literal) {
-    return schema.$literal;
-  }
-
+function fixMissingSchemaType(schema: OpenAPIV3Schema): void {
   if (!schema.type) {
     if (schema.properties) {
       schema.type = "object";
@@ -85,6 +86,14 @@ function compileType(schema: OpenAPIV3Schema): string {
       schema.type = "array";
     }
   }
+}
+
+function compileType(schema: OpenAPIV3Schema): string {
+  if (schema.$literal) {
+    return schema.$literal;
+  }
+
+  fixMissingSchemaType(schema);
 
   switch (schema.type) {
     case "object": {
@@ -150,6 +159,61 @@ function compileType(schema: OpenAPIV3Schema): string {
   return "any";
 }
 
+function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
+  if (schema.$literal) {
+    return schema;
+  }
+
+  fixMissingSchemaType(schema);
+
+  switch (schema.type) {
+    case "object": {
+      const { properties = {}, additionalProperties } = schema;
+
+      return {
+        ...schema,
+        properties: mapValues(properties, (prop) => compileSchema(prop)),
+        ...(additionalProperties && {
+          additionalProperties: compileSchema(additionalProperties)
+        })
+      };
+    }
+
+    case "array":
+      return {
+        ...schema,
+        ...(schema.items && { items: compileSchema(schema.items) })
+      };
+
+    case "number":
+    case "integer": {
+      const {
+        minimum,
+        maximum,
+        exclusiveMinimum,
+        exclusiveMaximum,
+        ...rest
+      } = schema;
+
+      return {
+        ...rest,
+        ...(exclusiveMinimum === true
+          ? {
+              exclusiveMinimum: minimum
+            }
+          : { exclusiveMinimum, minimum }),
+        ...(exclusiveMaximum === true
+          ? {
+              exclusiveMaximum: maximum
+            }
+          : { exclusiveMaximum, maximum })
+      };
+    }
+  }
+
+  return schema;
+}
+
 async function generateDefinition(
   options: GenerateDefinitionOptions
 ): Promise<GenerateResult> {
@@ -203,7 +267,7 @@ export class ${className} extends Model<${interfaceName}> implements ${interface
 
 const schemaId = "${options.group}.${options.version}.${options.kind}";
 const schema = ${JSON.stringify(
-      options.validation.openAPIV3Schema,
+      compileSchema(options.validation.openAPIV3Schema),
       null,
       "  "
     )};
