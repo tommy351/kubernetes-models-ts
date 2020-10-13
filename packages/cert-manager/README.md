@@ -13,7 +13,7 @@ npm install @kubernetes-models/cert-manager
 ## Usage
 
 ```js
-import { Certificate } from "@kubernetes-models/cert-manager/cert-manager.io/v1alpha3/Certificate";
+import { Certificate } from "@kubernetes-models/cert-manager/cert-manager.io/v1/Certificate";
 
 // Create a new certificate
 const cert = new Certificate({

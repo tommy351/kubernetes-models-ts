@@ -14,6 +14,8 @@
     "build": "npm-run-all build:*",
     "build:v1alpha1": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml --output ./gen",
     "build:v1alpha2": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml --output ./gen",
+    "build:v1beta1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml --output ./gen",
+    "build:v1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v1.0.3/cert-manager.crds.yaml --output ./gen",
     "prepack": "cp package.json README.md dist/",
     "clean": "rimraf gen"
   },
