@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/string-util",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "dist",
   "description": "Utility functions for strings.",
   "repository": {
