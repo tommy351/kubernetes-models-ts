@@ -1,6 +1,6 @@
 # kubernetes-models
 
-[![](https://img.shields.io/npm/v/kubernetes-models.svg)](https://www.npmjs.com/package/kubernetes-models) [![CircleCI](https://circleci.com/gh/tommy351/kubernetes-models-ts/tree/master.svg?style=svg)](https://circleci.com/gh/tommy351/kubernetes-models-ts/tree/master) [![](https://img.shields.io/badge/kubernetes-1.19.2-green.svg)](https://github.com/kubernetes/kubernetes/tree/v1.19.2)
+[![](https://img.shields.io/npm/v/kubernetes-models.svg)](https://www.npmjs.com/package/kubernetes-models) [![](https://img.shields.io/badge/kubernetes-1.19.2-green.svg)](https://github.com/kubernetes/kubernetes/tree/v1.19.2)
 
 Kubernetes models in TypeScript.
 
