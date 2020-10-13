@@ -22,13 +22,16 @@
   "keywords": [
     "kubernetes"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "dependencies": {
     "@kubernetes-models/base": "^0.1.4",
     "@kubernetes-models/validate": "^0.1.2",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.3"
   },
   "devDependencies": {
     "@kubernetes-models/openapi-generate": "^0.1.4",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.2"
   }
 }

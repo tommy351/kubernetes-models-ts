@@ -16,9 +16,12 @@
   "files": [
     "/dist/"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "dependencies": {
-    "ajv": "^6.10.2",
-    "big-integer": "^1.6.44",
-    "tslib": "^1.10.0"
+    "ajv": "^6.12.6",
+    "big-integer": "^1.6.48",
+    "tslib": "^2.0.3"
   }
 }
