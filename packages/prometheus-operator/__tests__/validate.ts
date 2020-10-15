@@ -9,7 +9,12 @@ describe("validate", () => {
             matchLabels: {
               app: "some-app"
             }
-          }
+          },
+          endpoints: [
+            {
+              port: "web"
+            }
+          ]
         }
       });
 

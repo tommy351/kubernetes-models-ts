@@ -7,6 +7,18 @@ describe("ServiceMonitor", () => {
     config = new ServiceMonitor({
       metadata: {
         name: "test"
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            app: "some-app"
+          }
+        },
+        endpoints: [
+          {
+            port: "web"
+          }
+        ]
       }
     });
   });
@@ -23,16 +35,24 @@ describe("ServiceMonitor", () => {
     expect(config.metadata).toEqual({ name: "test" });
   });
 
-  it("should not set sepc", () => {
-    expect(config).not.toHaveProperty("spec");
-  });
-
   it("toJSON", () => {
     expect(config.toJSON()).toEqual({
       apiVersion: "monitoring.coreos.com/v1",
       kind: "ServiceMonitor",
       metadata: {
         name: "test"
+      },
+      spec: {
+        selector: {
+          matchLabels: {
+            app: "some-app"
+          }
+        },
+        endpoints: [
+          {
+            port: "web"
+          }
+        ]
       }
     });
   });
