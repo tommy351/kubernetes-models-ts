@@ -27,7 +27,8 @@
     "directory": "dist"
   },
   "keywords": [
-    "kubernetes"
+    "kubernetes",
+    "prometheus"
   ],
   "dependencies": {
     "@kubernetes-models/base": "^1.0.0",
