@@ -13,7 +13,7 @@ npm install @kubernetes-models/prometheus-operator
 ## Usage
 
 ```js
-import { ServiceMonitor } from "@kubernetes-models/prometheus-operator/monitoring.coreos.com/ServiceMonitor";
+import { ServiceMonitor } from "@kubernetes-models/prometheus-operator/monitoring.coreos.com/v1/ServiceMonitor";
 
 const monitor = new ServiceMonitor({
   metadata: {
