@@ -30,9 +30,9 @@
     "kubernetes"
   ],
   "dependencies": {
-    "@kubernetes-models/base": "^0.1.4",
-    "@kubernetes-models/validate": "^0.1.2",
-    "kubernetes-models": "^0.8.1",
+    "@kubernetes-models/base": "^1.0.0",
+    "@kubernetes-models/validate": "^1.0.0",
+    "kubernetes-models": "^1.0.0",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
