@@ -23,6 +23,9 @@
       "ignores": ["modules"]
     }]
   },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
   "settings": {
     "node": {
       "tryExtensions": [".ts", ".js", ".json", ".node"]
