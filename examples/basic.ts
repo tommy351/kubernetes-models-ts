@@ -1,5 +1,5 @@
-import { Deployment } from "../gen/ts/apps/v1/Deployment";
-import { Service } from "../gen/ts/v1/Service";
+import { Deployment } from "kubernetes-models/apps/v1";
+import { Service } from "kubernetes-models/v1";
 
 export const deployment = new Deployment({
   metadata: {
