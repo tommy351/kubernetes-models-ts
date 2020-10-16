@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/sealed-secrets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Kubernetes sealed-secrets models",
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
   "dependencies": {
     "@kubernetes-models/base": "^1.0.0",
     "@kubernetes-models/validate": "^1.0.0",
-    "kubernetes-models": "^1.0.0",
+    "kubernetes-models": "^1.0.1",
     "tslib": "^2.0.3"
   },
   "devDependencies": {
