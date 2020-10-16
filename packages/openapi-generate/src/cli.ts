@@ -23,6 +23,7 @@ export async function run(): Promise<void> {
     });
   } catch (err) {
     console.error(err);
+    // eslint-disable-next-line no-process-exit
     process.exit(1);
   }
 }

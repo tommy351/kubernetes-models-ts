@@ -9,7 +9,8 @@
     "prettier",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:node/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
@@ -17,11 +18,15 @@
     "@typescript-eslint/explicit-function-return-type": [
       "warn",
       { "allowExpressions": true }
-    ]
+    ],
+    "node/no-unsupported-features/es-syntax": ["error", {
+      "ignores": ["modules"]
+    }]
   },
-  "env": {
-    "es6": true,
-    "node": true
+  "settings": {
+    "node": {
+      "tryExtensions": [".ts", ".js", ".json", ".node"]
+    }
   },
   "overrides": [
     {
@@ -36,6 +41,12 @@
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": ["examples/**/*.ts"],
+      "rules": {
+        "node/no-missing-import": "off"
       }
     }
   ]
