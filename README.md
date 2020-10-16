@@ -44,7 +44,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/cert-manager](packages/cert-manager) - [cert-manager](https://github.com/jetstack/cert-manager) models.
 - [@kubernetes-models/contour](packages/contour) - [Contour](https://github.com/heptio/contour) models.
 - [@kubernetes-models/gke](packages/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
-- [@kubernetes-models/prometheus-operator] - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
+- [@kubernetes-models/prometheus-operator](packages/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
 - [@kubernetes-models/sealed-secrets](packages/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
 
 ### Generators
