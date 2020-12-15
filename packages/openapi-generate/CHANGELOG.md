@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/openapi-generate@1.0.0...@kubernetes-models/openapi-generate@1.0.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* **openapi-generate:** Fix schema for JSON type ([9936430](https://github.com/tommy351/kubernetes-models-ts/commit/9936430ffcbe9630a7deee55628d2de236641607))
+
+
+
+
+
 # [1.0.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/openapi-generate@1.0.0...@kubernetes-models/openapi-generate@1.0.0) (2020-11-17)
 
 
@@ -42,6 +58,3 @@
 
 
 ## 0.0.2-alpha.0 (2019-09-01)
-
-
-

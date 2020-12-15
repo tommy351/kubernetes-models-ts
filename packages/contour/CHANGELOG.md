@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/contour@1.0.1...@kubernetes-models/contour@1.0.2) (2020-12-15)
+
+**Note:** Version bump only for package @kubernetes-models/contour
+
+
+
+
+
 ## [1.0.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/contour@1.0.1...@kubernetes-models/contour@1.0.1) (2020-11-17)
 
 
@@ -53,6 +66,3 @@
 
 * Add contour package ([0b8bd03](https://github.com/tommy351/kubernetes-models-ts/commit/0b8bd032d937026cd6bffcc25ddf35e4f73f4b51))
 * Set metadata in CRD ([6ee2946](https://github.com/tommy351/kubernetes-models-ts/commit/6ee29461188a7a76f3e68da79d6beed6c033d917))
-
-
-

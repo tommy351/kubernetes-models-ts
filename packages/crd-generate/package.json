@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/crd-generate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate Kubernetes models for custom resource definitions (CRD).",
   "repository": {
     "type": "git",
@@ -24,8 +24,8 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/read-input": "^1.0.0",
-    "@kubernetes-models/string-util": "^1.0.0",
+    "@kubernetes-models/read-input": "^1.0.1",
+    "@kubernetes-models/string-util": "^1.0.1",
     "js-yaml": "^3.14.0",
     "lodash.mapvalues": "^4.6.0",
     "make-dir": "^3.1.0",

@@ -1,3 +1,16 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/sealed-secrets@1.0.1...@kubernetes-models/sealed-secrets@1.0.2) (2020-12-15)
+
+**Note:** Version bump only for package @kubernetes-models/sealed-secrets
+
+
+
+
+
 ## [1.0.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/sealed-secrets@1.0.1...@kubernetes-models/sealed-secrets@1.0.1) (2020-11-17)
 
 
@@ -34,6 +47,3 @@
 ### Features
 
 * **sealed-secrets:** add sealed-secrets model ([ec99bea](https://github.com/tommy351/kubernetes-models-ts/commit/ec99bead130d257e849ec259cfd781709e481ab3))
-
-
-
