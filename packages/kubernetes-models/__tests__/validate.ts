@@ -1,6 +1,7 @@
 import { Pod } from "../gen/v1/Pod";
 import { Service } from "../gen/v1/Service";
-import { JSONSchemaProps } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
+import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
+import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps";
 
 describe("validate", () => {
   describe("when validation passed", () => {
@@ -51,8 +52,17 @@ describe("validate", () => {
       ["array", ["a", "b", "c"]],
       ["object", { a: "b", c: "d" }]
     ])("when type = %s", (_, value) => {
-      it("should pass", () => {
-        const props = new JSONSchemaProps({
+      it("v1beta1 should pass", () => {
+        const props = new JSONSchemaPropsV1Beta1({
+          default: value
+        });
+
+        props.validate();
+        expect(props.default).toEqual(value);
+      });
+
+      it("v1 should pass", () => {
+        const props = new JSONSchemaPropsV1({
           default: value
         });
 

@@ -36,6 +36,7 @@ function compileSchema(def: Definition): string {
       break;
 
     case "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSON":
+    case "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON":
       schema = {};
       break;
 
