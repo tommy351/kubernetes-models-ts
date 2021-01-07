@@ -95,16 +95,24 @@ import { ${getInterfaceName(ref)} } from "./${getClassName(ref)}";
       classContent = `${trimSuffix(classContent, "}")}
 static apiVersion: ${def.getInterfaceName()}["apiVersion"] = "${def.getAPIVersion()}";
 static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
+
+constructor(data?: ModelData<${def.getInterfaceName()}>) {
+  super({
+    apiVersion: ${def.getClassName()}.apiVersion,
+    kind: ${def.getClassName()}.kind,
+    ...data
+  } as ${def.getInterfaceName()});
+}
 }`;
 
       classContent = classContent.replace(
         /"(apiVersion|kind)": "([^"]+)";/g,
-        `$1: ${def.getInterfaceName()}["$1"] = ${def.getClassName()}["$1"];`
+        `$1!: ${def.getInterfaceName()}["$1"];`
       );
     }
 
     content += `
-import { Model } from "@kubernetes-models/base";
+import { Model, ModelData } from "@kubernetes-models/base";
 import { addSchema } from "../_schemas/${def.getClassName()}";
 
 ${comment}export interface ${def.getInterfaceName()} ${typing}

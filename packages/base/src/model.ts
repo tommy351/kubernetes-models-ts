@@ -27,11 +27,11 @@ function filterUndefinedValues(data: unknown): unknown {
   return data;
 }
 
-type ModelData<T> = T extends { apiVersion: any; kind: any }
+export type ModelData<T> = T extends { apiVersion: any; kind: any }
   ? Omit<T, "apiVersion" | "kind">
   : T;
 
-type ModelConstructor<T> = new () => Model<T>;
+export type ModelConstructor<T> = new (data?: ModelData<T>) => Model<T>;
 
 export class Model<T> {
   /** @internal */
@@ -47,11 +47,9 @@ export class Model<T> {
   }
 
   public toJSON(): any {
-    const { apiVersion, kind, ...data } = this as any;
     const result = {};
 
-    setDefinedProps({ apiVersion, kind }, result);
-    setDefinedProps(data, result);
+    setDefinedProps(this, result);
 
     return result;
   }
