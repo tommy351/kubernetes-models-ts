@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.0.1...@kubernetes-models/crd-generate@1.1.0) (2021-01-08)
+
+
+### Features
+
+* **crd-generate:** Set apiVersion/kind before other props ([7d3fb32](https://github.com/tommy351/kubernetes-models-ts/commit/7d3fb3204c83041e566158eebf105d8a616b4b09))
+
+
+
+
+
 ## [1.0.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.0.0...@kubernetes-models/crd-generate@1.0.1) (2020-12-15)
 
 **Note:** Version bump only for package @kubernetes-models/crd-generate

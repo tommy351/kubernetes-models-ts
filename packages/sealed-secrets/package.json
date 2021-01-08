@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/sealed-secrets",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Kubernetes sealed-secrets models",
   "repository": {
     "type": "git",
@@ -26,13 +26,13 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/base": "^1.0.1",
+    "@kubernetes-models/base": "^1.1.0",
     "@kubernetes-models/validate": "^1.0.1",
-    "kubernetes-models": "^1.0.2",
+    "kubernetes-models": "^1.0.3",
     "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "^1.0.1",
+    "@kubernetes-models/crd-generate": "^1.1.0",
     "rimraf": "^3.0.2"
   }
 }

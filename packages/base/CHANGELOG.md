@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/base@1.0.1...@kubernetes-models/base@1.1.0) (2021-01-08)
+
+
+### Features
+
+* **openapi-generate:** Set apiVersion/kind before other props ([888af3a](https://github.com/tommy351/kubernetes-models-ts/commit/888af3a3d4622b97819bcb6174780c54da042f34))
+
+
+
+
+
 ## [1.0.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/base@1.0.0...@kubernetes-models/base@1.0.1) (2020-12-15)
 
 **Note:** Version bump only for package @kubernetes-models/base
