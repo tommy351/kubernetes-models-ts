@@ -1,4 +1,4 @@
-export function collectRefs(data: any): readonly string[] {
+export function collectRefs(data: Record<string, unknown>): readonly string[] {
   const refs = Object.keys(data).map((key) => {
     const val = data[key];
 
@@ -7,7 +7,7 @@ export function collectRefs(data: any): readonly string[] {
     }
 
     if (typeof val === "object" && !Array.isArray(val)) {
-      return collectRefs(val);
+      return collectRefs(val as Record<string, unknown>);
     }
 
     return [];

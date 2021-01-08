@@ -9,6 +9,7 @@ import {
   getAPIVersion
 } from "@kubernetes-models/generate";
 import generateDefinitions from "./generators/definition";
+import generateAliases from "./generators/alias";
 
 export interface GenerateOptions {
   input: string;
@@ -140,7 +141,7 @@ function generateDefinition(
   };
 }
 
-const generator = composeGenerators([generateDefinitions]);
+const generator = composeGenerators([generateDefinitions, generateAliases]);
 
 export interface GenerateOptions {
   input: string;

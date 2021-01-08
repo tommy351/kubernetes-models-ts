@@ -8,7 +8,7 @@ import {
   Import,
   OutputFile
 } from "@kubernetes-models/generate";
-import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
+import { formatComment } from "@kubernetes-models/string-util";
 
 function getFieldType(key: string[]): string | undefined {
   if (key.length === 1 && key[0] === "metadata") {
