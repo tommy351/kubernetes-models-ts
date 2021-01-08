@@ -1,19 +1,62 @@
-import { writeFile } from "fs";
-import { join, dirname } from "path";
-import makeDir from "make-dir";
-import { promisify } from "util";
-import { Definition, GenerateFunc } from "./types";
-import { generateDefinitions } from "./generators/definition";
-import { generateAliases } from "./generators/alias";
-import { generateSchemas } from "./generators/schema";
+import {
+  composeGenerators,
+  Definition,
+  getAPIVersion,
+  GroupVersionKind,
+  Schema,
+  writeOutputFiles
+} from "@kubernetes-models/generate";
+import generateDefinitions from "./generators/definition";
+import generateSchemas from "./generators/schema";
+import generateAliases from "./generators/alias";
 
-const writeFileAsync = promisify(writeFile);
+function load(input: string): readonly Definition[] {
+  const { definitions } = JSON.parse(input);
 
-const generators: GenerateFunc[] = [
+  return Object.keys(definitions)
+    .filter((id) => !id.startsWith("io.k8s.kubernetes."))
+    .map((id) => {
+      const schema: Schema = definitions[id];
+      const gvks: GroupVersionKind[] =
+        schema["x-kubernetes-group-version-kind"] || [];
+
+      if (!schema.type && !schema.$ref) {
+        schema.type = "object";
+      }
+
+      if (schema.type === "object" && gvks.length) {
+        const { properties = {}, required = [] } = schema;
+
+        schema.properties = {
+          ...properties,
+          apiVersion: {
+            ...properties.apiVersion,
+            type: "string",
+            enum: gvks.map((x) => getAPIVersion(x))
+          },
+          kind: {
+            ...properties.kind,
+            type: "string",
+            enum: gvks.map((x) => x.kind)
+          }
+        };
+
+        schema.required = [...new Set([...required, "apiVersion", "kind"])];
+      }
+
+      return {
+        gvk: gvks,
+        schema,
+        schemaId: id
+      };
+    });
+}
+
+const generator = composeGenerators([
   generateDefinitions,
   generateSchemas,
   generateAliases
-];
+]);
 
 export interface GenerateOptions {
   input: string;
@@ -21,26 +64,8 @@ export interface GenerateOptions {
 }
 
 export async function generate(options: GenerateOptions): Promise<void> {
-  const { definitions } = JSON.parse(options.input);
-  const arr = Object.keys(definitions)
-    .filter((id) => !id.startsWith("io.k8s.kubernetes."))
-    .map((id) => new Definition(id, definitions[id]));
-  const generatedPaths = new Set<string>();
+  const definitions = load(options.input);
+  const files = await generator(definitions);
 
-  for (const fn of generators) {
-    const files = await fn(arr);
-
-    for (const file of files) {
-      if (generatedPaths.has(file.path)) {
-        throw new Error(`Path conflict: ${file.path}`);
-      }
-
-      const path = join(options.outputPath, file.path);
-
-      await makeDir(dirname(path));
-      await writeFileAsync(path, file.content);
-      generatedPaths.add(file.path);
-      console.log("Generating:", file.path);
-    }
-  }
+  await writeOutputFiles(options.outputPath, files);
 }

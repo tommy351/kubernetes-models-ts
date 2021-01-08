@@ -5,5 +5,9 @@
     "outDir": "dist"
   },
   "include": ["src"],
-  "references": [{ "path": "../read-input" }, { "path": "../string-util" }]
+  "references": [
+    { "path": "../read-input" },
+    { "path": "../string-util" },
+    { "path": "../generate" }
+  ]
 }

@@ -1,149 +1,128 @@
 import {
-  formatComment,
-  stripComment,
-  trimSuffix
-} from "@kubernetes-models/string-util";
-import { Definition, GenerateResult, Property } from "../types";
-import { trimRefPrefix, getInterfaceName, getClassName } from "../string";
+  collectRefs,
+  generateImports,
+  generateInterface,
+  Generator,
+  getAPIVersion,
+  Import
+} from "@kubernetes-models/generate";
+import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
+import {
+  getClassName,
+  getInterfaceName,
+  getShortClassName,
+  getShortInterfaceName,
+  trimRefPrefix
+} from "../string";
 
-function compileType(def: Property): string {
-  if (typeof def.$ref === "string") {
-    return getInterfaceName(trimRefPrefix(def.$ref));
-  }
-
-  switch (def.type) {
-    case "object": {
-      const { required = [], properties = {}, additionalProperties } = def;
-      let output = "{\n";
-
-      for (const key of Object.keys(properties)) {
-        const prop = properties[key];
-
-        if (typeof prop.description === "string") {
-          output += formatComment(prop.description);
-        }
-
-        output += `"${key}"`;
-        if (!~required.indexOf(key)) output += "?";
-        output += ": " + compileType(prop) + ";\n";
-      }
-
-      if (additionalProperties) {
-        output += `[key: string]: ${compileType(additionalProperties)};\n`;
-      }
-
-      output += "}";
-      return output;
-    }
-
-    case "string":
-      if (def.enum && def.enum.length) {
-        return def.enum.map((x) => JSON.stringify(x)).join(" | ");
-      }
-
-      switch (def.format) {
-        case "int-or-string":
-          return "string | number";
-
-        default:
-          return "string";
-      }
-
-    case "number":
-    case "integer":
-      return "number";
-
-    case "boolean":
-      return "boolean";
-
-    case "array":
-      if (def.items) {
-        return `Array<${compileType(def.items)}>`;
-      }
-
-      return "any[]";
-
-    case "null":
-      return "null";
-  }
-
-  return "any";
+function getRefType(ref: string): string {
+  return getInterfaceName(trimRefPrefix(ref));
 }
 
-function generate(def: Definition): GenerateResult {
-  const typing = compileType(def.schema);
-  let content = "";
-  let comment = "";
-
-  if (def.schema.description) {
-    comment = formatComment(def.schema.description, {
-      deprecated: def.schema.description.toLowerCase().startsWith("deprecated")
+const generateDefinitions: Generator = async (definitions) => {
+  return definitions.map((def) => {
+    const interfaceName = getInterfaceName(def.schemaId);
+    const className = getClassName(def.schemaId);
+    const shortInterfaceName = getShortInterfaceName(def.schemaId);
+    const shortClassName = getShortClassName(def.schemaId);
+    const refs = collectRefs(def.schema)
+      .map(trimRefPrefix)
+      .filter((ref) => ref !== def.schemaId);
+    const imports: Import[] = [];
+    const typing = generateInterface(def.schema, {
+      getRefType,
+      includeDescription: true
     });
-  }
+    let content = "";
+    let comment = "";
 
-  for (const ref of def.getRefs()) {
-    content += `
-import { ${getInterfaceName(ref)} } from "./${getClassName(ref)}";
-`;
-  }
+    if (def.schema.description) {
+      comment = formatComment(def.schema.description, {
+        deprecated: /^deprecated/i.test(def.schema.description)
+      });
+    }
 
-  if (def.schema.type === "object") {
-    const gvk = def.getGVK();
-    let classContent = stripComment(typing.trim());
+    for (const ref of refs) {
+      imports.push({
+        name: getInterfaceName(ref),
+        path: `./${getClassName(ref)}`
+      });
+    }
 
-    if (gvk) {
-      classContent = `${trimSuffix(classContent, "}")}
-static apiVersion: ${def.getInterfaceName()}["apiVersion"] = "${def.getAPIVersion()}";
-static kind: ${def.getInterfaceName()}["kind"] = "${def.getKind()}";
+    if (def.schema.type === "object") {
+      const gvk = def.gvk?.[0];
+      let classContent = generateInterface(def.schema, {
+        getRefType,
+        getFieldType(key) {
+          if (key.length !== 1) return;
 
-constructor(data?: ModelData<${def.getInterfaceName()}>) {
+          switch (key[0]) {
+            case "apiVersion":
+            case "kind":
+              return `${interfaceName}["${key[0]}"]`;
+          }
+        }
+      });
+
+      if (gvk) {
+        imports.push({
+          name: "ModelData",
+          path: "@kubernetes-models/base"
+        });
+
+        classContent = `${trimSuffix(classContent, "}")}
+static apiVersion: ${interfaceName}["apiVersion"] = "${getAPIVersion(gvk)}";
+static kind: ${interfaceName}["kind"] = "${gvk.kind}";
+
+constructor(data?: ModelData<${interfaceName}>) {
   super({
-    apiVersion: ${def.getClassName()}.apiVersion,
-    kind: ${def.getClassName()}.kind,
+    apiVersion: ${className}.apiVersion,
+    kind: ${className}.kind,
     ...data
-  } as ${def.getInterfaceName()});
+  } as ${interfaceName});
 }
 }`;
+      }
 
-      classContent = classContent.replace(
-        /"(apiVersion|kind)": "([^"]+)";/g,
-        `$1!: ${def.getInterfaceName()}["$1"];`
-      );
+      imports.push({
+        name: "Model",
+        path: "@kubernetes-models/base"
+      });
+
+      imports.push({
+        name: "addSchema",
+        path: `../_schemas/${className}`
+      });
+
+      content += `
+${comment}export interface ${interfaceName} ${typing}
+
+${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
+
+Model.setSchema(${className}, ${JSON.stringify(def.schemaId)}, addSchema);
+`;
+    } else {
+      content += `
+${comment}export type ${interfaceName} = ${typing};
+
+export type ${className} = ${interfaceName};
+`;
     }
 
     content += `
-import { Model, ModelData } from "@kubernetes-models/base";
-import { addSchema } from "../_schemas/${def.getClassName()}";
-
-${comment}export interface ${def.getInterfaceName()} ${typing}
-
-${comment}export class ${def.getClassName()} extends Model<${def.getInterfaceName()}> implements ${def.getInterfaceName()} ${classContent}
-
-Model.setSchema(${def.getClassName()}, "${def.id}", addSchema);
-`;
-  } else {
-    content += `
-${comment}export type ${def.getInterfaceName()} = ${typing};
-
-${comment}export type ${def.getClassName()} = ${def.getInterfaceName()};
-`;
-  }
-
-  content += `
 export {
-  ${def.getInterfaceName()} as ${def.getShortInterfaceName()},
-  ${def.getClassName()} as ${def.getShortClassName()}
+  ${interfaceName} as ${shortInterfaceName},
+  ${className} as ${shortClassName}
 };
 `;
 
-  return {
-    path: `_definitions/${def.getClassName()}.ts`,
-    content
-  };
-}
+    content = generateImports(imports) + "\n" + content;
 
-export async function generateDefinitions(
-  defs: readonly Definition[]
-): Promise<readonly GenerateResult[]> {
-  return defs.map(generate);
-}
+    return {
+      path: `_definitions/${getClassName(def.schemaId)}.ts`,
+      content
+    };
+  });
+};
+
+export default generateDefinitions;

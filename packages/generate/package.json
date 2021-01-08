@@ -1,0 +1,34 @@
+{
+  "name": "@kubernetes-models/generate",
+  "version": "0.0.0",
+  "description": "Type declarations and utilities for Kubernetes model generation.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist",
+  "bin": {
+    "openapi-generate": "bin/openapi-generate.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/bin/",
+    "/dist/"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "@kubernetes-models/string-util": "^1.0.0",
+    "fs-extra": "^9.0.1",
+    "tslib": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.6"
+  }
+}

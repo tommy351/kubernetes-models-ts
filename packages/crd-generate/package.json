@@ -30,6 +30,7 @@
     "node": ">=10"
   },
   "dependencies": {
+    "@kubernetes-models/generate": "^0.0.0",
     "@kubernetes-models/read-input": "^1.1.0",
     "@kubernetes-models/string-util": "^1.1.0",
     "js-yaml": "^3.14.0",

@@ -1,8 +1,15 @@
-import { Definition, GenerateResult, Property } from "../types";
-import { trimRefPrefix, getClassName } from "../string";
+import {
+  collectRefs,
+  Definition,
+  generateImports,
+  Generator,
+  Import,
+  Schema
+} from "@kubernetes-models/generate";
+import { getClassName, trimRefPrefix } from "../string";
 
 function compileSchema(def: Definition): string {
-  function changeRef(obj: Property): any {
+  function changeRef(obj: Schema): any {
     const output: any = {};
 
     for (const key of Object.keys(obj)) {
@@ -28,7 +35,7 @@ function compileSchema(def: Definition): string {
   let schema: any;
 
   // Rewrite schemas for some special types
-  switch (def.id) {
+  switch (def.schemaId) {
     case "io.k8s.apimachinery.pkg.util.intstr.IntOrString":
       schema = {
         oneOf: [{ type: "string" }, { type: "integer", format: "int32" }]
@@ -47,41 +54,44 @@ function compileSchema(def: Definition): string {
   return JSON.stringify(schema, null, "  ");
 }
 
-function compileAddSchema(def: Definition): string {
-  let output = "{\n";
+const generateSchemas: Generator = async (definitions) => {
+  return definitions.map((def) => {
+    const className = getClassName(def.schemaId);
+    const imports: Import[] = [];
+    const refs = collectRefs(def.schema)
+      .map(trimRefPrefix)
+      .filter((ref) => ref !== def.schemaId);
+    let addSchemaContent = "";
 
-  for (const ref of def.getRefs()) {
-    output += `${getClassName(ref)}();\n`;
-  }
+    imports.push({
+      name: "register",
+      path: "@kubernetes-models/validate"
+    });
 
-  output += `register("${def.id}", schema);\n`;
-  output += "}\n";
-  return output;
+    for (const ref of refs) {
+      const alias = getClassName(ref);
+
+      imports.push({
+        name: "addSchema",
+        alias: getClassName(ref),
+        path: `./${getClassName(ref)}`
+      });
+
+      addSchemaContent += `${alias}();\n`;
+    }
+
+    return {
+      path: `_schemas/${className}.ts`,
+      content: `${generateImports(imports)}
+
+const schema: object = ${compileSchema(def)};
+
+export function addSchema() {
+${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
 }
+`
+    };
+  });
+};
 
-function generate(def: Definition): GenerateResult {
-  let content = `import { register } from "@kubernetes-models/validate";
-`;
-
-  for (const ref of def.getRefs()) {
-    content += `
-import { addSchema as ${getClassName(ref)} } from "./${getClassName(ref)}";
-`;
-  }
-
-  content += `const schema: object = ${compileSchema(def)};
-
-export function addSchema() ${compileAddSchema(def)}
-`;
-
-  return {
-    path: `_schemas/${def.getClassName()}.ts`,
-    content
-  };
-}
-
-export async function generateSchemas(
-  defs: readonly Definition[]
-): Promise<readonly GenerateResult[]> {
-  return defs.map(generate);
-}
+export default generateSchemas;
