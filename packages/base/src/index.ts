@@ -1,1 +1,1 @@
-export { Model } from "./model";
+export { Model, ModelData, ModelConstructor } from "./model";

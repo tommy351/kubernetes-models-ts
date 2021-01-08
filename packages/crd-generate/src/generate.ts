@@ -248,16 +248,24 @@ async function generateDefinition(
   let classContent = `${trimSuffix(stripComment(typing), "}")}
 static apiVersion: ${interfaceName}["apiVersion"] = "${apiVersion}";
 static kind: ${interfaceName}["kind"] = "${options.kind}";
+
+constructor(data?: ModelData<${interfaceName}>) {
+  super({
+    apiVersion: ${className}.apiVersion,
+    kind: ${className}.kind,
+    ...data
+  } as ${interfaceName});
+}
 }`;
 
   classContent = classContent.replace(
     /"(apiVersion|kind)": "([^"]+)";/g,
-    `$1: ${interfaceName}["$1"] = ${className}["$1"];`
+    `$1!: ${interfaceName}["$1"];`
   );
 
   return {
     path,
-    content: `import { Model } from "@kubernetes-models/base";
+    content: `import { Model, ModelData } from "@kubernetes-models/base";
 import { register } from "@kubernetes-models/validate";
 import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
 
