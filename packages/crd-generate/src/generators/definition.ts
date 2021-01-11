@@ -8,7 +8,7 @@ import {
   Import,
   OutputFile
 } from "@kubernetes-models/generate";
-import { formatComment } from "@kubernetes-models/string-util";
+import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 
 function getFieldType(key: string[]): string | undefined {
   if (key.length === 1 && key[0] === "metadata") {
@@ -28,20 +28,21 @@ function generateDefinition(
     includeDescription: true,
     getFieldType
   });
-  const { properties = {}, required = [] } = def.schema;
-  let classContent = "{\n";
+  let classContent = generateInterface(def.schema, {
+    getFieldType(key) {
+      if (key.length === 1) {
+        return `${interfaceName}${JSON.stringify(key)}`;
+      }
+    }
+  });
+  let comment = "";
 
-  for (const key of Object.keys(properties)) {
-    const modifier = required.includes(key) ? "" : "?";
-    const quotedKey = JSON.stringify(key);
-
-    classContent += `${quotedKey}${modifier}: ${interfaceName}[${quotedKey}];\n`;
-  }
-
-  classContent += `
+  classContent =
+    trimSuffix(classContent, "}") +
+    `
 static apiVersion: ${interfaceName}["apiVersion"] = ${JSON.stringify(
-    apiVersion
-  )};
+      apiVersion
+    )};
 static kind: ${interfaceName}["kind"] = ${JSON.stringify(gvk.kind)};
 
 constructor(data?: ModelData<${interfaceName}>) {
@@ -53,7 +54,6 @@ constructor(data?: ModelData<${interfaceName}>) {
 }
 }
 `;
-  let comment = "";
 
   imports.push({
     name: "IObjectMeta",
