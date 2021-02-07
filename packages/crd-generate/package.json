@@ -9,7 +9,13 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "bin": {
     "crd-generate": "bin/crd-generate.js"
   },

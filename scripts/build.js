@@ -5,10 +5,10 @@ const spawn = require("cross-spawn");
 const globby = require("globby");
 const { dirname } = require("path");
 
-const TSC = "tsc";
+const TSC = "tsc-multi";
 
 const pkgs = globby.sync("packages/*/tsconfig.json").map(dirname);
-const args = ["-b", ...pkgs, ...process.argv.slice(2)];
+const args = [...pkgs, ...process.argv.slice(2)];
 
 console.log(TSC, ...args);
 

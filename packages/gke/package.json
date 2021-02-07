@@ -9,7 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Rueian <rueiancsie@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm-run-all build:*",
     "build:backend-configs": "crd-generate --input ./crd/backendconfigs.yaml --output ./gen",

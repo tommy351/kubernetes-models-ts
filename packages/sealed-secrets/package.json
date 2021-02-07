@@ -9,7 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io)",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "crd-generate --input ./crd/sealed-secrets.yaml --output ./gen",
     "prepack": "cp package.json README.md dist/",
