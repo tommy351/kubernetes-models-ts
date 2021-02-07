@@ -1,5 +1,4 @@
 import Ajv, { FormatDefinition } from "ajv";
-import bigInteger from "big-integer";
 
 // From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15
 const rBase64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
@@ -17,13 +16,19 @@ export function register(id: string, schema: object): void {
 }
 
 function intFormat(bits: number): FormatDefinition {
+  const max = BigInt(2) ** BigInt(bits - 1) - BigInt(1);
+  const min = BigInt(-2) ** BigInt(bits - 1);
+
   return {
     validate(input: number) {
-      const int = bigInteger(input);
-      return int.bitLength().toJSNumber() <= bits;
+      const n = BigInt(input);
+      return n >= min && n <= max;
     },
     compare(a: number, b: number) {
-      return bigInteger(a).compare(bigInteger(b));
+      const diff = BigInt(a) - BigInt(b);
+      if (diff > 0) return 1;
+      if (diff < 0) return -1;
+      return 0;
     },
     type: "number"
   };

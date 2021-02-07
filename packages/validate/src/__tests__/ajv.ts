@@ -4,10 +4,10 @@ describe("format", () => {
   describe("int32", () => {
     describe.each([
       [0, true],
-      [Math.pow(2, 32) - 1, true],
-      [Math.pow(2, 32), false],
-      [-Math.pow(2, 32), true],
-      [-Math.pow(2, 32) - 1, false],
+      [Math.pow(2, 31) - 1, true],
+      [Math.pow(2, 31), false],
+      [-Math.pow(2, 31), true],
+      [-Math.pow(2, 31) - 1, false],
       [123.456, false]
     ])("when input = %d", (input, expected) => {
       it(`should return ${expected}`, () => {
@@ -23,7 +23,7 @@ describe("format", () => {
     // because "number" type in JavaScript is IEEE 754.
     describe.each([
       [0, true],
-      [Math.pow(2, 63), true],
+      [Math.pow(2, 62), true],
       [Math.pow(2, 65), false],
       [-Math.pow(2, 63), true],
       [-Math.pow(2, 65), false],
