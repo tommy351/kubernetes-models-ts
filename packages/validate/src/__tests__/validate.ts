@@ -1,6 +1,5 @@
-import { validate } from "../validate";
+import { validate, ValidationError } from "../validate";
 import { register } from "../ajv";
-import { ValidationError } from "ajv";
 
 describe("validate", () => {
   const id = "number-test";

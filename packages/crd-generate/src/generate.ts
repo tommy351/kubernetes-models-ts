@@ -10,6 +10,8 @@ import {
 } from "@kubernetes-models/string-util";
 import mapValues from "lodash.mapvalues";
 
+const LITERAL = Symbol("crd-generate#literal");
+
 const writeFileAsync = promisify(writeFile);
 
 export interface GenerateOptions {
@@ -63,7 +65,7 @@ interface OpenAPIV3Schema {
   exclusiveMaximum?: boolean | number;
 
   // non-standard
-  $literal?: string;
+  [LITERAL]?: string;
 }
 
 interface GenerateDefinitionOptions {
@@ -89,8 +91,10 @@ function fixMissingSchemaType(schema: OpenAPIV3Schema): void {
 }
 
 function compileType(schema: OpenAPIV3Schema): string {
-  if (schema.$literal) {
-    return schema.$literal;
+  const literal = schema[LITERAL];
+
+  if (literal) {
+    return literal;
   }
 
   fixMissingSchemaType(schema);
@@ -160,7 +164,7 @@ function compileType(schema: OpenAPIV3Schema): string {
 }
 
 function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
-  if (schema.$literal) {
+  if (schema[LITERAL]) {
     return schema;
   }
 
@@ -239,7 +243,7 @@ async function generateDefinition(
     },
     metadata: {
       ...properties.metadata,
-      $literal: metadataTypeName
+      [LITERAL]: metadataTypeName
     }
   };
   schema.required = [...new Set([...required, "apiVersion", "kind"])];

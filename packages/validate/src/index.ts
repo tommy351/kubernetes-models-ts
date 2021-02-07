@@ -1,2 +1,2 @@
 export { register } from "./ajv";
-export { validate } from "./validate";
+export { validate, ValidationError } from "./validate";
