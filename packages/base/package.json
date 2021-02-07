@@ -4,6 +4,10 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "description": "Base model for Kubernetes models.",
   "repository": {
     "type": "git",

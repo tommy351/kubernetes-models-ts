@@ -4,6 +4,10 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "description": "Read input from file, URL or stdin.",
   "repository": {
     "type": "git",
