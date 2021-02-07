@@ -9,7 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm-run-all build:*",
     "build:v1alpha1": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml --output ./gen",

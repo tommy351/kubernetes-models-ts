@@ -9,7 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm-run-all build:*",
     "build:v1beta1": "crd-generate --input https://raw.githubusercontent.com/projectcontour/contour/v1.5.0/examples/contour/01-crds.yaml --output ./gen",

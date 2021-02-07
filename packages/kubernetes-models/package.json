@@ -9,7 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.19.2/api/openapi-spec/swagger.json --output ./gen",
     "prepack": "cp package.json README.md dist/",

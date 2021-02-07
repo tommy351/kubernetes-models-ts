@@ -1,7 +1,9 @@
 {
   "name": "@kubernetes-models/string-util",
   "version": "1.0.1",
-  "main": "dist",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "description": "Utility functions for strings.",
   "repository": {
     "type": "git",

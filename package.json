@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
-    "build": "tsc -b packages/openapi-generate packages/crd-generate && lerna run build --stream && node scripts/build.js",
+    "build": "tsc-multi packages/openapi-generate packages/crd-generate && lerna run build --stream && node scripts/build.js",
     "watch": "npm run build -- --watch",
     "clean": "node scripts/build.js --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",
@@ -58,6 +58,7 @@
     "signale": "^1.4.0",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
+    "tsc-multi": "^0.1.0",
     "typescript": "^4.0.3",
     "yargs": "^16.1.1"
   }
