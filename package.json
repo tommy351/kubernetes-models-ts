@@ -16,9 +16,9 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
-    "build": "tsc-multi packages/openapi-generate packages/crd-generate && lerna run build --stream && node scripts/build.js",
+    "build": "tsc-multi packages/openapi-generate packages/crd-generate && lerna run build --stream && tsc-multi",
     "watch": "npm run build -- --watch",
-    "clean": "node scripts/build.js --clean && lerna run clean",
+    "clean": "tsc-multi --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",
     "test": "jest",
     "new-crd-package": "ts-node scripts/new-crd-package.ts"
@@ -42,13 +42,11 @@
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "conventional-changelog-cli": "^2.1.1",
-    "cross-spawn": "^7.0.3",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "globby": "^11.0.1",
     "husky": "^4.3.0",
     "jest": "^26.5.3",
     "lerna": "^3.22.1",
@@ -58,7 +56,7 @@
     "signale": "^1.4.0",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
-    "tsc-multi": "^0.1.0",
+    "tsc-multi": "^0.3.0",
     "typescript": "^4.0.3",
     "yargs": "^16.1.1"
   }
