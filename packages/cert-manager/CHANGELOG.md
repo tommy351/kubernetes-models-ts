@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/cert-manager@1.1.0...@kubernetes-models/cert-manager@1.2.0) (2021-02-22)
+
+
+### Features
+
+* **cert-manager:** Update to cert-manager v1.2.0 ([a200971](https://github.com/tommy351/kubernetes-models-ts/commit/a200971e3f51d3faa072c98456734aec797cee81))
+
+
+
+
+
 # [1.1.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/cert-manager@1.0.3...@kubernetes-models/cert-manager@1.1.0) (2021-02-07)
 
 **Note:** Version bump only for package @kubernetes-models/cert-manager
