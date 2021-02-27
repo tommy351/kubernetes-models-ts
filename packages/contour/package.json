@@ -16,7 +16,7 @@
     "build": "npm-run-all build:*",
     "build:v1beta1": "crd-generate --input https://raw.githubusercontent.com/projectcontour/contour/v1.5.0/examples/contour/01-crds.yaml --output ./gen",
     "build:v1": "crd-generate --input https://raw.githubusercontent.com/projectcontour/contour/v1.9.0/examples/contour/01-crds.yaml --output ./gen",
-    "postbuild": "export-map generate --path gen --export gen/export-map.json",
+    "postbuild": "export-map generate --cwd gen --export gen/export-map.json",
     "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
     "clean": "rimraf gen"
   },

@@ -14,7 +14,7 @@
   "types": "index.d.ts",
   "scripts": {
     "build": "openapi-generate --input https://raw.githubusercontent.com/kubernetes/kubernetes/v1.19.2/api/openapi-spec/swagger.json --output ./gen",
-    "postbuild": "export-map generate --path gen --export gen/export-map.json",
+    "postbuild": "cp .export-map-ignore gen/ && export-map generate --cwd gen --export gen/export-map.json",
     "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
     "clean": "rimraf gen"
   },

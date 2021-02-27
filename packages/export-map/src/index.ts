@@ -8,10 +8,27 @@ yargs(process.argv.slice(2))
     "Generate export map",
     (cmd) => {
       return cmd
-        .option("path", {
+        .option("cwd", {
           type: "string",
-          demandOption: true,
-          description: "Path of package folder."
+          default: process.cwd(),
+          defaultDescription: "CWD",
+          description: "Current working directory."
+        })
+        .option("include", {
+          type: "array",
+          description:
+            "Files to include. All TypeScript files are included by default.",
+          default: ["**/*.ts"]
+        })
+        .option("exclude", {
+          type: "array",
+          description: "Files to exclude.",
+          default: []
+        })
+        .option("ignoreFile", {
+          type: "string",
+          description: "Exclude files using a .gitignore style file.",
+          default: ".export-map-ignore"
         })
         .option("export", {
           type: "string",

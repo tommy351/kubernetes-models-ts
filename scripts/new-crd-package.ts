@@ -51,7 +51,7 @@ const args = yargs
     types: "index.d.ts",
     scripts: {
       build: "npm-run-all build:*",
-      postbuild: "export-map generate --path gen --export gen/export-map.json",
+      postbuild: "export-map generate --cwd gen --export gen/export-map.json",
       prepack:
         "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
       clean: "rimraf gen"

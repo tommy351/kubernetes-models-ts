@@ -18,7 +18,7 @@
     "build:v1alpha2": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml --output ./gen",
     "build:v1beta1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml --output ./gen",
     "build:v1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml --output ./gen",
-    "postbuild": "export-map generate --path gen --export gen/export-map.json",
+    "postbuild": "export-map generate --cwd gen --export gen/export-map.json",
     "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
     "clean": "rimraf gen"
   },
