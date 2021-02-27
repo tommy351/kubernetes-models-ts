@@ -10,6 +10,7 @@
     { "path": "../base" },
     { "path": "../validate" },
     { "path": "../crd-generate" },
-    { "path": "../kubernetes-models" }
+    { "path": "../kubernetes-models" },
+    { "path": "../export-map" }
   ]
 }

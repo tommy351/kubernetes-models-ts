@@ -9,6 +9,7 @@
   "references": [
     { "path": "../base" },
     { "path": "../validate" },
-    { "path": "../openapi-generate" }
+    { "path": "../openapi-generate" },
+    { "path": "../export-map" }
   ]
 }

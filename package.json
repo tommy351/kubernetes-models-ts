@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
-    "build": "tsc-multi packages/openapi-generate packages/crd-generate && lerna run build --stream && tsc-multi",
+    "build": "tsc-multi packages/openapi-generate packages/crd-generate packages/export-map && lerna run build --stream && tsc-multi",
     "watch": "npm run build -- --watch",
     "clean": "tsc-multi --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",

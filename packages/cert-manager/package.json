@@ -6,19 +6,20 @@
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
   },
-  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/cert-manager",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "scripts": {
     "build": "npm-run-all build:*",
     "build:v1alpha1": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml --output ./gen",
     "build:v1alpha2": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml --output ./gen",
     "build:v1beta1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml --output ./gen",
     "build:v1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml --output ./gen",
-    "prepack": "cp package.json README.md dist/",
+    "postbuild": "export-map generate --path gen --export gen/export-map.json",
+    "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
     "clean": "rimraf gen"
   },
   "publishConfig": {
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "^1.2.0",
+    "@kubernetes-models/export-map": "^0.0.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }
