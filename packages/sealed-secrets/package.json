@@ -6,15 +6,16 @@
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
   },
-  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/sealed-secrets",
   "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io)",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
   "scripts": {
     "build": "crd-generate --input ./crd/sealed-secrets.yaml --output ./gen",
-    "prepack": "cp package.json README.md dist/",
+    "postbuild": "export-map generate --path gen --export gen/export-map.json",
+    "prepack": "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
     "clean": "rimraf gen"
   },
   "publishConfig": {
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "^1.2.0",
+    "@kubernetes-models/export-map": "^0.0.0",
     "rimraf": "^3.0.2"
   }
 }

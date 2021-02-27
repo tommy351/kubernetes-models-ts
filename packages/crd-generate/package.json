@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
   },
-  "homepage": "https://github.com/tommy351/kubernetes-models-ts",
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/crd-generate",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",

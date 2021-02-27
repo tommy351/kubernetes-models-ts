@@ -43,13 +43,17 @@ const args = yargs
       type: "git",
       url: "https://github.com/tommy351/kubernetes-models-ts.git"
     },
-    homepage: "https://github.com/tommy351/kubernetes-models-ts",
+    homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/${args.name}`,
     author: args.author,
     license: "MIT",
     main: "index.js",
+    module: "index.mjs",
+    types: "index.d.ts",
     scripts: {
       build: "npm-run-all build:*",
-      prepack: "cp package.json README.md dist/",
+      postbuild: "export-map generate --path gen --export gen/export-map.json",
+      prepack:
+        "cp package.json README.md dist/ && export-map inject --package dist/package.json --export gen/export-map.json",
       clean: "rimraf gen"
     },
     publishConfig: {
@@ -68,6 +72,7 @@ const args = yargs
     },
     devDependencies: {
       "@kubernetes-models/crd-generate": "^1.0.0",
+      "@kubernetes-models/export-map": "^0.0.0",
       "npm-run-all": "^4.1.5",
       rimraf: "^3.0.2"
     }
@@ -85,7 +90,8 @@ const args = yargs
       { path: "../base" },
       { path: "../validate" },
       { path: "../crd-generate" },
-      { path: "../kubernetes-models" }
+      { path: "../kubernetes-models" },
+      { path: "../export-map" }
     ]
   };
 
