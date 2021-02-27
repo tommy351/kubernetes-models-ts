@@ -23,8 +23,6 @@ export async function generate(args: GenerateArguments): Promise<void> {
   const exportMap: Record<string, Export> = {};
 
   for (const path of paths) {
-    if (path.startsWith("_")) continue;
-
     const base = trimSuffix(path, extname(path));
     const exportPath =
       base === "index" ? "." : `./${trimSuffix(base, "/index")}`;
