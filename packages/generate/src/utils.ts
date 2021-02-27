@@ -8,6 +8,8 @@ export class PathConflictError extends Error {
   }
 }
 
+PathConflictError.prototype.name = "PathConflictError";
+
 export function composeGenerators(generators: readonly Generator[]): Generator {
   return async (definitions) => {
     const fileMap = new Map<string, OutputFile>();
