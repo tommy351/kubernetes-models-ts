@@ -1,16 +1,15 @@
 import yaml from "js-yaml";
-import { join, dirname } from "path";
-import { writeFile } from "fs";
-import makeDir from "make-dir";
-import { promisify } from "util";
-import {
-  formatComment,
-  stripComment,
-  trimSuffix
-} from "@kubernetes-models/string-util";
 import mapValues from "lodash.mapvalues";
-
-const writeFileAsync = promisify(writeFile);
+import {
+  composeGenerators,
+  Definition,
+  GroupVersionKind,
+  writeOutputFiles,
+  Schema,
+  getAPIVersion
+} from "@kubernetes-models/generate";
+import generateDefinitions from "./generators/definition";
+import generateAliases from "./generators/alias";
 
 export interface GenerateOptions {
   input: string;
@@ -44,41 +43,10 @@ interface CustomResourceDefinitionVersion {
 }
 
 interface CustomResourceDefinitionValidation {
-  openAPIV3Schema: OpenAPIV3Schema;
+  openAPIV3Schema: Schema;
 }
 
-interface OpenAPIV3Schema {
-  description?: string;
-  type?: string;
-  format?: string;
-  properties?: { [key: string]: OpenAPIV3Schema };
-  additionalProperties?: OpenAPIV3Schema;
-  required?: string[];
-  items?: OpenAPIV3Schema;
-  enum?: any[];
-  deprecated?: boolean;
-  minimum?: number;
-  maximum?: number;
-  exclusiveMinimum?: boolean | number;
-  exclusiveMaximum?: boolean | number;
-
-  // non-standard
-  $literal?: string;
-}
-
-interface GenerateDefinitionOptions {
-  group: string;
-  version: string;
-  kind: string;
-  validation: CustomResourceDefinitionValidation;
-}
-
-export interface GenerateResult {
-  path: string;
-  content: string;
-}
-
-function fixMissingSchemaType(schema: OpenAPIV3Schema): void {
+function fixMissingSchemaType(schema: Schema): void {
   if (!schema.type) {
     if (schema.properties) {
       schema.type = "object";
@@ -88,82 +56,7 @@ function fixMissingSchemaType(schema: OpenAPIV3Schema): void {
   }
 }
 
-function compileType(schema: OpenAPIV3Schema): string {
-  if (schema.$literal) {
-    return schema.$literal;
-  }
-
-  fixMissingSchemaType(schema);
-
-  switch (schema.type) {
-    case "object": {
-      const { properties = {}, required = [], additionalProperties } = schema;
-      let output = "{\n";
-
-      for (const key of Object.keys(properties)) {
-        const prop = properties[key];
-
-        if (typeof prop.description === "string") {
-          output += formatComment(prop.description, {
-            deprecated:
-              prop.deprecated ||
-              prop.description.toLowerCase().startsWith("deprecated")
-          });
-        }
-
-        output += `"${key}"`;
-        if (!~required.indexOf(key)) output += "?";
-        output += ": " + compileType(prop) + ";\n";
-      }
-
-      if (additionalProperties) {
-        output += `[key: string]: ${compileType(additionalProperties)};\n`;
-      }
-
-      output += "}";
-
-      return output;
-    }
-
-    case "string":
-      if (schema.enum && schema.enum.length) {
-        return schema.enum.map((x) => JSON.stringify(x)).join(" | ");
-      }
-
-      switch (schema.format) {
-        case "int-or-string":
-          return "string | number";
-
-        default:
-          return "string";
-      }
-
-    case "number":
-    case "integer":
-      return "number";
-
-    case "boolean":
-      return "boolean";
-
-    case "array":
-      if (schema.items) {
-        return `Array<${compileType(schema.items)}>`;
-      }
-
-      return "any[]";
-
-    case "null":
-      return "null";
-  }
-
-  return "any";
-}
-
-function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
-  if (schema.$literal) {
-    return schema;
-  }
-
+function formatSchema(schema: Schema): Schema {
   fixMissingSchemaType(schema);
 
   switch (schema.type) {
@@ -172,9 +65,9 @@ function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
 
       return {
         ...schema,
-        properties: mapValues(properties, (prop) => compileSchema(prop)),
+        properties: mapValues(properties, (prop) => formatSchema(prop)),
         ...(additionalProperties && {
-          additionalProperties: compileSchema(additionalProperties)
+          additionalProperties: formatSchema(additionalProperties)
         })
       };
     }
@@ -182,7 +75,7 @@ function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
     case "array":
       return {
         ...schema,
-        ...(schema.items && { items: compileSchema(schema.items) })
+        ...(schema.items && { items: formatSchema(schema.items) })
       };
 
     case "number":
@@ -214,117 +107,45 @@ function compileSchema(schema: OpenAPIV3Schema): OpenAPIV3Schema {
   return schema;
 }
 
-async function generateDefinition(
-  options: GenerateDefinitionOptions
-): Promise<GenerateResult> {
-  const path = join(options.group, options.version, options.kind) + ".ts";
-  const apiVersion = `${options.group}/${options.version}`;
-  const schema = options.validation.openAPIV3Schema;
-  const metadataTypeName = "IObjectMeta";
-  const { properties = {}, required = [] } = schema;
-  const interfaceName = "I" + options.kind;
-  const className = options.kind;
+function generateDefinition(
+  gvk: GroupVersionKind,
+  validation: CustomResourceDefinitionValidation
+): Definition {
+  const { properties = {}, required = [], ...schema } = formatSchema(
+    validation.openAPIV3Schema
+  );
 
   schema.properties = {
     ...properties,
     apiVersion: {
       ...properties.apiVersion,
       type: "string",
-      enum: [apiVersion]
+      enum: [getAPIVersion(gvk)]
     },
     kind: {
       ...properties.kind,
       type: "string",
-      enum: [options.kind]
+      enum: [gvk.kind]
     },
     metadata: {
-      ...properties.metadata,
-      $literal: metadataTypeName
+      $ref: "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
     }
   };
+
   schema.required = [...new Set([...required, "apiVersion", "kind"])];
 
-  const typing = compileType(schema);
-  let classContent = `${trimSuffix(stripComment(typing), "}")}
-static apiVersion: ${interfaceName}["apiVersion"] = "${apiVersion}";
-static kind: ${interfaceName}["kind"] = "${options.kind}";
-
-constructor(data?: ModelData<${interfaceName}>) {
-  super({
-    apiVersion: ${className}.apiVersion,
-    kind: ${className}.kind,
-    ...data
-  } as ${interfaceName});
-}
-}`;
-
-  classContent = classContent.replace(
-    /"(apiVersion|kind)": "([^"]+)";/g,
-    `$1!: ${interfaceName}["$1"];`
-  );
-
   return {
-    path,
-    content: `import { Model, ModelData } from "@kubernetes-models/base";
-import { register } from "@kubernetes-models/validate";
-import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
-
-export interface ${interfaceName} ${typing}
-
-export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
-
-const schemaId = "${options.group}.${options.version}.${options.kind}";
-const schema = ${JSON.stringify(
-      compileSchema(options.validation.openAPIV3Schema),
-      null,
-      "  "
-    )};
-
-Model.setSchema(${className}, schemaId, () => {
-  register(schemaId, schema);
-});
-`
+    gvk: [gvk],
+    schemaId: `${gvk.group}.${gvk.version}.${gvk.kind}`,
+    schema
   };
 }
 
-async function generateCRD(
-  crd: CustomResourceDefinition
-): Promise<GenerateResult[]> {
-  const results: GenerateResult[] = [];
-  const group = crd.spec.group;
-  const kind = crd.spec.names.kind;
+const generator = composeGenerators([generateDefinitions, generateAliases]);
 
-  if (Array.isArray(crd.spec.versions) && crd.spec.versions.length) {
-    for (const version of crd.spec.versions) {
-      const validation = version.schema || crd.spec.validation;
-
-      if (validation) {
-        results.push(
-          await generateDefinition({
-            group,
-            version: version.name,
-            kind,
-            validation
-          })
-        );
-      }
-    }
-  } else if (crd.spec.version) {
-    const validation = crd.spec.validation;
-
-    if (validation) {
-      results.push(
-        await generateDefinition({
-          group,
-          version: crd.spec.version,
-          kind,
-          validation
-        })
-      );
-    }
-  }
-
-  return results;
+export interface GenerateOptions {
+  input: string;
+  outputPath: string;
 }
 
 export async function generate(options: GenerateOptions): Promise<void> {
@@ -337,22 +158,40 @@ export async function generate(options: GenerateOptions): Promise<void> {
       )
     )
     .filter(({ kind }) => kind === "CustomResourceDefinition");
-  const generatedPaths = new Set<string>();
+  const definitions: Definition[] = [];
 
   for (const crd of data) {
-    const files = await generateCRD(crd);
+    const group = crd.spec.group;
+    const kind = crd.spec.names.kind;
 
-    for (const file of files) {
-      if (generatedPaths.has(file.path)) {
-        throw new Error(`Path conflict: ${file.path}`);
+    if (Array.isArray(crd.spec.versions) && crd.spec.versions.length) {
+      for (const version of crd.spec.versions) {
+        const validation = version.schema || crd.spec.validation;
+        const gvk = {
+          group,
+          version: version.name,
+          kind
+        };
+
+        if (validation) {
+          definitions.push(generateDefinition(gvk, validation));
+        }
       }
+    } else if (crd.spec.version) {
+      const validation = crd.spec.validation;
+      const gvk = {
+        group,
+        kind,
+        version: crd.spec.version
+      };
 
-      const path = join(options.outputPath, file.path);
-
-      await makeDir(dirname(path));
-      await writeFileAsync(path, file.content);
-      generatedPaths.add(file.path);
-      console.log("Generating:", file.path);
+      if (validation) {
+        definitions.push(generateDefinition(gvk, validation));
+      }
     }
   }
+
+  const files = await generator(definitions);
+
+  await writeOutputFiles(options.outputPath, files);
 }

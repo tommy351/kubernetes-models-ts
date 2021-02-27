@@ -1,7 +1,7 @@
 {
-  "name": "@kubernetes-models/openapi-generate",
-  "version": "1.2.0",
-  "description": "Generate Kubernetes models from OpenAPI schema.",
+  "name": "@kubernetes-models/generate",
+  "version": "0.0.0",
+  "description": "Type declarations and utilities for Kubernetes model generation.",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
@@ -30,18 +30,11 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/generate": "^0.0.0",
-    "@kubernetes-models/read-input": "^1.1.0",
-    "@kubernetes-models/string-util": "^1.1.0",
-    "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2",
-    "make-dir": "^3.1.0",
-    "tslib": "^2.0.3",
-    "yargs": "^16.0.3"
+    "@kubernetes-models/string-util": "^1.0.0",
+    "fs-extra": "^9.0.1",
+    "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@types/lodash.get": "^4.4.6",
-    "@types/lodash.set": "^4.3.6",
-    "@types/yargs": "^15.0.8"
+    "@types/fs-extra": "^9.0.6"
   }
 }

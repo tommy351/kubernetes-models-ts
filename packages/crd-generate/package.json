@@ -30,10 +30,12 @@
     "node": ">=10"
   },
   "dependencies": {
+    "@kubernetes-models/generate": "^0.0.0",
     "@kubernetes-models/read-input": "^1.1.0",
     "@kubernetes-models/string-util": "^1.1.0",
     "js-yaml": "^3.14.0",
     "lodash.mapvalues": "^4.6.0",
+    "lodash.set": "^4.3.2",
     "make-dir": "^3.1.0",
     "tslib": "^2.0.3",
     "yargs": "^16.0.3"
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@types/js-yaml": "^3.12.5",
     "@types/lodash.mapvalues": "^4.6.6",
+    "@types/lodash.set": "^4.3.6",
     "@types/yargs": "^15.0.8"
   }
 }

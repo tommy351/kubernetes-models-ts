@@ -1,36 +1,17 @@
 import { camelCase, trimPrefix } from "@kubernetes-models/string-util";
-import { Definition, GenerateResult } from "../types";
 import { getClassName, getShortClassName } from "../string";
 import { posix } from "path";
+import { Generator, Definition, OutputFile } from "@kubernetes-models/generate";
+import get from "lodash.get";
+import set from "lodash.set";
 
 interface KeyMap {
   [key: string]: string | KeyMap;
 }
 
-function deepGet(obj: any, keys: readonly string[]): any {
-  const [key, ...rest] = keys;
-
-  if (!rest.length) {
-    return obj[key];
-  }
-
-  return deepGet(obj[key], rest);
-}
-
-function deepSet(obj: any, keys: readonly string[], value: any): void {
-  const [key, ...rest] = keys;
-
-  if (rest.length) {
-    obj[key] = obj[key] || {};
-    deepSet(obj[key], rest, value);
-  } else {
-    obj[key] = value;
-  }
-}
-
-function generate(map: KeyMap, parent = ""): readonly GenerateResult[] {
+function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
   const path = parent + "index.ts";
-  let children: GenerateResult[] = [];
+  let children: OutputFile[] = [];
   let content = "";
 
   for (const key of Object.keys(map)) {
@@ -61,12 +42,12 @@ function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
   const map: { [key: string]: string } = {};
 
   for (const def of defs) {
-    for (const gvk of def.gvk) {
+    for (const gvk of def.gvk || []) {
       let key = gvk.version;
       if (gvk.group) key = gvk.group + "/" + key;
 
       if (!map[key]) {
-        const val = def.id.split(".").slice(0, -1).join(".");
+        const val = def.schemaId.split(".").slice(0, -1).join(".");
 
         map[key] = val;
       }
@@ -76,23 +57,23 @@ function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
   return map;
 }
 
-export async function generateAliases(
-  defs: readonly Definition[]
-): Promise<readonly GenerateResult[]> {
+const generateAliases: Generator = async (definitions) => {
   const map: KeyMap = {};
-  const gvkMap = buildGVKMap(defs);
+  const gvkMap = buildGVKMap(definitions);
   const prefix = "io.k8s.";
 
-  for (const def of defs) {
-    deepSet(map, trimPrefix(def.id, prefix).split("."), def.id);
+  for (const def of definitions) {
+    set(map, trimPrefix(def.schemaId, prefix).split("."), def.schemaId);
   }
 
   for (const key of Object.keys(gvkMap)) {
     const keys = key.split("/");
-    const val = deepGet(map, trimPrefix(gvkMap[key], prefix).split("."));
+    const val = get(map, trimPrefix(gvkMap[key], prefix).split("."));
 
-    deepSet(map, keys, val);
+    set(map, keys, val);
   }
 
   return generate(map);
-}
+};
+
+export default generateAliases;
