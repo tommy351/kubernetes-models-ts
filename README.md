@@ -55,6 +55,8 @@ See [examples](examples) folder for more examples.
 ### Utilities
 
 - [@kubernetes-models/base](packages/base) - Base model for Kubernetes models.
+- [@kubernetes-models/export-map](packages/export-map) - Generate and inject export map.
+- [@kubernetes-models/generate](packages/generate) - Type declarations and utilities for Kubernetes model generation.
 - [@kubernetes-models/read-input](packages/read-input) - Read input from file, URL or stdin.
 - [@kubernetes-models/string-util](packages/string-util) - Utility functions for strings.
 - [@kubernetes-models/validate](packages/validate) - Validation library for Kubernetes models.
