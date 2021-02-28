@@ -1,5 +1,5 @@
 import test from "ava";
-import { Certificate } from "../../../packages/cert-manager/dist/cert-manager.io/v1/Certificate.mjs";
+import { Certificate } from "../../../packages/cert-manager/dist/cert-manager.io/v1/Certificate.js";
 
 const cert = new Certificate({
   metadata: {

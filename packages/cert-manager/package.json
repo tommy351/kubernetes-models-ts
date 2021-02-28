@@ -9,8 +9,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/cert-manager",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
+  "type": "module",
+  "main": "index.cjs",
+  "module": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {

@@ -46,8 +46,9 @@ const args = yargs
     homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/${args.name}`,
     author: args.author,
     license: "MIT",
-    main: "index.js",
-    module: "index.mjs",
+    type: "modules",
+    main: "index.cjs",
+    module: "index.js",
     types: "index.d.ts",
     sideEffects: false,
     scripts: {

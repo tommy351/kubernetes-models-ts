@@ -1,13 +1,14 @@
 {
   "name": "@kubernetes-models/read-input",
   "version": "1.2.1",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
   },
   "description": "Read input from file, URL or stdin.",
   "repository": {

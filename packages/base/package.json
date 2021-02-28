@@ -1,13 +1,14 @@
 {
   "name": "@kubernetes-models/base",
   "version": "1.4.1",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
   },
   "description": "Base model for Kubernetes models.",
   "repository": {

@@ -1,5 +1,5 @@
 import test from "ava";
-import { Pod } from "../../../packages/kubernetes-models/dist/v1/Pod.mjs";
+import { Pod } from "../../../packages/kubernetes-models/dist/v1/Pod.js";
 
 const pod = new Pod({
   metadata: {
