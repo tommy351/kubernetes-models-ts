@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/validate@1.3.0...@kubernetes-models/validate@1.3.1) (2021-02-28)
+
+
+### Bug Fixes
+
+* **validate:** Fix ajv import in ES modules ([c91c84e](https://github.com/tommy351/kubernetes-models-ts/commit/c91c84eff724f9bff29c17e91065104424566c1e))
+
+
+
+
+
 # [1.3.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/validate@1.2.0...@kubernetes-models/validate@1.3.0) (2021-02-27)
 
 

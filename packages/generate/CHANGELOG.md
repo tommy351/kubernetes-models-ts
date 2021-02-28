@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/generate@0.1.0...@kubernetes-models/generate@0.1.1) (2021-02-28)
+
+**Note:** Version bump only for package @kubernetes-models/generate
+
+
+
+
+
 # 0.1.0 (2021-02-27)
 
 
