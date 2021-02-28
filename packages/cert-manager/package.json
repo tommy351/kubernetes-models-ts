@@ -12,6 +12,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build": "npm-run-all build:*",
     "build:v1alpha1": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml --output ./gen",

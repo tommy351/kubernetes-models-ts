@@ -49,6 +49,7 @@ const args = yargs
     main: "index.js",
     module: "index.mjs",
     types: "index.d.ts",
+    sideEffects: false,
     scripts: {
       build: "npm-run-all build:*",
       postbuild: "export-map generate --cwd gen --export gen/export-map.json",

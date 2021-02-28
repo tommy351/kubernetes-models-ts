@@ -12,6 +12,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build": "crd-generate --input ./crd/sealed-secrets.yaml --output ./gen",
     "postbuild": "export-map generate --cwd gen --export gen/export-map.json",

@@ -12,6 +12,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build:alertmanagers": "crd-generate --input https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml --output ./gen",
     "build:podmonitors": "crd-generate --input https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml --output ./gen",

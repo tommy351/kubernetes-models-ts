@@ -12,6 +12,7 @@
   "main": "index.js",
   "module": "index.mjs",
   "types": "index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "build": "npm-run-all build:*",
     "build:v1beta1": "crd-generate --input https://raw.githubusercontent.com/projectcontour/contour/v1.5.0/examples/contour/01-crds.yaml --output ./gen",
