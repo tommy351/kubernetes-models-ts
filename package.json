@@ -20,7 +20,10 @@
     "watch": "npm run build -- --watch",
     "clean": "tsc-multi --clean && lerna run clean",
     "bootstrap": "lerna bootstrap",
-    "test": "jest",
+    "prepack": "lerna run prepack",
+    "test": "npm-run-all test:*",
+    "test:unit": "jest",
+    "test:esm": "ava integration/esm/__tests__/**/*",
     "new-crd-package": "ts-node scripts/new-crd-package.ts"
   },
   "husky": {
@@ -41,6 +44,7 @@
     "@types/yargs": "^15.0.10",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
+    "ava": "^3.15.0",
     "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.12.0",
@@ -52,6 +56,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.4.0",
     "make-dir": "^3.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "signale": "^1.4.0",
     "ts-jest": "^26.4.1",

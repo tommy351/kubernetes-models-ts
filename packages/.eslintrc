@@ -1,0 +1,4 @@
+{
+  "extends": ["../.eslintrc", "plugin:jest/recommended"],
+  "plugins": ["jest"]
+}
