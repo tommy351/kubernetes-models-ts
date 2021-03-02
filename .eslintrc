@@ -30,7 +30,7 @@
   },
   "settings": {
     "node": {
-      "tryExtensions": [".ts", ".js", ".json", ".node"]
+      "tryExtensions": [".ts", ".js", ".cjs", ".mjs", ".json", ".node"]
     }
   },
   "overrides": [
