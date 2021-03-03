@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.4.1...@kubernetes-models/crd-generate@1.4.2) (2021-03-03)
+
+
+### Bug Fixes
+
+* Fix Node.js 10 support ([3cffdf0](https://github.com/tommy351/kubernetes-models-ts/commit/3cffdf0d0a0efc24fcc959d20c8bca657385488f))
+
+
+
+
+
 ## [1.4.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.4.0...@kubernetes-models/crd-generate@1.4.1) (2021-03-03)
 
 **Note:** Version bump only for package @kubernetes-models/crd-generate
