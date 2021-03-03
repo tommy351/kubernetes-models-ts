@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.5.0...@kubernetes-models/gke@1.5.1) (2021-03-03)
+
+**Note:** Version bump only for package @kubernetes-models/gke
+
+
+
+
+
 # [1.5.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.4.2...@kubernetes-models/gke@1.5.0) (2021-03-03)
 
 

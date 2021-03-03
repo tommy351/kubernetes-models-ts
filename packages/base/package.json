@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/base",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -32,7 +32,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/validate": "^1.4.0",
+    "@kubernetes-models/validate": "^1.4.1",
     "is-plain-object": "^5.0.0",
     "tslib": "^2.0.3"
   }
