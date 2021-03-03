@@ -48,7 +48,7 @@ const args = yargs
     license: "MIT",
     type: "modules",
     main: "index.cjs",
-    module: "index.js",
+    module: "index.mjs",
     types: "index.d.ts",
     sideEffects: false,
     scripts: {
