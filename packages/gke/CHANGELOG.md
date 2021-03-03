@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.4.2...@kubernetes-models/gke@1.5.0) (2021-03-03)
+
+
+### Features
+
+* Rename extension of ESM files as ".mjs" ([025ac24](https://github.com/tommy351/kubernetes-models-ts/commit/025ac24948a07f2d48cc3fe4d3b6329749bc5c3a))
+
+
+
+
+
 ## [1.4.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.4.1...@kubernetes-models/gke@1.4.2) (2021-02-28)
 
 **Note:** Version bump only for package @kubernetes-models/gke
