@@ -27,7 +27,10 @@
     "directory": "dist"
   },
   "keywords": [
-    "kubernetes"
+    "kubernetes",
+    "kubernetes-models",
+    "gke",
+    "google-cloud"
   ],
   "engines": {
     "node": ">=10"

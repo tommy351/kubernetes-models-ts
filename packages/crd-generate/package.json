@@ -21,6 +21,11 @@
   "bin": {
     "crd-generate": "bin/crd-generate.cjs"
   },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "crd"
+  ],
   "publishConfig": {
     "access": "public"
   },

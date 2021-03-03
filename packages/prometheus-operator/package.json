@@ -33,6 +33,7 @@
   },
   "keywords": [
     "kubernetes",
+    "kubernetes-models",
     "prometheus"
   ],
   "dependencies": {

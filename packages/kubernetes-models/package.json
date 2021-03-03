@@ -25,7 +25,8 @@
     "directory": "dist"
   },
   "keywords": [
-    "kubernetes"
+    "kubernetes",
+    "kubernetes-models"
   ],
   "engines": {
     "node": ">=10"

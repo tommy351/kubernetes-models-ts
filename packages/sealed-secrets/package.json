@@ -25,7 +25,9 @@
     "directory": "dist"
   },
   "keywords": [
-    "kubernetes"
+    "kubernetes",
+    "kubernetes-models",
+    "sealed-secrets"
   ],
   "engines": {
     "node": ">=10"

@@ -23,6 +23,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "openapi"
+  ],
   "files": [
     "/bin/",
     "/dist/"

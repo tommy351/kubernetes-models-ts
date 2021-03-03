@@ -18,6 +18,10 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.cjs"
   },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
   "publishConfig": {
     "access": "public"
   },

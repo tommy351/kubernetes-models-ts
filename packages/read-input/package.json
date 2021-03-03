@@ -24,6 +24,10 @@
   "files": [
     "/dist/"
   ],
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
   "engines": {
     "node": ">=10"
   },

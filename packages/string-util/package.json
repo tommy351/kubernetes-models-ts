@@ -21,6 +21,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
   "files": [
     "/dist/"
   ],

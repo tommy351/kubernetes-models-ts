@@ -18,6 +18,10 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/base",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models"
+  ],
   "publishConfig": {
     "access": "public"
   },

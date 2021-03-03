@@ -30,6 +30,7 @@
   },
   "keywords": [
     "kubernetes",
+    "kubernetes-models",
     "cert-manager"
   ],
   "engines": {
