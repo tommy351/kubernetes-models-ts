@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "description": "Generate and inject export map.",
   "bin": {
-    "export-map": "./bin/export-map.cjs"
+    "export-map": "./bin/export-map.js"
   },
   "publishConfig": {
     "access": "public"

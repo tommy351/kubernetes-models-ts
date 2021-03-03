@@ -4,7 +4,7 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { extname } from "path";
 import ignore from "ignore";
 
-const CJS_EXT = ".cjs";
+const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
 
 interface Export {
