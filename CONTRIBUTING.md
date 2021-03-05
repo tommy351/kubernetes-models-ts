@@ -33,16 +33,7 @@ npm run clean
 Run unit tests. Testing files are located at `__tests__` folder in each package.
 
 ```sh
-npm run test:unit
-```
-
-Run integration tests for ES modules. Testing files are located at `integration/esm/__tests__`. We use [ava](https://github.com/avajs/ava) as the test runner only for this test suite, because Jest does not support ES modules well currently.
-
-```sh
-# Prepack is required only after "npm run build"
-npm run prepack
-
-npm run test:esm
+npm run test
 ```
 
 ## Linting
