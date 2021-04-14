@@ -8,8 +8,15 @@ const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
 
 interface Export {
-  require: string;
   import: string;
+  require: string;
+}
+
+function generateExport(path: string): Export {
+  return {
+    import: `./${path}${ESM_EXT}`,
+    require: `./${path}${CJS_EXT}`
+  };
 }
 
 export interface GenerateArguments {
@@ -40,16 +47,15 @@ export async function generate(args: GenerateArguments): Promise<void> {
     if (ig.ignores(path)) continue;
 
     const base = trimSuffix(path, extname(path));
-    const exportPath =
-      base === "index" ? "." : `./${trimSuffix(base, "/index")}`;
-    const requirePath = `./${base}${CJS_EXT}`;
-    const importPath = `./${base}${ESM_EXT}`;
 
-    exportMap[exportPath] = {
-      require: requirePath,
-      import: importPath
-    };
+    if (base === "index") {
+      exportMap["."] = generateExport(base);
+    } else if (base.endsWith("/index")) {
+      exportMap[`./${trimSuffix(base, "/index")}`] = generateExport(base);
+    }
   }
+
+  exportMap["./*"] = generateExport("*");
 
   await writeJSON(args.export, exportMap, {
     spaces: 2
