@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.4](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/export-map@0.4.3...@kubernetes-models/export-map@0.4.4) (2021-04-14)
+
+**Note:** Version bump only for package @kubernetes-models/export-map
+
+
+
+
+
 ## [0.4.3](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/export-map@0.4.2...@kubernetes-models/export-map@0.4.3) (2021-04-14)
 
 **Note:** Version bump only for package @kubernetes-models/export-map
