@@ -24,7 +24,7 @@ describe("validate", () => {
       });
 
       expect(() => pod.validate()).toThrow(
-        "data.spec should have required property 'containers'"
+        "data/spec must have required property 'containers'"
       );
     });
   });

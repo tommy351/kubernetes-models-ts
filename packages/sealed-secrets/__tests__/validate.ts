@@ -24,7 +24,7 @@ describe("validate", () => {
       });
 
       expect(() => config.validate()).toThrow(
-        "data.spec.encryptedData should be object"
+        "data/spec/encryptedData must be object"
       );
     });
   });

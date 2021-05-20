@@ -32,7 +32,7 @@ describe("validate", () => {
       });
 
       expect(() => config.validate()).toThrow(
-        "data.spec.selector should be object"
+        "data/spec/selector must be object"
       );
     });
   });

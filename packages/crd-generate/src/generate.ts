@@ -77,26 +77,6 @@ function formatSchema(schema: Schema): Schema {
         ...schema,
         ...(schema.items && { items: formatSchema(schema.items) })
       };
-
-    case "number":
-    case "integer": {
-      const { minimum, maximum, exclusiveMinimum, exclusiveMaximum, ...rest } =
-        schema;
-
-      return {
-        ...rest,
-        ...(exclusiveMinimum === true
-          ? {
-              exclusiveMinimum: minimum
-            }
-          : { exclusiveMinimum, minimum }),
-        ...(exclusiveMaximum === true
-          ? {
-              exclusiveMaximum: maximum
-            }
-          : { exclusiveMaximum, maximum })
-      };
-    }
   }
 
   return schema;

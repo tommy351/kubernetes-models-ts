@@ -27,7 +27,7 @@ describe("validate", () => {
       });
 
       expect(() => config.validate()).toThrow(
-        "data.spec.iap should have required property 'enabled'"
+        "data/spec/iap must have required property 'enabled'"
       );
     });
   });

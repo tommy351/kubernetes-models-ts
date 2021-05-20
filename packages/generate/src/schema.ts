@@ -1,5 +1,8 @@
 import { Schema, SchemaTransformer } from "./types";
-import { omit, omitBy } from "lodash";
+import { omit, omitBy, uniq } from "lodash";
+import Ajv from "ajv";
+
+const ajv = new Ajv();
 
 export function collectRefs(data: Record<string, unknown>): readonly string[] {
   const refs = Object.keys(data).map((key) => {
@@ -19,21 +22,6 @@ export function collectRefs(data: Record<string, unknown>): readonly string[] {
   return refs.reduce((acc, x) => acc.concat(x), [] as string[]);
 }
 
-function appendType(schema: Schema, type: string): Schema {
-  if (!schema.type || schema.type === type) return schema;
-
-  if (Array.isArray(schema.type)) {
-    if (schema.type.includes(type)) return schema;
-    return { ...schema, type: [...schema.type, type] };
-  }
-
-  if (schema.type) {
-    return { ...schema, type: [schema.type, type] };
-  }
-
-  return { ...schema, type };
-}
-
 function allowNull(schema: Schema): Schema {
   if (schema.type !== "object") return schema;
 
@@ -43,8 +31,8 @@ function allowNull(schema: Schema): Schema {
   const newProps: Record<string, Schema> = {};
 
   for (const [k, v] of Object.entries(properties)) {
-    if (!v.$ref && !required.includes(k)) {
-      newProps[k] = appendType(v, "null");
+    if (v.type && !v.$ref && !required.includes(k)) {
+      newProps[k] = { ...v, nullable: true };
     } else {
       newProps[k] = v;
     }
@@ -62,6 +50,35 @@ function omitDescription(schema: Schema): Schema {
 
 function omitKubernetesFields(schema: Schema): Schema {
   return omitBy(schema, (v, k) => k.startsWith("x-kubernetes-"));
+}
+
+function uniqEnum(schema: Schema): Schema {
+  if (Array.isArray(schema.enum)) {
+    return { ...schema, enum: uniq(schema.enum) };
+  }
+
+  return schema;
+}
+
+function setExclusiveNumber(schema: Schema): Schema {
+  if (schema.type !== "number" && schema.type !== "integer") return schema;
+
+  const { minimum, maximum, exclusiveMinimum, exclusiveMaximum, ...rest } =
+    schema;
+
+  return {
+    ...rest,
+    ...(exclusiveMinimum === true
+      ? {
+          exclusiveMinimum: minimum
+        }
+      : { exclusiveMinimum, minimum }),
+    ...(exclusiveMaximum === true
+      ? {
+          exclusiveMaximum: maximum
+        }
+      : { exclusiveMaximum, maximum })
+  };
 }
 
 function doTransformSchema(
@@ -96,10 +113,16 @@ export function transformSchema(
   schema: Schema,
   transformers: readonly SchemaTransformer[] = []
 ): Schema {
-  return doTransformSchema(schema, [
+  const output = doTransformSchema(schema, [
     omitDescription,
     omitKubernetesFields,
     allowNull,
+    uniqEnum,
+    setExclusiveNumber,
     ...transformers
   ]);
+
+  ajv.validateSchema(output, true);
+
+  return output;
 }

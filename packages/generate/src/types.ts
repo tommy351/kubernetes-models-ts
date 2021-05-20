@@ -15,6 +15,7 @@ export interface Schema {
   additionalProperties?: Schema;
   enum?: any[];
   oneOf?: Schema[];
+  nullable?: boolean;
   [key: string]: any;
 }
 
