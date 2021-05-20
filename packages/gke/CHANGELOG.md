@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.5.4...@kubernetes-models/gke@1.6.0) (2021-05-20)
+
+
+### Features
+
+* **validate:** Upgrade to ajv v8 ([44c6ce5](https://github.com/tommy351/kubernetes-models-ts/commit/44c6ce5f50b4847b6228ec059cd8b802bb671281))
+
+
+
+
+
 ## [1.5.4](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/gke@1.5.3...@kubernetes-models/gke@1.5.4) (2021-04-14)
 
 **Note:** Version bump only for package @kubernetes-models/gke

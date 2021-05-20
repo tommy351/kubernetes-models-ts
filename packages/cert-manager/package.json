@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/cert-manager",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "cert-manager models",
   "repository": {
     "type": "git",
@@ -36,14 +36,14 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/base": "^1.5.2",
-    "@kubernetes-models/validate": "^1.4.2",
-    "kubernetes-models": "^1.5.4",
+    "@kubernetes-models/base": "^1.5.3",
+    "@kubernetes-models/validate": "^1.5.0",
+    "kubernetes-models": "^1.6.0",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "^1.4.2",
-    "@kubernetes-models/export-map": "^0.4.4",
+    "@kubernetes-models/crd-generate": "^1.5.0",
+    "@kubernetes-models/export-map": "^0.4.5",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }

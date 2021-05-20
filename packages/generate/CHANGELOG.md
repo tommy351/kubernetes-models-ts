@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/generate@0.2.2...@kubernetes-models/generate@0.3.0) (2021-05-20)
+
+
+### Features
+
+* **generate:** Allow null in JSON schema ([ad6e4b7](https://github.com/tommy351/kubernetes-models-ts/commit/ad6e4b773c6967e1995146c35c5d3932050db794))
+* **generate:** Validate JSON schema ([68c9886](https://github.com/tommy351/kubernetes-models-ts/commit/68c9886ec32d6a1f6e0d72eeb193c147cfdce083))
+* **validate:** Upgrade to ajv v8 ([44c6ce5](https://github.com/tommy351/kubernetes-models-ts/commit/44c6ce5f50b4847b6228ec059cd8b802bb671281))
+
+
+
+
+
 ## [0.2.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/generate@0.2.1...@kubernetes-models/generate@0.2.2) (2021-03-03)
 
 

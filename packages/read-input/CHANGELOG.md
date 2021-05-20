@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/read-input@1.3.2...@kubernetes-models/read-input@1.3.3) (2021-05-20)
+
+**Note:** Version bump only for package @kubernetes-models/read-input
+
+
+
+
+
 ## [1.3.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/read-input@1.3.1...@kubernetes-models/read-input@1.3.2) (2021-03-03)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/generate",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Type declarations and utilities for Kubernetes model generation.",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/string-util": "^1.3.2",
+    "@kubernetes-models/string-util": "^1.3.3",
     "ajv": "^8.5.0",
     "fs-extra": "^9.1.0",
     "lodash": "^4.17.21",

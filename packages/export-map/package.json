@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/export-map",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Generate and inject export map.",
   "bin": {
     "export-map": "./bin/export-map.js"
@@ -27,7 +27,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/string-util": "^1.3.2",
+    "@kubernetes-models/string-util": "^1.3.3",
     "fast-glob": "^3.2.5",
     "fs-extra": "^9.1.0",
     "ignore": "^5.1.8",

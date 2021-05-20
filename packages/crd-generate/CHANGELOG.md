@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.4.2...@kubernetes-models/crd-generate@1.5.0) (2021-05-20)
+
+
+### Features
+
+* **generate:** Allow null in JSON schema ([ad6e4b7](https://github.com/tommy351/kubernetes-models-ts/commit/ad6e4b773c6967e1995146c35c5d3932050db794))
+
+
+
+
+
 ## [1.4.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/crd-generate@1.4.1...@kubernetes-models/crd-generate@1.4.2) (2021-03-03)
 
 
