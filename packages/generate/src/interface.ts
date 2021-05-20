@@ -22,7 +22,7 @@ function _generateInterface(
     if (result) return result;
   }
 
-  if (schema.$ref) {
+  if (typeof schema.$ref === "string") {
     if (!getRefType) throw new Error("options.getRefType is undefined");
 
     return getRefType(schema.$ref);
