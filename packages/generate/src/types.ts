@@ -6,14 +6,15 @@ export interface GroupVersionKind {
 
 export interface Schema {
   description?: string;
-  type: string;
+  type?: string | string[];
   format?: string;
   items?: Schema;
-  $ref?: string;
+  $ref?: string | Schema;
   properties?: { [key: string]: Schema };
   required?: string[];
   additionalProperties?: Schema;
   enum?: any[];
+  oneOf?: Schema[];
   [key: string]: any;
 }
 
@@ -30,4 +31,8 @@ export interface OutputFile {
 
 export interface Generator {
   (definitions: readonly Definition[]): Promise<readonly OutputFile[]>;
+}
+
+export interface SchemaTransformer {
+  (schema: Schema): Schema;
 }

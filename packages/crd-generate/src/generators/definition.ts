@@ -6,7 +6,8 @@ import {
   getAPIVersion,
   GroupVersionKind,
   Import,
-  OutputFile
+  OutputFile,
+  transformSchema
 } from "@kubernetes-models/generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 
@@ -86,12 +87,14 @@ constructor(data?: ModelData<${interfaceName}>) {
     });
   }
 
+  const schema = transformSchema(def.schema);
+
   return {
     path: `${apiVersion}/${className}.ts`,
     content: `${generateImports(imports)}
 
 const schemaId = ${JSON.stringify(def.schemaId)};
-const schema = ${JSON.stringify(def.schema, null, "  ")};
+const schema = ${JSON.stringify(schema, null, "  ")};
 
 ${comment}export interface ${interfaceName} ${interfaceContent}
 

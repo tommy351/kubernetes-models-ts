@@ -1,5 +1,6 @@
 import { Pod } from "../gen/v1/Pod";
 import { Service } from "../gen/v1/Service";
+import { ConfigMap } from "../gen/v1/ConfigMap";
 import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
 import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps";
 
@@ -68,6 +69,18 @@ describe("validate", () => {
 
         props.validate();
         expect(props.default).toEqual(value);
+      });
+    });
+  });
+
+  describe("ConfigMap", () => {
+    describe("when data is null", () => {
+      it("should pass", () => {
+        const configMap = new ConfigMap({
+          data: null as any
+        });
+
+        expect(() => configMap.validate()).not.toThrow();
       });
     });
   });

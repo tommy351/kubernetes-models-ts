@@ -4,35 +4,21 @@ import {
   generateImports,
   Generator,
   Import,
-  Schema
+  Schema,
+  transformSchema
 } from "@kubernetes-models/generate";
 import { getClassName, trimRefPrefix } from "../string";
 
-function compileSchema(def: Definition): string {
-  function changeRef(obj: Schema): any {
-    const output: any = {};
-
-    for (const key of Object.keys(obj)) {
-      // Remove description and kubernetes attributes
-      if (key === "description" || key.startsWith("x-kubernetes-")) {
-        continue;
-      }
-
-      let val = obj[key];
-
-      if (key === "$ref" && typeof val === "string") {
-        val = trimRefPrefix(val) + "#";
-      } else if (typeof val === "object" && !Array.isArray(val)) {
-        val = changeRef(val);
-      }
-
-      output[key] = val;
-    }
-
-    return output;
+function replaceRef(schema: Schema): Schema {
+  if (typeof schema.$ref === "string") {
+    return { ...schema, $ref: trimRefPrefix(schema.$ref) + "#" };
   }
 
-  let schema: any;
+  return schema;
+}
+
+function compileSchema(def: Definition): string {
+  let schema: Schema = {};
 
   // Rewrite schemas for some special types
   switch (def.schemaId) {
@@ -48,7 +34,7 @@ function compileSchema(def: Definition): string {
       break;
 
     default:
-      schema = changeRef(def.schema);
+      schema = transformSchema(def.schema, [replaceRef]);
   }
 
   return JSON.stringify(schema, null, "  ");
