@@ -35,7 +35,7 @@
     "@kubernetes-models/base": "^1.5.2",
     "@kubernetes-models/validate": "^1.4.2",
     "kubernetes-models": "^1.5.4",
-    "tslib": "^2.0.3"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "^1.4.2",

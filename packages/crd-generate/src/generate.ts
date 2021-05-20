@@ -1,5 +1,5 @@
 import yaml from "js-yaml";
-import mapValues from "lodash.mapvalues";
+import { mapValues } from "lodash";
 import {
   composeGenerators,
   Definition,
@@ -80,13 +80,8 @@ function formatSchema(schema: Schema): Schema {
 
     case "number":
     case "integer": {
-      const {
-        minimum,
-        maximum,
-        exclusiveMinimum,
-        exclusiveMaximum,
-        ...rest
-      } = schema;
+      const { minimum, maximum, exclusiveMinimum, exclusiveMaximum, ...rest } =
+        schema;
 
       return {
         ...rest,
@@ -111,9 +106,11 @@ function generateDefinition(
   gvk: GroupVersionKind,
   validation: CustomResourceDefinitionValidation
 ): Definition {
-  const { properties = {}, required = [], ...schema } = formatSchema(
-    validation.openAPIV3Schema
-  );
+  const {
+    properties = {},
+    required = [],
+    ...schema
+  } = formatSchema(validation.openAPIV3Schema);
 
   schema.properties = {
     ...properties,
@@ -150,7 +147,7 @@ export interface GenerateOptions {
 
 export async function generate(options: GenerateOptions): Promise<void> {
   const data: CustomResourceDefinition[] = yaml
-    .safeLoadAll(options.input)
+    .loadAll(options.input)
     .filter((x) => x != null && typeof x === "object")
     .filter(({ apiVersion }) =>
       ["apiextensions.k8s.io/v1beta1", "apiextensions.k8s.io/v1"].includes(

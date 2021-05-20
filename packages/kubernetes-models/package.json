@@ -33,7 +33,7 @@
   "dependencies": {
     "@kubernetes-models/base": "^1.5.2",
     "@kubernetes-models/validate": "^1.4.2",
-    "tslib": "^2.0.3"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@kubernetes-models/export-map": "^0.4.4",
