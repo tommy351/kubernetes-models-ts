@@ -60,6 +60,27 @@ function uniqEnum(schema: Schema): Schema {
   return schema;
 }
 
+function setExclusiveNumber(schema: Schema): Schema {
+  if (schema.type !== "number" && schema.type !== "integer") return schema;
+
+  const { minimum, maximum, exclusiveMinimum, exclusiveMaximum, ...rest } =
+    schema;
+
+  return {
+    ...rest,
+    ...(exclusiveMinimum === true
+      ? {
+          exclusiveMinimum: minimum
+        }
+      : { exclusiveMinimum, minimum }),
+    ...(exclusiveMaximum === true
+      ? {
+          exclusiveMaximum: maximum
+        }
+      : { exclusiveMaximum, maximum })
+  };
+}
+
 function doTransformSchema(
   schema: Schema,
   transformers: readonly SchemaTransformer[]
@@ -97,6 +118,7 @@ export function transformSchema(
     omitKubernetesFields,
     allowNull,
     uniqEnum,
+    setExclusiveNumber,
     ...transformers
   ]);
 
