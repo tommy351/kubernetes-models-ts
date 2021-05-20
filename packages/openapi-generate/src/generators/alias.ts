@@ -2,8 +2,7 @@ import { camelCase, trimPrefix } from "@kubernetes-models/string-util";
 import { getClassName, getShortClassName } from "../string";
 import { posix } from "path";
 import { Generator, Definition, OutputFile } from "@kubernetes-models/generate";
-import get from "lodash.get";
-import set from "lodash.set";
+import { get, set } from "lodash";
 
 interface KeyMap {
   [key: string]: string | KeyMap;
