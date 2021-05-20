@@ -30,7 +30,7 @@ describe("validate", () => {
       });
 
       expect(() => config.validate()).toThrow(
-        "data.spec.targetRef should have required property 'kind'"
+        "data/spec/targetRef must have required property 'kind'"
       );
     });
   });

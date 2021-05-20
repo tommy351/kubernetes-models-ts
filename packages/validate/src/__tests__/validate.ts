@@ -1,6 +1,6 @@
 import { validate } from "../validate";
 import { register } from "../ajv";
-import { ValidationError } from "ajv";
+import Ajv from "ajv";
 
 describe("validate", () => {
   const id = "number-test";
@@ -14,6 +14,6 @@ describe("validate", () => {
   });
 
   it("failed", () => {
-    expect(() => validate(id, false)).toThrow(ValidationError);
+    expect(() => validate(id, false)).toThrow(Ajv.ValidationError);
   });
 });

@@ -19,21 +19,6 @@ export function collectRefs(data: Record<string, unknown>): readonly string[] {
   return refs.reduce((acc, x) => acc.concat(x), [] as string[]);
 }
 
-function appendType(schema: Schema, type: string): Schema {
-  if (!schema.type || schema.type === type) return schema;
-
-  if (Array.isArray(schema.type)) {
-    if (schema.type.includes(type)) return schema;
-    return { ...schema, type: [...schema.type, type] };
-  }
-
-  if (schema.type) {
-    return { ...schema, type: [schema.type, type] };
-  }
-
-  return { ...schema, type };
-}
-
 function allowNull(schema: Schema): Schema {
   if (schema.type !== "object") return schema;
 
@@ -43,8 +28,8 @@ function allowNull(schema: Schema): Schema {
   const newProps: Record<string, Schema> = {};
 
   for (const [k, v] of Object.entries(properties)) {
-    if (!v.$ref && !required.includes(k)) {
-      newProps[k] = appendType(v, "null");
+    if (v.type && !v.$ref && !required.includes(k)) {
+      newProps[k] = { ...v, nullable: true };
     } else {
       newProps[k] = v;
     }
