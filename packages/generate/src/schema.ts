@@ -1,5 +1,8 @@
 import { Schema, SchemaTransformer } from "./types";
-import { omit, omitBy } from "lodash";
+import { omit, omitBy, uniq } from "lodash";
+import Ajv from "ajv";
+
+const ajv = new Ajv();
 
 export function collectRefs(data: Record<string, unknown>): readonly string[] {
   const refs = Object.keys(data).map((key) => {
@@ -49,6 +52,14 @@ function omitKubernetesFields(schema: Schema): Schema {
   return omitBy(schema, (v, k) => k.startsWith("x-kubernetes-"));
 }
 
+function uniqEnum(schema: Schema): Schema {
+  if (Array.isArray(schema.enum)) {
+    return { ...schema, enum: uniq(schema.enum) };
+  }
+
+  return schema;
+}
+
 function doTransformSchema(
   schema: Schema,
   transformers: readonly SchemaTransformer[]
@@ -81,10 +92,15 @@ export function transformSchema(
   schema: Schema,
   transformers: readonly SchemaTransformer[] = []
 ): Schema {
-  return doTransformSchema(schema, [
+  const output = doTransformSchema(schema, [
     omitDescription,
     omitKubernetesFields,
     allowNull,
+    uniqEnum,
     ...transformers
   ]);
+
+  ajv.validateSchema(output, true);
+
+  return output;
 }
