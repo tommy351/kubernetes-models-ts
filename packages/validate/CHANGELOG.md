@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/validate@1.5.0...@kubernetes-models/validate@1.5.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* **validate:** Fix byte format validator ([825f407](https://github.com/tommy351/kubernetes-models-ts/commit/825f40724bb606a7b151edcb9c512002f8026ca3))
+
+
+
+
+
 # [1.5.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/validate@1.4.2...@kubernetes-models/validate@1.5.0) (2021-05-20)
 
 
