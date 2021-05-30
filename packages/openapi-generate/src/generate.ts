@@ -9,6 +9,7 @@ import {
 import generateDefinitions from "./generators/definition";
 import generateSchemas from "./generators/schema";
 import generateAliases from "./generators/alias";
+import { uniq } from "lodash";
 
 function load(input: string): readonly Definition[] {
   const { definitions } = JSON.parse(input);
@@ -40,12 +41,12 @@ function load(input: string): readonly Definition[] {
           apiVersion: {
             ...properties.apiVersion,
             type: "string",
-            enum: gvks.map((x) => getAPIVersion(x))
+            enum: uniq(gvks.map((x) => getAPIVersion(x)))
           },
           kind: {
             ...properties.kind,
             type: "string",
-            enum: gvks.map((x) => x.kind)
+            enum: uniq(gvks.map((x) => x.kind))
           }
         };
 
