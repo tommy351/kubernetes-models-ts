@@ -16,11 +16,19 @@ function load(input: string): readonly Definition[] {
   return Object.keys(definitions)
     .filter((id) => !id.startsWith("io.k8s.kubernetes."))
     .map((id) => {
-      const schema: Schema = definitions[id];
+      let schema: Schema = definitions[id];
+
+      switch (id) {
+        case "io.k8s.apimachinery.pkg.api.resource.Quantity":
+          schema = {
+            oneOf: [{ type: "number" }, { type: "string", format: "quantity" }]
+          };
+      }
+
       const gvks: GroupVersionKind[] =
         schema["x-kubernetes-group-version-kind"] || [];
 
-      if (!schema.type && !schema.$ref) {
+      if (!schema.type && !schema.$ref && !schema.oneOf) {
         schema.type = "object";
       }
 

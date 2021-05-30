@@ -19,7 +19,7 @@ export function collectRefs(data: Record<string, unknown>): readonly string[] {
     return [];
   });
 
-  return refs.reduce((acc, x) => acc.concat(x), [] as string[]);
+  return uniq(refs.reduce((acc, x) => acc.concat(x), [] as string[]));
 }
 
 function allowNull(schema: Schema): Schema {

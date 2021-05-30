@@ -32,6 +32,12 @@ function _generateInterface(
     return schema.enum.map((x) => JSON.stringify(x)).join(" | ");
   }
 
+  if (schema.oneOf) {
+    return schema.oneOf
+      .map((x) => _generateInterface(x, options, parentKeys))
+      .join(" | ");
+  }
+
   switch (schema.type) {
     case "object": {
       const { required = [], properties = {}, additionalProperties } = schema;
