@@ -31,10 +31,12 @@ function allowNull(schema: Schema): Schema {
   const newProps: Record<string, Schema> = {};
 
   for (const [k, v] of Object.entries(properties)) {
-    if (v.type && !v.$ref && !required.includes(k)) {
+    if (required.includes(k)) {
+      newProps[k] = v;
+    } else if (v.type) {
       newProps[k] = { ...v, nullable: true };
     } else {
-      newProps[k] = v;
+      newProps[k] = { oneOf: [v, { type: "null" }] };
     }
   }
 

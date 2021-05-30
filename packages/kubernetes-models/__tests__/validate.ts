@@ -122,4 +122,18 @@ describe("validate", () => {
       });
     });
   });
+
+  describe("Pod", () => {
+    describe("when metadata.creationTimestamp is null", () => {
+      it("should pass", () => {
+        const pod = new Pod({
+          metadata: {
+            creationTimestamp: null as any
+          }
+        });
+
+        expect(() => pod.validate()).not.toThrow();
+      });
+    });
+  });
 });
