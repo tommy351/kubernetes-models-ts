@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.5](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/base@1.5.4...@kubernetes-models/base@1.5.5) (2021-05-30)
+
+**Note:** Version bump only for package @kubernetes-models/base
+
+
+
+
+
 ## [1.5.4](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/base@1.5.3...@kubernetes-models/base@1.5.4) (2021-05-20)
 
 **Note:** Version bump only for package @kubernetes-models/base

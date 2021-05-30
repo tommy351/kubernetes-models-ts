@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/generate@0.3.0...@kubernetes-models/generate@0.4.0) (2021-05-30)
+
+
+### Features
+
+* **validate:** Support quantity format ([66f502b](https://github.com/tommy351/kubernetes-models-ts/commit/66f502bbc902e81df3c22293937d45d82343d2aa))
+
+
+
+
+
 # [0.3.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/generate@0.2.2...@kubernetes-models/generate@0.3.0) (2021-05-20)
 
 

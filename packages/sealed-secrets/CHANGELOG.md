@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/sealed-secrets@1.6.1...@kubernetes-models/sealed-secrets@1.6.2) (2021-05-30)
+
+**Note:** Version bump only for package @kubernetes-models/sealed-secrets
+
+
+
+
+
 ## [1.6.1](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/sealed-secrets@1.6.0...@kubernetes-models/sealed-secrets@1.6.1) (2021-05-20)
 
 **Note:** Version bump only for package @kubernetes-models/sealed-secrets

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/openapi-generate@1.5.0...@kubernetes-models/openapi-generate@1.6.0) (2021-05-30)
+
+
+### Bug Fixes
+
+* **openapi-generate:** Dedupe kind enums ([fe26ac4](https://github.com/tommy351/kubernetes-models-ts/commit/fe26ac41e6a16e84a79312cc39b781a0a1bd5593))
+
+
+### Features
+
+* **validate:** Support quantity format ([66f502b](https://github.com/tommy351/kubernetes-models-ts/commit/66f502bbc902e81df3c22293937d45d82343d2aa))
+
+
+
+
+
 # [1.5.0](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/openapi-generate@1.4.2...@kubernetes-models/openapi-generate@1.5.0) (2021-05-20)
 
 
