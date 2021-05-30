@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/tommy351/kubernetes-models-ts/compare/kubernetes-models@1.7.0...kubernetes-models@1.7.1) (2021-05-30)
+
+
+### Bug Fixes
+
+* **generate:** Support nullable $ref prop ([cb4979d](https://github.com/tommy351/kubernetes-models-ts/commit/cb4979dd9984c4cf6a91ae80a08f4696eef02828)), closes [#41](https://github.com/tommy351/kubernetes-models-ts/issues/41)
+
+
+
+
+
 # [1.7.0](https://github.com/tommy351/kubernetes-models-ts/compare/kubernetes-models@1.6.1...kubernetes-models@1.7.0) (2021-05-30)
 
 

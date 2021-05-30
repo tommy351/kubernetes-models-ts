@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/autoscaler@0.2.2...@kubernetes-models/autoscaler@0.2.3) (2021-05-30)
+
+**Note:** Version bump only for package @kubernetes-models/autoscaler
+
+
+
+
+
 ## [0.2.2](https://github.com/tommy351/kubernetes-models-ts/compare/@kubernetes-models/autoscaler@0.2.1...@kubernetes-models/autoscaler@0.2.2) (2021-05-30)
 
 **Note:** Version bump only for package @kubernetes-models/autoscaler

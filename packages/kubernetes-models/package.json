@@ -1,6 +1,6 @@
 {
   "name": "kubernetes-models",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Kubernetes models",
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@kubernetes-models/export-map": "^0.4.5",
-    "@kubernetes-models/openapi-generate": "^1.6.0",
+    "@kubernetes-models/openapi-generate": "^1.6.1",
     "rimraf": "^3.0.2"
   }
 }
