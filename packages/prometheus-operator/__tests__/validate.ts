@@ -26,7 +26,8 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new ServiceMonitor({
         spec: {
-          selector: "some-app" as any,
+          // @ts-expect-error
+          selector: "some-app",
           endpoints: []
         }
       });

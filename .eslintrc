@@ -46,6 +46,12 @@
       "rules": {
         "node/no-missing-import": "off"
       }
+    },
+    {
+      "files": ["**/__tests__/**/*.ts"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
     }
   ]
 }

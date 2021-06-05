@@ -21,7 +21,8 @@ describe("validate", () => {
   describe("when validation failed", () => {
     it("should throw an error", () => {
       const pod = new Pod({
-        spec: {} as any
+        // @ts-expect-error
+        spec: {}
       });
 
       expect(() => pod.validate()).toThrow(
@@ -78,7 +79,8 @@ describe("validate", () => {
     describe("when data is null", () => {
       it("should pass", () => {
         const configMap = new ConfigMap({
-          data: null as any
+          // @ts-expect-error
+          data: null
         });
 
         expect(() => configMap.validate()).not.toThrow();
@@ -128,7 +130,8 @@ describe("validate", () => {
       it("should pass", () => {
         const pod = new Pod({
           metadata: {
-            creationTimestamp: null as any
+            // @ts-expect-error
+            creationTimestamp: null
           }
         });
 

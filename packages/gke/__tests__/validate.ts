@@ -22,7 +22,8 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new BackendConfig({
         spec: {
-          iap: {} as any
+          // @ts-expect-error
+          iap: {}
         }
       });
 

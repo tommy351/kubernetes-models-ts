@@ -24,8 +24,9 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new VerticalPodAutoscaler({
         spec: {
-          targetRef: {} as any,
-          updatePolicy: {} as any
+          // @ts-expect-error
+          targetRef: {},
+          updatePolicy: {}
         }
       });
 
