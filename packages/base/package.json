@@ -31,7 +31,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/validate": "^1.6.0",
+    "@kubernetes-models/validate": "workspace:*",
     "is-plain-object": "^5.0.0",
     "tslib": "^2.2.0"
   }

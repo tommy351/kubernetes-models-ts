@@ -1,5 +1,5 @@
 {
-  "name": "kubernetes-models",
+  "name": "@kubernetes-models/monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Kubernetes models",
@@ -18,13 +18,12 @@
     "lint": "npm-run-all lint:*",
     "lint:eslint": "eslint . --ext .js,.ts,.cjs,.mjs",
     "lint:syncpack": "syncpack list-mismatches",
-    "build": "tsc-multi packages/openapi-generate packages/crd-generate packages/export-map && lerna run build --stream && tsc-multi",
+    "build": "tsc-multi packages/openapi-generate packages/crd-generate packages/export-map && pnpm recursive --filter '!@kubernetes-models/monorepo' run build && tsc-multi",
     "watch": "npm run build -- --watch",
-    "clean": "rm -rf packages/*/dist && tsc-multi --clean && lerna run clean",
-    "bootstrap": "lerna bootstrap",
-    "prepack": "lerna run prepack",
+    "clean": "rm -rf packages/*/dist && tsc-multi --clean && pnpm recursive --filter '!@kubernetes-models/monorepo' run clean",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "new-crd-package": "ts-node scripts/new-crd-package.ts"
+    "new-crd-package": "ts-node scripts/new-crd-package.ts",
+    "preinstall": "npx only-allow pnpm"
   },
   "husky": {
     "hooks": {
@@ -35,7 +34,8 @@
     "*.{js,ts,cjs,mjs}": "eslint --fix"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=10",
+    "pnpm": ">=6.7.1"
   },
   "devDependencies": {
     "@tsconfig/node10": "^1.0.7",
@@ -53,7 +53,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "jest": "^27.0.3",
-    "lerna": "^4.0.0",
     "lint-staged": "^10.4.0",
     "make-dir": "^3.1.0",
     "npm-run-all": "^4.1.5",

@@ -66,14 +66,14 @@ const args = yargs
       node: ">=10"
     },
     dependencies: {
-      "@kubernetes-models/base": "^1.0.0",
-      "@kubernetes-models/validate": "^1.0.0",
-      "kubernetes-models": "^1.0.1",
+      "@kubernetes-models/base": "workspace:*",
+      "@kubernetes-models/validate": "workspace:*",
+      "kubernetes-models": "workspace:*",
       tslib: "^2.0.3"
     },
     devDependencies: {
-      "@kubernetes-models/crd-generate": "^1.0.0",
-      "@kubernetes-models/export-map": "^0.0.0",
+      "@kubernetes-models/crd-generate": "workspace:*",
+      "@kubernetes-models/export-map": "workspace:*",
       "npm-run-all": "^4.1.5",
       rimraf: "^3.0.2"
     }

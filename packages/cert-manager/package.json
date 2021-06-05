@@ -36,14 +36,14 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@kubernetes-models/base": "^1.5.5",
-    "@kubernetes-models/validate": "^1.6.0",
-    "kubernetes-models": "^1.7.1",
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "kubernetes-models": "workspace:*",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "^1.5.2",
-    "@kubernetes-models/export-map": "^0.4.5",
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/export-map": "workspace:*",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }
