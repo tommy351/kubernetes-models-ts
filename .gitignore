@@ -3,4 +3,6 @@ node_modules/
 *.tsbuildinfo
 /packages/*/dist/
 /packages/*/gen/
+/internal/*/dist/
 *.log
+/.vscode/

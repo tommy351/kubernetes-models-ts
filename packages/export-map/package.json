@@ -2,6 +2,13 @@
   "name": "@kubernetes-models/export-map",
   "version": "0.4.5",
   "description": "Generate and inject export map.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "bin": {
     "export-map": "./bin/export-map.js"
   },

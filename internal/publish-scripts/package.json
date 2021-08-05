@@ -1,0 +1,20 @@
+{
+  "name": "@kubernetes-models/publish-scripts",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "publish-scripts": "./bin/publish-scripts.js"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/export-map": "workspace:*",
+    "fs-extra": "^9.1.0",
+    "tslib": "^2.2.0",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.7"
+  }
+}

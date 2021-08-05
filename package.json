@@ -18,7 +18,7 @@
     "lint": "npm-run-all lint:*",
     "lint:eslint": "eslint . --ext .js,.ts,.cjs,.mjs",
     "lint:syncpack": "syncpack list-mismatches",
-    "build": "tsc-multi packages/openapi-generate packages/crd-generate packages/export-map && pnpm recursive --filter '!@kubernetes-models/monorepo' run build && tsc-multi",
+    "build": "tsc-multi packages/openapi-generate packages/crd-generate packages/export-map internal/publish-scripts && pnpm recursive --filter '!@kubernetes-models/monorepo' run build && tsc-multi",
     "watch": "npm run build -- --watch",
     "clean": "rm -rf packages/*/dist && tsc-multi --clean && pnpm recursive --filter '!@kubernetes-models/monorepo' run clean",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",

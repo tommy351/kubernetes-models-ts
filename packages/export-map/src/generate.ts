@@ -3,6 +3,7 @@ import { writeJSON, readFile, pathExists } from "fs-extra";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { extname } from "path";
 import ignore from "ignore";
+import { join } from "path";
 
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
@@ -13,23 +14,29 @@ interface Export {
 }
 
 export interface GenerateArguments {
-  cwd: string;
-  include: string[];
-  exclude: string[];
+  cwd?: string;
+  include?: string[];
+  exclude?: string[];
   export: string;
-  ignoreFile: string;
+  ignoreFile?: string;
 }
 
-export async function generate(args: GenerateArguments): Promise<void> {
+export async function generate({
+  cwd = process.cwd(),
+  include = ["**/*.ts"],
+  exclude = [],
+  export: exportPath,
+  ignoreFile = join(cwd, ".export-map-ignore")
+}: GenerateArguments): Promise<void> {
   const ig = ignore();
-  ig.add(args.exclude);
+  ig.add(exclude);
 
-  if (await pathExists(args.ignoreFile)) {
-    ig.add(await readFile(args.ignoreFile, "utf-8"));
+  if (await pathExists(ignoreFile)) {
+    ig.add(await readFile(ignoreFile, "utf-8"));
   }
 
-  const paths = await glob(args.include, {
-    cwd: args.cwd
+  const paths = await glob(include, {
+    cwd
   });
 
   paths.sort();
@@ -51,9 +58,9 @@ export async function generate(args: GenerateArguments): Promise<void> {
     };
   }
 
-  await writeJSON(args.export, exportMap, {
+  await writeJSON(exportPath, exportMap, {
     spaces: 2
   });
 
-  console.log("Generated export map in %s", args.export);
+  console.log("Generated export map in %s", exportPath);
 }

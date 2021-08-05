@@ -15,7 +15,7 @@
   "sideEffects": false,
   "exports": {
     "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
+    "require": "./dist/index.js"
   },
   "bin": {
     "openapi-generate": "bin/openapi-generate.js"
