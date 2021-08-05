@@ -28,7 +28,7 @@
     "kubernetes-models"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "base-x": "^3.0.8",

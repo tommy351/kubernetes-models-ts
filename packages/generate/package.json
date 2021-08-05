@@ -29,7 +29,7 @@
     "/dist/"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kubernetes-models/string-util": "workspace:*",

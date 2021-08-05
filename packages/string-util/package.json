@@ -28,7 +28,7 @@
     "/dist/"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "tslib": "^2.2.0"

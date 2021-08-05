@@ -63,7 +63,7 @@ const args = yargs
     },
     keywords: ["kubernetes"],
     engines: {
-      node: ">=10"
+      node: ">=12"
     },
     dependencies: {
       "@kubernetes-models/base": "workspace:*",

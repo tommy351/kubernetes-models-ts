@@ -28,7 +28,7 @@
     "kubernetes-models"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "dependencies": {
     "@kubernetes-models/base": "workspace:*",

@@ -34,7 +34,7 @@
     "*.{js,ts,cjs,mjs}": "eslint --fix"
   },
   "engines": {
-    "node": ">=10",
+    "node": ">=12",
     "pnpm": ">=6.7.1"
   },
   "devDependencies": {
