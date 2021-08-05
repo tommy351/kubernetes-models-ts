@@ -8,6 +8,9 @@ module.exports = {
   roots: ["<rootDir>/packages"],
   collectCoverageFrom: ["packages/*/src/**/*.ts", "!packages/*/src/index.ts"],
   testEnvironment: "node",
+  moduleNameMapper: {
+    "^kubernetes-models/(.*)": "<rootDir>/packages/kubernetes-models/dist/$1"
+  },
   ...(isESMSupported && {
     testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$",
     moduleFileExtensions: ["js", "jsx", "ts", "tsx", "mjs", "json", "node"]
