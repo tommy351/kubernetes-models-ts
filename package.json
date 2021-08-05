@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.16.0",
-    "@tsconfig/node10": "^1.0.7",
+    "@tsconfig/node12": "^1.0.9",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.3.1",
     "@types/signale": "^1.4.1",
