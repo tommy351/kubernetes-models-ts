@@ -1,7 +1,8 @@
 #!/bin/bash
 
-set -Eeuo pipefail
+set -euo pipefail
 
-npm run clean
-npm run build
-npx lerna publish --no-private --conventional-commits "$@"
+pnpm run clean
+pnpm run build
+pnpx changeset publish
+git push --follow-tags
