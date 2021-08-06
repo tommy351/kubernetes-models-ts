@@ -16,7 +16,7 @@
   "scripts": {
     "build": "npm-run-all build:*",
     "build:backend-configs": "crd-generate --input ./crd/backendconfigs.yaml --output ./gen",
-    "build:config-connector": "crd-generate --input https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/1.14.0/install-bundles/install-bundle-workload-identity/crds.yaml --output ./gen",
+    "build:config-connector": "crd-generate --input https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.58.0/install-bundles/install-bundle-workload-identity/crds.yaml --output ./gen",
     "postbuild": "publish-scripts postbuild",
     "prepack": "publish-scripts prepack",
     "clean": "rimraf gen"
