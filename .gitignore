@@ -6,3 +6,6 @@ node_modules/
 /internal/*/dist/
 *.log
 /.vscode/
+
+# pnpm store dir on GitHub actions
+/.pnpm-store/
