@@ -1,4 +1,4 @@
-import { copy, ensureLink } from "fs-extra";
+import { copy, ensureSymlink } from "fs-extra";
 import { join } from "path";
 import { inject } from "@kubernetes-models/export-map";
 
@@ -14,7 +14,7 @@ export async function prePack(args: PrePackArguments): Promise<void> {
     await copy(join(args.cwd, file), join(distDir, file));
   }
 
-  await ensureLink(
+  await ensureSymlink(
     join(args.cwd, "node_modules"),
     join(distDir, "node_modules")
   );
