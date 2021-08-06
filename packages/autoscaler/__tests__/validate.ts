@@ -24,14 +24,19 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new VerticalPodAutoscaler({
         spec: {
-          // @ts-expect-error
-          targetRef: {},
-          updatePolicy: {}
+          resourcePolicy: {
+            containerPolicies: [
+              {
+                // @ts-expect-error
+                mode: "foo"
+              }
+            ]
+          }
         }
       });
 
       expect(() => config.validate()).toThrow(
-        "data/spec/targetRef must have required property 'kind'"
+        "data/spec/resourcePolicy/containerPolicies/0/mode must be equal to one of the allowed values"
       );
     });
   });
