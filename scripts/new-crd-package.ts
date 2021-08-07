@@ -51,7 +51,7 @@ const stat = promisify(fs.stat);
     types: "index.d.ts",
     sideEffects: false,
     scripts: {
-      build: "npm-run-all build:*",
+      build: "crd-generate",
       postbuild: "publish-scripts postbuild",
       prepack: "publish-scripts prepack",
       clean: "rimraf gen"
@@ -73,8 +73,11 @@ const stat = promisify(fs.stat);
     devDependencies: {
       "@kubernetes-models/crd-generate": "workspace:*",
       "@kubernetes-models/publish-scripts": "workspace:*",
-      "npm-run-all": "^4.1.5",
       rimraf: "^3.0.2"
+    },
+    "crd-generate": {
+      input: [],
+      output: "./gen"
     }
   };
 

@@ -2,18 +2,30 @@ import yargs from "yargs";
 import { readInput } from "@kubernetes-models/read-input";
 import { generate, GenerateOptions } from "./generate";
 
+async function readFiles(paths: string[]): Promise<string> {
+  const documents: string[] = [];
+
+  for (const path of paths) {
+    console.log("Reading:", path);
+    documents.push(await readInput(path));
+  }
+
+  return documents.join("\n---\n");
+}
+
 export async function run(): Promise<void> {
   const args = await yargs
     .pkgConf("crd-generate")
     .option("input", {
-      type: "string",
+      type: "array",
       describe: "Path of the input file or URL",
-      required: true
+      string: true,
+      demandOption: true
     })
     .option("output", {
       type: "string",
       describe: "Path of output files",
-      required: true
+      demandOption: true
     })
     .option("yamlVersion", {
       type: "string",
@@ -24,7 +36,7 @@ export async function run(): Promise<void> {
 
   try {
     await generate({
-      input: await readInput(args.input),
+      input: await readFiles(args.input),
       outputPath: args.output,
       yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"]
     });

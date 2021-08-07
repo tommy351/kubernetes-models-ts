@@ -113,6 +113,26 @@ function generateDefinition(
   };
 }
 
+function gvkToString(gvk: GroupVersionKind): string {
+  return [gvk.group, gvk.version, gvk.kind].join("/");
+}
+
+function dedupeDefinitions(definitions: readonly Definition[]): Definition[] {
+  const map: Record<string, Definition> = {};
+
+  for (const def of definitions) {
+    if (!def.gvk) continue;
+
+    for (const gvk of def.gvk) {
+      // We don't need to check if the definition exists in the map or not.
+      // Values which come first should always be overridden.
+      map[gvkToString(gvk)] = def;
+    }
+  }
+
+  return Object.values(map);
+}
+
 const generator = composeGenerators([generateDefinitions, generateAliases]);
 
 export interface GenerateOptions {
@@ -166,7 +186,7 @@ export async function generate(options: GenerateOptions): Promise<void> {
     }
   }
 
-  const files = await generator(definitions);
+  const files = await generator(dedupeDefinitions(definitions));
 
   await writeOutputFiles(options.outputPath, files);
 }

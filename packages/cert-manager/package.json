@@ -14,11 +14,7 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "npm-run-all build:*",
-    "build:v1alpha1": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml --output ./gen",
-    "build:v1alpha2": "crd-generate --input https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml --output ./gen",
-    "build:v1beta1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml --output ./gen",
-    "build:v1": "crd-generate --input https://github.com/jetstack/cert-manager/releases/download/v1.4.3/cert-manager.crds.yaml --output ./gen",
+    "build": "crd-generate",
     "postbuild": "publish-scripts postbuild",
     "prepack": "publish-scripts prepack",
     "clean": "rimraf gen"
@@ -44,7 +40,15 @@
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:*",
     "@kubernetes-models/publish-scripts": "workspace:*",
-    "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml",
+      "https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml",
+      "https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml",
+      "https://github.com/jetstack/cert-manager/releases/download/v1.4.3/cert-manager.crds.yaml"
+    ],
+    "output": "./gen"
   }
 }
