@@ -41,3 +41,9 @@ ajv.addFormat("quantity", {
   type: "string",
   validate: rQuantity
 });
+
+// This format is used in Istio.
+ajv.addFormat("string", {
+  type: "string",
+  validate: (value: unknown) => typeof value === "string"
+});
