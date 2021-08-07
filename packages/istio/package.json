@@ -25,6 +25,7 @@
   },
   "keywords": [
     "kubernetes",
+    "kubernetes-models",
     "istio"
   ],
   "engines": {

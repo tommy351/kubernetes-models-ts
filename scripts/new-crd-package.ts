@@ -60,7 +60,7 @@ const stat = promisify(fs.stat);
       access: "public",
       directory: "dist"
     },
-    keywords: ["kubernetes"],
+    keywords: ["kubernetes", "kubernetes-models", args.name],
     engines: {
       node: ">=12"
     },
