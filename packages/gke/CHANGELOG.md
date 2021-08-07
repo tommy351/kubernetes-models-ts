@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.1.0
+
+### Minor Changes
+
+- [`7134133`](https://github.com/tommy351/kubernetes-models-ts/commit/7134133f54e74215c3e062b8e825371242996319) Thanks [@tommy351](https://github.com/tommy351)! - Update networking CRDs.
+
+  - Update `BackendConfig`.
+  - Add `FrontendConfig`.
+  - Add `ManagedCertificate`.
+  - Add `ServiceNetworkEndpointGroup`.
+
 ## 2.0.1
 
 ### Patch Changes
