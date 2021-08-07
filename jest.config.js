@@ -11,8 +11,17 @@ module.exports = {
   moduleNameMapper: {
     "^kubernetes-models/(.*)": "<rootDir>/packages/kubernetes-models/dist/$1"
   },
+  moduleFileExtensions: [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+    "cjs",
+    "mjs",
+    "json",
+    "node"
+  ],
   ...(isESMSupported && {
-    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$",
-    moduleFileExtensions: ["js", "jsx", "ts", "tsx", "mjs", "json", "node"]
+    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$"
   })
 };
