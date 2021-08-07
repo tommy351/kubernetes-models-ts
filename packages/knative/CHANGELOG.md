@@ -1,12 +1,19 @@
 # @kubernetes-models/knative
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`7c9d122`](https://github.com/tommy351/kubernetes-models-ts/commit/7c9d122689a55b644eb87b1661eb63c412302440)]:
+  - @kubernetes-models/base@2.0.1
+  - kubernetes-models@2.0.1
+  - @kubernetes-models/validate@2.0.1
+
 ## 0.1.0
+
 ### Minor Changes
 
-
-
 - [`56eca00`](https://github.com/tommy351/kubernetes-models-ts/commit/56eca00fdf65d7086fed52902af2ae850f8db491) Thanks [@tommy351](https://github.com/tommy351)! - Add Knative models.
-
 
 ### Patch Changes
 
