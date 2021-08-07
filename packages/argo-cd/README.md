@@ -16,7 +16,7 @@ npm install @kubernetes-models/argo-cd
 import { Application } from "@kubernetes-models/argo-cd/argoproj.io/v1alpha1/Application";
 
 // Create a new Application
-const vpa = new Application({
+const app = new Application({
   metadata: {
     name: "guestbook"
   },
@@ -35,7 +35,7 @@ const vpa = new Application({
 });
 
 // Validate against JSON schema
-vpa.validate();
+app.validate();
 ```
 
 ## License
