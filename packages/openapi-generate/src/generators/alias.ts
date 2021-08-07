@@ -15,13 +15,14 @@ function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
 
   for (const [key, val] of Object.entries(map)) {
     if (typeof val === "string") {
+      const fileName = getShortClassName(val);
       const target = posix.relative(
         parent,
         "_definitions/" + getClassName(val)
       );
-      content += `export * from "${target}";\n`;
+      content += `export * from "./${fileName}";\n`;
       children.push({
-        path: parent + getShortClassName(val) + ".ts",
+        path: parent + fileName + ".ts",
         content: `export * from "${target}";\n`
       });
     } else {
