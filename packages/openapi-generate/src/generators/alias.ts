@@ -13,9 +13,7 @@ function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
   let children: OutputFile[] = [];
   let content = "";
 
-  for (const key of Object.keys(map)) {
-    const val = map[key];
-
+  for (const [key, val] of Object.entries(map)) {
     if (typeof val === "string") {
       const target = posix.relative(
         parent,
@@ -37,18 +35,25 @@ function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
   return [{ path, content }, ...children];
 }
 
-function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
-  const map: { [key: string]: string } = {};
+function buildGVMap(defs: readonly Definition[]): Record<string, string> {
+  const map: Record<string, string> = {};
 
   for (const def of defs) {
-    for (const gvk of def.gvk || []) {
+    // Skip if the definition doesn't define any GVK
+    if (!def.gvk || !def.gvk.length) continue;
+
+    // Skip meta definitions because their "x-kubernetes-group-version-kind"
+    // usually contains all types of GVKs.
+    if (def.schemaId.startsWith("io.k8s.apimachinery.pkg.apis.meta.v1.")) {
+      continue;
+    }
+
+    for (const gvk of def.gvk) {
       let key = gvk.version;
       if (gvk.group) key = gvk.group + "/" + key;
 
       if (!map[key]) {
-        const val = def.schemaId.split(".").slice(0, -1).join(".");
-
-        map[key] = val;
+        map[key] = def.schemaId.split(".").slice(0, -1).join(".");
       }
     }
   }
@@ -58,17 +63,16 @@ function buildGVKMap(defs: readonly Definition[]): { [key: string]: string } {
 
 const generateAliases: Generator = async (definitions) => {
   const map: KeyMap = {};
-  const gvkMap = buildGVKMap(definitions);
-  const prefix = "io.k8s.";
+  const gvMap = buildGVMap(definitions);
+  const idPrefix = "io.k8s.";
 
   for (const def of definitions) {
-    set(map, trimPrefix(def.schemaId, prefix).split("."), def.schemaId);
+    set(map, trimPrefix(def.schemaId, idPrefix).split("."), def.schemaId);
   }
 
-  for (const key of Object.keys(gvkMap)) {
-    const keys = key.split("/");
-    const val = get(map, trimPrefix(gvkMap[key], prefix).split("."));
-
+  for (const [apiGroup, prefix] of Object.entries(gvMap)) {
+    const keys = apiGroup.split("/");
+    const val = get(map, trimPrefix(prefix, idPrefix).split("."));
     set(map, keys, val);
   }
 

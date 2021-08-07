@@ -3,6 +3,7 @@ import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deplo
 import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress";
 import { Ingress as IngressV1Beta1 } from "../gen/extensions/v1beta1/Ingress";
 import { Pod } from "../gen/v1/Pod";
+import { PodSpec } from "../gen/v1/PodSpec";
 
 describe("Deployment apps/v1", () => {
   let deployment: DeploymentV1;
@@ -125,5 +126,30 @@ describe("Pod", () => {
 
   it("should set kind", () => {
     expect(pod).toHaveProperty("kind", "Pod");
+  });
+});
+
+// Test if definitions without GVK are still exported
+describe("PodSpec", () => {
+  let spec: PodSpec;
+
+  beforeEach(() => {
+    spec = new PodSpec({
+      containers: [
+        {
+          name: "busybox",
+          image: "busybox"
+        }
+      ]
+    });
+  });
+
+  it("should set containers", () => {
+    expect(spec).toHaveProperty("containers", [
+      {
+        name: "busybox",
+        image: "busybox"
+      }
+    ]);
   });
 });
