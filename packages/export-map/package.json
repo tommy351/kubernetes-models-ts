@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/export-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate and inject export map.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

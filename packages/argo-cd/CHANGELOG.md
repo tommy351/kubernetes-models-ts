@@ -1,12 +1,19 @@
 # @kubernetes-models/argo-cd
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`7c9d122`](https://github.com/tommy351/kubernetes-models-ts/commit/7c9d122689a55b644eb87b1661eb63c412302440)]:
+  - @kubernetes-models/base@2.0.1
+  - kubernetes-models@2.0.1
+  - @kubernetes-models/validate@2.0.1
+
 ## 0.1.0
+
 ### Minor Changes
 
-
-
 - [`7ee11c4`](https://github.com/tommy351/kubernetes-models-ts/commit/7ee11c408c0e35f405e9d1536670e5284a964e38) Thanks [@tommy351](https://github.com/tommy351)! - Add Argo CD models.
-
 
 ### Patch Changes
 
