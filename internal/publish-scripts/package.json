@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@kubernetes-models/export-map": "workspace:*",
-    "fs-extra": "^9.1.0",
-    "tslib": "^2.2.0",
-    "yargs": "^16.2.0"
+    "fs-extra": "^10.0.0",
+    "tslib": "^2.3.0",
+    "yargs": "^17.1.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.7"
+    "@types/fs-extra": "^9.0.12"
   }
 }

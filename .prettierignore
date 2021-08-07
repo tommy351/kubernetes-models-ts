@@ -1,3 +1,4 @@
 dist/
 node_modules/
 gen/
+pnpm-lock.yaml

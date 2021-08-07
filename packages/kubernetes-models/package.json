@@ -33,15 +33,15 @@
   "dependencies": {
     "@kubernetes-models/base": "workspace:*",
     "@kubernetes-models/validate": "workspace:*",
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@kubernetes-models/openapi-generate": "workspace:*",
     "@kubernetes-models/publish-scripts": "workspace:*",
     "@kubernetes-models/read-input": "workspace:*",
-    "@types/fs-extra": "^9.0.7",
-    "fs-extra": "^9.1.0",
+    "@types/fs-extra": "^9.0.12",
+    "fs-extra": "^10.0.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0"
+    "ts-node": "^10.1.0"
   }
 }

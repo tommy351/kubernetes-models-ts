@@ -33,6 +33,6 @@
   "dependencies": {
     "@kubernetes-models/validate": "workspace:*",
     "is-plain-object": "^5.0.0",
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   }
 }

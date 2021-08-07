@@ -35,14 +35,14 @@
   },
   "dependencies": {
     "@kubernetes-models/string-util": "workspace:*",
-    "fast-glob": "^3.2.5",
-    "fs-extra": "^9.1.0",
+    "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
     "ignore": "^5.1.8",
-    "tslib": "^2.2.0",
-    "yargs": "^16.2.0"
+    "tslib": "^2.3.0",
+    "yargs": "^17.1.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.7",
-    "@types/yargs": "^16.0.0"
+    "@types/fs-extra": "^9.0.12",
+    "@types/yargs": "^17.0.2"
   }
 }

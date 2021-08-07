@@ -9,23 +9,23 @@ import signale from "signale";
 const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
 
-const args = yargs
-  .option("name", {
-    type: "string",
-    demandOption: true,
-    description: "Package name"
-  })
-  .option("description", {
-    type: "string",
-    description: "Package description"
-  })
-  .option("author", {
-    type: "string",
-    description: "Package author"
-  })
-  .parse();
-
 (async () => {
+  const args = await yargs
+    .option("name", {
+      type: "string",
+      demandOption: true,
+      description: "Package name"
+    })
+    .option("description", {
+      type: "string",
+      description: "Package description"
+    })
+    .option("author", {
+      type: "string",
+      description: "Package author"
+    })
+    .parse();
+
   const pkgDir = join(__dirname, "..", "packages", args.name);
 
   try {
@@ -68,7 +68,7 @@ const args = yargs
       "@kubernetes-models/base": "workspace:*",
       "@kubernetes-models/validate": "workspace:*",
       "kubernetes-models": "workspace:*",
-      tslib: "^2.0.3"
+      tslib: "^2.3.0"
     },
     devDependencies: {
       "@kubernetes-models/crd-generate": "workspace:*",
