@@ -1,0 +1,20 @@
+# @kubernetes-models/istio
+
+## 0.1.0
+### Minor Changes
+
+
+
+- [`78fe478`](https://github.com/tommy351/kubernetes-models-ts/commit/78fe4780beb0fa251ecada122366ea923f692fe7) Thanks [@tommy351](https://github.com/tommy351)! - Add Knative models.
+
+
+
+- [`e7cd3eb`](https://github.com/tommy351/kubernetes-models-ts/commit/e7cd3eb7537d6a0cdd6f4a6760c5dc052c641836) Thanks [@tommy351](https://github.com/tommy351)! - Add Istio models.
+
+
+### Patch Changes
+
+- Updated dependencies [[`7c1c04d`](https://github.com/tommy351/kubernetes-models-ts/commit/7c1c04dc0472a05d29bfd02a54855beb2bcb17db), [`0af92ab`](https://github.com/tommy351/kubernetes-models-ts/commit/0af92ab6320db857280c766f2a11bcefff1e0043), [`a9a3c18`](https://github.com/tommy351/kubernetes-models-ts/commit/a9a3c189111b1f4c6975f1c53cde69e724c6f35b), [`f77a5c1`](https://github.com/tommy351/kubernetes-models-ts/commit/f77a5c154b093aaaccdb74ce309076f9dedf3cc9)]:
+  - @kubernetes-models/validate@2.0.0
+  - kubernetes-models@2.0.0
+  - @kubernetes-models/base@2.0.0

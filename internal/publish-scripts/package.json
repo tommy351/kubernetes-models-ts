@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/publish-scripts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "bin": {
     "publish-scripts": "./bin/publish-scripts.cjs"
