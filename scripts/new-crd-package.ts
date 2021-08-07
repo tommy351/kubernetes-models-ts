@@ -90,8 +90,7 @@ const stat = promisify(fs.stat);
       { path: "../base" },
       { path: "../validate" },
       { path: "../crd-generate" },
-      { path: "../kubernetes-models" },
-      { path: "../export-map" }
+      { path: "../kubernetes-models" }
     ]
   };
 
