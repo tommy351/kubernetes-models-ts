@@ -4,6 +4,7 @@ import { generate } from "./generate";
 
 export async function run(): Promise<void> {
   const args = await yargs
+    .pkgConf("openapi-generate")
     .option("input", {
       type: "string",
       describe: "Path of the input file or URL",
