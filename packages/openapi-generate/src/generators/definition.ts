@@ -91,7 +91,7 @@ constructor(data?: ModelData<${interfaceName}>) {
 
       imports.push({
         name: "addSchema",
-        path: `../_schemas/${className}`
+        path: `../z-schemas/${className}`
       });
 
       content += `
@@ -119,7 +119,7 @@ export {
     content = generateImports(imports) + "\n" + content;
 
     return {
-      path: `_definitions/${getClassName(def.schemaId)}.ts`,
+      path: `z-defs/${getClassName(def.schemaId)}.ts`,
       content
     };
   });

@@ -15,10 +15,7 @@ function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
 
   for (const [key, val] of Object.entries(map)) {
     if (typeof val === "string") {
-      const target = posix.relative(
-        parent,
-        "_definitions/" + getClassName(val)
-      );
+      const target = posix.relative(parent, "z-defs/" + getClassName(val));
       content += `export * from "${target}";\n`;
       children.push({
         path: parent + getShortClassName(val) + ".ts",

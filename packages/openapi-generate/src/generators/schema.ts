@@ -67,7 +67,7 @@ const generateSchemas: Generator = async (definitions) => {
     }
 
     return {
-      path: `_schemas/${className}.ts`,
+      path: `z-schemas/${className}.ts`,
       content: `${generateImports(imports)}
 
 const schema: object = ${compileSchema(def)};
