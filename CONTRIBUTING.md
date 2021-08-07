@@ -5,13 +5,7 @@
 Download dependencies.
 
 ```sh
-npm install
-```
-
-Bootstrap subpackages.
-
-```sh
-npm run bootstrap
+pnpm install
 ```
 
 ## Developing
@@ -19,13 +13,13 @@ npm run bootstrap
 Build TypeScript files.
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 Delete built files.
 
 ```sh
-npm run clean
+pnpm run clean
 ```
 
 ## Testing
@@ -33,7 +27,7 @@ npm run clean
 Run unit tests. Testing files are located at `__tests__` folder in each package.
 
 ```sh
-npm run test
+pnpm test
 ```
 
 ## Linting
@@ -41,7 +35,7 @@ npm run test
 Lint TypeScript and JavaScript files.
 
 ```sh
-npm run lint
+pnpm run lint
 ```
 
 ## Adding a New CRD Package
@@ -49,27 +43,30 @@ npm run lint
 Create a new CRD package.
 
 ```sh
-npm run new-crd-package -- \
+pnpm run new-crd-package -- \
   --name 'pkg-name' \
   --description 'Package description' \
   --author 'John Doe <john.doe@gmail.com>'
 ```
 
-Install dependencies.
+Update workspaces.
 
 ```sh
-npm run bootstrap
+pnpm install
 ```
 
-Add build scripts in `package.json`.
+Add input paths to `crd-generate.input` in `package.json`.
 
 ```js
 {
-  "scripts": {
-    // Download CRD from a URL
-    "build:url": "crd-generate --input https://example.com/manifest.yaml --output ./gen",
-    // Or use a local file.
-    "build:file": "crd-generate --input ./path/to/file.yaml --output ./gen"
+  "crd-generate": {
+    "input": [
+      // Download CRD from a URL
+      "https://example.com/manifest.yaml",
+      // Or use a local file.
+      "./path/to/file.yaml"
+    ],
+    "output": "./gen"
   }
 }
 ```
@@ -77,7 +74,7 @@ Add build scripts in `package.json`.
 Build TypeScript files.
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 Finally, add a `README.md` and tests. Please follow other CRD packages mentioned in [readme](README.md#3rd-party-models)
