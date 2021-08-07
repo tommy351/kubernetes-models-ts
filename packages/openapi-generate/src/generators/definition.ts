@@ -38,7 +38,7 @@ const generateDefinitions: Generator = async (definitions) => {
 
     if (def.schema.description) {
       comment = formatComment(def.schema.description, {
-        deprecated: /^deprecated/i.test(def.schema.description)
+        deprecated: /deprecated/i.test(def.schema.description)
       });
     }
 
