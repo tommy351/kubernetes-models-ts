@@ -31,6 +31,14 @@ const pod = new Pod({
 pod.validate();
 ```
 
+## Development
+
+To update Kubernetes version, update the values of `openapi-generate.input` in `package.json`. Please follow the following guides when editing the values.
+
+- Older versions first.
+- Add only versions with removed APIs and latest version.
+- See [the deprecation guide of Kubernetes](https://kubernetes.io/docs/reference/using-api/deprecation-guide/) for removed APIs.
+
 ## License
 
 MIT

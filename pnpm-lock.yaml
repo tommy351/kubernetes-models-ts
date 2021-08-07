@@ -273,12 +273,8 @@ importers:
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/openapi-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
-      '@kubernetes-models/read-input': workspace:*
       '@kubernetes-models/validate': workspace:*
-      '@types/fs-extra': ^9.0.12
-      fs-extra: ^10.0.0
       rimraf: ^3.0.2
-      ts-node: ^10.1.0
       tslib: ^2.3.0
     dependencies:
       '@kubernetes-models/base': link:../base
@@ -287,11 +283,7 @@ importers:
     devDependencies:
       '@kubernetes-models/openapi-generate': link:../openapi-generate
       '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
-      '@kubernetes-models/read-input': link:../read-input
-      '@types/fs-extra': 9.0.12
-      fs-extra: 10.0.0
       rimraf: 3.0.2
-      ts-node: 10.1.0_dea0625f6d31b223e93dc3dc354b8b43
 
   packages/openapi-generate:
     specifiers:
