@@ -4,6 +4,7 @@ import { generate, GenerateOptions } from "./generate";
 
 export async function run(): Promise<void> {
   const args = await yargs
+    .pkgConf("crd-generate")
     .option("input", {
       type: "string",
       describe: "Path of the input file or URL",
@@ -14,7 +15,7 @@ export async function run(): Promise<void> {
       describe: "Path of output files",
       required: true
     })
-    .option("yaml-version", {
+    .option("yamlVersion", {
       type: "string",
       describe: "YAML version.",
       choices: ["1.0", "1.1", "1.2"]
@@ -25,7 +26,7 @@ export async function run(): Promise<void> {
     await generate({
       input: await readInput(args.input),
       outputPath: args.output,
-      yamlVersion: args["yaml-version"] as GenerateOptions["yamlVersion"]
+      yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"]
     });
   } catch (err) {
     console.error(err);

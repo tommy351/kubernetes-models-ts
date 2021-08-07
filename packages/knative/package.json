@@ -16,7 +16,7 @@
   "scripts": {
     "build": "npm-run-all build:*",
     "build:serving": "crd-generate --input https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml --output ./gen",
-    "build:eventing": "crd-generate --input https://github.com/knative/eventing/releases/download/v0.24.1/eventing-crds.yaml --output ./gen --yaml-version 1.1",
+    "build:eventing": "crd-generate --input https://github.com/knative/eventing/releases/download/v0.24.1/eventing-crds.yaml --output ./gen --yamlVersion 1.1",
     "build:operator": "crd-generate --input https://github.com/knative/operator/releases/download/v0.24.0/operator.yaml --output ./gen",
     "postbuild": "publish-scripts postbuild",
     "prepack": "publish-scripts prepack",
