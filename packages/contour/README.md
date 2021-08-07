@@ -1,6 +1,6 @@
 # @kubernetes-models/contour
 
-[Contour](https://github.com/heptio/contour) models.
+[Contour](https://projectcontour.io/) models.
 
 ## Installation
 

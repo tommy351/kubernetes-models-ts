@@ -1,6 +1,6 @@
 # @kubernetes-models/cert-manager
 
-[cert-manager](https://github.com/jetstack/cert-manager) models.
+[cert-manager](https://cert-manager.io/) models.
 
 ## Installation
 
