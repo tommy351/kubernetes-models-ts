@@ -1,4 +1,4 @@
-import yaml from "js-yaml";
+import { parseAllDocuments, Options } from "yaml";
 import { mapValues } from "lodash";
 import {
   composeGenerators,
@@ -10,11 +10,6 @@ import {
 } from "@kubernetes-models/generate";
 import generateDefinitions from "./generators/definition";
 import generateAliases from "./generators/alias";
-
-export interface GenerateOptions {
-  input: string;
-  outputPath: string;
-}
 
 interface CustomResourceDefinition {
   spec: CustomResourceDefinitionSpec;
@@ -123,11 +118,14 @@ const generator = composeGenerators([generateDefinitions, generateAliases]);
 export interface GenerateOptions {
   input: string;
   outputPath: string;
+  yamlVersion?: Options["version"];
 }
 
 export async function generate(options: GenerateOptions): Promise<void> {
-  const data: CustomResourceDefinition[] = yaml
-    .loadAll(options.input)
+  const data: CustomResourceDefinition[] = parseAllDocuments(options.input, {
+    version: options.yamlVersion ?? "1.2"
+  })
+    .map((doc) => doc.toJSON())
     .filter((x) => x != null && typeof x === "object")
     .filter(({ apiVersion }) =>
       ["apiextensions.k8s.io/v1beta1", "apiextensions.k8s.io/v1"].includes(

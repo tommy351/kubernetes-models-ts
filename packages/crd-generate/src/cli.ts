@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { readInput } from "@kubernetes-models/read-input";
-import { generate } from "./generate";
+import { generate, GenerateOptions } from "./generate";
 
 export async function run(): Promise<void> {
   const args = await yargs
@@ -14,12 +14,18 @@ export async function run(): Promise<void> {
       describe: "Path of output files",
       required: true
     })
+    .option("yaml-version", {
+      type: "string",
+      describe: "YAML version.",
+      choices: ["1.0", "1.1", "1.2"]
+    })
     .parse();
 
   try {
     await generate({
       input: await readInput(args.input),
-      outputPath: args.output
+      outputPath: args.output,
+      yamlVersion: args["yaml-version"] as GenerateOptions["yamlVersion"]
     });
   } catch (err) {
     console.error(err);
