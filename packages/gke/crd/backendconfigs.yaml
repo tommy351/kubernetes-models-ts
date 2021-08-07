@@ -1,130 +1,378 @@
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: backendconfigs.cloud.google.com
 spec:
+  conversion:
+    strategy: None
   group: cloud.google.com
   names:
     kind: BackendConfig
     listKind: BackendConfigList
     plural: backendconfigs
+    shortNames:
+      - bc
     singular: backendconfig
   scope: Namespaced
-  validation:
-    openAPIV3Schema:
-      properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
-            of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
-          type: string
-        kind:
-          description: 'Kind is a string value representing the REST resource this
-            object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        metadata:
-          type: object
-        spec:
-          description: BackendConfigSpec is the spec for a BackendConfig resource
+  versions:
+    - name: v1
+      schema:
+        openAPIV3Schema:
           properties:
-            cdn:
-              description: CDNConfig contains configuration for CDN-enabled backends.
+            apiVersion:
+              description: "APIVersion defines the versioned schema of this representation of
+                an object. Servers should convert recognized schemas to the
+                latest internal value, and may reject unrecognized values. More
+                info:
+                https://git.k8s.io/community/contributors/devel/sig-architectur\
+                e/api-conventions.md#resources"
+              type: string
+            kind:
+              description: "Kind is a string value representing the REST resource this object
+                represents. Servers may infer this from the endpoint the client
+                submits requests to. Cannot be updated. In CamelCase. More info:
+                https://git.k8s.io/community/contributors/devel/sig-architectur\
+                e/api-conventions.md#types-kinds"
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: BackendConfigSpec is the spec for a BackendConfig resource
               properties:
-                cachePolicy:
-                  description: CacheKeyPolicy contains configuration for how requests
-                    to a CDN-enabled backend are cached.
+                cdn:
+                  description: CDNConfig contains configuration for CDN-enabled backends.
                   properties:
-                    includeHost:
-                      description: If true, requests to different hosts will be cached
-                        separately.
+                    cachePolicy:
+                      description: CacheKeyPolicy contains configuration for how requests to a
+                        CDN-enabled backend are cached.
+                      properties:
+                        includeHost:
+                          description: If true, requests to different hosts will be cached separately.
+                          type: boolean
+                        includeProtocol:
+                          description: If true, http and https requests will be cached separately.
+                          type: boolean
+                        includeQueryString:
+                          description: If true, query string parameters are included in the cache key
+                            according to QueryStringBlacklist and
+                            QueryStringWhitelist. If neither is set, the entire
+                            query string is included and if false the entire
+                            query string is excluded.
+                          type: boolean
+                        queryStringBlacklist:
+                          description: Names of query strint parameters to exclude from cache keys. All
+                            other parameters are included. Either specify
+                            QueryStringBlacklist or QueryStringWhitelist, but
+                            not both.
+                          items:
+                            type: string
+                          type: array
+                        queryStringWhitelist:
+                          description: Names of query string parameters to include in cache keys. All
+                            other parameters are excluded. Either specify
+                            QueryStringBlacklist or QueryStringWhitelist, but
+                            not both.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    enabled:
                       type: boolean
-                    includeProtocol:
-                      description: If true, http and https requests will be cached
-                        separately.
-                      type: boolean
-                    includeQueryString:
-                      description: If true, query string parameters are included in
-                        the cache key according to QueryStringBlacklist and QueryStringWhitelist.
-                        If neither is set, the entire query string is included and
-                        if false the entire query string is excluded.
-                      type: boolean
-                    queryStringBlacklist:
-                      description: Names of query strint parameters to exclude from
-                        cache keys. All other parameters are included. Either specify
-                        QueryStringBlacklist or QueryStringWhitelist, but not both.
-                      items:
-                        type: string
-                      type: array
-                    queryStringWhitelist:
-                      description: Names of query string parameters to include in
-                        cache keys. All other parameters are excluded. Either specify
-                        QueryStringBlacklist or QueryStringWhitelist, but not both.
+                  required:
+                    - enabled
+                  type: object
+                connectionDraining:
+                  description: ConnectionDrainingConfig contains configuration for connection
+                    draining. For now the draining timeout. May manage more
+                    settings in the future.
+                  properties:
+                    drainingTimeoutSec:
+                      description: Draining timeout in seconds.
+                      format: int64
+                      type: integer
+                  type: object
+                customRequestHeaders:
+                  description: CustomRequestHeadersConfig contains configuration for custom
+                    request headers
+                  properties:
+                    headers:
                       items:
                         type: string
                       type: array
                   type: object
-                enabled:
-                  type: boolean
-              required:
-              - enabled
-              type: object
-            connectionDraining:
-              description: ConnectionDrainingConfig contains configuration for connection
-                draining. For now the draining timeout. May manage more settings in
-                the future.
-              properties:
-                drainingTimeoutSec:
-                  description: Draining timeout in seconds.
-                  format: int64
-                  type: integer
-              type: object
-            iap:
-              description: IAPConfig contains configuration for IAP-enabled backends.
-              properties:
-                enabled:
-                  type: boolean
-                oauthclientCredentials:
-                  description: OAuthClientCredentials contains credentials for a single
-                    IAP-enabled backend.
+                healthCheck:
+                  description: HealthCheckConfig contains configuration for the health check.
                   properties:
-                    clientID:
-                      description: Direct reference to OAuth client id.
+                    checkIntervalSec:
+                      description: CheckIntervalSec is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    healthyThreshold:
+                      description: HealthyThreshold is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    port:
+                      description: Port is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                        If Port is used, the controller updates
+                        portSpecification as well
+                      format: int64
+                      type: integer
+                    requestPath:
+                      description: RequestPath is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
                       type: string
-                    clientSecret:
-                      description: Direct reference to OAuth client secret.
+                    timeoutSec:
+                      description: TimeoutSec is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    type:
+                      description: Type is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
                       type: string
-                    secretName:
-                      description: The name of a k8s secret which stores the OAuth
-                        client id & secret.
+                    unhealthyThreshold:
+                      description: UnhealthyThreshold is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                  type: object
+                iap:
+                  description: IAPConfig contains configuration for IAP-enabled backends.
+                  properties:
+                    enabled:
+                      type: boolean
+                    oauthclientCredentials:
+                      description: OAuthClientCredentials contains credentials for a single
+                        IAP-enabled backend.
+                      properties:
+                        clientID:
+                          description: Direct reference to OAuth client id.
+                          type: string
+                        clientSecret:
+                          description: Direct reference to OAuth client secret.
+                          type: string
+                        secretName:
+                          description: The name of a k8s secret which stores the OAuth client id & secret.
+                          type: string
+                      required:
+                        - secretName
+                      type: object
+                  required:
+                    - enabled
+                    - oauthclientCredentials
+                  type: object
+                logging:
+                  description: LogConfig contains configuration for logging.
+                  properties:
+                    enable:
+                      description: This field denotes whether to enable logging for the load balancer
+                        traffic served by this backend service.
+                      type: boolean
+                    sampleRate:
+                      description: This field can only be specified if logging is enabled for this
+                        backend service. The value of the field must be in [0,
+                        1]. This configures the sampling rate of requests to the
+                        load balancer where 1.0 means all logged requests are
+                        reported and 0.0 means no logged requests are reported.
+                        The default value is 1.0.
+                      format: double
+                      type: number
+                  type: object
+                securityPolicy:
+                  description: SecurityPolicyConfig contains configuration for CloudArmor-enabled
+                    backends.
+                  properties:
+                    name:
+                      description: Name of the security policy that should be associated.
                       type: string
                   required:
-                  - secretName
+                    - name
                   type: object
-              required:
-              - enabled
-              - oauthclientCredentials
-              type: object
-            securityPolicy:
-              type: object
-            sessionAffinity:
-              description: SessionAffinityConfig contains configuration for stickyness
-                parameters.
-              properties:
-                affinityCookieTtlSec:
+                sessionAffinity:
+                  description: SessionAffinityConfig contains configuration for stickyness
+                    parameters.
+                  properties:
+                    affinityCookieTtlSec:
+                      format: int64
+                      type: integer
+                    affinityType:
+                      type: string
+                  type: object
+                timeoutSec:
                   format: int64
                   type: integer
-                affinityType:
-                  type: string
               type: object
-            timeoutSec:
-              format: int64
-              type: integer
+            status:
+              type: object
           type: object
-        status:
+      served: true
+      storage: true
+    - name: v1beta1
+      schema:
+        openAPIV3Schema:
+          properties:
+            apiVersion:
+              description: "APIVersion defines the versioned schema of this representation of
+                an object. Servers should convert recognized schemas to the
+                latest internal value, and may reject unrecognized values. More
+                info:
+                https://git.k8s.io/community/contributors/devel/sig-architectur\
+                e/api-conventions.md#resources"
+              type: string
+            kind:
+              description: "Kind is a string value representing the REST resource this object
+                represents. Servers may infer this from the endpoint the client
+                submits requests to. Cannot be updated. In CamelCase. More info:
+                https://git.k8s.io/community/contributors/devel/sig-architectur\
+                e/api-conventions.md#types-kinds"
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: BackendConfigSpec is the spec for a BackendConfig resource
+              properties:
+                cdn:
+                  description: CDNConfig contains configuration for CDN-enabled backends.
+                  properties:
+                    cachePolicy:
+                      description: CacheKeyPolicy contains configuration for how requests to a
+                        CDN-enabled backend are cached.
+                      properties:
+                        includeHost:
+                          description: If true, requests to different hosts will be cached separately.
+                          type: boolean
+                        includeProtocol:
+                          description: If true, http and https requests will be cached separately.
+                          type: boolean
+                        includeQueryString:
+                          description: If true, query string parameters are included in the cache key
+                            according to QueryStringBlacklist and
+                            QueryStringWhitelist. If neither is set, the entire
+                            query string is included and if false the entire
+                            query string is excluded.
+                          type: boolean
+                        queryStringBlacklist:
+                          description: Names of query strint parameters to exclude from cache keys. All
+                            other parameters are included. Either specify
+                            QueryStringBlacklist or QueryStringWhitelist, but
+                            not both.
+                          items:
+                            type: string
+                          type: array
+                        queryStringWhitelist:
+                          description: Names of query string parameters to include in cache keys. All
+                            other parameters are excluded. Either specify
+                            QueryStringBlacklist or QueryStringWhitelist, but
+                            not both.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    enabled:
+                      type: boolean
+                  required:
+                    - enabled
+                  type: object
+                connectionDraining:
+                  description: ConnectionDrainingConfig contains configuration for connection
+                    draining. For now the draining timeout. May manage more
+                    settings in the future.
+                  properties:
+                    drainingTimeoutSec:
+                      description: Draining timeout in seconds.
+                      format: int64
+                      type: integer
+                  type: object
+                customRequestHeaders:
+                  description: CustomRequestHeadersConfig contains configuration for custom
+                    request headers
+                  properties:
+                    headers:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+                healthCheck:
+                  description: HealthCheckConfig contains configuration for the health check.
+                  properties:
+                    checkIntervalSec:
+                      description: CheckIntervalSec is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    healthyThreshold:
+                      description: HealthyThreshold is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    port:
+                      format: int64
+                      type: integer
+                    requestPath:
+                      description: RequestPath is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      type: string
+                    timeoutSec:
+                      description: TimeoutSec is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                    type:
+                      description: Type is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      type: string
+                    unhealthyThreshold:
+                      description: UnhealthyThreshold is a health check parameter. See
+                        https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks.
+                      format: int64
+                      type: integer
+                  type: object
+                iap:
+                  description: IAPConfig contains configuration for IAP-enabled backends.
+                  properties:
+                    enabled:
+                      type: boolean
+                    oauthclientCredentials:
+                      description: OAuthClientCredentials contains credentials for a single
+                        IAP-enabled backend.
+                      properties:
+                        clientID:
+                          description: Direct reference to OAuth client id.
+                          type: string
+                        clientSecret:
+                          description: Direct reference to OAuth client secret.
+                          type: string
+                        secretName:
+                          description: The name of a k8s secret which stores the OAuth client id & secret.
+                          type: string
+                      required:
+                        - secretName
+                      type: object
+                  required:
+                    - enabled
+                    - oauthclientCredentials
+                  type: object
+                securityPolicy:
+                  type: object
+                sessionAffinity:
+                  description: SessionAffinityConfig contains configuration for stickyness
+                    parameters.
+                  properties:
+                    affinityCookieTtlSec:
+                      format: int64
+                      type: integer
+                    affinityType:
+                      type: string
+                  type: object
+                timeoutSec:
+                  format: int64
+                  type: integer
+              type: object
+            status:
+              type: object
           type: object
-  version: v1beta1
-  versions:
-  - name: v1beta1
-    served: true
-    storage: true
+      served: true
+      storage: false
