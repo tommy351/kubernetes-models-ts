@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/read-input",
-  "version": "1.3.3",
+  "version": "2.0.0",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
