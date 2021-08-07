@@ -259,6 +259,27 @@ importers:
       npm-run-all: 4.1.5
       rimraf: 3.0.2
 
+  packages/knative:
+    specifiers:
+      '@kubernetes-models/base': workspace:*
+      '@kubernetes-models/crd-generate': workspace:*
+      '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/validate': workspace:*
+      kubernetes-models: workspace:*
+      npm-run-all: ^4.1.5
+      rimraf: ^3.0.2
+      tslib: ^2.3.0
+    dependencies:
+      '@kubernetes-models/base': link:../base
+      '@kubernetes-models/validate': link:../validate
+      kubernetes-models: link:../kubernetes-models
+      tslib: 2.3.0
+    devDependencies:
+      '@kubernetes-models/crd-generate': link:../crd-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      npm-run-all: 4.1.5
+      rimraf: 3.0.2
+
   packages/kubernetes-models:
     specifiers:
       '@kubernetes-models/base': workspace:*

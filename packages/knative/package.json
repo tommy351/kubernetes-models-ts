@@ -1,0 +1,47 @@
+{
+  "name": "@kubernetes-models/knative",
+  "version": "0.0.0",
+  "description": "Knative models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/knative",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.cjs",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:serving": "crd-generate --input https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml --output ./gen",
+    "build:eventing": "crd-generate --input https://github.com/knative/eventing/releases/download/v0.24.1/eventing-crds.yaml --output ./gen --yaml-version 1.1",
+    "build:operator": "crd-generate --input https://github.com/knative/operator/releases/download/v0.24.0/operator.yaml --output ./gen",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "kubernetes-models": "workspace:*",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
+  }
+}
