@@ -9,16 +9,16 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/openapi-generate",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
     "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "require": "./dist/index.cjs"
   },
   "bin": {
-    "openapi-generate": "bin/openapi-generate.js"
+    "openapi-generate": "bin/openapi-generate.cjs"
   },
   "publishConfig": {
     "access": "public"

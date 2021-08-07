@@ -5,7 +5,7 @@ import { extname } from "path";
 import ignore from "ignore";
 import { join } from "path";
 
-const CJS_EXT = ".js";
+const CJS_EXT = ".cjs";
 const ESM_EXT = ".mjs";
 
 interface Export {
