@@ -1,5 +1,6 @@
 import { Schema } from "./types";
 import { formatComment } from "@kubernetes-models/string-util";
+import indentString from "indent-string";
 
 const FALLBACK_TYPE = "any";
 const WILDCARD_FIELD = "*";
@@ -41,7 +42,7 @@ function _generateInterface(
   switch (schema.type) {
     case "object": {
       const { required = [], properties = {}, additionalProperties } = schema;
-      let output = "{\n";
+      let output = "";
 
       for (const key of Object.keys(properties)) {
         const prop = properties[key];
@@ -66,8 +67,7 @@ function _generateInterface(
         )};\n`;
       }
 
-      output += "}";
-      return output;
+      return "{\n" + indentString(output, 2) + "}";
     }
 
     case "number":

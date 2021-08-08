@@ -35,6 +35,7 @@
     "@kubernetes-models/string-util": "workspace:*",
     "ajv": "^8.6.2",
     "fs-extra": "^10.0.0",
+    "indent-string": "^4.0.0",
     "lodash": "^4.17.21",
     "tslib": "^2.3.0"
   },

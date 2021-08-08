@@ -237,12 +237,14 @@ importers:
       '@types/lodash': ^4.14.172
       ajv: ^8.6.2
       fs-extra: ^10.0.0
+      indent-string: ^4.0.0
       lodash: ^4.17.21
       tslib: ^2.3.0
     dependencies:
       '@kubernetes-models/string-util': link:../string-util
       ajv: 8.6.2
       fs-extra: 10.0.0
+      indent-string: 4.0.0
       lodash: 4.17.21
       tslib: 2.3.0
     devDependencies:
@@ -3572,7 +3574,6 @@ packages:
   /indent-string/4.0.0:
     resolution: {integrity: sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==}
     engines: {node: '>=8'}
-    dev: true
 
   /inflight/1.0.6:
     resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
