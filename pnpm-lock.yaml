@@ -275,7 +275,7 @@ importers:
       execa: 5.1.1
       fs-extra: 10.0.0
       rimraf: 3.0.2
-      ts-node: 10.1.0
+      ts-node: 10.1.0_dea0625f6d31b223e93dc3dc354b8b43
       yaml: 1.10.2
 
   packages/istio:
@@ -321,8 +321,11 @@ importers:
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/openapi-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/read-input': workspace:*
       '@kubernetes-models/validate': workspace:*
+      openapi-types: ^9.1.0
       rimraf: ^3.0.2
+      ts-node: ^10.1.0
       tslib: ^2.3.0
     dependencies:
       '@kubernetes-models/base': link:../base
@@ -331,7 +334,10 @@ importers:
     devDependencies:
       '@kubernetes-models/openapi-generate': link:../openapi-generate
       '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      '@kubernetes-models/read-input': link:../read-input
+      openapi-types: 9.1.0
       rimraf: 3.0.2
+      ts-node: 10.1.0_dea0625f6d31b223e93dc3dc354b8b43
 
   packages/openapi-generate:
     specifiers:
@@ -4932,6 +4938,10 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
+  /openapi-types/9.1.0:
+    resolution: {integrity: sha512-mhXh8QN8sbErlxfxBeZ/pzgvmDn443p8CXlxwGSi2bWANZAFvjLPI0PoGjqHW+JdBbXg6uvmvM81WXaweh/SVA==}
+    dev: true
+
   /opencollective-postinstall/2.0.3:
     resolution: {integrity: sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==}
     hasBin: true
@@ -6200,33 +6210,6 @@ packages:
       semver: 7.3.5
       typescript: 4.3.5
       yargs-parser: 20.2.9
-    dev: true
-
-  /ts-node/10.1.0:
-    resolution: {integrity: sha512-6szn3+J9WyG2hE+5W8e0ruZrzyk1uFLYye6IGMBadnOzDh8aP7t8CbFpsfCiEx2+wMixAhjFt7lOZC4+l+WbEA==}
-    engines: {node: '>=12.0.0'}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@tsconfig/node10': 1.0.8
-      '@tsconfig/node12': 1.0.9
-      '@tsconfig/node14': 1.0.1
-      '@tsconfig/node16': 1.0.2
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      source-map-support: 0.5.19
-      yn: 3.1.1
     dev: true
 
   /ts-node/10.1.0_dea0625f6d31b223e93dc3dc354b8b43:

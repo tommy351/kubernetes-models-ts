@@ -4,6 +4,7 @@ import { ConfigMap } from "../gen/v1/ConfigMap";
 import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
 import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps";
 import { PersistentVolumeClaim } from "../gen/v1/PersistentVolumeClaim";
+import { StatefulSetSpec } from "../gen/apps/v1/StatefulSetSpec";
 
 describe("validate", () => {
   describe("when validation passed", () => {
@@ -137,6 +138,32 @@ describe("validate", () => {
 
         expect(() => pod.validate()).not.toThrow();
       });
+    });
+  });
+});
+
+describe("StatefulSetSpec", () => {
+  describe("when apiVersion and kind is not defined in volumeClaimTemplates", () => {
+    it("should pass", () => {
+      const spec = new StatefulSetSpec({
+        serviceName: "mysql",
+        selector: {
+          matchLabels: {
+            app: "mysql"
+          }
+        },
+        template: {},
+        volumeClaimTemplates: [
+          {
+            metadata: { name: "data" },
+            spec: {
+              storageClassName: "ssd"
+            }
+          }
+        ]
+      });
+
+      expect(() => spec.validate()).not.toThrow();
     });
   });
 });

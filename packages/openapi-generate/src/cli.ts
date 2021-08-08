@@ -1,32 +1,11 @@
 import yargs from "yargs";
 import { readInput } from "@kubernetes-models/read-input";
 import { generate } from "./generate";
-
-interface OpenAPISpec {
-  definitions?: Record<string, unknown>;
-  [key: string]: unknown;
-}
-
-function mergeSpec(oldData: OpenAPISpec, newData: OpenAPISpec): OpenAPISpec {
-  const { definitions: oldDefs = {} } = oldData;
-  const { definitions: newDefs = {}, ...data } = newData;
-
-  return {
-    ...data,
-    definitions: {
-      ...oldDefs,
-      ...newDefs
-    }
-  };
-}
+import { mergeOpenAPISpecs } from "./utils";
 
 async function readFiles(paths: string[]): Promise<string> {
-  let spec: OpenAPISpec = {};
-
-  for (const path of paths) {
-    console.log("Reading:", path);
-    spec = mergeSpec(spec, JSON.parse(await readInput(path)));
-  }
+  const data = await Promise.all(paths.map((path) => readInput(path)));
+  const spec = mergeOpenAPISpecs(data.map((x) => JSON.parse(x)));
 
   return JSON.stringify(spec);
 }
