@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/cert-manager",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "cert-manager models",
   "repository": {
     "type": "git",

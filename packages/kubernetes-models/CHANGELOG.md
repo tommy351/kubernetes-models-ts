@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.2
+
+### Patch Changes
+
+- [`0ddc606`](https://github.com/tommy351/kubernetes-models-ts/commit/0ddc606c531e1dbc06b2ddf102b9eeabd8bacea7) Thanks [@tommy351](https://github.com/tommy351)! - `apiVersion` and `kind` are no longer required in `volumeClaimTemplates` property of `StatefulSet` resource. (Fix [#44](https://github.com/tommy351/kubernetes-models-ts/issues/44))
+
 ## 2.0.1
 
 ### Patch Changes

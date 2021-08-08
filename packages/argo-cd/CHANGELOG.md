@@ -1,5 +1,12 @@
 # @kubernetes-models/argo-cd
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`0ddc606`](https://github.com/tommy351/kubernetes-models-ts/commit/0ddc606c531e1dbc06b2ddf102b9eeabd8bacea7)]:
+  - kubernetes-models@2.0.2
+
 ## 0.1.1
 
 ### Patch Changes
