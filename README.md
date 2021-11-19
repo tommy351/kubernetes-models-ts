@@ -47,6 +47,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/flux-cd](packages/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gke](packages/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
 - [@kubernetes-models/istio](packages/istio) - [Istio](https://istio.io/) models.
+- [@kubernetes-models/jaeger-operator](packages/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.
 - [@kubernetes-models/kapp-controller](packages/kapp-controller) - [Carvel kapp contoller](https://github.com/vmware-tanzu/carvel-kapp-controller) models.
 - [@kubernetes-models/knative](packages/knative) - [Knative](https://knative.dev/) models.
 - [@kubernetes-models/prometheus-operator](packages/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
