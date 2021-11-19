@@ -146,6 +146,25 @@ importers:
       '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
       rimraf: 3.0.2
 
+  packages/cilium:
+    specifiers:
+      '@kubernetes-models/base': workspace:*
+      '@kubernetes-models/crd-generate': workspace:*
+      '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/validate': workspace:*
+      kubernetes-models: workspace:*
+      rimraf: ^3.0.2
+      tslib: ^2.3.0
+    dependencies:
+      '@kubernetes-models/base': link:../base
+      '@kubernetes-models/validate': link:../validate
+      kubernetes-models: link:../kubernetes-models
+      tslib: 2.3.0
+    devDependencies:
+      '@kubernetes-models/crd-generate': link:../crd-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      rimraf: 3.0.2
+
   packages/contour:
     specifiers:
       '@kubernetes-models/base': workspace:*
@@ -3235,6 +3254,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -4465,7 +4485,7 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: 4.2.8
     dev: true
 
   /jsonfile/6.1.0:
@@ -4589,7 +4609,7 @@ packages:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
     engines: {node: '>=6'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: 4.2.8
       js-yaml: 3.14.1
       pify: 4.0.1
       strip-bom: 3.0.0
@@ -6409,6 +6429,7 @@ packages:
     resolution: {integrity: sha512-wZbyTQ1w6Y7fHdt8sJnHfSIuWeDgk6B5rCb4E/AM6QNNPbOMIZph21PW5dRB3h7Df0GszN+t7RuUH6sWK5bF0g==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -6704,7 +6725,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.2
       y18n: 5.0.8
-      yargs-parser: 20.2.7
+      yargs-parser: 20.2.9
     dev: true
 
   /yargs/17.1.0:

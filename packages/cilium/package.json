@@ -1,0 +1,58 @@
+{
+  "name": "@kubernetes-models/cilium",
+  "version": "1.0.2",
+  "description": "Cilium CRD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/cilium",
+  "author": "Rueian <rueiancsie@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "cilium"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "kubernetes-models": "workspace:*",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumlocalredirectpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumendpoints.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumexternalworkloads.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumidentities.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnodes.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.10.5/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumegressnatpolicies.yaml"
+    ],
+    "output": "./gen"
+  }
+}
