@@ -43,6 +43,7 @@ See [examples](examples) folder for more examples.
 
 - [@kubernetes-models/argo-cd](packages/argo-cd) - [Argo CD](https://argo-cd.readthedocs.io/) models.
 - [@kubernetes-models/cert-manager](packages/cert-manager) - [cert-manager](https://cert-manager.io/) models.
+- [@kubernetes-models/cilium](packages/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](packages/contour) - [Contour](https://projectcontour.io/) models.
 - [@kubernetes-models/flux-cd](packages/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gke](packages/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
