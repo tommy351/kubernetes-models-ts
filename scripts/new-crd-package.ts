@@ -49,6 +49,7 @@ const stat = promisify(fs.stat);
     main: "index.js",
     module: "index.mjs",
     types: "index.d.ts",
+    typedocMain: "gen/index.ts",
     sideEffects: false,
     scripts: {
       build: "crd-generate",

@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "rm -rf public && pnpm -C ../.. install && pnpm -C ../.. run build && pnpm -C .. run build && ln -s ../public public"
+  },
+  "dependencies": {
+    "pnpm": "^6.23.6"
+  }
+}
