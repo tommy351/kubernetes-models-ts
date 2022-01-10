@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/grafana-agent-operator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Grafana agent operator models",
   "repository": {
     "type": "git",
