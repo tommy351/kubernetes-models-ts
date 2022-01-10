@@ -299,6 +299,25 @@ importers:
       ts-node: 10.1.0_dea0625f6d31b223e93dc3dc354b8b43
       yaml: 1.10.2
 
+  packages/grafana-agent-operator:
+    specifiers:
+      '@kubernetes-models/base': workspace:*
+      '@kubernetes-models/crd-generate': workspace:*
+      '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/validate': workspace:*
+      kubernetes-models: workspace:*
+      rimraf: ^3.0.2
+      tslib: ^2.3.0
+    dependencies:
+      '@kubernetes-models/base': link:../base
+      '@kubernetes-models/validate': link:../validate
+      kubernetes-models: link:../kubernetes-models
+      tslib: 2.3.0
+    devDependencies:
+      '@kubernetes-models/crd-generate': link:../crd-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      rimraf: 3.0.2
+
   packages/grafana-operator:
     specifiers:
       '@kubernetes-models/base': workspace:*

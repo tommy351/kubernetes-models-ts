@@ -47,6 +47,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/contour](packages/contour) - [Contour](https://projectcontour.io/) models.
 - [@kubernetes-models/flux-cd](packages/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gke](packages/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
+- [@kubernetes-models/grafana-agent-operator](packages/grafana-agent-operator) - [Grafana agent operator](https://grafana.com/docs/agent/latest/operator/) models.
 - [@kubernetes-models/grafana-operator](packages/grafana-operator) - [Grafana operator](https://github.com/grafana-operator/grafana-operator) models.
 - [@kubernetes-models/istio](packages/istio) - [Istio](https://istio.io/) models.
 - [@kubernetes-models/jaeger-operator](packages/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.

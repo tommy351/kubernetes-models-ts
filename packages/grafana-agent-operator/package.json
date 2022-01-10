@@ -1,0 +1,57 @@
+{
+  "name": "@kubernetes-models/grafana-agent-operator",
+  "version": "0.0.0",
+  "description": "Grafana agent operator models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/grafana-agent-operator",
+  "author": "Tommy Chen <tommy351@gmail.com",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "grafana-agent-operator"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "kubernetes-models": "workspace:*",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_podmonitors.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_probes.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_servicemonitors.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_grafanaagents.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_logsinstances.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_metricsinstances.yaml",
+      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_podlogs.yaml"
+    ],
+    "output": "./gen"
+  }
+}
