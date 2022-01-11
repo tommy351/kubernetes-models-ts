@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0
+
+### Minor Changes
+
+- [#62](https://github.com/tommy351/kubernetes-models-ts/pull/62) [`d7d841a`](https://github.com/tommy351/kubernetes-models-ts/commit/d7d841acb0db15eba81f96b90fc8a5ad5b91aa07) Thanks [@tommy351](https://github.com/tommy351)! - Update CRDs to Prometheus operator v0.53.1.
+
 ## 2.0.2
 
 ### Patch Changes
