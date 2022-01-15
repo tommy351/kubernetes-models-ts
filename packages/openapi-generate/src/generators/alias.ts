@@ -2,7 +2,7 @@ import { camelCase, trimPrefix } from "@kubernetes-models/string-util";
 import { getClassName, getShortClassName } from "../string";
 import { posix } from "path";
 import { Generator, Definition, OutputFile } from "@kubernetes-models/generate";
-import { get, set } from "lodash";
+import { get, set, identity } from "lodash";
 
 interface KeyMap {
   [key: string]: string | KeyMap;
@@ -62,22 +62,27 @@ function buildGVMap(defs: readonly Definition[]): Record<string, string> {
   return map;
 }
 
-const generateAliases: Generator = async (definitions) => {
-  const map: KeyMap = {};
-  const gvMap = buildGVMap(definitions);
-  const idPrefix = "io.k8s.";
+export default function generateAliases(
+  rewritePath: (path: string) => string = identity
+): Generator {
+  return async (definitions) => {
+    const map: KeyMap = {};
+    const gvMap = buildGVMap(definitions);
+    const idPrefix = "io.k8s.";
 
-  for (const def of definitions) {
-    set(map, trimPrefix(def.schemaId, idPrefix).split("."), def.schemaId);
-  }
+    for (const def of definitions) {
+      set(map, trimPrefix(def.schemaId, idPrefix).split("."), def.schemaId);
+    }
 
-  for (const [apiGroup, prefix] of Object.entries(gvMap)) {
-    const keys = apiGroup.split("/");
-    const val = get(map, trimPrefix(prefix, idPrefix).split("."));
-    set(map, keys, val);
-  }
+    for (const [apiGroup, prefix] of Object.entries(gvMap)) {
+      const keys = apiGroup.split("/");
+      const val = get(map, trimPrefix(prefix, idPrefix).split("."));
+      set(map, keys, val);
+    }
 
-  return generate(map);
-};
-
-export default generateAliases;
+    return generate(map).map(({ path, ...file }) => ({
+      ...file,
+      path: rewritePath(path)
+    }));
+  };
+}

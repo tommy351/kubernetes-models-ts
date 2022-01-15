@@ -61,20 +61,24 @@ function load(input: string): readonly Definition[] {
     });
 }
 
-const generator = composeGenerators([
-  generateDefinitions,
-  generateSchemas,
-  generateAliases
-]);
-
 export interface GenerateOptions {
   input: string;
   outputPath: string;
+  rewriteAliasPath?(path: string): string;
 }
 
-export async function generate(options: GenerateOptions): Promise<void> {
-  const definitions = load(options.input);
+export async function generate({
+  input,
+  outputPath,
+  rewriteAliasPath
+}: GenerateOptions): Promise<void> {
+  const generator = composeGenerators([
+    generateDefinitions,
+    generateSchemas,
+    generateAliases(rewriteAliasPath)
+  ]);
+  const definitions = load(input);
   const files = await generator(definitions);
 
-  await writeOutputFiles(options.outputPath, files);
+  await writeOutputFiles(outputPath, files);
 }
