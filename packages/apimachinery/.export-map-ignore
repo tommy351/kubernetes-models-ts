@@ -1,0 +1,2 @@
+/_*/**/*.ts
+!/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta.ts
