@@ -1,5 +1,6 @@
 import { Definition, getAPIVersion } from "@kubernetes-models/generate";
 import { trimPrefix } from "@kubernetes-models/string-util";
+import { identity } from "lodash";
 import { getShortClassName } from "./string";
 
 function getIdPrefix(id: string): string {
@@ -8,9 +9,18 @@ function getIdPrefix(id: string): string {
 
 export interface Context {
   getDefinitionPath(id: string): string;
+  externalAPIMachinery?: boolean;
 }
 
-export function buildContext(definitions: readonly Definition[]): Context {
+export interface ContextOptions {
+  rewriteDefinitionPath?(path: string): string;
+  externalAPIMachinery?: boolean;
+}
+
+export function buildContext(
+  definitions: readonly Definition[],
+  { rewriteDefinitionPath = identity, externalAPIMachinery }: ContextOptions
+): Context {
   const apiVersionMap = new Map<string, string>();
 
   for (const def of definitions) {
@@ -30,6 +40,7 @@ export function buildContext(definitions: readonly Definition[]): Context {
   }
 
   return {
+    externalAPIMachinery,
     getDefinitionPath(id) {
       const apiVersion = apiVersionMap.get(getIdPrefix(id));
 
@@ -37,7 +48,9 @@ export function buildContext(definitions: readonly Definition[]): Context {
         return `${apiVersion}/${getShortClassName(id)}.ts`;
       }
 
-      return trimPrefix(id, "io.k8s.").split(".").join("/") + ".ts";
+      const path = trimPrefix(id, "io.k8s.").split(".").join("/") + ".ts";
+
+      return rewriteDefinitionPath(path);
     }
   };
 }

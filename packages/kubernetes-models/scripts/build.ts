@@ -1,7 +1,8 @@
 /* eslint-disable node/no-unpublished-import */
 import {
   generate,
-  mergeOpenAPISpecs
+  mergeOpenAPISpecs,
+  isAPIMachineryID
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
 import { join } from "path";
@@ -36,6 +37,14 @@ async function fetchSpec(): Promise<Document> {
   return mergeOpenAPISpecs<Document>(specs);
 }
 
+function omitAPIMachineryDefinitions(doc: Document): void {
+  if (!doc.definitions) return;
+
+  doc.definitions = Object.fromEntries(
+    Object.entries(doc.definitions).filter(([key]) => !isAPIMachineryID(key))
+  );
+}
+
 function patchStatefulSetSpec(spec: Document): void {
   const pvcSpec =
     spec.definitions?.["io.k8s.api.core.v1.PersistentVolumeClaim"];
@@ -52,10 +61,12 @@ function patchStatefulSetSpec(spec: Document): void {
 (async () => {
   const spec = await fetchSpec();
 
+  omitAPIMachineryDefinitions(spec);
   patchStatefulSetSpec(spec);
 
   await generate({
     input: JSON.stringify(spec),
-    outputPath: join(__dirname, "../gen")
+    outputPath: join(__dirname, "../gen"),
+    externalAPIMachinery: true
   });
 })();

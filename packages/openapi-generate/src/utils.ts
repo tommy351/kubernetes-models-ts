@@ -35,3 +35,7 @@ export function getRelativePath(from: string, to: string): string {
 
   return path;
 }
+
+export function isAPIMachineryID(id: string): boolean {
+  return id.startsWith("io.k8s.apimachinery.");
+}

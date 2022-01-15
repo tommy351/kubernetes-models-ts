@@ -58,12 +58,12 @@ constructor(data?: ModelData<${interfaceName}>) {
 
   imports.push({
     name: "IObjectMeta",
-    path: "kubernetes-models/v1/ObjectMeta"
+    path: "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta"
   });
 
   imports.push({
     name: "addSchema",
-    path: "kubernetes-models/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta"
+    path: "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta"
   });
 
   imports.push({

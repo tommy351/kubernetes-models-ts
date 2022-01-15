@@ -9,7 +9,9 @@ module.exports = {
   collectCoverageFrom: ["packages/*/src/**/*.ts", "!packages/*/src/index.ts"],
   testEnvironment: "node",
   moduleNameMapper: {
-    "^kubernetes-models/(.*)": "<rootDir>/packages/kubernetes-models/dist/$1"
+    "^kubernetes-models/(.*)": "<rootDir>/packages/kubernetes-models/dist/$1",
+    "^@kubernetes-models/apimachinery/(.*)":
+      "<rootDir>/packages/apimachinery/dist/$1"
   },
   moduleFileExtensions: [
     "js",

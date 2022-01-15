@@ -65,9 +65,9 @@ const stat = promisify(fs.stat);
       node: ">=12"
     },
     dependencies: {
+      "@kubernetes-models/apimachinery": "workspace:*",
       "@kubernetes-models/base": "workspace:*",
       "@kubernetes-models/validate": "workspace:*",
-      "kubernetes-models": "workspace:*",
       tslib: "^2.3.0"
     },
     devDependencies: {

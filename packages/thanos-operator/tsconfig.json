@@ -5,9 +5,7 @@
     "outDir": "dist",
     "sourceMap": false
   },
-  "include": [
-    "gen"
-  ],
+  "include": ["gen"],
   "references": [
     {
       "path": "../base"
@@ -19,7 +17,7 @@
       "path": "../crd-generate"
     },
     {
-      "path": "../kubernetes-models"
+      "path": "../apimachinery"
     }
   ]
 }

@@ -10,7 +10,7 @@
     { "path": "../base" },
     { "path": "../validate" },
     { "path": "../openapi-generate" },
-    { "path": "../export-map" },
-    { "path": "../read-input" }
+    { "path": "../read-input" },
+    { "path": "../apimachinery" }
   ]
 }

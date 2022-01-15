@@ -17,7 +17,7 @@
       "path": "../crd-generate"
     },
     {
-      "path": "../kubernetes-models"
+      "path": "../apimachinery"
     }
   ]
 }

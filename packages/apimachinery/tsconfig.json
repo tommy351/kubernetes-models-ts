@@ -9,7 +9,8 @@
   "references": [
     { "path": "../base" },
     { "path": "../validate" },
-    { "path": "../crd-generate" },
-    { "path": "../apimachinery" }
+    { "path": "../openapi-generate" },
+    { "path": "../read-input" },
+    { "path": "../string-util" }
   ]
 }

@@ -77,19 +77,48 @@ importers:
     devDependencies:
       '@types/fs-extra': 9.0.12
 
-  packages/argo-cd:
+  packages/apimachinery:
     specifiers:
       '@kubernetes-models/base': workspace:*
-      '@kubernetes-models/crd-generate': workspace:*
+      '@kubernetes-models/openapi-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/read-input': workspace:*
+      '@kubernetes-models/string-util': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
+      '@types/lodash': ^4.14.172
+      lodash: ^4.17.21
+      openapi-types: ^9.1.0
       rimraf: ^3.0.2
+      ts-node: ^10.4.0
       tslib: ^2.3.1
     dependencies:
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
+      tslib: 2.3.1
+    devDependencies:
+      '@kubernetes-models/openapi-generate': link:../openapi-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      '@kubernetes-models/read-input': link:../read-input
+      '@kubernetes-models/string-util': link:../string-util
+      '@types/lodash': 4.14.172
+      lodash: 4.17.21
+      openapi-types: 9.1.0
+      rimraf: 3.0.2
+      ts-node: 10.4.0_faf01e1d5a40372a98081522dcafc186
+
+  packages/argo-cd:
+    specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
+      '@kubernetes-models/base': workspace:*
+      '@kubernetes-models/crd-generate': workspace:*
+      '@kubernetes-models/publish-scripts': workspace:*
+      '@kubernetes-models/validate': workspace:*
+      rimraf: ^3.0.2
+      tslib: ^2.3.1
+    dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
+      '@kubernetes-models/base': link:../base
+      '@kubernetes-models/validate': link:../validate
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -98,17 +127,17 @@ importers:
 
   packages/autoscaler:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -127,17 +156,17 @@ importers:
 
   packages/cert-manager:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -146,17 +175,17 @@ importers:
 
   packages/cilium:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -165,17 +194,17 @@ importers:
 
   packages/contour:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -230,17 +259,17 @@ importers:
 
   packages/flux-cd:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -270,6 +299,7 @@ importers:
 
   packages/gke:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
@@ -277,15 +307,14 @@ importers:
       '@types/fs-extra': ^9.0.12
       execa: ^5.1.1
       fs-extra: ^10.0.0
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       ts-node: ^10.4.0
       tslib: ^2.3.1
       yaml: ^1.10.2
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -299,17 +328,17 @@ importers:
 
   packages/grafana-agent-operator:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -318,17 +347,17 @@ importers:
 
   packages/grafana-operator:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -337,17 +366,17 @@ importers:
 
   packages/istio:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -356,17 +385,17 @@ importers:
 
   packages/jaeger-operator:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -375,17 +404,17 @@ importers:
 
   packages/kapp-controller:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -394,17 +423,17 @@ importers:
 
   packages/knative:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -413,6 +442,7 @@ importers:
 
   packages/kubernetes-models:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/openapi-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
@@ -423,6 +453,7 @@ importers:
       ts-node: ^10.4.0
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
       tslib: 2.3.1
@@ -459,17 +490,17 @@ importers:
 
   packages/prometheus-operator:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -503,17 +534,17 @@ importers:
 
   packages/sealed-secrets:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -528,17 +559,17 @@ importers:
 
   packages/thanos-operator:
     specifiers:
+      '@kubernetes-models/apimachinery': workspace:*
       '@kubernetes-models/base': workspace:*
       '@kubernetes-models/crd-generate': workspace:*
       '@kubernetes-models/publish-scripts': workspace:*
       '@kubernetes-models/validate': workspace:*
-      kubernetes-models: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.3.1
     dependencies:
+      '@kubernetes-models/apimachinery': link:../apimachinery
       '@kubernetes-models/base': link:../base
       '@kubernetes-models/validate': link:../validate
-      kubernetes-models: link:../kubernetes-models
       tslib: 2.3.1
     devDependencies:
       '@kubernetes-models/crd-generate': link:../crd-generate
@@ -3648,17 +3679,6 @@ packages:
       is-glob: 4.0.3
     dev: true
 
-  /glob/7.1.7:
-    resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.0.4
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: true
-
   /glob/7.2.0:
     resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
     dependencies:
@@ -6069,7 +6089,7 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.1.7
+      glob: 7.2.0
     dev: true
 
   /run-parallel/1.2.0:

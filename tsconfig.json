@@ -7,7 +7,8 @@
     "importHelpers": true,
     "baseUrl": ".",
     "paths": {
-      "kubernetes-models/*": ["packages/kubernetes-models/dist/*"]
+      "kubernetes-models/*": ["packages/kubernetes-models/dist/*"],
+      "@kubernetes-models/apimachinery/*": ["packages/apimachinery/dist/*"]
     }
   }
 }

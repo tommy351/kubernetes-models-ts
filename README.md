@@ -38,6 +38,7 @@ See [examples](examples) folder for more examples.
 ### Models
 
 - [kubernetes-models](packages/kubernetes-models) - Kubernetes models.
+- [@kubernetes-models/apimachinery](packages/apimachinery) - Types for Kubernetes API objects.
 
 ### 3rd-party Models
 

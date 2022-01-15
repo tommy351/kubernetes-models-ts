@@ -6,7 +6,12 @@ import {
   getAPIVersion,
   Import
 } from "@kubernetes-models/generate";
-import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
+import {
+  formatComment,
+  trimPrefix,
+  trimSuffix
+} from "@kubernetes-models/string-util";
+import { isAPIMachineryID } from "..";
 import { Context } from "../context";
 import {
   getClassName,
@@ -17,7 +22,10 @@ import {
 } from "../string";
 import { getRelativePath, getSchemaPath } from "../utils";
 
-export default function ({ getDefinitionPath }: Context): Generator {
+export default function ({
+  getDefinitionPath,
+  externalAPIMachinery
+}: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
       const interfaceName = getInterfaceName(def.schemaId);
@@ -54,10 +62,24 @@ export default function ({ getDefinitionPath }: Context): Generator {
       }
 
       for (const ref of refs) {
-        imports.push({
-          name: getInterfaceName(ref),
-          path: getRelativePath(path, getDefinitionPath(ref))
-        });
+        const name = getInterfaceName(ref);
+
+        if (externalAPIMachinery && isAPIMachineryID(ref)) {
+          imports.push({
+            name,
+            path: `@kubernetes-models/apimachinery/${trimPrefix(
+              ref,
+              "io.k8s.apimachinery.pkg."
+            )
+              .split(".")
+              .join("/")}`
+          });
+        } else {
+          imports.push({
+            name,
+            path: getRelativePath(path, getDefinitionPath(ref))
+          });
+        }
       }
 
       if (def.schema.type === "object") {
@@ -128,7 +150,9 @@ export {
 };
 `;
 
-      content = generateImports(imports) + "\n" + content;
+      if (imports.length) {
+        content = generateImports(imports) + "\n" + content;
+      }
 
       return {
         path,
