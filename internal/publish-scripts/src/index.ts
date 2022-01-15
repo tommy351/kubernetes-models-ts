@@ -1,9 +1,9 @@
 import yargs from "yargs/yargs";
-import { postBuild } from "./postbuild";
-import { prePack } from "./prepack";
+import { postBuild, PostBuildArguments } from "./postbuild";
+import { prePack, PrePackArguments } from "./prepack";
 
 yargs(process.argv.slice(2))
-  .command(
+  .command<PostBuildArguments>(
     "postbuild",
     "Run postbuild script",
     (cmd) => {
@@ -16,7 +16,7 @@ yargs(process.argv.slice(2))
     },
     postBuild
   )
-  .command(
+  .command<PrePackArguments>(
     "prepack",
     "Run prepack script",
     (cmd) => {

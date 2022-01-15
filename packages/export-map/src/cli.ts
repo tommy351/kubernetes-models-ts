@@ -1,9 +1,10 @@
 import yargs from "yargs/yargs";
+import { GenerateArguments, InjectArguments } from ".";
 import { generate } from "./generate";
 import { inject } from "./inject";
 
 yargs(process.argv.slice(2))
-  .command(
+  .command<GenerateArguments>(
     "generate",
     "Generate export map",
     (cmd) => {
@@ -37,7 +38,7 @@ yargs(process.argv.slice(2))
     },
     generate
   )
-  .command(
+  .command<InjectArguments>(
     "inject",
     "Inject export map into package.json",
     (cmd) => {
