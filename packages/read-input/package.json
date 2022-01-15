@@ -38,7 +38,7 @@
     "make-dir": "^3.1.0",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.7",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/find-cache-dir": "^3.2.1",

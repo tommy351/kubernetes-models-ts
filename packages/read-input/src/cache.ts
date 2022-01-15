@@ -26,7 +26,7 @@ export async function getOrSetCache(
 
   try {
     return await readFileAsync(path, "utf8");
-  } catch (err) {
+  } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 

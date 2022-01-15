@@ -31,7 +31,7 @@ const stat = promisify(fs.stat);
   try {
     await stat(pkgDir);
     throw new Error(`Path already exists: ${pkgDir}`);
-  } catch (err) {
+  } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 
