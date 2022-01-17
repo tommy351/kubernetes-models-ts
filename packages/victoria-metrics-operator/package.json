@@ -1,0 +1,60 @@
+{
+  "name": "@kubernetes-models/victoria-metrics-operator",
+  "version": "0.0.0",
+  "description": "VictoriaMetrics operator models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/victoria-metrics-operator",
+  "author": "Tommy Chen <tommy351@gmail.com",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "ts-node scripts/download-crd.ts && crd-generate",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "victoria-metrics-operator"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "kubernetes-models": "workspace:*",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "@types/make-fetch-happen": "^9.0.1",
+    "@types/stream-to-promise": "^2.2.1",
+    "find-cache-dir": "^3.3.1",
+    "jszip": "^3.7.1",
+    "make-dir": "^3.1.0",
+    "make-fetch-happen": "^9.1.0",
+    "rimraf": "^3.0.2",
+    "stream-to-promise": "^3.0.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "crd-generate": {
+    "input": [
+      "./crds/crd.yaml"
+    ],
+    "output": "./gen"
+  }
+}
