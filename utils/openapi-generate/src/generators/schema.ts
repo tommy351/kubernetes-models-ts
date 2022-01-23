@@ -8,10 +8,9 @@ import {
   transformSchema
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { isAPIMachineryID } from "..";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
-import { getSchemaPath } from "../utils";
+import { getSchemaPath, isAPIMachineryID } from "../utils";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {

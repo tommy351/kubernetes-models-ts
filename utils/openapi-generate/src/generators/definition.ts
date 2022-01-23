@@ -11,7 +11,6 @@ import {
   trimPrefix,
   trimSuffix
 } from "@kubernetes-models/string-util";
-import { isAPIMachineryID } from "..";
 import { Context } from "../context";
 import {
   getClassName,
@@ -20,7 +19,7 @@ import {
   getShortInterfaceName,
   trimRefPrefix
 } from "../string";
-import { getRelativePath, getSchemaPath } from "../utils";
+import { getRelativePath, getSchemaPath, isAPIMachineryID } from "../utils";
 
 export default function ({
   getDefinitionPath,
