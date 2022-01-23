@@ -58,7 +58,7 @@ constructor(data?: ModelData<${interfaceName}>) {
 
   imports.push({
     name: "IObjectMeta",
-    path: "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta"
+    path: "kubernetes-models/v1/ObjectMeta"
   });
 
   imports.push({

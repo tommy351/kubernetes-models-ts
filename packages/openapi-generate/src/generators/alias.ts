@@ -1,83 +1,88 @@
-import { camelCase, trimPrefix } from "@kubernetes-models/string-util";
-import { getClassName, getShortClassName } from "../string";
+import { camelCase } from "@kubernetes-models/string-util";
+import { getShortClassName } from "../string";
 import { posix } from "path";
-import { Generator, Definition, OutputFile } from "@kubernetes-models/generate";
-import { get, set } from "lodash";
+import {
+  Generator,
+  getAPIVersion,
+  OutputFile
+} from "@kubernetes-models/generate";
+import { Context } from "../context";
+import { getRelativePath } from "../utils";
 
-interface KeyMap {
-  [key: string]: string | KeyMap;
+function getIndexPath(key: string): string {
+  return [key, "index.ts"].filter(Boolean).join("/");
 }
 
-function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
-  const path = parent + "index.ts";
-  let children: OutputFile[] = [];
-  let content = "";
+export default function ({ getDefinitionPath }: Context): Generator {
+  return async (definitions) => {
+    const kindPathMap = new Map<string, readonly string[]>();
+    const indexPathMap = new Map<string, readonly string[]>();
+    const output: OutputFile[] = [];
 
-  for (const [key, val] of Object.entries(map)) {
-    if (typeof val === "string") {
-      const fileName = getShortClassName(val);
-      const target = posix.relative(
-        parent,
-        "_definitions/" + getClassName(val)
-      );
-      content += `export * from "./${fileName}";\n`;
-      children.push({
-        path: parent + fileName + ".ts",
-        content: `export * from "${target}";\n`
-      });
-    } else {
-      const exportedName = camelCase(key, ".-");
-      content += `import * as ${exportedName} from "./${key}";\n`;
-      content += `export { ${exportedName} };\n`;
-      children = children.concat(generate(val, parent + key + "/"));
-    }
-  }
+    // Build the map of (definition folder, array of kinds)
+    for (const def of definitions) {
+      const defPath = getDefinitionPath(def.schemaId);
+      const dir = posix.dirname(defPath);
+      const kind = getShortClassName(def.schemaId);
+      const values = kindPathMap.get(dir) ?? [];
+      const gvks = def.gvk;
 
-  return [{ path, content }, ...children];
-}
+      if (!values.includes(kind)) {
+        kindPathMap.set(dir, [...values, kind]);
+      }
 
-function buildGVMap(defs: readonly Definition[]): Record<string, string> {
-  const map: Record<string, string> = {};
+      // Some definitions have multiple GVKs. Here we map the extra GVKs to the
+      // path of the first GVK.
+      if (gvks && gvks.length > 1) {
+        for (let i = 1; i < gvks.length; i++) {
+          const gvk = gvks[i];
+          const aliasPath = `${getAPIVersion(gvk)}/${gvk.kind}.ts`;
 
-  for (const def of defs) {
-    // Skip if the definition doesn't define any GVK
-    if (!def.gvk || !def.gvk.length) continue;
-
-    // Skip meta definitions because their "x-kubernetes-group-version-kind"
-    // usually contains all types of GVKs.
-    if (def.schemaId.startsWith("io.k8s.apimachinery.pkg.apis.meta.v1.")) {
-      continue;
-    }
-
-    for (const gvk of def.gvk) {
-      let key = gvk.version;
-      if (gvk.group) key = gvk.group + "/" + key;
-
-      if (!map[key]) {
-        map[key] = def.schemaId.split(".").slice(0, -1).join(".");
+          output.push({
+            path: aliasPath,
+            content: `export * from "${getRelativePath(aliasPath, defPath)}";`
+          });
+        }
       }
     }
-  }
 
-  return map;
+    // Build the map of (folder, alias folders)
+    for (const [key] of kindPathMap) {
+      const keys = key.split("/");
+
+      for (let i = 0; i < keys.length; i++) {
+        const path = keys.slice(0, i).join("/");
+        const values = indexPathMap.get(path) ?? [];
+
+        if (!values.includes(keys[i])) {
+          indexPathMap.set(path, [...values, keys[i]]);
+        }
+      }
+    }
+
+    for (const [key, values] of kindPathMap) {
+      output.push({
+        path: getIndexPath(key),
+        content: values.map((v) => `export * from "./${v}";`).join("\n")
+      });
+    }
+
+    for (const [key, values] of indexPathMap) {
+      output.push({
+        path: getIndexPath(key),
+        content: values
+          .flatMap((v) => {
+            const exportedName = camelCase(v, ".-");
+
+            return [
+              `import * as ${exportedName} from "./${v}";`,
+              `export { ${exportedName} };`
+            ];
+          })
+          .join("\n")
+      });
+    }
+
+    return output;
+  };
 }
-
-const generateAliases: Generator = async (definitions) => {
-  const map: KeyMap = {};
-  const gvMap = buildGVMap(definitions);
-  const idPrefix = "io.k8s.";
-
-  for (const def of definitions) {
-    set(map, trimPrefix(def.schemaId, idPrefix).split("."), def.schemaId);
-  }
-
-  for (const [apiGroup, prefix] of Object.entries(gvMap)) {
-    const keys = apiGroup.split("/");
-    const val = get(map, trimPrefix(prefix, idPrefix).split("."));
-    set(map, keys, val);
-  }
-
-  return generate(map);
-};
-
-export default generateAliases;

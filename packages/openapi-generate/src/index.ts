@@ -1,2 +1,2 @@
 export * from "./generate";
-export * from "./utils";
+export { mergeOpenAPISpecs } from "./utils";

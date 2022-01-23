@@ -32,7 +32,7 @@ export interface OutputFile {
 }
 
 export interface Generator {
-  (definitions: readonly Definition[]): Promise<readonly OutputFile[]>;
+  (definitions: readonly Definition[]): Promise<OutputFile[]>;
 }
 
 export interface SchemaTransformer {

@@ -1,5 +1,6 @@
 import { isPlainObject } from "is-plain-object";
 import { validate } from "@kubernetes-models/validate";
+import { TypeMeta } from "./meta";
 
 const SCHEMA_ID = Symbol("SCHEMA_ID");
 const ADD_SCHEMA = Symbol("ADD_SCHEMA");
@@ -27,9 +28,7 @@ function filterUndefinedValues(data: unknown): unknown {
   return data;
 }
 
-export type ModelData<T> = T extends { apiVersion: any; kind: any }
-  ? Omit<T, "apiVersion" | "kind">
-  : T;
+export type ModelData<T> = T extends TypeMeta ? Omit<T, keyof TypeMeta> : T;
 
 export type ModelConstructor<T> = new (data?: ModelData<T>) => Model<T>;
 

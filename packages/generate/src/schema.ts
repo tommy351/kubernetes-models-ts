@@ -4,7 +4,7 @@ import Ajv from "ajv";
 
 const ajv = new Ajv();
 
-export function collectRefs(data: Record<string, unknown>): readonly string[] {
+export function collectRefs(data: Record<string, unknown>): string[] {
   const refs = Object.keys(data).map((key) => {
     const val = data[key];
 

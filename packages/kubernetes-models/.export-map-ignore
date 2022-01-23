@@ -1,5 +1,2 @@
 /_*/**/*.ts
 !/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta.ts
-/api/
-/apiextensions-apiserver/
-/kube-aggregator/

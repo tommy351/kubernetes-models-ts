@@ -8,6 +8,7 @@ import {
   transformSchema
 } from "@kubernetes-models/generate";
 import { getClassName, trimRefPrefix } from "../string";
+import { getSchemaPath } from "../utils";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -42,7 +43,6 @@ function compileSchema(def: Definition): string {
 
 const generateSchemas: Generator = async (definitions) => {
   return definitions.map((def) => {
-    const className = getClassName(def.schemaId);
     const imports: Import[] = [];
     const refs = collectRefs(def.schema)
       .map(trimRefPrefix)
@@ -67,7 +67,7 @@ const generateSchemas: Generator = async (definitions) => {
     }
 
     return {
-      path: `_schemas/${className}.ts`,
+      path: getSchemaPath(def.schemaId),
       content: `${generateImports(imports)}
 
 const schema: object = ${compileSchema(def)};

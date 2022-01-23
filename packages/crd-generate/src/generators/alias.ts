@@ -6,7 +6,7 @@ interface KeyMap {
   [key: string]: string | KeyMap;
 }
 
-function generate(map: KeyMap, parent = ""): readonly OutputFile[] {
+function generate(map: KeyMap, parent = ""): OutputFile[] {
   const path = parent + "index.ts";
   let children: OutputFile[] = [];
   let content = "";

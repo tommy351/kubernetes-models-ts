@@ -10,8 +10,9 @@ import generateDefinitions from "./generators/definition";
 import generateSchemas from "./generators/schema";
 import generateAliases from "./generators/alias";
 import { uniq } from "lodash";
+import { buildContext } from "./context";
 
-function load(input: string): readonly Definition[] {
+function load(input: string): Definition[] {
   const { definitions } = JSON.parse(input);
 
   return Object.keys(definitions)
@@ -61,12 +62,6 @@ function load(input: string): readonly Definition[] {
     });
 }
 
-const generator = composeGenerators([
-  generateDefinitions,
-  generateSchemas,
-  generateAliases
-]);
-
 export interface GenerateOptions {
   input: string;
   outputPath: string;
@@ -74,6 +69,12 @@ export interface GenerateOptions {
 
 export async function generate(options: GenerateOptions): Promise<void> {
   const definitions = load(options.input);
+  const ctx = buildContext(definitions);
+  const generator = composeGenerators([
+    generateDefinitions(ctx),
+    generateSchemas,
+    generateAliases(ctx)
+  ]);
   const files = await generator(definitions);
 
   await writeOutputFiles(options.outputPath, files);

@@ -52,7 +52,7 @@ function _generateInterface(
         }
 
         output += `${JSON.stringify(key)}`;
-        if (!~required.indexOf(key)) output += "?";
+        if (!required.includes(key)) output += "?";
         output +=
           ": " +
           _generateInterface(prop, options, [...parentKeys, key]) +
