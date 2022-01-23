@@ -45,6 +45,7 @@ static apiVersion: ${interfaceName}["apiVersion"] = ${JSON.stringify(
       apiVersion
     )};
 static kind: ${interfaceName}["kind"] = ${JSON.stringify(gvk.kind)};
+static is = createTypeMetaGuard<${interfaceName}>(${className});
 
 constructor(data?: ModelData<${interfaceName}>) {
   super({
@@ -78,6 +79,11 @@ constructor(data?: ModelData<${interfaceName}>) {
 
   imports.push({
     name: "ModelData",
+    path: "@kubernetes-models/base"
+  });
+
+  imports.push({
+    name: "createTypeMetaGuard",
     path: "@kubernetes-models/base"
   });
 
