@@ -6,7 +6,7 @@ API machinery files are moved to the new package `@kubernetes-models/apimachiner
 
 ```ts
 // Before
-import { IObjectMeta } from "kubernetes-models/v1/ObjectMeta";
+import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
 
 // After
 import { IObjectMeta } from "@kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";

@@ -2,4 +2,4 @@
 "@kubernetes-models/base": major
 ---
 
-Remove the static method `setSchema` on `Model` class. This function will be exported separately.
+Remove the static method `setSchema` from `Model` class and re-export it separately.
