@@ -60,7 +60,4 @@ jobs:
       - name: Build packages
         run: pnpm run build
       - name: Run unit tests
-        run: pnpm run test -- --coverage
-      - uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+        run: pnpm run test
