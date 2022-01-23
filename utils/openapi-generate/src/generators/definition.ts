@@ -4,13 +4,15 @@ import {
   generateInterface,
   Generator,
   getAPIVersion,
-  Import
+  Import,
+  Schema
 } from "@kubernetes-models/generate";
 import {
   formatComment,
   trimPrefix,
   trimSuffix
 } from "@kubernetes-models/string-util";
+import { mapValues, omit } from "lodash";
 import { Context } from "../context";
 import {
   getClassName,
@@ -20,6 +22,22 @@ import {
   trimRefPrefix
 } from "../string";
 import { getRelativePath, getSchemaPath, isAPIMachineryID } from "../utils";
+
+function omitTypeMetaDescription(schema: Schema): Schema {
+  const { properties, ...rest } = schema;
+  if (!properties) return schema;
+
+  return {
+    ...rest,
+    properties: mapValues(properties, (prop, key) => {
+      if (["apiVersion", "kind"].includes(key)) {
+        return omit(prop, "description");
+      }
+
+      return prop;
+    })
+  };
+}
 
 export default function ({
   getDefinitionPath,
@@ -35,10 +53,14 @@ export default function ({
         .map(trimRefPrefix)
         .filter((ref) => ref !== def.schemaId);
       const imports: Import[] = [];
-      const typing = generateInterface(def.schema, {
-        getRefType,
-        includeDescription: true
-      });
+      const gvk = def.gvk?.[0];
+      const typing = generateInterface(
+        gvk ? omitTypeMetaDescription(def.schema) : def.schema,
+        {
+          getRefType,
+          includeDescription: true
+        }
+      );
       const path = getDefinitionPath(def.schemaId);
       let content = "";
       let comment = "";
@@ -82,7 +104,6 @@ export default function ({
       }
 
       if (def.schema.type === "object") {
-        const gvk = def.gvk?.[0];
         let classContent = generateInterface(def.schema, {
           getRefType,
           getFieldType(key) {
@@ -98,6 +119,11 @@ export default function ({
         if (gvk) {
           imports.push({
             name: "ModelData",
+            path: "@kubernetes-models/base"
+          });
+
+          imports.push({
+            name: "TypeMeta",
             path: "@kubernetes-models/base"
           });
 
@@ -133,7 +159,9 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
         });
 
         content += `
-${comment}export interface ${shortInterfaceName} ${typing}
+${comment}export interface ${shortInterfaceName}${
+          gvk ? " extends TypeMeta " : " "
+        }${typing}
 
 ${comment}export class ${shortClassName} extends Model<${shortInterfaceName}> implements ${shortInterfaceName} ${classContent}
 
