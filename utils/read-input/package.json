@@ -31,17 +31,13 @@
     "node": ">=12"
   },
   "dependencies": {
-    "base-x": "^3.0.8",
     "find-cache-dir": "^3.3.1",
     "get-stdin": "^8.0.0",
-    "hasha": "^5.2.2",
     "make-dir": "^3.1.0",
-    "request": "^2.88.2",
-    "request-promise-native": "^1.0.7",
+    "make-fetch-happen": "^9.1.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/find-cache-dir": "^3.2.1",
-    "@types/request-promise-native": "^1.0.18"
+    "@types/find-cache-dir": "^3.2.1"
   }
 }
