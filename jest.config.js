@@ -5,11 +5,12 @@ const isESMSupported = +nodeVersion.split(".")[0] >= 14;
 
 module.exports = {
   preset: "ts-jest",
-  roots: ["<rootDir>/packages"],
-  collectCoverageFrom: ["packages/*/src/**/*.ts", "!packages/*/src/index.ts"],
   testEnvironment: "node",
   moduleNameMapper: {
-    "^kubernetes-models/(.*)": "<rootDir>/packages/kubernetes-models/dist/$1"
+    "^kubernetes-models/(.*)":
+      "<rootDir>/first-party/kubernetes-models/dist/$1",
+    "^@kubernetes-models/apimachinery/(.*)":
+      "<rootDir>/first-party/apimachinery/dist/$1"
   },
   moduleFileExtensions: [
     "js",

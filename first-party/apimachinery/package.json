@@ -1,0 +1,49 @@
+{
+  "name": "@kubernetes-models/apimachinery",
+  "version": "0.0.0",
+  "description": "Types for Kubernetes API objects",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/apimachinery",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "ts-node scripts/build.ts && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "apimachinery"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@kubernetes-models/openapi-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "@kubernetes-models/read-input": "workspace:*",
+    "@kubernetes-models/string-util": "workspace:*",
+    "@types/lodash": "^4.14.172",
+    "lodash": "^4.17.21",
+    "openapi-types": "^9.1.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0"
+  }
+}

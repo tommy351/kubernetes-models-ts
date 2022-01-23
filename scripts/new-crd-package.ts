@@ -26,12 +26,12 @@ const stat = promisify(fs.stat);
     })
     .parse();
 
-  const pkgDir = join(__dirname, "..", "packages", args.name);
+  const pkgDir = join(__dirname, "..", "third-party", args.name);
 
   try {
     await stat(pkgDir);
     throw new Error(`Path already exists: ${pkgDir}`);
-  } catch (err) {
+  } catch (err: any) {
     if (err.code !== "ENOENT") throw err;
   }
 
@@ -43,7 +43,7 @@ const stat = promisify(fs.stat);
       type: "git",
       url: "https://github.com/tommy351/kubernetes-models-ts.git"
     },
-    homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/${args.name}`,
+    homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/${args.name}`,
     author: args.author,
     license: "MIT",
     main: "index.js",
@@ -51,8 +51,7 @@ const stat = promisify(fs.stat);
     types: "index.d.ts",
     sideEffects: false,
     scripts: {
-      build: "crd-generate",
-      postbuild: "publish-scripts postbuild",
+      build: "crd-generate && publish-scripts postbuild",
       prepack: "publish-scripts prepack",
       clean: "rimraf gen"
     },
@@ -65,9 +64,9 @@ const stat = promisify(fs.stat);
       node: ">=12"
     },
     dependencies: {
+      "@kubernetes-models/apimachinery": "workspace:*",
       "@kubernetes-models/base": "workspace:*",
       "@kubernetes-models/validate": "workspace:*",
-      "kubernetes-models": "workspace:*",
       tslib: "^2.3.0"
     },
     devDependencies: {
@@ -90,10 +89,9 @@ const stat = promisify(fs.stat);
     },
     include: ["gen"],
     references: [
-      { path: "../base" },
-      { path: "../validate" },
-      { path: "../crd-generate" },
-      { path: "../kubernetes-models" }
+      { path: "../../core/base" },
+      { path: "../../core/validate" },
+      { path: "../../first-party/apimachinery" }
     ]
   };
 

@@ -1,0 +1,52 @@
+{
+  "name": "@kubernetes-models/crd-generate",
+  "version": "2.0.2",
+  "description": "Generate Kubernetes models for custom resource definitions (CRD).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/utils/crd-generate",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
+  "bin": {
+    "crd-generate": "bin/crd-generate.js"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "crd"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/bin/",
+    "/dist/"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/generate": "workspace:*",
+    "@kubernetes-models/read-input": "workspace:*",
+    "@kubernetes-models/string-util": "workspace:*",
+    "lodash": "^4.17.21",
+    "make-dir": "^3.1.0",
+    "tslib": "^2.3.1",
+    "yaml": "^1.10.2",
+    "yargs": "^17.3.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.172",
+    "@types/yargs": "^17.0.8"
+  }
+}

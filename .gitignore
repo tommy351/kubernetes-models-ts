@@ -1,9 +1,8 @@
 node_modules/
 /.idea/
 *.tsbuildinfo
-/packages/*/dist/
-/packages/*/gen/
-/internal/*/dist/
+dist/
+gen/
 *.log
 /.vscode/
 
