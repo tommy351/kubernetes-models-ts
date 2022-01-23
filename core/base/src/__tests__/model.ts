@@ -1,4 +1,4 @@
-import { Model } from "../model";
+import { Model, setSchema } from "../model";
 import { register } from "@kubernetes-models/validate";
 
 describe("toJSON", () => {
@@ -55,7 +55,7 @@ describe("validate", () => {
       class MyModel extends Model<unknown> {}
       const addSchema = jest.fn();
       register("foo", {});
-      Model.setSchema(MyModel, "foo", addSchema);
+      setSchema(MyModel, "foo", addSchema);
       const model = new MyModel();
       model.validate();
       expect(addSchema).toHaveBeenCalledTimes(1);

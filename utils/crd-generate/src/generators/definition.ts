@@ -72,6 +72,11 @@ constructor(data?: ModelData<${interfaceName}>) {
   });
 
   imports.push({
+    name: "setSchema",
+    path: "@kubernetes-models/base"
+  });
+
+  imports.push({
     name: "ModelData",
     path: "@kubernetes-models/base"
   });
@@ -100,7 +105,7 @@ ${comment}export interface ${interfaceName} ${interfaceContent}
 
 ${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
 
-Model.setSchema(${className}, schemaId, () => {
+setSchema(${className}, schemaId, () => {
   addSchema();
   register(schemaId, schema);
 });

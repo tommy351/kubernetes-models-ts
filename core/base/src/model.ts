@@ -34,10 +34,10 @@ export type ModelConstructor<T> = new (data?: ModelData<T>) => Model<T>;
 
 export class Model<T> {
   /** @internal */
-  protected [SCHEMA_ID]: string;
+  private [SCHEMA_ID]: string;
 
   /** @internal */
-  protected [ADD_SCHEMA]: () => void;
+  private [ADD_SCHEMA]: () => void;
 
   public constructor(data?: ModelData<T>) {
     if (data) {
@@ -63,13 +63,13 @@ export class Model<T> {
 
     validate(id, this);
   }
+}
 
-  public static setSchema<T>(
-    ctor: ModelConstructor<T>,
-    id: string,
-    addSchema: () => void
-  ): void {
-    ctor.prototype[SCHEMA_ID] = id;
-    ctor.prototype[ADD_SCHEMA] = addSchema;
-  }
+export function setSchema<T>(
+  ctor: ModelConstructor<T>,
+  id: string,
+  addSchema: () => void
+): void {
+  ctor.prototype[SCHEMA_ID] = id;
+  ctor.prototype[ADD_SCHEMA] = addSchema;
 }

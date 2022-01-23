@@ -64,6 +64,11 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/crd-generate](utils/crd-generate) - Generate Kubernetes models for custom resource definitions (CRD).
 - [@kubernetes-models/openapi-generate](utils/openapi-generate) - Generate Kubernetes models from OpenAPI schema.
 
+### Runtime Dependencies
+
+- [@kubernetes-models/base](core/base) - Base model for Kubernetes models.
+- [@kubernetes-models/validate](core/validate) - Validation library for Kubernetes models.
+
 ### Utilities
 
 - [@kubernetes-models/base](core/base) - Base model for Kubernetes models.
@@ -71,7 +76,6 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/generate](utils/generate) - Type declarations and utilities for Kubernetes model generation.
 - [@kubernetes-models/read-input](utils/read-input) - Read input from file, URL or stdin.
 - [@kubernetes-models/string-util](utils/string-util) - Utility functions for strings.
-- [@kubernetes-models/validate](core/validate) - Validation library for Kubernetes models.
 
 ## License
 

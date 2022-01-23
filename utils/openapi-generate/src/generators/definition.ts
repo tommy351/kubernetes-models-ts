@@ -124,6 +124,11 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
         });
 
         imports.push({
+          name: "setSchema",
+          path: "@kubernetes-models/base"
+        });
+
+        imports.push({
           name: "addSchema",
           path: getRelativePath(path, getSchemaPath(def.schemaId))
         });
@@ -133,7 +138,7 @@ ${comment}export interface ${shortInterfaceName} ${typing}
 
 ${comment}export class ${shortClassName} extends Model<${shortInterfaceName}> implements ${shortInterfaceName} ${classContent}
 
-Model.setSchema(${shortClassName}, ${JSON.stringify(def.schemaId)}, addSchema);
+setSchema(${shortClassName}, ${JSON.stringify(def.schemaId)}, addSchema);
 `;
       } else {
         content += `
