@@ -8,3 +8,21 @@ export interface TypeMeta {
    */
   kind: string;
 }
+
+function isNonNullObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value != null;
+}
+
+export type TypeMetaGuard<T extends TypeMeta> = (value: unknown) => value is T;
+
+export function createTypeMetaGuard<T extends TypeMeta>(
+  meta: TypeMeta
+): TypeMetaGuard<T> {
+  return (value): value is T => {
+    return (
+      isNonNullObject(value) &&
+      value.apiVersion === meta.apiVersion &&
+      value.kind === meta.kind
+    );
+  };
+}

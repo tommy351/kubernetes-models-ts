@@ -127,11 +127,17 @@ export default function ({
             path: "@kubernetes-models/base"
           });
 
+          imports.push({
+            name: "createTypeMetaGuard",
+            path: "@kubernetes-models/base"
+          });
+
           classContent = `${trimSuffix(classContent, "}")}
 static apiVersion: ${shortInterfaceName}["apiVersion"] = "${getAPIVersion(
             gvk
           )}";
 static kind: ${shortInterfaceName}["kind"] = "${gvk.kind}";
+static is = createTypeMetaGuard<${shortInterfaceName}>(${shortClassName});
 
 constructor(data?: ModelData<${shortInterfaceName}>) {
   super({
