@@ -1,3 +1,6 @@
 packages:
-  - packages/*
   - internal/*
+  - core/*
+  - utils/*
+  - first-party/*
+  - third-party/*

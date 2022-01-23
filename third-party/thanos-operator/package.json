@@ -1,0 +1,56 @@
+{
+  "name": "@kubernetes-models/thanos-operator",
+  "version": "0.1.0",
+  "description": "Thanos operator models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/thanos-operator",
+  "author": "Tommy Chen <tommy351@gmail.com",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "thanos-operator"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:*",
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_objectstores.yaml",
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_receivers.yaml",
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_storeendpoints.yaml",
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_thanos.yaml",
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_thanosendpoints.yaml",
+      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.3/config/crd/bases/monitoring.banzaicloud.io_thanospeers.yaml"
+    ],
+    "output": "./gen"
+  }
+}

@@ -26,7 +26,7 @@ const stat = promisify(fs.stat);
     })
     .parse();
 
-  const pkgDir = join(__dirname, "..", "packages", args.name);
+  const pkgDir = join(__dirname, "..", "third-party", args.name);
 
   try {
     await stat(pkgDir);
@@ -43,7 +43,7 @@ const stat = promisify(fs.stat);
       type: "git",
       url: "https://github.com/tommy351/kubernetes-models-ts.git"
     },
-    homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/${args.name}`,
+    homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/${args.name}`,
     author: args.author,
     license: "MIT",
     main: "index.js",
@@ -90,10 +90,9 @@ const stat = promisify(fs.stat);
     },
     include: ["gen"],
     references: [
-      { path: "../base" },
-      { path: "../validate" },
-      { path: "../crd-generate" },
-      { path: "../kubernetes-models" }
+      { path: "../../core/base" },
+      { path: "../../core/validate" },
+      { path: "../../first-party/apimachinery" }
     ]
   };
 

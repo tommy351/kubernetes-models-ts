@@ -1,0 +1,57 @@
+{
+  "name": "@kubernetes-models/flux-cd",
+  "version": "0.1.1",
+  "description": "Flux CD models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/flux-cd",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate",
+    "postbuild": "publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "flux",
+    "flux-cd"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:*",
+    "@kubernetes-models/base": "workspace:*",
+    "@kubernetes-models/validate": "workspace:*",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:*",
+    "@kubernetes-models/publish-scripts": "workspace:*",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://github.com/fluxcd/source-controller/releases/download/v0.15.4/source-controller.crds.yaml",
+      "https://github.com/fluxcd/kustomize-controller/releases/download/v0.13.3/kustomize-controller.crds.yaml",
+      "https://github.com/fluxcd/helm-controller/releases/download/v0.11.2/helm-controller.crds.yaml",
+      "https://github.com/fluxcd/notification-controller/releases/download/v0.15.1/notification-controller.crds.yaml",
+      "https://github.com/fluxcd/image-reflector-controller/releases/download/v0.11.1/image-reflector-controller.crds.yaml",
+      "https://github.com/fluxcd/image-automation-controller/releases/download/v0.14.1/image-automation-controller.crds.yaml"
+    ],
+    "output": "./gen"
+  }
+}
