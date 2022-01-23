@@ -1,5 +1,4 @@
 ---
-"@kubernetes-models/apimachinery": major
 "@kubernetes-models/argo-cd": major
 "@kubernetes-models/autoscaler": major
 "@kubernetes-models/cert-manager": major

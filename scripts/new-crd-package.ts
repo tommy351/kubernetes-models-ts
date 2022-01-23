@@ -64,14 +64,14 @@ const stat = promisify(fs.stat);
       node: ">=12"
     },
     dependencies: {
-      "@kubernetes-models/apimachinery": "workspace:*",
-      "@kubernetes-models/base": "workspace:*",
-      "@kubernetes-models/validate": "workspace:*",
+      "@kubernetes-models/apimachinery": "workspace:^",
+      "@kubernetes-models/base": "workspace:^",
+      "@kubernetes-models/validate": "workspace:^",
       tslib: "^2.3.0"
     },
     devDependencies: {
-      "@kubernetes-models/crd-generate": "workspace:*",
-      "@kubernetes-models/publish-scripts": "workspace:*",
+      "@kubernetes-models/crd-generate": "workspace:^",
+      "@kubernetes-models/publish-scripts": "workspace:^",
       rimraf: "^3.0.2"
     },
     "crd-generate": {

@@ -32,7 +32,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kubernetes-models/string-util": "workspace:*",
+    "@kubernetes-models/string-util": "workspace:^",
     "ajv": "^8.6.2",
     "fs-extra": "^10.0.0",
     "indent-string": "^4.0.0",

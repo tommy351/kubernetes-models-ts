@@ -34,7 +34,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kubernetes-models/string-util": "workspace:*",
+    "@kubernetes-models/string-util": "workspace:^",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "ignore": "^5.1.8",

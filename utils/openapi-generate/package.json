@@ -36,9 +36,9 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kubernetes-models/generate": "workspace:*",
-    "@kubernetes-models/read-input": "workspace:*",
-    "@kubernetes-models/string-util": "workspace:*",
+    "@kubernetes-models/generate": "workspace:^",
+    "@kubernetes-models/read-input": "workspace:^",
+    "@kubernetes-models/string-util": "workspace:^",
     "lodash": "^4.17.21",
     "make-dir": "^3.1.0",
     "tslib": "^2.3.1",

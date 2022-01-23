@@ -31,15 +31,15 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kubernetes-models/base": "workspace:*",
-    "@kubernetes-models/validate": "workspace:*",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@kubernetes-models/openapi-generate": "workspace:*",
-    "@kubernetes-models/publish-scripts": "workspace:*",
-    "@kubernetes-models/read-input": "workspace:*",
-    "@kubernetes-models/string-util": "workspace:*",
+    "@kubernetes-models/openapi-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "@kubernetes-models/read-input": "workspace:^",
+    "@kubernetes-models/string-util": "workspace:^",
     "@types/lodash": "^4.14.172",
     "lodash": "^4.17.21",
     "openapi-types": "^9.1.0",

@@ -9,7 +9,7 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@kubernetes-models/export-map": "workspace:*",
+    "@kubernetes-models/export-map": "workspace:^",
     "fs-extra": "^10.0.0",
     "tslib": "^2.3.1",
     "yargs": "^17.3.1"
