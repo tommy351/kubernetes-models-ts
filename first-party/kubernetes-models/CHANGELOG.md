@@ -1,5 +1,58 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- [#66](https://github.com/tommy351/kubernetes-models-ts/pull/66) [`51cbc2b`](https://github.com/tommy351/kubernetes-models-ts/commit/51cbc2ba30ac417ee788f6a536a544191aadf69a) Thanks [@tommy351](https://github.com/tommy351)! - API machinery files are moved to the new package `@kubernetes-models/apimachinery`. You have to rewrite import paths as the following examples.
+
+  ```ts
+  // Before
+  import { IObjectMeta } from "kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
+
+  // After
+  import { IObjectMeta } from "@kubernetes-models/apimachinery/pkg/apis/meta/v1/ObjectMeta";
+  ```
+
+  This change makes CRD packages can import only API machinery files rather than the whole `kubernetes-models` package.
+
+* [#66](https://github.com/tommy351/kubernetes-models-ts/pull/66) [`51cbc2b`](https://github.com/tommy351/kubernetes-models-ts/commit/51cbc2ba30ac417ee788f6a536a544191aadf69a) Thanks [@tommy351](https://github.com/tommy351)! - File paths are used to be `_definitions/<name>`, which are supposed to be hidden files, but sometimes IDE get confused and use them in import suggestions. In this version, files are moved to better locations, which should imporve the user experience of import suggestions. Below are examples of file paths.
+
+  - `kubernetes-models/_definitions/IoK8sApiCoreV1Pod` -> `kubernetes-models/v1/Pod`
+  - `kubernetes-models/_definitions/IoK8sApiAppsV1Deployment` -> `kubernetes-models/apps/v1/Deployment`
+
+  Some file aliases are also removed to avoid hidden files being displayed in import suggestions. Here are some examples of removed file aliases.
+
+  - `kubernetes-models/api/core/v1/Pod`
+  - `kubernetes-models/api/apps/v1/Deployment`
+  - `kubernetes-models/apiextensions-apiserver/pkg/apis/apiextensions/v1/CustomResourceDefinition`
+
+  You might have to update import paths in your code if you are using any of the patterns above.
+
+### Minor Changes
+
+- [#68](https://github.com/tommy351/kubernetes-models-ts/pull/68) [`8b610d0`](https://github.com/tommy351/kubernetes-models-ts/commit/8b610d0130aebf48f9fb08bc9f6790f77281b4a9) Thanks [@tommy351](https://github.com/tommy351)! - All models with `apiVersion` and `kind` properties now come with a new static method `is`, which returns `true` when the input value contains the same `apiVersion` and `kind` with the model.
+
+  This function implements TypeScript type guard, which is very useful for narrowing down types.
+
+  Please noted that this function only checks `apiVersion` and `kind`, other properties may still be invalid.
+
+  Below is an example of the type guard function.
+
+  ```ts
+  import { Pod } from "kubernetes-models/v1/Pod";
+
+  if (Pod.is(value)) {
+    // value is a Pod.
+  }
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`2b18c6b`](https://github.com/tommy351/kubernetes-models-ts/commit/2b18c6bcbfe1a414beabda00a6f1332449b2e748), [`04197d2`](https://github.com/tommy351/kubernetes-models-ts/commit/04197d23d5bc951b24a7e225f8d3070511861811), [`8b610d0`](https://github.com/tommy351/kubernetes-models-ts/commit/8b610d0130aebf48f9fb08bc9f6790f77281b4a9), [`e904810`](https://github.com/tommy351/kubernetes-models-ts/commit/e9048102c03569c19fc648ebff42b48e950dbc5c)]:
+  - @kubernetes-models/base@3.0.0
+  - @kubernetes-models/apimachinery@0.1.0
+
 ## 2.0.2
 
 ### Patch Changes
