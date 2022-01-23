@@ -51,8 +51,7 @@ const stat = promisify(fs.stat);
     types: "index.d.ts",
     sideEffects: false,
     scripts: {
-      build: "crd-generate",
-      postbuild: "publish-scripts postbuild",
+      build: "crd-generate && publish-scripts postbuild",
       prepack: "publish-scripts prepack",
       clean: "rimraf gen"
     },
