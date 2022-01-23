@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- [#66](https://github.com/tommy351/kubernetes-models-ts/pull/66) [`51cbc2b`](https://github.com/tommy351/kubernetes-models-ts/commit/51cbc2ba30ac417ee788f6a536a544191aadf69a) Thanks [@tommy351](https://github.com/tommy351)! - Add more options to `generate` function to support the new `@kubernetes-models/apimachinery` package.
+
 ## 2.0.2
 
 ### Patch Changes
