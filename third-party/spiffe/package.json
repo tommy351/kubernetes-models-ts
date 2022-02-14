@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/spiffe",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "SPIFFE models",
   "repository": {
     "type": "git",
@@ -42,7 +42,9 @@
     "rimraf": "^3.0.2"
   },
   "crd-generate": {
-    "input": ["https://raw.githubusercontent.com/spiffe/spire/v1.2.0/support/k8s/k8s-workload-registrar/mode-crd/config/spiffeid.spiffe.io_spiffeids.yaml"],
+    "input": [
+      "https://raw.githubusercontent.com/spiffe/spire/v1.2.0/support/k8s/k8s-workload-registrar/mode-crd/config/spiffeid.spiffe.io_spiffeids.yaml"
+    ],
     "output": "./gen"
   }
 }

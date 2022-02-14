@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0
+
+### Minor Changes
+
+- [#69](https://github.com/tommy351/kubernetes-models-ts/pull/69) [`1cdc2f3`](https://github.com/tommy351/kubernetes-models-ts/commit/1cdc2f3375f9e2edf6e2a066e98db28a57d2b1f7) Thanks [@tommy351](https://github.com/tommy351)! - Use `make-fetch-happen` package.
+
 ## 2.0.1
 
 ### Patch Changes
