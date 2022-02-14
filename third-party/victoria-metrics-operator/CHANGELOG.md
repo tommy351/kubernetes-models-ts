@@ -1,5 +1,12 @@
 # @kubernetes-models/victoria-metrics-operator
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - kubernetes-models@3.0.1
+
 ## 1.0.0
 
 ### Major Changes

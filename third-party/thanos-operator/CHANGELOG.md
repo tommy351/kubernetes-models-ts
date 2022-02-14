@@ -1,5 +1,12 @@
 # @kubernetes-models/thanos-operator
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kubernetes-models/apimachinery@0.1.0
+
 ## 1.0.0
 
 ### Major Changes
