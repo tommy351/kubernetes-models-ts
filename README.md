@@ -56,6 +56,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/knative](third-party/knative) - [Knative](https://knative.dev/) models.
 - [@kubernetes-models/prometheus-operator](third-party/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
 - [@kubernetes-models/sealed-secrets](third-party/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
+- [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/victoria-metrics-operator](third-party/victoria-metrics-operator) - [VictoriaMetrics operator](https://github.com/VictoriaMetrics/operator) models.
 

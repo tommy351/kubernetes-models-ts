@@ -1,0 +1,48 @@
+{
+  "name": "@kubernetes-models/spiffe",
+  "version": "0.0.0",
+  "description": "SPIFFE models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/spiffe",
+  "author": "Tommy Chen <tommy351@gmail.com",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "spiffe"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": ["https://raw.githubusercontent.com/spiffe/spire/v1.2.0/support/k8s/k8s-workload-registrar/mode-crd/config/spiffeid.spiffe.io_spiffeids.yaml"],
+    "output": "./gen"
+  }
+}
