@@ -1,5 +1,12 @@
 # @kubernetes-models/knative
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`6e51206`](https://github.com/tommy351/kubernetes-models-ts/commit/6e512067557a938db902a88c18595fc7c76e9b37)]:
+  - @kubernetes-models/apimachinery@0.2.0
+
 ## 1.0.1
 
 ### Patch Changes
