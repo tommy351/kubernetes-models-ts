@@ -11,7 +11,7 @@ import { trimPrefix } from "@kubernetes-models/string-util";
 
 type Document = OpenAPIV2.Document<any>;
 
-const VERSION = "1.22.0";
+const VERSION = "1.23.5";
 
 async function fetchSpec(): Promise<Document> {
   return JSON.parse(
