@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/argo-cd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Argo CD models",
   "repository": {
     "type": "git",

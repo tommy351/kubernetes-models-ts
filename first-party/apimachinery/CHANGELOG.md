@@ -1,12 +1,16 @@
 # @kubernetes-models/apimachinery
 
-## 0.1.0
+## 0.2.0
+
 ### Minor Changes
 
+- [#72](https://github.com/tommy351/kubernetes-models-ts/pull/72) [`6e51206`](https://github.com/tommy351/kubernetes-models-ts/commit/6e512067557a938db902a88c18595fc7c76e9b37) Thanks [@tommy351](https://github.com/tommy351)! - Update schema to Kubernetes v1.23.5.
 
+## 0.1.0
+
+### Minor Changes
 
 - [#66](https://github.com/tommy351/kubernetes-models-ts/pull/66) [`04197d2`](https://github.com/tommy351/kubernetes-models-ts/commit/04197d23d5bc951b24a7e225f8d3070511861811) Thanks [@tommy351](https://github.com/tommy351)! - First release.
-
 
 ### Patch Changes
 
