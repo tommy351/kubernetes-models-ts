@@ -21,7 +21,7 @@ const VERSIONS = [
   "1.15.9",
   "1.21.3",
   // Latest version
-  "1.22.0"
+  "1.23.5"
 ];
 
 async function fetchSpec(): Promise<Document> {
