@@ -24,6 +24,11 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new VerticalPodAutoscaler({
         spec: {
+          targetRef: {
+            apiVersion: "apps/v1",
+            kind: "Deployment",
+            name: "my-app"
+          },
           resourcePolicy: {
             containerPolicies: [
               {

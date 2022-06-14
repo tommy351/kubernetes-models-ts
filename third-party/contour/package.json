@@ -44,7 +44,7 @@
   "crd-generate": {
     "input": [
       "https://raw.githubusercontent.com/projectcontour/contour/v1.5.0/examples/contour/01-crds.yaml",
-      "https://raw.githubusercontent.com/projectcontour/contour/v1.18.0/examples/contour/01-crds.yaml"
+      "https://raw.githubusercontent.com/projectcontour/contour/v1.21.0/examples/contour/01-crds.yaml"
     ],
     "output": "./gen"
   }

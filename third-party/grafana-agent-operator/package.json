@@ -43,13 +43,13 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_podmonitors.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_probes.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.coreos.com_servicemonitors.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_grafanaagents.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_logsinstances.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_metricsinstances.yaml",
-      "https://github.com/grafana/agent/raw/v0.21.2/production/operator/crds/monitoring.grafana.com_podlogs.yaml"
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.coreos.com_podmonitors.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.coreos.com_probes.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.coreos.com_servicemonitors.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.grafana.com_grafanaagents.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.grafana.com_logsinstances.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.grafana.com_metricsinstances.yaml",
+      "https://raw.githubusercontent.com/grafana/agent/v0.25.0/production/operator/crds/monitoring.grafana.com_podlogs.yaml"
     ],
     "output": "./gen"
   }

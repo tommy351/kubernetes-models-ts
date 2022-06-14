@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/grafana-operator/grafana-operator/v4.1.0/deploy/manifests/v4.1.0/crds.yaml"
+      "https://raw.githubusercontent.com/grafana-operator/grafana-operator/v4.4.1/deploy/manifests/v4.4.1/crds.yaml"
     ],
     "output": "./gen"
   }
