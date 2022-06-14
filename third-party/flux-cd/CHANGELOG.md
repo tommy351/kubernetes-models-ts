@@ -1,5 +1,18 @@
 # @kubernetes-models/flux-cd
 
+## 1.1.0
+
+### Minor Changes
+
+- [#75](https://github.com/tommy351/kubernetes-models-ts/pull/75) [`929ff88`](https://github.com/tommy351/kubernetes-models-ts/commit/929ff88dd0187cdf83e78317ad733b3f81de194a) Thanks [@tommy351](https://github.com/tommy351)! - Update the following CRDS:
+
+  - source-controller v0.25.5
+  - kustomize-controller v0.26.1
+  - helm-controller v0.22.1
+  - notification-controller v0.24.0
+  - image-reflector-controller v0.19.1
+  - image-automation-controller v0.23.2
+
 ## 1.0.2
 
 ### Patch Changes
