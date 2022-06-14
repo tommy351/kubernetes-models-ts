@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/grafana-operator",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Grafana operator models",
   "repository": {
     "type": "git",
