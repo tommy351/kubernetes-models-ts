@@ -43,9 +43,9 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml",
-      "https://github.com/knative/eventing/releases/download/v0.24.1/eventing-crds.yaml",
-      "https://github.com/knative/operator/releases/download/v0.24.0/operator.yaml"
+      "https://github.com/knative/serving/releases/download/knative-v1.5.0/serving-crds.yaml",
+      "https://github.com/knative/eventing/releases/download/knative-v1.5.1/eventing-crds.yaml",
+      "https://github.com/knative/operator/releases/download/knative-v1.5.0/operator.yaml"
     ],
     "output": "./gen",
     "yamlVersion": "1.1"

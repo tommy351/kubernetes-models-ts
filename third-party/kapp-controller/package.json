@@ -42,7 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/vmware-tanzu/carvel-kapp-controller/releases/download/v0.29.0/release.yml"
+      "https://github.com/vmware-tanzu/carvel-kapp-controller/releases/download/v0.38.1/release.yml"
     ],
     "output": "./gen"
   }

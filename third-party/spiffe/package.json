@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/spiffe/spire/v1.2.0/support/k8s/k8s-workload-registrar/mode-crd/config/spiffeid.spiffe.io_spiffeids.yaml"
+      "https://raw.githubusercontent.com/spiffe/spire/v1.3.1/support/k8s/k8s-workload-registrar/mode-crd/config/spiffeid.spiffe.io_spiffeids.yaml"
     ],
     "output": "./gen"
   }
