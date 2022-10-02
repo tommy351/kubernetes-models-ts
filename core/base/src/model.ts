@@ -34,10 +34,10 @@ export type ModelConstructor<T> = new (data?: ModelData<T>) => Model<T>;
 
 export class Model<T> {
   /** @internal */
-  private [SCHEMA_ID]: string;
+  private [SCHEMA_ID]?: string;
 
   /** @internal */
-  private [ADD_SCHEMA]: () => void;
+  private [ADD_SCHEMA]?: () => void;
 
   public constructor(data?: ModelData<T>) {
     if (data) {

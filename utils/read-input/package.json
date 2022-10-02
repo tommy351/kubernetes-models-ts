@@ -28,16 +28,17 @@
     "kubernetes-models"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
-    "find-cache-dir": "^3.3.1",
+    "find-cache-dir": "^3.3.2",
     "get-stdin": "^8.0.0",
     "make-dir": "^3.1.0",
-    "make-fetch-happen": "^9.1.0",
-    "tslib": "^2.3.1"
+    "make-fetch-happen": "^10.2.1",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/find-cache-dir": "^3.2.1"
+    "@types/find-cache-dir": "^3.2.1",
+    "@types/make-fetch-happen": "^10.0.0"
   }
 }

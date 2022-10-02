@@ -1,4 +1,4 @@
-import { parseAllDocuments, Options } from "yaml";
+import { parseAllDocuments, DocumentOptions } from "yaml";
 import { mapValues } from "lodash";
 import {
   composeGenerators,
@@ -138,7 +138,7 @@ const generator = composeGenerators([generateDefinitions, generateAliases]);
 export interface GenerateOptions {
   input: string;
   outputPath: string;
-  yamlVersion?: Options["version"];
+  yamlVersion?: DocumentOptions["version"];
 }
 
 export async function generate(options: GenerateOptions): Promise<void> {

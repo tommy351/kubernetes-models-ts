@@ -1,8 +1,5 @@
 "use strict";
 
-const nodeVersion = process.versions.node;
-const isESMSupported = +nodeVersion.split(".")[0] >= 14;
-
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
@@ -22,7 +19,5 @@ module.exports = {
     "json",
     "node"
   ],
-  ...(isESMSupported && {
-    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$"
-  })
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$"
 };
