@@ -119,7 +119,7 @@ describe("validate", () => {
     describe("when quantity is invalid", () => {
       it("should fail", () => {
         const pvc = createPVC("foo");
-        expect(() => pvc.validate()).toThrowError(
+        expect(() => pvc.validate()).toThrow(
           'data/spec/resources/requests/storage must be number, data/spec/resources/requests/storage must match format "quantity", data/spec/resources/requests/storage must match exactly one schema in oneOf'
         );
       });

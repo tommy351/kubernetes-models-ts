@@ -4,28 +4,20 @@ on:
   pull_request:
 
 env:
-  PNPM_CACHE_FOLDER: .pnpm-store
-  PNPM_VERSION: 6.11.5
+  PNPM_VERSION: 7.12.1
 
 jobs:
   lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build packages
@@ -38,23 +30,16 @@ jobs:
       - lint
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x, 18.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.PNPM_CACHE_FOLDER }}
-          key: ${{ runner.os }}-pnpm-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
-      - name: Set pnpm store dir
-        run: pnpm config set store-dir ${{ env.PNPM_CACHE_FOLDER }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build packages

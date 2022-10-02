@@ -20,8 +20,9 @@ const VERSIONS = [
   // Old versions with removed APIs
   "1.15.9",
   "1.21.3",
+  "1.24.6",
   // Latest version
-  "1.23.5"
+  "1.25.2"
 ];
 
 async function fetchSpec(): Promise<Document> {
