@@ -1,6 +1,6 @@
 # kubernetes-models
 
-[![](https://img.shields.io/npm/v/kubernetes-models.svg)](https://www.npmjs.com/package/kubernetes-models) [![](https://img.shields.io/badge/kubernetes-1.22.0-green.svg)](https://github.com/kubernetes/kubernetes/tree/v1.22.0)
+[![](https://img.shields.io/npm/v/kubernetes-models.svg)](https://www.npmjs.com/package/kubernetes-models) [![](https://img.shields.io/badge/kubernetes-1.25.2-green.svg)](https://github.com/kubernetes/kubernetes/tree/v1.25.2)
 
 Kubernetes models in TypeScript.
 
