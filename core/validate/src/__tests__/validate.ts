@@ -1,12 +1,17 @@
+/// <reference types="jest-extended" />
 import { validate } from "../validate";
-import { register } from "../ajv";
+import { ajv, register } from "../ajv";
 import Ajv from "ajv";
 
-describe("validate", () => {
+describe("number", () => {
   const id = "number-test";
 
-  beforeAll(() => {
+  beforeEach(() => {
     register(id, { type: "number" });
+  });
+
+  afterEach(() => {
+    ajv.removeSchema(id);
   });
 
   it("success", () => {
@@ -14,6 +19,51 @@ describe("validate", () => {
   });
 
   it("failed", () => {
-    expect(() => validate(id, false)).toThrow(Ajv.ValidationError);
+    expect(() => validate(id, false)).toThrowWithMessage(
+      Ajv.ValidationError,
+      "data must be number"
+    );
+  });
+});
+
+describe("object", () => {
+  const id = "object-test";
+
+  beforeEach(() => {
+    register(id, {
+      type: "object",
+      properties: {
+        a: { type: "string" },
+        b: { type: "number" },
+        c: { type: "boolean" }
+      }
+    });
+  });
+
+  afterEach(() => {
+    ajv.removeSchema(id);
+  });
+
+  it("success", () => {
+    expect(() =>
+      validate(id, {
+        a: "abc",
+        b: 3.14,
+        c: true
+      })
+    ).not.toThrow();
+  });
+
+  it("failed", () => {
+    expect(() =>
+      validate(id, {
+        a: true,
+        b: 3.14,
+        c: "abc"
+      })
+    ).toThrowWithMessage(
+      Ajv.ValidationError,
+      "data/a must be string, data/c must be boolean"
+    );
   });
 });
