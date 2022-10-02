@@ -19,5 +19,6 @@ module.exports = {
     "json",
     "node"
   ],
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$"
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.m?[jt]sx?$",
+  setupFilesAfterEnv: ["jest-extended/all"]
 };
