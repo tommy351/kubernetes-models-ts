@@ -31,7 +31,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kubernetes-models/apimachinery": "workspace:^1.0.0",
+    "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
     "kubernetes-models": "workspace:^",
