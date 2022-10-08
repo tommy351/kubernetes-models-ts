@@ -21,7 +21,8 @@ const rQuantity = new RegExp(
 
 export const ajv = new Ajv({
   strictTypes: false,
-  allErrors: true
+  allErrors: true,
+  verbose: true
 });
 
 addFormats(ajv);

@@ -67,3 +67,24 @@ describe("object", () => {
     );
   });
 });
+
+describe("nullable $ref", () => {
+  beforeEach(() => {
+    register("str", { type: "string" });
+    register("str-nullable", {
+      oneOf: [{ $ref: "str" }, { type: "null" }]
+    });
+  });
+
+  afterEach(() => {
+    ajv.removeSchema("str-nullable");
+    ajv.removeSchema("str");
+  });
+
+  it("should remove oneOf errors", () => {
+    expect(() => validate("str-nullable", 3.14)).toThrowWithMessage(
+      Ajv.ValidationError,
+      "data must be string"
+    );
+  });
+});
