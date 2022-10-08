@@ -11,12 +11,13 @@ import { trimPrefix } from "@kubernetes-models/string-util";
 
 type Document = OpenAPIV2.Document<any>;
 
-const VERSION = "1.25.2";
+// The following version should match the latest version in `first-part/kubernetes-models/scripts/build.ts`.
+const VERSION = "1.25.0";
 
 async function fetchSpec(): Promise<Document> {
   return JSON.parse(
     await readInput(
-      `https://raw.githubusercontent.com/kubernetes/kubernetes/v${VERSION}/api/openapi-spec/swagger.json`
+      `https://raw.githubusercontent.com/tommy351/kubernetes-openapi-spec/main/openapi/${VERSION}.json`
     )
   );
 }
