@@ -1,5 +1,41 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- [#77](https://github.com/tommy351/kubernetes-models-ts/pull/77) [`ac8d1c5`](https://github.com/tommy351/kubernetes-models-ts/commit/ac8d1c5e5e6190556419aa97229d1d6468482b58) Thanks [@tommy351](https://github.com/tommy351)! - Drop support for Node.js 12.
+
+### Minor Changes
+
+- [#79](https://github.com/tommy351/kubernetes-models-ts/pull/79) [`a0d4e70`](https://github.com/tommy351/kubernetes-models-ts/commit/a0d4e70acb1ec8f9ea4a369e30531a1eeb7fed02) Thanks [@tommy351](https://github.com/tommy351)! - When validation failed, collect all errors instead of only the first one.
+
+- [#80](https://github.com/tommy351/kubernetes-models-ts/pull/80) [`8a99963`](https://github.com/tommy351/kubernetes-models-ts/commit/8a99963e60a1479d97d63bb81a7830f2e36a9e05) Thanks [@tommy351](https://github.com/tommy351)! - - Enable `verbose` option in Ajv.
+
+  - Remove nullable $ref error messages.
+
+    When a schema like below failed.
+
+    ```json
+    {
+      "oneOf": [{ "$ref": "io.k8s.api.core.v1.PodSpec#" }, { "type": "null" }]
+    }
+    ```
+
+    It throws a validation error like this.
+
+    ```
+    data/spec must have required property 'containers',
+    data/spec must be null,
+    data/spec must match exactly one schema in oneOf
+    ```
+
+    Only the first line in this error message is helpful. Other lines are very confused and might make developers think they should set `spec` as `null`. Such error messages are removed in this version.
+
+    ```
+    data/spec must have required property 'containers'
+    ```
+
 ## 2.0.1
 
 ### Patch Changes
