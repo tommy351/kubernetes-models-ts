@@ -530,7 +530,6 @@ importers:
       '@types/stream-to-promise': ^2.2.1
       find-cache-dir: ^3.3.2
       jszip: ^3.10.1
-      kubernetes-models: workspace:^
       make-dir: ^3.1.0
       make-fetch-happen: ^10.2.1
       rimraf: ^3.0.2
@@ -542,7 +541,6 @@ importers:
       '@kubernetes-models/apimachinery': link:../../first-party/apimachinery
       '@kubernetes-models/base': link:../../core/base
       '@kubernetes-models/validate': link:../../core/validate
-      kubernetes-models: link:../../first-party/kubernetes-models
       tslib: 2.4.0
     devDependencies:
       '@kubernetes-models/crd-generate': link:../../utils/crd-generate
