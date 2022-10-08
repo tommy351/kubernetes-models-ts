@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/jaeger-operator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Jaeger operator models",
   "repository": {
     "type": "git",
