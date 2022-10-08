@@ -1,5 +1,11 @@
 # @kubernetes-models/victoria-metrics-operator
 
+## 2.0.2
+
+### Patch Changes
+
+- [#83](https://github.com/tommy351/kubernetes-models-ts/pull/83) [`59480db`](https://github.com/tommy351/kubernetes-models-ts/commit/59480db5798cace5e4b9553579478a7097d5b2f4) Thanks [@tommy351](https://github.com/tommy351)! - Remove unused `kubernetes-models` dependency.
+
 ## 2.0.1
 
 ### Patch Changes
