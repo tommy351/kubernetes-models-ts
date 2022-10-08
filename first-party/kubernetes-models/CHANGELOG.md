@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- [#81](https://github.com/tommy351/kubernetes-models-ts/pull/81) [`ef175ce`](https://github.com/tommy351/kubernetes-models-ts/commit/ef175ce282461aea2a2d7977c31791bb12c9cff6) Thanks [@tommy351](https://github.com/tommy351)! - Enum types was removed in the last version because they are removed from OpenAPI spec in `kubernetes` models after v1.24.0 ([PR #109178](https://github.com/kubernetes/kubernetes/pull/109178)). In order to bring back enum types, I manually generated OpenAPI spec files and stored them in [tommy351/kubernetes-openapi-spec](https://github.com/tommy351/kubernetes-openapi-spec) repository.
+
+### Patch Changes
+
+- Updated dependencies [[`ef175ce`](https://github.com/tommy351/kubernetes-models-ts/commit/ef175ce282461aea2a2d7977c31791bb12c9cff6)]:
+  - @kubernetes-models/apimachinery@1.1.0
+
 ## 4.0.0
 
 ### Major Changes
