@@ -165,7 +165,7 @@ importers:
 
   third-party/argo-cd:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -185,7 +185,7 @@ importers:
 
   third-party/autoscaler:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -205,7 +205,7 @@ importers:
 
   third-party/cert-manager:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -225,7 +225,7 @@ importers:
 
   third-party/cilium:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -245,7 +245,7 @@ importers:
 
   third-party/contour:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -265,7 +265,7 @@ importers:
 
   third-party/flux-cd:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -285,7 +285,7 @@ importers:
 
   third-party/gke:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -319,7 +319,7 @@ importers:
 
   third-party/grafana-agent-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -339,7 +339,7 @@ importers:
 
   third-party/grafana-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -359,7 +359,7 @@ importers:
 
   third-party/istio:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -379,7 +379,7 @@ importers:
 
   third-party/jaeger-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -399,7 +399,7 @@ importers:
 
   third-party/kapp-controller:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -419,7 +419,7 @@ importers:
 
   third-party/knative:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -439,7 +439,7 @@ importers:
 
   third-party/prometheus-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -459,7 +459,7 @@ importers:
 
   third-party/sealed-secrets:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -479,7 +479,7 @@ importers:
 
   third-party/spiffe:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -499,7 +499,7 @@ importers:
 
   third-party/thanos-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
@@ -519,7 +519,7 @@ importers:
 
   third-party/victoria-metrics-operator:
     specifiers:
-      '@kubernetes-models/apimachinery': workspace:^0.2.0
+      '@kubernetes-models/apimachinery': workspace:^1.0.0
       '@kubernetes-models/base': workspace:^
       '@kubernetes-models/crd-generate': workspace:^
       '@kubernetes-models/publish-scripts': workspace:^
