@@ -34,7 +34,6 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "kubernetes-models": "workspace:^",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
