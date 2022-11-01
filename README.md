@@ -47,6 +47,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.
 - [@kubernetes-models/flux-cd](third-party/flux-cd) - [Flux CD](https://fluxcd.io/) models.
+- [@kubernetes-models/gateway-api](third-party/gateway-api) - [Gateway API](https://gateway-api.sigs.k8s.io/) models.
 - [@kubernetes-models/gke](third-party/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
 - [@kubernetes-models/grafana-agent-operator](third-party/grafana-agent-operator) - [Grafana agent operator](https://grafana.com/docs/agent/latest/operator/) models.
 - [@kubernetes-models/grafana-operator](third-party/grafana-operator) - [Grafana operator](https://github.com/grafana-operator/grafana-operator) models.
