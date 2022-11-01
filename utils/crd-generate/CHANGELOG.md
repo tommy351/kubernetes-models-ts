@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`25a4971`](https://github.com/tommy351/kubernetes-models-ts/commit/25a49711ae2cceffd83d67e96b313d76ad15cb00)]:
+  - @kubernetes-models/read-input@3.1.0
+
 ## 4.0.0
 
 ### Major Changes
