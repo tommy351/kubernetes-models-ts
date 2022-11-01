@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.0
+
+### Minor Changes
+
+- [#90](https://github.com/tommy351/kubernetes-models-ts/pull/90) [`25a4971`](https://github.com/tommy351/kubernetes-models-ts/commit/25a49711ae2cceffd83d67e96b313d76ad15cb00) Thanks [@tommy351](https://github.com/tommy351)! - Throw errors when HTTP response status code is not 2XX.
+
 ## 3.0.0
 
 ### Major Changes
