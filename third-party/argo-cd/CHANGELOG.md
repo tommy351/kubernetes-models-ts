@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-cd
 
+## 2.0.2
+
+### Patch Changes
+
+- [#88](https://github.com/tommy351/kubernetes-models-ts/pull/88) [`bfb5a18`](https://github.com/tommy351/kubernetes-models-ts/commit/bfb5a18c83f939cd0a798d3e9760f0ef562c5584) Thanks [@tommy351](https://github.com/tommy351)! - Fix missing `ApplicationSet` CRD.
+
 ## 2.0.1
 
 ### Patch Changes
