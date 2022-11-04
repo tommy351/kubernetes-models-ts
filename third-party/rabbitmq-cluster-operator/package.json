@@ -28,7 +28,7 @@
     "rabbitmq-cluster-operator"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",

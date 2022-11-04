@@ -61,7 +61,7 @@ const stat = promisify(fs.stat);
     },
     keywords: ["kubernetes", "kubernetes-models", args.name],
     engines: {
-      node: ">=12"
+      node: ">=14"
     },
     dependencies: {
       "@kubernetes-models/apimachinery": "workspace:^",
