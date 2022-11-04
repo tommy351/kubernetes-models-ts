@@ -1,0 +1,50 @@
+{
+  "name": "@kubernetes-models/rabbitmq-cluster-operator",
+  "version": "0.0.0",
+  "description": "The RabbitMQ Cluster Kubernetes Operator automates provisioning, management, and operations of RabbitMQ clusters running on Kubernetes.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/rabbitmq-cluster-operator",
+  "author": "Justin Chen <mail@justin0u0.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "rabbitmq-cluster-operator"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/rabbitmq/cluster-operator/v2.0.0/config/crd/bases/rabbitmq.com_rabbitmqclusters.yaml"
+    ],
+    "output": "./gen"
+  }
+}
