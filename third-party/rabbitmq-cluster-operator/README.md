@@ -17,13 +17,13 @@ import { RabbitmqCluster } from "@kubernetes-models/rabbitmq-cluster-operator/ra
 
 // Create a new RabbitmqCluster
 const cluster = new RabbitmqCluster({
-	metadata: { name: "example" },
-	spec: {
-		replicas: 3,
-		service: {
-			type: "LoadBalancer"
-		}
-	}
+  metadata: { name: "example" },
+  spec: {
+    replicas: 3,
+    service: {
+      type: "LoadBalancer"
+    }
+  }
 });
 
 // Validate against JSON schema
