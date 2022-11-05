@@ -30,7 +30,7 @@
     data/spec must match exactly one schema in oneOf
     ```
 
-    Only the first line in this error message is helpful. Other lines are very confused and might make developers think they should set `spec` as `null`. Such error messages are removed in this version.
+    Only the first line in this error message is helpful. Other lines are very confusing and might make developers think they should set `spec` as `null`. Such error messages are removed in this version.
 
     ```
     data/spec must have required property 'containers'
