@@ -17,6 +17,7 @@ export interface Schema {
   const?: any;
   oneOf?: Schema[];
   nullable?: boolean;
+  pattern?: string;
   [key: string]: any;
 }
 

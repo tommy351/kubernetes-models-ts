@@ -83,6 +83,28 @@ function setExclusiveNumber(schema: Schema): Schema {
   };
 }
 
+/**
+ * Rewrite string pattern with `RegExp` class to make sure it can be parsed by
+ * Ajv correctly. Invalid pattern will be omitted.
+ */
+function rewriteStringPattern(schema: Schema): Schema {
+  if (schema.type !== "string" || !schema.pattern) return schema;
+
+  const { pattern, ...rest } = schema;
+
+  try {
+    return {
+      ...rest,
+      // Use the method Ajv uses to create a RegExp.
+      // https://ajv.js.org/json-schema.html#pattern
+      pattern: new RegExp(pattern, "u").source
+    };
+  } catch (err) {
+    console.error(err);
+    return rest;
+  }
+}
+
 function doTransformSchema(
   schema: Schema,
   transformers: readonly SchemaTransformer[]
@@ -121,6 +143,7 @@ export function transformSchema(
     allowNull,
     uniqEnum,
     setExclusiveNumber,
+    rewriteStringPattern,
     ...transformers
   ]);
 

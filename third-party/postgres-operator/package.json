@@ -1,0 +1,54 @@
+{
+  "name": "@kubernetes-models/postgres-operator",
+  "version": "0.0.0",
+  "description": "PostgreSQL operator models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/postgres-operator",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "postgres-operator"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/469c11586550deaded962fe1638d7912de086c3c/kustomize/install/crd/bases/postgres-operator.crunchydata.com_postgresclusters.yaml",
+      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/469c11586550deaded962fe1638d7912de086c3c/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgupgrades.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/postgresqls.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/operatorconfigurations.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/postgresteams.yaml"
+    ],
+    "output": "./gen"
+  }
+}
