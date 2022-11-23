@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0
+
+### Minor Changes
+
+- [#96](https://github.com/tommy351/kubernetes-models-ts/pull/96) [`c93da12`](https://github.com/tommy351/kubernetes-models-ts/commit/c93da12d15655cf8bbf9fbaf64d14f8ff94e118e) Thanks [@tommy351](https://github.com/tommy351)! - Rewrite string patterns and omit invalid string patterns to make sure Ajv won't throw `Invalid regular expression` error.
+
 ## 2.0.0
 
 ### Major Changes
