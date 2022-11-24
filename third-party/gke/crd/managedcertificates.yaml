@@ -13,10 +13,12 @@ spec:
     shortNames:
       - mcrt
     singular: managedcertificate
-  preserveUnknownFields: true
   scope: Namespaced
   versions:
-    - name: v1beta1
+    - deprecated: true
+      deprecationWarning: networking.gke.io/v1beta1 ManagedCertificate is deprecated;
+        please migrate to networking.gke.io/v1 ManagedCertificate
+      name: v1beta1
       schema:
         openAPIV3Schema:
           properties:
@@ -55,7 +57,10 @@ spec:
           type: object
       served: true
       storage: false
-    - name: v1beta2
+    - deprecated: true
+      deprecationWarning: networking.gke.io/v1beta2 ManagedCertificate is deprecated;
+        please migrate to networking.gke.io/v1 ManagedCertificate
+      name: v1beta2
       schema:
         openAPIV3Schema:
           properties:

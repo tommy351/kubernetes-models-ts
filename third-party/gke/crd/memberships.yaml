@@ -1,0 +1,58 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: memberships.hub.gke.io
+spec:
+  conversion:
+    strategy: None
+  group: hub.gke.io
+  names:
+    kind: Membership
+    listKind: MembershipList
+    plural: memberships
+    singular: membership
+  scope: Cluster
+  versions:
+    - name: v1
+      schema:
+        openAPIV3Schema:
+          properties:
+            metadata:
+              properties:
+                name:
+                  pattern: ^(membership|test-.*)$
+                  type: string
+              type: object
+            spec:
+              properties:
+                identity_provider:
+                  description: Name of the Identity Provider corresponding to this Membership.
+                    This is useful for workloads running in this cluster to use
+                    Workload Identity.
+                  type: string
+                owner:
+                  properties:
+                    id:
+                      description: Fully qualified name of the GCP resource that owns the cluster.
+                        Should be immutable.
+                      type: string
+                  type: object
+                workload_identity_pool:
+                  description: Name of the Workload Identity Pool that this Membership is part of.
+                    This will be of the form proj-id.svc.id.goog. This is useful
+                    for workloads running in this cluster to use Workload
+                    Identity.
+                  type: string
+              type: object
+          required:
+            - spec
+          type: object
+      served: true
+      storage: true
+    - name: v1beta1
+      schema:
+        openAPIV3Schema:
+          type: object
+          x-kubernetes-preserve-unknown-fields: true
+      served: false
+      storage: false

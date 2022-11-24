@@ -1,0 +1,156 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: multidimpodautoscalers.autoscaling.gke.io
+spec:
+  conversion:
+    strategy: None
+  group: autoscaling.gke.io
+  names:
+    kind: MultidimPodAutoscaler
+    listKind: MultidimPodAutoscalerList
+    plural: multidimpodautoscalers
+    shortNames:
+      - mpa
+    singular: multidimpodautoscaler
+  scope: Namespaced
+  versions:
+    - name: v1beta1
+      schema:
+        openAPIV3Schema:
+          properties:
+            spec:
+              properties:
+                constraints:
+                  properties:
+                    container:
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          requests:
+                            properties:
+                              maxAllowed:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              minAllowed:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                        type: object
+                      type: array
+                    containerControlledResources:
+                      items:
+                        enum:
+                          - memory
+                        type: string
+                      type: array
+                    global:
+                      properties:
+                        maxReplicas:
+                          minimum: 0
+                          type: integer
+                        minReplicas:
+                          default: 1
+                          minimum: 0
+                          type: integer
+                        requests:
+                          properties:
+                            maxAllowed:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            minAllowed:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                      type: object
+                    pod:
+                      properties:
+                        requests:
+                          properties:
+                            maxAllowed:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            minAllowed:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                          type: object
+                      type: object
+                  required:
+                    - containerControlledResources
+                  type: object
+                goals:
+                  properties:
+                    metrics:
+                      items:
+                        properties:
+                          resource:
+                            properties:
+                              name:
+                                enum:
+                                  - cpu
+                                type: string
+                              target:
+                                properties:
+                                  averageUtilization:
+                                    maximum: 100
+                                    minimum: 0
+                                    type: integer
+                                  averageValue:
+                                    x-kubernetes-int-or-string: true
+                                  type:
+                                    enum:
+                                      - Utilization
+                                      - Value
+                                      - AverageValue
+                                    type: string
+                                  value:
+                                    x-kubernetes-int-or-string: true
+                                type: object
+                            required:
+                              - name
+                              - target
+                            type: object
+                          type:
+                            enum:
+                              - Resource
+                            type: string
+                        required:
+                          - type
+                          - resource
+                        type: object
+                      type: array
+                  required:
+                    - metrics
+                  type: object
+                policy:
+                  properties:
+                    updateMode:
+                      enum:
+                        - Auto
+                      type: string
+                  type: object
+                scaleTargetRef:
+                  properties:
+                    apiVersion:
+                      type: string
+                    kind:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+              required:
+                - scaleTargetRef
+                - goals
+                - constraints
+              type: object
+            status:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+          required:
+            - spec
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}

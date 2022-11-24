@@ -43,7 +43,7 @@
     "@kubernetes-models/publish-scripts": "workspace:^",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.7.23",
-    "execa": "^6.1.0",
+    "execa": "^5.1.1",
     "fs-extra": "^10.1.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
@@ -53,10 +53,22 @@
   "crd-generate": {
     "input": [
       "./crd/backendconfigs.yaml",
+      "./crd/clusterimportconfigs.yaml",
+      "./crd/entitlements.yaml",
       "./crd/frontendconfigs.yaml",
       "./crd/managedcertificates.yaml",
+      "./crd/memberships.yaml",
+      "./crd/multidimpodautoscalers.yaml",
+      "./crd/networkloggings.yaml",
+      "./crd/podmonitors.yaml",
+      "./crd/redirectservices.yaml",
+      "./crd/serviceattachments.yaml",
+      "./crd/serviceexports.yaml",
+      "./crd/serviceimportconfigs.yaml",
+      "./crd/serviceimports.yaml",
       "./crd/servicenetworkendpointgroups.yaml",
-      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.58.0/install-bundles/install-bundle-workload-identity/crds.yaml"
+      "./crd/updateinfos.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.97.0/install-bundles/install-bundle-workload-identity/crds.yaml"
     ],
     "output": "./gen"
   }

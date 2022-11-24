@@ -42,6 +42,20 @@ spec:
                 cdn:
                   description: CDNConfig contains configuration for CDN-enabled backends.
                   properties:
+                    bypassCacheOnRequestHeaders:
+                      items:
+                        description: BypassCacheOnRequestHeader contains configuration for how requests
+                          containing specific request headers bypass the cache,
+                          even if the content was previously cached.
+                        properties:
+                          headerName:
+                            description: The header field name to match on when bypassing cache. Values are
+                              case-insensitive.
+                            type: string
+                        type: object
+                      type: array
+                    cacheMode:
+                      type: string
                     cachePolicy:
                       description: CacheKeyPolicy contains configuration for how requests to a
                         CDN-enabled backend are cached.
@@ -76,8 +90,76 @@ spec:
                             type: string
                           type: array
                       type: object
+                    clientTtl:
+                      format: int64
+                      type: integer
+                    defaultTtl:
+                      format: int64
+                      type: integer
                     enabled:
                       type: boolean
+                    maxTtl:
+                      format: int64
+                      type: integer
+                    negativeCaching:
+                      type: boolean
+                    negativeCachingPolicy:
+                      items:
+                        description: NegativeCachingPolicy contains configuration for how negative
+                          caching is applied.
+                        properties:
+                          code:
+                            description: The HTTP status code to define a TTL against. Only HTTP status
+                              codes 300, 301, 308, 404, 405, 410, 421, 451 and
+                              501 are can be specified as values, and you cannot
+                              specify a status code more than once.
+                            format: int64
+                            type: integer
+                          ttl:
+                            description: The TTL (in seconds) for which to cache responses with the
+                              corresponding status code. The maximum allowed
+                              value is 1800s (30 minutes), noting that
+                              infrequently accessed objects may be evicted from
+                              the cache before the defined TTL.
+                            format: int64
+                            type: integer
+                        type: object
+                      type: array
+                    requestCoalescing:
+                      type: boolean
+                    serveWhileStale:
+                      format: int64
+                      type: integer
+                    signedUrlCacheMaxAgeSec:
+                      format: int64
+                      type: integer
+                    signedUrlKeys:
+                      items:
+                        description: SignedUrlKey represents a customer-supplied Signing Key used by
+                          Cloud CDN Signed URLs
+                        properties:
+                          keyName:
+                            description: "KeyName: Name of the key. The name must be 1-63 characters long,
+                              and comply with RFC1035. Specifically, the name
+                              must be 1-63 characters long and match the regular
+                              expression `[a-z]([-a-z0-9]*[a-z0-9])?` which
+                              means the first character must be a lowercase
+                              letter, and all following characters must be a
+                              dash, lowercase letter, or digit, except the last
+                              character, which cannot be a dash."
+                            type: string
+                          keyValue:
+                            description: "KeyValue: 128-bit key value used for signing the URL. The key
+                              value must be a valid RFC 4648 Section 5 base64url
+                              encoded string."
+                            type: string
+                          secretName:
+                            description: The name of a k8s secret which stores the 128-bit key value used
+                              for signing the URL. The key value must be a valid
+                              RFC 4648 Section 5 base64url encoded string
+                            type: string
+                        type: object
+                      type: array
                   required:
                     - enabled
                   type: object
@@ -183,10 +265,15 @@ spec:
                   type: object
                 securityPolicy:
                   description: SecurityPolicyConfig contains configuration for CloudArmor-enabled
-                    backends.
+                    backends. If not specified, the controller will not
+                    reconcile the security policy configuration. In other words,
+                    users can make changes in GCE without the controller
+                    overwriting them.
                   properties:
                     name:
-                      description: Name of the security policy that should be associated.
+                      description: Name of the security policy that should be associated. If set to
+                        empty, the existing security policy on the backend will
+                        be removed.
                       type: string
                   required:
                     - name
@@ -356,6 +443,19 @@ spec:
                     - oauthclientCredentials
                   type: object
                 securityPolicy:
+                  description: SecurityPolicyConfig contains configuration for CloudArmor-enabled
+                    backends. If not specified, the controller will not
+                    reconcile the security policy configuration. In other words,
+                    users can make changes in GCE without the controller
+                    overwriting them.
+                  properties:
+                    name:
+                      description: Name of the security policy that should be associated. If set to
+                        empty, the existing security policy on the backend will
+                        be removed.
+                      type: string
+                  required:
+                    - name
                   type: object
                 sessionAffinity:
                   description: SessionAffinityConfig contains configuration for stickyness
