@@ -1,0 +1,53 @@
+{
+  "name": "@kubernetes-models/external-secrets",
+  "version": "0.0.0",
+  "description": "External secrets models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/external-secrets",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "external-secrets"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.6.1/config/crds/bases/external-secrets.io_clusterexternalsecrets.yaml",
+      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.6.1/config/crds/bases/external-secrets.io_clustersecretstores.yaml",
+      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.6.1/config/crds/bases/external-secrets.io_externalsecrets.yaml",
+      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.6.1/config/crds/bases/external-secrets.io_secretstores.yaml"
+    ],
+    "output": "./gen"
+  }
+}
