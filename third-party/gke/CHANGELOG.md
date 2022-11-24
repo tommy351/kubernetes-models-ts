@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- [#100](https://github.com/tommy351/kubernetes-models-ts/pull/100) [`5a09767`](https://github.com/tommy351/kubernetes-models-ts/commit/5a097671c952454c8a889b4488ca82d79ec481ba) Thanks [@tommy351](https://github.com/tommy351)! - Update CRDs.
+
 ## 4.0.1
 
 ### Patch Changes
