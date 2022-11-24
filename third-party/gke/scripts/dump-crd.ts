@@ -8,7 +8,20 @@ const CRDS: readonly string[] = [
   "backendconfigs.cloud.google.com",
   "frontendconfigs.networking.gke.io",
   "managedcertificates.networking.gke.io",
-  "servicenetworkendpointgroups.networking.gke.io"
+  "servicenetworkendpointgroups.networking.gke.io",
+  "clusterimportconfigs.net.gke.io",
+  "entitlements.anthos.gke.io",
+  "memberships.hub.gke.io",
+  "multidimpodautoscalers.autoscaling.gke.io",
+  "networkloggings.networking.gke.io",
+  "podmonitors.monitoring.gke.io",
+  "redirectservices.networking.gke.io",
+  "serviceattachments.networking.gke.io",
+  "serviceexports.net.gke.io",
+  "serviceimportconfigs.net.gke.io",
+  "serviceimports.net.gke.io",
+  "servicenetworkendpointgroups.networking.gke.io",
+  "updateinfos.nodemanagement.gke.io"
 ];
 
 const CRD_DIR = join(__dirname, "../crd");
