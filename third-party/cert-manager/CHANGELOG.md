@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- [#102](https://github.com/tommy351/kubernetes-models-ts/pull/102) [`7596ee8`](https://github.com/tommy351/kubernetes-models-ts/commit/7596ee8234764d253fb68155f1736a7cbb5bb3b9) Thanks [@tommy351](https://github.com/tommy351)! - Update cert-manager CRDs to v1.10.1 and add trust-manager, approver-policy, aws-pca-issuer CRDs.
+
 ## 4.0.1
 
 ### Patch Changes
