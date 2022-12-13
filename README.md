@@ -60,6 +60,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/prometheus-operator](third-party/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
 - [@kubernetes-models/rabbitmq-cluster-operator](third-party/rabbitmq-cluster-operator/) - [RabbitMQ cluster operator](https://github.com/rabbitmq/cluster-operator) models.
 - [@kubernetes-models/rabbitmq-messaging-topology-operator](third-party/rabbitmq-messaging-topology-operator/) - [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) models.
+- [@kubernetes-models/redis-operator](third-party/redis-operator) - [Redis Operator](https://ot-container-kit.github.io/redis-operator/) models.
 - [@kubernetes-models/sealed-secrets](third-party/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
