@@ -43,15 +43,20 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumlocalredirectpolicies.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumendpoints.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumexternalworkloads.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumidentities.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnodes.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumegressnatpolicies.yaml",
-      "https://raw.githubusercontent.com/cilium/cilium/v1.11.5/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumendpointslices.yaml"
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwideenvoyconfigs.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumegressgatewaypolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumendpoints.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumenvoyconfigs.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumexternalworkloads.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumidentities.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumlocalredirectpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnodes.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumbgploadbalancerippools.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumbgppeeringpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumegressnatpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/cilium/v1.12.4/pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumendpointslices.yaml"
     ],
     "output": "./gen"
   }

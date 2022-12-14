@@ -1,38 +1,44 @@
 import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret";
 
 describe("SealedSecret", () => {
-  let config: SealedSecret;
+  let secret: SealedSecret;
 
   beforeEach(() => {
-    config = new SealedSecret({
+    secret = new SealedSecret({
       metadata: {
         name: "test"
+      },
+      spec: {
+        encryptedData: {
+          foo: "bar"
+        }
       }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(config).toHaveProperty("apiVersion", "bitnami.com/v1alpha1");
+    expect(secret).toHaveProperty("apiVersion", "bitnami.com/v1alpha1");
   });
 
   it("should set kind", () => {
-    expect(config).toHaveProperty("kind", "SealedSecret");
+    expect(secret).toHaveProperty("kind", "SealedSecret");
   });
 
   it("should set metadata", () => {
-    expect(config.metadata).toEqual({ name: "test" });
-  });
-
-  it("should not set sepc", () => {
-    expect(config).not.toHaveProperty("spec");
+    expect(secret.metadata).toEqual({ name: "test" });
   });
 
   it("toJSON", () => {
-    expect(config.toJSON()).toEqual({
+    expect(secret.toJSON()).toEqual({
       apiVersion: "bitnami.com/v1alpha1",
       kind: "SealedSecret",
       metadata: {
         name: "test"
+      },
+      spec: {
+        encryptedData: {
+          foo: "bar"
+        }
       }
     });
   });

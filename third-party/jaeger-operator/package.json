@@ -44,7 +44,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.34.1/config/crd/bases/jaegertracing.io_jaegers.yaml"
+      "https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.39.0/config/crd/bases/jaegertracing.io_jaegers.yaml"
     ],
     "output": "./gen"
   }
