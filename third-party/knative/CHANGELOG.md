@@ -1,5 +1,16 @@
 # @kubernetes-models/knative
 
+## 2.1.0
+
+### Minor Changes
+
+- [#106](https://github.com/tommy351/kubernetes-models-ts/pull/106) [`167ea88`](https://github.com/tommy351/kubernetes-models-ts/commit/167ea88fe01cdbd5ef1d360610c22353667c1111) Thanks [@tommy351](https://github.com/tommy351)! - Update CRD version to serving@v1.8.3, eventing@v1.7.6, knative@v1.8.1.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @kubernetes-models/apimachinery@1.1.0
+
 ## 2.0.1
 
 ### Patch Changes
