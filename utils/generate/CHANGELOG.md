@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.2.0
+
+### Minor Changes
+
+- [#109](https://github.com/tommy351/kubernetes-models-ts/pull/109) [`4c9cb0f`](https://github.com/tommy351/kubernetes-models-ts/commit/4c9cb0fec5a96f972b3940a6bffab68ea8ea6dc5) Thanks [@tommy351](https://github.com/tommy351)! - Add support for `anyOf`, `allOf` and `not` JSON schema properties. Fix the issue that `oneOf` JSON schema property doesn't inherit parent schema.
+
 ## 2.1.0
 
 ### Minor Changes

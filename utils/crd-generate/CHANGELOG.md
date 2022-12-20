@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`4c9cb0f`](https://github.com/tommy351/kubernetes-models-ts/commit/4c9cb0fec5a96f972b3940a6bffab68ea8ea6dc5)]:
+  - @kubernetes-models/generate@2.2.0
+
 ## 4.0.2
 
 ### Patch Changes
