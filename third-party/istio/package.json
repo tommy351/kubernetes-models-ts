@@ -43,8 +43,8 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/istio/istio/1.14.1/manifests/charts/base/crds/crd-all.gen.yaml",
-      "https://raw.githubusercontent.com/istio/istio/1.14.1/manifests/charts/base/crds/crd-operator.yaml"
+      "https://raw.githubusercontent.com/istio/istio/1.16.1/manifests/charts/base/crds/crd-all.gen.yaml",
+      "https://raw.githubusercontent.com/istio/istio/1.16.1/manifests/charts/base/crds/crd-operator.yaml"
     ],
     "output": "./gen"
   }

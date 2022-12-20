@@ -19,6 +19,7 @@ describe("validate", () => {
     it("should throw an error", () => {
       const config = new SealedSecret({
         spec: {
+          // @ts-expect-error
           encryptedData: "sdf"
         }
       });
