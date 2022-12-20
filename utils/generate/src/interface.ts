@@ -1,6 +1,7 @@
 import { Schema } from "./types";
 import { formatComment } from "@kubernetes-models/string-util";
 import indentString from "indent-string";
+import { omit } from "lodash";
 
 const FALLBACK_TYPE = "any";
 const WILDCARD_FIELD = "*";
@@ -33,10 +34,52 @@ function _generateInterface(
     return schema.enum.map((x) => JSON.stringify(x)).join(" | ");
   }
 
+  if (schema.not) {
+    return `Exclude<${_generateInterface(
+      omit(schema, ["not"]),
+      options,
+      parentKeys
+    )}, ${_generateInterface(
+      { ...omit(schema, ["not"]), ...schema.not },
+      options,
+      parentKeys
+    )}>`;
+  }
+
   if (schema.oneOf) {
     return schema.oneOf
-      .map((x) => _generateInterface(x, options, parentKeys))
+      .map((x) =>
+        _generateInterface(
+          { ...omit(schema, ["oneOf"]), ...x },
+          options,
+          parentKeys
+        )
+      )
       .join(" | ");
+  }
+
+  if (schema.anyOf) {
+    return schema.anyOf
+      .map((x) =>
+        _generateInterface(
+          { ...omit(schema, ["anyOf"]), ...x },
+          options,
+          parentKeys
+        )
+      )
+      .join(" | ");
+  }
+
+  if (schema.allOf) {
+    return schema.allOf
+      .map((x) =>
+        _generateInterface(
+          { ...omit(schema, ["allOf"]), ...x },
+          options,
+          parentKeys
+        )
+      )
+      .join(" & ");
   }
 
   switch (schema.type) {
