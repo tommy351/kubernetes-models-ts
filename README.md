@@ -58,6 +58,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/jaeger-operator](third-party/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.
 - [@kubernetes-models/kapp-controller](third-party/kapp-controller) - [Carvel kapp contoller](https://github.com/vmware-tanzu/carvel-kapp-controller) models.
 - [@kubernetes-models/knative](third-party/knative) - [Knative](https://knative.dev/) models.
+- [@kubernetes-models/kubedb](third-party/kubedb) - [KubeDB](https://kubedb.com/) models.
 - [@kubernetes-models/postgres-operator](third-party/postgres-operator) - PostgreSQL operator models.
 - [@kubernetes-models/prometheus-operator](third-party/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
 - [@kubernetes-models/rabbitmq-cluster-operator](third-party/rabbitmq-cluster-operator/) - [RabbitMQ cluster operator](https://github.com/rabbitmq/cluster-operator) models.
