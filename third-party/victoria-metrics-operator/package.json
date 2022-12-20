@@ -45,7 +45,6 @@
     "@types/stream-to-promise": "^2.2.1",
     "find-cache-dir": "^3.3.2",
     "jszip": "^3.10.1",
-    "make-dir": "^3.1.0",
     "make-fetch-happen": "^10.2.1",
     "rimraf": "^3.0.2",
     "stream-to-promise": "^3.0.0",

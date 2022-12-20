@@ -40,7 +40,6 @@
     "@kubernetes-models/read-input": "workspace:^",
     "@kubernetes-models/string-util": "workspace:^",
     "lodash": "^4.17.21",
-    "make-dir": "^3.1.0",
     "tslib": "^2.4.0",
     "yaml": "^2.1.1",
     "yargs": "^17.6.0"

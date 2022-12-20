@@ -1,9 +1,8 @@
 import glob from "fast-glob";
 import { writeJSON, readFile, pathExists } from "fs-extra";
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { extname } from "path";
+import { extname, join } from "path";
 import ignore from "ignore";
-import { join } from "path";
 
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";

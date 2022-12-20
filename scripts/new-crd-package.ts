@@ -1,13 +1,8 @@
 /* eslint-disable node/no-unpublished-import */
-import makeDir from "make-dir";
 import { join } from "path";
 import yargs from "yargs";
-import fs from "fs";
-import { promisify } from "util";
+import { mkdir, stat, writeFile } from "fs/promises";
 import signale from "signale";
-
-const writeFile = promisify(fs.writeFile);
-const stat = promisify(fs.stat);
 
 (async () => {
   const args = await yargs
@@ -96,7 +91,7 @@ const stat = promisify(fs.stat);
   };
 
   signale.info("Creating the package directory:", pkgDir);
-  await makeDir(pkgDir);
+  await mkdir(pkgDir, { recursive: true });
 
   signale.info("Writing package.json");
   await writeFile(

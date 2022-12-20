@@ -1,7 +1,6 @@
 import yargs from "yargs/yargs";
-import { GenerateArguments, InjectArguments } from ".";
-import { generate } from "./generate";
-import { inject } from "./inject";
+import { generate, GenerateArguments } from "./generate";
+import { inject, InjectArguments } from "./inject";
 
 yargs(process.argv.slice(2))
   .command<GenerateArguments>(

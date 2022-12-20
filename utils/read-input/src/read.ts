@@ -1,9 +1,7 @@
 import getStdin from "get-stdin";
-import { readFile } from "fs";
-import { promisify } from "util";
+import { readFile } from "fs/promises";
 import { httpGet } from "./http";
 
-const readFileAsync = promisify(readFile);
 const urlRegex = /^https?:\/\//;
 
 export async function readInput(path: string): Promise<string> {
@@ -15,5 +13,5 @@ export async function readInput(path: string): Promise<string> {
     return httpGet(path);
   }
 
-  return readFileAsync(path, "utf8");
+  return readFile(path, "utf8");
 }

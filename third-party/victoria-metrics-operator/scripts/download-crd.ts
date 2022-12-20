@@ -1,11 +1,11 @@
 /* eslint-disable node/no-unpublished-import */
 import JSZip from "jszip";
 import { createWriteStream } from "fs";
+import { mkdir } from "fs/promises";
 import { dirname, join } from "path";
 import streamToPromise from "stream-to-promise";
 import assert from "assert";
 import fetch from "make-fetch-happen";
-import makeDir from "make-dir";
 import findCacheDir from "find-cache-dir";
 
 const VERSION = "0.29.2";
@@ -21,7 +21,7 @@ const outputPath = join(__dirname, "../crds/crd.yaml");
   const file = zip.file("release/crds/crd.yaml");
   assert(file);
 
-  await makeDir(dirname(outputPath));
+  await mkdir(dirname(outputPath), { recursive: true });
 
   const dest = createWriteStream(outputPath);
   await streamToPromise(file.nodeStream().pipe(dest));
