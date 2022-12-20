@@ -43,6 +43,7 @@ See [examples](examples) folder for more examples.
 ### 3rd-party Models
 
 - [@kubernetes-models/argo-cd](third-party/argo-cd) - [Argo CD](https://argo-cd.readthedocs.io/) models.
+- [@kubernetes-models/argo-rollouts](third-party/argo-rollouts) - [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) models.
 - [@kubernetes-models/cert-manager](third-party/cert-manager) - [cert-manager](https://cert-manager.io/) models.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.

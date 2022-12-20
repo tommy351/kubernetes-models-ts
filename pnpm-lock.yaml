@@ -183,6 +183,26 @@ importers:
       rimraf: 3.0.2
     publishDirectory: dist
 
+  third-party/argo-rollouts:
+    specifiers:
+      '@kubernetes-models/apimachinery': workspace:^
+      '@kubernetes-models/base': workspace:^
+      '@kubernetes-models/crd-generate': workspace:^
+      '@kubernetes-models/publish-scripts': workspace:^
+      '@kubernetes-models/validate': workspace:^
+      rimraf: ^3.0.2
+      tslib: ^2.3.0
+    dependencies:
+      '@kubernetes-models/apimachinery': link:../../first-party/apimachinery
+      '@kubernetes-models/base': link:../../core/base
+      '@kubernetes-models/validate': link:../../core/validate
+      tslib: 2.4.0
+    devDependencies:
+      '@kubernetes-models/crd-generate': link:../../utils/crd-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      rimraf: 3.0.2
+    publishDirectory: dist
+
   third-party/autoscaler:
     specifiers:
       '@kubernetes-models/apimachinery': workspace:^
