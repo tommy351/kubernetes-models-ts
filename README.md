@@ -48,6 +48,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.
 - [@kubernetes-models/external-secrets](third-party/external-secrets) - [External secrets](https://external-secrets.io) models.
+- [@kubernetes-models/flagger](third-party/flagger) - [Flagger](https://flagger.app/) models.
 - [@kubernetes-models/flux-cd](third-party/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gateway-api](third-party/gateway-api) - [Gateway API](https://gateway-api.sigs.k8s.io/) models.
 - [@kubernetes-models/gke](third-party/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.

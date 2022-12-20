@@ -15,7 +15,10 @@ export interface Schema {
   additionalProperties?: Schema;
   enum?: any[];
   const?: any;
+  not?: Schema;
   oneOf?: Schema[];
+  anyOf?: Schema[];
+  allOf?: Schema[];
   nullable?: boolean;
   pattern?: string;
   [key: string]: any;
