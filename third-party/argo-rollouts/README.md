@@ -13,7 +13,7 @@ npm install @kubernetes-models/argo-rollouts
 ## Usage
 
 ```js
-import { Rollout } from "@kubernetes-models/argo-cd/argoproj.io/v1alpha1/Rollout";
+import { Rollout } from "@kubernetes-models/argo-rollouts/argoproj.io/v1alpha1/Rollout";
 
 // Create a new Rollout
 const rollout = new Rollout({
