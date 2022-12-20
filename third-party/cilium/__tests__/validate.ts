@@ -41,6 +41,7 @@ describe("validate", () => {
           name: "lrp"
         },
         spec: {
+          // @ts-expect-error
           redirectFrontend: {},
           redirectBackend: {
             localEndpointSelector: {},

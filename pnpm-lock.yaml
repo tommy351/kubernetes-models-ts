@@ -283,6 +283,38 @@ importers:
       rimraf: 3.0.2
     publishDirectory: dist
 
+  third-party/flagger:
+    specifiers:
+      '@kubernetes-models/apimachinery': workspace:^
+      '@kubernetes-models/base': workspace:^
+      '@kubernetes-models/crd-generate': workspace:^
+      '@kubernetes-models/publish-scripts': workspace:^
+      '@kubernetes-models/read-input': workspace:^
+      '@kubernetes-models/validate': workspace:^
+      '@types/js-yaml': ^4.0.5
+      '@types/node': ^18.7.23
+      js-yaml: ^4.1.0
+      rimraf: ^3.0.2
+      ts-node: ^10.9.1
+      tslib: ^2.3.0
+      typescript: ^4.8.4
+    dependencies:
+      '@kubernetes-models/apimachinery': link:../../first-party/apimachinery
+      '@kubernetes-models/base': link:../../core/base
+      '@kubernetes-models/validate': link:../../core/validate
+      tslib: 2.4.0
+    devDependencies:
+      '@kubernetes-models/crd-generate': link:../../utils/crd-generate
+      '@kubernetes-models/publish-scripts': link:../../internal/publish-scripts
+      '@kubernetes-models/read-input': link:../../utils/read-input
+      '@types/js-yaml': 4.0.5
+      '@types/node': 18.7.23
+      js-yaml: 4.1.0
+      rimraf: 3.0.2
+      ts-node: 10.9.1_gbhfbbeqrol7fxixnzbkbuanxe
+      typescript: 4.8.4
+    publishDirectory: dist
+
   third-party/flux-cd:
     specifiers:
       '@kubernetes-models/apimachinery': workspace:^
@@ -1814,6 +1846,10 @@ packages:
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
+    dev: true
+
+  /@types/js-yaml/4.0.5:
+    resolution: {integrity: sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==}
     dev: true
 
   /@types/json-schema/7.0.11:
