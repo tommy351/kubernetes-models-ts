@@ -57,6 +57,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/istio](third-party/istio) - [Istio](https://istio.io/) models.
 - [@kubernetes-models/jaeger-operator](third-party/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.
 - [@kubernetes-models/kapp-controller](third-party/kapp-controller) - [Carvel kapp contoller](https://github.com/vmware-tanzu/carvel-kapp-controller) models.
+- [@kubernetes-models/keda](third-party/keda) - [KEDA](https://github.com/kedacore/keda) models.
 - [@kubernetes-models/knative](third-party/knative) - [Knative](https://knative.dev/) models.
 - [@kubernetes-models/kubedb](third-party/kubedb) - [KubeDB](https://kubedb.com/) models.
 - [@kubernetes-models/postgres-operator](third-party/postgres-operator) - PostgreSQL operator models.
