@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "rootDir": "gen",
+    "outDir": "dist",
+    "sourceMap": false
+  },
+  "include": [
+    "gen"
+  ],
+  "references": [
+    {
+      "path": "../../core/base"
+    },
+    {
+      "path": "../../core/validate"
+    }
+  ]
+}
