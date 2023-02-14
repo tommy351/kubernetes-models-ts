@@ -2,7 +2,10 @@
 import { join } from "path";
 import yargs from "yargs";
 import { mkdir, stat, writeFile } from "fs/promises";
-import signale from "signale";
+import humanId from "human-id";
+import execa from "execa";
+
+const rootDir = join(__dirname, "..");
 
 (async () => {
   const args = await yargs
@@ -21,7 +24,7 @@ import signale from "signale";
     })
     .parse();
 
-  const pkgDir = join(__dirname, "..", "third-party", args.name);
+  const pkgDir = join(rootDir, "third-party", args.name);
 
   try {
     await stat(pkgDir);
@@ -90,24 +93,46 @@ import signale from "signale";
     ]
   };
 
-  signale.info("Creating the package directory:", pkgDir);
+  console.log("Creating the package directory:", pkgDir);
   await mkdir(pkgDir, { recursive: true });
 
-  signale.info("Writing package.json");
+  console.log("Writing package.json");
   await writeFile(
     join(pkgDir, "package.json"),
     JSON.stringify(pkgJson, null, "  ")
   );
 
-  signale.info("Writing tsconfig.json");
+  console.log("Writing tsconfig.json");
   await writeFile(
     join(pkgDir, "tsconfig.json"),
     JSON.stringify(tsConfig, null, "  ")
   );
 
-  signale.success("New package %s is created at %s", pkgJson.name, pkgDir);
+  console.log("Writing changeset");
+  const changesetId = humanId({
+    separator: "-",
+    capitalize: false
+  });
+
+  await writeFile(
+    join(rootDir, ".changeset", changesetId + ".md"),
+    `---
+"${pkgJson.name}": minor
+---
+
+First release.
+`
+  );
+
+  console.log("New package %s is created at %s", pkgJson.name, pkgDir);
+
+  console.log("Running pnpm install");
+  const { exitCode } = await execa("pnpm", ["install"], {
+    stdio: "inherit",
+    reject: false
+  });
+  process.exitCode = exitCode;
 })().catch((err) => {
-  signale.fatal(err);
-  // eslint-disable-next-line no-process-exit
-  process.exit(1);
+  console.error(err);
+  process.exitCode = 1;
 });
