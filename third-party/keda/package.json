@@ -1,0 +1,52 @@
+{
+  "name": "@kubernetes-models/keda",
+  "version": "0.0.0",
+  "description": "KEDA(Kubernetes Event-driven Autoscaling) models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/keda",
+  "author": "Jay Chung <ken8203@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts postbuild",
+    "prepack": "publish-scripts prepack",
+    "clean": "rimraf gen"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "keda"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "rimraf": "^3.0.2"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_clustertriggerauthentications.yaml",
+      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_scaledjobs.yaml",
+      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_scaledobjects.yaml",
+      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_triggerauthentications.yaml"
+    ],
+    "output": "./gen"
+  }
+}
