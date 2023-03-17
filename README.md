@@ -69,6 +69,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/victoria-metrics-operator](third-party/victoria-metrics-operator) - [VictoriaMetrics operator](https://github.com/VictoriaMetrics/operator) models.
+- [@kubernetes-models/seldon-core-operator](third-party/seldon-core-operator) - [SeldonCore operator](https://github.com/SeldonIO/seldon-core/tree/v1.15.0/helm-charts/seldon-core-operator) models.
 
 ### Generators
 
