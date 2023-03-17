@@ -42,7 +42,7 @@
     "rimraf": "^3.0.2"
   },
   "crd-generate": {
-    "input": ["./crds/crd.yaml"],
+    "input": ["https://raw.githubusercontent.com/SeldonIO/seldon-core/v1.15.0/operator/config/crd/bases/machinelearning.seldon.io_seldondeployments.yaml"],
     "output": "./gen"
   }
 }
