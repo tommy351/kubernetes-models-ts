@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/seldon-core-operator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "seldon core operator",
   "repository": {
     "type": "git",
@@ -42,7 +42,9 @@
     "rimraf": "^3.0.2"
   },
   "crd-generate": {
-    "input": ["https://raw.githubusercontent.com/SeldonIO/seldon-core/v1.15.0/operator/config/crd/bases/machinelearning.seldon.io_seldondeployments.yaml"],
+    "input": [
+      "https://raw.githubusercontent.com/SeldonIO/seldon-core/v1.15.0/operator/config/crd/bases/machinelearning.seldon.io_seldondeployments.yaml"
+    ],
     "output": "./gen"
   }
 }
