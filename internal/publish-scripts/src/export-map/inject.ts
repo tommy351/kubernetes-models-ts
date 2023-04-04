@@ -5,7 +5,7 @@ export interface InjectArguments {
   export: string;
 }
 
-export async function inject(args: InjectArguments): Promise<void> {
+export default async function inject(args: InjectArguments): Promise<void> {
   const json = await readJSON(args.package);
   const exportMap = await readJSON(args.export);
 

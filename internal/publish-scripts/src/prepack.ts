@@ -1,6 +1,6 @@
 import { copy, ensureSymlink } from "fs-extra";
 import { join } from "path";
-import { inject } from "@kubernetes-models/export-map";
+import inject from "./export-map/inject";
 
 export interface PrePackArguments {
   cwd: string;

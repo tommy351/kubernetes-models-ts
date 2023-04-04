@@ -16,7 +16,7 @@ export interface GenerateArguments {
   ignoreFile?: string;
 }
 
-export async function generate({
+export default async function generate({
   cwd = process.cwd(),
   include = ["**/*.ts"],
   exclude = [],

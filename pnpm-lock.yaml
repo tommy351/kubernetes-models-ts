@@ -200,12 +200,18 @@ importers:
 
   internal/publish-scripts:
     dependencies:
-      '@kubernetes-models/export-map':
+      '@kubernetes-models/string-util':
         specifier: workspace:^
-        version: link:../../utils/export-map
+        version: link:../../utils/string-util
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
+      ignore:
+        specifier: ^5.2.0
+        version: 5.2.0
       tslib:
         specifier: ^2.4.0
         version: 2.4.0
@@ -216,6 +222,9 @@ importers:
       '@types/fs-extra':
         specifier: ^9.0.13
         version: 9.0.13
+      '@types/yargs':
+        specifier: ^17.0.13
+        version: 17.0.13
 
   third-party/argo-cd:
     dependencies:
@@ -1064,34 +1073,6 @@ importers:
       '@types/lodash':
         specifier: ^4.14.186
         version: 4.14.186
-      '@types/yargs':
-        specifier: ^17.0.13
-        version: 17.0.13
-
-  utils/export-map:
-    dependencies:
-      '@kubernetes-models/string-util':
-        specifier: workspace:^
-        version: link:../string-util
-      fast-glob:
-        specifier: ^3.2.12
-        version: 3.2.12
-      fs-extra:
-        specifier: ^10.1.0
-        version: 10.1.0
-      ignore:
-        specifier: ^5.2.0
-        version: 5.2.0
-      tslib:
-        specifier: ^2.4.0
-        version: 2.4.0
-      yargs:
-        specifier: ^17.6.0
-        version: 17.6.0
-    devDependencies:
-      '@types/fs-extra':
-        specifier: ^9.0.13
-        version: 9.0.13
       '@types/yargs':
         specifier: ^17.0.13
         version: 17.0.13

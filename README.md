@@ -83,8 +83,6 @@ See [examples](examples) folder for more examples.
 
 ### Utilities
 
-- [@kubernetes-models/base](core/base) - Base model for Kubernetes models.
-- [@kubernetes-models/export-map](utils/export-map) - Generate and inject export map.
 - [@kubernetes-models/generate](utils/generate) - Type declarations and utilities for Kubernetes model generation.
 - [@kubernetes-models/read-input](utils/read-input) - Read input from file, URL or stdin.
 - [@kubernetes-models/string-util](utils/string-util) - Utility functions for strings.

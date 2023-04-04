@@ -1,4 +1,4 @@
-import { generate } from "@kubernetes-models/export-map";
+import generate from "./export-map/generate";
 import { join } from "path";
 
 export interface PostBuildArguments {

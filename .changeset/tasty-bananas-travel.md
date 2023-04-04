@@ -1,5 +1,4 @@
 ---
-"@kubernetes-models/export-map": minor
 "kubernetes-models": minor
 "@kubernetes-models/argo-cd": minor
 "@kubernetes-models/argo-rollouts": minor

@@ -9,12 +9,15 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kubernetes-models/export-map": "workspace:^",
+    "@kubernetes-models/string-util": "workspace:^",
+    "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
+    "ignore": "^5.2.0",
     "tslib": "^2.4.0",
     "yargs": "^17.6.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13"
+    "@types/fs-extra": "^9.0.13",
+    "@types/yargs": "^17.0.13"
   }
 }
