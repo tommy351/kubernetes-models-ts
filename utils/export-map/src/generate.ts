@@ -4,13 +4,9 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { extname, join } from "path";
 import ignore from "ignore";
 
+const DTS_EXT = ".d.ts";
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
-
-interface Export {
-  require: string;
-  import: string;
-}
 
 export interface GenerateArguments {
   cwd?: string;
@@ -40,7 +36,7 @@ export async function generate({
 
   paths.sort();
 
-  const exportMap: Record<string, Export> = {};
+  const exportMap: Record<string, unknown> = {};
 
   for (const path of paths) {
     if (ig.ignores(path)) continue;
@@ -48,12 +44,19 @@ export async function generate({
     const base = trimSuffix(path, extname(path));
     const exportPath =
       base === "index" ? "." : `./${trimSuffix(base, "/index")}`;
+    const typesPath = `./${base}${DTS_EXT}`;
     const requirePath = `./${base}${CJS_EXT}`;
     const importPath = `./${base}${ESM_EXT}`;
 
     exportMap[exportPath] = {
-      require: requirePath,
-      import: importPath
+      import: {
+        types: typesPath,
+        default: importPath
+      },
+      require: {
+        types: typesPath,
+        default: requirePath
+      }
     };
   }
 
