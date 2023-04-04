@@ -71,13 +71,10 @@ export default function ({ getDefinitionPath }: Context): Generator {
       output.push({
         path: getIndexPath(key),
         content: values
-          .flatMap((v) => {
+          .map((v) => {
             const exportedName = camelCase(v, ".-");
 
-            return [
-              `import * as ${exportedName} from "./${v}";`,
-              `export { ${exportedName} };`
-            ];
+            return `export * as ${exportedName} from "./${v}";`;
           })
           .join("\n")
       });
