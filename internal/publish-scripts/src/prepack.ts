@@ -1,6 +1,5 @@
-import { copy, ensureSymlink } from "fs-extra";
+import { copy, ensureSymlink, readJSON, writeJSON } from "fs-extra";
 import { join } from "path";
-import inject from "./export-map/inject";
 
 export interface PrePackArguments {
   cwd: string;
@@ -8,7 +7,6 @@ export interface PrePackArguments {
 
 export async function prePack(args: PrePackArguments): Promise<void> {
   const distDir = join(args.cwd, "dist");
-  const genDir = join(args.cwd, "gen");
 
   for (const file of ["package.json", "README.md"]) {
     await copy(join(args.cwd, file), join(distDir, file));
@@ -19,8 +17,16 @@ export async function prePack(args: PrePackArguments): Promise<void> {
     join(distDir, "node_modules")
   );
 
-  await inject({
-    package: join(distDir, "package.json"),
-    export: join(genDir, "export-map.json")
+  const pkgJsonPath = join(distDir, "package.json");
+  const pkgJson = await readJSON(pkgJsonPath);
+  const exportMapPath = join(args.cwd, "gen/export-map.json");
+  const exportMap = await readJSON(exportMapPath);
+
+  pkgJson.exports = exportMap;
+
+  await writeJSON(pkgJsonPath, pkgJson, {
+    spaces: 2
   });
+
+  console.log("Injected export map %s into %s", exportMapPath, pkgJsonPath);
 }
