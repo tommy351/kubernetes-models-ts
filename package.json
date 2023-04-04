@@ -64,7 +64,11 @@
   "syncpack": {
     "source": [
       "package.json",
-      "packages/*/package.json"
+      "core/*/package.json",
+      "first-party/*/package.json",
+      "internal/*/package.json",
+      "third-party/*/package.json",
+      "utils/*/package.json"
     ]
   }
 }
