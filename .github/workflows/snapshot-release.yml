@@ -20,8 +20,6 @@ jobs:
         run: pnpm changeset version --snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Replace exact workspace version
-        run: pnpm ts-node scripts/replace-exact-workspace-version.ts
       - name: Publish snapshot packages
         run: pnpm publish -r --tag snapshot --no-git-checks
         env:
