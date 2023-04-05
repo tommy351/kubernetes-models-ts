@@ -35,10 +35,6 @@ function generateExportEntry(name: string): Record<string, string> {
   };
 }
 
-function getExportPath(path: string): string {
-  return path === "." ? path : `./${path}`;
-}
-
 async function generateExportMap(
   cwd: string
 ): Promise<Record<string, unknown>> {
@@ -50,34 +46,20 @@ async function generateExportMap(
     (path) => !ig.ignores(path)
   );
 
-  const indexPaths = new Set<string>();
-  const nonIndexPaths = new Set<string>();
-
-  for (const path of paths) {
-    const base = basename(path, extname(path));
-    const dir = posix.dirname(path);
-
-    if (base === "index") {
-      indexPaths.add(dir);
-    } else {
-      nonIndexPaths.add(dir);
-    }
-  }
-
   const exportMap: Record<string, unknown> = {
     "./package.json": "./package.json"
   };
 
-  for (const path of indexPaths) {
-    const exportPath = getExportPath(path);
+  for (const path of paths) {
+    const base = basename(path, extname(path));
+    const dir = posix.dirname(path);
+    const exportPath = dir === "." ? dir : `./${dir}`;
 
-    exportMap[exportPath] = generateExportEntry(`${exportPath}/index`);
-  }
-
-  for (const path of nonIndexPaths) {
-    const exportPath = getExportPath(path) + "/*";
-
-    exportMap[exportPath] = generateExportEntry(exportPath);
+    if (base === "index") {
+      exportMap[exportPath] = generateExportEntry(`${exportPath}/index`);
+    } else {
+      exportMap[`${exportPath}/*`] = generateExportEntry(`${exportPath}/*`);
+    }
   }
 
   return sortObjectByKey(exportMap);
