@@ -34,7 +34,7 @@
 
 Decrease the size of export map in `package.json` by using wildcard pattern (`*`).
 
-```json
+```js
 // Before
 {
   "exports": {
@@ -54,7 +54,7 @@ Decrease the size of export map in `package.json` by using wildcard pattern (`*`
   "exports": {
     "./v1/*": {
       "import": "./v1/*.mjs",
-      "require": "./v1/Pod.js"
+      "require": "./v1/*.js"
     }
   }
 }

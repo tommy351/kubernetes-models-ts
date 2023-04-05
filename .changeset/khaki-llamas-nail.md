@@ -5,7 +5,7 @@
 
 Decrease the size of alias files.
 
-```ts
+```js
 // Before
 import * as v1 from "./v1";
 export { v1 };

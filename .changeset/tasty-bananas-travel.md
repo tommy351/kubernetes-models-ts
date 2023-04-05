@@ -31,4 +31,32 @@
 "@kubernetes-models/victoria-metrics-operator": minor
 ---
 
-Support TypeScript `nodenext` module resolution.
+Support TypeScript `nodenext` module resolution by adding `types` to export map.
+
+```js
+// Before
+{
+  "exports": {
+    "./v1/Pod": {
+      "import": "./v1/Pod.mjs",
+      "require": "./v1/Pod.js"
+    }
+  }
+}
+
+// After
+{
+  "exports": {
+    "./v1/Pod": {
+      "import": {
+        "types": "./v1/Pod.d.ts",
+        "default": "./v1/Pod.mjs"
+      }
+      "require": {
+        "types": "./v1/Pod.d.ts",
+        "default": "./v1/Pod.js"
+      }
+    }
+  }
+}
+```
