@@ -683,6 +683,9 @@ importers:
 
   third-party/keda:
     dependencies:
+      '@kubernetes-models/apimachinery':
+        specifier: workspace:^
+        version: link:../../first-party/apimachinery/dist
       '@kubernetes-models/base':
         specifier: workspace:^
         version: link:../../core/base
