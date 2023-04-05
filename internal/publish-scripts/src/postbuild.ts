@@ -1,17 +1,22 @@
 import glob from "fast-glob";
-import { writeJSON, readFile, pathExists } from "fs-extra";
+import { writeJSON, readFile, pathExists, readJSON, mkdirs } from "fs-extra";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { basename, extname, join, posix } from "path";
 import ignore, { Ignore } from "ignore";
+import { copyFile } from "fs/promises";
 
 const DTS_EXT = ".d.ts";
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
 
-async function loadExportMapIgnoreFile(ig: Ignore, path: string) {
+async function loadExportMapIgnoreFile(
+  ig: Ignore,
+  path: string
+): Promise<void> {
   if (!(await pathExists(path))) return;
 
   ig.add(await readFile(path, "utf-8"));
+  console.log("Loaded export map ignore file", path);
 }
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
@@ -22,7 +27,7 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   return Object.fromEntries(entries) as T;
 }
 
-function generateExportEntry(name: string) {
+function generateExportEntry(name: string): Record<string, unknown> {
   return {
     import: {
       types: name + DTS_EXT,
@@ -35,17 +40,14 @@ function generateExportEntry(name: string) {
   };
 }
 
-export interface PostBuildArguments {
-  cwd: string;
-}
-
-export async function postBuild(args: PostBuildArguments): Promise<void> {
-  const genDir = join(args.cwd, "gen");
+async function generateExportMap(
+  cwd: string
+): Promise<Record<string, unknown>> {
   const ig = ignore();
 
-  await loadExportMapIgnoreFile(ig, join(args.cwd, ".export-map-ignore"));
+  await loadExportMapIgnoreFile(ig, join(cwd, ".export-map-ignore"));
 
-  const paths = (await glob(["**/*.ts"], { cwd: genDir })).filter(
+  const paths = (await glob(["**/*.ts"], { cwd: join(cwd, "gen") })).filter(
     (path) => !ig.ignores(path)
   );
 
@@ -89,8 +91,35 @@ export async function postBuild(args: PostBuildArguments): Promise<void> {
     exportMap[exportPath] = generateExportEntry(exportPath);
   }
 
-  const exportMapPath = join(genDir, "export-map.json");
+  return sortObjectByKey(exportMap);
+}
 
-  await writeJSON(exportMapPath, sortObjectByKey(exportMap), { spaces: 2 });
-  console.log("Generated export map in %s", exportMapPath);
+async function copyDistFiles(cwd: string): Promise<void> {
+  for (const file of ["README.md"]) {
+    const src = join(cwd, file);
+    const dst = join(cwd, "dist", file);
+
+    if (!(await pathExists(src))) continue;
+
+    await copyFile(src, dst);
+    console.log("Copied to dist folder:", file);
+  }
+}
+
+async function writePkgJson(cwd: string): Promise<void> {
+  const pkgJson = await readJSON(join(cwd, "package.json"));
+
+  pkgJson.exports = await generateExportMap(cwd);
+
+  await writeJSON(join(cwd, "dist/package.json"), pkgJson, { spaces: 2 });
+}
+
+export interface PostBuildArguments {
+  cwd: string;
+}
+
+export async function postBuild(args: PostBuildArguments): Promise<void> {
+  await mkdirs(join(args.cwd, "dist"));
+  await copyDistFiles(args.cwd);
+  await writePkgJson(args.cwd);
 }

@@ -1,4 +1,4 @@
-import { copy, ensureSymlink, readJSON, writeJSON } from "fs-extra";
+import { readJSON, writeJSON } from "fs-extra";
 import { join } from "path";
 
 export interface PrePackArguments {
@@ -6,27 +6,21 @@ export interface PrePackArguments {
 }
 
 export async function prePack(args: PrePackArguments): Promise<void> {
-  const distDir = join(args.cwd, "dist");
+  const rootPkgJsonPath = join(args.cwd, "package.json");
+  const distPkgJsonPath = join(args.cwd, "dist/package.json");
+  const rootPkgJson = await readJSON(rootPkgJsonPath);
+  const distPkgJson = await readJSON(distPkgJsonPath);
 
-  for (const file of ["package.json", "README.md"]) {
-    await copy(join(args.cwd, file), join(distDir, file));
-  }
-
-  await ensureSymlink(
-    join(args.cwd, "node_modules"),
-    join(distDir, "node_modules")
+  await writeJSON(
+    distPkgJsonPath,
+    {
+      ...distPkgJson,
+      version: rootPkgJson.version,
+      dependencies: rootPkgJson.dependencies,
+      devDependencies: rootPkgJson.devDependencies,
+      peerDependencies: rootPkgJson.peerDependencies
+    },
+    { spaces: 2 }
   );
-
-  const pkgJsonPath = join(distDir, "package.json");
-  const pkgJson = await readJSON(pkgJsonPath);
-  const exportMapPath = join(args.cwd, "gen/export-map.json");
-  const exportMap = await readJSON(exportMapPath);
-
-  pkgJson.exports = exportMap;
-
-  await writeJSON(pkgJsonPath, pkgJson, {
-    spaces: 2
-  });
-
-  console.log("Injected export map %s into %s", exportMapPath, pkgJsonPath);
+  console.log("Updated package.json dependencies");
 }
