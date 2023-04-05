@@ -1,6 +1,5 @@
 import glob from "fast-glob";
 import { writeJSON, readFile, pathExists, readJSON } from "fs-extra";
-import { trimSuffix } from "@kubernetes-models/string-util";
 import { basename, extname, join, posix } from "path";
 import ignore, { Ignore } from "ignore";
 import { copyFile } from "fs/promises";
@@ -41,6 +40,10 @@ function generateExportEntry(name: string): Record<string, unknown> {
   };
 }
 
+function getExportPath(path: string): string {
+  return path === "." ? path : `./${path}`;
+}
+
 async function generateExportMap(
   cwd: string
 ): Promise<Record<string, unknown>> {
@@ -52,17 +55,17 @@ async function generateExportMap(
     (path) => !ig.ignores(path)
   );
 
-  const indexDirSet = new Set<string>();
-  const nonIndexFiles: Record<string, number> = {};
+  const indexPaths = new Set<string>();
+  const nonIndexPaths = new Set<string>();
 
   for (const path of paths) {
     const base = basename(path, extname(path));
     const dir = posix.dirname(path);
 
     if (base === "index") {
-      indexDirSet.add(dir);
+      indexPaths.add(dir);
     } else {
-      nonIndexFiles[dir] = (nonIndexFiles[dir] || 0) + 1;
+      nonIndexPaths.add(dir);
     }
   }
 
@@ -70,24 +73,14 @@ async function generateExportMap(
     "./package.json": "./package.json"
   };
 
-  for (const path of indexDirSet) {
-    const exportPath = path === "." ? path : `./${path}`;
+  for (const path of indexPaths) {
+    const exportPath = getExportPath(path);
 
     exportMap[exportPath] = generateExportEntry(`${exportPath}/index`);
-
-    if (nonIndexFiles[path] > 0) {
-      const wildcardExportPath = `${exportPath}/*`;
-
-      exportMap[wildcardExportPath] = generateExportEntry(wildcardExportPath);
-    }
   }
 
-  for (const path of paths) {
-    const dir = posix.dirname(path);
-
-    if (indexDirSet.has(dir)) continue;
-
-    const exportPath = "./" + posix.normalize(trimSuffix(path, extname(path)));
+  for (const path of nonIndexPaths) {
+    const exportPath = getExportPath(path) + "/*";
 
     exportMap[exportPath] = generateExportEntry(exportPath);
   }

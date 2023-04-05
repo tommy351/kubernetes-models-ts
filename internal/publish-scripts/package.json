@@ -12,7 +12,6 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@kubernetes-models/string-util": "workspace:^",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",

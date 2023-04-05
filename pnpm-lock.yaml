@@ -214,9 +214,6 @@ importers:
 
   internal/publish-scripts:
     dependencies:
-      '@kubernetes-models/string-util':
-        specifier: workspace:^
-        version: link:../../utils/string-util
       execa:
         specifier: ^5.1.1
         version: 5.1.1
