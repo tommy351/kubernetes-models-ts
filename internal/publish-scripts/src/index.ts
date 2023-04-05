@@ -1,11 +1,11 @@
 import yargs from "yargs/yargs";
-import { postBuild, PostBuildArguments } from "./postbuild";
+import { build, BuildArguments } from "./build";
 import { prePack, PrePackArguments } from "./prepack";
 
 yargs(process.argv.slice(2))
-  .command<PostBuildArguments>(
-    "postbuild",
-    "Run postbuild script",
+  .command<BuildArguments>(
+    "build",
+    "Run build script",
     (cmd) => {
       return cmd.option("cwd", {
         type: "string",
@@ -14,7 +14,7 @@ yargs(process.argv.slice(2))
         description: "Current working directory."
       });
     },
-    postBuild
+    build
   )
   .command<PrePackArguments>(
     "prepack",

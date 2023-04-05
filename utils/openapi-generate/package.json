@@ -9,13 +9,22 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/utils/openapi-generate",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc-multi --config ../../tsc-multi.json"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "bin": {
     "openapi-generate": "bin/openapi-generate.js"
@@ -45,6 +54,8 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.186",
-    "@types/yargs": "^17.0.13"
+    "@types/yargs": "^17.0.13",
+    "tsc-multi": "^0.6.1",
+    "typescript": "^4.8.4"
   }
 }

@@ -5,15 +5,21 @@
   "bin": {
     "publish-scripts": "./bin/publish-scripts.js"
   },
+  "scripts": {
+    "build": "tsc"
+  },
   "engines": {
     "node": ">=14"
   },
   "dependencies": {
     "@kubernetes-models/string-util": "workspace:^",
+    "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "ignore": "^5.2.0",
     "tslib": "^2.4.0",
+    "tsc-multi": "^0.6.1",
+    "typescript": "^4.8.4",
     "yargs": "^17.6.0"
   },
   "devDependencies": {

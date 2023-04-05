@@ -21,8 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Replace exact workspace version
         run: pnpm ts-node scripts/replace-exact-workspace-version.ts
-      - name: Build packages
-        run: pnpm run build
+      - uses: ./.github/actions/build-packages
       - name: Publish snapshot packages
         run: pnpm changeset publish --tag snapshot --no-git-tag
         env:

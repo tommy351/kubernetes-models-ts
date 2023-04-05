@@ -49,9 +49,8 @@ const rootDir = join(__dirname, "..");
     types: "index.d.ts",
     sideEffects: false,
     scripts: {
-      build: "crd-generate && publish-scripts postbuild",
-      prepack: "publish-scripts prepack",
-      clean: "rimraf gen"
+      build: "crd-generate && publish-scripts build",
+      prepack: "publish-scripts prepack"
     },
     publishConfig: {
       access: "public",
@@ -65,12 +64,11 @@ const rootDir = join(__dirname, "..");
       "@kubernetes-models/apimachinery": "workspace:^",
       "@kubernetes-models/base": "workspace:^",
       "@kubernetes-models/validate": "workspace:^",
-      tslib: "^2.3.0"
+      tslib: "^2.4.0"
     },
     devDependencies: {
       "@kubernetes-models/crd-generate": "workspace:^",
-      "@kubernetes-models/publish-scripts": "workspace:^",
-      rimraf: "^3.0.2"
+      "@kubernetes-models/publish-scripts": "workspace:^"
     },
     "crd-generate": {
       input: [],
@@ -81,16 +79,10 @@ const rootDir = join(__dirname, "..");
   const tsConfig = {
     extends: "../../tsconfig.build.json",
     compilerOptions: {
-      rootDir: "gen",
       outDir: "dist",
       sourceMap: false
     },
-    include: ["gen"],
-    references: [
-      { path: "../../core/base" },
-      { path: "../../core/validate" },
-      { path: "../../first-party/apimachinery" }
-    ]
+    include: ["gen"]
   };
 
   console.log("Creating the package directory:", pkgDir);

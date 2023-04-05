@@ -14,9 +14,8 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts postbuild",
+    "build": "crd-generate && publish-scripts build",
     "prepack": "publish-scripts prepack",
-    "clean": "rimraf gen",
     "dump-crd": "ts-node scripts/dump-crd.ts"
   },
   "publishConfig": {
@@ -45,7 +44,6 @@
     "@types/node": "^18.7.23",
     "execa": "^5.1.1",
     "fs-extra": "^10.1.0",
-    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "yaml": "^2.1.1"

@@ -1,9 +1,10 @@
 import glob from "fast-glob";
-import { writeJSON, readFile, pathExists, readJSON, mkdirs } from "fs-extra";
+import { writeJSON, readFile, pathExists, readJSON } from "fs-extra";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { basename, extname, join, posix } from "path";
 import ignore, { Ignore } from "ignore";
 import { copyFile } from "fs/promises";
+import execa from "execa";
 
 const DTS_EXT = ".d.ts";
 const CJS_EXT = ".js";
@@ -94,6 +95,18 @@ async function generateExportMap(
   return sortObjectByKey(exportMap);
 }
 
+async function compileTS(cwd: string): Promise<void> {
+  const tscMultiBin = join(__dirname, "../node_modules/.bin/tsc-multi");
+  const tscMultiConfig = join(__dirname, "../../../tsc-multi.json");
+
+  console.log("Running tsc-multi");
+  await execa(
+    tscMultiBin,
+    ["--config", tscMultiConfig, "--compiler", require.resolve("typescript")],
+    { cwd, stdio: "inherit" }
+  );
+}
+
 async function copyDistFiles(cwd: string): Promise<void> {
   for (const file of ["README.md"]) {
     const src = join(cwd, file);
@@ -114,12 +127,12 @@ async function writePkgJson(cwd: string): Promise<void> {
   await writeJSON(join(cwd, "dist/package.json"), pkgJson, { spaces: 2 });
 }
 
-export interface PostBuildArguments {
+export interface BuildArguments {
   cwd: string;
 }
 
-export async function postBuild(args: PostBuildArguments): Promise<void> {
-  await mkdirs(join(args.cwd, "dist"));
+export async function build(args: BuildArguments): Promise<void> {
+  await compileTS(args.cwd);
   await copyDistFiles(args.cwd);
   await writePkgJson(args.cwd);
 }

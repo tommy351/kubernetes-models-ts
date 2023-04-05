@@ -13,9 +13,8 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts postbuild",
-    "prepack": "publish-scripts prepack",
-    "clean": "rimraf gen"
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
     "access": "public",
@@ -37,8 +36,7 @@
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",
-    "@kubernetes-models/publish-scripts": "workspace:^",
-    "rimraf": "^3.0.2"
+    "@kubernetes-models/publish-scripts": "workspace:^"
   },
   "crd-generate": {
     "input": [

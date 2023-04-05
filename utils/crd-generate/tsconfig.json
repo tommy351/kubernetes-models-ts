@@ -1,13 +1,7 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src"],
-  "references": [
-    { "path": "../read-input" },
-    { "path": "../string-util" },
-    { "path": "../generate" }
-  ]
+  "include": ["src"]
 }

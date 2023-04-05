@@ -1,14 +1,7 @@
 {
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "preserveConstEnums": true,
     "noEmitHelpers": true,
-    "importHelpers": true,
-    "baseUrl": ".",
-    "paths": {
-      "kubernetes-models/*": ["first-party/kubernetes-models/dist/*"],
-      "@kubernetes-models/apimachinery/*": ["first-party/apimachinery/dist/*"]
-    }
+    "importHelpers": true
   }
 }

@@ -9,8 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/install-deps
-      - name: Build packages
-        run: pnpm run build
+      - uses: ./.github/actions/build-packages
       - name: Lint files
         run: pnpm run lint
   test:
@@ -25,7 +24,6 @@ jobs:
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Build packages
-        run: pnpm run build
+      - uses: ./.github/actions/build-packages
       - name: Run unit tests
         run: pnpm run test
