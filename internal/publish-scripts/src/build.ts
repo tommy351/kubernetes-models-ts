@@ -27,16 +27,11 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   return Object.fromEntries(entries) as T;
 }
 
-function generateExportEntry(name: string): Record<string, unknown> {
+function generateExportEntry(name: string): Record<string, string> {
   return {
-    import: {
-      types: name + DTS_EXT,
-      default: name + ESM_EXT
-    },
-    require: {
-      types: name + DTS_EXT,
-      default: name + CJS_EXT
-    }
+    types: name + DTS_EXT,
+    import: name + ESM_EXT,
+    require: name + CJS_EXT
   };
 }
 
