@@ -1,13 +1,13 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "jest"],
+  "plugins": ["@typescript-eslint", "vitest"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "plugin:jest/recommended",
+    "plugin:vitest/recommended",
     "plugin:node/recommended"
   ],
   "rules": {
@@ -47,9 +47,10 @@
       }
     },
     {
-      "files": ["**/__tests__/**/*.ts"],
+      "files": ["**/__tests__/**/*.{js,mjs,ts}"],
       "rules": {
-        "@typescript-eslint/ban-ts-comment": "off"
+        "@typescript-eslint/ban-ts-comment": "off",
+        "node/no-unpublished-import": "off"
       }
     }
   ]

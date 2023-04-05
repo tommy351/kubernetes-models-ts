@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Certificate as CertificateV1Alpha1 } from "../gen/certmanager.k8s.io/v1alpha1/Certificate";
 import { Certificate as CertificateV1Alpha3 } from "../gen/cert-manager.io/v1alpha3/Certificate";
 import { Certificate as CertificateV1Beta1 } from "../gen/cert-manager.io/v1beta1/Certificate";

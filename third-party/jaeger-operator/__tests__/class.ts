@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Jaeger } from "../gen/jaegertracing.io/v1/Jaeger";
 
 describe("Jaeger", () => {

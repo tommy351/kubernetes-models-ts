@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Application } from "../gen/argoproj.io/v1alpha1/Application";
 import { ApplicationSet } from "../gen/argoproj.io/v1alpha1/ApplicationSet";
 import { AppProject } from "../gen/argoproj.io/v1alpha1/AppProject";

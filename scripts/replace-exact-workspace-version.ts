@@ -13,7 +13,7 @@ interface Package {
 
 const pkgMap = new Map<string, Package>();
 
-async function loadPkgInfo(dir: string) {
+async function loadPkgInfo(dir: string): Promise<void> {
   for (const name of await readdir(dir)) {
     const path = join(dir, name, "package.json");
     const pkg = JSON.parse(await readFile(path, "utf8"));

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Rollout } from "../gen/argoproj.io/v1alpha1/Rollout";
 
 describe("Rollout", () => {

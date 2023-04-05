@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Thanos } from "../gen/monitoring.banzaicloud.io/v1alpha1/Thanos";
 
 describe("Thanos", () => {

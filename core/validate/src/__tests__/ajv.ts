@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { ajv } from "../ajv";
 
 describe("format: byte", () => {
@@ -22,7 +23,7 @@ describe("format: byte", () => {
 
 // https://github.com/kubernetes/apimachinery/blob/8c18d83/pkg/api/resource/quantity_test.go#L216
 describe("format: quantity", () => {
-  test.each([
+  it.each([
     ["0", true],
     ["0n", true],
     ["0u", true],

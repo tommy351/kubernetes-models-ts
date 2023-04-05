@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { App } from "../gen/kappctrl.k14s.io/v1alpha1/App";
 
 describe("App", () => {

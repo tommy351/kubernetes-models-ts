@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { ExternalSecret } from "../gen/external-secrets.io/v1beta1/ExternalSecret";
 
 describe("ExternalSecret", () => {

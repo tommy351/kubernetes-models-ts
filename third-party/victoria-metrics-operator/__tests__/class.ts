@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { VMCluster } from "../gen/operator.victoriametrics.com/v1beta1/VMCluster";
 
 describe("VMCluster", () => {

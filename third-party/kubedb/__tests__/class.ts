@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Postgres } from "../gen/kubedb.com/v1alpha2/Postgres";
 
 describe("Postgres", () => {

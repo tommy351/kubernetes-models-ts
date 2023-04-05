@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { CiliumLocalRedirectPolicy } from "../gen/cilium.io/v2/CiliumLocalRedirectPolicy";
 
 describe("validate", () => {

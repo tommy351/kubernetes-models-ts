@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Deployment as DeploymentV1 } from "../gen/apps/v1/Deployment";
 import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deployment";
 import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress";

@@ -1,4 +1,5 @@
 /// <reference types="jest-extended" />
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { validate } from "../validate";
 import { ajv, register } from "../ajv";
 import Ajv from "ajv";

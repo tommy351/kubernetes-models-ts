@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { GrafanaAgent } from "../gen/monitoring.grafana.com/v1alpha1/GrafanaAgent";
 
 describe("GrafanaAgent", () => {

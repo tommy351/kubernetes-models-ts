@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { SpiffeID } from "../gen/spiffeid.spiffe.io/v1beta1/SpiffeID";
 
 describe("SpiffeID", () => {
@@ -9,12 +10,12 @@ describe("SpiffeID", () => {
         name: "test-id"
       },
       spec: {
-        parentId: 'spiffe://example.org/spire/server',
-        spiffeId: 'spiffe://example.org/test',
+        parentId: "spiffe://example.org/spire/server",
+        spiffeId: "spiffe://example.org/test",
         selector: {
-          namespace: 'default',
-          podName: 'test-pod'
-        },
+          namespace: "default",
+          podName: "test-pod"
+        }
       }
     });
   });
@@ -39,12 +40,12 @@ describe("SpiffeID", () => {
         name: "test-id"
       },
       spec: {
-        parentId: 'spiffe://example.org/spire/server',
-        spiffeId: 'spiffe://example.org/test',
+        parentId: "spiffe://example.org/spire/server",
+        spiffeId: "spiffe://example.org/test",
         selector: {
-          namespace: 'default',
-          podName: 'test-pod'
-        },
+          namespace: "default",
+          podName: "test-pod"
+        }
       }
     });
   });

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { PostgresCluster } from "../gen/postgres-operator.crunchydata.com/v1beta1/PostgresCluster";
 import { postgresql } from "../gen/acid.zalan.do/v1/postgresql";
 

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Gateway } from "../gen/networking.istio.io/v1beta1/Gateway";
 
 describe("Gateway", () => {

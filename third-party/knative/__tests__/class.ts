@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Service } from "../gen/serving.knative.dev/v1/Service";
 import { Trigger } from "../gen/eventing.knative.dev/v1/Trigger";
 

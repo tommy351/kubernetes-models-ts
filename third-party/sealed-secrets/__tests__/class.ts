@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret";
 
 describe("SealedSecret", () => {

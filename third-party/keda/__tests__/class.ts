@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { ScaledJob } from "../gen/keda.sh/v1alpha1/ScaledJob";
 import { ScaledObject } from "../gen/keda.sh/v1alpha1/ScaledObject";
 import { TriggerAuthentication } from "../gen/keda.sh/v1alpha1/TriggerAuthentication";
@@ -9,7 +10,7 @@ describe("ScaledJob", () => {
   beforeEach(() => {
     job = new ScaledJob({
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         jobTargetRef: {
@@ -18,9 +19,9 @@ describe("ScaledJob", () => {
               containers: [
                 {
                   name: "example",
-                  image: "example.com/example:latest",
+                  image: "example.com/example:latest"
                 }
-              ],
+              ]
             }
           }
         },
@@ -29,20 +30,17 @@ describe("ScaledJob", () => {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70",
-            },
+              value: "70"
+            }
           }
-        ],
-      },
+        ]
+      }
     });
-  })
+  });
 
   it("should set apiVersion", () => {
-    expect(job).toHaveProperty(
-      "apiVersion",
-      "keda.sh/v1alpha1"
-    );
-  })
+    expect(job).toHaveProperty("apiVersion", "keda.sh/v1alpha1");
+  });
 
   it("should set kind", () => {
     expect(job).toHaveProperty("kind", "ScaledJob");
@@ -57,7 +55,7 @@ describe("ScaledJob", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ScaledJob",
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         jobTargetRef: {
@@ -66,9 +64,9 @@ describe("ScaledJob", () => {
               containers: [
                 {
                   name: "example",
-                  image: "example.com/example:latest",
+                  image: "example.com/example:latest"
                 }
-              ],
+              ]
             }
           }
         },
@@ -77,11 +75,11 @@ describe("ScaledJob", () => {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70",
-            },
+              value: "70"
+            }
           }
-        ],
-      },
+        ]
+      }
     });
   });
 });
@@ -92,31 +90,28 @@ describe("ScaledObject", () => {
   beforeEach(() => {
     object = new ScaledObject({
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         scaleTargetRef: {
-          name: 'example',
+          name: "example"
         },
         triggers: [
           {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70",
-            },
+              value: "70"
+            }
           }
-        ],
-      },
+        ]
+      }
     });
-  })
+  });
 
   it("should set apiVersion", () => {
-    expect(object).toHaveProperty(
-      "apiVersion",
-      "keda.sh/v1alpha1"
-    );
-  })
+    expect(object).toHaveProperty("apiVersion", "keda.sh/v1alpha1");
+  });
 
   it("should set kind", () => {
     expect(object).toHaveProperty("kind", "ScaledObject");
@@ -131,22 +126,22 @@ describe("ScaledObject", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ScaledObject",
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         scaleTargetRef: {
-          name: 'example',
+          name: "example"
         },
         triggers: [
           {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70",
-            },
+              value: "70"
+            }
           }
-        ],
-      },
+        ]
+      }
     });
   });
 });
@@ -157,26 +152,23 @@ describe("TriggerAuthentication", () => {
   beforeEach(() => {
     auth = new TriggerAuthentication({
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         secretTargetRef: [
           {
             parameter: "example",
             name: "example",
-            key: "example",
-          },
-        ],
-      },
-    })
-  })
+            key: "example"
+          }
+        ]
+      }
+    });
+  });
 
   it("should set apiVersion", () => {
-    expect(auth).toHaveProperty(
-      "apiVersion",
-      "keda.sh/v1alpha1"
-    );
-  })
+    expect(auth).toHaveProperty("apiVersion", "keda.sh/v1alpha1");
+  });
 
   it("should set kind", () => {
     expect(auth).toHaveProperty("kind", "TriggerAuthentication");
@@ -191,17 +183,17 @@ describe("TriggerAuthentication", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "TriggerAuthentication",
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         secretTargetRef: [
           {
             parameter: "example",
             name: "example",
-            key: "example",
-          },
-        ],
-      },
+            key: "example"
+          }
+        ]
+      }
     });
   });
 });
@@ -212,22 +204,19 @@ describe("ClusterTriggerAuthentication", () => {
   beforeEach(() => {
     auth = new ClusterTriggerAuthentication({
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         podIdentity: {
           provider: "gcp"
-        },
-      },
-    })
-  })
+        }
+      }
+    });
+  });
 
   it("should set apiVersion", () => {
-    expect(auth).toHaveProperty(
-      "apiVersion",
-      "keda.sh/v1alpha1"
-    );
-  })
+    expect(auth).toHaveProperty("apiVersion", "keda.sh/v1alpha1");
+  });
 
   it("should set kind", () => {
     expect(auth).toHaveProperty("kind", "ClusterTriggerAuthentication");
@@ -242,13 +231,13 @@ describe("ClusterTriggerAuthentication", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ClusterTriggerAuthentication",
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         podIdentity: {
           provider: "gcp"
-        },
-      },
+        }
+      }
     });
   });
 });

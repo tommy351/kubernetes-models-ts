@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { Pod } from "../dist/v1/Pod.mjs";
 
 describe("Pod", () => {

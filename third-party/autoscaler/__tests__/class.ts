@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodAutoscaler";
 
 describe("VerticalPodAutoscaler", () => {

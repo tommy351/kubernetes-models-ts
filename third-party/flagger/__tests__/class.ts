@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Canary } from "../gen/flagger.app/v1beta1/Canary";
 
 describe("Canary", () => {

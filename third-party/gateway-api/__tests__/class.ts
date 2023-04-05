@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { HTTPRoute } from "../gen/gateway.networking.k8s.io/v1beta1/HTTPRoute";
 
 describe("HTTPRoute", () => {

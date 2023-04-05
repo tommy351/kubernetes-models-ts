@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { Binding } from "../gen/rabbitmq.com/v1beta1/Binding";
 import { Exchange } from "../gen/rabbitmq.com/v1beta1/Exchange";
 import { Federation } from "../gen/rabbitmq.com/v1beta1/Federation";
@@ -14,7 +15,7 @@ describe("Binding", () => {
   beforeEach(() => {
     binding = new Binding({
       metadata: {
-        name: "binding-sample",
+        name: "binding-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -22,8 +23,8 @@ describe("Binding", () => {
         source: "exchange-sample",
         destination: "queue-sample",
         destinationType: "queue",
-        routingKey: "key-sample",
-      },
+        routingKey: "key-sample"
+      }
     });
   });
 
@@ -44,7 +45,7 @@ describe("Binding", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Binding",
       metadata: {
-        name: "binding-sample",
+        name: "binding-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -52,8 +53,8 @@ describe("Binding", () => {
         source: "exchange-sample",
         destination: "queue-sample",
         destinationType: "queue",
-        routingKey: "key-sample",
-      },
+        routingKey: "key-sample"
+      }
     });
   });
 });
@@ -64,7 +65,7 @@ describe("Exchange", () => {
   beforeEach(() => {
     exchange = new Exchange({
       metadata: {
-        name: "direct-exchange",
+        name: "direct-exchange"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -72,8 +73,8 @@ describe("Exchange", () => {
         name: "exchange-sample",
         type: "direct",
         durable: true,
-        autoDelete: false,
-      },
+        autoDelete: false
+      }
     });
   });
 
@@ -94,7 +95,7 @@ describe("Exchange", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Exchange",
       metadata: {
-        name: "direct-exchange",
+        name: "direct-exchange"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -102,8 +103,8 @@ describe("Exchange", () => {
         name: "exchange-sample",
         type: "direct",
         durable: true,
-        autoDelete: false,
-      },
+        autoDelete: false
+      }
     });
   });
 });
@@ -114,17 +115,17 @@ describe("Federation", () => {
   beforeEach(() => {
     federation = new Federation({
       metadata: {
-        name: "federation-sample",
+        name: "federation-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
         vhost: "/",
         name: "federation-sample",
         uriSecret: {
-          name: "secret-sample",
+          name: "secret-sample"
         },
-        ackMode: "on-confirm",
-      },
+        ackMode: "on-confirm"
+      }
     });
   });
 
@@ -145,17 +146,17 @@ describe("Federation", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Federation",
       metadata: {
-        name: "federation-sample",
+        name: "federation-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
         vhost: "/",
         name: "federation-sample",
         uriSecret: {
-          name: "secret-sample",
+          name: "secret-sample"
         },
-        ackMode: "on-confirm",
-      },
+        ackMode: "on-confirm"
+      }
     });
   });
 });
@@ -166,7 +167,7 @@ describe("Permission", () => {
   beforeEach(() => {
     permission = new Permission({
       metadata: {
-        name: "permission-sample",
+        name: "permission-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -175,9 +176,9 @@ describe("Permission", () => {
         permissions: {
           configure: ".*",
           write: ".*",
-          read: ".*",
+          read: ".*"
         }
-      },
+      }
     });
   });
 
@@ -198,7 +199,7 @@ describe("Permission", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Permission",
       metadata: {
-        name: "permission-sample",
+        name: "permission-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -207,9 +208,9 @@ describe("Permission", () => {
         permissions: {
           configure: ".*",
           write: ".*",
-          read: ".*",
+          read: ".*"
         }
-      },
+      }
     });
   });
 });
@@ -220,7 +221,7 @@ describe("Policy", () => {
   beforeEach(() => {
     policy = new Policy({
       metadata: {
-        name: "policy-sample",
+        name: "policy-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -229,9 +230,9 @@ describe("Policy", () => {
         pattern: ".*",
         applyTo: "all",
         definition: {
-          "ha-mode": "all",
-        },
-      },
+          "ha-mode": "all"
+        }
+      }
     });
   });
 
@@ -252,7 +253,7 @@ describe("Policy", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Policy",
       metadata: {
-        name: "policy-sample",
+        name: "policy-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
@@ -261,9 +262,9 @@ describe("Policy", () => {
         pattern: ".*",
         applyTo: "all",
         definition: {
-          "ha-mode": "all",
-        },
-      },
+          "ha-mode": "all"
+        }
+      }
     });
   });
 });
@@ -282,8 +283,8 @@ describe("Queue", () => {
         name: "queue-sample",
         type: "quorum",
         durable: true,
-        autoDelete: false,
-      },
+        autoDelete: false
+      }
     });
   });
 
@@ -312,26 +313,26 @@ describe("Queue", () => {
         name: "queue-sample",
         type: "quorum",
         durable: true,
-        autoDelete: false,
-      },
+        autoDelete: false
+      }
     });
   });
 });
 
-describe("Shovel" , () => {
+describe("Shovel", () => {
   let shovel: Shovel;
 
   beforeEach(() => {
     shovel = new Shovel({
       metadata: {
-        name: "shovel-sample",
+        name: "shovel-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
         vhost: "/",
         name: "shovel-sample",
         uriSecret: {
-          name: "secret-sample",
+          name: "secret-sample"
         },
         srcAddress: "amqp://src-address",
         srcQueue: "source-queue",
@@ -340,8 +341,8 @@ describe("Shovel" , () => {
         destAddress: "amqp://dest-address",
         destQueue: "dest-queue",
         destExchange: "dest-exchange",
-        destExchangeKey: "dest-exchange-key",
-      },
+        destExchangeKey: "dest-exchange-key"
+      }
     });
   });
 
@@ -362,14 +363,14 @@ describe("Shovel" , () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "Shovel",
       metadata: {
-        name: "shovel-sample",
+        name: "shovel-sample"
       },
       spec: {
         rabbitmqClusterReference: { name: "cluster-sample" },
         vhost: "/",
         name: "shovel-sample",
         uriSecret: {
-          name: "secret-sample",
+          name: "secret-sample"
         },
         srcAddress: "amqp://src-address",
         srcQueue: "source-queue",
@@ -378,8 +379,8 @@ describe("Shovel" , () => {
         destAddress: "amqp://dest-address",
         destQueue: "dest-queue",
         destExchange: "dest-exchange",
-        destExchangeKey: "dest-exchange-key",
-      },
+        destExchangeKey: "dest-exchange-key"
+      }
     });
   });
 });

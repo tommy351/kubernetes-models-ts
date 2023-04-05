@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { Certificate } from "../dist/cert-manager.io/v1/Certificate.mjs";
 
 describe("Certificate", () => {

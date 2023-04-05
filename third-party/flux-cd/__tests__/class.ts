@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1beta1/GitRepository";
 
 describe("Application", () => {

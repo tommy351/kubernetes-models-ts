@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { IngressRoute } from "../gen/contour.heptio.com/v1beta1/IngressRoute";
 import { HTTPProxy } from "../gen/projectcontour.io/v1/HTTPProxy";
 

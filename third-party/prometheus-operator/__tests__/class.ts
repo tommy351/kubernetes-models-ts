@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor";
 
 describe("ServiceMonitor", () => {

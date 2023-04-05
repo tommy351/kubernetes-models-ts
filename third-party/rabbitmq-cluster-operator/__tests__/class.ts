@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { RabbitmqCluster } from "../gen/rabbitmq.com/v1beta1/RabbitmqCluster";
 
 describe("RabbitmqCluster", () => {
@@ -6,30 +7,27 @@ describe("RabbitmqCluster", () => {
   beforeEach(() => {
     cluster = new RabbitmqCluster({
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         replicas: 2,
         service: {
-          type: "ClusterIP",
+          type: "ClusterIP"
         },
         persistence: {
           storageClassName: "standard",
-          storage: "10Gi",
+          storage: "10Gi"
         },
         rabbitmq: {
-          additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+          additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
         }
-      },
+      }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(cluster).toHaveProperty(
-      "apiVersion",
-      "rabbitmq.com/v1beta1"
-    );
-  })
+    expect(cluster).toHaveProperty("apiVersion", "rabbitmq.com/v1beta1");
+  });
 
   it("should set kind", () => {
     expect(cluster).toHaveProperty("kind", "RabbitmqCluster");
@@ -44,21 +42,21 @@ describe("RabbitmqCluster", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "RabbitmqCluster",
       metadata: {
-        name: "example",
+        name: "example"
       },
       spec: {
         replicas: 2,
         service: {
-          type: "ClusterIP",
+          type: "ClusterIP"
         },
         persistence: {
           storageClassName: "standard",
-          storage: "10Gi",
+          storage: "10Gi"
         },
         rabbitmq: {
-          additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+          additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
         }
-      },
+      }
     });
   });
 });

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { SeldonDeployment } from "../gen/machinelearning.seldon.io/v1/SeldonDeployment";
 
 describe("SeldonDeployment", () => {
@@ -14,10 +15,10 @@ describe("SeldonDeployment", () => {
               name: "classifier",
               children: [],
               endpoint: {
-                type: "REST",
+                type: "REST"
               },
-              type: "MODEL",
-            },
+              type: "MODEL"
+            }
           }
         ]
       }
@@ -52,10 +53,10 @@ describe("SeldonDeployment", () => {
               name: "classifier",
               children: [],
               endpoint: {
-                type: "REST",
+                type: "REST"
               },
-              type: "MODEL",
-            },
+              type: "MODEL"
+            }
           }
         ]
       }

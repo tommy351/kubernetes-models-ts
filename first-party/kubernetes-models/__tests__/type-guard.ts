@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { Pod } from "../gen/v1/Pod";
 import { PodSpec } from "../gen/v1/PodSpec";
 import { Service } from "../gen/v1/Service";
