@@ -15,13 +15,13 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/install-deps
+      - uses: ./.github/actions/build-packages
       - name: Bump package version
         run: pnpm changeset version --snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Replace exact workspace version
         run: pnpm ts-node scripts/replace-exact-workspace-version.ts
-      - uses: ./.github/actions/build-packages
       - name: Publish snapshot packages
         run: pnpm publish -r --tag snapshot --no-git-checks
         env:
