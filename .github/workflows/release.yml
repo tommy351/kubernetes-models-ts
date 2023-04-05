@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - debug-release
 
 jobs:
   release:
@@ -12,6 +13,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/install-deps
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
