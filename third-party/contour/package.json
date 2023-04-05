@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/contour",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Contour models",
   "repository": {
     "type": "git",
