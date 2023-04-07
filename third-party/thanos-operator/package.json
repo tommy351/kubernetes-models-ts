@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/thanos-operator",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Thanos operator models",
   "repository": {
     "type": "git",

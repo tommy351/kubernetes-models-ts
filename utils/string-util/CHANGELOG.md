@@ -1,5 +1,36 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- [`767314d`](https://github.com/tommy351/kubernetes-models-ts/commit/767314d40b2d274f66cbbcfe68c5e3ed99138c94) Thanks [@tommy351](https://github.com/tommy351)! - Simplify export map.
+
+  ```js
+  // Before
+  {
+    "exports": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  }
+
+  // After
+  {
+    "exports": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  }
+  ```
+
 ## 3.0.0
 
 ### Major Changes

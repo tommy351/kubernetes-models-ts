@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/gateway-api",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Gateway API models",
   "repository": {
     "type": "git",
