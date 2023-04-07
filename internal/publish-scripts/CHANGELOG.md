@@ -1,5 +1,28 @@
 # @kubernetes-models/publish-scripts
 
+## 1.2.0
+
+### Minor Changes
+
+- [`9816d36`](https://github.com/tommy351/kubernetes-models-ts/commit/9816d3633d9722170fe761de4383d25f0c0a5ab3) Thanks [@tommy351](https://github.com/tommy351)! - Replace non-index files with wildcard pattern (`*`) in export map.
+
+  ```js
+  // Before
+  {
+    "exports": {
+      "./_schemas/IoK8sApimachineryPkgApiResourceQuantity": {},
+      "./_schemas/IoK8sApimachineryPkgApisMetaV1APIGroup": {}
+    }
+  }
+
+  // After
+  {
+    "exports": {
+      "./_schemas/*": {}
+    }
+  }
+  ```
+
 ## 1.1.0
 
 ### Minor Changes
