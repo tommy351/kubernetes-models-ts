@@ -30,7 +30,8 @@
     "validate"
   ],
   "files": [
-    "/dist/"
+    "/dist/",
+    "/src/"
   ],
   "engines": {
     "node": ">=14"
