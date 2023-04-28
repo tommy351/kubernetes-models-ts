@@ -41,7 +41,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/emissary-ingress/emissary/master/manifests/emissary/emissary-crds.yaml.in"
+      "https://raw.githubusercontent.com/emissary-ingress/emissary/v3.6.0/manifests/emissary/emissary-crds.yaml.in"
     ],
     "output": "./gen"
   }
