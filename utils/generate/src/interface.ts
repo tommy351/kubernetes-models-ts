@@ -30,12 +30,13 @@ function _generateInterface(
     return getRefType(schema.$ref);
   }
 
+  const slots = [];
   if (schema.enum && schema.enum.length) {
-    return schema.enum.map((x) => JSON.stringify(x)).join(" | ");
+    slots.push(...schema.enum.map((x) => JSON.stringify(x)));
   }
 
   if (schema.not) {
-    return `Exclude<${_generateInterface(
+    slots.push(`Exclude<${_generateInterface(
       omit(schema, ["not"]),
       options,
       parentKeys
@@ -43,35 +44,33 @@ function _generateInterface(
       { ...omit(schema, ["not"]), ...schema.not },
       options,
       parentKeys
-    )}>`;
+    )}>`);
   }
 
   if (schema.oneOf) {
-    return schema.oneOf
+    slots.push(...schema.oneOf
       .map((x) =>
         _generateInterface(
           { ...omit(schema, ["oneOf"]), ...x },
           options,
           parentKeys
         )
-      )
-      .join(" | ");
+      ))
   }
 
   if (schema.anyOf) {
-    return schema.anyOf
+    slots.push(...schema.anyOf
       .map((x) =>
         _generateInterface(
           { ...omit(schema, ["anyOf"]), ...x },
           options,
           parentKeys
         )
-      )
-      .join(" | ");
+      ))
   }
 
   if (schema.allOf) {
-    return schema.allOf
+    const input = schema.allOf
       .map((x) =>
         _generateInterface(
           { ...omit(schema, ["allOf"]), ...x },
@@ -80,6 +79,8 @@ function _generateInterface(
         )
       )
       .join(" & ");
+    // must ensure the order of evaluation is correct here
+    slots.push(`(${input})`);
   }
 
   switch (schema.type) {
@@ -110,40 +111,46 @@ function _generateInterface(
         )};\n`;
       }
 
-      return "{\n" + indentString(output, 2) + "}";
+      slots.push("{\n" + indentString(output, 2) + "}");
     }
-
+      break;
     case "number":
     case "integer":
-      return "number";
-
+      slots.push("number");
+      break;
     case "string":
       switch (schema.format) {
         case "int-or-string":
-          return "string | number";
-
+          slots.push("string | number");
+          break;
         default:
-          return "string";
+          slots.push("string");
+          break;
       }
-
+      break;
     case "boolean":
-      return "boolean";
-
+      slots.push("boolean");
+      break;
     case "array":
       if (schema.items) {
-        return `Array<${_generateInterface(schema.items, options, [
+        slots.push(`Array<${_generateInterface(schema.items, options, [
           ...parentKeys,
           WILDCARD_FIELD
-        ])}>`;
+        ])}>`);
+      } else {
+        slots.push(`${FALLBACK_TYPE}[]`);
       }
-
-      return `${FALLBACK_TYPE}[]`;
-
+      break;
     case "null":
-      return "null";
+      slots.push("null");
+      break;
   }
 
-  return FALLBACK_TYPE;
+  if (slots.length <= 0) {
+    return FALLBACK_TYPE;
+  };
+
+  return slots.join(" | ");
 }
 
 export function generateInterface(
