@@ -46,104 +46,125 @@ function _generateInterface(
     )}>`;
   }
 
+  const result = (() => {
+    switch (schema.type) {
+      case "object": {
+        const { required = [], properties = {}, additionalProperties } = schema;
+        let output = "";
+
+        for (const key of Object.keys(properties)) {
+          const prop = properties[key];
+
+          if (includeDescription && typeof prop.description === "string") {
+            output += formatComment(prop.description);
+          }
+
+          output += `${JSON.stringify(key)}`;
+          if (!required.includes(key)) output += "?";
+          output +=
+            ": " +
+            _generateInterface(prop, options, [...parentKeys, key]) +
+            ";\n";
+        }
+
+        if (additionalProperties) {
+          output += `[key: string]: ${_generateInterface(
+            additionalProperties,
+            options,
+            [...parentKeys, WILDCARD_FIELD]
+          )};\n`;
+        }
+
+        return "{\n" + indentString(output, 2) + "}";
+      }
+
+      case "number":
+      case "integer":
+        return "number";
+
+      case "string":
+        switch (schema.format) {
+          case "int-or-string":
+            return "string | number";
+
+          default:
+            return "string";
+        }
+
+      case "boolean":
+        return "boolean";
+
+      case "array":
+        if (schema.items) {
+          return `Array<${_generateInterface(schema.items, options, [
+            ...parentKeys,
+            WILDCARD_FIELD
+          ])}>`;
+        }
+
+        return `${FALLBACK_TYPE}[]`;
+
+      case "null":
+        return "null";
+    }
+
+    return "";
+  })();
+
   if (schema.oneOf) {
-    return schema.oneOf
-      .map((x) =>
-        _generateInterface(
-          { ...omit(schema, ["oneOf"]), ...x },
-          options,
-          parentKeys
+    return intersectType(
+      result,
+      schema.oneOf
+        .map((x) =>
+          _generateInterface(
+            { ...omit(schema, ["oneOf"]), ...x },
+            options,
+            parentKeys
+          )
         )
-      )
-      .join(" | ");
+        .join(" | ")
+    );
   }
 
   if (schema.anyOf) {
-    return schema.anyOf
-      .map((x) =>
-        _generateInterface(
-          { ...omit(schema, ["anyOf"]), ...x },
-          options,
-          parentKeys
+    return intersectType(
+      result,
+      schema.anyOf
+        .map((x) =>
+          _generateInterface(
+            { ...omit(schema, ["anyOf"]), ...x },
+            options,
+            parentKeys
+          )
         )
-      )
-      .join(" | ");
+        .join(" | ")
+    );
   }
 
   if (schema.allOf) {
-    return schema.allOf
-      .map((x) =>
-        _generateInterface(
-          { ...omit(schema, ["allOf"]), ...x },
-          options,
-          parentKeys
+    return intersectType(
+      result,
+      schema.allOf
+        .map((x) =>
+          _generateInterface(
+            { ...omit(schema, ["allOf"]), ...x },
+            options,
+            parentKeys
+          )
         )
-      )
-      .join(" & ");
+        .join(" & ")
+    );
   }
 
-  switch (schema.type) {
-    case "object": {
-      const { required = [], properties = {}, additionalProperties } = schema;
-      let output = "";
+  return result || FALLBACK_TYPE;
+}
 
-      for (const key of Object.keys(properties)) {
-        const prop = properties[key];
-
-        if (includeDescription && typeof prop.description === "string") {
-          output += formatComment(prop.description);
-        }
-
-        output += `${JSON.stringify(key)}`;
-        if (!required.includes(key)) output += "?";
-        output +=
-          ": " +
-          _generateInterface(prop, options, [...parentKeys, key]) +
-          ";\n";
-      }
-
-      if (additionalProperties) {
-        output += `[key: string]: ${_generateInterface(
-          additionalProperties,
-          options,
-          [...parentKeys, WILDCARD_FIELD]
-        )};\n`;
-      }
-
-      return "{\n" + indentString(output, 2) + "}";
-    }
-
-    case "number":
-    case "integer":
-      return "number";
-
-    case "string":
-      switch (schema.format) {
-        case "int-or-string":
-          return "string | number";
-
-        default:
-          return "string";
-      }
-
-    case "boolean":
-      return "boolean";
-
-    case "array":
-      if (schema.items) {
-        return `Array<${_generateInterface(schema.items, options, [
-          ...parentKeys,
-          WILDCARD_FIELD
-        ])}>`;
-      }
-
-      return `${FALLBACK_TYPE}[]`;
-
-    case "null":
-      return "null";
+function intersectType(base: string, patch: string): string {
+  if (base) {
+    return `${base} & (${patch})`;
   }
 
-  return FALLBACK_TYPE;
+  return patch;
 }
 
 export function generateInterface(
