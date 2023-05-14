@@ -44,6 +44,7 @@ See [examples](examples) folder for more examples.
 
 - [@kubernetes-models/argo-cd](third-party/argo-cd) - [Argo CD](https://argo-cd.readthedocs.io/) models.
 - [@kubernetes-models/argo-rollouts](third-party/argo-rollouts) - [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) models.
+- [@kubernetes-models/autoscaler](third-party/autoscaler) - [Kubernetes Autoscaler](https://github.com/kubernetes/autoscaler) models.
 - [@kubernetes-models/cert-manager](third-party/cert-manager) - [cert-manager](https://cert-manager.io/) models.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.
@@ -66,10 +67,11 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/rabbitmq-messaging-topology-operator](third-party/rabbitmq-messaging-topology-operator/) - [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) models.
 - [@kubernetes-models/redis-operator](third-party/redis-operator) - [Redis Operator](https://ot-container-kit.github.io/redis-operator/) models.
 - [@kubernetes-models/sealed-secrets](third-party/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
+- [@kubernetes-models/seldon-core-operator](third-party/seldon-core-operator) - [SeldonCore operator](https://github.com/SeldonIO/seldon-core/tree/v1.15.0/helm-charts/seldon-core-operator) models.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
+- [@kubernetes-models/tidb-operator](third-party/tidb-operator) - [TiDB Operator](https://github.com/pingcap/tidb-operator) models.
 - [@kubernetes-models/victoria-metrics-operator](third-party/victoria-metrics-operator) - [VictoriaMetrics operator](https://github.com/VictoriaMetrics/operator) models.
-- [@kubernetes-models/seldon-core-operator](third-party/seldon-core-operator) - [SeldonCore operator](https://github.com/SeldonIO/seldon-core/tree/v1.15.0/helm-charts/seldon-core-operator) models.
 
 ### Generators
 
