@@ -1,5 +1,18 @@
 # Change Log
 
+## 3.2.0
+
+### Minor Changes
+
+- [`48d3d7b`](https://github.com/tommy351/kubernetes-models-ts/commit/48d3d7b62cdfb0bca3b966056fc5b238640ee74c) Thanks [@tommy351](https://github.com/tommy351)! - Update CRD version to v0.13.0.
+
+### Patch Changes
+
+- Updated dependencies [[`73daa2b`](https://github.com/tommy351/kubernetes-models-ts/commit/73daa2b36d44e88405e2337463fbb8999cddf359), [`09051d0`](https://github.com/tommy351/kubernetes-models-ts/commit/09051d0753e800ca3e7fd7c3f32c82cee1b6c154)]:
+  - @kubernetes-models/apimachinery@1.2.0
+  - @kubernetes-models/validate@3.1.0
+  - @kubernetes-models/base@4.0.2
+
 ## 3.1.1
 
 ### Patch Changes

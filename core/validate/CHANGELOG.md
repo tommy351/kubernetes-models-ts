@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.0
+
+### Minor Changes
+
+- [#127](https://github.com/tommy351/kubernetes-models-ts/pull/127) [`09051d0`](https://github.com/tommy351/kubernetes-models-ts/commit/09051d0753e800ca3e7fd7c3f32c82cee1b6c154) Thanks [@tommy351](https://github.com/tommy351)! - Add support for more formats: `iri`, `iri-reference`, `idn-email`, `idn-hostname`, `duration`.
+
 ## 3.0.1
 
 ### Patch Changes

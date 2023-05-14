@@ -1,5 +1,35 @@
 # Change Log
 
+## 2.3.0
+
+### Minor Changes
+
+- [#127](https://github.com/tommy351/kubernetes-models-ts/pull/127) [`d82f15d`](https://github.com/tommy351/kubernetes-models-ts/commit/d82f15db540d77f00e6ed16850aa9988cde14501) Thanks [@tommy351](https://github.com/tommy351)! - Apply `oneOf`, `allOf`, `anyOf` after `type` is applied to better support [factoring schemas](https://json-schema.org/understanding-json-schema/reference/combining.html#factoring-schemas), which is used in Cilium `CiliumClusterwideNetworkPolicy` CRD.
+
+  ```json
+  {
+    "spec": {
+      "oneOf": [
+        {
+          "properties": {
+            "endpointSelector": {}
+          },
+          "required": ["endpointSelector"]
+        },
+        {
+          "properties": {
+            "nodeSelector": {}
+          },
+          "required": ["nodeSelector"]
+        }
+      ],
+      "properties": {
+        // ...
+      }
+    }
+  }
+  ```
+
 ## 2.2.1
 
 ### Patch Changes
