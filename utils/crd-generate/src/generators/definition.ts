@@ -20,7 +20,7 @@ function getFieldType(key: string[]): string | undefined {
 function generateDefinition(
   gvk: GroupVersionKind,
   def: Definition
-): OutputFile {
+): OutputFile[] {
   const apiVersion = getAPIVersion(gvk);
   const className = gvk.kind;
   const interfaceName = `I${className}`;
@@ -98,14 +98,17 @@ constructor(data?: ModelData<${interfaceName}>) {
     });
   }
 
-  const schema = transformSchema(def.schema);
-
-  return {
-    path: `${apiVersion}/${className}.ts`,
-    content: `${generateImports(imports)}
+  return [
+    {
+      path: `${apiVersion}/${className}.json`,
+      content: JSON.stringify(transformSchema(def.schema), null, "  ")
+    },
+    {
+      path: `${apiVersion}/${className}.ts`,
+      content: `${generateImports(imports)}
+import * as schema from "./${className}.json";
 
 const schemaId = ${JSON.stringify(def.schemaId)};
-const schema = ${JSON.stringify(schema, null, "  ")};
 
 ${comment}export interface ${interfaceName} ${interfaceContent}
 
@@ -116,7 +119,8 @@ setSchema(${className}, schemaId, () => {
   register(schemaId, schema);
 });
 `
-  };
+    }
+  ];
 }
 
 const generateDefinitions: Generator = async (definitions) => {
@@ -126,7 +130,7 @@ const generateDefinitions: Generator = async (definitions) => {
     const gvks = def.gvk;
 
     if (gvks && gvks.length) {
-      output.push(generateDefinition(gvks[0], def));
+      output.push(...generateDefinition(gvks[0], def));
     }
   }
 

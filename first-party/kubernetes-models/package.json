@@ -41,7 +41,7 @@
     "@types/node": "^18.7.23",
     "openapi-types": "^12.0.2",
     "ts-node": "^10.9.1",
-    "tsc-multi": "^0.6.1",
+    "tsc-multi": "^1.1.0",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"
   }
