@@ -42,7 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/bitnami-labs/sealed-secrets/v0.19.2/helm/sealed-secrets/crds/bitnami.com_sealedsecrets.yaml"
+      "https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.20.5/controller.yaml"
     ],
     "output": "./gen"
   }

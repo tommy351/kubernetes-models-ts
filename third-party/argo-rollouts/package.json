@@ -42,7 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/argoproj/argo-rollouts/releases/download/v1.3.2/install.yaml"
+      "https://github.com/argoproj/argo-rollouts/releases/download/v1.5.0/install.yaml"
     ],
     "output": "./gen"
   }

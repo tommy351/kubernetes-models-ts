@@ -42,15 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/external-secrets.io_clusterexternalsecrets.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/external-secrets.io_clustersecretstores.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/external-secrets.io_externalsecrets.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/external-secrets.io_secretstores.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/generators.external-secrets.io_acraccesstokens.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/generators.external-secrets.io_ecrauthorizationtokens.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/generators.external-secrets.io_fakes.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/generators.external-secrets.io_gcraccesstokens.yaml",
-      "https://raw.githubusercontent.com/external-secrets/external-secrets/v0.7.0/config/crds/bases/generators.external-secrets.io_passwords.yaml"
+      "https://github.com/external-secrets/external-secrets/releases/download/v0.8.1/external-secrets.yaml"
     ],
     "output": "./gen"
   }

@@ -42,8 +42,8 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/kubedb/installer/v2022.10.18/crds/kubedb-crds.yaml",
-      "https://raw.githubusercontent.com/kubedb/installer/v2022.10.18/crds/kubedb-catalog-crds.yaml"
+      "https://raw.githubusercontent.com/kubedb/installer/v2023.04.10/crds/kubedb-crds.yaml",
+      "https://raw.githubusercontent.com/kubedb/installer/v2023.04.10/crds/kubedb-catalog-crds.yaml"
     ],
     "output": "./gen"
   }

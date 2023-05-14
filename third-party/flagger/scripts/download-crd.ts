@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { dirname, join } from "path";
 
-const VERSION = "1.27.0";
+const VERSION = "1.31.0";
 
 const outputPath = join(__dirname, "../crds/crd.yaml");
 

@@ -42,10 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_clustertriggerauthentications.yaml",
-      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_scaledjobs.yaml",
-      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_scaledobjects.yaml",
-      "https://raw.githubusercontent.com/kedacore/keda/v2.9.3/config/crd/bases/keda.sh_triggerauthentications.yaml"
+      "https://github.com/kedacore/keda/releases/download/v2.10.1/keda-2.10.1.yaml"
     ],
     "output": "./gen"
   }
