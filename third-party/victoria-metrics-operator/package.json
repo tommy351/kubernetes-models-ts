@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/victoria-metrics-operator",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "VictoriaMetrics operator models",
   "repository": {
     "type": "git",

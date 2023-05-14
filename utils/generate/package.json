@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/generate",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Type declarations and utilities for Kubernetes model generation.",
   "repository": {
     "type": "git",
