@@ -45,7 +45,7 @@ function compileSchema(def: Definition): string {
 
 export default function ({ externalAPIMachinery }: Context): Generator {
   return async (definitions) => {
-    return definitions.map((def) => {
+    return definitions.flatMap((def) => {
       const imports: Import[] = [];
       const refs = collectRefs(def.schema)
         .map(trimRefPrefix)
@@ -77,17 +77,22 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         addSchemaContent += `${alias}();\n`;
       }
 
-      return {
-        path: getSchemaPath(def.schemaId),
-        content: `${generateImports(imports)}
-
-const schema: object = ${compileSchema(def)};
+      return [
+        {
+          path: trimSuffix(getSchemaPath(def.schemaId), ".ts") + ".json",
+          content: compileSchema(def)
+        },
+        {
+          path: getSchemaPath(def.schemaId),
+          content: `${generateImports(imports)}
+import schema from "./${getClassName(def.schemaId)}.json";
 
 export function addSchema() {
 ${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
 }
 `
-      };
+        }
+      ];
     });
   };
 }
