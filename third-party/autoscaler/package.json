@@ -43,10 +43,10 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.11.0/vertical-pod-autoscaler/deploy/vpa-crd.yaml",
-      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.11.0/vertical-pod-autoscaler/deploy/vpa-beta-crd.yaml",
-      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.11.0/vertical-pod-autoscaler/deploy/vpa-beta2-crd.yaml",
-      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.11.0/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml"
+      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.13.0/vertical-pod-autoscaler/deploy/vpa-crd.yaml",
+      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.13.0/vertical-pod-autoscaler/deploy/vpa-beta-crd.yaml",
+      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.13.0/vertical-pod-autoscaler/deploy/vpa-beta2-crd.yaml",
+      "https://raw.githubusercontent.com/kubernetes/autoscaler/vertical-pod-autoscaler/v0.13.0/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml"
     ],
     "output": "./gen"
   }
