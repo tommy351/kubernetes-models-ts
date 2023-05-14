@@ -168,3 +168,15 @@ describe("format: quantity", () => {
     expect(result).toEqual(expected);
   });
 });
+
+describe("format: string", () => {
+  it.each([
+    ["foo", true],
+    [1, false],
+    [true, false]
+  ])("%s -> %p", (input, expected) => {
+    const result = ajv.validate({ type: "string", format: "string" }, input);
+
+    expect(result).toEqual(expected);
+  });
+});
