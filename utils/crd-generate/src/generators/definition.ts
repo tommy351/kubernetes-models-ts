@@ -106,7 +106,7 @@ constructor(data?: ModelData<${interfaceName}>) {
     {
       path: `${apiVersion}/${className}.ts`,
       content: `${generateImports(imports)}
-import * as schema from "./${className}.json";
+import * as schema from "./${className}.json" assert { type: 'json' };
 
 const schemaId = ${JSON.stringify(def.schemaId)};
 

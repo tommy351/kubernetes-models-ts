@@ -85,7 +85,9 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         {
           path: getSchemaPath(def.schemaId),
           content: `${generateImports(imports)}
-import * as schema from "./${getClassName(def.schemaId)}.json";
+import * as schema from "./${getClassName(
+            def.schemaId
+          )}.json" assert { type: 'json' };
 
 export function addSchema() {
 ${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
