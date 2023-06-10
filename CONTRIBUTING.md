@@ -77,9 +77,19 @@ Build TypeScript files.
 pnpm run build
 ```
 
-Finally, add a `README.md` and tests. Please follow other CRD packages mentioned in [readme](README.md#3rd-party-models)
+Finally, add a `README.md` and tests. Please follow other CRD packages mentioned in [readme](README.md#3rd-party-models).
 
-## Styleguides
+## Changeset
+
+Run the command below and follow the instructions to create a changeset. A changeset should describes packages that have been modified and change information. These information will be added to the changelog once packages are released.
+
+```sh
+pnpm changeset
+```
+
+For more information, see [using changesets](https://github.com/changesets/changesets/blob/main/docs/intro-to-using-changesets.md).
+
+## Style Guides
 
 ### Git Commit Messages
 
