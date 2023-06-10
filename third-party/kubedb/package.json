@@ -19,7 +19,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "directory": "dist"
+    "directory": "dist",
+    "linkDirectory": true
   },
   "keywords": [
     "kubernetes",

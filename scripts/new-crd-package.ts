@@ -54,7 +54,8 @@ const rootDir = join(__dirname, "..");
     },
     publishConfig: {
       access: "public",
-      directory: "dist"
+      directory: "dist",
+      linkDirectory: true
     },
     keywords: ["kubernetes", "kubernetes-models", args.name],
     engines: {

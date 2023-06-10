@@ -67,5 +67,6 @@
       "third-party/*/package.json",
       "utils/*/package.json"
     ]
-  }
+  },
+  "packageManager": "pnpm@7.33.0"
 }
