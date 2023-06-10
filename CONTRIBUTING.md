@@ -83,6 +83,8 @@ Finally, add a `README.md` and tests. Please follow other CRD packages mentioned
 
 Run the command below and follow the instructions to create a changeset. A changeset should describes packages that have been modified and change information. These information will be added to the changelog once packages are released.
 
+If you're creating a new CRD package using `new-crd-package` script, a changeset will be created automatically, so you can skip this step.
+
 ```sh
 pnpm changeset
 ```
