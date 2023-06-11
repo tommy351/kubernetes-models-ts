@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@kubernetes-models/validate": "workspace:^",
-    "is-plain-object": "^5.0.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

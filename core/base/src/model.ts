@@ -1,32 +1,8 @@
-import { isPlainObject } from "is-plain-object";
 import { validate } from "@kubernetes-models/validate";
 import { TypeMeta } from "./meta";
 
 const SCHEMA_ID = Symbol("SCHEMA_ID");
 const ADD_SCHEMA = Symbol("ADD_SCHEMA");
-
-function setDefinedProps(src: any, dst: any): any {
-  for (const key of Object.keys(src)) {
-    if (src[key] !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      dst[key] = filterUndefinedValues(src[key]);
-    }
-  }
-
-  return dst;
-}
-
-function filterUndefinedValues(data: unknown): unknown {
-  if (Array.isArray(data)) {
-    return data.map(filterUndefinedValues);
-  }
-
-  if (isPlainObject(data)) {
-    return setDefinedProps(data, {});
-  }
-
-  return data;
-}
 
 export type ModelData<T> = T extends TypeMeta ? Omit<T, keyof TypeMeta> : T;
 
@@ -41,16 +17,12 @@ export class Model<T> {
 
   public constructor(data?: ModelData<T>) {
     if (data) {
-      setDefinedProps(data, this);
+      Object.assign(this, data);
     }
   }
 
   public toJSON(): any {
-    const result = {};
-
-    setDefinedProps(this, result);
-
-    return result;
+    return this;
   }
 
   public validate(): void {
