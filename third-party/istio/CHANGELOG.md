@@ -1,5 +1,18 @@
 # @kubernetes-models/istio
 
+## 2.3.0
+
+### Minor Changes
+
+- [#130](https://github.com/tommy351/kubernetes-models-ts/pull/130) [`50d1914`](https://github.com/tommy351/kubernetes-models-ts/commit/50d19148027540e15edaa05360b76dc6e246b126) Thanks [@bdw617](https://github.com/bdw617)! - Update CRD version to v1.18.0.
+
+### Patch Changes
+
+- Updated dependencies [[`50d1914`](https://github.com/tommy351/kubernetes-models-ts/commit/50d19148027540e15edaa05360b76dc6e246b126)]:
+  - @kubernetes-models/validate@3.1.1
+  - @kubernetes-models/base@4.0.3
+  - @kubernetes-models/apimachinery@1.2.1
+
 ## 2.2.2
 
 ### Patch Changes
