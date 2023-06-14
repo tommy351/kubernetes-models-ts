@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.1
+
+### Patch Changes
+
+- [#130](https://github.com/tommy351/kubernetes-models-ts/pull/130) [`50d1914`](https://github.com/tommy351/kubernetes-models-ts/commit/50d19148027540e15edaa05360b76dc6e246b126) Thanks [@bdw617](https://github.com/bdw617)! - Update to Ajv 8.12.
+
 ## 3.1.0
 
 ### Minor Changes

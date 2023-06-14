@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`50d1914`](https://github.com/tommy351/kubernetes-models-ts/commit/50d19148027540e15edaa05360b76dc6e246b126)]:
+  - @kubernetes-models/validate@3.1.1
+
 ## 4.0.2
 
 ### Patch Changes
