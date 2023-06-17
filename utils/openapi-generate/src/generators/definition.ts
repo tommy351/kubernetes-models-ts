@@ -5,7 +5,8 @@ import {
   Generator,
   getAPIVersion,
   Import,
-  Schema
+  Schema,
+  getRelativePath
 } from "@kubernetes-models/generate";
 import {
   formatComment,
@@ -21,7 +22,7 @@ import {
   getShortInterfaceName,
   trimRefPrefix
 } from "../string";
-import { getRelativePath, getSchemaPath, isAPIMachineryID } from "../utils";
+import { getSchemaPath, isAPIMachineryID } from "../utils";
 
 function omitTypeMetaDescription(schema: Schema): Schema {
   const { properties, ...rest } = schema;
@@ -37,6 +38,10 @@ function omitTypeMetaDescription(schema: Schema): Schema {
       return prop;
     })
   };
+}
+
+function appendClassContent(target: string, value: string): string {
+  return trimSuffix(target, "}") + "\n" + value + "\n}";
 }
 
 export default function ({
@@ -116,6 +121,21 @@ export default function ({
           }
         });
 
+        imports.push({
+          name: "runValidator",
+          path: "@kubernetes-models/validate"
+        });
+
+        imports.push({
+          name: "validate",
+          path: getRelativePath(path, getSchemaPath(def.schemaId))
+        });
+
+        classContent = appendClassContent(
+          classContent,
+          `validate() { runValidator(validate, this) }`
+        );
+
         if (gvk) {
           imports.push({
             name: "ModelData",
@@ -132,10 +152,12 @@ export default function ({
             path: "@kubernetes-models/base"
           });
 
-          classContent = `${trimSuffix(classContent, "}")}
+          classContent = appendClassContent(
+            classContent,
+            `
 static apiVersion: ${shortInterfaceName}["apiVersion"] = "${getAPIVersion(
-            gvk
-          )}";
+              gvk
+            )}";
 static kind: ${shortInterfaceName}["kind"] = "${gvk.kind}";
 static is = createTypeMetaGuard<${shortInterfaceName}>(${shortClassName});
 
@@ -145,23 +167,13 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
     kind: ${shortClassName}.kind,
     ...data
   } as ${shortInterfaceName});
-}
-}`;
+}`
+          );
         }
 
         imports.push({
           name: "Model",
           path: "@kubernetes-models/base"
-        });
-
-        imports.push({
-          name: "setSchema",
-          path: "@kubernetes-models/base"
-        });
-
-        imports.push({
-          name: "addSchema",
-          path: getRelativePath(path, getSchemaPath(def.schemaId))
         });
 
         content += `
@@ -170,8 +182,6 @@ ${comment}export interface ${shortInterfaceName}${
         }${typing}
 
 ${comment}export class ${shortClassName} extends Model<${shortInterfaceName}> implements ${shortInterfaceName} ${classContent}
-
-setSchema(${shortClassName}, ${JSON.stringify(def.schemaId)}, addSchema);
 `;
       } else {
         content += `

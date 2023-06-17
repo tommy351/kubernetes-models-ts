@@ -1,8 +1,9 @@
-import { Schema, SchemaTransformer } from "./types";
+import { ajv } from "./ajv";
+import type { Schema, SchemaTransformer } from "./types";
 import { omit, omitBy, uniq } from "lodash";
-import Ajv from "ajv";
-
-const ajv = new Ajv();
+import assert from "assert";
+import type { ValueScopeName } from "ajv/dist/compile/codegen";
+import type { SchemaEnv } from "ajv/dist/compile";
 
 export function collectRefs(data: Record<string, unknown>): string[] {
   const refs = Object.keys(data).map((key) => {
@@ -121,7 +122,7 @@ function doTransformSchema(
         return x;
       });
     } else if (typeof v === "object") {
-      output[k] = doTransformSchema(v, transformers);
+      output[k] = doTransformSchema(v as Schema, transformers);
     } else {
       output[k] = v;
     }
@@ -150,4 +151,95 @@ export function transformSchema(
   ajv.validateSchema(output, true);
 
   return output;
+}
+
+function renderValidatorFormats(names?: Set<ValueScopeName>): string {
+  if (!names?.size) return "";
+
+  const lines: string[] = [
+    'import { formats } from "@kubernetes-models/validate";'
+  ];
+
+  for (const name of names) {
+    if (name.value?.key) {
+      lines.push(`const ${name.str} = formats["${name.value.key}"]`);
+    }
+  }
+
+  return lines.join("\n");
+}
+
+function renderValidatorSchemas(names?: Set<ValueScopeName>): string {
+  if (!names?.size) return "";
+
+  const lines: string[] = [];
+
+  for (const name of names) {
+    if (name.value?.code) {
+      lines.push(`const ${name.str}: object = ${name.value.code}`);
+    }
+  }
+
+  return lines.join("\n");
+}
+
+export interface ValidatorInput {
+  id: string;
+  path: string;
+  schema: Schema;
+}
+
+export interface ValidatorResult {
+  id: string;
+  path: string;
+  content: string;
+}
+
+export function generateValidators(
+  inputs: readonly ValidatorInput[]
+): ValidatorResult[] {
+  const pathMap = new Map<string, string>();
+
+  // Register schemas
+  for (const input of inputs) {
+    pathMap.set(input.id, input.path);
+    ajv.addSchema(input.schema, input.id);
+  }
+
+  function renderRefs(names?: Set<ValueScopeName>): string {
+    if (!names?.size) return "";
+
+    const lines: string[] = [];
+
+    for (const name of names) {
+      const schemaEnv: SchemaEnv = (name.value?.ref as any).schemaEnv;
+      const path = pathMap.get(schemaEnv.baseId);
+
+      if (path) {
+        lines.push(`import { validate as ${name.str} } from "${path}";`);
+      }
+    }
+
+    return lines.join("\n");
+  }
+
+  return inputs.map((input) => {
+    const compiled = ajv.compile(input.schema);
+    assert(compiled.source);
+
+    const { validateCode, validateName, scopeValues } = compiled.source;
+
+    return {
+      id: input.id,
+      path: input.path,
+      content: `// @ts-nocheck
+${renderRefs(scopeValues.validate)}
+${renderValidatorFormats(scopeValues.formats)}
+${renderValidatorSchemas(scopeValues.schema)}
+function ${validateName}(data: unknown): boolean;
+${validateCode}
+export { ${validateName} as validate };
+`
+    };
+  });
 }

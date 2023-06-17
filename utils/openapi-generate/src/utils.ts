@@ -1,5 +1,3 @@
-import { trimSuffix } from "@kubernetes-models/string-util";
-import { posix } from "path";
 import { getClassName } from "./string";
 
 export function mergeOpenAPISpecs<
@@ -24,16 +22,6 @@ export function mergeOpenAPISpecs<
 
 export function getSchemaPath(id: string): string {
   return `_schemas/${getClassName(id)}.ts`;
-}
-
-export function getRelativePath(from: string, to: string): string {
-  const path = trimSuffix(posix.relative(posix.dirname(from), to), ".ts");
-
-  if (!path.startsWith(".")) {
-    return `./${path}`;
-  }
-
-  return path;
 }
 
 export function isAPIMachineryID(id: string): boolean {

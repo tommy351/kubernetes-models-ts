@@ -1,9 +1,11 @@
 import glob from "fast-glob";
 import { writeJSON, readFile, pathExists, readJSON } from "fs-extra";
-import { basename, extname, join, posix } from "path";
+import { basename, dirname, extname, join, posix } from "path";
 import ignore, { Ignore } from "ignore";
-import { copyFile } from "fs/promises";
+import { copyFile, mkdir, writeFile } from "fs/promises";
 import execa from "execa";
+import * as swc from "@swc/core";
+import { trimSuffix } from "@kubernetes-models/string-util";
 
 const DTS_EXT = ".d.ts";
 const CJS_EXT = ".js";
@@ -65,36 +67,53 @@ async function generateExportMap(
   return sortObjectByKey(exportMap);
 }
 
-async function compileTS(cwd: string): Promise<void> {
-  const tscMultiBin = join(__dirname, "../node_modules/.bin/tsc-multi");
-  const tscMultiConfig = join(__dirname, "../../../tsc-multi.json");
+async function generateDTS(cwd: string): Promise<void> {
+  const tscBin = join(__dirname, "../node_modules/.bin/tsc");
 
-  console.log("Running tsc-multi");
-  await execa(
-    tscMultiBin,
-    ["--config", tscMultiConfig, "--compiler", require.resolve("typescript")],
-    { cwd, stdio: "inherit" }
-  );
+  console.log("Generating type declarations");
+  await execa(tscBin, ["--emitDeclarationOnly", "--outDir", "dts"], {
+    cwd,
+    stdio: "inherit"
+  });
 }
 
-async function copyDistFiles(cwd: string): Promise<void> {
-  for (const file of ["README.md"]) {
-    const src = join(cwd, file);
-    const dst = join(cwd, "dist", file);
-
-    if (!(await pathExists(src))) continue;
-
-    await copyFile(src, dst);
-    console.log("Copied to dist folder:", file);
+async function compileTS(
+  cwd: string,
+  options: {
+    module: "es6" | "commonjs";
+    outDir: string;
+    ext: string;
   }
-}
+): Promise<void> {
+  console.log("Compiling TS files:", options.module);
 
-async function writePkgJson(cwd: string): Promise<void> {
-  const pkgJson = await readJSON(join(cwd, "package.json"));
+  const paths = await glob("**/*.ts", { cwd: join(cwd, "gen") });
 
-  pkgJson.exports = await generateExportMap(cwd);
+  for (const path of paths) {
+    const srcPath = join(cwd, "gen", path);
+    const dstPath =
+      trimSuffix(join(options.outDir, path), ".ts") + "." + options.ext;
+    const result = await swc.transformFile(srcPath, {
+      filename: path,
+      jsc: {
+        parser: {
+          syntax: "typescript"
+        },
+        externalHelpers: true,
+        target: "es2020",
+        minify: {
+          compress: true,
+          mangle: true
+        }
+      },
+      module: {
+        type: options.module
+      }
+    });
 
-  await writeJSON(join(cwd, "dist/package.json"), pkgJson, { spaces: 2 });
+    await mkdir(dirname(dstPath), { recursive: true });
+    await writeFile(dstPath, result.code);
+  }
 }
 
 export interface BuildArguments {
@@ -102,7 +121,12 @@ export interface BuildArguments {
 }
 
 export async function build(args: BuildArguments): Promise<void> {
-  await compileTS(args.cwd);
-  await copyDistFiles(args.cwd);
-  await writePkgJson(args.cwd);
+  // await checkTypes(args.cwd);
+  await generateDTS(args.cwd);
+  await compileTS(args.cwd, { module: "commonjs", outDir: "cjs", ext: "cjs" });
+  await compileTS(args.cwd, { module: "es6", outDir: "esm", ext: "mjs" });
+  // await copyDistFiles(args.cwd);
+  // await writePkgJson(args.cwd);
+
+  // TODO: Update export map
 }

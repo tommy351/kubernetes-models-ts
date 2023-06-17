@@ -28,7 +28,7 @@ function load(input: string): Definition[] {
       }
 
       const gvks: GroupVersionKind[] =
-        schema["x-kubernetes-group-version-kind"] || [];
+        (schema["x-kubernetes-group-version-kind"] as GroupVersionKind[]) || [];
 
       if (!schema.type && !schema.$ref && !schema.oneOf) {
         schema.type = "object";

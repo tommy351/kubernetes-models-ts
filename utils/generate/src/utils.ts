@@ -1,6 +1,7 @@
+import { trimSuffix } from "@kubernetes-models/string-util";
 import { Generator, GroupVersionKind, OutputFile } from "./types";
 import { outputFile } from "fs-extra";
-import { join } from "path";
+import { join, posix } from "path";
 
 export class PathConflictError extends Error {
   constructor(public path: string) {
@@ -42,4 +43,14 @@ export async function writeOutputFiles(
 
 export function getAPIVersion({ group, version }: GroupVersionKind): string {
   return group ? `${group}/${version}` : version;
+}
+
+export function getRelativePath(from: string, to: string): string {
+  const path = trimSuffix(posix.relative(posix.dirname(from), to), ".ts");
+
+  if (!path.startsWith(".")) {
+    return `./${path}`;
+  }
+
+  return path;
 }

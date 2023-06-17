@@ -2,3 +2,6 @@ dist/
 /coverage/
 node_modules/
 gen/
+cjs/
+dts/
+esm/

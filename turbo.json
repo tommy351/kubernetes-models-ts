@@ -3,7 +3,14 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "gen/**", "*.tsbuildinfo"]
+      "outputs": [
+        "cjs/**",
+        "dist/**",
+        "dts/**",
+        "esm/**",
+        "gen/**",
+        "*.tsbuildinfo"
+      ]
     }
   },
   "globalDependencies": [

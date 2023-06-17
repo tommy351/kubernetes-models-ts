@@ -13,15 +13,15 @@ export interface Schema {
   properties?: { [key: string]: Schema };
   required?: string[];
   additionalProperties?: Schema;
-  enum?: any[];
-  const?: any;
+  enum?: unknown[];
+  const?: unknown;
   not?: Schema;
   oneOf?: Schema[];
   anyOf?: Schema[];
   allOf?: Schema[];
   nullable?: boolean;
   pattern?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface Definition {

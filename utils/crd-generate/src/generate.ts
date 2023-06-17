@@ -1,5 +1,5 @@
 import { parseAllDocuments, DocumentOptions } from "yaml";
-import { mapValues } from "lodash";
+import { mapValues, omitBy } from "lodash";
 import {
   composeGenerators,
   Definition,
@@ -10,6 +10,7 @@ import {
 } from "@kubernetes-models/generate";
 import generateDefinitions from "./generators/definition";
 import generateAliases from "./generators/alias";
+import generateSchemas from "./generators/schema";
 
 interface CustomResourceDefinition {
   spec: CustomResourceDefinitionSpec;
@@ -133,7 +134,11 @@ function dedupeDefinitions(definitions: readonly Definition[]): Definition[] {
   return Object.values(map);
 }
 
-const generator = composeGenerators([generateDefinitions, generateAliases]);
+const generator = composeGenerators([
+  generateDefinitions,
+  generateSchemas,
+  generateAliases
+]);
 
 export interface GenerateOptions {
   input: string;

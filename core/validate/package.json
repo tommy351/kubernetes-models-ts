@@ -36,12 +36,12 @@
     "node": ">=14"
   },
   "dependencies": {
-    "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "ajv-formats-draft2019": "^1.6.1",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "ajv": "^8.11.0",
     "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"

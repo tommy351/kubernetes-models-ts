@@ -2,3 +2,6 @@ dist/
 node_modules/
 gen/
 pnpm-lock.yaml
+cjs/
+dts/
+esm/

@@ -4,10 +4,10 @@ import { posix } from "path";
 import {
   Generator,
   getAPIVersion,
-  OutputFile
+  OutputFile,
+  getRelativePath
 } from "@kubernetes-models/generate";
 import { Context } from "../context";
-import { getRelativePath } from "../utils";
 
 function getIndexPath(key: string): string {
   return [key, "index.ts"].filter(Boolean).join("/");

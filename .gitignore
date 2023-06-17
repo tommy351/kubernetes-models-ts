@@ -10,3 +10,7 @@ gen/
 /.pnpm-store/
 
 .turbo/
+
+cjs/
+dts/
+esm/

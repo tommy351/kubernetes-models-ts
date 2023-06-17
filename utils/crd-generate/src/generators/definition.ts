@@ -7,9 +7,10 @@ import {
   GroupVersionKind,
   Import,
   OutputFile,
-  transformSchema
+  getRelativePath
 } from "@kubernetes-models/generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
+import { getSchemaPath } from "../utils";
 
 function getFieldType(key: string[]): string | undefined {
   if (key.length === 1 && key[0] === "metadata") {
@@ -25,6 +26,7 @@ function generateDefinition(
   const className = gvk.kind;
   const interfaceName = `I${className}`;
   const imports: Import[] = [];
+  const path = `${apiVersion}/${className}.ts`;
   const interfaceContent = generateInterface(def.schema, {
     includeDescription: true,
     getFieldType
@@ -54,6 +56,8 @@ constructor(data?: ModelData<${interfaceName}>) {
     ...data
   } as ${interfaceName});
 }
+
+validate() { runValidator(validate, this) }
 }
 `;
 
@@ -63,17 +67,7 @@ constructor(data?: ModelData<${interfaceName}>) {
   });
 
   imports.push({
-    name: "addSchema",
-    path: "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta"
-  });
-
-  imports.push({
     name: "Model",
-    path: "@kubernetes-models/base"
-  });
-
-  imports.push({
-    name: "setSchema",
     path: "@kubernetes-models/base"
   });
 
@@ -88,8 +82,13 @@ constructor(data?: ModelData<${interfaceName}>) {
   });
 
   imports.push({
-    name: "register",
+    name: "runValidator",
     path: "@kubernetes-models/validate"
+  });
+
+  imports.push({
+    name: "validate",
+    path: getRelativePath(path, getSchemaPath(def.schemaId))
   });
 
   if (def.schema.description) {
@@ -98,23 +97,13 @@ constructor(data?: ModelData<${interfaceName}>) {
     });
   }
 
-  const schema = transformSchema(def.schema);
-
   return {
-    path: `${apiVersion}/${className}.ts`,
+    path,
     content: `${generateImports(imports)}
-
-const schemaId = ${JSON.stringify(def.schemaId)};
-const schema = ${JSON.stringify(schema, null, "  ")};
 
 ${comment}export interface ${interfaceName} ${interfaceContent}
 
 ${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
-
-setSchema(${className}, schemaId, () => {
-  addSchema();
-  register(schemaId, schema);
-});
 `
   };
 }

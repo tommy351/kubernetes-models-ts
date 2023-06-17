@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@kubernetes-models/string-util": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
     "ajv": "^8.11.0",
     "fs-extra": "^10.1.0",
     "indent-string": "^4.0.0",
