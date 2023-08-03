@@ -45,7 +45,7 @@
     "@kubernetes-models/string-util": "workspace:^",
     "lodash": "^4.17.21",
     "tslib": "^2.4.0",
-    "yaml": "^2.1.1",
+    "yaml": "^2.2.2",
     "yargs": "^17.6.0"
   },
   "devDependencies": {
