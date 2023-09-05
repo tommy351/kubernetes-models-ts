@@ -17,7 +17,7 @@
     "lint": "npm-run-all lint:*",
     "lint:eslint": "eslint . --ext .js,.ts,.cjs,.mjs",
     "lint:syncpack": "syncpack list-mismatches --workspace false",
-    "build": "turbo run build --filter=!@kubernetes-models/monorepo",
+    "build": "turbo run build --filter=!@kubernetes-models/monorepo --concurrency 4",
     "clean": "pnpm -r --filter '!@kubernetes-models/monorepo' exec -- rm -rf dist gen *.tsbuildinfo",
     "test": "vitest",
     "new-crd-package": "ts-node scripts/new-crd-package.ts",
