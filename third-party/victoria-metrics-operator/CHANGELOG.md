@@ -1,5 +1,11 @@
 # @kubernetes-models/victoria-metrics-operator
 
+## 2.4.0
+
+### Minor Changes
+
+- [#137](https://github.com/tommy351/kubernetes-models-ts/pull/137) [`9896980`](https://github.com/tommy351/kubernetes-models-ts/commit/9896980ac908e11c37cd2141fe3d7a65b011035a) Thanks [@yckao](https://github.com/yckao)! - Upgrade CRDs to v0.37.1
+
 ## 2.3.1
 
 ### Patch Changes
