@@ -8,7 +8,7 @@ import assert from "assert";
 import fetch from "make-fetch-happen";
 import findCacheDir from "find-cache-dir";
 
-const VERSION = "0.33.0";
+const VERSION = "0.37.1";
 
 const outputPath = join(__dirname, "../crds/crd.yaml");
 
