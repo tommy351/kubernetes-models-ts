@@ -69,6 +69,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/redis-operator](third-party/redis-operator) - [Redis Operator](https://ot-container-kit.github.io/redis-operator/) models.
 - [@kubernetes-models/sealed-secrets](third-party/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
 - [@kubernetes-models/seldon-core-operator](third-party/seldon-core-operator) - [SeldonCore operator](https://github.com/SeldonIO/seldon-core/tree/v1.15.0/helm-charts/seldon-core-operator) models.
+- [@kubernetes-models/shipwright](third-party/shipwright) - [Shipwright](https://shipwright.io/) CRD.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/tidb-operator](third-party/tidb-operator) - [TiDB Operator](https://github.com/pingcap/tidb-operator) models.
