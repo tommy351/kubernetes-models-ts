@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-cd
 
+## 2.4.0
+
+### Minor Changes
+
+- [#144](https://github.com/tommy351/kubernetes-models-ts/pull/144) [`fa9f0ff`](https://github.com/tommy351/kubernetes-models-ts/commit/fa9f0ffdbf44aeb54224c3522f0035b567967c5e) Thanks [@tommy351](https://github.com/tommy351)! - Update CRD version to v2.8.4.
+
 ## 2.3.1
 
 ### Patch Changes
