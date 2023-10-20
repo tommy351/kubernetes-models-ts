@@ -45,10 +45,10 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/shipwright-io/build/v0.11.0/deploy/crds/shipwright.io_clusterbuildstrategies.yaml",
-      "https://raw.githubusercontent.com/shipwright-io/build/v0.11.0/deploy/crds/shipwright.io_buildstrategies.yaml",
-      "https://raw.githubusercontent.com/shipwright-io/build/v0.11.0/deploy/crds/shipwright.io_builds.yaml",
-      "https://raw.githubusercontent.com/shipwright-io/build/v0.11.0/deploy/crds/shipwright.io_buildruns.yaml"
+      "https://raw.githubusercontent.com/shipwright-io/build/v0.12.0/deploy/crds/shipwright.io_clusterbuildstrategies.yaml",
+      "https://raw.githubusercontent.com/shipwright-io/build/v0.12.0/deploy/crds/shipwright.io_buildstrategies.yaml",
+      "https://raw.githubusercontent.com/shipwright-io/build/v0.12.0/deploy/crds/shipwright.io_builds.yaml",
+      "https://raw.githubusercontent.com/shipwright-io/build/v0.12.0/deploy/crds/shipwright.io_buildruns.yaml"
     ],
     "output": "./gen"
   }
