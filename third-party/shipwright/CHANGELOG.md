@@ -1,5 +1,11 @@
 # @kubernetes-models/shipwright
 
+## 0.2.0
+
+### Minor Changes
+
+- [#145](https://github.com/tommy351/kubernetes-models-ts/pull/145) [`af0eacc`](https://github.com/tommy351/kubernetes-models-ts/commit/af0eacc2b7abbaa8bd0754427f9097488d082847) Thanks [@jerolimov](https://github.com/jerolimov)! - Update to [Shipwright](https://shipwright.io/) release v0.12.0 that introduce a new v1beta1 API.
+
 ## 0.1.0
 
 ### Minor Changes
