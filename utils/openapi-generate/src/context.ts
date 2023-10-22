@@ -10,16 +10,22 @@ function getIdPrefix(id: string): string {
 export interface Context {
   getDefinitionPath(id: string): string;
   externalAPIMachinery?: boolean;
+  externalKubernetesModels?: boolean;
 }
 
 export interface ContextOptions {
   rewriteDefinitionPath?(path: string): string;
   externalAPIMachinery?: boolean;
+  externalKubernetesModels?: boolean;
 }
 
 export function buildContext(
   definitions: readonly Definition[],
-  { rewriteDefinitionPath = identity, externalAPIMachinery }: ContextOptions
+  {
+    rewriteDefinitionPath = identity,
+    externalAPIMachinery,
+    externalKubernetesModels
+  }: ContextOptions
 ): Context {
   const apiVersionMap = new Map<string, string>();
 
@@ -41,6 +47,7 @@ export function buildContext(
 
   return {
     externalAPIMachinery,
+    externalKubernetesModels,
     getDefinitionPath(id) {
       const apiVersion = apiVersionMap.get(getIdPrefix(id));
 

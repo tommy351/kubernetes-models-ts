@@ -21,7 +21,12 @@ import {
   getShortInterfaceName,
   trimRefPrefix
 } from "../string";
-import { getRelativePath, getSchemaPath, isAPIMachineryID } from "../utils";
+import {
+  getRelativePath,
+  getSchemaPath,
+  isAPIMachineryID,
+  isK8sID
+} from "../utils";
 
 function omitTypeMetaDescription(schema: Schema): Schema {
   const { properties, ...rest } = schema;
@@ -41,7 +46,8 @@ function omitTypeMetaDescription(schema: Schema): Schema {
 
 export default function ({
   getDefinitionPath,
-  externalAPIMachinery
+  externalAPIMachinery,
+  externalKubernetesModels
 }: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
@@ -92,6 +98,13 @@ export default function ({
               ref,
               "io.k8s.apimachinery.pkg."
             )
+              .split(".")
+              .join("/")}`
+          });
+        } else if (externalKubernetesModels && isK8sID(ref)) {
+          imports.push({
+            name,
+            path: `kubernetes-models/${trimPrefix(ref, "io.k8s.")
               .split(".")
               .join("/")}`
           });

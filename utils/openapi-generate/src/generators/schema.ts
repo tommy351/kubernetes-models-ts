@@ -10,7 +10,7 @@ import {
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
-import { getSchemaPath, isAPIMachineryID } from "../utils";
+import { getSchemaPath, isAPIMachineryID, isK8sID } from "../utils";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -43,7 +43,10 @@ function compileSchema(def: Definition): string {
   return JSON.stringify(schema, null, "  ");
 }
 
-export default function ({ externalAPIMachinery }: Context): Generator {
+export default function ({
+  externalAPIMachinery,
+  externalKubernetesModels
+}: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
       const imports: Import[] = [];
@@ -69,6 +72,12 @@ export default function ({ externalAPIMachinery }: Context): Generator {
               getSchemaPath(ref),
               ".ts"
             )}`
+          });
+        } else if (externalKubernetesModels && isK8sID(ref)) {
+          imports.push({
+            name,
+            alias,
+            path: `kubernetes-models/${trimSuffix(getSchemaPath(ref), ".ts")}`
           });
         } else {
           imports.push({ name, alias, path: `./${getClassName(ref)}` });

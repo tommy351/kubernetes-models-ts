@@ -36,6 +36,10 @@ export function getRelativePath(from: string, to: string): string {
   return path;
 }
 
+export function isK8sID(id: string): boolean {
+  return id.startsWith("io.k8s.");
+}
+
 export function isAPIMachineryID(id: string): boolean {
   return id.startsWith("io.k8s.apimachinery.");
 }

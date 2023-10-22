@@ -14,7 +14,7 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-crd-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -37,21 +37,50 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-crd-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^0.29.8"
   },
-  "crd-generate": {
+  "go-crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/jetstack/cert-manager/v0.10.1/deploy/manifests/00-crds.yaml",
-      "https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.3/deploy/manifests/00-crds.yaml",
-      "https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml",
-      "https://github.com/jetstack/cert-manager/releases/download/v1.5.5/cert-manager.crds.yaml",
-      "https://github.com/jetstack/cert-manager/releases/download/v1.11.2/cert-manager.crds.yaml",
-      "https://raw.githubusercontent.com/cert-manager/trust-manager/v0.4.0/deploy/crds/trust.cert-manager.io_bundles.yaml",
-      "https://raw.githubusercontent.com/cert-manager/approver-policy/v0.6.3/deploy/charts/approver-policy/templates/crds/policy.cert-manager.io_certificaterequestpolicies.yaml",
-      "https://raw.githubusercontent.com/cert-manager/aws-privateca-issuer/v1.2.2/charts/aws-pca-issuer/crds/awspca.cert-manager.io_awspcaclusterissuers.yaml",
-      "https://raw.githubusercontent.com/cert-manager/aws-privateca-issuer/v1.2.2/charts/aws-pca-issuer/crds/awspca.cert-manager.io_awspcaissuers.yaml"
+      {
+        "module": "github.com/cert-manager/cert-manager@v0.10.1",
+        "packages": [
+          "./pkg/apis/certmanager/v1alpha1"
+        ]
+      },
+      {
+        "module": "github.com/cert-manager/cert-manager@v1.6.3",
+        "packages": [
+          "./pkg/apis/certmanager/v1alpha2",
+          "./pkg/apis/certmanager/v1alpha3",
+          "./pkg/apis/certmanager/v1beta1"
+        ]
+      },
+      {
+        "module": "github.com/cert-manager/cert-manager@v1.11.2",
+        "packages": [
+          "./pkg/apis/certmanager/v1"
+        ]
+      },
+      {
+        "module": "github.com/cert-manager/trust-manager@v0.4.0",
+        "packages": [
+          "./pkg/apis/trust/v1alpha1"
+        ]
+      },
+      {
+        "module": "github.com/cert-manager/approver-policy@v0.6.3",
+        "packages": [
+          "./pkg/apis/policy/v1alpha1"
+        ]
+      },
+      {
+        "module": "github.com/cert-manager/aws-privateca-issuer@v1.2.2",
+        "packages": [
+          "./pkg/api/v1beta1"
+        ]
+      }
     ],
     "output": "./gen"
   }

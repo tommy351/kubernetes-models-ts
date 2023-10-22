@@ -12,7 +12,11 @@ export function collectRefs(data: Record<string, unknown>): string[] {
       return [val];
     }
 
-    if (typeof val === "object" && !Array.isArray(val)) {
+    if (Array.isArray(val)) {
+      return val.flatMap((v) => collectRefs(v));
+    }
+
+    if (typeof val === "object") {
       return collectRefs(val as Record<string, unknown>);
     }
 

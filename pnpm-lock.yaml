@@ -219,6 +219,28 @@ importers:
         version: 0.29.8
     publishDirectory: dist
 
+  internal/go-crd-generate:
+    dependencies:
+      '@kubernetes-models/openapi-generate':
+        specifier: workspace:^
+        version: link:../../utils/openapi-generate
+      execa:
+        specifier: ^5.1.1
+        version: 5.1.1
+      tslib:
+        specifier: ^2.4.0
+        version: 2.4.0
+      yargs:
+        specifier: ^17.6.0
+        version: 17.6.0
+    devDependencies:
+      '@types/yargs':
+        specifier: ^17.0.13
+        version: 17.0.13
+      typescript:
+        specifier: ^4.8.4
+        version: 4.8.4
+
   internal/publish-scripts:
     dependencies:
       execa:
@@ -346,9 +368,9 @@ importers:
         specifier: ^2.4.0
         version: 2.4.0
     devDependencies:
-      '@kubernetes-models/crd-generate':
+      '@kubernetes-models/go-crd-generate':
         specifier: workspace:^
-        version: link:../../utils/crd-generate
+        version: link:../../internal/go-crd-generate
       '@kubernetes-models/publish-scripts':
         specifier: workspace:^
         version: link:../../internal/publish-scripts
