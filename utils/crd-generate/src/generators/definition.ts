@@ -13,7 +13,7 @@ import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 
 function getFieldType(key: string[]): string | undefined {
   if (key.length === 1 && key[0] === "metadata") {
-    return "IObjectMeta";
+    return "V1ObjectMeta";
   }
 }
 
@@ -58,8 +58,8 @@ constructor(data?: ModelData<${interfaceName}>) {
 `;
 
   imports.push({
-    name: "IObjectMeta",
-    path: "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta"
+    name: "V1ObjectMeta",
+    path: "@kubernetes-models/base"
   });
 
   imports.push({
@@ -99,6 +99,29 @@ constructor(data?: ModelData<${interfaceName}>) {
   }
 
   const schema = transformSchema(def.schema);
+  let kubernetesObj = 'KubernetesObject';
+
+  // Spec is required
+  if (classContent.indexOf('spec') > -1 && schema.required && schema.required.indexOf('spec') > -1) {
+    kubernetesObj = 'KubernetesObjectWithSpec';
+
+    imports.push({
+      name: "KubernetesObjectWithSpec",
+      path: "@kubernetes-models/base"
+    });
+  } else if (classContent.indexOf('spec') > -1) { // We have spec but it's not required
+    kubernetesObj = 'KubernetesObjectWithOptionalSpec';
+
+    imports.push({
+      name: "KubernetesObjectWithOptionalSpec",
+      path: "@kubernetes-models/base"
+    });
+  } else { // No spec
+    imports.push({
+      name: "KubernetesObject",
+      path: "@kubernetes-models/base"
+    });
+  }
 
   return {
     path: `${apiVersion}/${className}.ts`,
@@ -109,7 +132,7 @@ const schema = ${JSON.stringify(schema, null, "  ")};
 
 ${comment}export interface ${interfaceName} ${interfaceContent}
 
-${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
+${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName}, ${kubernetesObj} ${classContent}
 
 setSchema(${className}, schemaId, () => {
   addSchema();
