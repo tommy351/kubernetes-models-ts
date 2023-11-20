@@ -36,7 +36,7 @@ const myStream = new Stream({
 });
 
 // Create a new NATS JetStream consumer
-const myPushConsumer = new Stream({
+const myPushConsumer = new Consumer({
   metadata: { name: "my-push-consumer" },
   spec: {
     streamName: "mystream",
@@ -49,7 +49,7 @@ const myPushConsumer = new Stream({
 });
 
 // Create a new NATS JetStream consumer
-const myPullConsumer = new Stream({
+const myPullConsumer = new Consumer({
   metadata: { name: "my-pull-consumer" },
   spec: {
     streamName: "mystream",
