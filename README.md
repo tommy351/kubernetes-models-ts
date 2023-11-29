@@ -73,6 +73,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/tidb-operator](third-party/tidb-operator) - [TiDB Operator](https://github.com/pingcap/tidb-operator) models.
+- [@kubernetes-models/traefik](third-party/traefik) - [Traefik Operator](https://github.com/traefik/traefik-helm-chart/tree/master/traefik/crds) models.
 - [@kubernetes-models/victoria-metrics-operator](third-party/victoria-metrics-operator) - [VictoriaMetrics operator](https://github.com/VictoriaMetrics/operator) models.
 
 ### Generators
