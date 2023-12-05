@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/traefik",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Traefik models",
   "repository": {
     "type": "git",
