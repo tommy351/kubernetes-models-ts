@@ -1,5 +1,11 @@
 # @kubernetes-models/gateway-api
 
+## 0.4.0
+
+### Minor Changes
+
+- [#153](https://github.com/tommy351/kubernetes-models-ts/pull/153) [`6fddd92`](https://github.com/tommy351/kubernetes-models-ts/commit/6fddd92a86ff260ef757bc49798f978c38734a4e) Thanks [@leozhantw](https://github.com/leozhantw)! - bump to v1.0.0
+
 ## 0.3.1
 
 ### Patch Changes
