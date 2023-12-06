@@ -13,7 +13,7 @@ npm install @kubernetes-models/gateway-api
 ## Usage
 
 ```js
-import { HTTPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1beta1/HTTPRoute";
+import { HTTPRoute } from "@kubernetes-models/gateway-api/gateway.networking.k8s.io/v1/HTTPRoute";
 
 // Create a new HTTPRoute
 const route = new HTTPRoute({

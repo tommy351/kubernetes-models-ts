@@ -43,7 +43,8 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.6.2/standard-install.yaml"
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.6.2/standard-install.yaml",
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml"
     ],
     "output": "./gen"
   }
