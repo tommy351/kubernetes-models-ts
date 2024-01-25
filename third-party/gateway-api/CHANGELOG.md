@@ -1,5 +1,11 @@
 # @kubernetes-models/gateway-api
 
+## 0.5.0
+
+### Minor Changes
+
+- [#156](https://github.com/tommy351/kubernetes-models-ts/pull/156) [`42adf3a`](https://github.com/tommy351/kubernetes-models-ts/commit/42adf3a962f4dafd890601e9e0099a1d8101370b) Thanks [@lperdereau](https://github.com/lperdereau)! - Add experimental CDRs
+
 ## 0.4.0
 
 ### Minor Changes
