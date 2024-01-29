@@ -43,7 +43,7 @@ pnpm run lint
 Create a new CRD package.
 
 ```sh
-pnpm run new-crd-package -- \
+pnpm run new-crd-package \
   --name 'pkg-name' \
   --description 'Package description' \
   --author 'John Doe <john.doe@gmail.com>'
