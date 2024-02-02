@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy";
-import { PolicyException } from "../gen/kyverno.io/v2alpha1/PolicyException";
-import { CleanupPolicy } from '../gen/kyverno.io/v2alpha1/CleanupPolicy';
+import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException";
+import { CleanupPolicy } from '../gen/kyverno.io/v2beta1/CleanupPolicy';
 
 describe('ClusterPolicy', () => {
   let policy: ClusterPolicy;
@@ -137,7 +137,7 @@ describe('PolicyException', () => {
   });
 
   it('should set apiVersion', () => {
-    expect(exception).toHaveProperty('apiVersion', 'kyverno.io/v2alpha1');
+    expect(exception).toHaveProperty('apiVersion', 'kyverno.io/v2beta1');
   });
 
   it('should set kind', () => {
@@ -150,7 +150,7 @@ describe('PolicyException', () => {
 
   it('toJSON', () => {
     expect(exception.toJSON()).toEqual({
-      apiVersion: 'kyverno.io/v2alpha1',
+      apiVersion: 'kyverno.io/v2beta1',
       kind: 'PolicyException',
       metadata: {
         name: 'delta-exception',
@@ -227,7 +227,7 @@ describe('CleanupPolicy', () => {
   });
 
   it('should set apiVersion', () => {
-    expect(policy).toHaveProperty('apiVersion', 'kyverno.io/v2alpha1');
+    expect(policy).toHaveProperty('apiVersion', 'kyverno.io/v2beta1');
   });
 
   it('should set kind', () => {
@@ -240,7 +240,7 @@ describe('CleanupPolicy', () => {
 
   it("toJSON", () => {
     expect(policy.toJSON()).toEqual({
-      apiVersion: 'kyverno.io/v2alpha1',
+      apiVersion: 'kyverno.io/v2beta1',
       kind: 'CleanupPolicy',
       metadata: {
         name: 'cleandeploy'
