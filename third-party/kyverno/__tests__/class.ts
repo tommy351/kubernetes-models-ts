@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy";
 import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException";
-import { CleanupPolicy } from '../gen/kyverno.io/v2beta1/CleanupPolicy';
+import { CleanupPolicy } from "../gen/kyverno.io/v2beta1/CleanupPolicy";
 
-describe('ClusterPolicy', () => {
+describe("ClusterPolicy", () => {
   let policy: ClusterPolicy;
 
   beforeEach(() => {
@@ -43,59 +43,59 @@ describe('ClusterPolicy', () => {
     });
   });
 
-  it('should set apiVersion', () => {
-    expect(policy).toHaveProperty('apiVersion', 'kyverno.io/v1');
+  it("should set apiVersion", () => {
+    expect(policy).toHaveProperty("apiVersion", "kyverno.io/v1");
   });
 
-  it('should set kind', () => {
-    expect(policy).toHaveProperty('kind', 'ClusterPolicy');
+  it("should set kind", () => {
+    expect(policy).toHaveProperty("kind", "ClusterPolicy");
   });
 
-  it('validate', () => {
+  it("validate", () => {
     expect(() => policy.validate()).not.toThrow();
   });
 
-  it('toJSON', () => {
+  it("toJSON", () => {
     expect(policy.toJSON()).toEqual({
-      apiVersion: 'kyverno.io/v1',
-      kind: 'ClusterPolicy',
+      apiVersion: "kyverno.io/v1",
+      kind: "ClusterPolicy",
       metadata: {
-        name: 'require-labels'
+        name: "require-labels"
       },
       spec: {
-        validationFailureAction: 'enforce',
+        validationFailureAction: "enforce",
         background: false,
         rules: [
           {
-            name: 'check-team',
+            name: "check-team",
             match: {
               any: [
                 {
                   resources: {
-                    namespaces: ['default'],
-                    kinds: ['Pod']
+                    namespaces: ["default"],
+                    kinds: ["Pod"]
                   }
                 }
               ]
             },
             validate: {
-              message: 'label team must be set',
+              message: "label team must be set",
               pattern: {
                 metadata: {
                   labels: {
-                    team: '?*'
+                    team: "?*"
                   }
                 }
               }
             }
           }
         ]
-    }
+      }
     });
   });
 });
 
-describe('PolicyException', () => {
+describe("PolicyException", () => {
   let exception: PolicyException;
 
   beforeEach(() => {
@@ -108,26 +108,16 @@ describe('PolicyException', () => {
         exceptions: [
           {
             policyName: "disallow-host-namespaces",
-            ruleNames: [
-              "host-namespaces",
-              "autogen-host-namespaces"
-            ]
+            ruleNames: ["host-namespaces", "autogen-host-namespaces"]
           }
         ],
         match: {
           any: [
             {
               resources: {
-                kinds: [
-                  "Deployment",
-                  "Pod"
-                ],
-                names: [
-                  "importent-tool*"
-                ],
-                namespaces: [
-                  "delta"
-                ]
+                kinds: ["Deployment", "Pod"],
+                names: ["importent-tool*"],
+                namespaces: ["delta"]
               }
             }
           ]
@@ -136,50 +126,40 @@ describe('PolicyException', () => {
     });
   });
 
-  it('should set apiVersion', () => {
-    expect(exception).toHaveProperty('apiVersion', 'kyverno.io/v2beta1');
+  it("should set apiVersion", () => {
+    expect(exception).toHaveProperty("apiVersion", "kyverno.io/v2beta1");
   });
 
-  it('should set kind', () => {
-    expect(exception).toHaveProperty('kind', 'PolicyException');
+  it("should set kind", () => {
+    expect(exception).toHaveProperty("kind", "PolicyException");
   });
 
-  it('validate', () => {
+  it("validate", () => {
     expect(() => exception.validate()).not.toThrow();
   });
 
-  it('toJSON', () => {
+  it("toJSON", () => {
     expect(exception.toJSON()).toEqual({
-      apiVersion: 'kyverno.io/v2beta1',
-      kind: 'PolicyException',
+      apiVersion: "kyverno.io/v2beta1",
+      kind: "PolicyException",
       metadata: {
-        name: 'delta-exception',
-        namespace: 'delta'
+        name: "delta-exception",
+        namespace: "delta"
       },
       spec: {
         exceptions: [
           {
-            policyName: 'disallow-host-namespaces',
-            ruleNames: [
-              'host-namespaces',
-              'autogen-host-namespaces'
-            ]
+            policyName: "disallow-host-namespaces",
+            ruleNames: ["host-namespaces", "autogen-host-namespaces"]
           }
         ],
         match: {
           any: [
             {
               resources: {
-                kinds: [
-                  'Deployment',
-                  'Pod'
-                ],
-                names: [
-                  'importent-tool*'
-                ],
-                namespaces: [
-                  'delta'
-                ]
+                kinds: ["Deployment", "Pod"],
+                names: ["importent-tool*"],
+                namespaces: ["delta"]
               }
             }
           ]
@@ -189,20 +169,20 @@ describe('PolicyException', () => {
   });
 });
 
-describe('CleanupPolicy', () => {
+describe("CleanupPolicy", () => {
   let policy: CleanupPolicy;
 
   beforeEach(() => {
     policy = new CleanupPolicy({
       metadata: {
-        name: 'cleandeploy'
+        name: "cleandeploy"
       },
       spec: {
         match: {
           any: [
             {
               resources: {
-                kinds: ['Deployment'],
+                kinds: ["Deployment"],
                 selector: {
                   matchLabels: {
                     canremove: "true"
@@ -221,17 +201,17 @@ describe('CleanupPolicy', () => {
             }
           ]
         },
-        schedule: "*/5 * * * *",
+        schedule: "*/5 * * * *"
       }
     });
   });
 
-  it('should set apiVersion', () => {
-    expect(policy).toHaveProperty('apiVersion', 'kyverno.io/v2beta1');
+  it("should set apiVersion", () => {
+    expect(policy).toHaveProperty("apiVersion", "kyverno.io/v2beta1");
   });
 
-  it('should set kind', () => {
-    expect(policy).toHaveProperty('kind', 'CleanupPolicy');
+  it("should set kind", () => {
+    expect(policy).toHaveProperty("kind", "CleanupPolicy");
   });
 
   it("validate", () => {
@@ -240,20 +220,20 @@ describe('CleanupPolicy', () => {
 
   it("toJSON", () => {
     expect(policy.toJSON()).toEqual({
-      apiVersion: 'kyverno.io/v2beta1',
-      kind: 'CleanupPolicy',
+      apiVersion: "kyverno.io/v2beta1",
+      kind: "CleanupPolicy",
       metadata: {
-        name: 'cleandeploy'
+        name: "cleandeploy"
       },
       spec: {
         match: {
           any: [
             {
               resources: {
-                kinds: ['Deployment'],
+                kinds: ["Deployment"],
                 selector: {
                   matchLabels: {
-                      canremove: "true"
+                    canremove: "true"
                   }
                 }
               }
@@ -263,13 +243,13 @@ describe('CleanupPolicy', () => {
         conditions: {
           any: [
             {
-              key: '{{ target.spec.replicas }}',
-              operator: 'LessThan',
+              key: "{{ target.spec.replicas }}",
+              operator: "LessThan",
               value: 2
             }
           ]
         },
-        schedule: '*/5 * * * *',
+        schedule: "*/5 * * * *"
       }
     });
   });

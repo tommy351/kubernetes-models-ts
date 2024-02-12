@@ -27,10 +27,7 @@ describe("HTTPRoute", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(route).toHaveProperty(
-      "apiVersion",
-      "gateway.networking.k8s.io/v1"
-    );
+    expect(route).toHaveProperty("apiVersion", "gateway.networking.k8s.io/v1");
   });
 
   it("should set kind", () => {

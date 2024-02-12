@@ -10,24 +10,24 @@ describe("Build", () => {
   beforeEach(() => {
     build = new Build({
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         name: "buildah-golang-build"
       },
       spec: {
         strategy: {
-          kind: 'ClusterBuildStrategy',
-          name: 'buildah',
+          kind: "ClusterBuildStrategy",
+          name: "buildah"
         },
         source: {
           git: {
-            url: 'https://github.com/shipwright-io/sample-go',
+            url: "https://github.com/shipwright-io/sample-go"
           },
-          contextDir: 'docker-build'
+          contextDir: "docker-build"
         },
         output: {
-          image: 'registry/namespace/image:latest',
-        },
-      },
+          image: "registry/namespace/image:latest"
+        }
+      }
     });
   });
 
@@ -48,24 +48,24 @@ describe("Build", () => {
       apiVersion: "shipwright.io/v1beta1",
       kind: "Build",
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         name: "buildah-golang-build"
       },
       spec: {
         strategy: {
-          kind: 'ClusterBuildStrategy',
-          name: 'buildah',
+          kind: "ClusterBuildStrategy",
+          name: "buildah"
         },
         source: {
           git: {
-            url: 'https://github.com/shipwright-io/sample-go',
+            url: "https://github.com/shipwright-io/sample-go"
           },
-          contextDir: 'docker-build',
+          contextDir: "docker-build"
         },
         output: {
-          image: 'registry/namespace/image:latest',
-        },
-      },
+          image: "registry/namespace/image:latest"
+        }
+      }
     });
   });
 });
@@ -76,12 +76,12 @@ describe("BuildRun", () => {
   beforeEach(() => {
     buildRun = new BuildRun({
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         generateName: "test-buildrun-"
       },
       spec: {
-        build: {},
-      },
+        build: {}
+      }
     });
   });
 
@@ -102,19 +102,19 @@ describe("BuildRun", () => {
       apiVersion: "shipwright.io/v1beta1",
       kind: "BuildRun",
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         generateName: "test-buildrun-"
       },
       spec: {
-        build: {},
+        build: {}
       }
     });
   });
 
   it("should accept a build-ref", () => {
     buildRun.spec.build = {
-      name: 'buildah-golang-build',
-    }
+      name: "buildah-golang-build"
+    };
     expect(() => buildRun.validate()).not.toThrow();
   });
 
@@ -122,23 +122,22 @@ describe("BuildRun", () => {
     buildRun.spec.build = {
       spec: {
         strategy: {
-          kind: 'ClusterBuildStrategy',
-          name: 'buildah',
+          kind: "ClusterBuildStrategy",
+          name: "buildah"
         },
         source: {
           git: {
-            url: 'https://github.com/shipwright-io/sample-go',
+            url: "https://github.com/shipwright-io/sample-go"
           },
-          contextDir: 'docker-build'
+          contextDir: "docker-build"
         },
         output: {
-          image: 'registry/namespace/image:latest',
-        },
-      },
-    }
+          image: "registry/namespace/image:latest"
+        }
+      }
+    };
     expect(() => buildRun.validate()).not.toThrow();
   });
-
 });
 
 describe("BuildStrategy", () => {
@@ -147,34 +146,39 @@ describe("BuildStrategy", () => {
   beforeEach(() => {
     buildStrategy = new BuildStrategy({
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         name: "namespaced-build-strategy"
       },
       spec: {
         parameters: [
-          { name: 'build-arg', description: 'ARGS' },
-          { name: 'secrets', description: 'Some secrets', type: 'array', defaults: [] },
+          { name: "build-arg", description: "ARGS" },
+          {
+            name: "secrets",
+            description: "Some secrets",
+            type: "array",
+            defaults: []
+          }
         ],
         steps: [
           {
-            name: 'build-and-push',
-            image: 'moby/buildkit:nightly-rootless',
-            imagePullPolicy: 'Always',
-            workingDir: '.',
-            command: ['/bin/bash'],
-            args: ['-c', 'echo hello world'],
+            name: "build-and-push",
+            image: "moby/buildkit:nightly-rootless",
+            imagePullPolicy: "Always",
+            workingDir: ".",
+            command: ["/bin/bash"],
+            args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false,
+              privileged: false
             },
             resources: {
               requests: {
-                cpu: '250m',
-                memory: '100Mi',
+                cpu: "250m",
+                memory: "100Mi"
               },
               limits: {
-                cpu: '500m',
-                memory: '1Gi',
-              },
+                cpu: "500m",
+                memory: "1Gi"
+              }
             }
           }
         ]
@@ -199,34 +203,39 @@ describe("BuildStrategy", () => {
       apiVersion: "shipwright.io/v1beta1",
       kind: "BuildStrategy",
       metadata: {
-        namespace: 'my-namespace',
+        namespace: "my-namespace",
         name: "namespaced-build-strategy"
       },
       spec: {
         parameters: [
-          { name: 'build-arg', description: 'ARGS' },
-          { name: 'secrets', description: 'Some secrets', type: 'array', defaults: [] },
+          { name: "build-arg", description: "ARGS" },
+          {
+            name: "secrets",
+            description: "Some secrets",
+            type: "array",
+            defaults: []
+          }
         ],
         steps: [
           {
-            name: 'build-and-push',
-            image: 'moby/buildkit:nightly-rootless',
-            imagePullPolicy: 'Always',
-            workingDir: '.',
-            command: ['/bin/bash'],
-            args: ['-c', 'echo hello world'],
+            name: "build-and-push",
+            image: "moby/buildkit:nightly-rootless",
+            imagePullPolicy: "Always",
+            workingDir: ".",
+            command: ["/bin/bash"],
+            args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false,
+              privileged: false
             },
             resources: {
               requests: {
-                cpu: '250m',
-                memory: '100Mi',
+                cpu: "250m",
+                memory: "100Mi"
               },
               limits: {
-                cpu: '500m',
-                memory: '1Gi',
-              },
+                cpu: "500m",
+                memory: "1Gi"
+              }
             }
           }
         ]
@@ -245,29 +254,34 @@ describe("ClusterBuildStrategy", () => {
       },
       spec: {
         parameters: [
-          { name: 'build-arg', description: 'ARGS' },
-          { name: 'secrets', description: 'Some secrets', type: 'array', defaults: [] },
+          { name: "build-arg", description: "ARGS" },
+          {
+            name: "secrets",
+            description: "Some secrets",
+            type: "array",
+            defaults: []
+          }
         ],
         steps: [
           {
-            name: 'build-and-push',
-            image: 'moby/buildkit:nightly-rootless',
-            imagePullPolicy: 'Always',
-            workingDir: '.',
-            command: ['/bin/bash'],
-            args: ['-c', 'echo hello world'],
+            name: "build-and-push",
+            image: "moby/buildkit:nightly-rootless",
+            imagePullPolicy: "Always",
+            workingDir: ".",
+            command: ["/bin/bash"],
+            args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false,
+              privileged: false
             },
             resources: {
               requests: {
-                cpu: '250m',
-                memory: '100Mi',
+                cpu: "250m",
+                memory: "100Mi"
               },
               limits: {
-                cpu: '500m',
-                memory: '1Gi',
-              },
+                cpu: "500m",
+                memory: "1Gi"
+              }
             }
           }
         ]
@@ -296,29 +310,34 @@ describe("ClusterBuildStrategy", () => {
       },
       spec: {
         parameters: [
-          { name: 'build-arg', description: 'ARGS' },
-          { name: 'secrets', description: 'Some secrets', type: 'array', defaults: [] },
+          { name: "build-arg", description: "ARGS" },
+          {
+            name: "secrets",
+            description: "Some secrets",
+            type: "array",
+            defaults: []
+          }
         ],
         steps: [
           {
-            name: 'build-and-push',
-            image: 'moby/buildkit:nightly-rootless',
-            imagePullPolicy: 'Always',
-            workingDir: '.',
-            command: ['/bin/bash'],
-            args: ['-c', 'echo hello world'],
+            name: "build-and-push",
+            image: "moby/buildkit:nightly-rootless",
+            imagePullPolicy: "Always",
+            workingDir: ".",
+            command: ["/bin/bash"],
+            args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false,
+              privileged: false
             },
             resources: {
               requests: {
-                cpu: '250m',
-                memory: '100Mi',
+                cpu: "250m",
+                memory: "100Mi"
               },
               limits: {
-                cpu: '500m',
-                memory: '1Gi',
-              },
+                cpu: "500m",
+                memory: "1Gi"
+              }
             }
           }
         ]

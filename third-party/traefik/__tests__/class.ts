@@ -28,7 +28,10 @@ describe("IngressRoute", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(ingressRoute).toHaveProperty("apiVersion", "traefik.containo.us/v1alpha1");
+    expect(ingressRoute).toHaveProperty(
+      "apiVersion",
+      "traefik.containo.us/v1alpha1"
+    );
   });
 
   it("should set kind", () => {

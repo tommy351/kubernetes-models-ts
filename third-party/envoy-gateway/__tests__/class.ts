@@ -5,7 +5,7 @@ import {
   EnvoyPatchPolicy,
   EnvoyProxy,
   SecurityPolicy
-  } from "../gen/gateway.envoyproxy.io/v1alpha1";
+} from "../gen/gateway.envoyproxy.io/v1alpha1";
 
 describe("BackendTrafficPolicy", () => {
   let policy: BackendTrafficPolicy;
@@ -83,7 +83,10 @@ describe("ClientTrafficPolicy", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(policy).toHaveProperty("apiVersion", "gateway.envoyproxy.io/v1alpha1");
+    expect(policy).toHaveProperty(
+      "apiVersion",
+      "gateway.envoyproxy.io/v1alpha1"
+    );
   });
 
   it("should set kind", () => {
@@ -141,13 +144,16 @@ describe("EnvoyPatchPolicy", () => {
               value: "1024"
             }
           }
-        ],
+        ]
       }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(policy).toHaveProperty("apiVersion", "gateway.envoyproxy.io/v1alpha1");
+    expect(policy).toHaveProperty(
+      "apiVersion",
+      "gateway.envoyproxy.io/v1alpha1"
+    );
   });
 
   it("should set kind", () => {
@@ -184,7 +190,7 @@ describe("EnvoyPatchPolicy", () => {
               value: "1024"
             }
           }
-        ],
+        ]
       }
     });
   });
@@ -220,15 +226,18 @@ describe("EnvoyProxy", () => {
                   }
                 ]
               }
-            ],
+            ]
           }
-        },
-      },
+        }
+      }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(proxy).toHaveProperty("apiVersion", "gateway.envoyproxy.io/v1alpha1");
+    expect(proxy).toHaveProperty(
+      "apiVersion",
+      "gateway.envoyproxy.io/v1alpha1"
+    );
   });
 
   it("should set kind", () => {
@@ -268,10 +277,10 @@ describe("EnvoyProxy", () => {
                   }
                 ]
               }
-            ],
+            ]
           }
-        },
-      },
+        }
+      }
     });
   });
 });
@@ -297,7 +306,10 @@ describe("SecurityPolicy", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(policy).toHaveProperty("apiVersion", "gateway.envoyproxy.io/v1alpha1");
+    expect(policy).toHaveProperty(
+      "apiVersion",
+      "gateway.envoyproxy.io/v1alpha1"
+    );
   });
 
   it("should set kind", () => {

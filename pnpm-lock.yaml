@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: false
@@ -33,11 +33,14 @@ importers:
         specifier: ^8.24.0
         version: 8.24.0
       eslint-config-prettier:
-        specifier: ^8.5.0
-        version: 8.5.0(eslint@8.24.0)
+        specifier: ^9.1.0
+        version: 9.1.0(eslint@8.24.0)
       eslint-plugin-node:
         specifier: ^11.1.0
         version: 11.1.0(eslint@8.24.0)
+      eslint-plugin-prettier:
+        specifier: ^5.1.3
+        version: 5.1.3(eslint-config-prettier@9.1.0)(eslint@8.24.0)(prettier@3.2.5)
       eslint-plugin-vitest:
         specifier: ^0.0.57
         version: 0.0.57(eslint@8.24.0)(typescript@4.8.4)
@@ -60,8 +63,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       prettier:
-        specifier: ^2.7.1
-        version: 2.7.1
+        specifier: ^3.2.5
+        version: 3.2.5
       syncpack:
         specifier: ^8.2.4
         version: 8.2.4
@@ -70,7 +73,7 @@ importers:
         version: 10.9.1(@types/node@18.7.23)(typescript@4.8.4)
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
       turbo:
         specifier: ^1.8.8
         version: 1.8.8
@@ -94,7 +97,7 @@ importers:
         version: 5.0.0
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       tsc-multi:
         specifier: ^0.6.1
@@ -119,7 +122,7 @@ importers:
         version: 1.6.1(ajv@8.12.0)
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       tsc-multi:
         specifier: ^0.6.1
@@ -141,7 +144,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -188,7 +191,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -238,7 +241,7 @@ importers:
         version: 0.6.1(typescript@4.8.4)
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
       typescript:
         specifier: ^4.8.4
         version: 4.8.4
@@ -266,7 +269,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -292,7 +295,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -318,7 +321,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -344,7 +347,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -370,7 +373,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -396,7 +399,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -422,7 +425,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -466,7 +469,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -492,7 +495,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -536,7 +539,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -562,7 +565,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -588,7 +591,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -635,7 +638,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -661,7 +664,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -687,7 +690,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -713,7 +716,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -739,7 +742,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -765,7 +768,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -791,7 +794,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -817,7 +820,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -843,7 +846,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -869,7 +872,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -916,7 +919,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -942,7 +945,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -968,7 +971,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -994,7 +997,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1020,7 +1023,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1046,7 +1049,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1072,7 +1075,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1098,7 +1101,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1124,7 +1127,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1150,7 +1153,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1176,7 +1179,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1202,7 +1205,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1228,7 +1231,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1254,7 +1257,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1280,7 +1283,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1306,7 +1309,7 @@ importers:
         version: link:../../core/validate
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1365,7 +1368,7 @@ importers:
         version: 4.17.21
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
       yaml:
         specifier: ^2.2.2
         version: 2.2.2
@@ -1405,7 +1408,7 @@ importers:
         version: 4.17.21
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@types/fs-extra':
         specifier: ^9.0.13
@@ -1436,7 +1439,7 @@ importers:
         version: 4.17.21
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
       yargs:
         specifier: ^17.6.0
         version: 17.6.0
@@ -1467,7 +1470,7 @@ importers:
         version: 10.2.1
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       '@types/find-cache-dir':
         specifier: ^3.2.1
@@ -1486,7 +1489,7 @@ importers:
     dependencies:
       tslib:
         specifier: ^2.4.0
-        version: 2.4.0
+        version: 2.6.2
     devDependencies:
       tsc-multi:
         specifier: ^0.6.1
@@ -1947,7 +1950,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       espree: 9.4.0
       globals: 13.17.0
       ignore: 5.2.0
@@ -1967,7 +1970,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -2057,9 +2060,15 @@ packages:
   /@npmcli/move-file@2.0.1:
     resolution: {integrity: sha512-mJd2Z5TjYWq/ttPLLGqArdtnC74J6bOzg4rMDnN+p1xTacZ2yPRCk2y0oSWQtygLR9YVQXgOcONrwtnk3JupxQ==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    deprecated: This functionality has been moved to @npmcli/fs
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
+
+  /@pkgr/core@0.1.1:
+    resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+    dev: true
 
   /@sinclair/typebox@0.24.44:
     resolution: {integrity: sha512-ka0W0KN5i6LfrSocduwliMMpqVgohtPFidKdMEOUjoOFCHcOOYkKsPRxfs5f15oPNHTm6ERAm0GV/+/LTKeiWg==}
@@ -2207,7 +2216,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.38.1
       '@typescript-eslint/type-utils': 5.38.1(eslint@8.24.0)(typescript@4.8.4)
       '@typescript-eslint/utils': 5.38.1(eslint@8.24.0)(typescript@4.8.4)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       eslint: 8.24.0
       ignore: 5.2.0
       regexpp: 3.2.0
@@ -2231,7 +2240,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.38.1
       '@typescript-eslint/types': 5.38.1
       '@typescript-eslint/typescript-estree': 5.38.1(typescript@4.8.4)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       eslint: 8.24.0
       typescript: 4.8.4
     transitivePeerDependencies:
@@ -2266,7 +2275,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.38.1(typescript@4.8.4)
       '@typescript-eslint/utils': 5.38.1(eslint@8.24.0)(typescript@4.8.4)
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       eslint: 8.24.0
       tsutils: 3.21.0(typescript@4.8.4)
       typescript: 4.8.4
@@ -2295,7 +2304,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.38.1
       '@typescript-eslint/visitor-keys': 5.38.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.7
@@ -2316,7 +2325,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.57.1
       '@typescript-eslint/visitor-keys': 5.57.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.7
@@ -2434,7 +2443,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -2442,7 +2451,7 @@ packages:
     resolution: {integrity: sha512-Zn4cw2NEqd+9fiSVWMscnjyQ1a8Yfoc5oBajLeo5w+YBHgDUcEBY2hS4YpTz6iN5f/2zQiktcuM6tS8x1p9dpA==}
     engines: {node: '>= 8.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       depd: 1.1.2
       humanize-ms: 1.2.1
     transitivePeerDependencies:
@@ -2902,6 +2911,17 @@ packages:
     resolution: {integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==}
     dev: true
 
+  /debug@4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+
   /debug@4.3.4(supports-color@8.1.1):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -3133,8 +3153,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-prettier@8.5.0(eslint@8.24.0):
-    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+  /eslint-config-prettier@9.1.0(eslint@8.24.0):
+    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -3166,6 +3186,27 @@ packages:
       minimatch: 3.1.2
       resolve: 1.22.1
       semver: 6.3.0
+    dev: true
+
+  /eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0)(eslint@8.24.0)(prettier@3.2.5):
+    resolution: {integrity: sha512-C9GCVAs4Eq7ZC/XFQHITLiHJxQngdtraXaM+LoUFoFp/lHNl2Zn8f3WQbe9HvTBBQ9YnKFB0/2Ajdqwo5D1EAw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      '@types/eslint': '>=8.0.0'
+      eslint: '>=8.0.0'
+      eslint-config-prettier: '*'
+      prettier: '>=3.0.0'
+    peerDependenciesMeta:
+      '@types/eslint':
+        optional: true
+      eslint-config-prettier:
+        optional: true
+    dependencies:
+      eslint: 8.24.0
+      eslint-config-prettier: 9.1.0(eslint@8.24.0)
+      prettier: 3.2.5
+      prettier-linter-helpers: 1.0.0
+      synckit: 0.8.8
     dev: true
 
   /eslint-plugin-vitest@0.0.57(eslint@8.24.0)(typescript@4.8.4):
@@ -3241,7 +3282,7 @@ packages:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.1.1
@@ -3373,6 +3414,10 @@ packages:
 
   /fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+
+  /fast-diff@1.3.0:
+    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
+    dev: true
 
   /fast-glob@3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
@@ -3673,7 +3718,7 @@ packages:
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -3682,7 +3727,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -4068,7 +4113,7 @@ packages:
       cli-truncate: 3.1.0
       colorette: 2.0.19
       commander: 9.4.1
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       execa: 6.1.0
       lilconfig: 2.0.5
       listr2: 4.0.5
@@ -4163,6 +4208,7 @@ packages:
 
   /loupe@2.3.6:
     resolution: {integrity: sha512-RaPMZKiMy8/JruncMU5Bt6na1eftNoo++R4Y+N2FrxkDVTrGvcyzFTsaGif4QTeKESheMGegbhw6iUAq+5A8zA==}
+    deprecated: Please upgrade to 2.3.7 which fixes GHSA-4q6p-r6v2-jvc5
     dependencies:
       get-func-name: 2.0.0
     dev: true
@@ -4735,9 +4781,22 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
+  /prettier-linter-helpers@1.0.0:
+    resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      fast-diff: 1.3.0
+    dev: true
+
   /prettier@2.7.1:
     resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.2.5:
+    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
@@ -4985,7 +5044,7 @@ packages:
   /rxjs@7.5.7:
     resolution: {integrity: sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==}
     dependencies:
-      tslib: 2.4.0
+      tslib: 2.6.2
     dev: true
 
   /safe-buffer@5.1.2:
@@ -5137,7 +5196,7 @@ packages:
     engines: {node: '>= 10'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       socks: 2.7.1
     transitivePeerDependencies:
       - supports-color
@@ -5367,6 +5426,14 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /synckit@0.8.8:
+    resolution: {integrity: sha512-HwOKAP7Wc5aRGYdKH+dw0PRRpbO841v2DENBtjnR5HFWoiNByAl7vrx3p0G/rCyYXQsrxqtX48TImFtPcIHSpQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    dependencies:
+      '@pkgr/core': 0.1.1
+      tslib: 2.6.2
+    dev: true
+
   /syncpack@8.2.4:
     resolution: {integrity: sha512-Tq1RzTqQwGCe8htWqJPHcA55LqGLO4wG1F2DCGMFflfX3ujbRoiXq2MYd7XFvm3mzxv1BPVQQp8DU2ZkY14e2A==}
     engines: {node: '>=10'}
@@ -5491,7 +5558,7 @@ packages:
       string-to-stream: 3.0.1
       superstruct: 0.14.2
       supports-color: 8.1.1
-      tslib: 2.4.0
+      tslib: 2.6.2
       typescript: 4.8.4
       yargs: 16.2.0
 
@@ -5499,8 +5566,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tslib@2.4.0:
-    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   /tsutils@3.21.0(typescript@4.8.4):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
@@ -5688,7 +5755,7 @@ packages:
     hasBin: true
     dependencies:
       cac: 6.7.14
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
@@ -5782,7 +5849,7 @@ packages:
       acorn-walk: 8.2.0
       cac: 6.7.14
       chai: 4.3.7
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.4
       local-pkg: 0.4.3
       pathe: 1.1.0
       picocolors: 1.0.0
