@@ -4,48 +4,46 @@ import { mkdir, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { dirname, join } from "path";
 
-const helmCRDsVersion = "1.8.0";
-const helmMultiClusterVersion = "30.11.10";
-
 const outputPath = join(__dirname, "../crds/crd.yaml");
+
+function isObject(obj: unknown): obj is Record<string, unknown> {
+  return typeof obj === "object" && obj != null;
+}
+
+async function render(name: string, version: string): Promise<string> {
+  const result = await execa("helm", [
+    "template",
+    "--repo",
+    "https://helm.linkerd.io/stable",
+    name,
+    name,
+    "--version",
+    version
+  ]);
+
+  return result.stdout;
+}
 
 (async () => {
   const commands = [
-    await execa("helm", [
-      "template",
-      "--repo",
-      "https://helm.linkerd.io/stable",
-      "linkerd-crds",
-      "linkerd-crds",
-      "--namespace",
-      "linkerd",
-      "--version",
-      helmCRDsVersion
-    ]),
-    await execa("helm", [
-      "template",
-      "--repo",
-      "https://helm.linkerd.io/stable",
-      "linkerd-multicluster",
-      "linkerd-multicluster",
-      "--namespace",
-      "linkerd-multicluster",
-      "--version",
-      helmMultiClusterVersion
-    ])
+    await render("linkerd-crds", "1.8.0"),
+    await render("linkerd-multicluster", "30.11.10")
   ];
-
-  const manifests: any[] = yaml.loadAll(
-    commands.map((x) => x.stdout).join("---\n")
-  );
-  const output: any[] = [];
+  const manifests = yaml.loadAll(commands.join("---\n"));
+  const chunks: string[] = [];
 
   for (const manifest of manifests) {
-    if (manifest && manifest.kind === "CustomResourceDefinition") {
-      output.push(manifest);
+    if (
+      isObject(manifest) &&
+      manifest.kind === "CustomResourceDefinition" &&
+      isObject(manifest.metadata) &&
+      typeof manifest.metadata.name === "string" &&
+      !manifest.metadata.name.endsWith("networking.k8s.io")
+    ) {
+      chunks.push(yaml.dump(manifest));
     }
   }
 
   await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, output.map((x) => yaml.dump(x)).join("---\n"));
+  await writeFile(outputPath, chunks.join("---\n"));
 })();

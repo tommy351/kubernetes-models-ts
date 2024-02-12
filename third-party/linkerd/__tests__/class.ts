@@ -2,8 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { ServiceProfile } from "../gen/linkerd.io/v1alpha2/ServiceProfile";
 import { Link } from "../gen/multicluster.linkerd.io/v1alpha1/Link";
-import { HTTPRoute as policyHTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute";
-import { HTTPRoute as networkHTTPRoute } from "../gen/gateway.networking.k8s.io/v1beta1/HTTPRoute";
+import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute";
 
 describe("ServiceProfile", () => {
   let profile: ServiceProfile;
@@ -121,11 +120,11 @@ describe("Link", () => {
   });
 });
 
-describe("policyHTTPRoute", () => {
-  let route: policyHTTPRoute;
+describe("HTTPRoute", () => {
+  let route: HTTPRoute;
 
   beforeEach(() => {
-    route = new policyHTTPRoute({
+    route = new HTTPRoute({
       metadata: {
         name: "test"
       },
@@ -164,67 +163,6 @@ describe("policyHTTPRoute", () => {
   it("toJSON", () => {
     expect(route.toJSON()).toEqual({
       apiVersion: "policy.linkerd.io/v1beta3",
-      kind: "HTTPRoute",
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        rules: [
-          {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
-    });
-  });
-});
-
-describe("networkHTTPRoute", () => {
-  let route: networkHTTPRoute;
-
-  beforeEach(() => {
-    route = new networkHTTPRoute({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        rules: [
-          {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
-    });
-  });
-
-  it("should set apiVersion", () => {
-    expect(route).toHaveProperty(
-      "apiVersion",
-      "gateway.networking.k8s.io/v1beta1"
-    );
-  });
-
-  it("should set kind", () => {
-    expect(route).toHaveProperty("kind", "HTTPRoute");
-  });
-
-  it("should set metadata", () => {
-    expect(route.metadata).toEqual({ name: "test" });
-  });
-
-  it("should set spec", () => {
-    expect(route.spec).toEqual({
-      rules: [
-        {
-          matches: [{ method: "GET" }]
-        }
-      ]
-    });
-  });
-
-  it("toJSON", () => {
-    expect(route.toJSON()).toEqual({
-      apiVersion: "gateway.networking.k8s.io/v1beta1",
       kind: "HTTPRoute",
       metadata: {
         name: "test"
