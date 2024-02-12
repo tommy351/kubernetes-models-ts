@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/flux-cd": major
+"@kubernetes-models/flux-cd": minor
 ---
 
 Upgrading Flux CRDs
