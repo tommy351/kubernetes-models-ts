@@ -1,5 +1,11 @@
 # @kubernetes-models/flux-cd
 
+## 2.2.0
+
+### Minor Changes
+
+- [#168](https://github.com/tommy351/kubernetes-models-ts/pull/168) [`840d659`](https://github.com/tommy351/kubernetes-models-ts/commit/840d6590e4d4435c43ef9e5c42129e17a877f78b) Thanks [@jleni](https://github.com/jleni)! - Upgrading Flux CRDs
+
 ## 2.1.3
 
 ### Patch Changes
