@@ -32,8 +32,8 @@
     "pnpm": ">=7.31.0"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.7",
-    "@changesets/cli": "^2.25.0",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
     "@tsconfig/node14": "^1.0.3",
     "@types/node": "^18.7.23",
     "@types/yargs": "^17.0.13",
