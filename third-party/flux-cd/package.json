@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/flux-cd",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Flux CD models",
   "repository": {
     "type": "git",
