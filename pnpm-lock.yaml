@@ -433,6 +433,9 @@ importers:
       '@kubernetes-models/publish-scripts':
         specifier: workspace:^
         version: link:../../internal/publish-scripts
+      vitest:
+        specifier: ^0.29.8
+        version: 0.29.8
     publishDirectory: dist
 
   third-party/envoy-gateway:
