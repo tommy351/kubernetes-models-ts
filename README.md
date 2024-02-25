@@ -63,6 +63,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/knative](third-party/knative) - [Knative](https://knative.dev/) models.
 - [@kubernetes-models/kubedb](third-party/kubedb) - [KubeDB](https://kubedb.com/) models.
 - [@kubernetes-models/kyverno](third-party/kyverno) - [Kyverno](https://kyverno.io/) models.
+- [@kubernetes-models/k8ssandra-operator](third-party/k8ssandra-operator) - [K8ssandra](https://k8ssandra.io/) models.
 - [@kubernetes-models/linkerd](third-party/linkerd) - [Linkerd](https://linkerd.io/) models.
 - [@kubernetes-models/pipelines-as-code](third-party/pipelines-as-code) - [Pipelines-as-Code](https://pipelinesascode.com/) models.
 - [@kubernetes-models/postgres-operator](third-party/postgres-operator) - PostgreSQL operator models.
