@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.3.0
+
+### Minor Changes
+
+- [#174](https://github.com/tommy351/kubernetes-models-ts/pull/174) [`027a326`](https://github.com/tommy351/kubernetes-models-ts/commit/027a3269a8ef41a59e13cbe72d6f8bcd93df3d04) Thanks [@tommy351](https://github.com/tommy351)! - Add CRDs from [GoogleCloudPlatform/gke-networking-recipes](https://github.com/GoogleCloudPlatform/gke-networking-recipes) repository.
+
+- [#174](https://github.com/tommy351/kubernetes-models-ts/pull/174) [`027a326`](https://github.com/tommy351/kubernetes-models-ts/commit/027a3269a8ef41a59e13cbe72d6f8bcd93df3d04) Thanks [@tommy351](https://github.com/tommy351)! - Update [k8s-config-connector](https://github.com/GoogleCloudPlatform/k8s-config-connector) CRDs.
+
 ## 4.2.3
 
 ### Patch Changes
