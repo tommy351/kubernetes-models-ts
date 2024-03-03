@@ -56,6 +56,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/gke](third-party/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
 - [@kubernetes-models/grafana-agent-operator](third-party/grafana-agent-operator) - [Grafana agent operator](https://grafana.com/docs/agent/latest/operator/) models.
 - [@kubernetes-models/grafana-operator](third-party/grafana-operator) - [Grafana operator](https://github.com/grafana-operator/grafana-operator) models.
+- [@kubernetes-models/hierarchical-namespaces](third-party/hierarchical-namespaces) - [Hierarchical Namespace](https://github.com/kubernetes-sigs/hierarchical-namespaces) models.
 - [@kubernetes-models/istio](third-party/istio) - [Istio](https://istio.io/) models.
 - [@kubernetes-models/jaeger-operator](third-party/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.
 - [@kubernetes-models/kapp-controller](third-party/kapp-controller) - [Carvel kapp contoller](https://github.com/vmware-tanzu/carvel-kapp-controller) models.
