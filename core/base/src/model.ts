@@ -1,6 +1,7 @@
 import { isPlainObject } from "is-plain-object";
 import { validate } from "@kubernetes-models/validate";
 import { TypeMeta } from "./meta";
+import { KubernetesObject, KubernetesObjectWithSpec, V1ObjectMeta } from '@kubernetes/client-node';
 
 const SCHEMA_ID = Symbol("SCHEMA_ID");
 const ADD_SCHEMA = Symbol("ADD_SCHEMA");
@@ -26,6 +27,14 @@ function filterUndefinedValues(data: unknown): unknown {
   }
 
   return data;
+}
+
+export { KubernetesObjectWithSpec };
+export { KubernetesObject };
+export { V1ObjectMeta };
+
+export interface KubernetesObjectWithOptionalSpec extends KubernetesObject {
+  spec?: object;
 }
 
 export type ModelData<T> = T extends TypeMeta ? Omit<T, keyof TypeMeta> : T;
