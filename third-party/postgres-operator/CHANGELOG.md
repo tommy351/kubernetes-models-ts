@@ -1,5 +1,13 @@
 # @kubernetes-models/postgres-operator
 
+## 0.3.0
+
+### Minor Changes
+
+- [#182](https://github.com/tommy351/kubernetes-models-ts/pull/182) [`b61c242`](https://github.com/tommy351/kubernetes-models-ts/commit/b61c242e10bb1c5fe02336af7772dbfd3b2084a1) Thanks [@tommy351](https://github.com/tommy351)! - Update Zalando Postgres operator to v1.11.0.
+
+- [#182](https://github.com/tommy351/kubernetes-models-ts/pull/182) [`b61c242`](https://github.com/tommy351/kubernetes-models-ts/commit/b61c242e10bb1c5fe02336af7772dbfd3b2084a1) Thanks [@tommy351](https://github.com/tommy351)! - Update CrunchyData Postgres operator to v5.5.1.
+
 ## 0.2.3
 
 ### Patch Changes
