@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Grafana } from "../gen/integreatly.org/v1alpha1/Grafana";
-import { GrafanaDashboard } from "../gen/integreatly.org/v1alpha1/GrafanaDashboard";
-import { GrafanaDataSource } from "../gen/integreatly.org/v1alpha1/GrafanaDataSource";
+import { Grafana } from "../gen/grafana.integreatly.org/v1beta1/Grafana";
+import { GrafanaDashboard } from "../gen/grafana.integreatly.org/v1beta1/GrafanaDashboard";
+import { GrafanaDatasource } from "../gen/grafana.integreatly.org/v1beta1/GrafanaDatasource";
 
 describe("Grafana", () => {
   let grafana: Grafana;
@@ -21,7 +21,10 @@ describe("Grafana", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(grafana).toHaveProperty("apiVersion", "integreatly.org/v1alpha1");
+    expect(grafana).toHaveProperty(
+      "apiVersion",
+      "grafana.integreatly.org/v1beta1"
+    );
   });
 
   it("should set kind", () => {
@@ -34,7 +37,7 @@ describe("Grafana", () => {
 
   it("toJSON", () => {
     expect(grafana.toJSON()).toEqual({
-      apiVersion: "integreatly.org/v1alpha1",
+      apiVersion: "grafana.integreatly.org/v1beta1",
       kind: "Grafana",
       metadata: { name: "example" },
       spec: {
@@ -59,13 +62,17 @@ describe("GrafanaDashboard", () => {
         json: JSON.stringify({
           title: "Simple Dashboard"
         }),
-        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }]
+        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
+        instanceSelector: {}
       }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(dashboard).toHaveProperty("apiVersion", "integreatly.org/v1alpha1");
+    expect(dashboard).toHaveProperty(
+      "apiVersion",
+      "grafana.integreatly.org/v1beta1"
+    );
   });
 
   it("should set kind", () => {
@@ -78,48 +85,49 @@ describe("GrafanaDashboard", () => {
 
   it("toJSON", () => {
     expect(dashboard.toJSON()).toEqual({
-      apiVersion: "integreatly.org/v1alpha1",
+      apiVersion: "grafana.integreatly.org/v1beta1",
       kind: "GrafanaDashboard",
       metadata: { name: "example" },
       spec: {
         json: JSON.stringify({
           title: "Simple Dashboard"
         }),
-        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }]
+        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
+        instanceSelector: {}
       }
     });
   });
 });
 
 describe("GrafanaDataSource", () => {
-  let source: GrafanaDataSource;
+  let source: GrafanaDatasource;
 
   beforeEach(() => {
-    source = new GrafanaDataSource({
+    source = new GrafanaDatasource({
       metadata: { name: "example" },
       spec: {
-        name: "middleware.yaml",
-        datasources: [
-          {
-            name: "Prometheus",
-            type: "prometheus",
-            access: "proxy",
-            url: "http://prometheus:9090",
-            isDefault: true,
-            version: 1,
-            editable: true
-          }
-        ]
+        datasource: {
+          name: "Prometheus",
+          type: "prometheus",
+          access: "proxy",
+          url: "http://prometheus:9090",
+          isDefault: true,
+          editable: true
+        },
+        instanceSelector: {}
       }
     });
   });
 
   it("should set apiVersion", () => {
-    expect(source).toHaveProperty("apiVersion", "integreatly.org/v1alpha1");
+    expect(source).toHaveProperty(
+      "apiVersion",
+      "grafana.integreatly.org/v1beta1"
+    );
   });
 
   it("should set kind", () => {
-    expect(source).toHaveProperty("kind", "GrafanaDataSource");
+    expect(source).toHaveProperty("kind", "GrafanaDatasource");
   });
 
   it("validate", () => {
@@ -128,22 +136,19 @@ describe("GrafanaDataSource", () => {
 
   it("toJSON", () => {
     expect(source.toJSON()).toEqual({
-      apiVersion: "integreatly.org/v1alpha1",
-      kind: "GrafanaDataSource",
+      apiVersion: "grafana.integreatly.org/v1beta1",
+      kind: "GrafanaDatasource",
       metadata: { name: "example" },
       spec: {
-        name: "middleware.yaml",
-        datasources: [
-          {
-            name: "Prometheus",
-            type: "prometheus",
-            access: "proxy",
-            url: "http://prometheus:9090",
-            isDefault: true,
-            version: 1,
-            editable: true
-          }
-        ]
+        datasource: {
+          name: "Prometheus",
+          type: "prometheus",
+          access: "proxy",
+          url: "http://prometheus:9090",
+          isDefault: true,
+          editable: true
+        },
+        instanceSelector: {}
       }
     });
   });
