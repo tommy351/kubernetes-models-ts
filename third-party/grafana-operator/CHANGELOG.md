@@ -1,5 +1,11 @@
 # @kubernetes-models/grafana-operator
 
+## 2.3.0
+
+### Minor Changes
+
+- [#184](https://github.com/tommy351/kubernetes-models-ts/pull/184) [`ad642d5`](https://github.com/tommy351/kubernetes-models-ts/commit/ad642d50f79f6ee74238b818404393880733cad7) Thanks [@yckao](https://github.com/yckao)! - Support CRDs for Grafana Operator v5.8.0
+
 ## 2.2.3
 
 ### Patch Changes
