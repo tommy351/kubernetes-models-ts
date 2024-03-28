@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/grafana-operator": major
+"@kubernetes-models/grafana-operator": minor
 ---
 
-Upgrade CRDs to v5.8.0
+Support CRDs for Grafana Operator v5.8.0
