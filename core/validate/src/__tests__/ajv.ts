@@ -180,3 +180,20 @@ describe("format: string", () => {
     expect(result).toEqual(expected);
   });
 });
+
+describe("format: cidr", () => {
+  it.each([
+    // IPv4 CIDR
+    ["192.168.0.1/24", true],
+    // IPv6 CIDR
+    ["1:2:3:4:5:6:7:8/64", true],
+    // Just an IPv4
+    ["192.168.0.1", false],
+    // Empty string
+    ["", false]
+  ])("%s -> %p", (input, expected) => {
+    const result = ajv.validate({ type: "string", format: "cidr" }, input);
+
+    expect(result).toEqual(expected);
+  });
+});
