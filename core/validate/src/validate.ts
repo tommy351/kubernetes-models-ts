@@ -51,11 +51,34 @@ function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
   return result.filter((x) => !schemaPathsToExclude.has(x.schemaPath));
 }
 
+function handleErrors(values?: ErrorObject[] | null): void {
+  if (!values) return;
+
+  const errors = excludeNullableRefErrors(values);
+  if (!errors.length) return;
+
+  const err = new Ajv.ValidationError(errors);
+  err.message = ajv.errorsText(errors);
+
+  throw err;
+}
+
 export function validate(id: string, data: unknown): void {
-  if (!ajv.validate(id, data) && ajv.errors) {
-    const errors = excludeNullableRefErrors(ajv.errors);
-    const err = new Ajv.ValidationError(errors);
-    err.message = ajv.errorsText(errors);
-    throw err;
+  if (!ajv.validate(id, data)) {
+    handleErrors(ajv.errors);
+  }
+}
+
+export interface ValidateFunc<T> {
+  (data: unknown): data is T;
+  errors?: ErrorObject[] | null;
+}
+
+export function runValidateFunc<T>(
+  fn: ValidateFunc<T>,
+  data: unknown
+): asserts data is T {
+  if (!fn(data)) {
+    handleErrors(fn.errors);
   }
 }

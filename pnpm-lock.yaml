@@ -1590,6 +1590,12 @@ importers:
       '@kubernetes-models/string-util':
         specifier: workspace:^
         version: link:../string-util
+      '@kubernetes-models/validate':
+        specifier: workspace:^
+        version: link:../../core/validate
+      ajv:
+        specifier: ^8.12.0
+        version: 8.12.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21

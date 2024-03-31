@@ -23,11 +23,12 @@ export function mergeOpenAPISpecs<
 }
 
 export function getSchemaPath(id: string): string {
-  return `_schemas/${getClassName(id)}.ts`;
+  return `_schemas/${getClassName(id)}.js`;
 }
 
 export function getRelativePath(from: string, to: string): string {
-  const path = trimSuffix(posix.relative(posix.dirname(from), to), ".ts");
+  const ext = posix.extname(to);
+  const path = trimSuffix(posix.relative(posix.dirname(from), to), ext);
 
   if (!path.startsWith(".")) {
     return `./${path}`;
