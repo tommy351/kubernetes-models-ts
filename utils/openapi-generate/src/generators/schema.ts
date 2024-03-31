@@ -73,7 +73,6 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         .map(trimRefPrefix)
         .filter((ref) => ref !== def.schemaId);
       const formatVars: Record<string, string> = {};
-      let addSchemaContent = "";
 
       // Register custom formats
       addFormats(ajv);
@@ -81,23 +80,7 @@ export default function ({ externalAPIMachinery }: Context): Generator {
       // Register the schema because some schemas reference themselves
       ajv.addSchema(schema, def.schemaId);
 
-      imports.push({
-        name: "register",
-        path: "@kubernetes-models/validate"
-      });
-
       for (const ref of refs) {
-        const alias = getClassName(ref);
-
-        addSchemaContent += `${alias}();\n`;
-
-        // Import addSchema function
-        imports.push({
-          name: "addSchema",
-          alias,
-          path: getSchemaImportPath(ref)
-        });
-
         // Register referenced schemas
         ajv.addSchema({}, ref);
       }
@@ -145,17 +128,13 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         path: getSchemaPath(def.schemaId),
         content: `${generateImports(imports)}
 
-const schema = ${JSON.stringify(schema)};
-
 ${Object.entries(formatVars)
   .map(([key, value]) => `const ${key} = formats[${JSON.stringify(value)}];`)
   .join("\n")}
-${validate.source.validateCode}
-export { ${validate.source.validateName} as validate };
 
-export function addSchema() {
-${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
-}
+${validate.source.validateCode}
+
+export { ${validate.source.validateName} as validate };
 `
       };
     });

@@ -1,23 +1,12 @@
 import glob from "fast-glob";
-import { writeJSON, readFile, pathExists, readJSON } from "fs-extra";
+import { writeJSON, pathExists, readJSON } from "fs-extra";
 import { basename, extname, join, posix } from "path";
-import ignore, { Ignore } from "ignore";
 import { copyFile } from "fs/promises";
 import execa from "execa";
 
 const DTS_EXT = ".d.ts";
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
-
-async function loadExportMapIgnoreFile(
-  ig: Ignore,
-  path: string
-): Promise<void> {
-  if (!(await pathExists(path))) return;
-
-  ig.add(await readFile(path, "utf-8"));
-  console.log("Loaded export map ignore file", path);
-}
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
@@ -36,15 +25,12 @@ function generateExportEntry(name: string): Record<string, string> {
 }
 
 async function generateExportMap(
-  cwd: string
+  args: BuildArguments
 ): Promise<Record<string, unknown>> {
-  const ig = ignore();
-
-  await loadExportMapIgnoreFile(ig, join(cwd, ".export-map-ignore"));
-
-  const paths = (
-    await glob(["**/*.{js,ts}"], { cwd: join(cwd, "gen") })
-  ).filter((path) => !ig.ignores(path));
+  const paths = await glob(["**/*.{js,ts}"], {
+    cwd: join(args.cwd, "gen"),
+    ...(!args["include-hidden"] && { ignore: ["!_**/*"] })
+  });
 
   const exportMap: Record<string, unknown> = {
     "./package.json": "./package.json"
@@ -89,20 +75,21 @@ async function copyDistFiles(cwd: string): Promise<void> {
   }
 }
 
-async function writePkgJson(cwd: string): Promise<void> {
-  const pkgJson = await readJSON(join(cwd, "package.json"));
+async function writePkgJson(args: BuildArguments): Promise<void> {
+  const pkgJson = await readJSON(join(args.cwd, "package.json"));
 
-  pkgJson.exports = await generateExportMap(cwd);
+  pkgJson.exports = await generateExportMap(args);
 
-  await writeJSON(join(cwd, "dist/package.json"), pkgJson, { spaces: 2 });
+  await writeJSON(join(args.cwd, "dist/package.json"), pkgJson, { spaces: 2 });
 }
 
 export interface BuildArguments {
   cwd: string;
+  "include-hidden"?: boolean;
 }
 
 export async function build(args: BuildArguments): Promise<void> {
   await compileTS(args.cwd);
   await copyDistFiles(args.cwd);
-  await writePkgJson(args.cwd);
+  await writePkgJson(args);
 }

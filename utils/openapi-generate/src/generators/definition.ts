@@ -160,7 +160,6 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
           name: "ValidateFunc",
           path: "@kubernetes-models/validate"
         });
-        imports.push({ name: "addSchema", path: schemaPath });
         imports.push({ name: "validate", path: schemaPath });
 
         content += `
@@ -170,7 +169,6 @@ ${comment}export interface ${shortInterfaceName}${
 
 ${comment}export class ${shortClassName} extends Model<${shortInterfaceName}> implements ${shortInterfaceName} ${classContent}
 
-setSchema(${shortClassName}, ${JSON.stringify(def.schemaId)}, addSchema);
 setValidateFunc(${shortClassName}, validate as ValidateFunc<${shortInterfaceName}>);
 `;
       } else {
