@@ -2,6 +2,7 @@
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "noEmitHelpers": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "allowJs": true
   }
 }

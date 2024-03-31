@@ -1,5 +1,9 @@
 import { isPlainObject } from "is-plain-object";
-import { validate } from "@kubernetes-models/validate";
+import {
+  validate,
+  ValidateFunc,
+  runValidateFunc
+} from "@kubernetes-models/validate";
 import { TypeMeta } from "./meta";
 
 const SCHEMA_ID = Symbol("SCHEMA_ID");
@@ -72,4 +76,13 @@ export function setSchema<T>(
 ): void {
   ctor.prototype[SCHEMA_ID] = id;
   ctor.prototype[ADD_SCHEMA] = addSchema;
+}
+
+export function setValidateFunc<T>(
+  ctor: ModelConstructor<T>,
+  fn: ValidateFunc<T>
+): void {
+  ctor.prototype.validate = function () {
+    runValidateFunc(fn, this);
+  };
 }

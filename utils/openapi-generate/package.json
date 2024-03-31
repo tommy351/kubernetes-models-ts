@@ -43,6 +43,8 @@
     "@kubernetes-models/generate": "workspace:^",
     "@kubernetes-models/read-input": "workspace:^",
     "@kubernetes-models/string-util": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "ajv": "^8.12.0",
     "lodash": "^4.17.21",
     "tslib": "^2.4.0",
     "yargs": "^17.6.0"

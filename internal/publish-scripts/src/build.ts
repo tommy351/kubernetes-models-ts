@@ -42,9 +42,9 @@ async function generateExportMap(
 
   await loadExportMapIgnoreFile(ig, join(cwd, ".export-map-ignore"));
 
-  const paths = (await glob(["**/*.ts"], { cwd: join(cwd, "gen") })).filter(
-    (path) => !ig.ignores(path)
-  );
+  const paths = (
+    await glob(["**/*.{js,ts}"], { cwd: join(cwd, "gen") })
+  ).filter((path) => !ig.ignores(path));
 
   const exportMap: Record<string, unknown> = {
     "./package.json": "./package.json"
