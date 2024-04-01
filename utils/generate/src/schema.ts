@@ -1,6 +1,15 @@
 import { Schema, SchemaTransformer } from "./types";
 import { omit, omitBy, uniq } from "lodash";
-import Ajv from "ajv";
+import Ajv, { _ } from "ajv";
+import standaloneCode from "ajv/dist/standalone";
+import assert from "assert";
+import { addFormats } from "@kubernetes-models/validate";
+import objectHash from "object-hash";
+import { parse } from "@babel/parser";
+import { transformFromAstAsync } from "@babel/core";
+import traverse from "@babel/traverse";
+import * as t from "@babel/types";
+import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
 
 const ajv = new Ajv();
 
@@ -150,4 +159,169 @@ export function transformSchema(
   ajv.validateSchema(output, true);
 
   return output;
+}
+
+function addChildSchema(ajv: Ajv, schema: Schema): Schema {
+  const hash = objectHash(schema);
+
+  if (!ajv.getSchema(hash)) {
+    ajv.addSchema(schema, hash);
+    splitSchema(ajv, schema);
+  }
+
+  return { $ref: hash };
+}
+
+// TODO: Try not to modify the schema in place
+function splitSchema(ajv: Ajv, schema: Schema): void {
+  if (schema.properties) {
+    for (const [key, value] of Object.entries(schema.properties)) {
+      schema.properties[key] = addChildSchema(ajv, value);
+    }
+  }
+
+  if (schema.items) {
+    schema.items = addChildSchema(ajv, schema.items);
+  }
+
+  if (schema.additionalProperties) {
+    schema.additionalProperties = addChildSchema(
+      ajv,
+      schema.additionalProperties
+    );
+  }
+
+  if (schema.not) {
+    schema.not = addChildSchema(ajv, schema.not);
+  }
+
+  if (schema.oneOf) {
+    schema.oneOf = schema.oneOf.map((x) => addChildSchema(ajv, x));
+  }
+
+  if (schema.anyOf) {
+    schema.anyOf = schema.anyOf.map((x) => addChildSchema(ajv, x));
+  }
+
+  if (schema.allOf) {
+    schema.allOf = schema.allOf.map((x) => addChildSchema(ajv, x));
+  }
+}
+
+function collectValidateNames(refs: SchemaRefs): Record<string, string> {
+  const names: Record<string, string> = {};
+
+  for (const value of Object.values(refs)) {
+    const ref = value as SchemaEnv;
+
+    if (ref.validateName) {
+      names[ref.validateName.str] = ref.baseId;
+    }
+
+    if (ref.refs) {
+      Object.assign(names, collectValidateNames(ref.refs));
+    }
+  }
+
+  return names;
+}
+
+export async function compileSchema(
+  schema: Schema,
+  refs: Record<string, string>
+): Promise<string> {
+  const ajv = new Ajv({
+    strictTypes: false,
+    allErrors: true,
+    code: { source: true, esm: true, formats: _`formats`, lines: true },
+    inlineRefs: false,
+    // example keyword is used by grafana-operator
+    keywords: ["example"]
+  });
+
+  // Add custom formats
+  addFormats(ajv);
+
+  // Add referenced schemas
+  for (const key of Object.keys(refs)) {
+    ajv.addSchema({}, key);
+  }
+
+  // Split the schema
+  splitSchema(ajv, schema);
+
+  // Compile the schema
+  const validate = ajv.compile(schema);
+
+  // Ensure the source code is generated
+  assert(validate.source);
+
+  const validateNames = collectValidateNames(validate.schemaEnv.refs);
+
+  // Generate standalone code
+  const code = standaloneCode(ajv, validate);
+  const ast = parse(code, { sourceType: "module" });
+
+  traverse(ast, {
+    // Replace validate function of referenced schemas with import statement
+    FunctionDeclaration(path) {
+      if (!path.node.id) return;
+
+      const id = validateNames[path.node.id.name];
+      const ref = refs[id];
+      if (!ref) return;
+
+      path.replaceWith(
+        t.importDeclaration(
+          [t.importDefaultSpecifier(t.identifier(path.node.id.name))],
+          t.stringLiteral(ref)
+        )
+      );
+    },
+    // Replace Ajv runtime require() with import statement
+    VariableDeclaration(path) {
+      const vars: t.VariableDeclarator[] = [];
+
+      for (const declaration of path.node.declarations) {
+        if (
+          t.isIdentifier(declaration.id) &&
+          t.isMemberExpression(declaration.init) &&
+          t.isCallExpression(declaration.init.object) &&
+          t.isIdentifier(declaration.init.property) &&
+          t.isIdentifier(declaration.init.object.callee) &&
+          declaration.init.object.callee.name === "require" &&
+          declaration.init.object.arguments.length === 1 &&
+          t.isStringLiteral(declaration.init.object.arguments[0])
+        ) {
+          path.insertBefore(
+            t.importDeclaration(
+              [
+                declaration.init.property.name === "default"
+                  ? t.importDefaultSpecifier(declaration.id)
+                  : t.importSpecifier(declaration.id, declaration.init.property)
+              ],
+              t.stringLiteral(declaration.init.object.arguments[0].value)
+            )
+          );
+        } else {
+          vars.push(declaration);
+        }
+      }
+
+      if (vars.length === path.node.declarations.length) return;
+
+      if (vars.length) {
+        path.replaceWith(t.variableDeclaration(path.node.kind, vars));
+      } else {
+        path.remove();
+      }
+    }
+  });
+
+  const transformed = await transformFromAstAsync(ast, code);
+
+  assert(transformed?.code);
+
+  return `import { formats } from "@kubernetes-models/validate";
+${transformed.code}`;
 }

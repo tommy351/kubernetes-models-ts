@@ -1,20 +1,15 @@
 import {
   collectRefs,
   Definition,
-  generateImports,
   Generator,
-  Import,
   Schema,
-  transformSchema
+  transformSchema as baseTransformSchema,
+  compileSchema
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { addFormats } from "@kubernetes-models/validate";
-import Ajv, { _ } from "ajv";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
-import assert from "assert";
-import standaloneCode from "ajv/dist/standalone";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -24,7 +19,7 @@ function replaceRef(schema: Schema): Schema {
   return schema;
 }
 
-function compileSchema(def: Definition): Schema {
+function transformSchema(def: Definition): Schema {
   let schema: Schema = {};
 
   // Rewrite schemas for some special types
@@ -41,7 +36,7 @@ function compileSchema(def: Definition): Schema {
       break;
 
     default:
-      schema = transformSchema(def.schema, [replaceRef]);
+      schema = baseTransformSchema(def.schema, [replaceRef]);
   }
 
   return schema;
@@ -60,56 +55,26 @@ export default function ({ externalAPIMachinery }: Context): Generator {
   }
 
   return async (definitions) => {
-    return definitions.map((def) => {
-      const ajv = new Ajv({
-        strictTypes: false,
-        allErrors: true,
-        code: { source: true, esm: true, lines: true, formats: _`formats` },
-        inlineRefs: false
-      });
+    return Promise.all(
+      definitions.map(async (def) => {
+        const schema = transformSchema(def);
+        const refIds = collectRefs(def.schema)
+          .map(trimRefPrefix)
+          .filter((ref) => ref !== def.schemaId);
+        const refPaths: Record<string, string> = {
+          // Add self reference because some schemas reference themselves (e.g. JSONSchemaProps)
+          [def.schemaId]: "."
+        };
 
-      const schema = compileSchema(def);
-      const imports: Import[] = [];
-      const refs = collectRefs(def.schema)
-        .map(trimRefPrefix)
-        .filter((ref) => ref !== def.schemaId);
+        for (const ref of refIds) {
+          refPaths[ref] = getSchemaImportPath(ref);
+        }
 
-      // Register custom formats
-      addFormats(ajv);
-
-      // Register the schema because some schemas reference themselves
-      ajv.addSchema(schema, def.schemaId);
-
-      for (const ref of refs) {
-        // Register referenced schemas
-        ajv.addSchema({}, ref);
-      }
-
-      imports.push({
-        name: "formats",
-        path: "@kubernetes-models/validate"
-      });
-
-      // Compile the schema
-      const validate = ajv.compile(schema);
-
-      // Ensure that the source code is generated
-      assert(validate.source);
-
-      // Rewrite validate function for referenced schemas
-      for (const value of validate.source.scopeValues.validate ?? []) {
-        const source = (value as any).value.ref.source;
-        source.validateCode = `import ${source.validateName} from "${getSchemaImportPath((value as any).value.ref.schemaEnv.baseId)}";`;
-        source.scopeValues = {};
-      }
-
-      const code = standaloneCode(ajv, validate);
-
-      return {
-        path: getSchemaPath(def.schemaId),
-        content: `${generateImports(imports)}
-${code}`
-      };
-    });
+        return {
+          path: getSchemaPath(def.schemaId),
+          content: await compileSchema(schema, refPaths)
+        };
+      })
+    );
   };
 }
