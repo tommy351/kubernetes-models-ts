@@ -4,12 +4,13 @@ import Ajv, { _ } from "ajv";
 import standaloneCode from "ajv/dist/standalone";
 import assert from "assert";
 import { addFormats } from "@kubernetes-models/validate";
-import objectHash from "object-hash";
 import { parse } from "@babel/parser";
-import generate from "@babel/generator";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
+import generate from "@babel/generator";
+import terser from "terser";
 import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
+import { objectHash, sha256base64 } from "ohash";
 
 const ajv = new Ajv();
 
@@ -80,14 +81,10 @@ function setExclusiveNumber(schema: Schema): Schema {
   return {
     ...rest,
     ...(exclusiveMinimum === true
-      ? {
-          exclusiveMinimum: minimum
-        }
+      ? { exclusiveMinimum: minimum }
       : { exclusiveMinimum, minimum }),
     ...(exclusiveMaximum === true
-      ? {
-          exclusiveMaximum: maximum
-        }
+      ? { exclusiveMaximum: maximum }
       : { exclusiveMaximum, maximum })
   };
 }
@@ -162,7 +159,7 @@ export function transformSchema(
 }
 
 function addChildSchema(ajv: Ajv, schema: Schema): Schema {
-  const hash = objectHash(schema);
+  const hash = sha256base64(objectHash(schema));
 
   if (!ajv.getSchema(hash)) {
     ajv.addSchema(schema, hash);
@@ -226,10 +223,10 @@ function collectValidateNames(refs: SchemaRefs): Record<string, string> {
   return names;
 }
 
-export function compileSchema(
+export async function compileSchema(
   schema: Schema,
   refs: Record<string, string>
-): string {
+): Promise<string> {
   const ajv = new Ajv({
     strictTypes: false,
     allErrors: true,
@@ -263,9 +260,17 @@ export function compileSchema(
   const ast = parse(code, { sourceType: "module" });
 
   traverse(ast, {
-    // Remove "use strict" directive
     Program(path) {
+      // Remove "use strict" directive
       path.node.directives = [];
+
+      // Add @kubernetes-models/validate import
+      path.node.body.unshift(
+        t.importDeclaration(
+          [t.importSpecifier(t.identifier("formats"), t.identifier("formats"))],
+          t.stringLiteral("@kubernetes-models/validate")
+        )
+      );
     },
     // Replace validate function of referenced schemas with import statement
     FunctionDeclaration(path) {
@@ -331,8 +336,16 @@ export function compileSchema(
     }
   });
 
-  const result = generate(ast, {}, code);
+  const generateResult = generate(ast, {}, code);
+  const minifyResult = await terser.minify(generateResult.code, {
+    ecma: 2018,
+    mangle: false,
+    compress: {
+      toplevel: true
+    }
+  });
 
-  return `import { formats } from "@kubernetes-models/validate";
-${result.code}`;
+  assert(minifyResult.code);
+
+  return minifyResult.code;
 }
