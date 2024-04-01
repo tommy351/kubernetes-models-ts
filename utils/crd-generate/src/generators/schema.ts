@@ -1,6 +1,7 @@
 import {
   Generator,
   Import,
+  Schema,
   generateImports,
   transformSchema
 } from "@kubernetes-models/generate";
@@ -9,8 +10,55 @@ import Ajv, { _ } from "ajv";
 import { getSchemaPath } from "../utils";
 import standaloneCode from "ajv/dist/standalone";
 import assert from "assert";
+import objectHash from "object-hash";
 
 const OBJECT_META_ID = "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta";
+
+function addChildSchema(ajv: Ajv, schema: Schema): Schema {
+  const hash = objectHash(schema);
+
+  if (!ajv.getSchema(hash)) {
+    ajv.addSchema(schema, hash);
+    splitSchema(ajv, schema);
+  }
+
+  return { $ref: hash };
+}
+
+function splitSchema(ajv: Ajv, schema: Schema): void {
+  if (schema.properties) {
+    for (const [key, value] of Object.entries(schema.properties)) {
+      schema.properties[key] = addChildSchema(ajv, value);
+    }
+  }
+
+  if (schema.items) {
+    schema.items = addChildSchema(ajv, schema.items);
+  }
+
+  if (schema.additionalProperties) {
+    schema.additionalProperties = addChildSchema(
+      ajv,
+      schema.additionalProperties
+    );
+  }
+
+  if (schema.not) {
+    schema.not = addChildSchema(ajv, schema.not);
+  }
+
+  if (schema.oneOf) {
+    schema.oneOf = schema.oneOf.map((x) => addChildSchema(ajv, x));
+  }
+
+  if (schema.anyOf) {
+    schema.anyOf = schema.anyOf.map((x) => addChildSchema(ajv, x));
+  }
+
+  if (schema.allOf) {
+    schema.allOf = schema.allOf.map((x) => addChildSchema(ajv, x));
+  }
+}
 
 const generateSchemas: Generator = async (definitions) => {
   return definitions.map((def) => {
@@ -37,6 +85,8 @@ const generateSchemas: Generator = async (definitions) => {
 
     const schema = transformSchema(def.schema);
 
+    splitSchema(ajv, schema);
+
     // Compile the schema
     const validate = ajv.compile(schema);
 
@@ -45,7 +95,7 @@ const generateSchemas: Generator = async (definitions) => {
 
     // Rewrite validate code for ObjectMeta
     for (const value of validate.source.scopeValues.validate ?? []) {
-      if ((value as any).value.ref.schemaEnv.baseId === OBJECT_META_ID) {
+      if ((value as any).value.ref.schema?.$ref === `${OBJECT_META_ID}#`) {
         const source = (value as any).value.ref.source;
         source.validateCode = `import ${source.validateName} from "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta";`;
         source.scopeValues = {};
