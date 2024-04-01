@@ -1,4 +1,4 @@
-import Ajv, { AnySchema, Format } from "ajv";
+import Ajv, { Format } from "ajv";
 import { fullFormats } from "ajv-formats/dist/formats";
 import draft2019Formats from "ajv-formats-draft2019/formats";
 import isCidr from "is-cidr";
@@ -42,20 +42,6 @@ export const formats: Record<string, Format> = {
     validate: (value: string) => isCidr(value) !== 0
   }
 };
-
-export const ajv = new Ajv({
-  strictTypes: false,
-  allErrors: true,
-  verbose: true
-});
-
-addFormats(ajv);
-
-export function register(id: string, schema: AnySchema): void {
-  if (!ajv.getSchema(id)) {
-    ajv.addSchema(schema, id);
-  }
-}
 
 export function addFormats(ajv: Ajv): void {
   for (const [name, format] of Object.entries(formats)) {

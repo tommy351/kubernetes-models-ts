@@ -151,7 +151,6 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
         }
 
         imports.push({ name: "Model", path: "@kubernetes-models/base" });
-        imports.push({ name: "setSchema", path: "@kubernetes-models/base" });
         imports.push({
           name: "setValidateFunc",
           path: "@kubernetes-models/base"

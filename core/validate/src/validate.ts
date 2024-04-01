@@ -1,5 +1,5 @@
-import Ajv, { ErrorObject, SchemaObject } from "ajv";
-import { ajv } from "./ajv";
+import type { ErrorObject, SchemaObject } from "ajv";
+import ValidationError from "ajv/dist/runtime/validation_error";
 
 function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
   const result: ErrorObject[] = [];
@@ -51,22 +51,10 @@ function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
   return result.filter((x) => !schemaPathsToExclude.has(x.schemaPath));
 }
 
-function handleErrors(values?: ErrorObject[] | null): void {
-  if (!values) return;
-
-  const errors = excludeNullableRefErrors(values);
-  if (!errors.length) return;
-
-  const err = new Ajv.ValidationError(errors);
-  err.message = ajv.errorsText(errors);
-
-  throw err;
-}
-
-export function validate(id: string, data: unknown): void {
-  if (!ajv.validate(id, data)) {
-    handleErrors(ajv.errors);
-  }
+function generateErrorMessage(errors: ErrorObject[]): string {
+  return errors
+    .map((err) => `data${err.instancePath} ${err.message}`)
+    .join(", ");
 }
 
 export interface ValidateFunc<T> {
@@ -78,7 +66,13 @@ export function runValidateFunc<T>(
   fn: ValidateFunc<T>,
   data: unknown
 ): asserts data is T {
-  if (!fn(data)) {
-    handleErrors(fn.errors);
+  if (!fn(data) && fn.errors) {
+    const errors = excludeNullableRefErrors(fn.errors);
+    if (!errors.length) return;
+
+    const err = new ValidationError(errors);
+    err.message = generateErrorMessage(errors);
+
+    throw err;
   }
 }
