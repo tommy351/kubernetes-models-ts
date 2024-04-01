@@ -9,11 +9,12 @@ import {
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { addFormats } from "@kubernetes-models/validate";
-import Ajv from "ajv";
+import Ajv, { _ } from "ajv";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
 import assert from "assert";
+import standaloneCode from "ajv/dist/standalone";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -63,7 +64,7 @@ export default function ({ externalAPIMachinery }: Context): Generator {
       const ajv = new Ajv({
         strictTypes: false,
         allErrors: true,
-        code: { source: true, esm: true },
+        code: { source: true, esm: true, lines: true, formats: _`formats` },
         inlineRefs: false
       });
 
@@ -72,7 +73,6 @@ export default function ({ externalAPIMachinery }: Context): Generator {
       const refs = collectRefs(def.schema)
         .map(trimRefPrefix)
         .filter((ref) => ref !== def.schemaId);
-      const formatVars: Record<string, string> = {};
 
       // Register custom formats
       addFormats(ajv);
@@ -85,57 +85,30 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         ajv.addSchema({}, ref);
       }
 
+      imports.push({
+        name: "formats",
+        path: "@kubernetes-models/validate"
+      });
+
       // Compile the schema
       const validate = ajv.compile(schema);
 
       // Ensure that the source code is generated
       assert(validate.source);
 
-      // Assign format functions to variables
-      for (const format of validate.source.scopeValues.formats ?? []) {
-        const key = format.value?.key;
-
-        if (typeof key === "string") {
-          formatVars[format.str] = key;
-        }
+      // Rewrite validate function for referenced schemas
+      for (const value of validate.source.scopeValues.validate ?? []) {
+        const source = (value as any).value.ref.source;
+        source.validateCode = `import ${source.validateName} from "${getSchemaImportPath((value as any).value.ref.schemaEnv.baseId)}";`;
+        source.scopeValues = {};
       }
 
-      if (Object.keys(formatVars).length) {
-        imports.push({
-          name: "formats",
-          path: "@kubernetes-models/validate"
-        });
-      }
-
-      // Import validate functions from other schemas
-      for (const [key, ref] of Object.entries(validate.schemaEnv.refs)) {
-        // Do not import the schema itself
-        if (key === def.schemaId) continue;
-
-        const name = (ref as any).validateName;
-
-        // Skip if the name is not defined
-        if (!name) continue;
-
-        imports.push({
-          name: "validate",
-          alias: name,
-          path: getSchemaImportPath(key)
-        });
-      }
+      const code = standaloneCode(ajv, validate);
 
       return {
         path: getSchemaPath(def.schemaId),
         content: `${generateImports(imports)}
-
-${Object.entries(formatVars)
-  .map(([key, value]) => `const ${key} = formats[${JSON.stringify(value)}];`)
-  .join("\n")}
-
-${validate.source.validateCode}
-
-export { ${validate.source.validateName} as validate };
-`
+${code}`
       };
     });
   };
