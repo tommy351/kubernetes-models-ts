@@ -1450,6 +1450,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      object-hash:
+        specifier: ^3.0.0
+        version: 3.0.0
       tslib:
         specifier: ^2.4.0
         version: 2.6.2
@@ -1463,6 +1466,9 @@ importers:
       '@types/lodash':
         specifier: ^4.14.186
         version: 4.14.186
+      '@types/object-hash':
+        specifier: ^3.0.6
+        version: 3.0.6
       '@types/yargs':
         specifier: ^17.0.13
         version: 17.0.13
@@ -2245,6 +2251,10 @@ packages:
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/object-hash@3.0.6:
+    resolution: {integrity: sha512-fOBV8C1FIu2ELinoILQ+ApxcUKz4ngq+IWUYrxSGjXzzjUALijilampwkMgEtJ+h2njAW3pi853QpzNVCHB73w==}
     dev: true
 
   /@types/parse-json@4.0.0:
@@ -4608,6 +4618,11 @@ packages:
     dependencies:
       path-key: 4.0.0
     dev: true
+
+  /object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
+    dev: false
 
   /object-inspect@1.12.2:
     resolution: {integrity: sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==}
