@@ -6,7 +6,7 @@ import assert from "assert";
 import { addFormats } from "@kubernetes-models/validate";
 import objectHash from "object-hash";
 import { parse } from "@babel/parser";
-import { transformFromAstAsync } from "@babel/core";
+import generate from "@babel/generator";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
@@ -226,10 +226,10 @@ function collectValidateNames(refs: SchemaRefs): Record<string, string> {
   return names;
 }
 
-export async function compileSchema(
+export function compileSchema(
   schema: Schema,
   refs: Record<string, string>
-): Promise<string> {
+): string {
   const ajv = new Ajv({
     strictTypes: false,
     allErrors: true,
@@ -263,6 +263,10 @@ export async function compileSchema(
   const ast = parse(code, { sourceType: "module" });
 
   traverse(ast, {
+    // Remove "use strict" directive
+    Program(path) {
+      path.node.directives = [];
+    },
     // Replace validate function of referenced schemas with import statement
     FunctionDeclaration(path) {
       if (!path.node.id) return;
@@ -298,6 +302,7 @@ export async function compileSchema(
             "@kubernetes-models/validate/runtime/$1"
           );
 
+          // Insert an import statement before the current node
           path.insertBefore(
             t.importDeclaration(
               [
@@ -313,20 +318,21 @@ export async function compileSchema(
         }
       }
 
+      // Do not change the node if variables are not removed
       if (vars.length === path.node.declarations.length) return;
 
       if (vars.length) {
+        // Replace the node with a new variable declaration
         path.replaceWith(t.variableDeclaration(path.node.kind, vars));
       } else {
+        // Remove the node if all variables are removed
         path.remove();
       }
     }
   });
 
-  const transformed = await transformFromAstAsync(ast, code);
-
-  assert(transformed?.code);
+  const result = generate(ast, {}, code);
 
   return `import { formats } from "@kubernetes-models/validate";
-${transformed.code}`;
+${result.code}`;
 }

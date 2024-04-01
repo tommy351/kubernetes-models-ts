@@ -62,21 +62,19 @@ export default function ({ externalAPIMachinery }: Context): Generator {
   }
 
   return async (definitions) => {
-    return Promise.all(
-      definitions.map(async (def) => {
-        const schema = transformSchema(def);
-        const refIds = collectRefs(def.schema)
-          .map(trimRefPrefix)
-          .filter((ref) => ref !== def.schemaId);
-        const refPaths = Object.fromEntries(
-          refIds.map((ref) => [ref, getSchemaImportPath(ref)])
-        );
+    return definitions.map((def) => {
+      const schema = transformSchema(def);
+      const refIds = collectRefs(def.schema)
+        .map(trimRefPrefix)
+        .filter((ref) => ref !== def.schemaId);
+      const refPaths = Object.fromEntries(
+        refIds.map((ref) => [ref, getSchemaImportPath(ref)])
+      );
 
-        return {
-          path: getSchemaPath(def.schemaId),
-          content: await compileSchema(schema, refPaths)
-        };
-      })
-    );
+      return {
+        path: getSchemaPath(def.schemaId),
+        content: compileSchema(schema, refPaths)
+      };
+    });
   };
 }
