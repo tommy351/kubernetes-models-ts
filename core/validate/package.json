@@ -6,9 +6,16 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./runtime/*": {
+      "types": "./dist/runtime/*.d.ts",
+      "import": "./dist/runtime/*.mjs",
+      "require": "./dist/runtime/*.js"
+    }
   },
   "scripts": {
     "build": "tsc-multi --config ../../tsc-multi.json"

@@ -293,6 +293,11 @@ export async function compileSchema(
           declaration.init.object.arguments.length === 1 &&
           t.isStringLiteral(declaration.init.object.arguments[0])
         ) {
+          const importPath = declaration.init.object.arguments[0].value.replace(
+            /^ajv\/dist\/runtime\/(.+)$/,
+            "@kubernetes-models/validate/runtime/$1"
+          );
+
           path.insertBefore(
             t.importDeclaration(
               [
@@ -300,7 +305,7 @@ export async function compileSchema(
                   ? t.importDefaultSpecifier(declaration.id)
                   : t.importSpecifier(declaration.id, declaration.init.property)
               ],
-              t.stringLiteral(declaration.init.object.arguments[0].value)
+              t.stringLiteral(importPath)
             )
           );
         } else {
