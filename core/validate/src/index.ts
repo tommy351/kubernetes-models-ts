@@ -1,2 +1,2 @@
-export { register, formats, addFormats } from "./ajv";
-export { validate, ValidateFunc, runValidateFunc } from "./validate";
+export { formats, addFormats } from "./formats";
+export { ValidateFunc, runValidateFunc } from "./validate";

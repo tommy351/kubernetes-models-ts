@@ -1,5 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { ajv } from "../ajv";
+import { addFormats } from "../formats";
+import Ajv from "ajv";
+
+const ajv = new Ajv({
+  strictTypes: false,
+  allErrors: true,
+  verbose: true
+});
+
+addFormats(ajv);
 
 describe("format: byte", () => {
   it("multiple base64 strings in an object", () => {

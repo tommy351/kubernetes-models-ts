@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
-import { Model, setSchema } from "../model";
-import { register } from "@kubernetes-models/validate";
+import { Model, setValidateFunc } from "../model";
+import { ValidateFunc } from "@kubernetes-models/validate";
 
 describe("toJSON", () => {
   it("should not set undefined props", () => {
@@ -44,22 +44,23 @@ describe("toJSON", () => {
 });
 
 describe("validate", () => {
-  describe("when schema is not set", () => {
+  describe("when validate function is not set", () => {
     it("should do nothing", () => {
       const model = new Model();
       expect(() => model.validate()).not.toThrow();
     });
   });
 
-  describe("when schema is set", () => {
+  describe("when validate function is set", () => {
     it("works", () => {
+      const validate = vi.fn();
       class MyModel extends Model<unknown> {}
-      const addSchema = vi.fn();
-      register("foo", {});
-      setSchema(MyModel, "foo", addSchema);
+      setValidateFunc(MyModel, validate as unknown as ValidateFunc<unknown>);
+
       const model = new MyModel();
       model.validate();
-      expect(addSchema).toHaveBeenCalledTimes(1);
+      expect(validate).toHaveBeenCalledTimes(1);
+      expect(validate).toHaveBeenCalledWith(model);
     });
   });
 });
