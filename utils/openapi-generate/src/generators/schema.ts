@@ -10,13 +10,20 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
+import { SchemaTransformer } from "@kubernetes-models/generate";
 
-function replaceRef(schema: Schema): Schema {
-  if (typeof schema.$ref === "string") {
-    return { ...schema, $ref: trimRefPrefix(schema.$ref) + "#" };
-  }
+function replaceRef(def: Definition): SchemaTransformer {
+  return (schema) => {
+    if (typeof schema.$ref === "string") {
+      const ref = trimRefPrefix(schema.$ref);
 
-  return schema;
+      // If the ref equals to the schema ID, replace it with "#", which means
+      // self-reference.
+      return { ...schema, $ref: ref === def.schemaId ? "#" : `${ref}#` };
+    }
+
+    return schema;
+  };
 }
 
 function transformSchema(def: Definition): Schema {
@@ -36,7 +43,7 @@ function transformSchema(def: Definition): Schema {
       break;
 
     default:
-      schema = baseTransformSchema(def.schema, [replaceRef]);
+      schema = baseTransformSchema(def.schema, [replaceRef(def)]);
   }
 
   return schema;
@@ -61,14 +68,9 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         const refIds = collectRefs(def.schema)
           .map(trimRefPrefix)
           .filter((ref) => ref !== def.schemaId);
-        const refPaths: Record<string, string> = {
-          // Add self reference because some schemas reference themselves (e.g. JSONSchemaProps)
-          [def.schemaId]: "."
-        };
-
-        for (const ref of refIds) {
-          refPaths[ref] = getSchemaImportPath(ref);
-        }
+        const refPaths = Object.fromEntries(
+          refIds.map((ref) => [ref, getSchemaImportPath(ref)])
+        );
 
         return {
           path: getSchemaPath(def.schemaId),
