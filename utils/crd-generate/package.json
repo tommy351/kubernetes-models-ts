@@ -43,17 +43,13 @@
     "@kubernetes-models/generate": "workspace:^",
     "@kubernetes-models/read-input": "workspace:^",
     "@kubernetes-models/string-util": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^",
-    "ajv": "^8.12.0",
     "lodash": "^4.17.21",
-    "object-hash": "^3.0.0",
     "tslib": "^2.4.0",
     "yaml": "^2.2.2",
     "yargs": "^17.6.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.186",
-    "@types/object-hash": "^3.0.6",
     "@types/yargs": "^17.0.13",
     "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4"
