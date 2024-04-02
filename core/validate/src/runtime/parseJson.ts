@@ -1,1 +1,1 @@
-export * from "ajv/dist/runtime/parseJson";
+export * from "ajv/dist/runtime/parseJson.js";

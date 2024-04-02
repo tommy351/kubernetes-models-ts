@@ -1,5 +1,5 @@
 import type { ErrorObject, SchemaObject } from "ajv";
-import ValidationError from "ajv/dist/runtime/validation_error";
+import ValidationError from "./runtime/validation_error";
 
 function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
   const result: ErrorObject[] = [];
