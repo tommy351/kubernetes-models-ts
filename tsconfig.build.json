@@ -4,5 +4,5 @@
     "declaration": true,
     "sourceMap": true
   },
-  "exclude": ["**/__tests__/**"]
+  "exclude": ["**/__tests__/**", "**/__fixtures__/**"]
 }

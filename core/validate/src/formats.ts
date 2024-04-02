@@ -1,6 +1,6 @@
-import Ajv, { Format } from "ajv";
-import { fullFormats } from "ajv-formats/dist/formats";
-import draft2019Formats from "ajv-formats-draft2019/formats";
+import type { default as Ajv, Format } from "ajv";
+import { fullFormats } from "ajv-formats/dist/formats.js";
+import draft2019Formats from "ajv-formats-draft2019/formats/index.js";
 import isCidr from "is-cidr";
 
 // From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15

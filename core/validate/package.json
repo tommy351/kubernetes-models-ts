@@ -12,9 +12,8 @@
       "require": "./dist/index.js"
     },
     "./runtime/*": {
-      "types": "./dist/runtime/*.d.ts",
-      "import": "./dist/runtime/*.mjs",
-      "require": "./dist/runtime/*.js"
+      "import": "./runtime/*.mjs",
+      "require": "./runtime/*.js"
     }
   },
   "scripts": {
@@ -37,7 +36,8 @@
     "validate"
   ],
   "files": [
-    "/dist/"
+    "/dist/",
+    "/runtime/"
   ],
   "engines": {
     "node": ">=14"
@@ -50,6 +50,9 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@types/re2": "^1.10.8",
+    "execa": "^5.1.1",
+    "re2": "^1.20.10",
     "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"
