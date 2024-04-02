@@ -10,7 +10,7 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
-import { SchemaTransformer } from "@kubernetes-models/generate";
+import { SchemaTransformer, OutputFile } from "@kubernetes-models/generate";
 
 function replaceRef(def: Definition): SchemaTransformer {
   return (schema) => {
@@ -62,21 +62,29 @@ export default function ({ externalAPIMachinery }: Context): Generator {
   }
 
   return async (definitions) => {
-    return Promise.all(
-      definitions.map(async (def) => {
-        const schema = transformSchema(def);
-        const refIds = collectRefs(def.schema)
-          .map(trimRefPrefix)
-          .filter((ref) => ref !== def.schemaId);
-        const refPaths = Object.fromEntries(
-          refIds.map((ref) => [ref, getSchemaImportPath(ref)])
-        );
+    const files: OutputFile[] = [];
 
-        return {
+    for (const def of definitions) {
+      const schema = transformSchema(def);
+      const refIds = collectRefs(def.schema)
+        .map(trimRefPrefix)
+        .filter((ref) => ref !== def.schemaId);
+      const refPaths = Object.fromEntries(
+        refIds.map((ref) => [ref, getSchemaImportPath(ref)])
+      );
+
+      files.push(
+        {
           path: getSchemaPath(def.schemaId),
           content: await compileSchema(schema, refPaths)
-        };
-      })
-    );
+        },
+        {
+          path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
+          content: `export function validate(data: unknown): boolean;`
+        }
+      );
+    }
+
+    return files;
   };
 }
