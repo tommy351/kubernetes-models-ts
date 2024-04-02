@@ -11,7 +11,7 @@ const generateSchemas: Generator = async (definitions) => {
   const files: OutputFile[] = [];
 
   for (const def of definitions) {
-    const schema = transformSchema(def.schema);
+    const schema = { ...transformSchema(def.schema), $id: def.schemaId };
 
     files.push(
       {
