@@ -214,9 +214,6 @@ importers:
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.7.23)(typescript@4.8.4)
-      tsc-multi:
-        specifier: ^0.6.1
-        version: 0.6.1(typescript@4.8.4)
       typescript:
         specifier: ^4.8.4
         version: 4.8.4
