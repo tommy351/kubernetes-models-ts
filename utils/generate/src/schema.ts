@@ -8,7 +8,6 @@ import { parse } from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import generate from "@babel/generator";
-import terser from "terser";
 import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
 import { objectHash, sha256base64 } from "ohash";
 
@@ -278,14 +277,20 @@ export async function compileSchema(
 
       const id = validateNames[path.node.id.name];
       const ref = refs[id];
-      if (!ref) return;
 
-      path.replaceWith(
-        t.importDeclaration(
-          [t.importDefaultSpecifier(t.identifier(path.node.id.name))],
-          t.stringLiteral(ref)
-        )
-      );
+      if (ref) {
+        path.replaceWith(
+          t.importDeclaration(
+            [
+              t.importSpecifier(
+                t.identifier(path.node.id.name),
+                t.identifier("validate")
+              )
+            ],
+            t.stringLiteral(ref)
+          )
+        );
+      }
     },
     // Replace Ajv runtime require() with import statement
     VariableDeclaration(path) {
@@ -333,19 +338,14 @@ export async function compileSchema(
         // Remove the node if all variables are removed
         path.remove();
       }
+    },
+    // Remove the default export
+    ExportDefaultDeclaration(path) {
+      path.remove();
     }
   });
 
-  const generateResult = generate(ast, {}, code);
-  const minifyResult = await terser.minify(generateResult.code, {
-    ecma: 2018,
-    mangle: false,
-    compress: {
-      toplevel: true
-    }
-  });
+  const result = generate(ast, {}, code);
 
-  assert(minifyResult.code);
-
-  return minifyResult.code;
+  return result.code;
 }

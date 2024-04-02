@@ -145,9 +145,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -192,9 +192,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -227,6 +227,9 @@ importers:
 
   internal/publish-scripts:
     dependencies:
+      '@swc/core':
+        specifier: ^1.4.11
+        version: 1.4.11
       execa:
         specifier: ^5.1.1
         version: 5.1.1
@@ -236,9 +239,6 @@ importers:
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
-      tsc-multi:
-        specifier: ^0.6.1
-        version: 0.6.1(typescript@4.8.4)
       tslib:
         specifier: ^2.4.0
         version: 2.6.2
@@ -267,9 +267,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -293,9 +293,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -319,9 +319,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -345,9 +345,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -371,9 +371,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -397,9 +397,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -423,9 +423,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -449,9 +449,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -493,9 +493,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -545,9 +545,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -589,9 +589,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -615,9 +615,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -641,9 +641,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -688,9 +688,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -714,9 +714,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -740,9 +740,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -766,9 +766,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -792,9 +792,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -818,9 +818,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -844,9 +844,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -896,9 +896,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -922,9 +922,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -948,9 +948,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -974,9 +974,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1000,9 +1000,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1047,9 +1047,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1073,9 +1073,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1099,9 +1099,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1125,9 +1125,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1151,9 +1151,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1177,9 +1177,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1203,9 +1203,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1229,9 +1229,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1255,9 +1255,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1281,9 +1281,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1333,9 +1333,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1359,9 +1359,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1385,9 +1385,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1411,9 +1411,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1437,9 +1437,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1463,9 +1463,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1580,9 +1580,6 @@ importers:
       ohash:
         specifier: ^1.1.3
         version: 1.1.3
-      terser:
-        specifier: ^5.30.1
-        version: 5.30.1
       tslib:
         specifier: ^2.4.0
         version: 2.6.2
@@ -2509,13 +2506,6 @@ packages:
     resolution: {integrity: sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==}
     engines: {node: '>=6.0.0'}
 
-  /@jridgewell/source-map@0.3.6:
-    resolution: {integrity: sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5BjSRCRxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==}
-    dependencies:
-      '@jridgewell/gen-mapping': 0.3.5
-      '@jridgewell/trace-mapping': 0.3.25
-    dev: false
-
   /@jridgewell/sourcemap-codec@1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
 
@@ -2728,6 +2718,137 @@ packages:
   /@sinclair/typebox@0.24.44:
     resolution: {integrity: sha512-ka0W0KN5i6LfrSocduwliMMpqVgohtPFidKdMEOUjoOFCHcOOYkKsPRxfs5f15oPNHTm6ERAm0GV/+/LTKeiWg==}
     dev: true
+
+  /@swc/core-darwin-arm64@1.4.11:
+    resolution: {integrity: sha512-C1j1Qp/IHSelVWdEnT7f0iONWxQz6FAqzjCF2iaL+0vFg4V5f2nlgrueY8vj5pNNzSGhrAlxsMxEIp4dj1MXkg==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-darwin-x64@1.4.11:
+    resolution: {integrity: sha512-0TTy3Ni8ncgaMCchSQ7FK8ZXQLlamy0FXmGWbR58c+pVZWYZltYPTmheJUvVcR0H2+gPAymRKyfC0iLszDALjg==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-linux-arm-gnueabihf@1.4.11:
+    resolution: {integrity: sha512-XJLB71uw0rog4DjYAPxFGAuGCBQpgJDlPZZK6MTmZOvI/1t0+DelJ24IjHIxk500YYM26Yv47xPabqFPD7I2zQ==}
+    engines: {node: '>=10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-linux-arm64-gnu@1.4.11:
+    resolution: {integrity: sha512-vYQwzJvm/iu052d5Iw27UFALIN5xSrGkPZXxLNMHPySVko2QMNNBv35HLatkEQHbQ3X+VKSW9J9SkdtAvAVRAQ==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-linux-arm64-musl@1.4.11:
+    resolution: {integrity: sha512-eV+KduiRYUFjPsvbZuJ9aknQH9Tj0U2/G9oIZSzLx/18WsYi+upzHbgxmIIHJ2VJgfd7nN40RI/hMtxNsUzR/g==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-linux-x64-gnu@1.4.11:
+    resolution: {integrity: sha512-WA1iGXZ2HpqM1OR9VCQZJ8sQ1KP2or9O4bO8vWZo6HZJIeoQSo7aa9waaCLRpkZvkng1ct/TF/l6ymqSNFXIzQ==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-linux-x64-musl@1.4.11:
+    resolution: {integrity: sha512-UkVJToKf0owwQYRnGvjHAeYVDfeimCEcx0VQSbJoN7Iy0ckRZi7YPlmWJU31xtKvikE2bQWCOVe0qbSDqqcWXA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-win32-arm64-msvc@1.4.11:
+    resolution: {integrity: sha512-35khwkyly7lF5NDSyvIrukBMzxPorgc5iTSDfVO/LvnmN5+fm4lTlrDr4tUfTdOhv3Emy7CsKlsNAeFRJ+Pm+w==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-win32-ia32-msvc@1.4.11:
+    resolution: {integrity: sha512-Wx8/6f0ufgQF2pbVPsJ2dAmFLwIOW+xBE5fxnb7VnEbGkTgP1qMDWiiAtD9rtvDSuODG3i1AEmAak/2HAc6i6A==}
+    engines: {node: '>=10'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core-win32-x64-msvc@1.4.11:
+    resolution: {integrity: sha512-0xRFW6K9UZQH2NVC/0pVB0GJXS45lY24f+6XaPBF1YnMHd8A8GoHl7ugyM5yNUTe2AKhSgk5fJV00EJt/XBtdQ==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@swc/core@1.4.11:
+    resolution: {integrity: sha512-WKEakMZxkVwRdgMN4AMJ9K5nysY8g8npgQPczmjBeNK5In7QEAZAJwnyccrWwJZU0XjVeHn2uj+XbOKdDW17rg==}
+    engines: {node: '>=10'}
+    requiresBuild: true
+    peerDependencies:
+      '@swc/helpers': ^0.5.0
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+    dependencies:
+      '@swc/counter': 0.1.3
+      '@swc/types': 0.1.6
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.4.11
+      '@swc/core-darwin-x64': 1.4.11
+      '@swc/core-linux-arm-gnueabihf': 1.4.11
+      '@swc/core-linux-arm64-gnu': 1.4.11
+      '@swc/core-linux-arm64-musl': 1.4.11
+      '@swc/core-linux-x64-gnu': 1.4.11
+      '@swc/core-linux-x64-musl': 1.4.11
+      '@swc/core-win32-arm64-msvc': 1.4.11
+      '@swc/core-win32-ia32-msvc': 1.4.11
+      '@swc/core-win32-x64-msvc': 1.4.11
+    dev: false
+
+  /@swc/counter@0.1.3:
+    resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
+    dev: false
+
+  /@swc/helpers@0.5.8:
+    resolution: {integrity: sha512-lruDGw3pnfM3wmZHeW7JuhkGQaJjPyiKjxeGhdmfoOT53Ic9qb5JLDNaK2HUdl1zLDeX28H221UvKjfdvSLVMg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /@swc/types@0.1.6:
+    resolution: {integrity: sha512-/JLo/l2JsT/LRd80C3HfbmVpxOAJ11FO2RCEslFrgzLltoP9j8XIbsyDcfCt2WWyX+CM96rBoNM+IToAkFOugg==}
+    dependencies:
+      '@swc/counter': 0.1.3
+    dev: false
 
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -3098,6 +3219,7 @@ packages:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
 
   /agent-base@6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
@@ -3305,10 +3427,6 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /buffer-from@1.1.2:
-    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
-    dev: false
-
   /bundle-require@4.2.1(esbuild@0.21.4):
     resolution: {integrity: sha512-7Q/6vkyYAwOmQNRw75x+4yRtZCZJXUDmHHlFdkiV0wgv/reNjtJwpu1jPJ0w2kbEpIM0uoKI3S4/f39dU7AjSA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -3402,6 +3520,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
 
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
@@ -3483,6 +3602,7 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: true
 
   /cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
@@ -3644,6 +3764,7 @@ packages:
     dependencies:
       ms: 2.1.2
       supports-color: 8.1.1
+    dev: true
 
   /decamelize-keys@1.1.0:
     resolution: {integrity: sha512-ocLWuYzRPoS9bfiSdDd3cxvrzovVMZnRDVEzAs+hWIVXGDbHxWMECij2OBuyB/An0FFW/nLuq6Kv1i/YC5Qfzg==}
@@ -4446,6 +4567,7 @@ packages:
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+    dev: true
 
   /has-property-descriptors@1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
@@ -5430,6 +5552,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-map: 4.0.0
+    dev: true
 
   /p-filter@2.1.0:
     resolution: {integrity: sha512-ZBxxZ5sL2HghephhpGAQdoskxplTwr7ICaehZwLIlfL6acuVgZPm8yBNuRAFBGEqtD/hmUeq9eqLg2ys9Xr/yw==}
@@ -5818,6 +5941,7 @@ packages:
       inherits: 2.0.4
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
+    dev: true
 
   /readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
@@ -5967,6 +6091,7 @@ packages:
 
   /safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+    dev: true
 
   /safe-regex-test@1.0.0:
     resolution: {integrity: sha512-JBUUzyOgEwXQY1NuPtvcj/qcBDbDmEvWufhlnXZIm75DEHp+afM1r1ujJpJsV/gSM4t59tpDyPi1sd6ZaPFfsA==}
@@ -6140,16 +6265,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /source-map-support@0.5.21:
-    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
-    dependencies:
-      buffer-from: 1.1.2
-      source-map: 0.6.1
-    dev: false
-
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
@@ -6235,6 +6354,7 @@ packages:
     resolution: {integrity: sha512-Hl092MV3USJuUCC6mfl9sPzGloA3K5VwdIeJjYIkXY/8K+mUvaeEabWJgArp+xXrsWxCajeT2pc4axbVhIZJyg==}
     dependencies:
       readable-stream: 3.6.0
+    dev: true
 
   /string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -6288,6 +6408,7 @@ packages:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
     dependencies:
       safe-buffer: 5.2.1
+    dev: true
 
   /strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
@@ -6355,6 +6476,7 @@ packages:
 
   /superstruct@0.14.2:
     resolution: {integrity: sha512-nPewA6m9mR3d6k7WkZ8N8zpTWfenFH3q9pA2PkuiZxINr9DKB2+40wEQf0ixn8VaGuJ78AB6iWOtStI+/4FKZQ==}
+    dev: true
 
   /supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -6367,12 +6489,14 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       has-flag: 4.0.0
+    dev: true
 
   /supports-color@8.1.1:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
     dependencies:
       has-flag: 4.0.0
+    dev: true
 
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -6419,17 +6543,6 @@ packages:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
     engines: {node: '>=8'}
     dev: true
-
-  /terser@5.30.1:
-    resolution: {integrity: sha512-PJhOnRttZqqmIujxOQOMu4QuFGvh43lR7Youln3k6OJvmxwZ5FxK5rbCEh8XABRCpLf7ZnhrZuclCNCASsScnA==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      '@jridgewell/source-map': 0.3.6
-      acorn: 8.8.2
-      commander: 2.20.3
-      source-map-support: 0.5.21
-    dev: false
 
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
@@ -6557,6 +6670,7 @@ packages:
       tslib: 2.6.2
       typescript: 4.8.4
       yargs: 16.2.0
+    dev: true
 
   /tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
@@ -6772,6 +6886,7 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
 
   /v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
@@ -7051,6 +7166,7 @@ packages:
   /yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
+    dev: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
@@ -7084,6 +7200,7 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 20.2.9
+    dev: true
 
   /yargs@17.6.0:
     resolution: {integrity: sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g==}
