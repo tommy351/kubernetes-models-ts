@@ -96,28 +96,39 @@ function isRelativeImport(source: string): boolean {
   return source.startsWith("./") || source.startsWith("../");
 }
 
-function rewriteImportExt(ast: swc.Module, ext: string): swc.Module {
+function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
   const body: swc.ModuleItem[] = [];
 
-  for (const stmt of ast.body) {
+  function rewrite<T extends { source?: swc.StringLiteral }>(stmt: T): T {
     if (
-      stmt.type === "ImportDeclaration" &&
-      stmt.source.type === "StringLiteral" &&
-      isRelativeImport(stmt.source.value) &&
-      !extname(stmt.source.value).length
+      !stmt.source ||
+      !isRelativeImport(stmt.source.value) ||
+      extname(stmt.source.value).length
     ) {
-      const newValue = stmt.source.value + ext;
+      return stmt;
+    }
 
-      body.push({
-        ...stmt,
-        source: {
-          ...stmt.source,
-          value: newValue,
-          raw: JSON.stringify(newValue)
-        }
-      });
-    } else {
-      body.push(stmt);
+    const newValue = stmt.source.value + ext;
+
+    return {
+      ...stmt,
+      source: {
+        ...stmt.source,
+        value: newValue,
+        raw: JSON.stringify(newValue)
+      }
+    };
+  }
+
+  for (const stmt of ast.body) {
+    switch (stmt.type) {
+      case "ImportDeclaration":
+      case "ExportAllDeclaration":
+      case "ExportNamedDeclaration":
+        body.push(rewrite(stmt));
+        break;
+      default:
+        body.push(stmt);
     }
   }
 
@@ -145,12 +156,12 @@ async function compileJs(cwd: string): Promise<void> {
 
     await Promise.all([
       writeJs({
-        ast: rewriteImportExt(ast, CJS_EXT),
+        ast: rewriteImportPath(ast, CJS_EXT),
         module: "commonjs",
         path: join(distDir, name + CJS_EXT)
       }),
       writeJs({
-        ast: rewriteImportExt(ast, ESM_EXT),
+        ast: rewriteImportPath(ast, ESM_EXT),
         module: "es6",
         path: join(distDir, name + ESM_EXT)
       })
