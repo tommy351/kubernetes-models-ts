@@ -10,20 +10,15 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
-import { SchemaTransformer, OutputFile } from "@kubernetes-models/generate";
+import { OutputFile } from "@kubernetes-models/generate";
 
-function replaceRef(def: Definition): SchemaTransformer {
-  return (schema) => {
-    if (typeof schema.$ref === "string") {
-      const ref = trimRefPrefix(schema.$ref);
+function replaceRef(schema: Schema): Schema {
+  if (typeof schema.$ref === "string") {
+    const ref = trimRefPrefix(schema.$ref);
+    return { ...schema, $ref: `${ref}#` };
+  }
 
-      // If the ref equals to the schema ID, replace it with "#", which means
-      // self-reference.
-      return { ...schema, $ref: ref === def.schemaId ? "#" : `${ref}#` };
-    }
-
-    return schema;
-  };
+  return schema;
 }
 
 function transformSchema(def: Definition): Schema {
@@ -43,10 +38,10 @@ function transformSchema(def: Definition): Schema {
       break;
 
     default:
-      schema = baseTransformSchema(def.schema, [replaceRef(def)]);
+      schema = baseTransformSchema(def.schema, [replaceRef]);
   }
 
-  return schema;
+  return { ...schema, $id: def.schemaId };
 }
 
 export default function ({ externalAPIMachinery }: Context): Generator {

@@ -75,6 +75,14 @@ describe("validate", () => {
         expect(props.default).toEqual(value);
       });
     });
+
+    it("oneOf", () => {
+      const props = new JSONSchemaPropsV1({
+        oneOf: [{ type: "string" }, { type: "number" }]
+      });
+
+      expect(() => props.validate()).not.toThrow();
+    });
   });
 
   describe("ConfigMap", () => {

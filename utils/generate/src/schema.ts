@@ -3,7 +3,7 @@ import { omit, omitBy, uniq } from "lodash";
 import Ajv, { _ } from "ajv";
 import standaloneCode from "ajv/dist/standalone";
 import assert from "assert";
-import { addFormats } from "@kubernetes-models/validate";
+import { formats } from "@kubernetes-models/validate";
 import { parse } from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
@@ -204,20 +204,31 @@ function splitSchema(ajv: Ajv, schema: Schema): void {
   }
 }
 
-function collectValidateNames(refs: SchemaRefs): Record<string, string> {
-  const names: Record<string, string> = {};
+function collectValidateNames(refs: SchemaRefs): Map<string, string> {
+  const names = new Map<string, string>();
+  const seenIds = new Set<string>();
 
-  for (const value of Object.values(refs)) {
-    const ref = value as SchemaEnv;
+  function collect(refs: SchemaRefs): void {
+    for (const value of Object.values(refs)) {
+      const ref = value as SchemaEnv | undefined;
+      if (!ref) continue;
 
-    if (ref.validateName) {
-      names[ref.validateName.str] = ref.baseId;
-    }
+      const id = ref.baseId;
+      if (seenIds.has(id)) continue;
 
-    if (ref.refs) {
-      Object.assign(names, collectValidateNames(ref.refs));
+      seenIds.add(id);
+
+      if (ref.validateName) {
+        names.set(ref.validateName.str, id);
+      }
+
+      if (ref.refs) {
+        collect(ref.refs);
+      }
     }
   }
+
+  collect(refs);
 
   return names;
 }
@@ -232,11 +243,12 @@ export async function compileSchema(
     code: { source: true, esm: true, formats: _`formats`, lines: true },
     inlineRefs: false,
     // example keyword is used by grafana-operator
-    keywords: ["example"]
+    keywords: ["example"],
+    formats
   });
 
-  // Add custom formats
-  addFormats(ajv);
+  // Add self reference
+  ajv.addSchema(schema);
 
   // Add referenced schemas
   for (const key of Object.keys(refs)) {
@@ -275,22 +287,23 @@ export async function compileSchema(
     FunctionDeclaration(path) {
       if (!path.node.id) return;
 
-      const id = validateNames[path.node.id.name];
-      const ref = refs[id];
+      const id = validateNames.get(path.node.id.name);
+      if (!id) return;
 
-      if (ref) {
-        path.replaceWith(
-          t.importDeclaration(
-            [
-              t.importSpecifier(
-                t.identifier(path.node.id.name),
-                t.identifier("validate")
-              )
-            ],
-            t.stringLiteral(ref)
-          )
-        );
-      }
+      const ref = refs[id];
+      if (!ref) return;
+
+      path.replaceWith(
+        t.importDeclaration(
+          [
+            t.importSpecifier(
+              t.identifier(path.node.id.name),
+              t.identifier("validate")
+            )
+          ],
+          t.stringLiteral(ref)
+        )
+      );
     },
     // Replace Ajv runtime require() with import statement
     VariableDeclaration(path) {
