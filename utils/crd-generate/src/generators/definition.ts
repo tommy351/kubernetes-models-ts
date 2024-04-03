@@ -105,7 +105,8 @@ constructor(data?: ModelData<${interfaceName}>) {
     content: `${generateImports(imports)}
 
 const schemaId = ${JSON.stringify(def.schemaId)};
-const schema = ${JSON.stringify(schema, null, "  ")};
+const schema = ${JSON.stringify(JSON.stringify(schema))};
+let parsed: any;
 
 ${comment}export interface ${interfaceName} ${interfaceContent}
 
@@ -113,7 +114,8 @@ ${comment}export class ${className} extends Model<${interfaceName}> implements $
 
 setSchema(${className}, schemaId, () => {
   addSchema();
-  register(schemaId, schema);
+  if (!parsed) parsed = JSON.parse(schema);
+  register(schemaId, parsed);
 });
 `
   };

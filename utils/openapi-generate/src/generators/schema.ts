@@ -20,7 +20,7 @@ function replaceRef(schema: Schema): Schema {
   return schema;
 }
 
-function compileSchema(def: Definition): string {
+function compileSchema(def: Definition): Schema {
   let schema: Schema = {};
 
   // Rewrite schemas for some special types
@@ -40,7 +40,7 @@ function compileSchema(def: Definition): string {
       schema = transformSchema(def.schema, [replaceRef]);
   }
 
-  return JSON.stringify(schema, null, "  ");
+  return schema;
 }
 
 export default function ({ externalAPIMachinery }: Context): Generator {
@@ -81,10 +81,13 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         path: getSchemaPath(def.schemaId),
         content: `${generateImports(imports)}
 
-const schema: object = ${compileSchema(def)};
+const schema = ${JSON.stringify(JSON.stringify(compileSchema(def)))};
+let parsed: any;
 
 export function addSchema() {
-${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
+${addSchemaContent}
+if (!parsed) parsed = JSON.parse(schema);
+register(${JSON.stringify(def.schemaId)}, parsed);
 }
 `
       };
