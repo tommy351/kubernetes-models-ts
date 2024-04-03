@@ -1,5 +1,11 @@
 # @kubernetes-models/envoy-gateway
 
+## 0.2.0
+
+### Minor Changes
+
+- [#188](https://github.com/tommy351/kubernetes-models-ts/pull/188) [`fd668d9`](https://github.com/tommy351/kubernetes-models-ts/commit/fd668d934c20b248b5bc4161acb66c79b5fb7436) Thanks [@tommy351](https://github.com/tommy351)! - Update to Envoy Gateway v1.0.0.
+
 ## 0.1.1
 
 ### Patch Changes
