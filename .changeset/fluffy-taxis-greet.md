@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/karpenter": major
+"@kubernetes-models/karpenter": minor
 ---
 
 Introduce karpenter models
