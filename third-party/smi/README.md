@@ -15,6 +15,7 @@ npm install @kubernetes-models/smi
 ```ts
 import { TrafficSplit } from "@kubernetes-models/smi/split.smi-spec.io/v1alpha4/TrafficSplit";
 
+// Create a new TrafficSplit
 const split = new TrafficSplit({
   metadata: { name: "example" },
   spec: {
@@ -25,6 +26,9 @@ const split = new TrafficSplit({
     ]
   }
 });
+
+// Validate against JSON schema
+split.validate();
 ```
 
 ## License
