@@ -1,0 +1,55 @@
+{
+  "name": "@kubernetes-models/smi",
+  "version": "0.0.0",
+  "description": "Service Mesh Interface (SMI) models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/smi",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "smi"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^0.29.8"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/access.smi-spec.io_identitybindings.yaml",
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/access.smi-spec.io_traffictargets.yaml",
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_httproutegroups.yaml",
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_tcproutes.yaml",
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_udproutes.yaml",
+      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/split.smi-spec.io_trafficsplits.yaml"
+    ],
+    "output": "./gen"
+  }
+}
