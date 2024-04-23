@@ -1,5 +1,11 @@
 # @kubernetes-models/karpenter
 
+## 0.1.1
+
+### Patch Changes
+
+- [`a501b1d`](https://github.com/tommy351/kubernetes-models-ts/commit/a501b1db3158b54cbb8fdb6a16777fcd0c07b738) Thanks [@tommy351](https://github.com/tommy351)! - Update readme.
+
 ## 0.1.0
 
 ### Minor Changes
