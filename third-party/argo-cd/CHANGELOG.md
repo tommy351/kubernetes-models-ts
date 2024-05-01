@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-cd
 
+## 2.5.0
+
+### Minor Changes
+
+- [#194](https://github.com/tommy351/kubernetes-models-ts/pull/194) [`c0d93b8`](https://github.com/tommy351/kubernetes-models-ts/commit/c0d93b817687d7445cf6ff4cd949cd8ee8726cc8) Thanks [@yz89122](https://github.com/yz89122)! - Upgrade to version `2.10.8`
+
 ## 2.4.0
 
 ### Minor Changes
