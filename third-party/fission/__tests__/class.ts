@@ -43,10 +43,13 @@ describe("CanaryConfig", () => {
 
   it("toJSON", () => {
     expect(canaryConfig.toJSON()).toEqual({
-      apiVersion: "fission.io/v1",
       kind: "CanaryConfig",
+      apiVersion: "fission.io/v1",
       metadata: {
         name: "example"
+      },
+      status: {
+        status: "active"
       },
       spec: {
         newfunction: "new",
@@ -94,7 +97,10 @@ describe("Environment", () => {
         name: "example"
       },
       spec: {
-        runtime: "nodejs"
+        runtime: {
+          image: "fission/node-env"
+        },
+        version: 0
       }
     });
   });
@@ -196,7 +202,10 @@ describe("HTTPTrigger", () => {
         name: "example"
       },
       spec: {
-        relativeURL: "/example"
+        functionref: {
+          name: "example",
+          type: "name"
+        }
       }
     });
   });
@@ -247,7 +256,12 @@ describe("KubernetesWatchTrigger", () => {
         name: "example"
       },
       spec: {
-        relativeURL: "/example"
+        functionref: {
+          name: "example",
+          type: "name"
+        },
+        namespace: "fission-function",
+        type: "application/json"
       }
     });
   });
@@ -291,7 +305,11 @@ describe("MessageQueueTrigger", () => {
         name: "example"
       },
       spec: {
-        relativeURL: "/example"
+        functionref: {
+          name: "example",
+          type: "name"
+        },
+        topic: "example"
       }
     });
   });
@@ -389,7 +407,11 @@ describe("TimeTrigger", () => {
         name: "example"
       },
       spec: {
-        relativeURL: "/example"
+        functionref: {
+          name: "example",
+          type: "name"
+        },
+        cron: "0 0 * * *"
       }
     });
   });
