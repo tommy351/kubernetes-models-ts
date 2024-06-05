@@ -51,6 +51,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/elastic-cloud](third-party/elastic-cloud) - [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) models.
 - [@kubernetes-models/envoy-gateway](third-party/envoy-gateway) - [Envoy Gateway](https://gateway.envoyproxy.io/) models.
 - [@kubernetes-models/external-secrets](third-party/external-secrets) - [External secrets](https://external-secrets.io) models.
+- [@kubernetes-models/fission](third-party/fission) - [Fission](https://fission.io) models.
 - [@kubernetes-models/flagger](third-party/flagger) - [Flagger](https://flagger.app/) models.
 - [@kubernetes-models/flux-cd](third-party/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gateway-api](third-party/gateway-api) - [Gateway API](https://gateway-api.sigs.k8s.io/) models.
