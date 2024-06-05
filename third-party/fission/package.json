@@ -1,0 +1,56 @@
+{
+  "name": "@kubernetes-models/fission",
+  "version": "0.0.0",
+  "description": "fission models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/fission",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "fission"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^"
+  },
+  "crd-generate": {
+    "input": [
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_canaryconfigs.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_environments.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_functions.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_httptriggers.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_kuberneteswatchtriggers.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_messagequeuetriggers.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_packages.yaml",
+      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_timetriggers.yaml"
+    ],
+    "output": "./gen"
+  }
+}
