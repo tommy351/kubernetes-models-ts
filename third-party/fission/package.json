@@ -43,14 +43,14 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_canaryconfigs.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_environments.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_functions.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_httptriggers.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_kuberneteswatchtriggers.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_messagequeuetriggers.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_packages.yaml",
-      "https://github.com/fission/fission/raw/main/crds/v1/fission.io_timetriggers.yaml"
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_canaryconfigs.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_environments.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_functions.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_httptriggers.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_kuberneteswatchtriggers.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_messagequeuetriggers.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_packages.yaml",
+      "https://github.com/fission/fission/raw/v1.20.2/crds/v1/fission.io_timetriggers.yaml"
     ],
     "output": "./gen"
   }
