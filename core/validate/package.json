@@ -18,7 +18,7 @@
     }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsc-multi --config ../../tsc-multi.json"
   },
   "description": "Validation library for Kubernetes models.",
   "repository": {
@@ -50,7 +50,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "tsup": "^8.1.0",
+    "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"
   }
