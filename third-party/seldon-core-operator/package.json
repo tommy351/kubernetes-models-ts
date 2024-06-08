@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/seldon-core-operator",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "seldon core operator",
   "repository": {
     "type": "git",
