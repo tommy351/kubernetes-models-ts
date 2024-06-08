@@ -1,6 +1,6 @@
 import Ajv, { AnySchema } from "ajv";
 import addFormats from "ajv-formats";
-import addFormatsDraft2019 from "ajv-formats-draft2019";
+import addFormatsDraft2019 from "./draft2019";
 
 // From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15
 const rBase64 =
