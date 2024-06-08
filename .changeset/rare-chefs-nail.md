@@ -41,6 +41,9 @@
 "@kubernetes-models/tidb-operator": minor
 "@kubernetes-models/traefik": minor
 "@kubernetes-models/victoria-metrics-operator": minor
+"@kubernetes-models/fission": minor
+"@kubernetes-models/karpenter": minor
+"@kubernetes-models/smi": minor
 ---
 
 Pre-compile OpenAPI schema into a validate function. This should improve the performance of first-time validation, but the package size will slightly increase.
