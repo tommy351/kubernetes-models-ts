@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/external-secrets",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "External secrets models",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/flagger",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Flagger models",
   "repository": {
     "type": "git",

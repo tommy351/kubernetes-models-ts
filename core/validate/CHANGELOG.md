@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.2
+
+### Patch Changes
+
+- [`915b6dd`](https://github.com/tommy351/kubernetes-models-ts/commit/915b6dd8fb5e9d046dc7f7b654f72eea5e97391e) Thanks [@tommy351](https://github.com/tommy351)! - Fix `ajv-formats-draft2019` import on Node.js ESM.
+
 ## 3.1.1
 
 ### Patch Changes

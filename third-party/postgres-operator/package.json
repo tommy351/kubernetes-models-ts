@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/postgres-operator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "PostgreSQL operator models",
   "repository": {
     "type": "git",
