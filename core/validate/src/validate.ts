@@ -1,5 +1,6 @@
 import type { ErrorObject, SchemaObject } from "ajv";
 import ValidationError from "./runtime/validation_error";
+import localize from "ajv-i18n";
 
 const reOneOfTypeSchemaPath = /^\d+\/type$/;
 
@@ -96,6 +97,8 @@ function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
 }
 
 function generateErrorMessage(errors: ErrorObject[]): string {
+  localize.en(errors);
+
   return errors
     .map((err) => `data${err.instancePath} ${err.message}`)
     .join(", ");

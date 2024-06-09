@@ -244,7 +244,8 @@ export async function compileSchema(
     inlineRefs: false,
     // example keyword is used by grafana-operator
     keywords: ["example"],
-    formats
+    formats,
+    messages: false
   });
 
   // Add self reference
