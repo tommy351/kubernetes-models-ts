@@ -1,9 +1,12 @@
 import type { ErrorObject, SchemaObject } from "ajv";
 import ValidationError from "./runtime/validation_error";
 
+const reOneOfTypeSchemaPath = /^\d+\/type$/;
+
 function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
   const result: ErrorObject[] = [];
   const schemaPathsToExclude = new Set<string>();
+  const oneOfSchemaPaths: string[] = [];
 
   for (const err of errors) {
     /*
@@ -21,6 +24,8 @@ function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
       }
      */
     if (err.keyword === "oneOf") {
+      oneOfSchemaPaths.push(err.schemaPath);
+
       const nullTypeIndex = (err.schema as SchemaObject[])?.findIndex(
         (x) => x.type === "null"
       );
@@ -46,6 +51,45 @@ function excludeNullableRefErrors(errors: ErrorObject[]): ErrorObject[] {
     }
 
     result.push(err);
+  }
+
+  /*
+    Errors thrown by standalone code are like this. We want to keep the first error only.
+    [
+      {
+        instancePath: '',
+        schemaPath: '#/oneOf/0/type',
+        keyword: 'type',
+        params: { type: 'string' }
+      },
+      {
+        instancePath: '',
+        schemaPath: '#/oneOf/1/type',
+        keyword: 'type',
+        params: { type: 'number' }
+      },
+      {
+        instancePath: '',
+        schemaPath: '#/oneOf',
+        keyword: 'oneOf',
+        params: { passingSchemas: null }
+      }
+    ]
+   */
+  for (const err of errors) {
+    for (const path of oneOfSchemaPaths) {
+      const prefix = path + "/";
+
+      // Find schema paths like this: #/oneOf/0/type, and the params.type is "null".
+      if (
+        err.schemaPath.startsWith(prefix) &&
+        reOneOfTypeSchemaPath.test(err.schemaPath.substring(prefix.length)) &&
+        err.params.type === "null"
+      ) {
+        schemaPathsToExclude.add(path);
+        schemaPathsToExclude.add(err.schemaPath);
+      }
+    }
   }
 
   return result.filter((x) => !schemaPathsToExclude.has(x.schemaPath));

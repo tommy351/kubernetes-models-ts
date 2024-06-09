@@ -148,6 +148,21 @@ describe("validate", () => {
         expect(() => pod.validate()).not.toThrow();
       });
     });
+
+    describe("when spec.containers is null", () => {
+      it("should fail", () => {
+        const pod = new Pod({
+          spec: {
+            // @ts-expect-error
+            containers: null
+          }
+        });
+
+        expect(() => pod.validate()).toThrow(
+          "data/spec must have required property 'containers'"
+        );
+      });
+    });
   });
 });
 
