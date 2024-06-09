@@ -10,6 +10,7 @@ import * as t from "@babel/types";
 import generate from "@babel/generator";
 import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
 import { objectHash, sha256base64 } from "ohash";
+import nullableRef from "./nullable-ref";
 
 const ajv = new Ajv();
 
@@ -44,8 +45,11 @@ function allowNull(schema: Schema): Schema {
       newProps[k] = v;
     } else if (v.type) {
       newProps[k] = { ...v, nullable: true };
+    } else if (v.$ref) {
+      const { $ref, ...rest } = v;
+      newProps[k] = { ...rest, nullableRef: $ref };
     } else {
-      newProps[k] = { oneOf: [v, { type: "null" }] };
+      newProps[k] = v;
     }
   }
 
@@ -242,11 +246,16 @@ export async function compileSchema(
     allErrors: true,
     code: { source: true, esm: true, formats: _`formats`, lines: true },
     inlineRefs: false,
-    // example keyword is used by grafana-operator
-    keywords: ["example"],
+    keywords: [
+      // example keyword is used by grafana-operator
+      "example"
+    ],
     formats,
     messages: false
   });
+
+  // Add keywords
+  ajv.addKeyword(nullableRef);
 
   // Add self reference
   ajv.addSchema(schema);

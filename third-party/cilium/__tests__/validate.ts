@@ -53,7 +53,7 @@ describe("CiliumLocalRedirectPolicy", () => {
       });
 
       expect(() => lrp.validate()).toThrow(
-        "data/spec/redirectFrontend must have required property 'addressMatcher', data/spec/redirectFrontend must have required property 'serviceMatcher', data/spec/redirectFrontend must match exactly one schema in oneOf"
+        `data/spec/redirectFrontend must have required property addressMatcher, data/spec/redirectFrontend must have required property serviceMatcher, data/spec/redirectFrontend must match exactly one schema in "oneOf"`
       );
     });
   });
@@ -97,7 +97,7 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       });
 
       expect(() => policy.validate()).toThrow(
-        "data/spec must match exactly one schema in oneOf"
+        `data/spec must match exactly one schema in "oneOf"`
       );
     });
   });
@@ -111,7 +111,7 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       });
 
       expect(() => policy.validate()).toThrow(
-        "data/spec must have required property 'endpointSelector', data/spec must have required property 'nodeSelector', data/spec must match exactly one schema in oneOf"
+        `data/spec must have required property endpointSelector, data/spec must have required property nodeSelector, data/spec must match exactly one schema in "oneOf"`
       );
     });
   });

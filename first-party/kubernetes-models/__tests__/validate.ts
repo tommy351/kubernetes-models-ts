@@ -28,7 +28,7 @@ describe("validate", () => {
       });
 
       expect(() => pod.validate()).toThrow(
-        "data/spec must have required property 'containers'"
+        "data/spec must have required property containers"
       );
     });
   });
@@ -129,7 +129,7 @@ describe("validate", () => {
       it("should fail", () => {
         const pvc = createPVC("foo");
         expect(() => pvc.validate()).toThrow(
-          'data/spec/resources/requests/storage must be number, data/spec/resources/requests/storage must match format "quantity", data/spec/resources/requests/storage must match exactly one schema in oneOf'
+          `data/spec/resources/requests/storage must be number, data/spec/resources/requests/storage must match format "quantity", data/spec/resources/requests/storage must match exactly one schema in "oneOf"`
         );
       });
     });
@@ -149,6 +149,17 @@ describe("validate", () => {
       });
     });
 
+    describe("when spec is null", () => {
+      it("should pass", () => {
+        const pod = new Pod({
+          // @ts-expect-error
+          spec: null
+        });
+
+        expect(() => pod.validate()).not.toThrow();
+      });
+    });
+
     describe("when spec.containers is null", () => {
       it("should fail", () => {
         const pod = new Pod({
@@ -159,7 +170,7 @@ describe("validate", () => {
         });
 
         expect(() => pod.validate()).toThrow(
-          "data/spec must have required property 'containers'"
+          "data/spec/containers must be array"
         );
       });
     });
