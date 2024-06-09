@@ -213,7 +213,11 @@ export async function build(args: BuildArguments): Promise<void> {
   await rm(join(args.cwd, "dist"), { recursive: true, force: true });
   await compileDts(args.cwd);
   await compileJs(args.cwd);
-  await copySchemaDts(args.cwd);
+
+  if (args["include-hidden"]) {
+    await copySchemaDts(args.cwd);
+  }
+
   await copyDistFiles(args.cwd);
   await writePkgJson(args);
 }
