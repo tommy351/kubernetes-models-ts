@@ -1,5 +1,5 @@
 import { type KeywordDefinition, str, _, Name } from "ajv";
-import RE2 from "re2";
+import { RE2 } from "re2-wasm";
 
 // https://github.com/ajv-validator/ajv/blob/c8b37f448f77448656222a5a5e279432857f7e9f/lib/vocabularies/validation/pattern.ts
 const keyword: KeywordDefinition = {
@@ -31,7 +31,7 @@ const keyword: KeywordDefinition = {
       pattern = gen.scopeValue("pattern", {
         key: schema,
         ref: re,
-        code: _`${func}(${schema}, ${u})`
+        code: _`new ${func}(${schema}, ${u})`
       });
     }
 
