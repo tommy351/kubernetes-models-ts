@@ -4,7 +4,7 @@ import Ajv, { _ } from "ajv";
 import standaloneCode from "ajv/dist/standalone";
 import assert from "assert";
 import { formats } from "@kubernetes-models/validate";
-import { parse } from "@babel/parser";
+import { ParseResult, parse } from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import generate from "@babel/generator";
@@ -13,6 +13,8 @@ import { objectHash, sha256base64 } from "ohash";
 import nullableRef from "./nullable-ref";
 
 const ajv = new Ajv();
+
+const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
 
 export function collectRefs(data: Record<string, unknown>): string[] {
   const refs = Object.keys(data).map((key) => {
@@ -237,6 +239,154 @@ function collectValidateNames(refs: SchemaRefs): Map<string, string> {
   return names;
 }
 
+/**
+ * Remove `"use strict"` directive.
+ */
+function removeDirectives(ast: ParseResult<t.File>): void {
+  traverse(ast, {
+    Program(path) {
+      path.node.directives = [];
+    }
+  });
+}
+
+/**
+ * Remove `export default` declaration.
+ */
+function removeDefaultExport(ast: ParseResult<t.File>): void {
+  traverse(ast, {
+    ExportDefaultDeclaration(path) {
+      path.remove();
+    }
+  });
+}
+
+/**
+ * Replace validate function of referenced schemas with import statement.
+ */
+function replaceValidateFunction(
+  ast: ParseResult<t.File>,
+  names: Map<string, string>,
+  refs: Record<string, string>
+): void {
+  traverse(ast, {
+    FunctionDeclaration(path) {
+      if (!path.node.id) return;
+
+      const id = names.get(path.node.id.name);
+      if (!id) return;
+
+      const ref = refs[id];
+      if (!ref) return;
+
+      path.replaceWith(
+        t.importDeclaration(
+          [
+            t.importSpecifier(
+              t.identifier(path.node.id.name),
+              t.identifier("validate")
+            )
+          ],
+          t.stringLiteral(ref)
+        )
+      );
+    }
+  });
+}
+
+/**
+ * Replace `const func = require("ajv/dist/runtime/*")` with import statement.
+ */
+function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
+  traverse(ast, {
+    VariableDeclaration(path) {
+      const filtered = new Set<number>();
+
+      for (let i = 0; i < path.node.declarations.length; i++) {
+        const { id, init } = path.node.declarations[i];
+
+        if (
+          !t.isIdentifier(id) ||
+          !t.isMemberExpression(init) ||
+          !t.isCallExpression(init.object) ||
+          !t.isIdentifier(init.property) ||
+          !t.isIdentifier(init.object.callee) ||
+          init.object.callee.name !== "require" ||
+          init.object.arguments.length !== 1 ||
+          !t.isStringLiteral(init.object.arguments[0])
+        ) {
+          continue;
+        }
+
+        const importPath = init.object.arguments[0].value;
+        if (!importPath.startsWith(AJV_RUNTIME_PREFIX)) continue;
+
+        filtered.add(i);
+        path.insertBefore(
+          t.importDeclaration(
+            [
+              init.property.name === "default"
+                ? t.importDefaultSpecifier(id)
+                : t.importSpecifier(id, init.property)
+            ],
+            t.stringLiteral(
+              "@kubernetes-models/validate/runtime/" +
+                importPath.substring(AJV_RUNTIME_PREFIX.length)
+            )
+          )
+        );
+      }
+
+      if (!filtered.size) return;
+
+      const vars = path.node.declarations.filter((_, i) => !filtered.has(i));
+
+      if (vars.length) {
+        path.replaceWith(t.variableDeclaration(path.node.kind, vars));
+      } else {
+        path.remove();
+      }
+    }
+  });
+}
+
+/**
+ * Replace `require("FORMATS")` with import statement.
+ */
+function replaceFormatRequire(ast: ParseResult<t.File>): void {
+  let formatsImported = false;
+
+  traverse(ast, {
+    CallExpression(path) {
+      if (
+        t.isIdentifier(path.node.callee) &&
+        path.node.callee.name === "require" &&
+        path.node.arguments.length === 1 &&
+        t.isStringLiteral(path.node.arguments[0]) &&
+        path.node.arguments[0].value === "FORMATS"
+      ) {
+        if (!formatsImported) {
+          formatsImported = true;
+
+          ast.program.body.unshift(
+            t.importDeclaration(
+              [
+                t.importSpecifier(
+                  t.identifier("formats"),
+                  t.identifier("formats")
+                )
+              ],
+              t.stringLiteral("@kubernetes-models/validate")
+            )
+          );
+        }
+
+        path.replaceWith(t.identifier("formats"));
+      }
+    }
+  });
+}
+
 export async function compileSchema(
   schema: Schema,
   refs: Record<string, string>
@@ -244,7 +394,12 @@ export async function compileSchema(
   const ajv = new Ajv({
     strictTypes: false,
     allErrors: true,
-    code: { source: true, esm: true, formats: _`formats`, lines: true },
+    code: {
+      source: true,
+      esm: true,
+      formats: _`require("FORMATS")`,
+      lines: true
+    },
     inlineRefs: false,
     keywords: [
       // example keyword is used by grafana-operator
@@ -280,93 +435,11 @@ export async function compileSchema(
   const code = standaloneCode(ajv, validate);
   const ast = parse(code, { sourceType: "module" });
 
-  traverse(ast, {
-    Program(path) {
-      // Remove "use strict" directive
-      path.node.directives = [];
-
-      // Add @kubernetes-models/validate import
-      path.node.body.unshift(
-        t.importDeclaration(
-          [t.importSpecifier(t.identifier("formats"), t.identifier("formats"))],
-          t.stringLiteral("@kubernetes-models/validate")
-        )
-      );
-    },
-    // Replace validate function of referenced schemas with import statement
-    FunctionDeclaration(path) {
-      if (!path.node.id) return;
-
-      const id = validateNames.get(path.node.id.name);
-      if (!id) return;
-
-      const ref = refs[id];
-      if (!ref) return;
-
-      path.replaceWith(
-        t.importDeclaration(
-          [
-            t.importSpecifier(
-              t.identifier(path.node.id.name),
-              t.identifier("validate")
-            )
-          ],
-          t.stringLiteral(ref)
-        )
-      );
-    },
-    // Replace Ajv runtime require() with import statement
-    VariableDeclaration(path) {
-      const vars: t.VariableDeclarator[] = [];
-
-      for (const declaration of path.node.declarations) {
-        if (
-          t.isIdentifier(declaration.id) &&
-          t.isMemberExpression(declaration.init) &&
-          t.isCallExpression(declaration.init.object) &&
-          t.isIdentifier(declaration.init.property) &&
-          t.isIdentifier(declaration.init.object.callee) &&
-          declaration.init.object.callee.name === "require" &&
-          declaration.init.object.arguments.length === 1 &&
-          t.isStringLiteral(declaration.init.object.arguments[0])
-        ) {
-          const importPath = declaration.init.object.arguments[0].value.replace(
-            /^ajv\/dist\/runtime\/(.+)$/,
-            "@kubernetes-models/validate/runtime/$1"
-          );
-
-          // Insert an import statement before the current node
-          path.insertBefore(
-            t.importDeclaration(
-              [
-                declaration.init.property.name === "default"
-                  ? t.importDefaultSpecifier(declaration.id)
-                  : t.importSpecifier(declaration.id, declaration.init.property)
-              ],
-              t.stringLiteral(importPath)
-            )
-          );
-        } else {
-          vars.push(declaration);
-        }
-      }
-
-      // Do not change the node if variables are not removed
-      if (vars.length === path.node.declarations.length) return;
-
-      if (vars.length) {
-        // Replace the node with a new variable declaration
-        path.replaceWith(t.variableDeclaration(path.node.kind, vars));
-      } else {
-        // Remove the node if all variables are removed
-        path.remove();
-      }
-    },
-    // Remove the default export
-    ExportDefaultDeclaration(path) {
-      path.remove();
-    }
-  });
+  removeDirectives(ast);
+  removeDefaultExport(ast);
+  replaceValidateFunction(ast, validateNames, refs);
+  replaceRuntimeRequire(ast);
+  replaceFormatRequire(ast);
 
   const result = generate(ast, {}, code);
 

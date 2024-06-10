@@ -1,2 +1,2 @@
-export { formats, addFormats } from "./formats";
-export { ValidateFunc, runValidateFunc } from "./validate";
+export { formats } from "./formats";
+export { type ValidateFunc, runValidateFunc } from "./validate";
