@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/karpenter",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Karpenter models",
   "repository": {
     "type": "git",

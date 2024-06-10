@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.4.0
+
+### Minor Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`5986ef0`](https://github.com/tommy351/kubernetes-models-ts/commit/5986ef0c2ecb2dd571ebcefa827e54c269d774e7) Thanks [@tommy351](https://github.com/tommy351)! - Add `compileSchema` function.
+
+- [#201](https://github.com/tommy351/kubernetes-models-ts/pull/201) [`060d424`](https://github.com/tommy351/kubernetes-models-ts/commit/060d424bb33bc68634efc285420b76b394c50941) Thanks [@tommy351](https://github.com/tommy351)! - Use re2 for regular expressions that aren't supported by JavaScript.
+
+### Patch Changes
+
+- Updated dependencies [[`d9aae82`](https://github.com/tommy351/kubernetes-models-ts/commit/d9aae82c62a461fe68ea0521b8e99b7c20777251), [`8440a52`](https://github.com/tommy351/kubernetes-models-ts/commit/8440a52b6a04af52ab0f28ccfa7794953b469b91), [`3a6a6c1`](https://github.com/tommy351/kubernetes-models-ts/commit/3a6a6c1141d4fcfd627bb1e2b2f62522ccd5f483), [`dba981d`](https://github.com/tommy351/kubernetes-models-ts/commit/dba981d0fab843e0c772bff7b1833acde9a59995), [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf), [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf)]:
+  - @kubernetes-models/validate@4.0.0
+
 ## 2.3.1
 
 ### Patch Changes
