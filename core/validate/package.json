@@ -6,17 +6,19 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
-    "node": {
-      "import": "./dist/index.node.mjs",
+    ".": {
       "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "import": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "require": "./dist/index.js"
+    "./runtime/*": {
+      "types": "./dist/runtime/*.d.ts",
+      "import": "./dist/runtime/*.mjs",
+      "require": "./dist/runtime/*.js"
+    }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsc-multi --config ../../tsc-multi.json"
   },
   "description": "Validation library for Kubernetes models.",
   "repository": {
@@ -44,10 +46,12 @@
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
     "ajv-formats-draft2019": "^1.6.1",
+    "ajv-i18n": "^4.2.0",
+    "is-cidr": "^4.0.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "tsup": "^8.1.0",
+    "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"
   }

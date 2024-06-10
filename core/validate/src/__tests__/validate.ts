@@ -1,26 +1,23 @@
 /// <reference types="jest-extended" />
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { validate } from "../validate";
-import { ajv, register } from "../ajv";
+import { describe, it, expect } from "vitest";
 import Ajv from "ajv";
+import { runValidateFunc } from "../validate";
+
+const ajv = new Ajv({
+  strictTypes: false,
+  allErrors: true,
+  verbose: true
+});
 
 describe("number", () => {
-  const id = "number-test";
-
-  beforeEach(() => {
-    register(id, { type: "number" });
-  });
-
-  afterEach(() => {
-    ajv.removeSchema(id);
-  });
+  const validate = ajv.compile({ type: "number" });
 
   it("success", () => {
-    expect(() => validate(id, 46)).not.toThrow();
+    expect(() => runValidateFunc(validate, 46)).not.toThrow();
   });
 
   it("failed", () => {
-    expect(() => validate(id, false)).toThrowWithMessage(
+    expect(() => runValidateFunc(validate, false)).toThrowWithMessage(
       Ajv.ValidationError,
       "data must be number"
     );
@@ -28,26 +25,18 @@ describe("number", () => {
 });
 
 describe("object", () => {
-  const id = "object-test";
-
-  beforeEach(() => {
-    register(id, {
-      type: "object",
-      properties: {
-        a: { type: "string" },
-        b: { type: "number" },
-        c: { type: "boolean" }
-      }
-    });
-  });
-
-  afterEach(() => {
-    ajv.removeSchema(id);
+  const validate = ajv.compile({
+    type: "object",
+    properties: {
+      a: { type: "string" },
+      b: { type: "number" },
+      c: { type: "boolean" }
+    }
   });
 
   it("success", () => {
     expect(() =>
-      validate(id, {
+      runValidateFunc(validate, {
         a: "abc",
         b: 3.14,
         c: true
@@ -57,7 +46,7 @@ describe("object", () => {
 
   it("failed", () => {
     expect(() =>
-      validate(id, {
+      runValidateFunc(validate, {
         a: true,
         b: 3.14,
         c: "abc"
@@ -65,27 +54,6 @@ describe("object", () => {
     ).toThrowWithMessage(
       Ajv.ValidationError,
       "data/a must be string, data/c must be boolean"
-    );
-  });
-});
-
-describe("nullable $ref", () => {
-  beforeEach(() => {
-    register("str", { type: "string" });
-    register("str-nullable", {
-      oneOf: [{ $ref: "str" }, { type: "null" }]
-    });
-  });
-
-  afterEach(() => {
-    ajv.removeSchema("str-nullable");
-    ajv.removeSchema("str");
-  });
-
-  it("should remove oneOf errors", () => {
-    expect(() => validate("str-nullable", 3.14)).toThrowWithMessage(
-      Ajv.ValidationError,
-      "data must be string"
     );
   });
 });

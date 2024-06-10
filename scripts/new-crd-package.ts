@@ -65,7 +65,7 @@ const rootDir = join(__dirname, "..");
       "@kubernetes-models/apimachinery": "workspace:^",
       "@kubernetes-models/base": "workspace:^",
       "@kubernetes-models/validate": "workspace:^",
-      tslib: "^2.4.0"
+      "@swc/helpers": "^0.5.8"
     },
     devDependencies: {
       "@kubernetes-models/crd-generate": "workspace:^",

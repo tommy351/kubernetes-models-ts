@@ -1,26 +1,27 @@
 import {
   collectRefs,
   Definition,
-  generateImports,
   Generator,
-  Import,
   Schema,
-  transformSchema
+  transformSchema as baseTransformSchema,
+  compileSchema
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { Context } from "../context";
 import { getClassName, trimRefPrefix } from "../string";
 import { getSchemaPath, isAPIMachineryID } from "../utils";
+import { OutputFile } from "@kubernetes-models/generate";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
-    return { ...schema, $ref: trimRefPrefix(schema.$ref) + "#" };
+    const ref = trimRefPrefix(schema.$ref);
+    return { ...schema, $ref: `${ref}#` };
   }
 
   return schema;
 }
 
-function compileSchema(def: Definition): string {
+function transformSchema(def: Definition): Schema {
   let schema: Schema = {};
 
   // Rewrite schemas for some special types
@@ -37,57 +38,48 @@ function compileSchema(def: Definition): string {
       break;
 
     default:
-      schema = transformSchema(def.schema, [replaceRef]);
+      schema = baseTransformSchema(def.schema, [replaceRef]);
   }
 
-  return JSON.stringify(schema, null, "  ");
+  return { ...schema, $id: def.schemaId };
 }
 
 export default function ({ externalAPIMachinery }: Context): Generator {
+  function getSchemaImportPath(ref: string): string {
+    if (externalAPIMachinery && isAPIMachineryID(ref)) {
+      return `@kubernetes-models/apimachinery/${trimSuffix(
+        getSchemaPath(ref),
+        ".js"
+      )}`;
+    }
+
+    return `./${getClassName(ref)}`;
+  }
+
   return async (definitions) => {
-    return definitions.map((def) => {
-      const imports: Import[] = [];
-      const refs = collectRefs(def.schema)
+    const files: OutputFile[] = [];
+
+    for (const def of definitions) {
+      const schema = transformSchema(def);
+      const refIds = collectRefs(def.schema)
         .map(trimRefPrefix)
         .filter((ref) => ref !== def.schemaId);
-      let addSchemaContent = "";
+      const refPaths = Object.fromEntries(
+        refIds.map((ref) => [ref, getSchemaImportPath(ref)])
+      );
 
-      imports.push({
-        name: "register",
-        path: "@kubernetes-models/validate"
-      });
-
-      for (const ref of refs) {
-        const name = "addSchema";
-        const alias = getClassName(ref);
-
-        if (externalAPIMachinery && isAPIMachineryID(ref)) {
-          imports.push({
-            name,
-            alias,
-            path: `@kubernetes-models/apimachinery/${trimSuffix(
-              getSchemaPath(ref),
-              ".ts"
-            )}`
-          });
-        } else {
-          imports.push({ name, alias, path: `./${getClassName(ref)}` });
+      files.push(
+        {
+          path: getSchemaPath(def.schemaId),
+          content: await compileSchema(schema, refPaths)
+        },
+        {
+          path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
+          content: `export function validate(data: unknown): boolean;`
         }
+      );
+    }
 
-        addSchemaContent += `${alias}();\n`;
-      }
-
-      return {
-        path: getSchemaPath(def.schemaId),
-        content: `${generateImports(imports)}
-
-const schema: object = ${compileSchema(def)};
-
-export function addSchema() {
-${addSchemaContent}register(${JSON.stringify(def.schemaId)}, schema);
-}
-`
-      };
-    });
+    return files;
   };
 }
