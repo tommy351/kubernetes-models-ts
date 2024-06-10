@@ -1,5 +1,36 @@
 # @kubernetes-models/apimachinery
 
+## 2.0.0
+
+### Major Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`10ca286`](https://github.com/tommy351/kubernetes-models-ts/commit/10ca28636e33fb3f3611feaef00ff536e7b0d874) Thanks [@tommy351](https://github.com/tommy351)! - If you import files from the `_schemas` directory, please note that `addSchema` function is replaced with `validate` function, and their behavior is totally different. You can follow the example below to migrate your code.
+
+  ```js
+  // Before
+  import { validate } from "@kubernetes-models/validate";
+  import { addSchema } from "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+
+  addSchema();
+  validate("io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta", { foo: "bar" });
+
+  // After
+  import { runValidateFunc } from "@kubernetes-models/validate";
+  import validate from "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta";
+
+  runValidateFunc(validate, { foo: "bar" });
+  ```
+
+### Minor Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf) Thanks [@tommy351](https://github.com/tommy351)! - Pre-compile OpenAPI schema into a validate function. This should improve the performance of first-time validation, but the package size will slightly increase.
+
+### Patch Changes
+
+- Updated dependencies [[`d9aae82`](https://github.com/tommy351/kubernetes-models-ts/commit/d9aae82c62a461fe68ea0521b8e99b7c20777251), [`8440a52`](https://github.com/tommy351/kubernetes-models-ts/commit/8440a52b6a04af52ab0f28ccfa7794953b469b91), [`3a6a6c1`](https://github.com/tommy351/kubernetes-models-ts/commit/3a6a6c1141d4fcfd627bb1e2b2f62522ccd5f483), [`dba981d`](https://github.com/tommy351/kubernetes-models-ts/commit/dba981d0fab843e0c772bff7b1833acde9a59995), [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf), [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf), [`8440a52`](https://github.com/tommy351/kubernetes-models-ts/commit/8440a52b6a04af52ab0f28ccfa7794953b469b91), [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf)]:
+  - @kubernetes-models/validate@4.0.0
+  - @kubernetes-models/base@5.0.0
+
 ## 1.2.2
 
 ### Patch Changes

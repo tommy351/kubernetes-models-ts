@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/kapp-controller",
-  "version": "2.2.4",
+  "version": "2.3.0",
   "description": "Carvel kapp contoller models",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/kyverno",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Kyverno models",
   "repository": {
     "type": "git",
