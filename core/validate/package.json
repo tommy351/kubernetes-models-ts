@@ -54,5 +54,8 @@
     "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8"
+  },
+  "optionalDependencies": {
+    "re2-wasm": "^1.0.2"
   }
 }

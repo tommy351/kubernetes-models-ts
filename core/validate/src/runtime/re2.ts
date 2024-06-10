@@ -1,3 +1,2 @@
-import mod from "ajv/dist/runtime/re2.js";
-import { exportDefault } from "../utils";
-export default exportDefault(mod);
+import { RE2 } from "re2-wasm";
+export default RE2;
