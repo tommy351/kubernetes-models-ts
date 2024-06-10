@@ -519,9 +519,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -870,9 +870,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1307,9 +1307,9 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      tslib:
-        specifier: ^2.4.0
-        version: 2.6.2
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
