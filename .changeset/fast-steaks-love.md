@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/argo-workflows": major
+"@kubernetes-models/argo-workflows": minor
 ---
 
 initial package code
