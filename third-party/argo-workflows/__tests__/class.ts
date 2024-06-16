@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Workflow } from "../gen/argoproj.io/v1alpha1/Workflow";
 
-describe("Rollout", () => {
+describe("Workflow", () => {
   let workflow: Workflow;
 
   beforeEach(() => {
