@@ -1,63 +1,41 @@
-# @kubernetes-models/argo-rollouts
+# @kubernetes-models/argo-workflows
 
-[Argo Rollouts](https://argoproj.github.io/argo-rollouts/) models.
+[Argo Workflows](https://argoproj.github.io/argo-workflows/) models.
 
 ## Installation
 
 Install with npm.
 
 ```sh
-npm install @kubernetes-models/argo-rollouts
+npm install @kubernetes-models/argo-workflows
 ```
 
 ## Usage
 
 ```js
-import { Rollout } from "@kubernetes-models/argo-rollouts/argoproj.io/v1alpha1/Rollout";
+import { Rollout } from "@kubernetes-models/argo-workflows/argoproj.io/v1alpha1/Workflow";
 
 // Create a new Rollout
-const rollout = new Rollout({
+const workflow = new Workflow({
   metadata: {
-    name: "rollouts-demo"
+    name: "workflows-demo"
   },
   spec: {
-    replicas: 5,
-    strategy: {
-      canary: {
-        steps: [
-          { setWeight: 20 },
-          { pause: {} },
-          { setWeight: 40 },
-          { pause: { duration: 10 } }
-        ]
-      }
-    },
-    revisionHistoryLimit: 2,
-    selector: {
-      matchLabels: {
-        app: "rollouts-demo"
-      }
-    },
-    template: {
-      metadata: {
-        labels: {
-          app: "rollouts-demo"
+    entrypoint: "hello",
+    templates: [
+      {
+        name: "hello",
+        container: {
+          image: "alpine:latest",
+          command: ["echo", "Hello, Argo!"]
         }
-      },
-      spec: {
-        containers: [
-          {
-            name: "rollouts-demo",
-            image: "argoproj/rollouts-demo:blue"
-          }
-        ]
       }
-    }
+    ]
   }
 });
 
 // Validate against JSON schema
-rollout.validate();
+workflow.validate();
 ```
 
 ## License
