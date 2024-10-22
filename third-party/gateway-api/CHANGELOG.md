@@ -1,5 +1,11 @@
 # @kubernetes-models/gateway-api
 
+## 0.7.0
+
+### Minor Changes
+
+- [#209](https://github.com/tommy351/kubernetes-models-ts/pull/209) [`df76afd`](https://github.com/tommy351/kubernetes-models-ts/commit/df76afdf1811c63132b2820dc6c8607fd54d6812) Thanks [@yckao](https://github.com/yckao)! - add v1.2.0 crds
+
 ## 0.6.0
 
 ### Minor Changes
