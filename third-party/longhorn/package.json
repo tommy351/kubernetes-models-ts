@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/longhorn/longhorn/refs/heads/master/chart/templates/crds.yaml"
+      "https://github.com/longhorn/longhorn/releases/download/v1.7.2/longhorn.yaml"
     ],
     "output": "./gen"
   }
