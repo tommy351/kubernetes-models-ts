@@ -30,7 +30,7 @@ const backup = new Backup({
 });
 
 // Validate against JSON schema
-repo.validate();
+backup.validate();
 ```
 
 ## License
