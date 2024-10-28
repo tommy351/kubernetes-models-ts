@@ -1066,6 +1066,32 @@ importers:
         version: 0.29.8
     publishDirectory: dist
 
+  third-party/longhorn:
+    dependencies:
+      '@kubernetes-models/apimachinery':
+        specifier: workspace:^
+        version: link:../../first-party/apimachinery/dist
+      '@kubernetes-models/base':
+        specifier: workspace:^
+        version: link:../../core/base
+      '@kubernetes-models/validate':
+        specifier: workspace:^
+        version: link:../../core/validate
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
+    devDependencies:
+      '@kubernetes-models/crd-generate':
+        specifier: workspace:^
+        version: link:../../utils/crd-generate
+      '@kubernetes-models/publish-scripts':
+        specifier: workspace:^
+        version: link:../../internal/publish-scripts
+      vitest:
+        specifier: ^0.29.8
+        version: 0.29.8
+    publishDirectory: dist
+
   third-party/nats:
     dependencies:
       '@kubernetes-models/apimachinery':
