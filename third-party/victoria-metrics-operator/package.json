@@ -44,7 +44,6 @@
     "@types/node": "^18.7.23",
     "@types/stream-to-promise": "^2.2.1",
     "find-cache-dir": "^3.3.2",
-    "jszip": "^3.10.1",
     "make-fetch-happen": "^10.2.1",
     "stream-to-promise": "^3.0.0",
     "ts-node": "^10.9.1",
