@@ -1,5 +1,14 @@
 # @kubernetes-models/grafana-agent-operator
 
+## 2.3.1
+
+### Patch Changes
+
+- [#216](https://github.com/tommy351/kubernetes-models-ts/pull/216) [`db67b32`](https://github.com/tommy351/kubernetes-models-ts/commit/db67b3253d21d4247a50109ef9f18c2345d7ce7f) Thanks [@RealityAnomaly](https://github.com/RealityAnomaly)! - Append `/index` to generated paths to ensure correct import handling.
+
+- Updated dependencies [[`db67b32`](https://github.com/tommy351/kubernetes-models-ts/commit/db67b3253d21d4247a50109ef9f18c2345d7ce7f)]:
+  - @kubernetes-models/apimachinery@2.0.1
+
 ## 2.3.0
 
 ### Minor Changes

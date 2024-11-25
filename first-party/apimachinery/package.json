@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/apimachinery",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Types for Kubernetes API objects",
   "repository": {
     "type": "git",

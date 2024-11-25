@@ -1,5 +1,18 @@
 # @kubernetes-models/victoria-metrics-operator
 
+## 2.6.0
+
+### Minor Changes
+
+- [#215](https://github.com/tommy351/kubernetes-models-ts/pull/215) [`20e66b3`](https://github.com/tommy351/kubernetes-models-ts/commit/20e66b303049f80908f6edff953f608399cd132b) Thanks [@yz89122](https://github.com/yz89122)! - Upgrade to version `0.49.1`
+
+### Patch Changes
+
+- [#216](https://github.com/tommy351/kubernetes-models-ts/pull/216) [`db67b32`](https://github.com/tommy351/kubernetes-models-ts/commit/db67b3253d21d4247a50109ef9f18c2345d7ce7f) Thanks [@RealityAnomaly](https://github.com/RealityAnomaly)! - Append `/index` to generated paths to ensure correct import handling.
+
+- Updated dependencies [[`db67b32`](https://github.com/tommy351/kubernetes-models-ts/commit/db67b3253d21d4247a50109ef9f18c2345d7ce7f)]:
+  - @kubernetes-models/apimachinery@2.0.1
+
 ## 2.5.0
 
 ### Minor Changes

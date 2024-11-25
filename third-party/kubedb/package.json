@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/kubedb",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "KubeDB models",
   "repository": {
     "type": "git",
