@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/fission",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "fission models",
   "repository": {
     "type": "git",

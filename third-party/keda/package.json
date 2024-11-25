@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/keda",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "KEDA(Kubernetes Event-driven Autoscaling) models",
   "repository": {
     "type": "git",
