@@ -7,8 +7,17 @@ import * as swc from "@swc/core";
 
 const ECMA_VERSION = 2020;
 const DTS_EXT = ".d.ts";
+const DMTS_EXT = ".d.mts";
 const CJS_EXT = ".js";
 const ESM_EXT = ".mjs";
+
+function getGenDir(cwd: string): string {
+  return join(cwd, "gen");
+}
+
+function getDistDir(cwd: string): string {
+  return join(cwd, "dist");
+}
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
@@ -18,11 +27,16 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   return Object.fromEntries(entries) as T;
 }
 
-function generateExportEntry(name: string): Record<string, string> {
+function generateExportEntry(name: string): Record<string, unknown> {
   return {
-    types: name + DTS_EXT,
-    import: name + ESM_EXT,
-    require: name + CJS_EXT
+    import: {
+      types: name + DMTS_EXT,
+      default: name + ESM_EXT
+    },
+    require: {
+      types: name + DTS_EXT,
+      default: name + CJS_EXT
+    }
   };
 }
 
@@ -30,7 +44,7 @@ async function generateExportMap(
   args: BuildArguments
 ): Promise<Record<string, unknown>> {
   const paths = await glob(["**/*.{js,ts}"], {
-    cwd: join(args.cwd, "gen"),
+    cwd: getGenDir(args.cwd),
     ...(!args["include-hidden"] && { ignore: ["!_**/*"] })
   });
 
@@ -100,15 +114,16 @@ function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
   const body: swc.ModuleItem[] = [];
 
   function rewrite<T extends { source?: swc.StringLiteral }>(stmt: T): T {
-    if (
-      !stmt.source ||
-      !isRelativeImport(stmt.source.value) ||
-      extname(stmt.source.value).length
-    ) {
+    if (!stmt.source || !isRelativeImport(stmt.source.value)) {
       return stmt;
     }
 
-    const newValue = stmt.source.value + ext;
+    const currentExt = extname(stmt.source.value);
+    const newValue =
+      stmt.source.value.substring(
+        0,
+        stmt.source.value.length - currentExt.length
+      ) + ext;
 
     return {
       ...stmt,
@@ -136,11 +151,11 @@ function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
 }
 
 async function compileJs(cwd: string): Promise<void> {
-  const genDir = join(cwd, "gen");
-  const distDir = join(cwd, "dist");
+  const genDir = getGenDir(cwd);
+  const distDir = getDistDir(cwd);
   const srcPaths = await glob(["**/*.{js,ts}"], {
     cwd: genDir,
-    ignore: ["**/*.d.ts"]
+    ignore: ["**/*.d.ts", "**/*.d.mts"]
   });
 
   for (const path of srcPaths) {
@@ -170,17 +185,31 @@ async function compileJs(cwd: string): Promise<void> {
 }
 
 async function copySchemaDts(cwd: string): Promise<void> {
-  const genDir = join(cwd, "gen");
+  const genDir = getGenDir(cwd);
+  const distDir = getDistDir(cwd);
   const paths = await glob(["_schemas/**/*.d.ts"], { cwd: genDir });
 
   for (const path of paths) {
     const src = join(genDir, path);
-    const dst = join(cwd, "dist", path);
+    const dst = join(distDir, path);
 
     console.log("Copying:", path);
 
     await mkdir(dirname(dst), { recursive: true });
     await copyFile(src, dst);
+  }
+}
+
+async function copyEsmDts(cwd: string): Promise<void> {
+  const distDir = getDistDir(cwd);
+  const paths = await glob(["**/*.d.ts"], { cwd: distDir });
+
+  // TODO: Rewrite extension to `.mjs` in declaration files
+
+  for (const path of paths) {
+    const dst = path.substring(0, path.length - DTS_EXT.length) + DMTS_EXT;
+    console.log("Copying:", dst);
+    await copyFile(join(distDir, path), join(distDir, dst));
   }
 }
 
@@ -218,6 +247,7 @@ export async function build(args: BuildArguments): Promise<void> {
     await copySchemaDts(args.cwd);
   }
 
+  await copyEsmDts(args.cwd);
   await copyDistFiles(args.cwd);
   await writePkgJson(args);
 }
