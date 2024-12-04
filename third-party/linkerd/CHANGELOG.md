@@ -1,5 +1,11 @@
 # @kubernetes-models/linkerd
 
+## 0.4.0
+
+### Minor Changes
+
+- [#218](https://github.com/tommy351/kubernetes-models-ts/pull/218) [`fb87b8c`](https://github.com/tommy351/kubernetes-models-ts/commit/fb87b8c3e22cd8b905aa4c302579a44ee26d8c94) Thanks [@yckao](https://github.com/yckao)! - linkerd community release is now use edge channel and upgrade to 2024.11.8
+
 ## 0.3.1
 
 ### Patch Changes
