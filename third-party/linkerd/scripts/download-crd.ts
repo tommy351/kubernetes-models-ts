@@ -14,7 +14,7 @@ async function render(name: string, version: string): Promise<string> {
   const result = await execa("helm", [
     "template",
     "--repo",
-    "https://helm.linkerd.io/stable",
+    "https://helm.linkerd.io/edge",
     name,
     name,
     "--version",
@@ -26,8 +26,8 @@ async function render(name: string, version: string): Promise<string> {
 
 (async () => {
   const commands = [
-    await render("linkerd-crds", "1.8.0"),
-    await render("linkerd-multicluster", "30.11.10")
+    await render("linkerd-crds", "2024.11.8"),
+    await render("linkerd-multicluster", "2024.11.8")
   ];
   const manifests = yaml.loadAll(commands.join("---\n"));
   const chunks: string[] = [];
