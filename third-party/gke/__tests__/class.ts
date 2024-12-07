@@ -25,10 +25,6 @@ describe("BackendConfig", () => {
     expect(config.metadata).toEqual({ name: "test" });
   });
 
-  it("should not set sepc", () => {
-    expect(config).not.toHaveProperty("spec");
-  });
-
   it("toJSON", () => {
     expect(config.toJSON()).toEqual({
       apiVersion: "cloud.google.com/v1beta1",

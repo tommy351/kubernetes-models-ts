@@ -49,7 +49,9 @@ static kind: ${interfaceName}["kind"] = ${JSON.stringify(gvk.kind)};
 static is = createTypeMetaGuard<${interfaceName}>(${className});
 
 constructor(data?: ModelData<${interfaceName}>) {
-  super({
+  super();
+
+  this.setDefinedProps({
     apiVersion: ${className}.apiVersion,
     kind: ${className}.kind,
     ...data

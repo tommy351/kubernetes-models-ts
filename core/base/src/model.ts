@@ -36,6 +36,12 @@ export class Model<T> {
     }
   }
 
+  protected setDefinedProps(data?: ModelData<T>): any {
+    if (data) {
+      setDefinedProps(data, this);
+    }
+  }
+
   public toJSON(): any {
     const result = {};
 
