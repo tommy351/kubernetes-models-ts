@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/shipwright",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Shipwright models",
   "repository": {
     "type": "git",
