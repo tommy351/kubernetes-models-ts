@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/openapi-generate",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Generate Kubernetes models from OpenAPI schema.",
   "repository": {
     "type": "git",

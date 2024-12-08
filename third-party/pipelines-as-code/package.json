@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/pipelines-as-code",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Pipelines-as-Code models",
   "repository": {
     "type": "git",

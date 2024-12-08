@@ -1,5 +1,15 @@
 # @kubernetes-models/spiffe
 
+## 1.2.2
+
+### Patch Changes
+
+- [#220](https://github.com/tommy351/kubernetes-models-ts/pull/220) [`de414dd`](https://github.com/tommy351/kubernetes-models-ts/commit/de414ddbb16d37da1e88c2aacb5ce4f57cec2d02) Thanks [@RealityAnomaly](https://github.com/RealityAnomaly)! - Set model-defined props outside constructor to ensure `useDefineForClassFields` compatibility.
+
+- Updated dependencies [[`de414dd`](https://github.com/tommy351/kubernetes-models-ts/commit/de414ddbb16d37da1e88c2aacb5ce4f57cec2d02)]:
+  - @kubernetes-models/base@5.0.1
+  - @kubernetes-models/apimachinery@2.0.2
+
 ## 1.2.1
 
 ### Patch Changes
