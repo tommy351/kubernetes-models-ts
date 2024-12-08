@@ -117,12 +117,12 @@ export default function ({
           }
         });
 
-        if (gvk) {
-          imports.push({
-            name: "ModelData",
-            path: "@kubernetes-models/base"
-          });
+        imports.push({
+          name: "ModelData",
+          path: "@kubernetes-models/base"
+        });
 
+        if (gvk) {
           imports.push({
             name: "TypeMeta",
             path: "@kubernetes-models/base"
@@ -141,11 +141,21 @@ static kind: ${shortInterfaceName}["kind"] = "${gvk.kind}";
 static is = createTypeMetaGuard<${shortInterfaceName}>(${shortClassName});
 
 constructor(data?: ModelData<${shortInterfaceName}>) {
-  super({
+  super();
+
+  this.setDefinedProps({
     apiVersion: ${shortClassName}.apiVersion,
     kind: ${shortClassName}.kind,
     ...data
   } as ${shortInterfaceName});
+}
+}`;
+        } else {
+          classContent = `${trimSuffix(classContent, "}")}
+constructor(data?: ModelData<${shortInterfaceName}>) {
+  super();
+
+  this.setDefinedProps(data);
 }
 }`;
         }
