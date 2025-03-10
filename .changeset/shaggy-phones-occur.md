@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/postgres-operator": major
+"@kubernetes-models/postgres-operator": minor
 ---
 
 update CrunchyData PGO 5.7.4
