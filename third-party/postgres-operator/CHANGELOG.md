@@ -1,5 +1,11 @@
 # @kubernetes-models/postgres-operator
 
+## 0.5.0
+
+### Minor Changes
+
+- [#223](https://github.com/tommy351/kubernetes-models-ts/pull/223) [`b47e54a`](https://github.com/tommy351/kubernetes-models-ts/commit/b47e54a1ee6a4620e6a8a6a5c3897f30a9136586) Thanks [@KennyChenFight](https://github.com/KennyChenFight)! - update CrunchyData PGO 5.7.4
+
 ## 0.4.2
 
 ### Patch Changes
