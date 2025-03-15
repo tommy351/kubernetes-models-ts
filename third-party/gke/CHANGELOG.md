@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.5.0
+
+### Minor Changes
+
+- [#225](https://github.com/tommy351/kubernetes-models-ts/pull/225) [`474b116`](https://github.com/tommy351/kubernetes-models-ts/commit/474b1164dfbec6e52420376f17cf8a12f866f118) Thanks [@mgold](https://github.com/mgold)! - Updates GKE CRD sources to add `gcptrafficdistributionpolicy` and `maxRatePerEndpoint` field to `gcpbackendpolicy`.
+
 ## 4.4.2
 
 ### Patch Changes
