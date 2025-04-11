@@ -54,6 +54,7 @@
     "input": [
       "./crd/backendconfigs.yaml",
       "./crd/clusterimportconfigs.yaml",
+      "./crd/computeclasses.yaml",
       "./crd/entitlements.yaml",
       "./crd/frontendconfigs.yaml",
       "./crd/managedcertificates.yaml",
