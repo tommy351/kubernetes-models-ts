@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.6.0
+
+### Minor Changes
+
+- [`30506b9`](https://github.com/tommy351/kubernetes-models-ts/commit/30506b926a48eba263a79ac0e17f995f5505c0d0) Thanks [@tommy351](https://github.com/tommy351)! - Add `ComputeClass` type.
+
 ## 4.5.0
 
 ### Minor Changes
