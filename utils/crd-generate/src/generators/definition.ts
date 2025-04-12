@@ -102,7 +102,7 @@ constructor(data?: ModelData<${interfaceName}>) {
   let kubernetesObj = 'KubernetesObject';
 
   // Spec is required
-  if (classContent.indexOf('spec') > -1 && schema.required && schema.required.indexOf('spec') > -1) {
+  if (classContent.includes('spec') && schema.required?.includes('spec')) { 
     kubernetesObj = 'KubernetesObjectWithSpec';
 
     imports.push({

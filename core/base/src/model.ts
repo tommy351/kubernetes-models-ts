@@ -34,7 +34,7 @@ export { KubernetesObject };
 export { V1ObjectMeta };
 
 export interface KubernetesObjectWithOptionalSpec extends KubernetesObject {
-  spec?: object;
+  spec?: unknown;
 }
 
 export type ModelData<T> = T extends TypeMeta ? Omit<T, keyof TypeMeta> : T;
