@@ -1,5 +1,31 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`8440a52`](https://github.com/tommy351/kubernetes-models-ts/commit/8440a52b6a04af52ab0f28ccfa7794953b469b91) Thanks [@tommy351](https://github.com/tommy351)! - Remove `register` and `validate` functions.
+
+### Minor Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`d9aae82`](https://github.com/tommy351/kubernetes-models-ts/commit/d9aae82c62a461fe68ea0521b8e99b7c20777251) Thanks [@tommy351](https://github.com/tommy351)! - Export Ajv runtime libraries.
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`dba981d`](https://github.com/tommy351/kubernetes-models-ts/commit/dba981d0fab843e0c772bff7b1833acde9a59995) Thanks [@tommy351](https://github.com/tommy351)! - Add `cidr` format.
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf) Thanks [@tommy351](https://github.com/tommy351)! - Export `formats` object and `addFormats` function.
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf) Thanks [@tommy351](https://github.com/tommy351)! - Add `runValidateFunc` function and `ValidateFunc` type.
+
+### Patch Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`3a6a6c1`](https://github.com/tommy351/kubernetes-models-ts/commit/3a6a6c1141d4fcfd627bb1e2b2f62522ccd5f483) Thanks [@tommy351](https://github.com/tommy351)! - Revert `ajv-formats-draft2019` import fix.
+
+## 3.1.2
+
+### Patch Changes
+
+- [`915b6dd`](https://github.com/tommy351/kubernetes-models-ts/commit/915b6dd8fb5e9d046dc7f7b654f72eea5e97391e) Thanks [@tommy351](https://github.com/tommy351)! - Fix `ajv-formats-draft2019` import on Node.js ESM.
+
 ## 3.1.1
 
 ### Patch Changes

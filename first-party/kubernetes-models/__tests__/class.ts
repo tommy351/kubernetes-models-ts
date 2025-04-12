@@ -29,10 +29,6 @@ describe("Deployment apps/v1", () => {
     expect(deployment.metadata).toEqual({ name: "test" });
   });
 
-  it("should not set sepc", () => {
-    expect(deployment).not.toHaveProperty("spec");
-  });
-
   it("toJSON", () => {
     expect(deployment.toJSON()).toEqual({
       apiVersion: "apps/v1",
@@ -65,10 +61,6 @@ describe("Deployment apps/v1beta1", () => {
 
   it("should set metadata", () => {
     expect(deployment.metadata).toEqual({ name: "test" });
-  });
-
-  it("should not set sepc", () => {
-    expect(deployment).not.toHaveProperty("spec");
   });
 
   it("toJSON", () => {

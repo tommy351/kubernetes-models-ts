@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/jaeger-operator",
-  "version": "2.2.3",
+  "version": "2.3.2",
   "description": "Jaeger operator models",
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

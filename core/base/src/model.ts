@@ -1,10 +1,7 @@
 import { isPlainObject } from "is-plain-object";
-import { validate } from "@kubernetes-models/validate";
+import { ValidateFunc, runValidateFunc } from "@kubernetes-models/validate";
 import { TypeMeta } from "./meta";
 import { KubernetesObject, KubernetesObjectWithSpec, V1ObjectMeta } from '@kubernetes/client-node';
-
-const SCHEMA_ID = Symbol("SCHEMA_ID");
-const ADD_SCHEMA = Symbol("ADD_SCHEMA");
 
 function setDefinedProps(src: any, dst: any): any {
   for (const key of Object.keys(src)) {
@@ -42,13 +39,13 @@ export type ModelData<T> = T extends TypeMeta ? Omit<T, keyof TypeMeta> : T;
 export type ModelConstructor<T> = new (data?: ModelData<T>) => Model<T>;
 
 export class Model<T> {
-  /** @internal */
-  private [SCHEMA_ID]?: string;
-
-  /** @internal */
-  private [ADD_SCHEMA]?: () => void;
-
   public constructor(data?: ModelData<T>) {
+    if (data) {
+      setDefinedProps(data, this);
+    }
+  }
+
+  protected setDefinedProps(data?: ModelData<T>): any {
     if (data) {
       setDefinedProps(data, this);
     }
@@ -63,22 +60,15 @@ export class Model<T> {
   }
 
   public validate(): void {
-    const id = this[SCHEMA_ID];
-    if (!id) return;
-
-    if (typeof this[ADD_SCHEMA] === "function") {
-      this[ADD_SCHEMA]();
-    }
-
-    validate(id, this);
+    // Use `setValidateFunc` to set the validate function
   }
 }
 
-export function setSchema<T>(
+export function setValidateFunc<T>(
   ctor: ModelConstructor<T>,
-  id: string,
-  addSchema: () => void
+  fn: ValidateFunc<T>
 ): void {
-  ctor.prototype[SCHEMA_ID] = id;
-  ctor.prototype[ADD_SCHEMA] = addSchema;
+  ctor.prototype.validate = function () {
+    runValidateFunc(fn, this);
+  };
 }

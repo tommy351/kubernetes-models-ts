@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/rabbitmq-messaging-topology-operator",
-  "version": "0.2.3",
+  "version": "0.3.2",
   "description": "The operator allow developers to create and manage RabbitMQ messaging topologies within a RabbitMQ cluster using a declarative Kubernetes API",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

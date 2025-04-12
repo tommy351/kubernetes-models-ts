@@ -1,6 +1,7 @@
-import Ajv, { AnySchema } from "ajv";
-import addFormats from "ajv-formats";
-import addFormatsDraft2019 from "ajv-formats-draft2019";
+import Ajv, { Format } from "ajv";
+import { fullFormats } from "ajv-formats/dist/formats.js";
+import draft2019Formats from "ajv-formats-draft2019/formats/index.js";
+import isCidr from "is-cidr";
 
 // From: https://github.com/miguelmota/is-base64/blob/0702e189090921a2f11b4342f27906ff8c43d7ec/is-base64.js#L15
 const rBase64 =
@@ -20,33 +21,30 @@ const rQuantity = new RegExp(
   `^${rSignedNumber.source}${rQuantitySuffix.source}$`
 );
 
-export const ajv = new Ajv({
-  strictTypes: false,
-  allErrors: true,
-  verbose: true
-});
+export const formats: Record<string, Format> = {
+  ...fullFormats,
+  ...draft2019Formats,
+  byte: {
+    type: "string",
+    validate: (value: string) => rBase64.test(value)
+  },
+  quantity: {
+    type: "string",
+    validate: rQuantity
+  },
+  // This format is used in Istio.
+  string: {
+    type: "string",
+    validate: (value: unknown) => typeof value === "string"
+  },
+  cidr: {
+    type: "string",
+    validate: (value: string) => isCidr(value) !== 0
+  }
+};
 
-addFormats(ajv);
-addFormatsDraft2019(ajv);
-
-export function register(id: string, schema: AnySchema): void {
-  if (!ajv.getSchema(id)) {
-    ajv.addSchema(schema, id);
+export function addFormats(ajv: Ajv): void {
+  for (const [name, format] of Object.entries(formats)) {
+    ajv.addFormat(name, format);
   }
 }
-
-ajv.addFormat("byte", {
-  type: "string",
-  validate: (value: string) => rBase64.test(value)
-});
-
-ajv.addFormat("quantity", {
-  type: "string",
-  validate: rQuantity
-});
-
-// This format is used in Istio.
-ajv.addFormat("string", {
-  type: "string",
-  validate: (value: unknown) => typeof value === "string"
-});

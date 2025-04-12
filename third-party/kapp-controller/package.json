@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/kapp-controller",
-  "version": "2.2.3",
+  "version": "2.3.2",
   "description": "Carvel kapp contoller models",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

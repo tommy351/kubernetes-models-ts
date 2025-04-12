@@ -7,12 +7,17 @@ yargs(process.argv.slice(2))
     "build",
     "Run build script",
     (cmd) => {
-      return cmd.option("cwd", {
-        type: "string",
-        default: process.cwd(),
-        defaultDescription: "CWD",
-        description: "Current working directory."
-      });
+      return cmd
+        .option("cwd", {
+          type: "string",
+          default: process.cwd(),
+          defaultDescription: "CWD",
+          description: "Current working directory."
+        })
+        .option("include-hidden", {
+          type: "boolean",
+          description: "Include hidden files in the export map."
+        });
     },
     build
   )

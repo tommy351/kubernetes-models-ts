@@ -1,2 +1,2 @@
-export { Model, ModelData, ModelConstructor, KubernetesObjectWithOptionalSpec, KubernetesObject, KubernetesObjectWithSpec, V1ObjectMeta, setSchema } from "./model";
+export { Model, ModelData, ModelConstructor, setValidateFunc, KubernetesObjectWithOptionalSpec, KubernetesObject, KubernetesObjectWithSpec, V1ObjectMeta } from "./model";
 export { TypeMeta, TypeMetaGuard, createTypeMetaGuard } from "./meta";

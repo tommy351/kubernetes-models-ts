@@ -6,9 +6,9 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
     "plugin:vitest/recommended",
-    "plugin:node/recommended"
+    "plugin:node/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/gke",
-  "version": "4.2.3",
+  "version": "4.6.0",
   "description": "Kubernetes GKE models",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",
@@ -48,12 +48,13 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "vitest": "^0.29.8",
-    "yaml": "^2.1.1"
+    "yaml": "^2.2.2"
   },
   "crd-generate": {
     "input": [
       "./crd/backendconfigs.yaml",
       "./crd/clusterimportconfigs.yaml",
+      "./crd/computeclasses.yaml",
       "./crd/entitlements.yaml",
       "./crd/frontendconfigs.yaml",
       "./crd/managedcertificates.yaml",
@@ -68,7 +69,28 @@
       "./crd/serviceimports.yaml",
       "./crd/servicenetworkendpointgroups.yaml",
       "./crd/updateinfos.yaml",
-      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.97.0/install-bundles/install-bundle-workload-identity/crds.yaml"
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-autopilot-gcp-identity/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-autopilot-namespaced/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-autopilot-workload-identity/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-gcp-identity/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-namespaced/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/k8s-config-connector/v1.113.0/install-bundles/install-bundle-workload-identity/crds.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/mesh/crd/stable/tdgrpcroute.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/mesh/crd/stable/tdmesh.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_gcpsessionaffinityfilters.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_gcpsessionaffinitypolicies.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_gcpbackendpolicies.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_gcpgatewaypolicies.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_healthcheckpolicies.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-gateway-api/v1.4.0/config/crd/networking.gke.io_gcptrafficdistributionpolicies.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/standard/lbpolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/cdnpolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/grpcrouteretrypolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/httprouteretrypolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/iappolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/lbpolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/lbsecuritypolicy.yaml",
+      "https://raw.githubusercontent.com/GoogleCloudPlatform/gke-networking-recipes/e0c4725bc03a17f7ed7e9690406387de5287ea2b/gateway-api/config/servicepolicies/crd/experimental/outlierdetectionpolicy.yaml"
     ],
     "output": "./gen"
   }

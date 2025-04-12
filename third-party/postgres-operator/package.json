@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/postgres-operator",
-  "version": "0.2.3",
+  "version": "0.5.0",
   "description": "PostgreSQL operator models",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",
@@ -43,11 +43,12 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/469c11586550deaded962fe1638d7912de086c3c/kustomize/install/crd/bases/postgres-operator.crunchydata.com_postgresclusters.yaml",
-      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/469c11586550deaded962fe1638d7912de086c3c/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgupgrades.yaml",
-      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/postgresqls.yaml",
-      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/operatorconfigurations.yaml",
-      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.8.2/charts/postgres-operator/crds/postgresteams.yaml"
+      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_postgresclusters.yaml",
+      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgupgrades.yaml",
+      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgadmins.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.11.0/charts/postgres-operator/crds/postgresqls.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.11.0/charts/postgres-operator/crds/operatorconfigurations.yaml",
+      "https://raw.githubusercontent.com/zalando/postgres-operator/v1.11.0/charts/postgres-operator/crds/postgresteams.yaml"
     ],
     "output": "./gen"
   }

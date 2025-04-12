@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/prometheus-operator",
-  "version": "4.3.1",
+  "version": "4.4.2",
   "description": "Kubernetes prometheus-operator models",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

@@ -62,6 +62,7 @@ export default function ({
         }
       );
       const path = getDefinitionPath(def.schemaId);
+      const schemaPath = getRelativePath(path, getSchemaPath(def.schemaId));
       let content = "";
       let comment = "";
 
@@ -116,12 +117,12 @@ export default function ({
           }
         });
 
-        if (gvk) {
-          imports.push({
-            name: "ModelData",
-            path: "@kubernetes-models/base"
-          });
+        imports.push({
+          name: "ModelData",
+          path: "@kubernetes-models/base"
+        });
 
+        if (gvk) {
           imports.push({
             name: "TypeMeta",
             path: "@kubernetes-models/base"
@@ -140,29 +141,35 @@ static kind: ${shortInterfaceName}["kind"] = "${gvk.kind}";
 static is = createTypeMetaGuard<${shortInterfaceName}>(${shortClassName});
 
 constructor(data?: ModelData<${shortInterfaceName}>) {
-  super({
+  super();
+
+  this.setDefinedProps({
     apiVersion: ${shortClassName}.apiVersion,
     kind: ${shortClassName}.kind,
     ...data
   } as ${shortInterfaceName});
 }
 }`;
+        } else {
+          classContent = `${trimSuffix(classContent, "}")}
+constructor(data?: ModelData<${shortInterfaceName}>) {
+  super();
+
+  this.setDefinedProps(data);
+}
+}`;
         }
 
+        imports.push({ name: "Model", path: "@kubernetes-models/base" });
         imports.push({
-          name: "Model",
+          name: "setValidateFunc",
           path: "@kubernetes-models/base"
         });
-
         imports.push({
-          name: "setSchema",
-          path: "@kubernetes-models/base"
+          name: "ValidateFunc",
+          path: "@kubernetes-models/validate"
         });
-
-        imports.push({
-          name: "addSchema",
-          path: getRelativePath(path, getSchemaPath(def.schemaId))
-        });
+        imports.push({ name: "validate", path: schemaPath });
 
         content += `
 ${comment}export interface ${shortInterfaceName}${
@@ -171,7 +178,7 @@ ${comment}export interface ${shortInterfaceName}${
 
 ${comment}export class ${shortClassName} extends Model<${shortInterfaceName}> implements ${shortInterfaceName} ${classContent}
 
-setSchema(${shortClassName}, ${JSON.stringify(def.schemaId)}, addSchema);
+setValidateFunc(${shortClassName}, validate as ValidateFunc<${shortInterfaceName}>);
 `;
       } else {
         content += `

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/apimachinery",
-  "version": "1.2.1",
+  "version": "2.0.2",
   "description": "Types for Kubernetes API objects",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "ts-node scripts/generate.ts && publish-scripts build",
+    "build": "ts-node scripts/generate.ts && publish-scripts build --include-hidden",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -33,7 +33,7 @@
   "dependencies": {
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/openapi-generate": "workspace:^",

@@ -44,23 +44,33 @@ See [examples](examples) folder for more examples.
 
 - [@kubernetes-models/argo-cd](third-party/argo-cd) - [Argo CD](https://argo-cd.readthedocs.io/) models.
 - [@kubernetes-models/argo-rollouts](third-party/argo-rollouts) - [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) models.
+- [@kubernetes-models/argo-workflows](third-party/argo-workflows) - [Argo Workflows](https://argoproj.github.io/argo-workflows/) models.
 - [@kubernetes-models/autoscaler](third-party/autoscaler) - [Kubernetes Autoscaler](https://github.com/kubernetes/autoscaler) models.
 - [@kubernetes-models/cert-manager](third-party/cert-manager) - [cert-manager](https://cert-manager.io/) models.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.
+- [@kubernetes-models/elastic-cloud](third-party/elastic-cloud) - [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) models.
+- [@kubernetes-models/envoy-gateway](third-party/envoy-gateway) - [Envoy Gateway](https://gateway.envoyproxy.io/) models.
 - [@kubernetes-models/external-secrets](third-party/external-secrets) - [External secrets](https://external-secrets.io) models.
+- [@kubernetes-models/fission](third-party/fission) - [Fission](https://fission.io) models.
 - [@kubernetes-models/flagger](third-party/flagger) - [Flagger](https://flagger.app/) models.
 - [@kubernetes-models/flux-cd](third-party/flux-cd) - [Flux CD](https://fluxcd.io/) models.
 - [@kubernetes-models/gateway-api](third-party/gateway-api) - [Gateway API](https://gateway-api.sigs.k8s.io/) models.
 - [@kubernetes-models/gke](third-party/gke) - [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) models.
 - [@kubernetes-models/grafana-agent-operator](third-party/grafana-agent-operator) - [Grafana agent operator](https://grafana.com/docs/agent/latest/operator/) models.
 - [@kubernetes-models/grafana-operator](third-party/grafana-operator) - [Grafana operator](https://github.com/grafana-operator/grafana-operator) models.
+- [@kubernetes-models/hierarchical-namespaces](third-party/hierarchical-namespaces) - [Hierarchical Namespace](https://github.com/kubernetes-sigs/hierarchical-namespaces) models.
 - [@kubernetes-models/istio](third-party/istio) - [Istio](https://istio.io/) models.
 - [@kubernetes-models/jaeger-operator](third-party/jaeger-operator) - [Jaeger operator](https://www.jaegertracing.io/docs/latest/operator/) models.
+- [@kubernetes-models/k8ssandra-operator](third-party/k8ssandra-operator) - [K8ssandra](https://k8ssandra.io/) models.
 - [@kubernetes-models/kapp-controller](third-party/kapp-controller) - [Carvel kapp contoller](https://github.com/vmware-tanzu/carvel-kapp-controller) models.
+- [@kubernetes-models/karpenter](third-party/karpenter) - [Karpenter](https://karpenter.sh/) models.
 - [@kubernetes-models/keda](third-party/keda) - [KEDA](https://github.com/kedacore/keda) models.
 - [@kubernetes-models/knative](third-party/knative) - [Knative](https://knative.dev/) models.
 - [@kubernetes-models/kubedb](third-party/kubedb) - [KubeDB](https://kubedb.com/) models.
+- [@kubernetes-models/kyverno](third-party/kyverno) - [Kyverno](https://kyverno.io/) models.
+- [@kubernetes-models/linkerd](third-party/linkerd) - [Linkerd](https://linkerd.io/) models.
+- [@kubernetes-models/nats](third-party/nats) - NATS models.
 - [@kubernetes-models/pipelines-as-code](third-party/pipelines-as-code) - [Pipelines-as-Code](https://pipelinesascode.com/) models.
 - [@kubernetes-models/postgres-operator](third-party/postgres-operator) - PostgreSQL operator models.
 - [@kubernetes-models/prometheus-operator](third-party/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
@@ -70,9 +80,12 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/sealed-secrets](third-party/sealed-secrets) - [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) models.
 - [@kubernetes-models/seldon-core-operator](third-party/seldon-core-operator) - [SeldonCore operator](https://github.com/SeldonIO/seldon-core/tree/v1.15.0/helm-charts/seldon-core-operator) models.
 - [@kubernetes-models/shipwright](third-party/shipwright) - [Shipwright](https://shipwright.io/) CRD.
+- [@kubernetes-models/smi](third-party/smi) - [Service Mesh Interface (SMI)](https://smi-spec.io/) models.
+- [@kubernetes-models/spicedb](third-party/spicedb) - [SpiceDB](https://authzed.com/docs) models.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/tidb-operator](third-party/tidb-operator) - [TiDB Operator](https://github.com/pingcap/tidb-operator) models.
+- [@kubernetes-models/traefik](third-party/traefik) - [Traefik Operator](https://github.com/traefik/traefik-helm-chart/tree/master/traefik/crds) models.
 - [@kubernetes-models/victoria-metrics-operator](third-party/victoria-metrics-operator) - [VictoriaMetrics operator](https://github.com/VictoriaMetrics/operator) models.
 
 ### Generators

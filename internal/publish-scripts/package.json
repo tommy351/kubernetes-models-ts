@@ -12,12 +12,11 @@
     "node": ">=14"
   },
   "dependencies": {
+    "@swc/core": "^1.4.11",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
-    "ignore": "^5.2.0",
     "tslib": "^2.4.0",
-    "tsc-multi": "^0.6.1",
     "typescript": "^4.8.4",
     "yargs": "^17.6.0"
   },

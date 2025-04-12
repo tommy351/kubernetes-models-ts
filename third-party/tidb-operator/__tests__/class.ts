@@ -7,48 +7,48 @@ describe("TidbCluster", () => {
   beforeEach(() => {
     cluster = new TidbCluster({
       metadata: {
-        name: 'cluster-sample',
+        name: "cluster-sample"
       },
       spec: {
-        version: 'v6.5.0',
-        timezone: 'UTC',
-        pvReclaimPolicy: 'Retain',
+        version: "v6.5.0",
+        timezone: "UTC",
+        pvReclaimPolicy: "Retain",
         enableDynamicConfiguration: true,
-        configUpdateStrategy: 'RollingUpdate',
+        configUpdateStrategy: "RollingUpdate",
         discovery: {},
         helper: {
-          image: 'alpine:3.16.0',
+          image: "alpine:3.16.0"
         },
         pd: {
-          baseImage: 'pingcap/pd',
+          baseImage: "pingcap/pd",
           maxFailoverCount: 0,
           replicas: 1,
           requests: {
-            storage: '1Gi',
+            storage: "1Gi"
           },
-          config: {},
+          config: {}
         },
         tikv: {
-          baseImage: 'pingcap/tikv',
+          baseImage: "pingcap/tikv",
           maxFailoverCount: 0,
-          evictLeaderTimeout: '1m',
+          evictLeaderTimeout: "1m",
           replicas: 1,
           requests: {
             storage: "1Gi"
           },
           config: {
             storage: {
-              'reserve-space': '0MB',
+              "reserve-space": "0MB"
             },
             rocksdb: {
-              'max-open-files': 256,
+              "max-open-files": 256
             },
             raftdb: {
-              'max-open-files': 256,
-            },
-          },
-        },
-      },
+              "max-open-files": 256
+            }
+          }
+        }
+      }
     });
   });
 
@@ -72,45 +72,45 @@ describe("TidbCluster", () => {
         name: "cluster-sample"
       },
       spec: {
-        version: 'v6.5.0',
-        timezone: 'UTC',
-        pvReclaimPolicy: 'Retain',
+        version: "v6.5.0",
+        timezone: "UTC",
+        pvReclaimPolicy: "Retain",
         enableDynamicConfiguration: true,
-        configUpdateStrategy: 'RollingUpdate',
+        configUpdateStrategy: "RollingUpdate",
         discovery: {},
         helper: {
-          image: 'alpine:3.16.0',
+          image: "alpine:3.16.0"
         },
         pd: {
-          baseImage: 'pingcap/pd',
+          baseImage: "pingcap/pd",
           maxFailoverCount: 0,
           replicas: 1,
           requests: {
-            storage: '1Gi',
+            storage: "1Gi"
           },
-          config: {},
+          config: {}
         },
         tikv: {
-          baseImage: 'pingcap/tikv',
+          baseImage: "pingcap/tikv",
           maxFailoverCount: 0,
-          evictLeaderTimeout: '1m',
+          evictLeaderTimeout: "1m",
           replicas: 1,
           requests: {
             storage: "1Gi"
           },
           config: {
             storage: {
-              'reserve-space': '0MB',
+              "reserve-space": "0MB"
             },
             rocksdb: {
-              'max-open-files': 256,
+              "max-open-files": 256
             },
             raftdb: {
-              'max-open-files': 256,
-            },
-          },
-        },
-      },
+              "max-open-files": 256
+            }
+          }
+        }
+      }
     });
   });
 });

@@ -18,7 +18,7 @@ function generate(map: KeyMap, parent = ""): OutputFile[] {
       content += `export * from "./${val}";\n`;
     } else {
       const exportedName = camelCase(key, ".-");
-      content += `export * as ${exportedName} from "./${key}";\n`;
+      content += `export * as ${exportedName} from "./${key}/index";\n`;
       children = children.concat(generate(val, parent + key + "/"));
     }
   }

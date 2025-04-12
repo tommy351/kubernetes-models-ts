@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/gateway-api",
-  "version": "0.3.1",
+  "version": "0.7.2",
   "description": "Gateway API models",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",
@@ -43,7 +43,11 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.6.2/standard-install.yaml"
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.6.2/standard-install.yaml",
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml",
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/experimental-install.yaml",
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml",
+      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml"
     ],
     "output": "./gen"
   }

@@ -1,5 +1,32 @@
 # Change Log
 
+## 5.0.2
+
+### Patch Changes
+
+- [#220](https://github.com/tommy351/kubernetes-models-ts/pull/220) [`de414dd`](https://github.com/tommy351/kubernetes-models-ts/commit/de414ddbb16d37da1e88c2aacb5ce4f57cec2d02) Thanks [@RealityAnomaly](https://github.com/RealityAnomaly)! - Set model-defined props outside constructor to ensure `useDefineForClassFields` compatibility.
+
+## 5.0.1
+
+### Patch Changes
+
+- [#216](https://github.com/tommy351/kubernetes-models-ts/pull/216) [`db67b32`](https://github.com/tommy351/kubernetes-models-ts/commit/db67b3253d21d4247a50109ef9f18c2345d7ce7f) Thanks [@RealityAnomaly](https://github.com/RealityAnomaly)! - Append `/index` to generated paths to ensure correct import handling.
+
+## 5.0.0
+
+### Major Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`dba981d`](https://github.com/tommy351/kubernetes-models-ts/commit/dba981d0fab843e0c772bff7b1833acde9a59995) Thanks [@tommy351](https://github.com/tommy351)! - Remove schema object from generated files.
+
+### Minor Changes
+
+- [#199](https://github.com/tommy351/kubernetes-models-ts/pull/199) [`d076453`](https://github.com/tommy351/kubernetes-models-ts/commit/d076453fa50650d7f99426048a6b583df0abaeaf) Thanks [@tommy351](https://github.com/tommy351)! - Pre-compile OpenAPI schema into a validate function. This should improve the performance of first-time validation, but the package size will slightly increase.
+
+### Patch Changes
+
+- Updated dependencies [[`5986ef0`](https://github.com/tommy351/kubernetes-models-ts/commit/5986ef0c2ecb2dd571ebcefa827e54c269d774e7), [`060d424`](https://github.com/tommy351/kubernetes-models-ts/commit/060d424bb33bc68634efc285420b76b394c50941)]:
+  - @kubernetes-models/generate@2.4.0
+
 ## 4.1.3
 
 ### Patch Changes

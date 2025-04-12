@@ -40,7 +40,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
 
           output.push({
             path: aliasPath,
-            content: `export * from "${getRelativePath(aliasPath, defPath)}";`
+            content: `export * from "${getRelativePath(aliasPath, defPath)}/index";`
           });
         }
       }
@@ -74,7 +74,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
           .map((v) => {
             const exportedName = camelCase(v, ".-");
 
-            return `export * as ${exportedName} from "./${v}";`;
+            return `export * as ${exportedName} from "./${v}/index";`;
           })
           .join("\n")
       });

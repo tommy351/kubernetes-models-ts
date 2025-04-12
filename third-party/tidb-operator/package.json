@@ -1,7 +1,7 @@
 {
   "name": "@kubernetes-models/tidb-operator",
   "description": "TiDB Operator models",
-  "version": "0.1.2",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
@@ -34,7 +34,7 @@
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
-    "tslib": "^2.4.0"
+    "@swc/helpers": "^0.5.8"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

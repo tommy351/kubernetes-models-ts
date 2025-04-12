@@ -29,7 +29,7 @@ describe("validate", () => {
       });
 
       expect(() => config.validate()).toThrow(
-        "data/spec/iap must have required property 'enabled'"
+        "data/spec/iap must have required property enabled, data/spec/iap must have required property oauthclientCredentials"
       );
     });
   });
