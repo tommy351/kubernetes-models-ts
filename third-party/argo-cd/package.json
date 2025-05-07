@@ -44,9 +44,9 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.8/manifests/crds/application-crd.yaml",
-      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.8/manifests/crds/applicationset-crd.yaml",
-      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.8/manifests/crds/appproject-crd.yaml"
+      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.11/manifests/crds/application-crd.yaml",
+      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.11/manifests/crds/applicationset-crd.yaml",
+      "https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.11/manifests/crds/appproject-crd.yaml"
     ],
     "output": "./gen"
   }
