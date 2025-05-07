@@ -1,5 +1,11 @@
 # @kubernetes-models/external-secrets
 
+## 0.6.0
+
+### Minor Changes
+
+- [#234](https://github.com/tommy351/kubernetes-models-ts/pull/234) [`509b5f6`](https://github.com/tommy351/kubernetes-models-ts/commit/509b5f6c4b8951c6e09fc4f4314b334806edcef5) Thanks [@kinyat](https://github.com/kinyat)! - bump external-secrets from 0.8.1 to 0.16.1
+
 ## 0.5.2
 
 ### Patch Changes
