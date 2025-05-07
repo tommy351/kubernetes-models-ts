@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/external-secrets/external-secrets/releases/download/v0.8.1/external-secrets.yaml"
+      "https://github.com/external-secrets/external-secrets/releases/download/v0.16.1/external-secrets.yaml"
     ],
     "output": "./gen"
   }
