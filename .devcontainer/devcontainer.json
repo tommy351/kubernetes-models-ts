@@ -1,0 +1,48 @@
+{
+    "name": "Kubernetes Models TypeScript",
+    "dockerFile": "Dockerfile",
+    "features": {
+        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+            "version": "latest",
+            "helm": "latest",
+            "minikube": "none"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        },
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest",
+            "ppa": false
+        }
+    },
+    // Mount host's Git configuration and SSH keys into the container
+    "mounts": [
+        "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.git-credentials,target=/home/node/.git-credentials,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.git,target=/home/node/.git,type=bind,consistency=cached"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-kubernetes-tools.vscode-kubernetes-tools",
+                "ms-azuretools.vscode-docker",
+                "redhat.vscode-yaml",
+                "bradlc.vscode-tailwindcss",
+                "firsttris.vscode-jest-runner"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.eslint": true
+                },
+                "typescript.tsdk": "node_modules/typescript/lib"
+            }
+        }
+    },
+    "forwardPorts": [],
+    "remoteUser": "node",
+    "postCreateCommand": "sudo mkdir -p /usr/local/share/pnpm /usr/local/share/.pnpm-store && sudo chown -R node:node /usr/local/share/pnpm /usr/local/share/.pnpm-store && if [ -d \"/home/node/.ssh\" ]; then chmod 700 /home/node/.ssh && chmod 600 /home/node/.ssh/* || true; fi"
+}
