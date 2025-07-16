@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/cilium",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Cilium CRD",
   "repository": {
     "type": "git",

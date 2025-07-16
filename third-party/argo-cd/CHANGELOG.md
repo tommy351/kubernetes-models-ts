@@ -1,5 +1,12 @@
 # @kubernetes-models/argo-cd
 
+## 2.7.1
+
+### Patch Changes
+
+- Updated dependencies [[`1d68961`](https://github.com/tommy351/kubernetes-models-ts/commit/1d68961f1832866716e01992f70d90b161b58e81)]:
+  - @kubernetes-models/apimachinery@2.1.0
+
 ## 2.7.0
 
 ### Minor Changes
