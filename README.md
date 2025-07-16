@@ -75,6 +75,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/pipelines-as-code](third-party/pipelines-as-code) - [Pipelines-as-Code](https://pipelinesascode.com/) models.
 - [@kubernetes-models/postgres-operator](third-party/postgres-operator) - PostgreSQL operator models.
 - [@kubernetes-models/prometheus-operator](third-party/prometheus-operator) - [Prometheus operator](https://github.com/prometheus-operator/prometheus-operator/) models.
+- [@kubernetes-models/pulsar-resources-operator](third-party/pulsar-resources-operator) - [Pulsar resources operator](https://github.com/streamnative/pulsar-resources-operator) models.
 - [@kubernetes-models/rabbitmq-cluster-operator](third-party/rabbitmq-cluster-operator/) - [RabbitMQ cluster operator](https://github.com/rabbitmq/cluster-operator) models.
 - [@kubernetes-models/rabbitmq-messaging-topology-operator](third-party/rabbitmq-messaging-topology-operator/) - [RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator) models.
 - [@kubernetes-models/redis-operator](third-party/redis-operator) - [Redis Operator](https://ot-container-kit.github.io/redis-operator/) models.
