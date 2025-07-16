@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/kedacore/keda/releases/download/v2.10.1/keda-2.10.1.yaml"
+      "https://github.com/kedacore/keda/releases/download/v2.11.1/keda-2.11.1.yaml"
     ],
     "output": "./gen"
   }
