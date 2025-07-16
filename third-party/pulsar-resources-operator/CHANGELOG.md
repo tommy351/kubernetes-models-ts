@@ -1,5 +1,11 @@
 # @kubernetes-models/pulsar-resources-operator
 
+## 0.1.1
+
+### Patch Changes
+
+- [`c7bb686`](https://github.com/tommy351/kubernetes-models-ts/commit/c7bb686fff89f8481d74e7dd9e813e0e25e473df) Thanks [@tommy351](https://github.com/tommy351)! - Add readme.
+
 ## 0.1.0
 
 ### Minor Changes
