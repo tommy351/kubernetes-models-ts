@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/cloudnative-pg",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "cloudnative-pg models",
   "repository": {
     "type": "git",

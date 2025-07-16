@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/smi",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Service Mesh Interface (SMI) models",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/hierarchical-namespaces",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Kubernetes hierarchical-namespaces models",
   "repository": {
     "type": "git",

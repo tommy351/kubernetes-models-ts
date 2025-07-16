@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/autoscaler",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Kubernetes Autoscaler models",
   "repository": {
     "type": "git",
