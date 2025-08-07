@@ -13,24 +13,43 @@ npm install @kubernetes-models/flink
 ## Usage
 
 ```js
-import { GitRepository } from "@kubernetes-models/flink/source.toolkit.fluxcd.io/v1beta1/GitRepository";
+import { FlinkDeployment } from "@kubernetes-models/flink/flink.apache.org/v1beta1/FlinkDeployment";
 
-// Create a new GitRepository
-const repo = new GitRepository({
+// Create a new deployment
+const deployment = new FlinkDeployment({
   metadata: {
-    name: "webapp"
+    name: "example"
   },
   spec: {
-    interval: "60m",
-    url: "https://github.com/tommy351/kubernetes-models-ts",
-    ref: {
-      branch: "master"
+    image: "flink:1.20",
+    flinkVersion: "v1_20",
+    flinkConfiguration: {
+      "taskmanager.numberOfTaskSlots": "2"
+    },
+    serviceAccount: "flink",
+    jobManager: {
+      resource: {
+        memory: "1024m",
+        cpu: 1
+      }
+    },
+    taskManager: {
+      resource: {
+        memory: "2048m",
+        cpu: 1
+      }
+    },
+    job: {
+      jarURI: "local:///opt/flink/examples/streaming/StateMachineExample.jar",
+      parallelism: 2,
+      upgradeMode: "stateless",
+      state: "running"
     }
   }
 });
 
 // Validate against JSON schema
-repo.validate();
+deployment.validate();
 ```
 
 ## License
