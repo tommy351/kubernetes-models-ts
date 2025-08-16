@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/crd-generate",
-  "version": "5.0.2",
+  "version": "5.1.0",
   "description": "Generate Kubernetes models for custom resource definitions (CRD).",
   "repository": {
     "type": "git",

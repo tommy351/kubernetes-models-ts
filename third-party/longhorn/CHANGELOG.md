@@ -1,5 +1,12 @@
 # @kubernetes-models/longhorn
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`7a8e7d3`](https://github.com/tommy351/kubernetes-models-ts/commit/7a8e7d3fc130b7e63c4b7066c88378b0a631e83f)]:
+  - @kubernetes-models/apimachinery@2.2.0
+
 ## 0.1.3
 
 ### Patch Changes

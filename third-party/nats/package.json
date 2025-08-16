@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/nats",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "NATS models",
   "repository": {
     "type": "git",

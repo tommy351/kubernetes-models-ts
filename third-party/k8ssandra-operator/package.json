@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/k8ssandra-operator",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Manage Apache Cassandra and DSE on Kubernetes.",
   "repository": {
     "type": "git",
