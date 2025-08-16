@@ -9,7 +9,7 @@ import {
 import generateDefinitions from "./generators/definition";
 import generateSchemas from "./generators/schema";
 import generateAliases from "./generators/alias";
-import { uniq } from "lodash";
+import { uniq } from "es-toolkit";
 import { buildContext, ContextOptions } from "./context";
 
 function load(input: string): Definition[] {

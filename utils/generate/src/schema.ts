@@ -1,5 +1,5 @@
 import { Schema, SchemaTransformer } from "./types";
-import { omit, omitBy, uniq } from "lodash";
+import { omit, omitBy, uniq } from "es-toolkit";
 import Ajv, { _ } from "ajv";
 import standaloneCode from "ajv/dist/standalone";
 import assert from "assert";
@@ -67,7 +67,7 @@ function omitDescription(schema: Schema): Schema {
 }
 
 function omitKubernetesFields(schema: Schema): Schema {
-  return omitBy(schema, (v, k) => k.startsWith("x-kubernetes-"));
+  return omitBy(schema, (v, k) => (k as string).startsWith("x-kubernetes-"));
 }
 
 function uniqEnum(schema: Schema): Schema {

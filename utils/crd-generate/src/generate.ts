@@ -1,5 +1,5 @@
 import { parseAllDocuments, DocumentOptions } from "yaml";
-import { mapValues } from "lodash";
+import { mapValues } from "es-toolkit";
 import {
   composeGenerators,
   Definition,
