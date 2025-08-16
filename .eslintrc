@@ -22,6 +22,17 @@
       {
         "ignores": ["modules"]
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "lodash",
+        "message": "Do not use lodash because it doesn't support ES modules. Please use es-toolkit instead."
+      },
+      {
+        "name": "lodash-es",
+        "message": "Please use es-toolkit instead."
+      }
     ]
   },
   "parserOptions": {

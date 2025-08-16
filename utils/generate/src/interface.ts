@@ -1,7 +1,7 @@
 import { Schema } from "./types";
 import { formatComment } from "@kubernetes-models/string-util";
 import indentString from "indent-string";
-import { omit } from "lodash";
+import { omit } from "es-toolkit";
 
 const FALLBACK_TYPE = "any";
 const WILDCARD_FIELD = "*";

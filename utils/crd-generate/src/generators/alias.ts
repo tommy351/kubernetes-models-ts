@@ -1,5 +1,5 @@
 import { Generator, OutputFile } from "@kubernetes-models/generate";
-import { set } from "lodash";
+import { set } from "es-toolkit/compat";
 import { camelCase } from "@kubernetes-models/string-util";
 
 interface KeyMap {

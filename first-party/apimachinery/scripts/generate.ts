@@ -6,7 +6,7 @@ import {
 import { readInput } from "@kubernetes-models/read-input";
 import { join } from "path";
 import { OpenAPIV2 } from "openapi-types";
-import { mapValues, omit } from "lodash";
+import { mapValues, omit } from "es-toolkit";
 import { trimPrefix } from "@kubernetes-models/string-util";
 
 type Document = OpenAPIV2.Document<any>;
@@ -38,7 +38,7 @@ function omitGVK(doc: Document): void {
   if (!doc.definitions) return;
 
   doc.definitions = mapValues(doc.definitions, (def) =>
-    omit(def, "x-kubernetes-group-version-kind")
+    omit(def, ["x-kubernetes-group-version-kind"])
   );
 }
 

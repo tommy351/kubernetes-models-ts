@@ -12,7 +12,7 @@ import {
   trimPrefix,
   trimSuffix
 } from "@kubernetes-models/string-util";
-import { mapValues, omit } from "lodash";
+import { mapValues, omit } from "es-toolkit";
 import { Context } from "../context";
 import {
   getClassName,
@@ -30,8 +30,8 @@ function omitTypeMetaDescription(schema: Schema): Schema {
   return {
     ...rest,
     properties: mapValues(properties, (prop, key) => {
-      if (["apiVersion", "kind"].includes(key)) {
-        return omit(prop, "description");
+      if (key === "apiVersion" || key === "kind") {
+        return omit(prop, ["description"]);
       }
 
       return prop;

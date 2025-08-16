@@ -168,15 +168,12 @@ importers:
       '@kubernetes-models/string-util':
         specifier: workspace:^
         version: link:../../utils/string-util
-      '@types/lodash':
-        specifier: ^4.14.186
-        version: 4.14.186
       '@types/node':
         specifier: ^18.7.23
         version: 18.7.23
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+      es-toolkit:
+        specifier: ^1.39.9
+        version: 1.39.9
       openapi-types:
         specifier: ^12.0.2
         version: 12.0.2
@@ -1667,9 +1664,9 @@ importers:
       '@kubernetes-models/string-util':
         specifier: workspace:^
         version: link:../string-util
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+      es-toolkit:
+        specifier: ^1.39.9
+        version: 1.39.9
       tslib:
         specifier: ^2.4.0
         version: 2.6.2
@@ -1680,9 +1677,6 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0
     devDependencies:
-      '@types/lodash':
-        specifier: ^4.14.186
-        version: 4.14.186
       '@types/yargs':
         specifier: ^17.0.13
         version: 17.0.13
@@ -1716,15 +1710,15 @@ importers:
       ajv:
         specifier: ^8.12.0
         version: 8.12.0
+      es-toolkit:
+        specifier: ^1.39.9
+        version: 1.39.9
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
       indent-string:
         specifier: ^4.0.0
         version: 4.0.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       ohash:
         specifier: ^1.1.3
         version: 1.1.3
@@ -1744,9 +1738,6 @@ importers:
       '@types/fs-extra':
         specifier: ^9.0.13
         version: 9.0.13
-      '@types/lodash':
-        specifier: ^4.14.186
-        version: 4.14.186
       tsc-multi:
         specifier: ^0.6.1
         version: 0.6.1(typescript@4.8.4)
@@ -1765,9 +1756,9 @@ importers:
       '@kubernetes-models/string-util':
         specifier: workspace:^
         version: link:../string-util
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+      es-toolkit:
+        specifier: ^1.39.9
+        version: 1.39.9
       tslib:
         specifier: ^2.4.0
         version: 2.6.2
@@ -1775,9 +1766,6 @@ importers:
         specifier: ^17.6.0
         version: 17.6.0
     devDependencies:
-      '@types/lodash':
-        specifier: ^4.14.186
-        version: 4.14.186
       '@types/yargs':
         specifier: ^17.0.13
         version: 17.0.13
@@ -2385,6 +2373,7 @@ packages:
   /@humanwhocodes/config-array@0.10.7:
     resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
       debug: 4.3.4
@@ -2404,6 +2393,7 @@ packages:
 
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    deprecated: Use @eslint/object-schema instead
     dev: true
 
   /@jest/schemas@29.0.0:
@@ -2702,10 +2692,6 @@ packages:
 
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
-    dev: true
-
-  /@types/lodash@4.14.186:
-    resolution: {integrity: sha512-eHcVlLXP0c2FlMPm56ITode2AgLMSa6aJ05JTTbYbI+7EMkCEE5qk2E41d5g2lCVTqRe0GnnRFurmlCsDODrPw==}
     dev: true
 
   /@types/make-fetch-happen@10.0.0:
@@ -3690,6 +3676,9 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
+  /es-toolkit@1.39.9:
+    resolution: {integrity: sha512-9OtbkZmTA2Qc9groyA1PUNeb6knVTkvB2RSdr/LcJXDL8IdEakaxwXLHXa7VX/Wj0GmdMJPR3WhnPGhiP3E+qg==}
+
   /esbuild@0.18.17:
     resolution: {integrity: sha512-1GJtYnUxsJreHYA0Y+iQz2UEykonY66HNWOb0yXYZi9/kNrORUEHVg87eQsCtqh59PEJ5YVZJO98JHznMJSWjg==}
     engines: {node: '>=12'}
@@ -3853,6 +3842,7 @@ packages:
   /eslint@8.24.0:
     resolution: {integrity: sha512-dWFaPhGhTAiPcCgm3f6LI2MBWbogMnTJzFBbhXVRQDJPkr9pGZvVjlVfXd+vyDcWPA2Ic9L2AXPIQM0+vk/cSQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     dependencies:
       '@eslint/eslintrc': 1.3.2
@@ -4778,9 +4768,6 @@ packages:
   /lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
     dev: true
-
-  /lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   /log-update@4.0.0:
     resolution: {integrity: sha512-9fkkDevMefjg0mmzWFBW8YkFP91OrizzkW3diF7CpG+S2EYdy4+TVfGwz1zeF8x7hCx1ovSPTOE9Ngib74qqUg==}
