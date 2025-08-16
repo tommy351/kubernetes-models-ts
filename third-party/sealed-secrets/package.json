@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/sealed-secrets",
-  "version": "4.4.3",
+  "version": "4.4.4",
   "description": "Kubernetes sealed-secrets models",
   "repository": {
     "type": "git",

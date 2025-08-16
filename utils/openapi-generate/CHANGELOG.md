@@ -1,5 +1,16 @@
 # Change Log
 
+## 5.1.0
+
+### Minor Changes
+
+- [#242](https://github.com/tommy351/kubernetes-models-ts/pull/242) [`7a8e7d3`](https://github.com/tommy351/kubernetes-models-ts/commit/7a8e7d3fc130b7e63c4b7066c88378b0a631e83f) Thanks [@tommy351](https://github.com/tommy351)! - Replace `lodash` with `es-toolkit` because the former doesn't support ES modules.
+
+### Patch Changes
+
+- Updated dependencies [[`7a8e7d3`](https://github.com/tommy351/kubernetes-models-ts/commit/7a8e7d3fc130b7e63c4b7066c88378b0a631e83f)]:
+  - @kubernetes-models/generate@2.5.0
+
 ## 5.0.2
 
 ### Patch Changes

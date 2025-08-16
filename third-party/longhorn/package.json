@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/longhorn",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Longhorn models",
   "repository": {
     "type": "git",
