@@ -48,6 +48,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/autoscaler](third-party/autoscaler) - [Kubernetes Autoscaler](https://github.com/kubernetes/autoscaler) models.
 - [@kubernetes-models/cert-manager](third-party/cert-manager) - [cert-manager](https://cert-manager.io/) models.
 - [@kubernetes-models/cilium](third-party/cilium) - [Cilium](https://cilium.io/) CRD.
+- [@kubernetes-models/clickhouse](third-party/clickhouse) - [ClickHouse Kubernetes Operator](https://github.com/Altinity/clickhouse-operator) models.
 - [@kubernetes-models/contour](third-party/contour) - [Contour](https://projectcontour.io/) models.
 - [@kubernetes-models/elastic-cloud](third-party/elastic-cloud) - [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-overview.html) models.
 - [@kubernetes-models/envoy-gateway](third-party/envoy-gateway) - [Envoy Gateway](https://gateway.envoyproxy.io/) models.
