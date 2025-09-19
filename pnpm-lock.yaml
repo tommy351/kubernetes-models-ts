@@ -413,6 +413,50 @@ importers:
         version: 0.29.8
     publishDirectory: dist
 
+  third-party/clickhouse:
+    dependencies:
+      '@kubernetes-models/apimachinery':
+        specifier: workspace:^
+        version: link:../../first-party/apimachinery/dist
+      '@kubernetes-models/base':
+        specifier: workspace:^
+        version: link:../../core/base
+      '@kubernetes-models/validate':
+        specifier: workspace:^
+        version: link:../../core/validate
+      '@swc/helpers':
+        specifier: ^0.5.8
+        version: 0.5.8
+    devDependencies:
+      '@kubernetes-models/crd-generate':
+        specifier: workspace:^
+        version: link:../../utils/crd-generate
+      '@kubernetes-models/publish-scripts':
+        specifier: workspace:^
+        version: link:../../internal/publish-scripts
+      '@kubernetes-models/read-input':
+        specifier: workspace:^
+        version: link:../../utils/read-input
+      '@types/js-yaml':
+        specifier: ^4.0.5
+        version: 4.0.5
+      '@types/node':
+        specifier: ^18.7.23
+        version: 18.7.23
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.1(@types/node@18.7.23)(typescript@4.8.4)
+      typescript:
+        specifier: ^4.8.4
+        version: 4.8.4
+      vitest:
+        specifier: ^0.29.8
+        version: 0.29.8
+    publishDirectory: dist
+
   third-party/cloudnative-pg:
     dependencies:
       '@kubernetes-models/apimachinery':
