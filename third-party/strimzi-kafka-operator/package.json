@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/strimzi-kafka-operator",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Strimzi Kafka operator models",
   "repository": {
     "type": "git",
