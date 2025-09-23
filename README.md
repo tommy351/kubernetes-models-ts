@@ -87,6 +87,7 @@ See [examples](examples) folder for more examples.
 - [@kubernetes-models/smi](third-party/smi) - [Service Mesh Interface (SMI)](https://smi-spec.io/) models.
 - [@kubernetes-models/spicedb](third-party/spicedb) - [SpiceDB](https://authzed.com/docs) models.
 - [@kubernetes-models/spiffe](third-party/spiffe) - [SPIFFE](https://spiffe.io/) models.
+- [@kubernetes-models/strimzi-kafka-operator](third-party/strimzi-kafka-operator) - [Strimzi Kafka Operator](https://strimzi.io/) models.
 - [@kubernetes-models/thanos-operator](third-party/thanos-operator) - [Thanos operator](https://github.com/banzaicloud/thanos-operator) models.
 - [@kubernetes-models/tidb-operator](third-party/tidb-operator) - [TiDB Operator](https://github.com/pingcap/tidb-operator) models.
 - [@kubernetes-models/traefik](third-party/traefik) - [Traefik Operator](https://github.com/traefik/traefik-helm-chart/tree/master/traefik/crds) models.
