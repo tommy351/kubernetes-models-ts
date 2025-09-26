@@ -1,5 +1,11 @@
 # @kubernetes-models/tidb-operator
 
+## 0.3.0
+
+### Minor Changes
+
+- [#248](https://github.com/tommy351/kubernetes-models-ts/pull/248) [`fe914c1`](https://github.com/tommy351/kubernetes-models-ts/commit/fe914c1e013e3ebbf4e0298491568a4dea9b424d) Thanks [@yz89122](https://github.com/yz89122)! - Update TiDB operator CRDs from v1.4.4 to v1.6.3
+
 ## 0.2.4
 
 ### Patch Changes
