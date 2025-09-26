@@ -43,7 +43,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v1.4.4/manifests/crd.yaml"
+      "https://raw.githubusercontent.com/pingcap/tidb-operator/v1.6.3/manifests/crd.yaml"
     ],
     "output": "./gen"
   }
