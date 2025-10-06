@@ -35,8 +35,16 @@ export interface OutputFile {
   content: string;
 }
 
+export interface GenerateOptions {
+  baseClassName?: string;
+  baseClassImportPath?: string;
+}
+
 export interface Generator {
-  (definitions: readonly Definition[]): Promise<OutputFile[]>;
+  (
+    definitions: readonly Definition[],
+    options?: GenerateOptions
+  ): Promise<OutputFile[]>;
 }
 
 export interface SchemaTransformer {

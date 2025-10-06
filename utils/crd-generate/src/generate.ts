@@ -144,6 +144,8 @@ export interface GenerateOptions {
   input: string;
   outputPath: string;
   yamlVersion?: DocumentOptions["version"];
+  customBaseClassName?: string;
+  customBaseClassImportPath?: string;
 }
 
 export async function generate(options: GenerateOptions): Promise<void> {
@@ -191,7 +193,10 @@ export async function generate(options: GenerateOptions): Promise<void> {
     }
   }
 
-  const files = await generator(dedupeDefinitions(definitions));
+  const files = await generator(dedupeDefinitions(definitions), {
+    baseClassName: options.customBaseClassName,
+    baseClassImportPath: options.customBaseClassImportPath
+  });
 
   await writeOutputFiles(options.outputPath, files);
 }

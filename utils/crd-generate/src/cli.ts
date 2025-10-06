@@ -32,13 +32,25 @@ export async function run(): Promise<void> {
       describe: "YAML version.",
       choices: ["1.0", "1.1", "1.2"]
     })
+    .option("customBaseClassName", {
+      type: "string",
+      describe: "Base class import name",
+      default: "Model"
+    })
+    .option("customBaseClassImportPath", {
+      type: "string",
+      describe: "Base class import path",
+      default: "@kubernetes-models/base"
+    })
     .parse();
 
   try {
     await generate({
       input: await readFiles(args.input),
       outputPath: args.output,
-      yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"]
+      yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"],
+      customBaseClassName: args.customBaseClassName,
+      customBaseClassImportPath: args.customBaseClassImportPath
     });
   } catch (err) {
     console.error(err);
