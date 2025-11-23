@@ -13,7 +13,7 @@ npm install @kubernetes-models/strimzi-kafka-operator
 ## Usage
 
 ```js
-import { Kafka } from "@kubernetes-models/strimzi-kafka-operator/kafka.strimzi.io/v1beta2/Kafka";
+import { Kafka } from "@kubernetes-models/strimzi-kafka-operator/kafka.strimzi.io/v1/Kafka";
 
 // Create a new Kafka
 const kafka = new Kafka({
@@ -26,8 +26,8 @@ const kafka = new Kafka({
   },
   spec: {
     kafka: {
-      version: "4.0.0",
-      metadataVersion: "4.0-IV3",
+      version: "4.1.1",
+      metadataVersion: "4.1.1",
       listeners: [
         { name: "plain", port: 9092, type: "internal", tls: false },
         { name: "tls", port: 9093, type: "internal", tls: true }
