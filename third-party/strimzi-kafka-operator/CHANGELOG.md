@@ -1,5 +1,11 @@
 # @kubernetes-models/strimzi-kafka-operator
 
+## 0.2.0
+
+### Minor Changes
+
+- [#250](https://github.com/tommy351/kubernetes-models-ts/pull/250) [`0d84598`](https://github.com/tommy351/kubernetes-models-ts/commit/0d845985f706097efd41cb67b188c9f063030c87) Thanks [@cgarciamtg](https://github.com/cgarciamtg)! - feat(strimzi-kafka-operator): upgrade CRDs from v0.47.0 to v0.49.0
+
 ## 0.1.0
 
 ### Minor Changes
