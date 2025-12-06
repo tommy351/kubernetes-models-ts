@@ -1,4 +1,9 @@
-import { Generator, GroupVersionKind, OutputFile } from "./types";
+import {
+  Generator,
+  GenerateOptions,
+  GroupVersionKind,
+  OutputFile
+} from "./types";
 import { outputFile } from "fs-extra";
 import { join } from "path";
 
@@ -11,11 +16,11 @@ export class PathConflictError extends Error {
 PathConflictError.prototype.name = "PathConflictError";
 
 export function composeGenerators(generators: readonly Generator[]): Generator {
-  return async (definitions) => {
+  return async (definitions, options: GenerateOptions = {}) => {
     const fileMap = new Map<string, OutputFile>();
 
     for (const g of generators) {
-      const files = await g(definitions);
+      const files = await g(definitions, options);
 
       for (const f of files) {
         if (fileMap.has(f.path)) {

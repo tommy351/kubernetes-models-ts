@@ -6,8 +6,10 @@ import {
   getAPIVersion,
   GroupVersionKind,
   Import,
-  OutputFile
+  OutputFile,
+  GenerateOptions as BaseGenerateOptions
 } from "@kubernetes-models/generate";
+import { GenerateOptions } from "../generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import { getRelativePath, getSchemaPath } from "../utils";
 
@@ -19,7 +21,8 @@ function getFieldType(key: string[]): string | undefined {
 
 function generateDefinition(
   gvk: GroupVersionKind,
-  def: Definition
+  def: Definition,
+  options: GenerateOptions
 ): OutputFile {
   const apiVersion = getAPIVersion(gvk);
   const className = gvk.kind;
@@ -66,8 +69,9 @@ constructor(data?: ModelData<${interfaceName}>) {
   });
 
   imports.push({
-    name: "Model",
-    path: "@kubernetes-models/base"
+    alias: "Model",
+    name: options.customBaseClassName as string,
+    path: options.customBaseClassImportPath as string
   });
 
   imports.push({
@@ -114,14 +118,22 @@ setValidateFunc(${className}, validate as ValidateFunc<${interfaceName}>);
   };
 }
 
-const generateDefinitions: Generator = async (definitions) => {
+const generateDefinitions: Generator = async (definitions, options = {}) => {
   const output: OutputFile[] = [];
+
+  // Convert base options to local options format
+  const localOptions: GenerateOptions = {
+    input: "",
+    outputPath: "",
+    customBaseClassName: options.baseClassName,
+    customBaseClassImportPath: options.baseClassImportPath
+  };
 
   for (const def of definitions) {
     const gvks = def.gvk;
 
     if (gvks && gvks.length) {
-      output.push(generateDefinition(gvks[0], def));
+      output.push(generateDefinition(gvks[0], def, localOptions));
     }
   }
 
