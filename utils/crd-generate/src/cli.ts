@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { readInput } from "@kubernetes-models/read-input";
-import { generate, GenerateOptions } from "./generate";
+import { generate, type GenerateOptions } from "./generate.js";
 
 async function readFiles(paths: string[]): Promise<string> {
   const documents: string[] = [];
@@ -14,7 +14,7 @@ async function readFiles(paths: string[]): Promise<string> {
 }
 
 export async function run(): Promise<void> {
-  const args = await yargs
+  const args = await yargs()
     .pkgConf("crd-generate")
     .option("input", {
       type: "array",
@@ -42,7 +42,7 @@ export async function run(): Promise<void> {
     });
   } catch (err) {
     console.error(err);
-    // eslint-disable-next-line no-process-exit
+    // eslint-disable-next-line n/no-process-exit
     process.exit(1);
   }
 }

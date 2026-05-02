@@ -1,6 +1,0 @@
-{
-  "targets": [
-    { "extname": ".mjs", "module": "esnext" },
-    { "extname": ".js", "module": "commonjs" }
-  ]
-}

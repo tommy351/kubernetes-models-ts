@@ -1,6 +1,9 @@
-import { isPlainObject } from "is-plain-object";
-import { ValidateFunc, runValidateFunc } from "@kubernetes-models/validate";
-import { TypeMeta } from "./meta";
+import { isPlainObject } from "es-toolkit/predicate";
+import {
+  type ValidateFunc,
+  runValidateFunc
+} from "@kubernetes-models/validate";
+import { type TypeMeta } from "./meta.js";
 
 function setDefinedProps(src: any, dst: any): any {
   for (const key of Object.keys(src)) {

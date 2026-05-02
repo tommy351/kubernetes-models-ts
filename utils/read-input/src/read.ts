@@ -1,6 +1,6 @@
 import getStdin from "get-stdin";
 import { readFile } from "fs/promises";
-import { httpGet } from "./http";
+import { httpGet } from "./http.js";
 
 const urlRegex = /^https?:\/\//;
 

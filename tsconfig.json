@@ -1,7 +1,9 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json",
+  "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "noEmitHelpers": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "erasableSyntaxOnly": true,
+    "types": ["node"]
   }
 }

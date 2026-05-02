@@ -1,12 +1,13 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import { readInput } from "@kubernetes-models/read-input";
 import { mkdir, writeFile } from "fs/promises";
 import yaml from "js-yaml";
-import { dirname, join } from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const VERSIONS = ["0.5.0", "1.0.0"];
 
-const outputPath = join(__dirname, "../crds/crd.yaml");
+const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
 
 (async () => {
   const output: any[] = [];

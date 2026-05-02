@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Deployment as DeploymentV1 } from "../gen/apps/v1/Deployment";
-import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deployment";
-import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress";
-import { Ingress as IngressV1Beta1 } from "../gen/extensions/v1beta1/Ingress";
-import { Pod } from "../gen/v1/Pod";
-import { PodSpec } from "../gen/v1/PodSpec";
+import { Deployment as DeploymentV1 } from "../gen/apps/v1/Deployment.js";
+import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deployment.js";
+import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress.js";
+import { Ingress as IngressV1Beta1 } from "../gen/extensions/v1beta1/Ingress.js";
+import { Pod } from "../gen/v1/Pod.js";
+import { PodSpec } from "../gen/v1/PodSpec.js";
 
 describe("Deployment apps/v1", () => {
   let deployment: DeploymentV1;

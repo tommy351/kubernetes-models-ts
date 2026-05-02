@@ -1,9 +1,13 @@
-import type { ErrorObject } from "ajv";
-import ValidationError from "./runtime/validation_error";
-import localize from "ajv-i18n";
+import { type ErrorObject } from "ajv";
+import ValidationError from "./runtime/validation_error.js";
+import localizeEnMod from "ajv-i18n/localize/en/index.js";
+
+const localizeEn = localizeEnMod as unknown as (
+  errors?: ErrorObject[] | null
+) => void;
 
 function generateErrorMessage(errors: ErrorObject[]): string {
-  localize.en(errors);
+  localizeEn(errors);
 
   return errors
     .map((err) => `data${err.instancePath} ${err.message}`)

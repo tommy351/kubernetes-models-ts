@@ -1,4 +1,4 @@
-import { Schema } from "./types";
+import type { Schema } from "./types.js";
 import { formatComment } from "@kubernetes-models/string-util";
 import indentString from "indent-string";
 import { omit } from "es-toolkit";

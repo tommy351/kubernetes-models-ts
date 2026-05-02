@@ -1,5 +1,7 @@
 import { type KeywordDefinition, _ } from "ajv";
-import ref from "ajv/dist/vocabularies/core/ref";
+import refMod from "ajv/dist/vocabularies/core/ref.js";
+
+const ref = refMod.default;
 
 const keyword: KeywordDefinition = {
   keyword: "nullableRef",

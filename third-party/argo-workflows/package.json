@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/argo-workflows",
   "version": "0.1.4",
+  "type": "module",
   "description": "Argo Workflows models",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/argo-workflows",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",

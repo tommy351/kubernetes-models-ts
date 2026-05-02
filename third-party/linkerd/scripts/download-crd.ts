@@ -1,10 +1,11 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import execa from "execa";
 import { mkdir, writeFile } from "fs/promises";
 import yaml from "js-yaml";
-import { dirname, join } from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const outputPath = join(__dirname, "../crds/crd.yaml");
+const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
 
 function isObject(obj: unknown): obj is Record<string, unknown> {
   return typeof obj === "object" && obj != null;

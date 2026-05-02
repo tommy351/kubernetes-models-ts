@@ -1,13 +1,13 @@
 import { camelCase } from "@kubernetes-models/string-util";
-import { getShortClassName } from "../string";
+import { getShortClassName } from "../string.js";
 import { posix } from "path";
 import {
-  Generator,
+  type Generator,
   getAPIVersion,
-  OutputFile
+  type OutputFile
 } from "@kubernetes-models/generate";
-import { Context } from "../context";
-import { getRelativePath } from "../utils";
+import { Context } from "../context.js";
+import { getRelativePath } from "../utils.js";
 
 function getIndexPath(key: string): string {
   return [key, "index.ts"].filter(Boolean).join("/");
@@ -40,7 +40,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
 
           output.push({
             path: aliasPath,
-            content: `export * from "${getRelativePath(aliasPath, defPath)}/index";`
+            content: `export * from "${getRelativePath(aliasPath, defPath)}/index.js";`
           });
         }
       }
@@ -63,7 +63,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
     for (const [key, values] of kindPathMap) {
       output.push({
         path: getIndexPath(key),
-        content: values.map((v) => `export * from "./${v}";`).join("\n")
+        content: values.map((v) => `export * from "./${v}.js";`).join("\n")
       });
     }
 
@@ -74,7 +74,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
           .map((v) => {
             const exportedName = camelCase(v, ".-");
 
-            return `export * as ${exportedName} from "./${v}/index";`;
+            return `export * as ${exportedName} from "./${v}/index.js";`;
           })
           .join("\n")
       });

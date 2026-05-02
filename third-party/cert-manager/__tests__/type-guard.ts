@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Certificate } from "../gen/cert-manager.io/v1/Certificate";
+import { Certificate } from "../gen/cert-manager.io/v1/Certificate.js";
 
 describe.each([
   // Interface with TypeMeta only

@@ -1,13 +1,13 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import {
   generate,
   isAPIMachineryID
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
-import { join } from "path";
-import { OpenAPIV2 } from "openapi-types";
+import { type OpenAPIV2 } from "openapi-types";
 import { mapValues, omit } from "es-toolkit";
 import { trimPrefix } from "@kubernetes-models/string-util";
+import { fileURLToPath } from "url";
 
 type Document = OpenAPIV2.Document<any>;
 
@@ -50,7 +50,7 @@ function omitGVK(doc: Document): void {
 
   await generate({
     input: JSON.stringify(spec),
-    outputPath: join(__dirname, "../gen"),
+    outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
     rewriteDefinitionPath(path) {
       return trimPrefix(path, "apimachinery/pkg/");
     }

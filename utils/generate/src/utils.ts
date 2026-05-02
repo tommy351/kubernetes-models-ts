@@ -1,10 +1,13 @@
-import { Generator, GroupVersionKind, OutputFile } from "./types";
+import type { Generator, GroupVersionKind, OutputFile } from "./types.js";
 import { outputFile } from "fs-extra";
 import { join } from "path";
 
 export class PathConflictError extends Error {
-  constructor(public path: string) {
+  public path: string;
+
+  constructor(path: string) {
     super(`Path conflict: ${path}`);
+    this.path = path;
   }
 }
 

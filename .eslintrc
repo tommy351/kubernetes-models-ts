@@ -1,13 +1,13 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "vitest"],
+  "plugins": ["@typescript-eslint", "vitest", "n"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:vitest/recommended",
-    "plugin:node/recommended",
+    "plugin:n/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
@@ -17,7 +17,7 @@
       "warn",
       { "allowExpressions": true }
     ],
-    "node/no-unsupported-features/es-syntax": [
+    "n/no-unsupported-features/es-syntax": [
       "error",
       {
         "ignores": ["modules"]
@@ -33,14 +33,22 @@
         "name": "lodash-es",
         "message": "Please use es-toolkit instead."
       }
-    ]
+    ],
+    "n/no-missing-import": "off",
+    "n/no-unpublished-bin": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018
   },
   "settings": {
-    "node": {
-      "tryExtensions": [".ts", ".js", ".cjs", ".mjs", ".json", ".node"]
+    "n": {
+      "tryExtensions": [".ts", ".js", ".cjs", ".mjs", ".json", ".node"],
+      "typescriptExtensionMap": [
+        [".ts", ".js"],
+        [".cts", ".cjs"],
+        [".mts", ".mjs"],
+        [".tsx", ".js"]
+      ]
     }
   },
   "overrides": [
@@ -52,16 +60,10 @@
       }
     },
     {
-      "files": ["examples/**/*.ts"],
-      "rules": {
-        "node/no-missing-import": "off"
-      }
-    },
-    {
       "files": ["**/__tests__/**/*.{js,mjs,ts}"],
       "rules": {
         "@typescript-eslint/ban-ts-comment": "off",
-        "node/no-unpublished-import": "off"
+        "n/no-unpublished-import": "off"
       }
     }
   ]

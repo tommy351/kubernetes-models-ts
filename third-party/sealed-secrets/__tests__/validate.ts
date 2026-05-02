@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret";
+import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {

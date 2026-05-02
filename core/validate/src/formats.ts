@@ -1,4 +1,4 @@
-import Ajv, { Format } from "ajv";
+import { Ajv, Format } from "ajv";
 import { fullFormats } from "ajv-formats/dist/formats.js";
 import draft2019Formats from "ajv-formats-draft2019/formats/index.js";
 import isCidr from "is-cidr";

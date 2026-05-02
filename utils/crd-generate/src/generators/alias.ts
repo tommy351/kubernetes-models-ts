@@ -15,10 +15,10 @@ function generate(map: KeyMap, parent = ""): OutputFile[] {
     const val = map[key];
 
     if (typeof val === "string") {
-      content += `export * from "./${val}";\n`;
+      content += `export * from "./${val}.js";\n`;
     } else {
       const exportedName = camelCase(key, ".-");
-      content += `export * as ${exportedName} from "./${key}/index";\n`;
+      content += `export * as ${exportedName} from "./${key}/index.js";\n`;
       children = children.concat(generate(val, parent + key + "/"));
     }
   }

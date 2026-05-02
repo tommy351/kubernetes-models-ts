@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/pipelines-as-code",
   "version": "0.2.4",
+  "type": "module",
   "description": "Pipelines-as-Code models",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/pipelines-as-code",
   "author": "Christoph Jerolimov <jerolimov@redhat.com>",
   "license": "MIT",
-  "main": "index.cjs",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",

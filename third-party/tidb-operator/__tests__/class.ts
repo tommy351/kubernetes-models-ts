@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { TidbCluster } from "../gen/pingcap.com/v1alpha1/TidbCluster";
+import { TidbCluster } from "../gen/pingcap.com/v1alpha1/TidbCluster.js";
 
 describe("TidbCluster", () => {
   let cluster: TidbCluster;

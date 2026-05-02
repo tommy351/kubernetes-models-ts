@@ -1,19 +1,22 @@
-import { Schema, SchemaTransformer } from "./types";
+import type { Schema, SchemaTransformer } from "./types.js";
 import { omit, omitBy, uniq } from "es-toolkit";
-import Ajv, { _ } from "ajv";
-import standaloneCode from "ajv/dist/standalone";
+import { Ajv, _ } from "ajv";
+import standaloneCodeMod from "ajv/dist/standalone/index.js";
 import assert from "assert";
 import { formats } from "@kubernetes-models/validate";
 import { ParseResult, parse } from "@babel/parser";
-import traverse from "@babel/traverse";
+import traverseMod from "@babel/traverse";
 import * as t from "@babel/types";
-import generate from "@babel/generator";
-import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
+import { generate } from "@babel/generator";
+import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
 import { objectHash, sha256base64 } from "ohash";
-import nullableRef from "./nullable-ref";
-import pattern from "./pattern";
+import nullableRef from "./nullable-ref.js";
+import pattern from "./pattern.js";
 
 const ajv = new Ajv();
+const standaloneCode =
+  standaloneCodeMod as unknown as typeof standaloneCodeMod.default;
+const traverse = traverseMod.default as unknown as typeof traverseMod.default;
 
 const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
 

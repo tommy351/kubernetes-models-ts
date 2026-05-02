@@ -1,7 +1,7 @@
 import yargs from "yargs";
 import { readInput } from "@kubernetes-models/read-input";
-import { generate } from "./generate";
-import { mergeOpenAPISpecs } from "./utils";
+import { generate } from "./generate.js";
+import { mergeOpenAPISpecs } from "./utils.js";
 
 async function readFiles(paths: string[]): Promise<string> {
   const contents: string[] = [];
@@ -17,7 +17,7 @@ async function readFiles(paths: string[]): Promise<string> {
 }
 
 export async function run(): Promise<void> {
-  const args = await yargs
+  const args = await yargs()
     .pkgConf("openapi-generate")
     .option("input", {
       type: "array",
@@ -39,7 +39,7 @@ export async function run(): Promise<void> {
     });
   } catch (err) {
     console.error(err);
-    // eslint-disable-next-line no-process-exit
+    // eslint-disable-next-line n/no-process-exit
     process.exit(1);
   }
 }

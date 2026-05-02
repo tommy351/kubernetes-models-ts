@@ -2,15 +2,15 @@ import { parseAllDocuments, DocumentOptions } from "yaml";
 import { mapValues } from "es-toolkit";
 import {
   composeGenerators,
-  Definition,
-  GroupVersionKind,
+  type Definition,
+  type GroupVersionKind,
   writeOutputFiles,
-  Schema,
+  type Schema,
   getAPIVersion
 } from "@kubernetes-models/generate";
-import generateDefinitions from "./generators/definition";
-import generateAliases from "./generators/alias";
-import generateSchemas from "./generators/schema";
+import generateDefinitions from "./generators/definition.js";
+import generateAliases from "./generators/alias.js";
+import generateSchemas from "./generators/schema.js";
 
 interface CustomResourceDefinition {
   spec: CustomResourceDefinitionSpec;

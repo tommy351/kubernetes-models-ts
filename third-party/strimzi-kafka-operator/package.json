@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/strimzi-kafka-operator",
   "version": "0.2.0",
+  "type": "module",
   "description": "Strimzi Kafka operator models",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/strimzi-kafka-operator",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",

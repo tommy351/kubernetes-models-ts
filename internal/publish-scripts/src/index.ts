@@ -1,6 +1,6 @@
 import yargs from "yargs/yargs";
-import { build, BuildArguments } from "./build";
-import { prePack, PrePackArguments } from "./prepack";
+import { build, type BuildArguments } from "./build.js";
+import { prePack, type PrePackArguments } from "./prepack.js";
 
 yargs(process.argv.slice(2))
   .command<BuildArguments>(

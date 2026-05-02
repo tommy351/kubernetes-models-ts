@@ -1,2 +1,2 @@
-export { formats } from "./formats";
-export { type ValidateFunc, runValidateFunc } from "./validate";
+export { formats } from "./formats.js";
+export { type ValidateFunc, runValidateFunc } from "./validate.js";

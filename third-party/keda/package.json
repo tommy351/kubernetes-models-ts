@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/keda",
   "version": "0.4.4",
+  "type": "module",
   "description": "KEDA(Kubernetes Event-driven Autoscaling) models",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/keda",
   "author": "Jay Chung <ken8203@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",

@@ -1,10 +1,10 @@
 import {
-  Generator,
+  type Generator,
   transformSchema,
   compileSchema,
-  OutputFile
+  type OutputFile
 } from "@kubernetes-models/generate";
-import { getSchemaPath } from "../utils";
+import { getSchemaPath } from "../utils.js";
 import { trimSuffix } from "@kubernetes-models/string-util";
 
 const generateSchemas: Generator = async (definitions) => {

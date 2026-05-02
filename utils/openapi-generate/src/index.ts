@@ -1,2 +1,2 @@
-export * from "./generate";
-export { mergeOpenAPISpecs, isAPIMachineryID } from "./utils";
+export * from "./generate.js";
+export { mergeOpenAPISpecs, isAPIMachineryID } from "./utils.js";

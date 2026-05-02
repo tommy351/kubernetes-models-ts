@@ -1,7 +1,7 @@
 import { Definition, getAPIVersion } from "@kubernetes-models/generate";
 import { trimPrefix } from "@kubernetes-models/string-util";
 import { identity } from "es-toolkit";
-import { getShortClassName } from "./string";
+import { getShortClassName } from "./string.js";
 
 function getIdPrefix(id: string): string {
   return id.split(".").slice(0, -1).join(".");

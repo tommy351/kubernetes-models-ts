@@ -1,16 +1,16 @@
 import {
   composeGenerators,
-  Definition,
+  type Definition,
   getAPIVersion,
-  GroupVersionKind,
-  Schema,
+  type GroupVersionKind,
+  type Schema,
   writeOutputFiles
 } from "@kubernetes-models/generate";
-import generateDefinitions from "./generators/definition";
-import generateSchemas from "./generators/schema";
-import generateAliases from "./generators/alias";
+import generateDefinitions from "./generators/definition.js";
+import generateSchemas from "./generators/schema.js";
+import generateAliases from "./generators/alias.js";
 import { uniq } from "es-toolkit";
-import { buildContext, ContextOptions } from "./context";
+import { buildContext, type ContextOptions } from "./context.js";
 
 function load(input: string): Definition[] {
   const { definitions } = JSON.parse(input);

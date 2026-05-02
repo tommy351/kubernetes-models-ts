@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { postgresql } from "../gen/acid.zalan.do/v1/postgresql";
+import { postgresql } from "../gen/acid.zalan.do/v1/postgresql.js";
 
 describe("postgresql", () => {
   describe("JavaScript RegExp", () => {

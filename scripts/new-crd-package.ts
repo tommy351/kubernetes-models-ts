@@ -1,11 +1,12 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import { join } from "path";
 import yargs from "yargs";
 import { mkdir, stat, writeFile } from "fs/promises";
 import humanId from "human-id";
 import execa from "execa";
+import { fileURLToPath } from "url";
 
-const rootDir = join(__dirname, "..");
+const rootDir = fileURLToPath(new URL("..", import.meta.url));
 
 (async () => {
   const args = await yargs

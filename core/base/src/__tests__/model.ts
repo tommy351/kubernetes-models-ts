@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { Model, setValidateFunc } from "../model";
+import { Model, setValidateFunc } from "../model.js";
 import { ValidateFunc } from "@kubernetes-models/validate";
 
 describe("toJSON", () => {

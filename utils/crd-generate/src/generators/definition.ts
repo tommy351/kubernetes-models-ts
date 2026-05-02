@@ -1,15 +1,15 @@
 import {
-  Definition,
+  type Definition,
   generateImports,
   generateInterface,
-  Generator,
+  type Generator,
   getAPIVersion,
-  GroupVersionKind,
-  Import,
-  OutputFile
+  type GroupVersionKind,
+  type Import,
+  type OutputFile
 } from "@kubernetes-models/generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
-import { getRelativePath, getSchemaPath } from "../utils";
+import { getRelativePath, getSchemaPath } from "../utils.js";
 
 function getFieldType(key: string[]): string | undefined {
   if (key.length === 1 && key[0] === "metadata") {

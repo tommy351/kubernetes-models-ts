@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/crd-generate",
   "version": "5.1.0",
+  "type": "module",
   "description": "Generate Kubernetes models for custom resource definitions (CRD).",
   "repository": {
     "type": "git",
@@ -10,16 +11,12 @@
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc-multi --config ../../tsc-multi.json"
+    "build": "tsc"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
   "sideEffects": false,
   "exports": {
     "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    "import": "./dist/index.js"
   },
   "bin": {
     "crd-generate": "bin/crd-generate.js"
@@ -50,7 +47,6 @@
   },
   "devDependencies": {
     "@types/yargs": "^17.0.13",
-    "tsc-multi": "^0.6.1",
-    "typescript": "^4.8.4"
+    "typescript": "^6.0.3"
   }
 }

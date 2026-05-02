@@ -1,7 +1,7 @@
 /// <reference types="jest-extended" />
 import { describe, it, expect } from "vitest";
-import Ajv from "ajv";
-import { runValidateFunc } from "../validate";
+import { Ajv, ValidationError } from "ajv";
+import { runValidateFunc } from "../validate.js";
 
 const ajv = new Ajv({
   strictTypes: false,
@@ -18,7 +18,7 @@ describe("number", () => {
 
   it("failed", () => {
     expect(() => runValidateFunc(validate, false)).toThrowWithMessage(
-      Ajv.ValidationError,
+      ValidationError,
       "data must be number"
     );
   });
@@ -52,7 +52,7 @@ describe("object", () => {
         c: "abc"
       })
     ).toThrowWithMessage(
-      Ajv.ValidationError,
+      ValidationError,
       "data/a must be string, data/c must be boolean"
     );
   });

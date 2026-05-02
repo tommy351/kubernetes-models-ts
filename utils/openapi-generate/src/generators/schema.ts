@@ -1,16 +1,16 @@
 import {
   collectRefs,
-  Definition,
-  Generator,
-  Schema,
+  type Definition,
+  type Generator,
+  type Schema,
   transformSchema as baseTransformSchema,
   compileSchema
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { Context } from "../context";
-import { getClassName, trimRefPrefix } from "../string";
-import { getSchemaPath, isAPIMachineryID } from "../utils";
-import { OutputFile } from "@kubernetes-models/generate";
+import { type Context } from "../context.js";
+import { getClassName, trimRefPrefix } from "../string.js";
+import { getSchemaPath, isAPIMachineryID } from "../utils.js";
+import { type OutputFile } from "@kubernetes-models/generate";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {

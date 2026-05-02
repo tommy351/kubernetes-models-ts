@@ -1,7 +1,8 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import execa from "execa";
 import { outputFile } from "fs-extra";
 import { join } from "path";
+import { fileURLToPath } from "url";
 import { parse, stringify } from "yaml";
 
 const CRDS: readonly string[] = [
@@ -24,7 +25,7 @@ const CRDS: readonly string[] = [
   "updateinfos.nodemanagement.gke.io"
 ];
 
-const CRD_DIR = join(__dirname, "../crd");
+const CRD_DIR = fileURLToPath(new URL("../crd", import.meta.url));
 
 function formatCRD(data: any): any {
   return {

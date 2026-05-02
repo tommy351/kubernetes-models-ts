@@ -1,14 +1,13 @@
 import glob from "fast-glob";
-import { writeJSON, pathExists, readJSON } from "fs-extra";
 import { basename, dirname, extname, join, posix } from "path";
-import { copyFile, mkdir, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
 import execa from "execa";
 import * as swc from "@swc/core";
+import { fileURLToPath } from "url";
 
 const ECMA_VERSION = 2020;
 const DTS_EXT = ".d.ts";
-const CJS_EXT = ".js";
-const ESM_EXT = ".mjs";
+const ESM_EXT = ".js";
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
@@ -21,8 +20,7 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
 function generateExportEntry(name: string): Record<string, string> {
   return {
     types: name + DTS_EXT,
-    import: name + ESM_EXT,
-    require: name + CJS_EXT
+    import: name + ESM_EXT
   };
 }
 
@@ -54,7 +52,9 @@ async function generateExportMap(
 }
 
 async function compileDts(cwd: string): Promise<void> {
-  const tscBin = join(__dirname, "../node_modules/.bin/tsc");
+  const tscBin = fileURLToPath(
+    new URL("../node_modules/.bin/tsc", import.meta.url)
+  );
 
   console.log("Generating declaration files");
   await execa(tscBin, ["--emitDeclarationOnly"], { cwd, stdio: "inherit" });
@@ -154,18 +154,11 @@ async function compileJs(cwd: string): Promise<void> {
       syntax: ext === ".ts" ? "typescript" : "ecmascript"
     });
 
-    await Promise.all([
-      writeJs({
-        ast: rewriteImportPath(ast, CJS_EXT),
-        module: "commonjs",
-        path: join(distDir, name + CJS_EXT)
-      }),
-      writeJs({
-        ast: rewriteImportPath(ast, ESM_EXT),
-        module: "es6",
-        path: join(distDir, name + ESM_EXT)
-      })
-    ]);
+    await writeJs({
+      ast: rewriteImportPath(ast, ESM_EXT),
+      module: "es6",
+      path: join(distDir, name + ESM_EXT)
+    });
   }
 }
 
@@ -189,19 +182,26 @@ async function copyDistFiles(cwd: string): Promise<void> {
     const src = join(cwd, file);
     const dst = join(cwd, "dist", file);
 
-    if (!(await pathExists(src))) continue;
-
-    await copyFile(src, dst);
-    console.log("Copying:", file);
+    try {
+      await copyFile(src, dst);
+      console.log("Copying:", file);
+    } catch (err) {
+      if ((err as any).code !== "ENOENT") throw err;
+    }
   }
 }
 
 async function writePkgJson(args: BuildArguments): Promise<void> {
-  const pkgJson = await readJSON(join(args.cwd, "package.json"));
+  const pkgJson = JSON.parse(
+    await readFile(join(args.cwd, "package.json"), "utf-8")
+  );
 
   pkgJson.exports = await generateExportMap(args);
 
-  await writeJSON(join(args.cwd, "dist/package.json"), pkgJson, { spaces: 2 });
+  await writeFile(
+    join(args.cwd, "dist/package.json"),
+    JSON.stringify(pkgJson, null, 2)
+  );
 }
 
 export interface BuildArguments {

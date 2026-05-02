@@ -1,12 +1,12 @@
-/* eslint-disable node/no-unpublished-import */
+/* eslint-disable n/no-unpublished-import */
 import {
   generate,
   mergeOpenAPISpecs,
   isAPIMachineryID
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
-import { join } from "path";
 import { OpenAPIV2 } from "openapi-types";
+import { fileURLToPath } from "url";
 
 type Document = OpenAPIV2.Document<any>;
 
@@ -72,7 +72,7 @@ function patchStatefulSetSpec(spec: Document): void {
 
   await generate({
     input: JSON.stringify(spec),
-    outputPath: join(__dirname, "../gen"),
+    outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
     externalAPIMachinery: true
   });
 })();

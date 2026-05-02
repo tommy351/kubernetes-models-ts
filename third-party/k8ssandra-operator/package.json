@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/k8ssandra-operator",
   "version": "0.2.4",
+  "type": "module",
   "description": "Manage Apache Cassandra and DSE on Kubernetes.",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/k8ssandra-operator",
   "author": "Eddie Wen <eddiewen.tw@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",

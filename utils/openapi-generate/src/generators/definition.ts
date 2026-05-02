@@ -13,15 +13,20 @@ import {
   trimSuffix
 } from "@kubernetes-models/string-util";
 import { mapValues, omit } from "es-toolkit";
-import { Context } from "../context";
+import { Context } from "../context.js";
 import {
   getClassName,
   getInterfaceName,
   getShortClassName,
   getShortInterfaceName,
   trimRefPrefix
-} from "../string";
-import { getRelativePath, getSchemaPath, isAPIMachineryID } from "../utils";
+} from "../string.js";
+import {
+  getRelativePath,
+  getSchemaPath,
+  isAPIMachineryID,
+  trimExtname
+} from "../utils.js";
 
 function omitTypeMetaDescription(schema: Schema): Schema {
   const { properties, ...rest } = schema;
@@ -99,7 +104,8 @@ export default function ({
         } else {
           imports.push({
             name,
-            path: getRelativePath(path, getDefinitionPath(ref))
+            path:
+              getRelativePath(path, trimExtname(getDefinitionPath(ref))) + ".js"
           });
         }
       }
@@ -189,7 +195,7 @@ export type ${shortClassName} = ${shortInterfaceName};
       }
 
       content += `
-export {
+export type {
   ${shortInterfaceName} as ${interfaceName},
   ${shortClassName} as ${className}
 };

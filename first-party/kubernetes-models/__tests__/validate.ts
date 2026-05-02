@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { Pod } from "../gen/v1/Pod";
-import { Service } from "../gen/v1/Service";
-import { ConfigMap } from "../gen/v1/ConfigMap";
-import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
-import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps";
-import { PersistentVolumeClaim } from "../gen/v1/PersistentVolumeClaim";
-import { StatefulSetSpec } from "../gen/apps/v1/StatefulSetSpec";
+import { Pod } from "../gen/v1/Pod.js";
+import { Service } from "../gen/v1/Service.js";
+import { ConfigMap } from "../gen/v1/ConfigMap.js";
+import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps.js";
+import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps.js";
+import { PersistentVolumeClaim } from "../gen/v1/PersistentVolumeClaim.js";
+import { StatefulSetSpec } from "../gen/apps/v1/StatefulSetSpec.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {

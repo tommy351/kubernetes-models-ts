@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/rabbitmq-messaging-topology-operator",
   "version": "0.3.4",
+  "type": "module",
   "description": "The operator allow developers to create and manage RabbitMQ messaging topologies within a RabbitMQ cluster using a declarative Kubernetes API",
   "repository": {
     "type": "git",
@@ -9,9 +10,6 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/rabbitmq-messaging-topology-operator",
   "author": "Justin Chen <mail@justin0u0.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
     "build": "crd-generate && publish-scripts build",
