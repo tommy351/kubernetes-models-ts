@@ -8,12 +8,12 @@ function getIdPrefix(id: string): string {
 }
 
 export interface Context {
-  getDefinitionPath(id: string): string;
+  getDefinitionPath(this: void, id: string): string;
   externalAPIMachinery?: boolean;
 }
 
 export interface ContextOptions {
-  rewriteDefinitionPath?(path: string): string;
+  rewriteDefinitionPath?(this: void, path: string): string;
   externalAPIMachinery?: boolean;
 }
 

@@ -8,8 +8,8 @@ const WILDCARD_FIELD = "*";
 
 export interface GenerateInterfaceOptions {
   includeDescription?: boolean;
-  getRefType?(ref: string): string;
-  getFieldType?(key: string[], schema: Schema): string | undefined;
+  getRefType?(this: void, ref: string): string;
+  getFieldType?(this: void, key: string[], schema: Schema): string | undefined;
 }
 
 function _generateInterface(

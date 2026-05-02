@@ -1,20 +1,16 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { TrafficSplit } from "../gen/split.smi-spec.io/v1alpha4/TrafficSplit";
+import { describe, it, expect } from "vitest";
+import { TrafficSplit } from "../gen/split.smi-spec.io/v1alpha4/TrafficSplit.js";
 
 describe("TrafficSplit", () => {
-  let repository: TrafficSplit;
-
-  beforeEach(() => {
-    repository = new TrafficSplit({
-      metadata: { name: "example" },
-      spec: {
-        service: "example",
-        backends: [
-          { service: "example-v1", weight: 90 },
-          { service: "example-v2", weight: 10 }
-        ]
-      }
-    });
+  const repository = new TrafficSplit({
+    metadata: { name: "example" },
+    spec: {
+      service: "example",
+      backends: [
+        { service: "example-v1", weight: 90 },
+        { service: "example-v2", weight: 10 }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

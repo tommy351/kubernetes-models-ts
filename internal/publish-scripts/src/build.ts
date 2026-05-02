@@ -1,4 +1,4 @@
-import glob from "fast-glob";
+import { glob } from "fast-glob";
 import { basename, dirname, extname, join, posix } from "path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
 import execa from "execa";

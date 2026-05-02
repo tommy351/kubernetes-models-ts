@@ -5,11 +5,13 @@ import {
 } from "@kubernetes-models/validate";
 import { type TypeMeta } from "./meta.js";
 
-function setDefinedProps(src: any, dst: any): any {
-  for (const key of Object.keys(src)) {
-    if (src[key] !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      dst[key] = filterUndefinedValues(src[key]);
+function setDefinedProps<D extends object>(src: object, dst: D): D {
+  const s = src as Record<string, unknown>;
+  const d = dst as Record<string, unknown>;
+
+  for (const key of Object.keys(s)) {
+    if (s[key] !== undefined) {
+      d[key] = filterUndefinedValues(s[key]);
     }
   }
 
@@ -22,7 +24,7 @@ function filterUndefinedValues(data: unknown): unknown {
   }
 
   if (isPlainObject(data)) {
-    return setDefinedProps(data, {});
+    return setDefinedProps(data as object, {});
   }
 
   return data;
@@ -39,14 +41,14 @@ export class Model<T> {
     }
   }
 
-  protected setDefinedProps(data?: ModelData<T>): any {
+  protected setDefinedProps(data?: ModelData<T>): void {
     if (data) {
       setDefinedProps(data, this);
     }
   }
 
-  public toJSON(): any {
-    const result = {};
+  public toJSON(): unknown {
+    const result: Record<string, unknown> = {};
 
     setDefinedProps(this, result);
 

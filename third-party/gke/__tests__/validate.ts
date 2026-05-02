@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { BackendConfig } from "../gen/cloud.google.com/v1beta1/BackendConfig";
+import { BackendConfig } from "../gen/cloud.google.com/v1beta1/BackendConfig.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {

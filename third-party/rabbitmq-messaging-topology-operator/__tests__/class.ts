@@ -1,31 +1,27 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Binding } from "../gen/rabbitmq.com/v1beta1/Binding";
-import { Exchange } from "../gen/rabbitmq.com/v1beta1/Exchange";
-import { Federation } from "../gen/rabbitmq.com/v1beta1/Federation";
-import { Permission } from "../gen/rabbitmq.com/v1beta1";
-import { Policy } from "../gen/rabbitmq.com/v1beta1/Policy";
-import { Shovel } from "../gen/rabbitmq.com/v1beta1/Shovel";
-import { Queue } from "../gen/rabbitmq.com/v1beta1/Queue";
-import { User } from "../gen/rabbitmq.com/v1beta1/User";
-import { Vhost } from "../gen/rabbitmq.com/v1beta1/Vhost";
+import { describe, it, expect } from "vitest";
+import { Binding } from "../gen/rabbitmq.com/v1beta1/Binding.js";
+import { Exchange } from "../gen/rabbitmq.com/v1beta1/Exchange.js";
+import { Federation } from "../gen/rabbitmq.com/v1beta1/Federation.js";
+import { Permission } from "../gen/rabbitmq.com/v1beta1/index.js";
+import { Policy } from "../gen/rabbitmq.com/v1beta1/Policy.js";
+import { Shovel } from "../gen/rabbitmq.com/v1beta1/Shovel.js";
+import { Queue } from "../gen/rabbitmq.com/v1beta1/Queue.js";
+import { User } from "../gen/rabbitmq.com/v1beta1/User.js";
+import { Vhost } from "../gen/rabbitmq.com/v1beta1/Vhost.js";
 
 describe("Binding", () => {
-  let binding: Binding;
-
-  beforeEach(() => {
-    binding = new Binding({
-      metadata: {
-        name: "binding-sample"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        source: "exchange-sample",
-        destination: "queue-sample",
-        destinationType: "queue",
-        routingKey: "key-sample"
-      }
-    });
+  const binding = new Binding({
+    metadata: {
+      name: "binding-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      source: "exchange-sample",
+      destination: "queue-sample",
+      destinationType: "queue",
+      routingKey: "key-sample"
+    }
   });
 
   it("should set apiVersion", () => {
@@ -60,22 +56,18 @@ describe("Binding", () => {
 });
 
 describe("Exchange", () => {
-  let exchange: Exchange;
-
-  beforeEach(() => {
-    exchange = new Exchange({
-      metadata: {
-        name: "direct-exchange"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        name: "exchange-sample",
-        type: "direct",
-        durable: true,
-        autoDelete: false
-      }
-    });
+  const exchange = new Exchange({
+    metadata: {
+      name: "direct-exchange"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      name: "exchange-sample",
+      type: "direct",
+      durable: true,
+      autoDelete: false
+    }
   });
 
   it("should set apiVersion", () => {
@@ -110,23 +102,19 @@ describe("Exchange", () => {
 });
 
 describe("Federation", () => {
-  let federation: Federation;
-
-  beforeEach(() => {
-    federation = new Federation({
-      metadata: {
-        name: "federation-sample"
+  const federation = new Federation({
+    metadata: {
+      name: "federation-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      name: "federation-sample",
+      uriSecret: {
+        name: "secret-sample"
       },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        name: "federation-sample",
-        uriSecret: {
-          name: "secret-sample"
-        },
-        ackMode: "on-confirm"
-      }
-    });
+      ackMode: "on-confirm"
+    }
   });
 
   it("should set apiVersion", () => {
@@ -162,24 +150,20 @@ describe("Federation", () => {
 });
 
 describe("Permission", () => {
-  let permission: Permission;
-
-  beforeEach(() => {
-    permission = new Permission({
-      metadata: {
-        name: "permission-sample"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        user: "user-sample",
-        permissions: {
-          configure: ".*",
-          write: ".*",
-          read: ".*"
-        }
+  const permission = new Permission({
+    metadata: {
+      name: "permission-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      user: "user-sample",
+      permissions: {
+        configure: ".*",
+        write: ".*",
+        read: ".*"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -216,24 +200,20 @@ describe("Permission", () => {
 });
 
 describe("Policy", () => {
-  let policy: Policy;
-
-  beforeEach(() => {
-    policy = new Policy({
-      metadata: {
-        name: "policy-sample"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        name: "policy-sample",
-        pattern: ".*",
-        applyTo: "all",
-        definition: {
-          "ha-mode": "all"
-        }
+  const policy = new Policy({
+    metadata: {
+      name: "policy-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      name: "policy-sample",
+      pattern: ".*",
+      applyTo: "all",
+      definition: {
+        "ha-mode": "all"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -270,22 +250,18 @@ describe("Policy", () => {
 });
 
 describe("Queue", () => {
-  let queue: Queue;
-
-  beforeEach(() => {
-    queue = new Queue({
-      metadata: {
-        name: "quorum-queue"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        name: "queue-sample",
-        type: "quorum",
-        durable: true,
-        autoDelete: false
-      }
-    });
+  const queue = new Queue({
+    metadata: {
+      name: "quorum-queue"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      name: "queue-sample",
+      type: "quorum",
+      durable: true,
+      autoDelete: false
+    }
   });
 
   it("should set apiVersion", () => {
@@ -320,30 +296,26 @@ describe("Queue", () => {
 });
 
 describe("Shovel", () => {
-  let shovel: Shovel;
-
-  beforeEach(() => {
-    shovel = new Shovel({
-      metadata: {
-        name: "shovel-sample"
+  const shovel = new Shovel({
+    metadata: {
+      name: "shovel-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      vhost: "/",
+      name: "shovel-sample",
+      uriSecret: {
+        name: "secret-sample"
       },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        vhost: "/",
-        name: "shovel-sample",
-        uriSecret: {
-          name: "secret-sample"
-        },
-        srcAddress: "amqp://src-address",
-        srcQueue: "source-queue",
-        srcExchange: "source-exchange",
-        srcExchangeKey: "source-exchange-key",
-        destAddress: "amqp://dest-address",
-        destQueue: "dest-queue",
-        destExchange: "dest-exchange",
-        destExchangeKey: "dest-exchange-key"
-      }
-    });
+      srcAddress: "amqp://src-address",
+      srcQueue: "source-queue",
+      srcExchange: "source-exchange",
+      srcExchangeKey: "source-exchange-key",
+      destAddress: "amqp://dest-address",
+      destQueue: "dest-queue",
+      destExchange: "dest-exchange",
+      destExchangeKey: "dest-exchange-key"
+    }
   });
 
   it("should set apiVersion", () => {
@@ -386,19 +358,15 @@ describe("Shovel", () => {
 });
 
 describe("User", () => {
-  let user: User;
-
-  beforeEach(() => {
-    user = new User({
-      metadata: {
-        name: "user-sample"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        importCredentialsSecret: { name: "secret-sample" },
-        tags: ["management"]
-      }
-    });
+  const user = new User({
+    metadata: {
+      name: "user-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      importCredentialsSecret: { name: "secret-sample" },
+      tags: ["management"]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -430,18 +398,14 @@ describe("User", () => {
 });
 
 describe("Vhost", () => {
-  let vhost: Vhost;
-
-  beforeEach(() => {
-    vhost = new Vhost({
-      metadata: {
-        name: "vhost-sample"
-      },
-      spec: {
-        rabbitmqClusterReference: { name: "cluster-sample" },
-        name: "vhost-sample"
-      }
-    });
+  const vhost = new Vhost({
+    metadata: {
+      name: "vhost-sample"
+    },
+    spec: {
+      rabbitmqClusterReference: { name: "cluster-sample" },
+      name: "vhost-sample"
+    }
   });
 
   it("should set apiVersion", () => {

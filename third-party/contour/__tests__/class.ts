@@ -1,32 +1,28 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { IngressRoute } from "../gen/contour.heptio.com/v1beta1/IngressRoute";
-import { HTTPProxy } from "../gen/projectcontour.io/v1/HTTPProxy";
+import { describe, it, expect } from "vitest";
+import { IngressRoute } from "../gen/contour.heptio.com/v1beta1/IngressRoute.js";
+import { HTTPProxy } from "../gen/projectcontour.io/v1/HTTPProxy.js";
 
 describe("IngressRoute", () => {
-  let route: IngressRoute;
-
-  beforeEach(() => {
-    route = new IngressRoute({
-      metadata: {
-        name: "foo"
+  const route = new IngressRoute({
+    metadata: {
+      name: "foo"
+    },
+    spec: {
+      virtualhost: {
+        fqdn: "foo.example.com"
       },
-      spec: {
-        virtualhost: {
-          fqdn: "foo.example.com"
-        },
-        routes: [
-          {
-            match: "/",
-            services: [
-              {
-                name: "foo",
-                port: 80
-              }
-            ]
-          }
-        ]
-      }
-    });
+      routes: [
+        {
+          match: "/",
+          services: [
+            {
+              name: "foo",
+              port: 80
+            }
+          ]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -69,34 +65,30 @@ describe("IngressRoute", () => {
 });
 
 describe("HTTPProxy", () => {
-  let proxy: HTTPProxy;
-
-  beforeEach(() => {
-    proxy = new HTTPProxy({
-      metadata: {
-        name: "foo"
+  const proxy = new HTTPProxy({
+    metadata: {
+      name: "foo"
+    },
+    spec: {
+      virtualhost: {
+        fqdn: "foo.example.com"
       },
-      spec: {
-        virtualhost: {
-          fqdn: "foo.example.com"
-        },
-        routes: [
-          {
-            conditions: [
-              {
-                prefix: "/"
-              }
-            ],
-            services: [
-              {
-                name: "foo",
-                port: 80
-              }
-            ]
-          }
-        ]
-      }
-    });
+      routes: [
+        {
+          conditions: [
+            {
+              prefix: "/"
+            }
+          ],
+          services: [
+            {
+              name: "foo",
+              port: 80
+            }
+          ]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

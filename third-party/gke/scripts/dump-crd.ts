@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unpublished-import */
 import execa from "execa";
 import { outputFile } from "fs-extra";
 import { join } from "path";
@@ -45,11 +44,9 @@ async function dumpCRD(name: string): Promise<void> {
   const data = formatCRD(parse(stdout));
   const path = join(CRD_DIR, name.split(".")[0]) + ".yaml";
 
-  outputFile(path, stringify(data));
+  await outputFile(path, stringify(data));
 }
 
-(async () => {
-  for (const crd of CRDS) {
-    await dumpCRD(crd);
-  }
-})();
+for (const crd of CRDS) {
+  await dumpCRD(crd);
+}

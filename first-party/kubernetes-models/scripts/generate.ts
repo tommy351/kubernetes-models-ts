@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unpublished-import */
 import {
   generate,
   mergeOpenAPISpecs,
@@ -64,15 +63,13 @@ function patchStatefulSetSpec(spec: Document): void {
   volumeClaimTemplates.items = pvcSpec as any;
 }
 
-(async () => {
-  const spec = await fetchSpec();
+const spec = await fetchSpec();
 
-  omitAPIMachineryDefinitions(spec);
-  patchStatefulSetSpec(spec);
+omitAPIMachineryDefinitions(spec);
+patchStatefulSetSpec(spec);
 
-  await generate({
-    input: JSON.stringify(spec),
-    outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
-    externalAPIMachinery: true
-  });
-})();
+await generate({
+  input: JSON.stringify(spec),
+  outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
+  externalAPIMachinery: true
+});

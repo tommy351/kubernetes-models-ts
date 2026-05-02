@@ -1,53 +1,49 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { PostgresCluster } from "../gen/postgres-operator.crunchydata.com/v1beta1/PostgresCluster";
-import { postgresql } from "../gen/acid.zalan.do/v1/postgresql";
+import { describe, it, expect } from "vitest";
+import { PostgresCluster } from "../gen/postgres-operator.crunchydata.com/v1beta1/PostgresCluster.js";
+import { postgresql } from "../gen/acid.zalan.do/v1/postgresql.js";
 
 describe("PostgresCluster", () => {
-  let cluster: PostgresCluster;
-
-  beforeEach(() => {
-    cluster = new PostgresCluster({
-      metadata: { name: "example" },
-      spec: {
-        image:
-          "registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.5-1",
-        postgresVersion: 14,
-        instances: [
-          {
-            name: "instance1",
-            dataVolumeClaimSpec: {
-              accessModes: ["ReadWriteOnce"],
-              resources: {
-                requests: {
-                  storage: "1Gi"
-                }
+  const cluster = new PostgresCluster({
+    metadata: { name: "example" },
+    spec: {
+      image:
+        "registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.5-1",
+      postgresVersion: 14,
+      instances: [
+        {
+          name: "instance1",
+          dataVolumeClaimSpec: {
+            accessModes: ["ReadWriteOnce"],
+            resources: {
+              requests: {
+                storage: "1Gi"
               }
             }
           }
-        ],
-        backups: {
-          pgbackrest: {
-            image:
-              "registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.40-1",
-            repos: [
-              {
-                name: "repo1",
-                volume: {
-                  volumeClaimSpec: {
-                    accessModes: ["ReadWriteOnce"],
-                    resources: {
-                      requests: {
-                        storage: "1Gi"
-                      }
+        }
+      ],
+      backups: {
+        pgbackrest: {
+          image:
+            "registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.40-1",
+          repos: [
+            {
+              name: "repo1",
+              volume: {
+                volumeClaimSpec: {
+                  accessModes: ["ReadWriteOnce"],
+                  resources: {
+                    requests: {
+                      storage: "1Gi"
                     }
                   }
                 }
               }
-            ]
-          }
+            }
+          ]
         }
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -114,33 +110,29 @@ describe("PostgresCluster", () => {
 });
 
 describe("postgresql", () => {
-  let cluster: postgresql;
-
-  beforeEach(() => {
-    cluster = new postgresql({
-      metadata: {
-        name: "example"
+  const cluster = new postgresql({
+    metadata: {
+      name: "example"
+    },
+    spec: {
+      teamId: "acid",
+      volume: {
+        size: "1Gi"
       },
-      spec: {
-        teamId: "acid",
-        volume: {
-          size: "1Gi"
-        },
-        numberOfInstances: 2,
-        users: {
-          zalando: ["superuser", "createdb"]
-        },
-        databases: {
-          foo: "zalando"
-        },
-        preparedDatabases: {
-          bar: {}
-        },
-        postgresql: {
-          version: "14"
-        }
+      numberOfInstances: 2,
+      users: {
+        zalando: ["superuser", "createdb"]
+      },
+      databases: {
+        foo: "zalando"
+      },
+      preparedDatabases: {
+        bar: {}
+      },
+      postgresql: {
+        version: "14"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

@@ -2,6 +2,7 @@ import {
   collectRefs,
   type Definition,
   type Generator,
+  type OutputFile,
   type Schema,
   transformSchema as baseTransformSchema,
   compileSchema
@@ -10,7 +11,6 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 import { type Context } from "../context.js";
 import { getClassName, trimRefPrefix } from "../string.js";
 import { getSchemaPath, isAPIMachineryID } from "../utils.js";
-import { type OutputFile } from "@kubernetes-models/generate";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -22,7 +22,7 @@ function replaceRef(schema: Schema): Schema {
 }
 
 function transformSchema(def: Definition): Schema {
-  let schema: Schema = {};
+  let schema: Schema;
 
   // Rewrite schemas for some special types
   switch (def.schemaId) {

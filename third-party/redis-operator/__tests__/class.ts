@@ -1,19 +1,15 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Redis } from "../gen/redis.redis.opstreelabs.in/v1beta1/Redis";
-import { RedisCluster } from "../gen/redis.redis.opstreelabs.in/v1beta1/RedisCluster";
+import { describe, it, expect } from "vitest";
+import { Redis } from "../gen/redis.redis.opstreelabs.in/v1beta1/Redis.js";
+import { RedisCluster } from "../gen/redis.redis.opstreelabs.in/v1beta1/RedisCluster.js";
 
 describe("Redis", () => {
-  let redis: Redis;
-
-  beforeEach(() => {
-    redis = new Redis({
-      metadata: { name: "example" },
-      spec: {
-        kubernetesConfig: {
-          image: "quay.io/opstree/redis:v7.0.5"
-        }
+  const redis = new Redis({
+    metadata: { name: "example" },
+    spec: {
+      kubernetesConfig: {
+        image: "quay.io/opstree/redis:v7.0.5"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -46,20 +42,16 @@ describe("Redis", () => {
 });
 
 describe("RedisCluster", () => {
-  let cluster: RedisCluster;
-
-  beforeEach(() => {
-    cluster = new RedisCluster({
-      metadata: { name: "example" },
-      spec: {
-        clusterSize: 3,
-        clusterVersion: "v7",
-        persistenceEnabled: true,
-        kubernetesConfig: {
-          image: "quay.io/opstree/redis:v7.0.5"
-        }
+  const cluster = new RedisCluster({
+    metadata: { name: "example" },
+    spec: {
+      clusterSize: 3,
+      clusterVersion: "v7",
+      persistenceEnabled: true,
+      kubernetesConfig: {
+        image: "quay.io/opstree/redis:v7.0.5"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

@@ -1,19 +1,15 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { VMCluster } from "../gen/operator.victoriametrics.com/v1beta1/VMCluster";
+import { describe, it, expect } from "vitest";
+import { VMCluster } from "../gen/operator.victoriametrics.com/v1beta1/VMCluster.js";
 
 describe("VMCluster", () => {
-  let cluster: VMCluster;
-
-  beforeEach(() => {
-    cluster = new VMCluster({
-      metadata: { name: "example" },
-      spec: {
-        retentionPeriod: "12",
-        vmstorage: {
-          replicaCount: 2
-        }
+  const cluster = new VMCluster({
+    metadata: { name: "example" },
+    spec: {
+      retentionPeriod: "12",
+      vmstorage: {
+        replicaCount: 2
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

@@ -1,7 +1,6 @@
-/* eslint-disable n/no-unpublished-import */
 import { readInput } from "@kubernetes-models/read-input";
 import { mkdir, writeFile } from "fs/promises";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -14,18 +13,15 @@ const CRDS = [
 ];
 
 const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
+const output: any[] = [];
 
-(async () => {
-  const output: any[] = [];
+for (const crd of CRDS) {
+  const content = await readInput(
+    `https://raw.githubusercontent.com/Altinity/clickhouse-operator/refs/tags/release-${VERSION}/deploy/helm/clickhouse-operator/crds/CustomResourceDefinition-${crd}.altinity.com.yaml`
+  );
 
-  for (const crd of CRDS) {
-    const content = await readInput(
-      `https://raw.githubusercontent.com/Altinity/clickhouse-operator/refs/tags/release-${VERSION}/deploy/helm/clickhouse-operator/crds/CustomResourceDefinition-${crd}.altinity.com.yaml`
-    );
+  output.push(yaml.load(content.replace(/!!merge */g, "")));
+}
 
-    output.push(yaml.load(content.replace(/!!merge */g, "")));
-  }
-
-  await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, output.map((x) => yaml.dump(x)).join("---\n"));
-})();
+await mkdir(dirname(outputPath), { recursive: true });
+await writeFile(outputPath, output.map((x) => yaml.dump(x)).join("---\n"));

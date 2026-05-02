@@ -1,29 +1,25 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { HTTPRoute } from "../gen/gateway.networking.k8s.io/v1/HTTPRoute";
-import { HTTPRoute as HTTPRouteV1Beta1 } from "../gen/gateway.networking.k8s.io/v1beta1/HTTPRoute";
+import { describe, it, expect } from "vitest";
+import { HTTPRoute } from "../gen/gateway.networking.k8s.io/v1/HTTPRoute.js";
+import { HTTPRoute as HTTPRouteV1Beta1 } from "../gen/gateway.networking.k8s.io/v1beta1/HTTPRoute.js";
 
 describe("HTTPRoute", () => {
-  let route: HTTPRoute;
-
-  beforeEach(() => {
-    route = new HTTPRoute({
-      metadata: {
-        name: "http-route"
-      },
-      spec: {
-        parentRefs: [
-          {
-            kind: "Gateway",
-            name: "foo-gateway"
-          }
-        ],
-        rules: [
-          {
-            backendRefs: [{ name: "foo-svc", port: 8080 }]
-          }
-        ]
-      }
-    });
+  const route = new HTTPRoute({
+    metadata: {
+      name: "http-route"
+    },
+    spec: {
+      parentRefs: [
+        {
+          kind: "Gateway",
+          name: "foo-gateway"
+        }
+      ],
+      rules: [
+        {
+          backendRefs: [{ name: "foo-svc", port: 8080 }]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -63,27 +59,23 @@ describe("HTTPRoute", () => {
 });
 
 describe("HTTPRoute v1beta1", () => {
-  let route: HTTPRouteV1Beta1;
-
-  beforeEach(() => {
-    route = new HTTPRouteV1Beta1({
-      metadata: {
-        name: "http-route"
-      },
-      spec: {
-        parentRefs: [
-          {
-            kind: "Gateway",
-            name: "foo-gateway"
-          }
-        ],
-        rules: [
-          {
-            backendRefs: [{ name: "foo-svc", port: 8080 }]
-          }
-        ]
-      }
-    });
+  const route = new HTTPRouteV1Beta1({
+    metadata: {
+      name: "http-route"
+    },
+    spec: {
+      parentRefs: [
+        {
+          kind: "Gateway",
+          name: "foo-gateway"
+        }
+      ],
+      rules: [
+        {
+          backendRefs: [{ name: "foo-svc", port: 8080 }]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

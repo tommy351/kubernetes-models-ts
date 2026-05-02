@@ -1,49 +1,45 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Rollout } from "../gen/argoproj.io/v1alpha1/Rollout";
+import { describe, it, expect } from "vitest";
+import { Rollout } from "../gen/argoproj.io/v1alpha1/Rollout.js";
 
 describe("Rollout", () => {
-  let rollout: Rollout;
-
-  beforeEach(() => {
-    rollout = new Rollout({
-      metadata: {
-        name: "rollouts-demo"
+  const rollout = new Rollout({
+    metadata: {
+      name: "rollouts-demo"
+    },
+    spec: {
+      replicas: 5,
+      strategy: {
+        canary: {
+          steps: [
+            { setWeight: 20 },
+            { pause: {} },
+            { setWeight: 40 },
+            { pause: { duration: 10 } }
+          ]
+        }
       },
-      spec: {
-        replicas: 5,
-        strategy: {
-          canary: {
-            steps: [
-              { setWeight: 20 },
-              { pause: {} },
-              { setWeight: 40 },
-              { pause: { duration: 10 } }
-            ]
-          }
-        },
-        revisionHistoryLimit: 2,
-        selector: {
-          matchLabels: {
+      revisionHistoryLimit: 2,
+      selector: {
+        matchLabels: {
+          app: "rollouts-demo"
+        }
+      },
+      template: {
+        metadata: {
+          labels: {
             app: "rollouts-demo"
           }
         },
-        template: {
-          metadata: {
-            labels: {
-              app: "rollouts-demo"
+        spec: {
+          containers: [
+            {
+              name: "rollouts-demo",
+              image: "argoproj/rollouts-demo:blue"
             }
-          },
-          spec: {
-            containers: [
-              {
-                name: "rollouts-demo",
-                image: "argoproj/rollouts-demo:blue"
-              }
-            ]
-          }
+          ]
         }
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

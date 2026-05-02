@@ -1,28 +1,24 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Gateway } from "../gen/networking.istio.io/v1beta1/Gateway";
+import { describe, it, expect } from "vitest";
+import { Gateway } from "../gen/networking.istio.io/v1beta1/Gateway.js";
 
 describe("Gateway", () => {
-  let gateway: Gateway;
-
-  beforeEach(() => {
-    gateway = new Gateway({
-      metadata: {
-        name: "test"
+  const gateway = new Gateway({
+    metadata: {
+      name: "test"
+    },
+    spec: {
+      selector: {
+        app: "istio"
       },
-      spec: {
-        selector: {
-          app: "istio"
-        },
-        servers: [
-          {
-            port: {
-              number: 80
-            },
-            hosts: ["*"]
-          }
-        ]
-      }
-    });
+      servers: [
+        {
+          port: {
+            number: 80
+          },
+          hosts: ["*"]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

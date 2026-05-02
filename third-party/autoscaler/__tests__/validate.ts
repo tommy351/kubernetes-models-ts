@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodAutoscaler";
+import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodAutoscaler.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {

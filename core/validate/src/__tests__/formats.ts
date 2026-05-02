@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { addFormats } from "../formats";
-import Ajv from "ajv";
+import { addFormats } from "../formats.js";
+import { Ajv } from "ajv";
 
 const ajv = new Ajv({
   strictTypes: false,

@@ -1,7 +1,6 @@
-/* eslint-disable n/no-unpublished-import */
 import execa from "execa";
 import { mkdir, writeFile } from "fs/promises";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -25,26 +24,24 @@ async function render(name: string, version: string): Promise<string> {
   return result.stdout;
 }
 
-(async () => {
-  const commands = [
-    await render("linkerd-crds", "2024.11.8"),
-    await render("linkerd-multicluster", "2024.11.8")
-  ];
-  const manifests = yaml.loadAll(commands.join("---\n"));
-  const chunks: string[] = [];
+const commands = [
+  await render("linkerd-crds", "2024.11.8"),
+  await render("linkerd-multicluster", "2024.11.8")
+];
+const manifests = yaml.loadAll(commands.join("---\n"));
+const chunks: string[] = [];
 
-  for (const manifest of manifests) {
-    if (
-      isObject(manifest) &&
-      manifest.kind === "CustomResourceDefinition" &&
-      isObject(manifest.metadata) &&
-      typeof manifest.metadata.name === "string" &&
-      !manifest.metadata.name.endsWith("networking.k8s.io")
-    ) {
-      chunks.push(yaml.dump(manifest));
-    }
+for (const manifest of manifests) {
+  if (
+    isObject(manifest) &&
+    manifest.kind === "CustomResourceDefinition" &&
+    isObject(manifest.metadata) &&
+    typeof manifest.metadata.name === "string" &&
+    !manifest.metadata.name.endsWith("networking.k8s.io")
+  ) {
+    chunks.push(yaml.dump(manifest));
   }
+}
 
-  await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, chunks.join("---\n"));
-})();
+await mkdir(dirname(outputPath), { recursive: true });
+await writeFile(outputPath, chunks.join("---\n"));

@@ -1,22 +1,18 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Backup } from "../gen/longhorn.io/v1beta1/Backup";
+import { describe, it, expect } from "vitest";
+import { Backup } from "../gen/longhorn.io/v1beta1/Backup.js";
 
 describe("Application", () => {
-  let backup: Backup;
-
-  beforeEach(() => {
-    backup = new Backup({
-      metadata: {
-        name: "backup"
-      },
-      spec: {
-        backupMode: "incremental",
-        snapshotName: "snapshot-name-example",
-        labels: {
-          app: "test"
-        }
+  const backup = new Backup({
+    metadata: {
+      name: "backup"
+    },
+    spec: {
+      backupMode: "incremental",
+      snapshotName: "snapshot-name-example",
+      labels: {
+        app: "test"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

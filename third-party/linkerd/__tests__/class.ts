@@ -1,28 +1,24 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
-import { ServiceProfile } from "../gen/linkerd.io/v1alpha2/ServiceProfile";
-import { Link } from "../gen/multicluster.linkerd.io/v1alpha1/Link";
-import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute";
+import { ServiceProfile } from "../gen/linkerd.io/v1alpha2/ServiceProfile.js";
+import { Link } from "../gen/multicluster.linkerd.io/v1alpha1/Link.js";
+import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute.js";
 
 describe("ServiceProfile", () => {
-  let profile: ServiceProfile;
-
-  beforeEach(() => {
-    profile = new ServiceProfile({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        routes: [
-          {
-            name: "test",
-            condition: {
-              method: "GET"
-            }
+  const profile = new ServiceProfile({
+    metadata: {
+      name: "test"
+    },
+    spec: {
+      routes: [
+        {
+          name: "test",
+          condition: {
+            method: "GET"
           }
-        ]
-      }
-    });
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -72,17 +68,13 @@ describe("ServiceProfile", () => {
 });
 
 describe("Link", () => {
-  let link: Link;
-
-  beforeEach(() => {
-    link = new Link({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        targetClusterName: "test"
-      }
-    });
+  const link = new Link({
+    metadata: {
+      name: "test"
+    },
+    spec: {
+      targetClusterName: "test"
+    }
   });
 
   it("should set apiVersion", () => {
@@ -121,21 +113,17 @@ describe("Link", () => {
 });
 
 describe("HTTPRoute", () => {
-  let route: HTTPRoute;
-
-  beforeEach(() => {
-    route = new HTTPRoute({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        rules: [
-          {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
-    });
+  const route = new HTTPRoute({
+    metadata: {
+      name: "test"
+    },
+    spec: {
+      rules: [
+        {
+          matches: [{ method: "GET" }]
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

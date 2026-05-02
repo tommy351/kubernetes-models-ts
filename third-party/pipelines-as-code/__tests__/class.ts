@@ -1,18 +1,14 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Repository } from "../gen/pipelinesascode.tekton.dev/v1alpha1/Repository";
+import { describe, it, expect } from "vitest";
+import { Repository } from "../gen/pipelinesascode.tekton.dev/v1alpha1/Repository.js";
 
 describe("Repository", () => {
-  let repository: Repository;
-
-  beforeEach(() => {
-    repository = new Repository({
-      metadata: {
-        name: "test-repository"
-      },
-      spec: {
-        url: "https://github.com/linda/project"
-      }
-    });
+  const repository = new Repository({
+    metadata: {
+      name: "test-repository"
+    },
+    spec: {
+      url: "https://github.com/linda/project"
+    }
   });
 
   it("should set apiVersion", () => {

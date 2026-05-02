@@ -1,34 +1,30 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Build } from "../gen/shipwright.io/v1beta1/Build";
-import { BuildRun } from "../gen/shipwright.io/v1beta1/BuildRun";
-import { BuildStrategy } from "../gen/shipwright.io/v1beta1/BuildStrategy";
-import { ClusterBuildStrategy } from "../gen/shipwright.io/v1beta1/ClusterBuildStrategy";
+import { describe, it, expect } from "vitest";
+import { Build } from "../gen/shipwright.io/v1beta1/Build.js";
+import { BuildRun } from "../gen/shipwright.io/v1beta1/BuildRun.js";
+import { BuildStrategy } from "../gen/shipwright.io/v1beta1/BuildStrategy.js";
+import { ClusterBuildStrategy } from "../gen/shipwright.io/v1beta1/ClusterBuildStrategy.js";
 
 describe("Build", () => {
-  let build: Build;
-
-  beforeEach(() => {
-    build = new Build({
-      metadata: {
-        namespace: "my-namespace",
-        name: "buildah-golang-build"
+  const build = new Build({
+    metadata: {
+      namespace: "my-namespace",
+      name: "buildah-golang-build"
+    },
+    spec: {
+      strategy: {
+        kind: "ClusterBuildStrategy",
+        name: "buildah"
       },
-      spec: {
-        strategy: {
-          kind: "ClusterBuildStrategy",
-          name: "buildah"
+      source: {
+        git: {
+          url: "https://github.com/shipwright-io/sample-go"
         },
-        source: {
-          git: {
-            url: "https://github.com/shipwright-io/sample-go"
-          },
-          contextDir: "docker-build"
-        },
-        output: {
-          image: "registry/namespace/image:latest"
-        }
+        contextDir: "docker-build"
+      },
+      output: {
+        image: "registry/namespace/image:latest"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -71,18 +67,14 @@ describe("Build", () => {
 });
 
 describe("BuildRun", () => {
-  let buildRun: BuildRun;
-
-  beforeEach(() => {
-    buildRun = new BuildRun({
-      metadata: {
-        namespace: "my-namespace",
-        generateName: "test-buildrun-"
-      },
-      spec: {
-        build: {}
-      }
-    });
+  const buildRun = new BuildRun({
+    metadata: {
+      namespace: "my-namespace",
+      generateName: "test-buildrun-"
+    },
+    spec: {
+      build: {}
+    }
   });
 
   it("should set apiVersion", () => {
@@ -141,49 +133,45 @@ describe("BuildRun", () => {
 });
 
 describe("BuildStrategy", () => {
-  let buildStrategy: BuildStrategy;
-
-  beforeEach(() => {
-    buildStrategy = new BuildStrategy({
-      metadata: {
-        namespace: "my-namespace",
-        name: "namespaced-build-strategy"
-      },
-      spec: {
-        parameters: [
-          { name: "build-arg", description: "ARGS" },
-          {
-            name: "secrets",
-            description: "Some secrets",
-            type: "array",
-            defaults: []
-          }
-        ],
-        steps: [
-          {
-            name: "build-and-push",
-            image: "moby/buildkit:nightly-rootless",
-            imagePullPolicy: "Always",
-            workingDir: ".",
-            command: ["/bin/bash"],
-            args: ["-c", "echo hello world"],
-            securityContext: {
-              privileged: false
+  const buildStrategy = new BuildStrategy({
+    metadata: {
+      namespace: "my-namespace",
+      name: "namespaced-build-strategy"
+    },
+    spec: {
+      parameters: [
+        { name: "build-arg", description: "ARGS" },
+        {
+          name: "secrets",
+          description: "Some secrets",
+          type: "array",
+          defaults: []
+        }
+      ],
+      steps: [
+        {
+          name: "build-and-push",
+          image: "moby/buildkit:nightly-rootless",
+          imagePullPolicy: "Always",
+          workingDir: ".",
+          command: ["/bin/bash"],
+          args: ["-c", "echo hello world"],
+          securityContext: {
+            privileged: false
+          },
+          resources: {
+            requests: {
+              cpu: "250m",
+              memory: "100Mi"
             },
-            resources: {
-              requests: {
-                cpu: "250m",
-                memory: "100Mi"
-              },
-              limits: {
-                cpu: "500m",
-                memory: "1Gi"
-              }
+            limits: {
+              cpu: "500m",
+              memory: "1Gi"
             }
           }
-        ]
-      }
-    });
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -245,48 +233,44 @@ describe("BuildStrategy", () => {
 });
 
 describe("ClusterBuildStrategy", () => {
-  let buildStrategy: ClusterBuildStrategy;
-
-  beforeEach(() => {
-    buildStrategy = new ClusterBuildStrategy({
-      metadata: {
-        name: "namespaced-build-strategy"
-      },
-      spec: {
-        parameters: [
-          { name: "build-arg", description: "ARGS" },
-          {
-            name: "secrets",
-            description: "Some secrets",
-            type: "array",
-            defaults: []
-          }
-        ],
-        steps: [
-          {
-            name: "build-and-push",
-            image: "moby/buildkit:nightly-rootless",
-            imagePullPolicy: "Always",
-            workingDir: ".",
-            command: ["/bin/bash"],
-            args: ["-c", "echo hello world"],
-            securityContext: {
-              privileged: false
+  const buildStrategy = new ClusterBuildStrategy({
+    metadata: {
+      name: "namespaced-build-strategy"
+    },
+    spec: {
+      parameters: [
+        { name: "build-arg", description: "ARGS" },
+        {
+          name: "secrets",
+          description: "Some secrets",
+          type: "array",
+          defaults: []
+        }
+      ],
+      steps: [
+        {
+          name: "build-and-push",
+          image: "moby/buildkit:nightly-rootless",
+          imagePullPolicy: "Always",
+          workingDir: ".",
+          command: ["/bin/bash"],
+          args: ["-c", "echo hello world"],
+          securityContext: {
+            privileged: false
+          },
+          resources: {
+            requests: {
+              cpu: "250m",
+              memory: "100Mi"
             },
-            resources: {
-              requests: {
-                cpu: "250m",
-                memory: "100Mi"
-              },
-              limits: {
-                cpu: "500m",
-                memory: "1Gi"
-              }
+            limits: {
+              cpu: "500m",
+              memory: "1Gi"
             }
           }
-        ]
-      }
-    });
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

@@ -1,25 +1,21 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Postgres } from "../gen/kubedb.com/v1alpha2/Postgres";
+import { describe, it, expect } from "vitest";
+import { Postgres } from "../gen/kubedb.com/v1alpha2/Postgres.js";
 
 describe("Postgres", () => {
-  let pg: Postgres;
-
-  beforeEach(() => {
-    pg = new Postgres({
-      metadata: { name: "example" },
-      spec: {
-        version: "13.2",
-        storageType: "Durable",
-        storage: {
-          storageClassName: "standard",
-          accessModes: ["ReadWriteOnce"],
-          resources: {
-            requests: { storage: "1Gi" }
-          }
-        },
-        terminationPolicy: "DoNotTerminate"
-      }
-    });
+  const pg = new Postgres({
+    metadata: { name: "example" },
+    spec: {
+      version: "13.2",
+      storageType: "Durable",
+      storage: {
+        storageClassName: "standard",
+        accessModes: ["ReadWriteOnce"],
+        resources: {
+          requests: { storage: "1Gi" }
+        }
+      },
+      terminationPolicy: "DoNotTerminate"
+    }
   });
 
   it("should set apiVersion", () => {

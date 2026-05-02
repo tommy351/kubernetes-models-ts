@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { CiliumLocalRedirectPolicy } from "../gen/cilium.io/v2/CiliumLocalRedirectPolicy";
-import { CiliumClusterwideNetworkPolicy } from "../gen/cilium.io/v2/CiliumClusterwideNetworkPolicy";
+import { CiliumLocalRedirectPolicy } from "../gen/cilium.io/v2/CiliumLocalRedirectPolicy.js";
+import { CiliumClusterwideNetworkPolicy } from "../gen/cilium.io/v2/CiliumClusterwideNetworkPolicy.js";
 
 describe("CiliumLocalRedirectPolicy", () => {
   describe("when validation passed", () => {

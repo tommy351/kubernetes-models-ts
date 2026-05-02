@@ -1,20 +1,16 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Stream } from "../gen/jetstream.nats.io/v1beta2/Stream";
-import { Consumer } from "../gen/jetstream.nats.io/v1beta2/Consumer";
+import { Stream } from "../gen/jetstream.nats.io/v1beta2/Stream.js";
+import { Consumer } from "../gen/jetstream.nats.io/v1beta2/Consumer.js";
 
 describe("Stream", () => {
-  let stream: Stream;
-
-  beforeEach(() => {
-    stream = new Stream({
-      metadata: { name: "mystream" },
-      spec: {
-        name: "mystream",
-        subjects: ["orders.*"],
-        storage: "memory",
-        maxAge: "1h"
-      }
-    });
+  const stream = new Stream({
+    metadata: { name: "mystream" },
+    spec: {
+      name: "mystream",
+      subjects: ["orders.*"],
+      storage: "memory",
+      maxAge: "1h"
+    }
   });
 
   it("should set apiVersion", () => {

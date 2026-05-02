@@ -1,43 +1,39 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { OpenTelemetryCollector } from "../gen/opentelemetry.io/v1beta1/OpenTelemetryCollector";
-import { Instrumentation } from "../gen/opentelemetry.io/v1alpha1/Instrumentation";
+import { OpenTelemetryCollector } from "../gen/opentelemetry.io/v1beta1/OpenTelemetryCollector.js";
+import { Instrumentation } from "../gen/opentelemetry.io/v1alpha1/Instrumentation.js";
 
 describe("OpenTelemetryCollector", () => {
-  let collector: OpenTelemetryCollector;
-
-  beforeEach(() => {
-    collector = new OpenTelemetryCollector({
-      metadata: { name: "my-collector" },
-      spec: {
-        mode: "deployment",
-        image:
-          "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.96.0",
-        managementState: "managed",
-        config: {
-          receivers: {
-            otlp: {
-              protocols: {
-                grpc: {},
-                http: {}
-              }
+  const collector = new OpenTelemetryCollector({
+    metadata: { name: "my-collector" },
+    spec: {
+      mode: "deployment",
+      image:
+        "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.96.0",
+      managementState: "managed",
+      config: {
+        receivers: {
+          otlp: {
+            protocols: {
+              grpc: {},
+              http: {}
             }
-          },
-          exporters: {
-            prometheus: {
-              endpoint: "0.0.0.0:8889"
-            }
-          },
-          service: {
-            pipelines: {
-              metrics: {
-                receivers: ["otlp"],
-                exporters: ["prometheus"]
-              }
+          }
+        },
+        exporters: {
+          prometheus: {
+            endpoint: "0.0.0.0:8889"
+          }
+        },
+        service: {
+          pipelines: {
+            metrics: {
+              receivers: ["otlp"],
+              exporters: ["prometheus"]
             }
           }
         }
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

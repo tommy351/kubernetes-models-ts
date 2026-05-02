@@ -1,4 +1,3 @@
-/* eslint-disable n/no-unpublished-import */
 import {
   generate,
   isAPIMachineryID
@@ -42,17 +41,15 @@ function omitGVK(doc: Document): void {
   );
 }
 
-(async () => {
-  const spec = await fetchSpec();
+const spec = await fetchSpec();
 
-  pickAPIMachinerySpec(spec);
-  omitGVK(spec);
+pickAPIMachinerySpec(spec);
+omitGVK(spec);
 
-  await generate({
-    input: JSON.stringify(spec),
-    outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
-    rewriteDefinitionPath(path) {
-      return trimPrefix(path, "apimachinery/pkg/");
-    }
-  });
-})();
+await generate({
+  input: JSON.stringify(spec),
+  outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
+  rewriteDefinitionPath(path) {
+    return trimPrefix(path, "apimachinery/pkg/");
+  }
+});

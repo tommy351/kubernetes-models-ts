@@ -1,25 +1,21 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { K8ssandraCluster } from "../gen/k8ssandra.io/v1alpha1";
+import { describe, it, expect } from "vitest";
+import { K8ssandraCluster } from "../gen/k8ssandra.io/v1alpha1/index.js";
 
 describe("K8ssandraCluster", () => {
-  let cluster: K8ssandraCluster;
-
-  beforeEach(() => {
-    cluster = new K8ssandraCluster({
-      metadata: { name: "hello" },
-      spec: {
-        cassandra: {
-          datacenters: [
-            {
-              metadata: {
-                name: "hello"
-              },
-              size: 3
-            }
-          ]
-        }
+  const cluster = new K8ssandraCluster({
+    metadata: { name: "hello" },
+    spec: {
+      cassandra: {
+        datacenters: [
+          {
+            metadata: {
+              name: "hello"
+            },
+            size: 3
+          }
+        ]
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

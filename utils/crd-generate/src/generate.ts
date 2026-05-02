@@ -152,7 +152,7 @@ export async function generate(options: GenerateOptions): Promise<void> {
   })
     .map((doc) => doc.toJSON())
     .filter((x) => x != null && typeof x === "object")
-    .filter(({ apiVersion }) =>
+    .filter(({ apiVersion }: { apiVersion: string }) =>
       ["apiextensions.k8s.io/v1beta1", "apiextensions.k8s.io/v1"].includes(
         apiVersion
       )

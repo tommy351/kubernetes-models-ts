@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor";
+import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {

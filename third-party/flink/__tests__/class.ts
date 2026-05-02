@@ -1,42 +1,37 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { FlinkDeployment } from "../gen/flink.apache.org/v1beta1/FlinkDeployment";
+import { describe, it, expect } from "vitest";
+import { FlinkDeployment } from "../gen/flink.apache.org/v1beta1/FlinkDeployment.js";
 
 describe("FlinkDeployment", () => {
-  let deployment: FlinkDeployment;
-
-  beforeEach(() => {
-    deployment = new FlinkDeployment({
-      metadata: {
-        name: "example"
+  const deployment = new FlinkDeployment({
+    metadata: {
+      name: "example"
+    },
+    spec: {
+      image: "flink:1.20",
+      flinkVersion: "v1_20",
+      flinkConfiguration: {
+        "taskmanager.numberOfTaskSlots": "2"
       },
-      spec: {
-        image: "flink:1.20",
-        flinkVersion: "v1_20",
-        flinkConfiguration: {
-          "taskmanager.numberOfTaskSlots": "2"
-        },
-        serviceAccount: "flink",
-        jobManager: {
-          resource: {
-            memory: "1024m",
-            cpu: 1
-          }
-        },
-        taskManager: {
-          resource: {
-            memory: "2048m",
-            cpu: 1
-          }
-        },
-        job: {
-          jarURI:
-            "local:///opt/flink/examples/streaming/StateMachineExample.jar",
-          parallelism: 2,
-          upgradeMode: "stateless",
-          state: "running"
+      serviceAccount: "flink",
+      jobManager: {
+        resource: {
+          memory: "1024m",
+          cpu: 1
         }
+      },
+      taskManager: {
+        resource: {
+          memory: "2048m",
+          cpu: 1
+        }
+      },
+      job: {
+        jarURI: "local:///opt/flink/examples/streaming/StateMachineExample.jar",
+        parallelism: 2,
+        upgradeMode: "stateless",
+        state: "running"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

@@ -1,28 +1,24 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { SeldonDeployment } from "../gen/machinelearning.seldon.io/v1/SeldonDeployment";
+import { describe, it, expect } from "vitest";
+import { SeldonDeployment } from "../gen/machinelearning.seldon.io/v1/SeldonDeployment.js";
 
 describe("SeldonDeployment", () => {
-  let deployment: SeldonDeployment;
-
-  beforeEach(() => {
-    deployment = new SeldonDeployment({
-      metadata: { name: "example" },
-      spec: {
-        predictors: [
-          {
-            name: "example",
-            graph: {
-              name: "classifier",
-              children: [],
-              endpoint: {
-                type: "REST"
-              },
-              type: "MODEL"
-            }
+  const deployment = new SeldonDeployment({
+    metadata: { name: "example" },
+    spec: {
+      predictors: [
+        {
+          name: "example",
+          graph: {
+            name: "classifier",
+            children: [],
+            endpoint: {
+              type: "REST"
+            },
+            type: "MODEL"
           }
-        ]
-      }
-    });
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {

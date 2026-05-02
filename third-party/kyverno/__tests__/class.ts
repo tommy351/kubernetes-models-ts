@@ -1,46 +1,42 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy";
-import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException";
-import { CleanupPolicy } from "../gen/kyverno.io/v2beta1/CleanupPolicy";
+import { describe, it, expect } from "vitest";
+import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy.js";
+import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException.js";
+import { CleanupPolicy } from "../gen/kyverno.io/v2beta1/CleanupPolicy.js";
 
 describe("ClusterPolicy", () => {
-  let policy: ClusterPolicy;
-
-  beforeEach(() => {
-    policy = new ClusterPolicy({
-      metadata: {
-        name: "require-labels"
-      },
-      spec: {
-        validationFailureAction: "enforce",
-        background: false,
-        rules: [
-          {
-            name: "check-team",
-            match: {
-              any: [
-                {
-                  resources: {
-                    namespaces: ["default"],
-                    kinds: ["Pod"]
-                  }
+  const policy = new ClusterPolicy({
+    metadata: {
+      name: "require-labels"
+    },
+    spec: {
+      validationFailureAction: "enforce",
+      background: false,
+      rules: [
+        {
+          name: "check-team",
+          match: {
+            any: [
+              {
+                resources: {
+                  namespaces: ["default"],
+                  kinds: ["Pod"]
                 }
-              ]
-            },
-            validate: {
-              message: "label team must be set",
-              pattern: {
-                metadata: {
-                  labels: {
-                    team: "?*"
-                  }
+              }
+            ]
+          },
+          validate: {
+            message: "label team must be set",
+            pattern: {
+              metadata: {
+                labels: {
+                  team: "?*"
                 }
               }
             }
           }
-        ]
-      }
-    });
+        }
+      ]
+    }
   });
 
   it("should set apiVersion", () => {
@@ -96,34 +92,30 @@ describe("ClusterPolicy", () => {
 });
 
 describe("PolicyException", () => {
-  let exception: PolicyException;
-
-  beforeEach(() => {
-    exception = new PolicyException({
-      metadata: {
-        name: "delta-exception",
-        namespace: "delta"
-      },
-      spec: {
-        exceptions: [
-          {
-            policyName: "disallow-host-namespaces",
-            ruleNames: ["host-namespaces", "autogen-host-namespaces"]
-          }
-        ],
-        match: {
-          any: [
-            {
-              resources: {
-                kinds: ["Deployment", "Pod"],
-                names: ["importent-tool*"],
-                namespaces: ["delta"]
-              }
-            }
-          ]
+  const exception = new PolicyException({
+    metadata: {
+      name: "delta-exception",
+      namespace: "delta"
+    },
+    spec: {
+      exceptions: [
+        {
+          policyName: "disallow-host-namespaces",
+          ruleNames: ["host-namespaces", "autogen-host-namespaces"]
         }
+      ],
+      match: {
+        any: [
+          {
+            resources: {
+              kinds: ["Deployment", "Pod"],
+              names: ["importent-tool*"],
+              namespaces: ["delta"]
+            }
+          }
+        ]
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
@@ -170,40 +162,36 @@ describe("PolicyException", () => {
 });
 
 describe("CleanupPolicy", () => {
-  let policy: CleanupPolicy;
-
-  beforeEach(() => {
-    policy = new CleanupPolicy({
-      metadata: {
-        name: "cleandeploy"
-      },
-      spec: {
-        match: {
-          any: [
-            {
-              resources: {
-                kinds: ["Deployment"],
-                selector: {
-                  matchLabels: {
-                    canremove: "true"
-                  }
+  const policy = new CleanupPolicy({
+    metadata: {
+      name: "cleandeploy"
+    },
+    spec: {
+      match: {
+        any: [
+          {
+            resources: {
+              kinds: ["Deployment"],
+              selector: {
+                matchLabels: {
+                  canremove: "true"
                 }
               }
             }
-          ]
-        },
-        conditions: {
-          any: [
-            {
-              key: "{{ target.spec.replicas }}",
-              operator: "LessThan",
-              value: 2
-            }
-          ]
-        },
-        schedule: "*/5 * * * *"
-      }
-    });
+          }
+        ]
+      },
+      conditions: {
+        any: [
+          {
+            key: "{{ target.spec.replicas }}",
+            operator: "LessThan",
+            value: 2
+          }
+        ]
+      },
+      schedule: "*/5 * * * *"
+    }
   });
 
   it("should set apiVersion", () => {

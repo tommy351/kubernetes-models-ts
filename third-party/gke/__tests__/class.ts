@@ -1,16 +1,12 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { BackendConfig } from "../gen/cloud.google.com/v1beta1/BackendConfig";
-import { SpannerInstance } from "../gen/spanner.cnrm.cloud.google.com/v1beta1/SpannerInstance";
+import { describe, it, expect } from "vitest";
+import { BackendConfig } from "../gen/cloud.google.com/v1beta1/BackendConfig.js";
+import { SpannerInstance } from "../gen/spanner.cnrm.cloud.google.com/v1beta1/SpannerInstance.js";
 
 describe("BackendConfig", () => {
-  let config: BackendConfig;
-
-  beforeEach(() => {
-    config = new BackendConfig({
-      metadata: {
-        name: "test"
-      }
-    });
+  const config = new BackendConfig({
+    metadata: {
+      name: "test"
+    }
   });
 
   it("should set apiVersion", () => {
@@ -37,19 +33,15 @@ describe("BackendConfig", () => {
 });
 
 describe("SpannerInstance", () => {
-  let instance: SpannerInstance;
-
-  beforeEach(() => {
-    instance = new SpannerInstance({
-      metadata: {
-        name: "spanner-example"
-      },
-      spec: {
-        config: "regional-us-west1",
-        displayName: "Spanner Example",
-        numNodes: 1
-      }
-    });
+  const instance = new SpannerInstance({
+    metadata: {
+      name: "spanner-example"
+    },
+    spec: {
+      config: "regional-us-west1",
+      displayName: "Spanner Example",
+      numNodes: 1
+    }
   });
 
   it("should set apiVersion", () => {

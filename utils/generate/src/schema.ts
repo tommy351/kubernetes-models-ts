@@ -16,7 +16,7 @@ import pattern from "./pattern.js";
 const ajv = new Ajv();
 const standaloneCode =
   standaloneCodeMod as unknown as typeof standaloneCodeMod.default;
-const traverse = traverseMod.default as unknown as typeof traverseMod.default;
+const traverse = traverseMod.default;
 
 const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
 
@@ -139,6 +139,7 @@ export function transformSchema(
     ...transformers
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   ajv.validateSchema(output, true);
 
   return output;

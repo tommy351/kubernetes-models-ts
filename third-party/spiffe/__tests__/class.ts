@@ -1,23 +1,19 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { SpiffeID } from "../gen/spiffeid.spiffe.io/v1beta1/SpiffeID";
+import { describe, it, expect } from "vitest";
+import { SpiffeID } from "../gen/spiffeid.spiffe.io/v1beta1/SpiffeID.js";
 
 describe("SpiffeID", () => {
-  let id: SpiffeID;
-
-  beforeEach(() => {
-    id = new SpiffeID({
-      metadata: {
-        name: "test-id"
-      },
-      spec: {
-        parentId: "spiffe://example.org/spire/server",
-        spiffeId: "spiffe://example.org/test",
-        selector: {
-          namespace: "default",
-          podName: "test-pod"
-        }
+  const id = new SpiffeID({
+    metadata: {
+      name: "test-id"
+    },
+    spec: {
+      parentId: "spiffe://example.org/spire/server",
+      spiffeId: "spiffe://example.org/test",
+      selector: {
+        namespace: "default",
+        podName: "test-pod"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {

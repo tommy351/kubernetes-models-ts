@@ -1,22 +1,18 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1beta1/GitRepository";
+import { describe, it, expect } from "vitest";
+import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1beta1/GitRepository.js";
 
 describe("Application", () => {
-  let repo: GitRepository;
-
-  beforeEach(() => {
-    repo = new GitRepository({
-      metadata: {
-        name: "webapp"
-      },
-      spec: {
-        interval: "60m",
-        url: "https://github.com/tommy351/kubernetes-models-ts",
-        ref: {
-          branch: "master"
-        }
+  const repo = new GitRepository({
+    metadata: {
+      name: "webapp"
+    },
+    spec: {
+      interval: "60m",
+      url: "https://github.com/tommy351/kubernetes-models-ts",
+      ref: {
+        branch: "master"
       }
-    });
+    }
   });
 
   it("should set apiVersion", () => {
