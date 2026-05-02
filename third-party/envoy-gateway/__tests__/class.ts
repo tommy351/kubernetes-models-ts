@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import {
   BackendTrafficPolicy,
   ClientTrafficPolicy,
+  EnvoyExtensionPolicy,
   EnvoyPatchPolicy,
   EnvoyProxy,
   SecurityPolicy,
@@ -19,7 +20,6 @@ describe("BackendTrafficPolicy", () => {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway",
       },
     },
   });
@@ -52,7 +52,6 @@ describe("BackendTrafficPolicy", () => {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway",
         },
       },
     });
@@ -70,7 +69,6 @@ describe("ClientTrafficPolicy", () => {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway",
       },
     },
   });
@@ -103,7 +101,6 @@ describe("ClientTrafficPolicy", () => {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway",
         },
       },
     });
@@ -122,7 +119,6 @@ describe("EnvoyPatchPolicy", () => {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway",
       },
       jsonPatches: [
         {
@@ -167,7 +163,6 @@ describe("EnvoyPatchPolicy", () => {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway",
         },
         jsonPatches: [
           {
@@ -281,7 +276,6 @@ describe("SecurityPolicy", () => {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway",
       },
     },
   });
@@ -314,8 +308,60 @@ describe("SecurityPolicy", () => {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway",
         },
+      },
+    });
+  });
+});
+
+describe("EnvoyExtensionPolicy", () => {
+  const policy = new EnvoyExtensionPolicy({
+    metadata: {
+      namespace: "envoy-gateway",
+      name: "target-gateway-1",
+    },
+    spec: {
+      targetRefs: [
+        {
+          group: "gateway.networking.k8s.io",
+          kind: "Gateway",
+          name: "gateway-1",
+        },
+      ],
+    },
+  });
+
+  it("should set apiVersion", () => {
+    expect(policy).toHaveProperty(
+      "apiVersion",
+      "gateway.envoyproxy.io/v1alpha1",
+    );
+  });
+
+  it("should set kind", () => {
+    expect(policy).toHaveProperty("kind", "EnvoyExtensionPolicy");
+  });
+
+  it("validate", () => {
+    expect(() => policy.validate()).not.toThrow();
+  });
+
+  it("toJSON", () => {
+    expect(policy.toJSON()).toEqual({
+      apiVersion: "gateway.envoyproxy.io/v1alpha1",
+      kind: "EnvoyExtensionPolicy",
+      metadata: {
+        namespace: "envoy-gateway",
+        name: "target-gateway-1",
+      },
+      spec: {
+        targetRefs: [
+          {
+            group: "gateway.networking.k8s.io",
+            kind: "Gateway",
+            name: "gateway-1",
+          },
+        ],
       },
     });
   });

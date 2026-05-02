@@ -4,7 +4,7 @@ import * as yaml from "js-yaml";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const VERSIONS = ["0.5.0", "1.0.0"];
+const VERSIONS = ["0.5.0", "1.0.0", "1.7.2"];
 
 const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
 const output: any[] = [];
