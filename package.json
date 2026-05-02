@@ -27,8 +27,8 @@
     "*.{js,ts,cjs,mjs}": "eslint --fix"
   },
   "engines": {
-    "node": ">=14",
-    "pnpm": ">=7.31.0"
+    "node": ">=22",
+    "pnpm": ">=11"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
@@ -68,5 +68,5 @@
       "utils/*/package.json"
     ]
   },
-  "packageManager": "pnpm@7.33.0"
+  "packageManager": "pnpm@11.0.3"
 }

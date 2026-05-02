@@ -9,7 +9,7 @@
     "build": "tsc"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "@swc/core": "^1.4.11",

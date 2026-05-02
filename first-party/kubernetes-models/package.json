@@ -27,7 +27,7 @@
     "kubernetes-models"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",

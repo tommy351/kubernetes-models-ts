@@ -33,7 +33,7 @@
     "/dist/"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "@babel/generator": "^7.24.1",

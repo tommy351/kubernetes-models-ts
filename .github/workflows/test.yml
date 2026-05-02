@@ -18,9 +18,9 @@ jobs:
       - lint
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 20.x]
+        node-version: [22.x, 24.x]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-deps
         with:
           node-version: ${{ matrix.node-version }}

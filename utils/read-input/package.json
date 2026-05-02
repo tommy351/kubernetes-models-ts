@@ -32,7 +32,7 @@
     "kubernetes-models"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "find-cache-dir": "^3.3.2",
