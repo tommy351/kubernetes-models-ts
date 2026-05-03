@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import {
   BackendTrafficPolicy,
   ClientTrafficPolicy,
@@ -7,7 +7,6 @@ import {
   EnvoyProxy,
   SecurityPolicy,
 } from "../gen/gateway.envoyproxy.io/v1alpha1/index.js";
-import * as v05 from "../gen/config.gateway.envoyproxy.io/v1alpha1/index.js";
 
 describe("BackendTrafficPolicy", () => {
   const policy = new BackendTrafficPolicy({
@@ -363,97 +362,6 @@ describe("EnvoyExtensionPolicy", () => {
           },
         ],
       },
-    });
-  });
-});
-
-describe("v0.5.0", () => {
-  describe("EnvoyProxy", () => {
-    let proxy: v05.EnvoyProxy;
-
-    beforeEach(() => {
-      proxy = new v05.EnvoyProxy({
-        metadata: {
-          namespace: "envoy-gateway-system",
-          name: "test",
-        },
-        spec: {
-          telemetry: {
-            accessLog: {
-              settings: [
-                {
-                  format: {
-                    type: "JSON",
-                    json: {
-                      protocol: "%PROTOCOL%",
-                      duration: "%DURATION%",
-                    },
-                  },
-                  sinks: [
-                    {
-                      type: "File",
-                      file: {
-                        path: "/dev/stdout",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          },
-        },
-      });
-    });
-
-    it("should set apiVersion", () => {
-      expect(proxy).toHaveProperty(
-        "apiVersion",
-        "config.gateway.envoyproxy.io/v1alpha1",
-      );
-    });
-
-    it("should set kind", () => {
-      expect(proxy).toHaveProperty("kind", "EnvoyProxy");
-    });
-
-    it("validate", () => {
-      expect(() => proxy.validate()).not.toThrow();
-    });
-
-    it("toJSON", () => {
-      expect(proxy.toJSON()).toEqual({
-        apiVersion: "config.gateway.envoyproxy.io/v1alpha1",
-        kind: "EnvoyProxy",
-        metadata: {
-          namespace: "envoy-gateway-system",
-          name: "test",
-        },
-        spec: {
-          telemetry: {
-            accessLog: {
-              settings: [
-                {
-                  format: {
-                    type: "JSON",
-                    json: {
-                      protocol: "%PROTOCOL%",
-                      duration: "%DURATION%",
-                    },
-                  },
-                  sinks: [
-                    {
-                      type: "File",
-                      file: {
-                        path: "/dev/stdout",
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          },
-        },
-      });
     });
   });
 });
