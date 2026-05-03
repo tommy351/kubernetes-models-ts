@@ -2,7 +2,7 @@ import { join } from "node:path";
 import yargs from "yargs";
 import { mkdir, stat, writeFile } from "node:fs/promises";
 import { humanId } from "human-id";
-import execa from "execa";
+import { execa } from "execa";
 import { fileURLToPath } from "node:url";
 
 const rootDir = fileURLToPath(new URL("..", import.meta.url));

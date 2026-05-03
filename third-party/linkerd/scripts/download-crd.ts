@@ -1,4 +1,4 @@
-import execa from "execa";
+import { execa } from "execa";
 import { mkdir, writeFile } from "node:fs/promises";
 import * as yaml from "js-yaml";
 import { dirname } from "node:path";

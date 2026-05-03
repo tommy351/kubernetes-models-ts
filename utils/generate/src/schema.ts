@@ -9,7 +9,7 @@ import traverseMod from "@babel/traverse";
 import * as t from "@babel/types";
 import { generate } from "@babel/generator";
 import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
-import { objectHash, sha256base64 } from "ohash";
+import { serialize, digest } from "ohash";
 import nullableRef from "./nullable-ref.js";
 import pattern from "./pattern.js";
 
@@ -146,7 +146,7 @@ export function transformSchema(
 }
 
 function addChildSchema(ajv: Ajv, schema: Schema): Schema {
-  const hash = sha256base64(objectHash(schema));
+  const hash = digest(serialize(schema));
 
   if (!ajv.getSchema(hash)) {
     ajv.addSchema(schema, hash);

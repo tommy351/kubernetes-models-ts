@@ -32,14 +32,13 @@
     "node": ">=22"
   },
   "dependencies": {
-    "find-cache-dir": "^3.3.2",
-    "get-stdin": "^8.0.0",
-    "make-fetch-happen": "^10.2.1",
+    "find-cache-directory": "^6.0.0",
+    "get-stdin": "^10.0.0",
+    "make-fetch-happen": "^15.0.5",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/find-cache-dir": "^3.2.1",
-    "@types/make-fetch-happen": "^10.0.0",
+    "@types/make-fetch-happen": "^10.0.4",
     "typescript": "^6.0.3"
   }
 }

@@ -41,16 +41,16 @@
     "@kubernetes-models/validate": "workspace:^",
     "ajv": "^8.12.0",
     "es-toolkit": "^1.39.9",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.3.4",
     "indent-string": "^5.0.0",
-    "ohash": "^1.1.3",
+    "ohash": "^2.0.11",
     "re2-wasm": "^1.0.2",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.5",
-    "@types/fs-extra": "^9.0.13",
+    "@types/fs-extra": "^11.0.4",
     "typescript": "^6.0.3"
   }
 }

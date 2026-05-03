@@ -1,4 +1,4 @@
-import execa from "execa";
+import { execa } from "execa";
 import { outputFile } from "fs-extra";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";

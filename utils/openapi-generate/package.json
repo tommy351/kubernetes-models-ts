@@ -42,7 +42,7 @@
     "@kubernetes-models/string-util": "workspace:^",
     "es-toolkit": "^1.39.9",
     "tslib": "^2.4.0",
-    "yargs": "^17.6.0"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@types/yargs": "^17.0.13",

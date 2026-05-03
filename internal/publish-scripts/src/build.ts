@@ -1,7 +1,8 @@
-import { glob } from "fast-glob";
+// eslint-disable-next-line import-x/no-named-as-default
+import glob from "fast-glob";
 import { basename, dirname, extname, join, posix } from "node:path";
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import execa from "execa";
+import { execa } from "execa";
 import * as swc from "@swc/core";
 import { fileURLToPath } from "node:url";
 
