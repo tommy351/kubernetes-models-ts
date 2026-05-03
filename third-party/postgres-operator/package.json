@@ -40,9 +40,9 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_postgresclusters.yaml",
-      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgupgrades.yaml",
-      "https://raw.githubusercontent.com/CrunchyData/postgres-operator-examples/7ea01748194c4e714e6e6a71191c796a18492a9f/kustomize/install/crd/bases/postgres-operator.crunchydata.com_pgadmins.yaml",
+      "https://github.com/CrunchyData/postgres-operator/raw/refs/tags/v6.0.1/config/crd/bases/postgres-operator.crunchydata.com_postgresclusters.yaml",
+      "https://github.com/CrunchyData/postgres-operator/raw/refs/tags/v6.0.1/config/crd/bases/postgres-operator.crunchydata.com_pgupgrades.yaml",
+      "https://github.com/CrunchyData/postgres-operator/raw/refs/tags/v6.0.1/config/crd/bases/postgres-operator.crunchydata.com_pgadmins.yaml",
       "https://raw.githubusercontent.com/zalando/postgres-operator/v1.15.1/charts/postgres-operator/crds/postgresqls.yaml",
       "https://raw.githubusercontent.com/zalando/postgres-operator/v1.15.1/charts/postgres-operator/crds/operatorconfigurations.yaml",
       "https://raw.githubusercontent.com/zalando/postgres-operator/v1.15.1/charts/postgres-operator/crds/postgresteams.yaml"
