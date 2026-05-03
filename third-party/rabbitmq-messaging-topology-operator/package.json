@@ -51,7 +51,8 @@
       "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_superstreams.yaml",
       "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_topicpermissions.yaml",
       "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_users.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_vhosts.yaml"
+      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_vhosts.yaml",
+      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_operatorpolicies.yaml"
     ],
     "output": "./gen"
   }
