@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/authzed/spicedb-operator/releases/download/v1.12.0/bundle.yaml"
+      "https://github.com/authzed/spicedb-operator/releases/download/v1.24.0/bundle.yaml"
     ],
     "output": "./gen"
   }
