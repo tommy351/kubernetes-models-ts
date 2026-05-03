@@ -14,6 +14,8 @@ describe("Gateway", () => {
         {
           port: {
             number: 80,
+            name: "http",
+            protocol: "HTTP",
           },
           hosts: ["*"],
         },
@@ -48,6 +50,8 @@ describe("Gateway", () => {
           {
             port: {
               number: 80,
+              name: "http",
+              protocol: "HTTP",
             },
             hosts: ["*"],
           },
