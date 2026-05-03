@@ -71,7 +71,8 @@
       "first-party/*/package.json",
       "internal/*/package.json",
       "third-party/*/package.json",
-      "utils/*/package.json"
+      "utils/*/package.json",
+      "!**/dist/package.json"
     ]
   },
   "packageManager": "pnpm@11.0.3"

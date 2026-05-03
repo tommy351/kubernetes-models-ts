@@ -40,7 +40,7 @@
     "@kubernetes-models/generate": "workspace:^",
     "@kubernetes-models/read-input": "workspace:^",
     "@kubernetes-models/string-util": "workspace:^",
-    "es-toolkit": "^1.39.9",
+    "es-toolkit": "^1.46.0",
     "tslib": "^2.4.0",
     "yargs": "^18.0.0"
   },

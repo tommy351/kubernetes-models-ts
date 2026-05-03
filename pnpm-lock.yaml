@@ -178,7 +178,7 @@ importers:
         specifier: ^25.6.0
         version: 25.6.0
       es-toolkit:
-        specifier: ^1.39.9
+        specifier: ^1.46.0
         version: 1.46.0
       openapi-types:
         specifier: ^12.0.2
@@ -1540,7 +1540,7 @@ importers:
         specifier: workspace:^
         version: link:../string-util
       es-toolkit:
-        specifier: ^1.39.9
+        specifier: ^1.46.0
         version: 1.46.0
       tslib:
         specifier: ^2.4.0
@@ -1583,7 +1583,7 @@ importers:
         specifier: ^8.12.0
         version: 8.20.0
       es-toolkit:
-        specifier: ^1.39.9
+        specifier: ^1.46.0
         version: 1.46.0
       fs-extra:
         specifier: ^11.3.4
@@ -1626,7 +1626,7 @@ importers:
         specifier: workspace:^
         version: link:../string-util
       es-toolkit:
-        specifier: ^1.39.9
+        specifier: ^1.46.0
         version: 1.46.0
       tslib:
         specifier: ^2.4.0

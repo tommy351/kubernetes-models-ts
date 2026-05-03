@@ -40,7 +40,7 @@
     "@kubernetes-models/string-util": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
     "ajv": "^8.12.0",
-    "es-toolkit": "^1.39.9",
+    "es-toolkit": "^1.46.0",
     "fs-extra": "^11.3.4",
     "indent-string": "^5.0.0",
     "ohash": "^2.0.11",
