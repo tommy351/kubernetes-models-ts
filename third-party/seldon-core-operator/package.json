@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/SeldonIO/seldon-core/v1.15.0/operator/config/crd/bases/machinelearning.seldon.io_seldondeployments.yaml"
+      "https://raw.githubusercontent.com/SeldonIO/seldon-core/v1.19.0/operator/config/crd/bases/machinelearning.seldon.io_seldondeployments.yaml"
     ],
     "output": "./gen"
   }
