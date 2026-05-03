@@ -158,9 +158,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -199,9 +196,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/openapi-generate':
         specifier: workspace:^
@@ -230,7 +224,7 @@ importers:
     dependencies:
       '@swc/core':
         specifier: ^1.4.11
-        version: 1.15.30(@swc/helpers@0.5.21)
+        version: 1.15.30
       execa:
         specifier: ^9.6.1
         version: 9.6.1
@@ -265,9 +259,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -291,9 +282,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -317,9 +305,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -343,9 +328,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -369,9 +351,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -395,9 +374,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -421,9 +397,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -462,9 +435,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -488,9 +458,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -514,9 +481,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -540,9 +504,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -581,9 +542,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -607,9 +565,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -633,9 +588,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -674,9 +626,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -700,9 +649,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -726,9 +672,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -752,9 +695,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -796,9 +736,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -822,9 +759,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -848,9 +782,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -874,9 +805,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -900,9 +828,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -926,9 +851,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -952,9 +874,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -978,9 +897,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1004,9 +920,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1030,9 +943,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1056,9 +966,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1082,9 +989,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1108,9 +1012,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1152,9 +1053,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1178,9 +1076,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1204,9 +1099,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1230,9 +1122,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1256,9 +1145,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1282,9 +1168,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1308,9 +1191,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1334,9 +1214,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1360,9 +1237,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1386,9 +1260,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1412,9 +1283,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1438,9 +1306,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1464,9 +1329,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1490,9 +1352,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1516,9 +1375,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1542,9 +1398,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1568,9 +1421,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1594,9 +1444,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1620,9 +1467,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1646,9 +1490,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -1672,9 +1513,6 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-      '@swc/helpers':
-        specifier: ^0.5.8
-        version: 0.5.21
     devDependencies:
       '@kubernetes-models/crd-generate':
         specifier: workspace:^
@@ -2317,9 +2155,6 @@ packages:
 
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
-
-  '@swc/helpers@0.5.21':
-    resolution: {integrity: sha512-jI/VAmtdjB/RnI8GTnokyX7Ug8c+g+ffD6QRLa6XQewtnGyukKkKSk3wLTM3b5cjt1jNh9x0jfVlagdN2gDKQg==}
 
   '@swc/types@0.1.26':
     resolution: {integrity: sha512-lyMwd7WGgG79RS7EERZV3T8wMdmPq3xwyg+1nmAM64kIhx5yl+juO2PYIHb7vTiPgPCj8LYjsNV2T5wiQHUEaw==}
@@ -4960,7 +4795,7 @@ snapshots:
   '@swc/core-win32-x64-msvc@1.15.30':
     optional: true
 
-  '@swc/core@1.15.30(@swc/helpers@0.5.21)':
+  '@swc/core@1.15.30':
     dependencies:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.26
@@ -4977,13 +4812,8 @@ snapshots:
       '@swc/core-win32-arm64-msvc': 1.15.30
       '@swc/core-win32-ia32-msvc': 1.15.30
       '@swc/core-win32-x64-msvc': 1.15.30
-      '@swc/helpers': 0.5.21
 
   '@swc/counter@0.1.3': {}
-
-  '@swc/helpers@0.5.21':
-    dependencies:
-      tslib: 2.8.1
 
   '@swc/types@0.1.26':
     dependencies:

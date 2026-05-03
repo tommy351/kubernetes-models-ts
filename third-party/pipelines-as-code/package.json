@@ -33,8 +33,7 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^",
-    "@swc/helpers": "^0.5.8"
+    "@kubernetes-models/validate": "workspace:^"
   },
   "devDependencies": {
     "@kubernetes-models/crd-generate": "workspace:^",

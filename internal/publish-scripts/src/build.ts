@@ -6,9 +6,9 @@ import { execa } from "execa";
 import * as swc from "@swc/core";
 import { fileURLToPath } from "node:url";
 
-const ECMA_VERSION = 2020;
+const ECMA_VERSION = 2024;
 const DTS_EXT = ".d.ts";
-const ESM_EXT = ".js";
+const JS_EXT = ".js";
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
@@ -21,7 +21,7 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
 function generateExportEntry(name: string): Record<string, string> {
   return {
     types: name + DTS_EXT,
-    import: name + ESM_EXT,
+    import: name + JS_EXT,
   };
 }
 
@@ -62,21 +62,18 @@ async function compileDts(cwd: string): Promise<void> {
 }
 
 async function writeJs({
-  ast,
-  module,
-  path,
+  srcPath,
+  dstPath,
 }: {
-  ast: swc.Module;
-  module: "es6" | "commonjs";
-  path: string;
+  srcPath: string;
+  dstPath: string;
 }): Promise<void> {
-  const transformResult = await swc.transform(ast, {
+  const transformResult = await swc.transformFile(srcPath, {
     jsc: {
       target: `es${ECMA_VERSION}`,
-      externalHelpers: true,
       loose: true,
     },
-    module: { type: module },
+    module: { type: "nodenext" },
   });
 
   const minifyResult = await swc.minify(transformResult.code, {
@@ -86,54 +83,11 @@ async function writeJs({
     },
     mangle: false,
     ecma: ECMA_VERSION,
-    module: module === "es6",
+    module: true,
   });
 
-  await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, minifyResult.code);
-}
-
-function isRelativeImport(source: string): boolean {
-  return source.startsWith("./") || source.startsWith("../");
-}
-
-function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
-  const body: swc.ModuleItem[] = [];
-
-  function rewrite<T extends { source?: swc.StringLiteral }>(stmt: T): T {
-    if (
-      !stmt.source ||
-      !isRelativeImport(stmt.source.value) ||
-      extname(stmt.source.value).length
-    ) {
-      return stmt;
-    }
-
-    const newValue = stmt.source.value + ext;
-
-    return {
-      ...stmt,
-      source: {
-        ...stmt.source,
-        value: newValue,
-        raw: JSON.stringify(newValue),
-      },
-    };
-  }
-
-  for (const stmt of ast.body) {
-    switch (stmt.type) {
-      case "ImportDeclaration":
-      case "ExportAllDeclaration":
-      case "ExportNamedDeclaration":
-        body.push(rewrite(stmt));
-        break;
-      default:
-        body.push(stmt);
-    }
-  }
-
-  return { ...ast, body };
+  await mkdir(dirname(dstPath), { recursive: true });
+  await writeFile(dstPath, minifyResult.code);
 }
 
 async function compileJs(cwd: string): Promise<void> {
@@ -151,14 +105,9 @@ async function compileJs(cwd: string): Promise<void> {
 
     console.log("Transforming:", `gen/${path}`);
 
-    const ast = await swc.parseFile(srcPath, {
-      syntax: ext === ".ts" ? "typescript" : "ecmascript",
-    });
-
     await writeJs({
-      ast: rewriteImportPath(ast, ESM_EXT),
-      module: "es6",
-      path: join(distDir, name + ESM_EXT),
+      srcPath,
+      dstPath: join(distDir, name + JS_EXT),
     });
   }
 }
