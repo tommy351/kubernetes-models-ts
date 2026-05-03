@@ -1,5 +1,5 @@
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export interface PrePackArguments {
   cwd: string;

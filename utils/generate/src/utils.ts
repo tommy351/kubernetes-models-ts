@@ -1,6 +1,6 @@
 import type { Generator, GroupVersionKind, OutputFile } from "./types.js";
 import { outputFile } from "fs-extra";
-import { join } from "path";
+import { join } from "node:path";
 
 export class PathConflictError extends Error {
   public path: string;

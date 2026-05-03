@@ -1,8 +1,8 @@
 import execa from "execa";
-import { mkdir, writeFile } from "fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import * as yaml from "js-yaml";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
 

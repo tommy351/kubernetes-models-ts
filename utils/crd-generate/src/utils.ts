@@ -1,5 +1,5 @@
 import { camelCase, upperFirst } from "@kubernetes-models/string-util";
-import { posix } from "path";
+import { posix } from "node:path";
 
 // TODO: Move to @kubernetes-models/generate
 export function getClassName(s: string): string {

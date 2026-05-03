@@ -6,7 +6,7 @@ import n from "eslint-plugin-n";
 import prettier from "eslint-plugin-prettier/recommended";
 import vitest from "@vitest/eslint-plugin";
 import globals from "globals";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 
 export default [
   {
@@ -73,7 +73,8 @@ export default [
       "@typescript-eslint/explicit-function-return-type": [
         "warn",
         { allowExpressions: true }
-      ]
+      ],
+      "n/prefer-node-protocol": "error"
     }
   },
   {

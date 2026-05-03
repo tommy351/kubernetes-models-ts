@@ -5,7 +5,7 @@ import {
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
 import { OpenAPIV2 } from "openapi-types";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 
 type Document = OpenAPIV2.Document<any>;
 

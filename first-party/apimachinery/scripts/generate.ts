@@ -6,7 +6,7 @@ import { readInput } from "@kubernetes-models/read-input";
 import { type OpenAPIV2 } from "openapi-types";
 import { mapValues, omit } from "es-toolkit";
 import { trimPrefix } from "@kubernetes-models/string-util";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 
 type Document = OpenAPIV2.Document<any>;
 

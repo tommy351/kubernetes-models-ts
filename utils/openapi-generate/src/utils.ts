@@ -1,5 +1,5 @@
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { posix } from "path";
+import { posix } from "node:path";
 import { getClassName } from "./string.js";
 
 export function mergeOpenAPISpecs<

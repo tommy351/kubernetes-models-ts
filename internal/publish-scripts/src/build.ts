@@ -1,9 +1,9 @@
 import { glob } from "fast-glob";
-import { basename, dirname, extname, join, posix } from "path";
-import { copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { basename, dirname, extname, join, posix } from "node:path";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import execa from "execa";
 import * as swc from "@swc/core";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 
 const ECMA_VERSION = 2020;
 const DTS_EXT = ".d.ts";

@@ -1,7 +1,7 @@
 import execa from "execa";
 import { outputFile } from "fs-extra";
-import { join } from "path";
-import { fileURLToPath } from "url";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parse, stringify } from "yaml";
 
 const CRDS: readonly string[] = [

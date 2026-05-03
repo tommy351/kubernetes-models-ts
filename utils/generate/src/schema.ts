@@ -2,7 +2,7 @@ import type { Schema, SchemaTransformer } from "./types.js";
 import { omit, omitBy, uniq } from "es-toolkit";
 import { Ajv, _ } from "ajv";
 import standaloneCodeMod from "ajv/dist/standalone/index.js";
-import assert from "assert";
+import assert from "node:assert";
 import { formats } from "@kubernetes-models/validate";
 import { ParseResult, parse } from "@babel/parser";
 import traverseMod from "@babel/traverse";

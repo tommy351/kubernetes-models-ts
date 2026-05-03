@@ -1,6 +1,6 @@
 import { camelCase } from "@kubernetes-models/string-util";
 import { getShortClassName } from "../string.js";
-import { posix } from "path";
+import { posix } from "node:path";
 import {
   type Generator,
   getAPIVersion,
