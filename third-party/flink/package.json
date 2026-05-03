@@ -42,7 +42,8 @@
     "input": [
       "https://raw.githubusercontent.com/apache/flink-kubernetes-operator/refs/tags/release-1.14.0/helm/flink-kubernetes-operator/crds/flinkdeployments.flink.apache.org-v1.yml",
       "https://raw.githubusercontent.com/apache/flink-kubernetes-operator/refs/tags/release-1.14.0/helm/flink-kubernetes-operator/crds/flinksessionjobs.flink.apache.org-v1.yml",
-      "https://raw.githubusercontent.com/apache/flink-kubernetes-operator/refs/tags/release-1.14.0/helm/flink-kubernetes-operator/crds/flinkstatesnapshots.flink.apache.org-v1.yml"
+      "https://raw.githubusercontent.com/apache/flink-kubernetes-operator/refs/tags/release-1.14.0/helm/flink-kubernetes-operator/crds/flinkstatesnapshots.flink.apache.org-v1.yml",
+      "https://raw.githubusercontent.com/apache/flink-kubernetes-operator/refs/tags/release-1.14.0/helm/flink-kubernetes-operator/crds/flinkbluegreendeployments.flink.apache.org-v1.yml"
     ],
     "output": "./gen"
   }
