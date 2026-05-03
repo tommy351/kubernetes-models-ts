@@ -57,7 +57,16 @@
       "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v25.0.0/traefik/crds/traefik.io_serverstransports.yaml",
       "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v25.0.0/traefik/crds/traefik.io_tlsoptions.yaml",
       "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v25.0.0/traefik/crds/traefik.io_tlsstores.yaml",
-      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v25.0.0/traefik/crds/traefik.io_traefikservices.yaml"
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v25.0.0/traefik/crds/traefik.io_traefikservices.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_ingressroutes.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_ingressroutetcps.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_ingressrouteudps.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_middlewares.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_middlewaretcps.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_serverstransports.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_tlsoptions.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_tlsstores.yaml",
+      "https://raw.githubusercontent.com/traefik/traefik-helm-chart/v39.0.8/traefik/crds/traefik.io_traefikservices.yaml"
     ],
     "output": "./gen"
   }
