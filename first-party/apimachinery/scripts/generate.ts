@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 type Document = OpenAPIV2.Document<any>;
 
 // The following version should match the latest version in `first-part/kubernetes-models/scripts/build.ts`.
-const VERSION = "1.33.0";
+const VERSION = "1.36.0";
 
 async function fetchSpec(): Promise<Document> {
   return JSON.parse(
