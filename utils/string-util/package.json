@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/string-util",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "type": "module",
   "sideEffects": false,
   "exports": {

@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- [#255](https://github.com/tommy351/kubernetes-models-ts/pull/255) [`f4bbf66`](https://github.com/tommy351/kubernetes-models-ts/commit/f4bbf667df2271f8b5fd3cc5cf2dedb3bc0ce39a) Thanks [@tommy351](https://github.com/tommy351)! - Migrate to ESM only package.
+
+- [#255](https://github.com/tommy351/kubernetes-models-ts/pull/255) [`d4280f7`](https://github.com/tommy351/kubernetes-models-ts/commit/d4280f7f316ac9c149a06c364e8d5d941e23ade1) Thanks [@tommy351](https://github.com/tommy351)! - Require Node.js 22+.
+
 ## 4.0.0
 
 ### Major Changes
@@ -80,7 +88,6 @@
 - [#79](https://github.com/tommy351/kubernetes-models-ts/pull/79) [`a0d4e70`](https://github.com/tommy351/kubernetes-models-ts/commit/a0d4e70acb1ec8f9ea4a369e30531a1eeb7fed02) Thanks [@tommy351](https://github.com/tommy351)! - When validation failed, collect all errors instead of only the first one.
 
 - [#80](https://github.com/tommy351/kubernetes-models-ts/pull/80) [`8a99963`](https://github.com/tommy351/kubernetes-models-ts/commit/8a99963e60a1479d97d63bb81a7830f2e36a9e05) Thanks [@tommy351](https://github.com/tommy351)! - - Enable `verbose` option in Ajv.
-
   - Remove nullable $ref error messages.
 
     When a schema like below failed.
