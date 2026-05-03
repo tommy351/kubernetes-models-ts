@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v1.24.1/cnpg-1.24.1.yaml"
+      "https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v1.29.0/cnpg-1.29.0.yaml"
     ],
     "output": "./gen"
   }
