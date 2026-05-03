@@ -40,7 +40,8 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/kyverno/kyverno/releases/download/v1.11.4/install.yaml"
+      "https://github.com/kyverno/kyverno/releases/download/v1.11.4/install.yaml",
+      "https://github.com/kyverno/kyverno/releases/download/v1.18.0/install.yaml"
     ],
     "output": "./gen"
   }
