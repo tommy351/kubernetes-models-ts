@@ -42,7 +42,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/openshift-pipelines/pipelines-as-code/v0.21.1/config/300-repositories.yaml"
+      "https://raw.githubusercontent.com/openshift-pipelines/pipelines-as-code/v0.45.0/config/300-repositories.yaml"
     ],
     "output": "./gen"
   }
