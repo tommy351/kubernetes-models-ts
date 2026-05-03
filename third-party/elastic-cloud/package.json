@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://download.elastic.co/downloads/eck/2.11.1/crds.yaml"
+      "https://download.elastic.co/downloads/eck/3.3.2/crds.yaml"
     ],
     "output": "./gen"
   }
