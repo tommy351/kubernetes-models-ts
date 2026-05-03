@@ -61,7 +61,7 @@ For each package, work one at a time and only commit if every step succeeds:
 2. Edit the version pin(s) in `third-party/<pkg>/package.json` `crd-generate.input`. Keep historical anchor URLs that intentionally pin earlier API versions (see e.g. `cert-manager`, `contour`).
 3. `pnpm run build` from the repo root (so generated `gen/` is up to date) and `pnpm run lint`.
 4. `pnpm test --run third-party/<pkg>` — if test fixtures fail because the upstream schema got stricter (new required fields, regex patterns, etc.), the bump is breaking; revert and skip.
-5. Run `pnpm diff-crd-inputs --base master --package third-party/<pkg>`. The tool reports any CRD kinds/versions that exist on `master` but not in the working tree. If it reports removals, **keep the old YAML URL and add the new YAML URL alongside it** so consumers of removed kinds/versions are not broken. Re-run the build/test/diff after appending.
+5. Run `pnpm diff-crd-inputs --base master --package third-party/<pkg>`. The tool reports any CRD kinds/versions that exist on `master` but not in the working tree. If it reports removals, **add the new YAML URL and keep only the specific old YAML files that contain the removed kinds/versions** — drop any old URLs whose kinds are still covered by the new release. Re-run the build/test/diff after appending.
 6. List the upstream CRD directory (`gh api repos/<owner>/<repo>/contents/<path>?ref=<tag> --jq '.[].name'`) and add any extra files whose top-level `kind` is `CustomResourceDefinition`. Skip kustomization/install/RBAC manifests and any kinds already covered by URLs from a sibling subproject in the same `package.json`.
 7. Add a changeset:
    ```md
