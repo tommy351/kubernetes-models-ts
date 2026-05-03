@@ -62,4 +62,4 @@
 "@kubernetes-models/victoria-metrics-operator": major
 ---
 
-Require Node.js 22+. Drop support for Node 14, 16, 18, 20.
+Require Node.js 22+.
