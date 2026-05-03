@@ -46,6 +46,7 @@
       "https://github.com/jetstack/cert-manager/releases/download/v1.5.5/cert-manager.crds.yaml",
       "https://github.com/cert-manager/cert-manager/releases/download/v1.20.2/cert-manager.crds.yaml",
       "https://raw.githubusercontent.com/cert-manager/trust-manager/v0.22.1/deploy/crds/trust.cert-manager.io_bundles.yaml",
+      "https://raw.githubusercontent.com/cert-manager/trust-manager/v0.22.1/deploy/crds/trust-manager.io_clusterbundles.yaml",
       "https://raw.githubusercontent.com/cert-manager/approver-policy/v0.25.1/deploy/crds/policy.cert-manager.io_certificaterequestpolicies.yaml",
       "https://raw.githubusercontent.com/cert-manager/aws-privateca-issuer/v1.8.1/charts/aws-pca-issuer/crds/awspca.cert-manager.io_awspcaclusterissuers.yaml",
       "https://raw.githubusercontent.com/cert-manager/aws-privateca-issuer/v1.8.1/charts/aws-pca-issuer/crds/awspca.cert-manager.io_awspcaissuers.yaml"
