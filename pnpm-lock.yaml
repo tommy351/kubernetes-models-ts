@@ -228,6 +228,9 @@ importers:
 
   internal/diff-crd-inputs:
     dependencies:
+      '@kubernetes-models/generate':
+        specifier: workspace:^
+        version: link:../../utils/generate
       '@kubernetes-models/read-input':
         specifier: workspace:^
         version: link:../../utils/read-input

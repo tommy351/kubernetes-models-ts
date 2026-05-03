@@ -2,17 +2,16 @@ import { readFile } from "node:fs/promises";
 import { execa } from "execa";
 import yargs from "yargs";
 import { parseAllDocuments } from "yaml";
+import { type GroupVersionKind } from "@kubernetes-models/generate";
 import { readInput } from "@kubernetes-models/read-input";
-
-interface CRDVersion {
-  group: string;
-  kind: string;
-  version: string;
-}
 
 interface CRDDiff {
   removedKinds: string[];
   removedVersions: string[];
+}
+
+function kindKey(crd: GroupVersionKind): string {
+  return `${crd.group}/${crd.kind}`;
 }
 
 async function readInputAt(
@@ -45,14 +44,14 @@ async function readInputAt(
   }
 }
 
-function extractCRDs(doc: unknown): CRDVersion[] {
+function extractCRDs(doc: unknown): GroupVersionKind[] {
   if (!doc || typeof doc !== "object") return [];
   const d = doc as Record<string, any>;
   if (d.kind !== "CustomResourceDefinition") return [];
   const group: unknown = d.spec?.group;
   const kind: unknown = d.spec?.names?.kind;
   if (typeof group !== "string" || typeof kind !== "string") return [];
-  const out: CRDVersion[] = [];
+  const out: GroupVersionKind[] = [];
   if (Array.isArray(d.spec?.versions)) {
     for (const v of d.spec.versions) {
       if (typeof v?.name === "string") {
@@ -65,7 +64,7 @@ function extractCRDs(doc: unknown): CRDVersion[] {
   return out;
 }
 
-async function fetchUrlCRDs(url: string): Promise<CRDVersion[]> {
+async function fetchUrlCRDs(url: string): Promise<GroupVersionKind[]> {
   let text: string;
   try {
     text = await readInput(url);
@@ -83,39 +82,42 @@ async function fetchUrlCRDs(url: string): Promise<CRDVersion[]> {
   return docs.flatMap(extractCRDs);
 }
 
-function collectFromUrls(
-  urls: string[],
-  cache: Map<string, CRDVersion[]>,
-): { kinds: Set<string>; versions: Set<string> } {
-  const kinds = new Set<string>();
-  const versions = new Set<string>();
-  for (const url of urls) {
-    for (const crd of cache.get(url) ?? []) {
-      kinds.add(`${crd.group}/${crd.kind}`);
-      versions.add(`${crd.group}/${crd.kind}/${crd.version}`);
+function indexByKind(crds: GroupVersionKind[]): Map<string, Set<string>> {
+  const out = new Map<string, Set<string>>();
+  for (const crd of crds) {
+    const key = kindKey(crd);
+    let versions = out.get(key);
+    if (!versions) {
+      versions = new Set();
+      out.set(key, versions);
     }
+    versions.add(crd.version);
   }
-  return { kinds, versions };
+  return out;
 }
 
 function buildDiff(
-  oldUrls: string[],
-  newUrls: string[],
-  cache: Map<string, CRDVersion[]>,
+  oldCrds: GroupVersionKind[],
+  newCrds: GroupVersionKind[],
 ): CRDDiff {
-  const oldSet = collectFromUrls(oldUrls, cache);
-  const newSet = collectFromUrls(newUrls, cache);
-  const removedKinds = [...oldSet.kinds]
-    .filter((k) => !newSet.kinds.has(k))
-    .sort();
-  const removedKindSet = new Set(removedKinds);
-  const removedVersions = [...oldSet.versions]
-    .filter((v) => {
-      if (newSet.versions.has(v)) return false;
-      const kindKey = v.split("/").slice(0, 2).join("/");
-      return !removedKindSet.has(kindKey);
-    })
-    .sort();
+  const oldIdx = indexByKind(oldCrds);
+  const newIdx = indexByKind(newCrds);
+  const removedKinds: string[] = [];
+  const removedVersions: string[] = [];
+  for (const [kind, oldVersions] of oldIdx) {
+    const newVersions = newIdx.get(kind);
+    if (!newVersions) {
+      removedKinds.push(kind);
+      continue;
+    }
+    for (const v of oldVersions) {
+      if (!newVersions.has(v)) {
+        removedVersions.push(`${kind}/${v}`);
+      }
+    }
+  }
+  removedKinds.sort();
+  removedVersions.sort();
   return { removedKinds, removedVersions };
 }
 
@@ -173,14 +175,16 @@ async function main(): Promise<void> {
   ]);
 
   const uniqueUrls = [...new Set([...oldUrls, ...newUrls])];
-  const urlCache = new Map<string, CRDVersion[]>();
+  const urlCache = new Map<string, GroupVersionKind[]>();
   await Promise.all(
     uniqueUrls.map(async (url) => {
       urlCache.set(url, await fetchUrlCRDs(url));
     }),
   );
+  const resolve = (urls: string[]): GroupVersionKind[] =>
+    urls.flatMap((url) => urlCache.get(url) ?? []);
 
-  const diff = buildDiff(oldUrls, newUrls, urlCache);
+  const diff = buildDiff(resolve(oldUrls), resolve(newUrls));
 
   if (args.json) {
     console.log(JSON.stringify({ pkg: relPath, ...diff }, null, 2));
