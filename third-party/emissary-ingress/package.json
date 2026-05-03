@@ -1,0 +1,48 @@
+{
+  "name": "@kubernetes-models/emissary-ingress",
+  "version": "3.6.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/emissary-ingress",
+  "author": "Alex Bowers",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "ambassador",
+    "emissary-ingress"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/emissary-ingress/emissary/v3.6.0/manifests/emissary/emissary-crds.yaml.in"
+    ],
+    "output": "./gen"
+  }
+}
