@@ -1,5 +1,26 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- [#255](https://github.com/tommy351/kubernetes-models-ts/pull/255) [`f4bbf66`](https://github.com/tommy351/kubernetes-models-ts/commit/f4bbf667df2271f8b5fd3cc5cf2dedb3bc0ce39a) Thanks [@tommy351](https://github.com/tommy351)! - Migrate to ESM only package.
+
+- [#255](https://github.com/tommy351/kubernetes-models-ts/pull/255) [`d4280f7`](https://github.com/tommy351/kubernetes-models-ts/commit/d4280f7f316ac9c149a06c364e8d5d941e23ade1) Thanks [@tommy351](https://github.com/tommy351)! - Require Node.js 22+.
+
+### Minor Changes
+
+- [#257](https://github.com/tommy351/kubernetes-models-ts/pull/257) [`09b5f79`](https://github.com/tommy351/kubernetes-models-ts/commit/09b5f79dc255e5d33526ca855b5aaa49cc122a62) Thanks [@tommy351](https://github.com/tommy351)! - Add `ClusterBundle` CRD from trust-manager.
+
+- [#257](https://github.com/tommy351/kubernetes-models-ts/pull/257) [`1a31308`](https://github.com/tommy351/kubernetes-models-ts/commit/1a31308e299612426560f9a8770dd314b12e1747) Thanks [@tommy351](https://github.com/tommy351)! - Update CRDs to v1.20.2.
+
+### Patch Changes
+
+- Updated dependencies [[`f4bbf66`](https://github.com/tommy351/kubernetes-models-ts/commit/f4bbf667df2271f8b5fd3cc5cf2dedb3bc0ce39a), [`5bcc96b`](https://github.com/tommy351/kubernetes-models-ts/commit/5bcc96bd6900043d6d6c2388a237dd42d43f3a93), [`d4280f7`](https://github.com/tommy351/kubernetes-models-ts/commit/d4280f7f316ac9c149a06c364e8d5d941e23ade1)]:
+  - @kubernetes-models/apimachinery@3.0.0
+  - @kubernetes-models/validate@5.0.0
+  - @kubernetes-models/base@6.0.0
+
 ## 4.4.4
 
 ### Patch Changes
