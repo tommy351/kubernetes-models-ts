@@ -1,29 +1,25 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { PulsarTenant } from "../gen/resource.streamnative.io/v1alpha1/PulsarTenant";
+import { describe, it, expect } from "vitest";
+import { PulsarTenant } from "../gen/resource.streamnative.io/v1alpha1/PulsarTenant.js";
 
 describe("PulsarTenant", () => {
-  let tenant: PulsarTenant;
-
-  beforeEach(() => {
-    tenant = new PulsarTenant({
-      metadata: {
-        name: "example"
+  const tenant = new PulsarTenant({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      name: "example-tenant",
+      connectionRef: {
+        name: "example-connection",
       },
-      spec: {
-        name: "example-tenant",
-        connectionRef: {
-          name: "example-connection"
-        },
-        adminRoles: ["admin", "ops"],
-        lifecyclePolicy: "CleanUpAfterDeletion"
-      }
-    });
+      adminRoles: ["admin", "ops"],
+      lifecyclePolicy: "CleanUpAfterDeletion",
+    },
   });
 
   it("should set apiVersion", () => {
     expect(tenant).toHaveProperty(
       "apiVersion",
-      "resource.streamnative.io/v1alpha1"
+      "resource.streamnative.io/v1alpha1",
     );
   });
 
@@ -40,16 +36,16 @@ describe("PulsarTenant", () => {
       apiVersion: "resource.streamnative.io/v1alpha1",
       kind: "PulsarTenant",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         name: "example-tenant",
         connectionRef: {
-          name: "example-connection"
+          name: "example-connection",
         },
         adminRoles: ["admin", "ops"],
-        lifecyclePolicy: "CleanUpAfterDeletion"
-      }
+        lifecyclePolicy: "CleanUpAfterDeletion",
+      },
     });
   });
 });

@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/apimachinery",
   "version": "2.2.0",
+  "type": "module",
   "description": "Types for Kubernetes API objects",
   "repository": {
     "type": "git",
@@ -9,12 +10,9 @@
   "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/packages/apimachinery",
   "author": "Tommy Chen <tommy351@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.mjs",
-  "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "ts-node scripts/generate.ts && publish-scripts build --include-hidden",
+    "build": "node scripts/generate.ts && publish-scripts build --include-hidden",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -28,22 +26,20 @@
     "apimachinery"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^",
-    "@swc/helpers": "^0.5.8"
+    "@kubernetes-models/validate": "workspace:^"
   },
   "devDependencies": {
     "@kubernetes-models/openapi-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "@kubernetes-models/read-input": "workspace:^",
     "@kubernetes-models/string-util": "workspace:^",
-    "@types/node": "^18.7.23",
-    "es-toolkit": "^1.39.9",
+    "@types/node": "^25.6.0",
+    "es-toolkit": "^1.46.0",
     "openapi-types": "^12.0.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^6.0.3"
   }
 }

@@ -1,28 +1,24 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { RabbitmqCluster } from "../gen/rabbitmq.com/v1beta1/RabbitmqCluster";
+import { describe, it, expect } from "vitest";
+import { RabbitmqCluster } from "../gen/rabbitmq.com/v1beta1/RabbitmqCluster.js";
 
 describe("RabbitmqCluster", () => {
-  let cluster: RabbitmqCluster;
-
-  beforeEach(() => {
-    cluster = new RabbitmqCluster({
-      metadata: {
-        name: "example"
+  const cluster = new RabbitmqCluster({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      replicas: 2,
+      service: {
+        type: "ClusterIP",
       },
-      spec: {
-        replicas: 2,
-        service: {
-          type: "ClusterIP"
-        },
-        persistence: {
-          storageClassName: "standard",
-          storage: "10Gi"
-        },
-        rabbitmq: {
-          additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
-        }
-      }
-    });
+      persistence: {
+        storageClassName: "standard",
+        storage: "10Gi",
+      },
+      rabbitmq: {
+        additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -42,21 +38,21 @@ describe("RabbitmqCluster", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "RabbitmqCluster",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         replicas: 2,
         service: {
-          type: "ClusterIP"
+          type: "ClusterIP",
         },
         persistence: {
           storageClassName: "standard",
-          storage: "10Gi"
+          storage: "10Gi",
         },
         rabbitmq: {
-          additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
-        }
-      }
+          additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+        },
+      },
     });
   });
 });

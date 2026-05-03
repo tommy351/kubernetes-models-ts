@@ -1,19 +1,19 @@
 import { describe, it, expect } from "vitest";
-import { Pod } from "../gen/v1/Pod";
-import { Service } from "../gen/v1/Service";
-import { ConfigMap } from "../gen/v1/ConfigMap";
-import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps";
-import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps";
-import { PersistentVolumeClaim } from "../gen/v1/PersistentVolumeClaim";
-import { StatefulSetSpec } from "../gen/apps/v1/StatefulSetSpec";
+import { Pod } from "../gen/v1/Pod.js";
+import { Service } from "../gen/v1/Service.js";
+import { ConfigMap } from "../gen/v1/ConfigMap.js";
+import { JSONSchemaProps as JSONSchemaPropsV1Beta1 } from "../gen/apiextensions.k8s.io/v1beta1/JSONSchemaProps.js";
+import { JSONSchemaProps as JSONSchemaPropsV1 } from "../gen/apiextensions.k8s.io/v1/JSONSchemaProps.js";
+import { PersistentVolumeClaim } from "../gen/v1/PersistentVolumeClaim.js";
+import { StatefulSetSpec } from "../gen/apps/v1/StatefulSetSpec.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {
     it("should pass", () => {
       const pod = new Pod({
         spec: {
-          containers: []
-        }
+          containers: [],
+        },
       });
 
       expect(() => pod.validate()).not.toThrow();
@@ -24,11 +24,11 @@ describe("validate", () => {
     it("should throw an error", () => {
       const pod = new Pod({
         // @ts-expect-error
-        spec: {}
+        spec: {},
       });
 
       expect(() => pod.validate()).toThrow(
-        "data/spec must have required property containers"
+        "data/spec must have required property containers",
       );
     });
   });
@@ -38,8 +38,8 @@ describe("validate", () => {
       it("should pass", () => {
         const svc = new Service({
           spec: {
-            ports: [{ port: 80, targetPort }]
-          }
+            ports: [{ port: 80, targetPort }],
+          },
         });
 
         svc.validate();
@@ -55,11 +55,11 @@ describe("validate", () => {
       ["int", 123],
       ["float", 46.93],
       ["array", ["a", "b", "c"]],
-      ["object", { a: "b", c: "d" }]
+      ["object", { a: "b", c: "d" }],
     ])("when type = %s", (_, value) => {
       it("v1beta1 should pass", () => {
         const props = new JSONSchemaPropsV1Beta1({
-          default: value
+          default: value,
         });
 
         props.validate();
@@ -68,7 +68,7 @@ describe("validate", () => {
 
       it("v1 should pass", () => {
         const props = new JSONSchemaPropsV1({
-          default: value
+          default: value,
         });
 
         props.validate();
@@ -78,7 +78,7 @@ describe("validate", () => {
 
     it("oneOf", () => {
       const props = new JSONSchemaPropsV1({
-        oneOf: [{ type: "string" }, { type: "number" }]
+        oneOf: [{ type: "string" }, { type: "number" }],
       });
 
       expect(() => props.validate()).not.toThrow();
@@ -90,7 +90,7 @@ describe("validate", () => {
       it("should pass", () => {
         const configMap = new ConfigMap({
           // @ts-expect-error
-          data: null
+          data: null,
         });
 
         expect(() => configMap.validate()).not.toThrow();
@@ -104,10 +104,10 @@ describe("validate", () => {
         spec: {
           resources: {
             requests: {
-              storage: quantity
-            }
-          }
-        }
+              storage: quantity,
+            },
+          },
+        },
       });
     }
 
@@ -129,7 +129,7 @@ describe("validate", () => {
       it("should fail", () => {
         const pvc = createPVC("foo");
         expect(() => pvc.validate()).toThrow(
-          `data/spec/resources/requests/storage must be number, data/spec/resources/requests/storage must match format "quantity", data/spec/resources/requests/storage must match exactly one schema in "oneOf"`
+          `data/spec/resources/requests/storage must be number, data/spec/resources/requests/storage must match format "quantity", data/spec/resources/requests/storage must match exactly one schema in "oneOf"`,
         );
       });
     });
@@ -141,8 +141,8 @@ describe("validate", () => {
         const pod = new Pod({
           metadata: {
             // @ts-expect-error
-            creationTimestamp: null
-          }
+            creationTimestamp: null,
+          },
         });
 
         expect(() => pod.validate()).not.toThrow();
@@ -153,7 +153,7 @@ describe("validate", () => {
       it("should pass", () => {
         const pod = new Pod({
           // @ts-expect-error
-          spec: null
+          spec: null,
         });
 
         expect(() => pod.validate()).not.toThrow();
@@ -165,12 +165,12 @@ describe("validate", () => {
         const pod = new Pod({
           spec: {
             // @ts-expect-error
-            containers: null
-          }
+            containers: null,
+          },
         });
 
         expect(() => pod.validate()).toThrow(
-          "data/spec/containers must be array"
+          "data/spec/containers must be array",
         );
       });
     });
@@ -184,18 +184,18 @@ describe("StatefulSetSpec", () => {
         serviceName: "mysql",
         selector: {
           matchLabels: {
-            app: "mysql"
-          }
+            app: "mysql",
+          },
         },
         template: {},
         volumeClaimTemplates: [
           {
             metadata: { name: "data" },
             spec: {
-              storageClassName: "ssd"
-            }
-          }
-        ]
+              storageClassName: "ssd",
+            },
+          },
+        ],
       });
 
       expect(() => spec.validate()).not.toThrow();

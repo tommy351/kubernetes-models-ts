@@ -1,30 +1,26 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { GrafanaAgent } from "../gen/monitoring.grafana.com/v1alpha1/GrafanaAgent";
+import { describe, it, expect } from "vitest";
+import { GrafanaAgent } from "../gen/monitoring.grafana.com/v1alpha1/GrafanaAgent.js";
 
 describe("GrafanaAgent", () => {
-  let agent: GrafanaAgent;
-
-  beforeEach(() => {
-    agent = new GrafanaAgent({
-      metadata: { name: "grafana-agent" },
-      spec: {
-        image: "grafana/agent:v0.21.2",
-        logLevel: "info",
-        metrics: {
-          instanceSelector: {
-            matchLabels: {
-              agent: "grafana-agent-metrics"
-            }
-          }
-        }
-      }
-    });
+  const agent = new GrafanaAgent({
+    metadata: { name: "grafana-agent" },
+    spec: {
+      image: "grafana/agent:v0.21.2",
+      logLevel: "info",
+      metrics: {
+        instanceSelector: {
+          matchLabels: {
+            agent: "grafana-agent-metrics",
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(agent).toHaveProperty(
       "apiVersion",
-      "monitoring.grafana.com/v1alpha1"
+      "monitoring.grafana.com/v1alpha1",
     );
   });
 
@@ -47,11 +43,11 @@ describe("GrafanaAgent", () => {
         metrics: {
           instanceSelector: {
             matchLabels: {
-              agent: "grafana-agent-metrics"
-            }
-          }
-        }
-      }
+              agent: "grafana-agent-metrics",
+            },
+          },
+        },
+      },
     });
   });
 });

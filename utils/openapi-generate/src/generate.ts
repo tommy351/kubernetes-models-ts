@@ -1,16 +1,16 @@
 import {
   composeGenerators,
-  Definition,
+  type Definition,
   getAPIVersion,
-  GroupVersionKind,
-  Schema,
-  writeOutputFiles
+  type GroupVersionKind,
+  type Schema,
+  writeOutputFiles,
 } from "@kubernetes-models/generate";
-import generateDefinitions from "./generators/definition";
-import generateSchemas from "./generators/schema";
-import generateAliases from "./generators/alias";
+import generateDefinitions from "./generators/definition.js";
+import generateSchemas from "./generators/schema.js";
+import generateAliases from "./generators/alias.js";
 import { uniq } from "es-toolkit";
-import { buildContext, ContextOptions } from "./context";
+import { buildContext, type ContextOptions } from "./context.js";
 
 function load(input: string): Definition[] {
   const { definitions } = JSON.parse(input);
@@ -23,7 +23,7 @@ function load(input: string): Definition[] {
       switch (id) {
         case "io.k8s.apimachinery.pkg.api.resource.Quantity":
           schema = {
-            oneOf: [{ type: "number" }, { type: "string", format: "quantity" }]
+            oneOf: [{ type: "number" }, { type: "string", format: "quantity" }],
           };
       }
 
@@ -42,13 +42,13 @@ function load(input: string): Definition[] {
           apiVersion: {
             ...properties.apiVersion,
             type: "string",
-            enum: uniq(gvks.map((x) => getAPIVersion(x)))
+            enum: uniq(gvks.map((x) => getAPIVersion(x))),
           },
           kind: {
             ...properties.kind,
             type: "string",
-            enum: uniq(gvks.map((x) => x.kind))
-          }
+            enum: uniq(gvks.map((x) => x.kind)),
+          },
         };
 
         schema.required = [...new Set([...required, "apiVersion", "kind"])];
@@ -57,7 +57,7 @@ function load(input: string): Definition[] {
       return {
         gvk: gvks,
         schema,
-        schemaId: id
+        schemaId: id,
       };
     });
 }
@@ -77,7 +77,7 @@ export async function generate({
   const generator = composeGenerators([
     generateDefinitions(ctx),
     generateSchemas(ctx),
-    generateAliases(ctx)
+    generateAliases(ctx),
   ]);
   const files = await generator(definitions);
 

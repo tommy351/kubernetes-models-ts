@@ -1,6 +1,7 @@
 {
   "name": "@kubernetes-models/publish-scripts",
   "version": "1.2.0",
+  "type": "module",
   "private": true,
   "bin": {
     "publish-scripts": "./bin/publish-scripts.js"
@@ -9,19 +10,18 @@
     "build": "tsc"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=22"
   },
   "dependencies": {
     "@swc/core": "^1.4.11",
-    "execa": "^5.1.1",
+    "execa": "^9.6.1",
     "fast-glob": "^3.2.12",
-    "fs-extra": "^10.1.0",
     "tslib": "^2.4.0",
-    "typescript": "^4.8.4",
-    "yargs": "^17.6.0"
+    "typescript": "^6.0.3",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
+    "@types/fs-extra": "^11.0.4",
     "@types/yargs": "^17.0.13"
   }
 }

@@ -1,20 +1,15 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { EC2NodeClass } from "../gen/karpenter.k8s.aws/v1beta1";
-import { NodeClaim } from "../gen/karpenter.sh/v1beta1";
-import { NodePool } from "../gen/karpenter.sh/v1beta1";
+import { describe, it, expect } from "vitest";
+import { EC2NodeClass } from "../gen/karpenter.k8s.aws/v1beta1/index.js";
+import { NodeClaim, NodePool } from "../gen/karpenter.sh/v1beta1/index.js";
 
 describe("EC2NodeClass", () => {
-  let nodeClass: EC2NodeClass;
-
-  beforeEach(() => {
-    nodeClass = new EC2NodeClass({
-      metadata: { name: "test" },
-      spec: {
-        amiFamily: "AL2",
-        subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
-        securityGroupSelectorTerms: [{ name: "test" }]
-      }
-    });
+  const nodeClass = new EC2NodeClass({
+    metadata: { name: "test" },
+    spec: {
+      amiFamily: "AL2",
+      subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
+      securityGroupSelectorTerms: [{ name: "test" }],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -41,31 +36,27 @@ describe("EC2NodeClass", () => {
       spec: {
         amiFamily: "AL2",
         subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
-        securityGroupSelectorTerms: [{ name: "test" }]
-      }
+        securityGroupSelectorTerms: [{ name: "test" }],
+      },
     });
   });
 });
 
 describe("NodeClaim", () => {
-  let nodeClaim: NodeClaim;
-
-  beforeEach(() => {
-    nodeClaim = new NodeClaim({
-      metadata: { name: "test" },
-      spec: {
-        nodeClassRef: {
-          name: "test"
+  const nodeClaim = new NodeClaim({
+    metadata: { name: "test" },
+    spec: {
+      nodeClassRef: {
+        name: "test",
+      },
+      requirements: [
+        {
+          key: "karpenter.sh/instance-type",
+          operator: "In",
+          values: ["m5.large"],
         },
-        requirements: [
-          {
-            key: "karpenter.sh/instance-type",
-            operator: "In",
-            values: ["m5.large"]
-          }
-        ]
-      }
-    });
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -91,41 +82,37 @@ describe("NodeClaim", () => {
       metadata: { name: "test" },
       spec: {
         nodeClassRef: {
-          name: "test"
+          name: "test",
         },
         requirements: [
           {
             key: "karpenter.sh/instance-type",
             operator: "In",
-            values: ["m5.large"]
-          }
-        ]
-      }
+            values: ["m5.large"],
+          },
+        ],
+      },
     });
   });
 });
 
 describe("NodePool", () => {
-  let nodePool: NodePool;
-
-  beforeEach(() => {
-    nodePool = new NodePool({
-      metadata: { name: "test" },
-      spec: {
-        template: {
-          spec: {
-            nodeClassRef: { name: "test" },
-            requirements: [
-              {
-                key: "karpenter.sh/instance-type",
-                operator: "In",
-                values: ["m5.large"]
-              }
-            ]
-          }
-        }
-      }
-    });
+  const nodePool = new NodePool({
+    metadata: { name: "test" },
+    spec: {
+      template: {
+        spec: {
+          nodeClassRef: { name: "test" },
+          requirements: [
+            {
+              key: "karpenter.sh/instance-type",
+              operator: "In",
+              values: ["m5.large"],
+            },
+          ],
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -157,12 +144,12 @@ describe("NodePool", () => {
               {
                 key: "karpenter.sh/instance-type",
                 operator: "In",
-                values: ["m5.large"]
-              }
-            ]
-          }
-        }
-      }
+                values: ["m5.large"],
+              },
+            ],
+          },
+        },
+      },
     });
   });
 });

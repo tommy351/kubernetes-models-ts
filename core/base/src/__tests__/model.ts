@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
-import { Model, setValidateFunc } from "../model";
+import { Model, setValidateFunc } from "../model.js";
 import { ValidateFunc } from "@kubernetes-models/validate";
 
 describe("toJSON", () => {
   it("should not set undefined props", () => {
     const json = new Model({
-      spec: undefined
+      spec: undefined,
     }).toJSON();
 
     expect(json).toEqual({});
@@ -14,12 +14,12 @@ describe("toJSON", () => {
   it("should not set undefined props in an object", () => {
     const json = new Model({
       spec: {
-        nodeName: undefined
-      }
+        nodeName: undefined,
+      },
     }).toJSON();
 
     expect(json).toEqual({
-      spec: {}
+      spec: {},
     });
   });
 
@@ -29,16 +29,16 @@ describe("toJSON", () => {
         containers: [
           {
             name: "foo",
-            image: undefined
-          }
-        ]
-      }
+            image: undefined,
+          },
+        ],
+      },
     }).toJSON();
 
     expect(json).toEqual({
       spec: {
-        containers: [{ name: "foo" }]
-      }
+        containers: [{ name: "foo" }],
+      },
     });
   });
 });

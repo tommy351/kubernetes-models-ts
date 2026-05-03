@@ -1,1 +1,1 @@
-export { readInput } from "./read";
+export { readInput } from "./read.js";

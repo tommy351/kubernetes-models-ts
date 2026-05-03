@@ -1,1 +1,1 @@
-export { generate } from "./generate";
+export { generate } from "./generate.js";

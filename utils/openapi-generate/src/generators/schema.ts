@@ -1,16 +1,16 @@
 import {
   collectRefs,
-  Definition,
-  Generator,
-  Schema,
+  type Definition,
+  type Generator,
+  type OutputFile,
+  type Schema,
   transformSchema as baseTransformSchema,
-  compileSchema
+  compileSchema,
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
-import { Context } from "../context";
-import { getClassName, trimRefPrefix } from "../string";
-import { getSchemaPath, isAPIMachineryID } from "../utils";
-import { OutputFile } from "@kubernetes-models/generate";
+import { type Context } from "../context.js";
+import { getClassName, trimRefPrefix } from "../string.js";
+import { getSchemaPath, isAPIMachineryID } from "../utils.js";
 
 function replaceRef(schema: Schema): Schema {
   if (typeof schema.$ref === "string") {
@@ -22,13 +22,13 @@ function replaceRef(schema: Schema): Schema {
 }
 
 function transformSchema(def: Definition): Schema {
-  let schema: Schema = {};
+  let schema: Schema;
 
   // Rewrite schemas for some special types
   switch (def.schemaId) {
     case "io.k8s.apimachinery.pkg.util.intstr.IntOrString":
       schema = {
-        oneOf: [{ type: "string" }, { type: "integer", format: "int32" }]
+        oneOf: [{ type: "string" }, { type: "integer", format: "int32" }],
       };
       break;
 
@@ -49,7 +49,7 @@ export default function ({ externalAPIMachinery }: Context): Generator {
     if (externalAPIMachinery && isAPIMachineryID(ref)) {
       return `@kubernetes-models/apimachinery/${trimSuffix(
         getSchemaPath(ref),
-        ".js"
+        ".js",
       )}`;
     }
 
@@ -65,18 +65,18 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         .map(trimRefPrefix)
         .filter((ref) => ref !== def.schemaId);
       const refPaths = Object.fromEntries(
-        refIds.map((ref) => [ref, getSchemaImportPath(ref)])
+        refIds.map((ref) => [ref, getSchemaImportPath(ref)]),
       );
 
       files.push(
         {
           path: getSchemaPath(def.schemaId),
-          content: await compileSchema(schema, refPaths)
+          content: await compileSchema(schema, refPaths),
         },
         {
           path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
-          content: `export function validate(data: unknown): boolean;`
-        }
+          content: `export function validate(data: unknown): boolean;`,
+        },
       );
     }
 

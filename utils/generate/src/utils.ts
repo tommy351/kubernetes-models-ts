@@ -1,10 +1,13 @@
-import { Generator, GroupVersionKind, OutputFile } from "./types";
+import type { Generator, GroupVersionKind, OutputFile } from "./types.js";
 import { outputFile } from "fs-extra";
-import { join } from "path";
+import { join } from "node:path";
 
 export class PathConflictError extends Error {
-  constructor(public path: string) {
+  public path: string;
+
+  constructor(path: string) {
     super(`Path conflict: ${path}`);
+    this.path = path;
   }
 }
 
@@ -32,7 +35,7 @@ export function composeGenerators(generators: readonly Generator[]): Generator {
 
 export async function writeOutputFiles(
   outDir: string,
-  files: readonly OutputFile[]
+  files: readonly OutputFile[],
 ): Promise<void> {
   for (const f of files) {
     console.log("Writing:", f.path);

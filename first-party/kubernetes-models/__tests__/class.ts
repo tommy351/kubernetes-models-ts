@@ -1,20 +1,16 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Deployment as DeploymentV1 } from "../gen/apps/v1/Deployment";
-import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deployment";
-import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress";
-import { Ingress as IngressV1Beta1 } from "../gen/extensions/v1beta1/Ingress";
-import { Pod } from "../gen/v1/Pod";
-import { PodSpec } from "../gen/v1/PodSpec";
+import { describe, it, expect } from "vitest";
+import { Deployment as DeploymentV1 } from "../gen/apps/v1/Deployment.js";
+import { Deployment as DeploymentV1Beta1 } from "../gen/extensions/v1beta1/Deployment.js";
+import { Ingress as IngressV1 } from "../gen/networking.k8s.io/v1/Ingress.js";
+import { Ingress as IngressV1Beta1 } from "../gen/extensions/v1beta1/Ingress.js";
+import { Pod } from "../gen/v1/Pod.js";
+import { PodSpec } from "../gen/v1/PodSpec.js";
 
 describe("Deployment apps/v1", () => {
-  let deployment: DeploymentV1;
-
-  beforeEach(() => {
-    deployment = new DeploymentV1({
-      metadata: {
-        name: "test"
-      }
-    });
+  const deployment = new DeploymentV1({
+    metadata: {
+      name: "test",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -34,21 +30,17 @@ describe("Deployment apps/v1", () => {
       apiVersion: "apps/v1",
       kind: "Deployment",
       metadata: {
-        name: "test"
-      }
+        name: "test",
+      },
     });
   });
 });
 
 describe("Deployment apps/v1beta1", () => {
-  let deployment: DeploymentV1Beta1;
-
-  beforeEach(() => {
-    deployment = new DeploymentV1Beta1({
-      metadata: {
-        name: "test"
-      }
-    });
+  const deployment = new DeploymentV1Beta1({
+    metadata: {
+      name: "test",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -68,18 +60,14 @@ describe("Deployment apps/v1beta1", () => {
       apiVersion: "extensions/v1beta1",
       kind: "Deployment",
       metadata: {
-        name: "test"
-      }
+        name: "test",
+      },
     });
   });
 });
 
 describe("Ingress networking.k8s.io/v1", () => {
-  let ingress: IngressV1;
-
-  beforeEach(() => {
-    ingress = new IngressV1({});
-  });
+  const ingress = new IngressV1({});
 
   it("should set apiVersion", () => {
     expect(ingress).toHaveProperty("apiVersion", "networking.k8s.io/v1");
@@ -91,11 +79,7 @@ describe("Ingress networking.k8s.io/v1", () => {
 });
 
 describe("Ingress extensions/v1beta1", () => {
-  let ingress: IngressV1Beta1;
-
-  beforeEach(() => {
-    ingress = new IngressV1Beta1({});
-  });
+  const ingress = new IngressV1Beta1({});
 
   it("should set apiVersion", () => {
     expect(ingress).toHaveProperty("apiVersion", "extensions/v1beta1");
@@ -107,11 +91,7 @@ describe("Ingress extensions/v1beta1", () => {
 });
 
 describe("Pod", () => {
-  let pod: Pod;
-
-  beforeEach(() => {
-    pod = new Pod();
-  });
+  const pod = new Pod();
 
   it("should set apiVersion", () => {
     expect(pod).toHaveProperty("apiVersion", "v1");
@@ -124,25 +104,21 @@ describe("Pod", () => {
 
 // Test if definitions without GVK are still exported
 describe("PodSpec", () => {
-  let spec: PodSpec;
-
-  beforeEach(() => {
-    spec = new PodSpec({
-      containers: [
-        {
-          name: "busybox",
-          image: "busybox"
-        }
-      ]
-    });
+  const spec = new PodSpec({
+    containers: [
+      {
+        name: "busybox",
+        image: "busybox",
+      },
+    ],
   });
 
   it("should set containers", () => {
     expect(spec).toHaveProperty("containers", [
       {
         name: "busybox",
-        image: "busybox"
-      }
+        image: "busybox",
+      },
     ]);
   });
 });

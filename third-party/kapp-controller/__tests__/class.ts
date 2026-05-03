@@ -1,27 +1,23 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { App } from "../gen/kappctrl.k14s.io/v1alpha1/App";
+import { describe, it, expect } from "vitest";
+import { App } from "../gen/kappctrl.k14s.io/v1alpha1/App.js";
 
 describe("App", () => {
-  let app: App;
-
-  beforeEach(() => {
-    app = new App({
-      metadata: { name: "hello" },
-      spec: {
-        serviceAccountName: "default-ns-sa",
-        fetch: [
-          {
-            git: {
-              url: "https://github.com/vmware-tanzu/carvel-simple-app-on-kubernetes",
-              ref: "origin/develop",
-              subPath: "config-step-2-template"
-            }
-          }
-        ],
-        template: [{ ytt: {} }],
-        deploy: [{ kapp: {} }]
-      }
-    });
+  const app = new App({
+    metadata: { name: "hello" },
+    spec: {
+      serviceAccountName: "default-ns-sa",
+      fetch: [
+        {
+          git: {
+            url: "https://github.com/vmware-tanzu/carvel-simple-app-on-kubernetes",
+            ref: "origin/develop",
+            subPath: "config-step-2-template",
+          },
+        },
+      ],
+      template: [{ ytt: {} }],
+      deploy: [{ kapp: {} }],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -48,13 +44,13 @@ describe("App", () => {
             git: {
               url: "https://github.com/vmware-tanzu/carvel-simple-app-on-kubernetes",
               ref: "origin/develop",
-              subPath: "config-step-2-template"
-            }
-          }
+              subPath: "config-step-2-template",
+            },
+          },
         ],
         template: [{ ytt: {} }],
-        deploy: [{ kapp: {} }]
-      }
+        deploy: [{ kapp: {} }],
+      },
     });
   });
 });

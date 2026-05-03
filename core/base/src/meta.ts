@@ -16,7 +16,7 @@ function isNonNullObject(value: unknown): value is Record<string, unknown> {
 export type TypeMetaGuard<T extends TypeMeta> = (value: unknown) => value is T;
 
 export function createTypeMetaGuard<T extends TypeMeta>(
-  meta: TypeMeta
+  meta: TypeMeta,
 ): TypeMetaGuard<T> {
   return (value): value is T => {
     return (

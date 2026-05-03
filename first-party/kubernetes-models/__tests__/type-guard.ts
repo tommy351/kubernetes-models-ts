@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { Pod } from "../gen/v1/Pod";
-import { PodSpec } from "../gen/v1/PodSpec";
-import { Service } from "../gen/v1/Service";
-import { Deployment } from "../gen/apps/v1/Deployment";
+import { Pod } from "../gen/v1/Pod.js";
+import { PodSpec } from "../gen/v1/PodSpec.js";
+import { Service } from "../gen/v1/Service.js";
+import { Deployment } from "../gen/apps/v1/Deployment.js";
 
 describe("With GVK", () => {
   describe.each([
@@ -37,7 +37,7 @@ describe("With GVK", () => {
     // Class with incorrect apiVersion
     [new Deployment(), false],
     // Class with incorrect kind
-    [new Service(), false]
+    [new Service(), false],
   ])("Pod.is(%p)", (value, expected) => {
     it(`should return ${expected}`, () => {
       expect(Pod.is(value)).toEqual(expected);

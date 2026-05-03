@@ -1,41 +1,37 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { ExternalSecret } from "../gen/external-secrets.io/v1beta1/ExternalSecret";
+import { describe, it, expect } from "vitest";
+import { ExternalSecret } from "../gen/external-secrets.io/v1beta1/ExternalSecret.js";
 
 describe("ExternalSecret", () => {
-  let secret: ExternalSecret;
-
-  beforeEach(() => {
-    secret = new ExternalSecret({
-      metadata: {
-        name: "example"
+  const secret = new ExternalSecret({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      refreshInterval: "1h",
+      secretStoreRef: {
+        name: "secret-store-sample",
+        kind: "SecretStore",
       },
-      spec: {
-        refreshInterval: "1h",
-        secretStoreRef: {
-          name: "secret-store-sample",
-          kind: "SecretStore"
+      target: {
+        name: "secret-to-be-created",
+        creationPolicy: "Owner",
+      },
+      data: [
+        {
+          secretKey: "secret-key-to-be-managed",
+          remoteRef: {
+            key: "provider-key",
+            version: "provider-key-version",
+            property: "provider-key-property",
+          },
         },
-        target: {
-          name: "secret-to-be-created",
-          creationPolicy: "Owner"
+      ],
+      dataFrom: [
+        {
+          extract: { key: "remote-key-in-the-provider" },
         },
-        data: [
-          {
-            secretKey: "secret-key-to-be-managed",
-            remoteRef: {
-              key: "provider-key",
-              version: "provider-key-version",
-              property: "provider-key-property"
-            }
-          }
-        ],
-        dataFrom: [
-          {
-            extract: { key: "remote-key-in-the-provider" }
-          }
-        ]
-      }
-    });
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -55,17 +51,17 @@ describe("ExternalSecret", () => {
       apiVersion: "external-secrets.io/v1beta1",
       kind: "ExternalSecret",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         refreshInterval: "1h",
         secretStoreRef: {
           name: "secret-store-sample",
-          kind: "SecretStore"
+          kind: "SecretStore",
         },
         target: {
           name: "secret-to-be-created",
-          creationPolicy: "Owner"
+          creationPolicy: "Owner",
         },
         data: [
           {
@@ -73,16 +69,16 @@ describe("ExternalSecret", () => {
             remoteRef: {
               key: "provider-key",
               version: "provider-key-version",
-              property: "provider-key-property"
-            }
-          }
+              property: "provider-key-property",
+            },
+          },
         ],
         dataFrom: [
           {
-            extract: { key: "remote-key-in-the-provider" }
-          }
-        ]
-      }
+            extract: { key: "remote-key-in-the-provider" },
+          },
+        ],
+      },
     });
   });
 });

@@ -1,18 +1,18 @@
+// eslint-disable-next-line import-x/no-named-as-default
 import glob from "fast-glob";
-import { writeJSON, pathExists, readJSON } from "fs-extra";
-import { basename, dirname, extname, join, posix } from "path";
-import { copyFile, mkdir, rm, writeFile } from "fs/promises";
-import execa from "execa";
+import { basename, dirname, extname, join, posix } from "node:path";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { execa } from "execa";
 import * as swc from "@swc/core";
+import { fileURLToPath } from "node:url";
 
-const ECMA_VERSION = 2020;
+const ECMA_VERSION = 2024;
 const DTS_EXT = ".d.ts";
-const CJS_EXT = ".js";
-const ESM_EXT = ".mjs";
+const JS_EXT = ".js";
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
-    a[0].localeCompare(b[0])
+    a[0].localeCompare(b[0]),
   );
 
   return Object.fromEntries(entries) as T;
@@ -21,21 +21,20 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
 function generateExportEntry(name: string): Record<string, string> {
   return {
     types: name + DTS_EXT,
-    import: name + ESM_EXT,
-    require: name + CJS_EXT
+    import: name + JS_EXT,
   };
 }
 
 async function generateExportMap(
-  args: BuildArguments
+  args: BuildArguments,
 ): Promise<Record<string, unknown>> {
   const paths = await glob(["**/*.{js,ts}"], {
     cwd: join(args.cwd, "gen"),
-    ...(!args["include-hidden"] && { ignore: ["!_**/*"] })
+    ...(!args["include-hidden"] && { ignore: ["!_**/*"] }),
   });
 
   const exportMap: Record<string, unknown> = {
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
   };
 
   for (const path of paths) {
@@ -54,85 +53,41 @@ async function generateExportMap(
 }
 
 async function compileDts(cwd: string): Promise<void> {
-  const tscBin = join(__dirname, "../node_modules/.bin/tsc");
+  const tscBin = fileURLToPath(
+    new URL("../node_modules/.bin/tsc", import.meta.url),
+  );
 
   console.log("Generating declaration files");
   await execa(tscBin, ["--emitDeclarationOnly"], { cwd, stdio: "inherit" });
 }
 
 async function writeJs({
-  ast,
-  module,
-  path
+  srcPath,
+  dstPath,
 }: {
-  ast: swc.Module;
-  module: "es6" | "commonjs";
-  path: string;
+  srcPath: string;
+  dstPath: string;
 }): Promise<void> {
-  const transformResult = await swc.transform(ast, {
+  const transformResult = await swc.transformFile(srcPath, {
     jsc: {
       target: `es${ECMA_VERSION}`,
-      externalHelpers: true,
-      loose: true
+      loose: true,
     },
-    module: { type: module }
+    module: { type: "nodenext" },
   });
 
   const minifyResult = await swc.minify(transformResult.code, {
     compress: {
       toplevel: true,
-      ecma: ECMA_VERSION
+      ecma: ECMA_VERSION,
     },
     mangle: false,
     ecma: ECMA_VERSION,
-    module: module === "es6"
+    module: true,
   });
 
-  await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, minifyResult.code);
-}
-
-function isRelativeImport(source: string): boolean {
-  return source.startsWith("./") || source.startsWith("../");
-}
-
-function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
-  const body: swc.ModuleItem[] = [];
-
-  function rewrite<T extends { source?: swc.StringLiteral }>(stmt: T): T {
-    if (
-      !stmt.source ||
-      !isRelativeImport(stmt.source.value) ||
-      extname(stmt.source.value).length
-    ) {
-      return stmt;
-    }
-
-    const newValue = stmt.source.value + ext;
-
-    return {
-      ...stmt,
-      source: {
-        ...stmt.source,
-        value: newValue,
-        raw: JSON.stringify(newValue)
-      }
-    };
-  }
-
-  for (const stmt of ast.body) {
-    switch (stmt.type) {
-      case "ImportDeclaration":
-      case "ExportAllDeclaration":
-      case "ExportNamedDeclaration":
-        body.push(rewrite(stmt));
-        break;
-      default:
-        body.push(stmt);
-    }
-  }
-
-  return { ...ast, body };
+  await mkdir(dirname(dstPath), { recursive: true });
+  await writeFile(dstPath, minifyResult.code);
 }
 
 async function compileJs(cwd: string): Promise<void> {
@@ -140,7 +95,7 @@ async function compileJs(cwd: string): Promise<void> {
   const distDir = join(cwd, "dist");
   const srcPaths = await glob(["**/*.{js,ts}"], {
     cwd: genDir,
-    ignore: ["**/*.d.ts"]
+    ignore: ["**/*.d.ts"],
   });
 
   for (const path of srcPaths) {
@@ -150,22 +105,10 @@ async function compileJs(cwd: string): Promise<void> {
 
     console.log("Transforming:", `gen/${path}`);
 
-    const ast = await swc.parseFile(srcPath, {
-      syntax: ext === ".ts" ? "typescript" : "ecmascript"
+    await writeJs({
+      srcPath,
+      dstPath: join(distDir, name + JS_EXT),
     });
-
-    await Promise.all([
-      writeJs({
-        ast: rewriteImportPath(ast, CJS_EXT),
-        module: "commonjs",
-        path: join(distDir, name + CJS_EXT)
-      }),
-      writeJs({
-        ast: rewriteImportPath(ast, ESM_EXT),
-        module: "es6",
-        path: join(distDir, name + ESM_EXT)
-      })
-    ]);
   }
 }
 
@@ -189,19 +132,26 @@ async function copyDistFiles(cwd: string): Promise<void> {
     const src = join(cwd, file);
     const dst = join(cwd, "dist", file);
 
-    if (!(await pathExists(src))) continue;
-
-    await copyFile(src, dst);
-    console.log("Copying:", file);
+    try {
+      await copyFile(src, dst);
+      console.log("Copying:", file);
+    } catch (err) {
+      if ((err as any).code !== "ENOENT") throw err;
+    }
   }
 }
 
 async function writePkgJson(args: BuildArguments): Promise<void> {
-  const pkgJson = await readJSON(join(args.cwd, "package.json"));
+  const pkgJson = JSON.parse(
+    await readFile(join(args.cwd, "package.json"), "utf-8"),
+  );
 
   pkgJson.exports = await generateExportMap(args);
 
-  await writeJSON(join(args.cwd, "dist/package.json"), pkgJson, { spaces: 2 });
+  await writeFile(
+    join(args.cwd, "dist/package.json"),
+    JSON.stringify(pkgJson, null, 2),
+  );
 }
 
 export interface BuildArguments {

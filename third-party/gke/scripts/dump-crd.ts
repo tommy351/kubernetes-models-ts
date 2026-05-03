@@ -1,7 +1,7 @@
-/* eslint-disable node/no-unpublished-import */
-import execa from "execa";
+import { execa } from "execa";
 import { outputFile } from "fs-extra";
-import { join } from "path";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parse, stringify } from "yaml";
 
 const CRDS: readonly string[] = [
@@ -21,19 +21,19 @@ const CRDS: readonly string[] = [
   "serviceimportconfigs.net.gke.io",
   "serviceimports.net.gke.io",
   "servicenetworkendpointgroups.networking.gke.io",
-  "updateinfos.nodemanagement.gke.io"
+  "updateinfos.nodemanagement.gke.io",
 ];
 
-const CRD_DIR = join(__dirname, "../crd");
+const CRD_DIR = fileURLToPath(new URL("../crd", import.meta.url));
 
 function formatCRD(data: any): any {
   return {
     apiVersion: data.apiVersion,
     kind: data.kind,
     metadata: {
-      name: data.metadata.name
+      name: data.metadata.name,
     },
-    spec: data.spec
+    spec: data.spec,
   };
 }
 
@@ -44,11 +44,9 @@ async function dumpCRD(name: string): Promise<void> {
   const data = formatCRD(parse(stdout));
   const path = join(CRD_DIR, name.split(".")[0]) + ".yaml";
 
-  outputFile(path, stringify(data));
+  await outputFile(path, stringify(data));
 }
 
-(async () => {
-  for (const crd of CRDS) {
-    await dumpCRD(crd);
-  }
-})();
+for (const crd of CRDS) {
+  await dumpCRD(crd);
+}

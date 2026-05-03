@@ -1,23 +1,19 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { SpiceDBCluster } from "../gen/authzed.com/v1alpha1/SpiceDBCluster";
+import { describe, it, expect } from "vitest";
+import { SpiceDBCluster } from "../gen/authzed.com/v1alpha1/SpiceDBCluster.js";
 
 describe("SpiceDBCluster", () => {
-  let cluster: SpiceDBCluster;
-
-  beforeEach(() => {
-    cluster = new SpiceDBCluster({
-      metadata: {
-        name: "dev"
+  const cluster = new SpiceDBCluster({
+    metadata: {
+      name: "dev",
+    },
+    spec: {
+      channel: "stable",
+      version: "v1.14.0",
+      config: {
+        datastoreEngine: "memory",
       },
-      spec: {
-        channel: "stable",
-        version: "v1.14.0",
-        config: {
-          datastoreEngine: "memory"
-        },
-        secretName: "dev-spicedb-secret"
-      }
-    });
+      secretName: "dev-spicedb-secret",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -37,16 +33,16 @@ describe("SpiceDBCluster", () => {
       apiVersion: "authzed.com/v1alpha1",
       kind: "SpiceDBCluster",
       metadata: {
-        name: "dev"
+        name: "dev",
       },
       spec: {
         channel: "stable",
         version: "v1.14.0",
         config: {
-          datastoreEngine: "memory"
+          datastoreEngine: "memory",
         },
-        secretName: "dev-spicedb-secret"
-      }
+        secretName: "dev-spicedb-secret",
+      },
     });
   });
 });

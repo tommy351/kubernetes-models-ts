@@ -1,12 +1,11 @@
-/* eslint-disable node/no-unpublished-import */
 import {
   generate,
   mergeOpenAPISpecs,
-  isAPIMachineryID
+  isAPIMachineryID,
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
-import { join } from "path";
 import { OpenAPIV2 } from "openapi-types";
+import { fileURLToPath } from "node:url";
 
 type Document = OpenAPIV2.Document<any>;
 
@@ -27,7 +26,7 @@ const VERSIONS = [
   "1.29.5",
   "1.32.0",
   // Latest version
-  "1.33.0"
+  "1.33.0",
 ];
 
 async function fetchSpec(): Promise<Document> {
@@ -47,7 +46,7 @@ function omitAPIMachineryDefinitions(doc: Document): void {
   if (!doc.definitions) return;
 
   doc.definitions = Object.fromEntries(
-    Object.entries(doc.definitions).filter(([key]) => !isAPIMachineryID(key))
+    Object.entries(doc.definitions).filter(([key]) => !isAPIMachineryID(key)),
   );
 }
 
@@ -64,15 +63,13 @@ function patchStatefulSetSpec(spec: Document): void {
   volumeClaimTemplates.items = pvcSpec as any;
 }
 
-(async () => {
-  const spec = await fetchSpec();
+const spec = await fetchSpec();
 
-  omitAPIMachineryDefinitions(spec);
-  patchStatefulSetSpec(spec);
+omitAPIMachineryDefinitions(spec);
+patchStatefulSetSpec(spec);
 
-  await generate({
-    input: JSON.stringify(spec),
-    outputPath: join(__dirname, "../gen"),
-    externalAPIMachinery: true
-  });
-})();
+await generate({
+  input: JSON.stringify(spec),
+  outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
+  externalAPIMachinery: true,
+});

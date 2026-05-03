@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { addFormats } from "../formats";
-import Ajv from "ajv";
+import { addFormats } from "../formats.js";
+import { Ajv } from "ajv";
 
 const ajv = new Ajv({
   strictTypes: false,
   allErrors: true,
-  verbose: true
+  verbose: true,
 });
 
 addFormats(ajv);
@@ -17,13 +17,13 @@ describe("format: byte", () => {
         type: "object",
         additionalProperties: {
           type: "string",
-          format: "byte"
-        }
+          format: "byte",
+        },
       },
       {
         foo: Buffer.from("foo").toString("base64"),
-        bar: Buffer.from("bar").toString("base64")
-      }
+        bar: Buffer.from("bar").toString("base64"),
+      },
     );
 
     expect(result).toBeTruthy();
@@ -164,14 +164,14 @@ describe("format: quantity", () => {
 
     // trailing whitespace is forbidden
     [" 1", false],
-    ["1 ", false]
+    ["1 ", false],
   ])("%s -> %p", (input, expected) => {
     const result = ajv.validate(
       {
         type: "string",
-        format: "quantity"
+        format: "quantity",
       },
-      input
+      input,
     );
 
     expect(result).toEqual(expected);
@@ -182,7 +182,7 @@ describe("format: string", () => {
   it.each([
     ["foo", true],
     [1, false],
-    [true, false]
+    [true, false],
   ])("%s -> %p", (input, expected) => {
     const result = ajv.validate({ type: "string", format: "string" }, input);
 
@@ -199,7 +199,7 @@ describe("format: cidr", () => {
     // Just an IPv4
     ["192.168.0.1", false],
     // Empty string
-    ["", false]
+    ["", false],
   ])("%s -> %p", (input, expected) => {
     const result = ajv.validate({ type: "string", format: "cidr" }, input);
 

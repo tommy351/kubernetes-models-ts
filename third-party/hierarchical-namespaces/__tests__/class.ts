@@ -1,21 +1,17 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import {
   SubnamespaceAnchor,
   HierarchyConfiguration,
-  HierarchicalResourceQuota
-} from "../gen/hnc.x-k8s.io/v1alpha2";
+  HierarchicalResourceQuota,
+} from "../gen/hnc.x-k8s.io/v1alpha2/index.js";
 
 describe("SubnamespaceAnchor", () => {
-  let subns: SubnamespaceAnchor;
-
-  beforeEach(() => {
-    subns = new SubnamespaceAnchor({
-      metadata: {
-        name: "child-ns",
-        namespace: "parent-ns"
-      },
-      spec: {}
-    });
+  const subns = new SubnamespaceAnchor({
+    metadata: {
+      name: "child-ns",
+      namespace: "parent-ns",
+    },
+    spec: {},
   });
 
   it("should set apiVersion", () => {
@@ -36,31 +32,27 @@ describe("SubnamespaceAnchor", () => {
       kind: "SubnamespaceAnchor",
       metadata: {
         name: "child-ns",
-        namespace: "parent-ns"
+        namespace: "parent-ns",
       },
-      spec: {}
+      spec: {},
     });
   });
 });
 
 describe("HierarchyConfiguration", () => {
-  let hc: HierarchyConfiguration;
-
-  beforeEach(() => {
-    hc = new HierarchyConfiguration({
-      metadata: {
-        name: "example"
-      },
-      spec: {
-        labels: [
-          {
-            key: "foo",
-            value: "bar"
-          }
-        ],
-        parent: "parent-ns"
-      }
-    });
+  const hc = new HierarchyConfiguration({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      labels: [
+        {
+          key: "foo",
+          value: "bar",
+        },
+      ],
+      parent: "parent-ns",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -80,35 +72,31 @@ describe("HierarchyConfiguration", () => {
       apiVersion: "hnc.x-k8s.io/v1alpha2",
       kind: "HierarchyConfiguration",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         labels: [
           {
             key: "foo",
-            value: "bar"
-          }
+            value: "bar",
+          },
         ],
-        parent: "parent-ns"
-      }
+        parent: "parent-ns",
+      },
     });
   });
 });
 
 describe("HierarchicalResourceQuota", () => {
-  let hrq: HierarchicalResourceQuota;
-
-  beforeEach(() => {
-    hrq = new HierarchicalResourceQuota({
-      metadata: {
-        name: "example"
+  const hrq = new HierarchicalResourceQuota({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      hard: {
+        "count/pods": "100",
       },
-      spec: {
-        hard: {
-          "count/pods": "100"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -128,13 +116,13 @@ describe("HierarchicalResourceQuota", () => {
       apiVersion: "hnc.x-k8s.io/v1alpha2",
       kind: "HierarchicalResourceQuota",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         hard: {
-          "count/pods": "100"
-        }
-      }
+          "count/pods": "100",
+        },
+      },
     });
   });
 });

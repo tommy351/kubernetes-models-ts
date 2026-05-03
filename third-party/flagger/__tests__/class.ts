@@ -1,29 +1,25 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Canary } from "../gen/flagger.app/v1beta1/Canary";
+import { describe, it, expect } from "vitest";
+import { Canary } from "../gen/flagger.app/v1beta1/Canary.js";
 
 describe("Canary", () => {
-  let canary: Canary;
-
-  beforeEach(() => {
-    canary = new Canary({
-      metadata: {
-        name: "example"
+  const canary = new Canary({
+    metadata: {
+      name: "example",
+    },
+    spec: {
+      targetRef: {
+        apiVersion: "apps/v1",
+        kind: "Deployment",
+        name: "example",
       },
-      spec: {
-        targetRef: {
-          apiVersion: "apps/v1",
-          kind: "Deployment",
-          name: "example"
-        },
-        service: { port: 9898 },
-        analysis: {
-          interval: "1m",
-          threshold: 10,
-          maxWeight: 50,
-          stepWeight: 5
-        }
-      }
-    });
+      service: { port: 9898 },
+      analysis: {
+        interval: "1m",
+        threshold: 10,
+        maxWeight: 50,
+        stepWeight: 5,
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -43,22 +39,22 @@ describe("Canary", () => {
       apiVersion: "flagger.app/v1beta1",
       kind: "Canary",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         targetRef: {
           apiVersion: "apps/v1",
           kind: "Deployment",
-          name: "example"
+          name: "example",
         },
         service: { port: 9898 },
         analysis: {
           interval: "1m",
           threshold: 10,
           maxWeight: 50,
-          stepWeight: 5
-        }
-      }
+          stepWeight: 5,
+        },
+      },
     });
   });
 });

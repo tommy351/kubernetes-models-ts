@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret";
+import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret.js";
 
 describe("validate", () => {
   describe("when validation passed", () => {
@@ -7,9 +7,9 @@ describe("validate", () => {
       const config = new SealedSecret({
         spec: {
           encryptedData: {
-            foo: "12345679"
-          }
-        }
+            foo: "12345679",
+          },
+        },
       });
 
       expect(() => config.validate()).not.toThrow();
@@ -21,12 +21,12 @@ describe("validate", () => {
       const config = new SealedSecret({
         spec: {
           // @ts-expect-error
-          encryptedData: "sdf"
-        }
+          encryptedData: "sdf",
+        },
       });
 
       expect(() => config.validate()).toThrow(
-        "data/spec/encryptedData must be object"
+        "data/spec/encryptedData must be object",
       );
     });
   });

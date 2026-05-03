@@ -1,9 +1,9 @@
 import fetch from "make-fetch-happen";
-import findCacheDir from "find-cache-dir";
+import findCacheDir from "find-cache-directory";
 
 export async function httpGet(url: string): Promise<string> {
   const res = await fetch(url, {
-    cachePath: findCacheDir({ name: "kubernetes-models-read-input" })
+    cachePath: findCacheDir({ name: "kubernetes-models-read-input" }),
   });
 
   if (!res.ok) {

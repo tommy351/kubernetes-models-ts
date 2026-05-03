@@ -1,19 +1,22 @@
-import { Schema, SchemaTransformer } from "./types";
+import type { Schema, SchemaTransformer } from "./types.js";
 import { omit, omitBy, uniq } from "es-toolkit";
-import Ajv, { _ } from "ajv";
-import standaloneCode from "ajv/dist/standalone";
-import assert from "assert";
+import { Ajv, _ } from "ajv";
+import standaloneCodeMod from "ajv/dist/standalone/index.js";
+import assert from "node:assert";
 import { formats } from "@kubernetes-models/validate";
 import { ParseResult, parse } from "@babel/parser";
-import traverse from "@babel/traverse";
+import traverseMod from "@babel/traverse";
 import * as t from "@babel/types";
-import generate from "@babel/generator";
-import { SchemaEnv, SchemaRefs } from "ajv/dist/compile";
-import { objectHash, sha256base64 } from "ohash";
-import nullableRef from "./nullable-ref";
-import pattern from "./pattern";
+import { generate } from "@babel/generator";
+import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
+import { serialize, digest } from "ohash";
+import nullableRef from "./nullable-ref.js";
+import pattern from "./pattern.js";
 
 const ajv = new Ajv();
+const standaloneCode =
+  standaloneCodeMod as unknown as typeof standaloneCodeMod.default;
+const traverse = traverseMod.default;
 
 const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
 
@@ -58,7 +61,7 @@ function allowNull(schema: Schema): Schema {
 
   return {
     ...schema,
-    properties: newProps
+    properties: newProps,
   };
 }
 
@@ -91,13 +94,13 @@ function setExclusiveNumber(schema: Schema): Schema {
       : { exclusiveMinimum, minimum }),
     ...(exclusiveMaximum === true
       ? { exclusiveMaximum: maximum }
-      : { exclusiveMaximum, maximum })
+      : { exclusiveMaximum, maximum }),
   };
 }
 
 function doTransformSchema(
   schema: Schema,
-  transformers: readonly SchemaTransformer[]
+  transformers: readonly SchemaTransformer[],
 ): Schema {
   const output: Schema = {};
 
@@ -125,7 +128,7 @@ function doTransformSchema(
  */
 export function transformSchema(
   schema: Schema,
-  transformers: readonly SchemaTransformer[] = []
+  transformers: readonly SchemaTransformer[] = [],
 ): Schema {
   const output = doTransformSchema(schema, [
     omitDescription,
@@ -133,16 +136,17 @@ export function transformSchema(
     allowNull,
     uniqEnum,
     setExclusiveNumber,
-    ...transformers
+    ...transformers,
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   ajv.validateSchema(output, true);
 
   return output;
 }
 
 function addChildSchema(ajv: Ajv, schema: Schema): Schema {
-  const hash = sha256base64(objectHash(schema));
+  const hash = digest(serialize(schema));
 
   if (!ajv.getSchema(hash)) {
     ajv.addSchema(schema, hash);
@@ -167,7 +171,7 @@ function splitSchema(ajv: Ajv, schema: Schema): void {
   if (schema.additionalProperties) {
     schema.additionalProperties = addChildSchema(
       ajv,
-      schema.additionalProperties
+      schema.additionalProperties,
     );
   }
 
@@ -224,7 +228,7 @@ function removeDirectives(ast: ParseResult<t.File>): void {
   traverse(ast, {
     Program(path) {
       path.node.directives = [];
-    }
+    },
   });
 }
 
@@ -235,7 +239,7 @@ function removeDefaultExport(ast: ParseResult<t.File>): void {
   traverse(ast, {
     ExportDefaultDeclaration(path) {
       path.remove();
-    }
+    },
   });
 }
 
@@ -245,7 +249,7 @@ function removeDefaultExport(ast: ParseResult<t.File>): void {
 function replaceValidateFunction(
   ast: ParseResult<t.File>,
   names: Map<string, string>,
-  refs: Record<string, string>
+  refs: Record<string, string>,
 ): void {
   traverse(ast, {
     FunctionDeclaration(path) {
@@ -262,13 +266,13 @@ function replaceValidateFunction(
           [
             t.importSpecifier(
               t.identifier(path.node.id.name),
-              t.identifier("validate")
-            )
+              t.identifier("validate"),
+            ),
           ],
-          t.stringLiteral(ref)
-        )
+          t.stringLiteral(ref),
+        ),
       );
-    }
+    },
   });
 }
 
@@ -305,13 +309,13 @@ function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
             [
               init.property.name === "default"
                 ? t.importDefaultSpecifier(id)
-                : t.importSpecifier(id, init.property)
+                : t.importSpecifier(id, init.property),
             ],
             t.stringLiteral(
               "@kubernetes-models/validate/runtime/" +
-                importPath.substring(AJV_RUNTIME_PREFIX.length)
-            )
-          )
+                importPath.substring(AJV_RUNTIME_PREFIX.length),
+            ),
+          ),
         );
       }
 
@@ -324,7 +328,7 @@ function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
       } else {
         path.remove();
       }
-    }
+    },
   });
 }
 
@@ -351,23 +355,23 @@ function replaceFormatRequire(ast: ParseResult<t.File>): void {
               [
                 t.importSpecifier(
                   t.identifier("formats"),
-                  t.identifier("formats")
-                )
+                  t.identifier("formats"),
+                ),
               ],
-              t.stringLiteral("@kubernetes-models/validate")
-            )
+              t.stringLiteral("@kubernetes-models/validate"),
+            ),
           );
         }
 
         path.replaceWith(t.identifier("formats"));
       }
-    }
+    },
   });
 }
 
 export async function compileSchema(
   schema: Schema,
-  refs: Record<string, string>
+  refs: Record<string, string>,
 ): Promise<string> {
   const ajv = new Ajv({
     strictTypes: false,
@@ -376,15 +380,15 @@ export async function compileSchema(
       source: true,
       esm: true,
       formats: _`require("FORMATS")`,
-      lines: true
+      lines: true,
     },
     inlineRefs: false,
     keywords: [
       // example keyword is used by grafana-operator
-      "example"
+      "example",
     ],
     formats,
-    messages: false
+    messages: false,
   });
 
   // Override the default pattern keyword to support RE2.

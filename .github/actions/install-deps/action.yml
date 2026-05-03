@@ -4,15 +4,13 @@ inputs:
   node-version:
     description: Node.js version
     required: true
-    default: 20.x
+    default: 22.x
 
 runs:
   using: composite
   steps:
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 7.33.0
-    - uses: actions/setup-node@v4
+    - uses: pnpm/action-setup@v6
+    - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: pnpm

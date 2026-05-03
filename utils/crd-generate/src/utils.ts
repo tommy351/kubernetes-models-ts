@@ -1,6 +1,5 @@
 import { camelCase, upperFirst } from "@kubernetes-models/string-util";
-import { trimSuffix } from "@kubernetes-models/string-util";
-import { posix } from "path";
+import { posix } from "node:path";
 
 // TODO: Move to @kubernetes-models/generate
 export function getClassName(s: string): string {
@@ -14,8 +13,7 @@ export function getSchemaPath(id: string): string {
 
 // TODO: Move to @kubernetes-models/generate
 export function getRelativePath(from: string, to: string): string {
-  const ext = posix.extname(to);
-  const path = trimSuffix(posix.relative(posix.dirname(from), to), ext);
+  const path = posix.relative(posix.dirname(from), to);
 
   if (!path.startsWith(".")) {
     return `./${path}`;

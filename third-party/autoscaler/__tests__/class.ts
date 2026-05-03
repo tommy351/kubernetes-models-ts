@@ -1,22 +1,18 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodAutoscaler";
+import { describe, it, expect } from "vitest";
+import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodAutoscaler.js";
 
 describe("VerticalPodAutoscaler", () => {
-  let vpa: VerticalPodAutoscaler;
-
-  beforeEach(() => {
-    vpa = new VerticalPodAutoscaler({
-      metadata: {
-        name: "test"
+  const vpa = new VerticalPodAutoscaler({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      targetRef: {
+        apiVersion: "apps/v1",
+        kind: "Deployment",
+        name: "my-app",
       },
-      spec: {
-        targetRef: {
-          apiVersion: "apps/v1",
-          kind: "Deployment",
-          name: "my-app"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -40,15 +36,15 @@ describe("VerticalPodAutoscaler", () => {
       apiVersion: "autoscaling.k8s.io/v1",
       kind: "VerticalPodAutoscaler",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         targetRef: {
           apiVersion: "apps/v1",
           kind: "Deployment",
-          name: "my-app"
-        }
-      }
+          name: "my-app",
+        },
+      },
     });
   });
 });

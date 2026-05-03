@@ -1,27 +1,23 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Workflow } from "../gen/argoproj.io/v1alpha1/Workflow";
+import { describe, it, expect } from "vitest";
+import { Workflow } from "../gen/argoproj.io/v1alpha1/Workflow.js";
 
 describe("Workflow", () => {
-  let workflow: Workflow;
-
-  beforeEach(() => {
-    workflow = new Workflow({
-      metadata: {
-        name: "workflows-demo"
-      },
-      spec: {
-        entrypoint: "hello",
-        templates: [
-          {
-            name: "hello",
-            container: {
-              image: "alpine:latest",
-              command: ["echo", "Hello, Argo!"]
-            }
-          }
-        ]
-      }
-    });
+  const workflow = new Workflow({
+    metadata: {
+      name: "workflows-demo",
+    },
+    spec: {
+      entrypoint: "hello",
+      templates: [
+        {
+          name: "hello",
+          container: {
+            image: "alpine:latest",
+            command: ["echo", "Hello, Argo!"],
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -41,7 +37,7 @@ describe("Workflow", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "Workflow",
       metadata: {
-        name: "workflows-demo"
+        name: "workflows-demo",
       },
       spec: {
         entrypoint: "hello",
@@ -50,11 +46,11 @@ describe("Workflow", () => {
             name: "hello",
             container: {
               image: "alpine:latest",
-              command: ["echo", "Hello, Argo!"]
-            }
-          }
-        ]
-      }
+              command: ["echo", "Hello, Argo!"],
+            },
+          },
+        ],
+      },
     });
   });
 });

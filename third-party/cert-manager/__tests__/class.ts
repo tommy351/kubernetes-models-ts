@@ -1,33 +1,29 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Certificate as CertificateV1Alpha1 } from "../gen/certmanager.k8s.io/v1alpha1/Certificate";
-import { Certificate as CertificateV1Alpha3 } from "../gen/cert-manager.io/v1alpha3/Certificate";
-import { Certificate as CertificateV1Beta1 } from "../gen/cert-manager.io/v1beta1/Certificate";
-import { Certificate as CertificateV1 } from "../gen/cert-manager.io/v1/Certificate";
+import { describe, it, expect } from "vitest";
+import { Certificate as CertificateV1Alpha1 } from "../gen/certmanager.k8s.io/v1alpha1/Certificate.js";
+import { Certificate as CertificateV1Alpha3 } from "../gen/cert-manager.io/v1alpha3/Certificate.js";
+import { Certificate as CertificateV1Beta1 } from "../gen/cert-manager.io/v1beta1/Certificate.js";
+import { Certificate as CertificateV1 } from "../gen/cert-manager.io/v1/Certificate.js";
 
 describe("Certificate v1alpha1", () => {
-  let cert: CertificateV1Alpha1;
-
-  beforeEach(() => {
-    cert = new CertificateV1Alpha1({
-      metadata: {
-        name: "foo"
+  const cert = new CertificateV1Alpha1({
+    metadata: {
+      name: "foo",
+    },
+    spec: {
+      secretName: "foo-secret",
+      dnsNames: ["foo.example.com"],
+      acme: {
+        config: [
+          {
+            domains: ["foo.example.com"],
+          },
+        ],
       },
-      spec: {
-        secretName: "foo-secret",
-        dnsNames: ["foo.example.com"],
-        acme: {
-          config: [
-            {
-              domains: ["foo.example.com"]
-            }
-          ]
-        },
-        issuerRef: {
-          name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
-    });
+      issuerRef: {
+        name: "letsencrypt-prod",
+        kind: "Issuer",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -47,7 +43,7 @@ describe("Certificate v1alpha1", () => {
       apiVersion: "certmanager.k8s.io/v1alpha1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
@@ -55,36 +51,32 @@ describe("Certificate v1alpha1", () => {
         acme: {
           config: [
             {
-              domains: ["foo.example.com"]
-            }
-          ]
+              domains: ["foo.example.com"],
+            },
+          ],
         },
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
 
 describe("Certificate v1alpha3", () => {
-  let cert: CertificateV1Alpha3;
-
-  beforeEach(() => {
-    cert = new CertificateV1Alpha3({
-      metadata: {
-        name: "foo"
+  const cert = new CertificateV1Alpha3({
+    metadata: {
+      name: "foo",
+    },
+    spec: {
+      secretName: "foo-secret",
+      dnsNames: ["foo.example.com"],
+      issuerRef: {
+        name: "letsencrypt-prod",
+        kind: "Issuer",
       },
-      spec: {
-        secretName: "foo-secret",
-        dnsNames: ["foo.example.com"],
-        issuerRef: {
-          name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -104,37 +96,33 @@ describe("Certificate v1alpha3", () => {
       apiVersion: "cert-manager.io/v1alpha3",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
 
 describe("Certificate v1beta1", () => {
-  let cert: CertificateV1Beta1;
-
-  beforeEach(() => {
-    cert = new CertificateV1Beta1({
-      metadata: {
-        name: "foo"
+  const cert = new CertificateV1Beta1({
+    metadata: {
+      name: "foo",
+    },
+    spec: {
+      secretName: "foo-secret",
+      dnsNames: ["foo.example.com"],
+      issuerRef: {
+        name: "letsencrypt-prod",
+        kind: "Issuer",
       },
-      spec: {
-        secretName: "foo-secret",
-        dnsNames: ["foo.example.com"],
-        issuerRef: {
-          name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -154,37 +142,33 @@ describe("Certificate v1beta1", () => {
       apiVersion: "cert-manager.io/v1beta1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
 
 describe("Certificate v1", () => {
-  let cert: CertificateV1;
-
-  beforeEach(() => {
-    cert = new CertificateV1({
-      metadata: {
-        name: "foo"
+  const cert = new CertificateV1({
+    metadata: {
+      name: "foo",
+    },
+    spec: {
+      secretName: "foo-secret",
+      dnsNames: ["foo.example.com"],
+      issuerRef: {
+        name: "letsencrypt-prod",
+        kind: "Issuer",
       },
-      spec: {
-        secretName: "foo-secret",
-        dnsNames: ["foo.example.com"],
-        issuerRef: {
-          name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -204,16 +188,16 @@ describe("Certificate v1", () => {
       apiVersion: "cert-manager.io/v1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });

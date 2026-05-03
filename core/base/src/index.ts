@@ -1,2 +1,11 @@
-export { Model, ModelData, ModelConstructor, setValidateFunc } from "./model";
-export { TypeMeta, TypeMetaGuard, createTypeMetaGuard } from "./meta";
+export {
+  Model,
+  type ModelData,
+  type ModelConstructor,
+  setValidateFunc,
+} from "./model.js";
+export {
+  type TypeMeta,
+  type TypeMetaGuard,
+  createTypeMetaGuard,
+} from "./meta.js";

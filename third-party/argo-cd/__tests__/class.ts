@@ -1,29 +1,25 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Application } from "../gen/argoproj.io/v1alpha1/Application";
-import { ApplicationSet } from "../gen/argoproj.io/v1alpha1/ApplicationSet";
-import { AppProject } from "../gen/argoproj.io/v1alpha1/AppProject";
+import { describe, it, expect } from "vitest";
+import { Application } from "../gen/argoproj.io/v1alpha1/Application.js";
+import { ApplicationSet } from "../gen/argoproj.io/v1alpha1/ApplicationSet.js";
+import { AppProject } from "../gen/argoproj.io/v1alpha1/AppProject.js";
 
 describe("Application", () => {
-  let app: Application;
-
-  beforeEach(() => {
-    app = new Application({
-      metadata: {
-        name: "guestbook"
+  const app = new Application({
+    metadata: {
+      name: "guestbook",
+    },
+    spec: {
+      project: "default",
+      source: {
+        repoURL: "https://github.com/argoproj/argocd-example-apps.git",
+        targetRevision: "HEAD",
+        path: "guestbook",
       },
-      spec: {
-        project: "default",
-        source: {
-          repoURL: "https://github.com/argoproj/argocd-example-apps.git",
-          targetRevision: "HEAD",
-          path: "guestbook"
-        },
-        destination: {
-          server: "https://kubernetes.default.svc",
-          namespace: "guestbook"
-        }
-      }
-    });
+      destination: {
+        server: "https://kubernetes.default.svc",
+        namespace: "guestbook",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -43,61 +39,57 @@ describe("Application", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "Application",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
         project: "default",
         source: {
           repoURL: "https://github.com/argoproj/argocd-example-apps.git",
           targetRevision: "HEAD",
-          path: "guestbook"
+          path: "guestbook",
         },
         destination: {
           server: "https://kubernetes.default.svc",
-          namespace: "guestbook"
-        }
-      }
+          namespace: "guestbook",
+        },
+      },
     });
   });
 });
 
 describe("ApplicationSet", () => {
-  let app: ApplicationSet;
-
-  beforeEach(() => {
-    app = new ApplicationSet({
-      metadata: {
-        name: "guestbook"
-      },
-      spec: {
-        generators: [
-          {
-            list: {
-              elements: [
-                {
-                  cluster: "engineering-dev",
-                  url: "https://1.2.3.4"
-                }
-              ]
-            }
-          }
-        ],
-        template: {
-          metadata: {
-            name: "{{cluster}}-guestbook"
+  const app = new ApplicationSet({
+    metadata: {
+      name: "guestbook",
+    },
+    spec: {
+      generators: [
+        {
+          list: {
+            elements: [
+              {
+                cluster: "engineering-dev",
+                url: "https://1.2.3.4",
+              },
+            ],
           },
-          spec: {
-            project: "default",
-            source: {
-              repoURL: "https://github.com/argoproj/argo-cd.git"
-            },
-            destination: {
-              server: "{{url}}"
-            }
-          }
-        }
-      }
-    });
+        },
+      ],
+      template: {
+        metadata: {
+          name: "{{cluster}}-guestbook",
+        },
+        spec: {
+          project: "default",
+          source: {
+            repoURL: "https://github.com/argoproj/argo-cd.git",
+          },
+          destination: {
+            server: "{{url}}",
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -117,7 +109,7 @@ describe("ApplicationSet", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "ApplicationSet",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
         generators: [
@@ -126,43 +118,39 @@ describe("ApplicationSet", () => {
               elements: [
                 {
                   cluster: "engineering-dev",
-                  url: "https://1.2.3.4"
-                }
-              ]
-            }
-          }
+                  url: "https://1.2.3.4",
+                },
+              ],
+            },
+          },
         ],
         template: {
           metadata: {
-            name: "{{cluster}}-guestbook"
+            name: "{{cluster}}-guestbook",
           },
           spec: {
             project: "default",
             source: {
-              repoURL: "https://github.com/argoproj/argo-cd.git"
+              repoURL: "https://github.com/argoproj/argo-cd.git",
             },
             destination: {
-              server: "{{url}}"
-            }
-          }
-        }
-      }
+              server: "{{url}}",
+            },
+          },
+        },
+      },
     });
   });
 });
 
 describe("AppProject", () => {
-  let app: AppProject;
-
-  beforeEach(() => {
-    app = new AppProject({
-      metadata: {
-        name: "guestbook"
-      },
-      spec: {
-        description: "Example project"
-      }
-    });
+  const app = new AppProject({
+    metadata: {
+      name: "guestbook",
+    },
+    spec: {
+      description: "Example project",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -182,11 +170,11 @@ describe("AppProject", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "AppProject",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
-        description: "Example project"
-      }
+        description: "Example project",
+      },
     });
   });
 });

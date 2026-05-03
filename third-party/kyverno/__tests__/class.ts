@@ -1,46 +1,42 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy";
-import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException";
-import { CleanupPolicy } from "../gen/kyverno.io/v2beta1/CleanupPolicy";
+import { describe, it, expect } from "vitest";
+import { ClusterPolicy } from "../gen/kyverno.io/v1/ClusterPolicy.js";
+import { PolicyException } from "../gen/kyverno.io/v2beta1/PolicyException.js";
+import { CleanupPolicy } from "../gen/kyverno.io/v2beta1/CleanupPolicy.js";
 
 describe("ClusterPolicy", () => {
-  let policy: ClusterPolicy;
-
-  beforeEach(() => {
-    policy = new ClusterPolicy({
-      metadata: {
-        name: "require-labels"
-      },
-      spec: {
-        validationFailureAction: "enforce",
-        background: false,
-        rules: [
-          {
-            name: "check-team",
-            match: {
-              any: [
-                {
-                  resources: {
-                    namespaces: ["default"],
-                    kinds: ["Pod"]
-                  }
-                }
-              ]
+  const policy = new ClusterPolicy({
+    metadata: {
+      name: "require-labels",
+    },
+    spec: {
+      validationFailureAction: "enforce",
+      background: false,
+      rules: [
+        {
+          name: "check-team",
+          match: {
+            any: [
+              {
+                resources: {
+                  namespaces: ["default"],
+                  kinds: ["Pod"],
+                },
+              },
+            ],
+          },
+          validate: {
+            message: "label team must be set",
+            pattern: {
+              metadata: {
+                labels: {
+                  team: "?*",
+                },
+              },
             },
-            validate: {
-              message: "label team must be set",
-              pattern: {
-                metadata: {
-                  labels: {
-                    team: "?*"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
-    });
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -60,7 +56,7 @@ describe("ClusterPolicy", () => {
       apiVersion: "kyverno.io/v1",
       kind: "ClusterPolicy",
       metadata: {
-        name: "require-labels"
+        name: "require-labels",
       },
       spec: {
         validationFailureAction: "enforce",
@@ -73,57 +69,53 @@ describe("ClusterPolicy", () => {
                 {
                   resources: {
                     namespaces: ["default"],
-                    kinds: ["Pod"]
-                  }
-                }
-              ]
+                    kinds: ["Pod"],
+                  },
+                },
+              ],
             },
             validate: {
               message: "label team must be set",
               pattern: {
                 metadata: {
                   labels: {
-                    team: "?*"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      }
+                    team: "?*",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
     });
   });
 });
 
 describe("PolicyException", () => {
-  let exception: PolicyException;
-
-  beforeEach(() => {
-    exception = new PolicyException({
-      metadata: {
-        name: "delta-exception",
-        namespace: "delta"
-      },
-      spec: {
-        exceptions: [
+  const exception = new PolicyException({
+    metadata: {
+      name: "delta-exception",
+      namespace: "delta",
+    },
+    spec: {
+      exceptions: [
+        {
+          policyName: "disallow-host-namespaces",
+          ruleNames: ["host-namespaces", "autogen-host-namespaces"],
+        },
+      ],
+      match: {
+        any: [
           {
-            policyName: "disallow-host-namespaces",
-            ruleNames: ["host-namespaces", "autogen-host-namespaces"]
-          }
+            resources: {
+              kinds: ["Deployment", "Pod"],
+              names: ["importent-tool*"],
+              namespaces: ["delta"],
+            },
+          },
         ],
-        match: {
-          any: [
-            {
-              resources: {
-                kinds: ["Deployment", "Pod"],
-                names: ["importent-tool*"],
-                namespaces: ["delta"]
-              }
-            }
-          ]
-        }
-      }
-    });
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -144,14 +136,14 @@ describe("PolicyException", () => {
       kind: "PolicyException",
       metadata: {
         name: "delta-exception",
-        namespace: "delta"
+        namespace: "delta",
       },
       spec: {
         exceptions: [
           {
             policyName: "disallow-host-namespaces",
-            ruleNames: ["host-namespaces", "autogen-host-namespaces"]
-          }
+            ruleNames: ["host-namespaces", "autogen-host-namespaces"],
+          },
         ],
         match: {
           any: [
@@ -159,51 +151,47 @@ describe("PolicyException", () => {
               resources: {
                 kinds: ["Deployment", "Pod"],
                 names: ["importent-tool*"],
-                namespaces: ["delta"]
-              }
-            }
-          ]
-        }
-      }
+                namespaces: ["delta"],
+              },
+            },
+          ],
+        },
+      },
     });
   });
 });
 
 describe("CleanupPolicy", () => {
-  let policy: CleanupPolicy;
-
-  beforeEach(() => {
-    policy = new CleanupPolicy({
-      metadata: {
-        name: "cleandeploy"
+  const policy = new CleanupPolicy({
+    metadata: {
+      name: "cleandeploy",
+    },
+    spec: {
+      match: {
+        any: [
+          {
+            resources: {
+              kinds: ["Deployment"],
+              selector: {
+                matchLabels: {
+                  canremove: "true",
+                },
+              },
+            },
+          },
+        ],
       },
-      spec: {
-        match: {
-          any: [
-            {
-              resources: {
-                kinds: ["Deployment"],
-                selector: {
-                  matchLabels: {
-                    canremove: "true"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        conditions: {
-          any: [
-            {
-              key: "{{ target.spec.replicas }}",
-              operator: "LessThan",
-              value: 2
-            }
-          ]
-        },
-        schedule: "*/5 * * * *"
-      }
-    });
+      conditions: {
+        any: [
+          {
+            key: "{{ target.spec.replicas }}",
+            operator: "LessThan",
+            value: 2,
+          },
+        ],
+      },
+      schedule: "*/5 * * * *",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -223,7 +211,7 @@ describe("CleanupPolicy", () => {
       apiVersion: "kyverno.io/v2beta1",
       kind: "CleanupPolicy",
       metadata: {
-        name: "cleandeploy"
+        name: "cleandeploy",
       },
       spec: {
         match: {
@@ -233,24 +221,24 @@ describe("CleanupPolicy", () => {
                 kinds: ["Deployment"],
                 selector: {
                   matchLabels: {
-                    canremove: "true"
-                  }
-                }
-              }
-            }
-          ]
+                    canremove: "true",
+                  },
+                },
+              },
+            },
+          ],
         },
         conditions: {
           any: [
             {
               key: "{{ target.spec.replicas }}",
               operator: "LessThan",
-              value: 2
-            }
-          ]
+              value: 2,
+            },
+          ],
         },
-        schedule: "*/5 * * * *"
-      }
+        schedule: "*/5 * * * *",
+      },
     });
   });
 });

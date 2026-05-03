@@ -1,27 +1,23 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor";
+import { describe, it, expect } from "vitest";
+import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor.js";
 
 describe("ServiceMonitor", () => {
-  let config: ServiceMonitor;
-
-  beforeEach(() => {
-    config = new ServiceMonitor({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        selector: {
-          matchLabels: {
-            app: "some-app"
-          }
+  const config = new ServiceMonitor({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      selector: {
+        matchLabels: {
+          app: "some-app",
         },
-        endpoints: [
-          {
-            port: "web"
-          }
-        ]
-      }
-    });
+      },
+      endpoints: [
+        {
+          port: "web",
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -41,20 +37,20 @@ describe("ServiceMonitor", () => {
       apiVersion: "monitoring.coreos.com/v1",
       kind: "ServiceMonitor",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         selector: {
           matchLabels: {
-            app: "some-app"
-          }
+            app: "some-app",
+          },
         },
         endpoints: [
           {
-            port: "web"
-          }
-        ]
-      }
+            port: "web",
+          },
+        ],
+      },
     });
   });
 });

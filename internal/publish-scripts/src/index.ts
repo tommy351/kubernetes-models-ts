@@ -1,8 +1,8 @@
 import yargs from "yargs/yargs";
-import { build, BuildArguments } from "./build";
-import { prePack, PrePackArguments } from "./prepack";
+import { build, type BuildArguments } from "./build.js";
+import { prePack, type PrePackArguments } from "./prepack.js";
 
-yargs(process.argv.slice(2))
+void yargs(process.argv.slice(2))
   .command<BuildArguments>(
     "build",
     "Run build script",
@@ -12,14 +12,14 @@ yargs(process.argv.slice(2))
           type: "string",
           default: process.cwd(),
           defaultDescription: "CWD",
-          description: "Current working directory."
+          description: "Current working directory.",
         })
         .option("include-hidden", {
           type: "boolean",
-          description: "Include hidden files in the export map."
+          description: "Include hidden files in the export map.",
         });
     },
-    build
+    build,
   )
   .command<PrePackArguments>(
     "prepack",
@@ -29,10 +29,10 @@ yargs(process.argv.slice(2))
         type: "string",
         default: process.cwd(),
         defaultDescription: "CWD",
-        description: "Current working directory."
+        description: "Current working directory.",
       });
     },
-    prePack
+    prePack,
   )
   .demandCommand()
   .showHelpOnFail(false).argv;

@@ -4,3 +4,12 @@ packages:
   - utils/*
   - first-party/*
   - third-party/*
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  unrs-resolver: true
+autoInstallPeers: true
+minimumReleaseAge: 10080
+provenance: true
+
+saveWorkspaceProtocol: rolling

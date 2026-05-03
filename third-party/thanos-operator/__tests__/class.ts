@@ -1,24 +1,20 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { Thanos } from "../gen/monitoring.banzaicloud.io/v1alpha1/Thanos";
+import { describe, it, expect } from "vitest";
+import { Thanos } from "../gen/monitoring.banzaicloud.io/v1alpha1/Thanos.js";
 
 describe("Thanos", () => {
-  let thanos: Thanos;
-
-  beforeEach(() => {
-    thanos = new Thanos({
-      metadata: { name: "example" },
-      spec: {
-        query: {},
-        rule: {},
-        storeGateway: {}
-      }
-    });
+  const thanos = new Thanos({
+    metadata: { name: "example" },
+    spec: {
+      query: {},
+      rule: {},
+      storeGateway: {},
+    },
   });
 
   it("should set apiVersion", () => {
     expect(thanos).toHaveProperty(
       "apiVersion",
-      "monitoring.banzaicloud.io/v1alpha1"
+      "monitoring.banzaicloud.io/v1alpha1",
     );
   });
 
@@ -38,8 +34,8 @@ describe("Thanos", () => {
       spec: {
         query: {},
         rule: {},
-        storeGateway: {}
-      }
+        storeGateway: {},
+      },
     });
   });
 });

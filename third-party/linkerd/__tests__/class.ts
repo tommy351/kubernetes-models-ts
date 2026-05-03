@@ -1,28 +1,24 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
-import { ServiceProfile } from "../gen/linkerd.io/v1alpha2/ServiceProfile";
-import { Link } from "../gen/multicluster.linkerd.io/v1alpha1/Link";
-import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute";
+import { ServiceProfile } from "../gen/linkerd.io/v1alpha2/ServiceProfile.js";
+import { Link } from "../gen/multicluster.linkerd.io/v1alpha1/Link.js";
+import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute.js";
 
 describe("ServiceProfile", () => {
-  let profile: ServiceProfile;
-
-  beforeEach(() => {
-    profile = new ServiceProfile({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        routes: [
-          {
-            name: "test",
-            condition: {
-              method: "GET"
-            }
-          }
-        ]
-      }
-    });
+  const profile = new ServiceProfile({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      routes: [
+        {
+          name: "test",
+          condition: {
+            method: "GET",
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -43,10 +39,10 @@ describe("ServiceProfile", () => {
         {
           name: "test",
           condition: {
-            method: "GET"
-          }
-        }
-      ]
+            method: "GET",
+          },
+        },
+      ],
     });
   });
 
@@ -55,40 +51,36 @@ describe("ServiceProfile", () => {
       apiVersion: "linkerd.io/v1alpha2",
       kind: "ServiceProfile",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         routes: [
           {
             name: "test",
             condition: {
-              method: "GET"
-            }
-          }
-        ]
-      }
+              method: "GET",
+            },
+          },
+        ],
+      },
     });
   });
 });
 
 describe("Link", () => {
-  let link: Link;
-
-  beforeEach(() => {
-    link = new Link({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        targetClusterName: "test"
-      }
-    });
+  const link = new Link({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      targetClusterName: "test",
+    },
   });
 
   it("should set apiVersion", () => {
     expect(link).toHaveProperty(
       "apiVersion",
-      "multicluster.linkerd.io/v1alpha1"
+      "multicluster.linkerd.io/v1alpha1",
     );
   });
 
@@ -102,7 +94,7 @@ describe("Link", () => {
 
   it("should set spec", () => {
     expect(link.spec).toEqual({
-      targetClusterName: "test"
+      targetClusterName: "test",
     });
   });
 
@@ -111,31 +103,27 @@ describe("Link", () => {
       apiVersion: "multicluster.linkerd.io/v1alpha1",
       kind: "Link",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
-        targetClusterName: "test"
-      }
+        targetClusterName: "test",
+      },
     });
   });
 });
 
 describe("HTTPRoute", () => {
-  let route: HTTPRoute;
-
-  beforeEach(() => {
-    route = new HTTPRoute({
-      metadata: {
-        name: "test"
-      },
-      spec: {
-        rules: [
-          {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
-    });
+  const route = new HTTPRoute({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      rules: [
+        {
+          matches: [{ method: "GET" }],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -154,9 +142,9 @@ describe("HTTPRoute", () => {
     expect(route.spec).toEqual({
       rules: [
         {
-          matches: [{ method: "GET" }]
-        }
-      ]
+          matches: [{ method: "GET" }],
+        },
+      ],
     });
   });
 
@@ -165,15 +153,15 @@ describe("HTTPRoute", () => {
       apiVersion: "policy.linkerd.io/v1beta3",
       kind: "HTTPRoute",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         rules: [
           {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
+            matches: [{ method: "GET" }],
+          },
+        ],
+      },
     });
   });
 });

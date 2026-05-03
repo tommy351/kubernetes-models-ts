@@ -1,20 +1,16 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret";
+import { describe, it, expect } from "vitest";
+import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret.js";
 
 describe("SealedSecret", () => {
-  let secret: SealedSecret;
-
-  beforeEach(() => {
-    secret = new SealedSecret({
-      metadata: {
-        name: "test"
+  const secret = new SealedSecret({
+    metadata: {
+      name: "test",
+    },
+    spec: {
+      encryptedData: {
+        foo: "bar",
       },
-      spec: {
-        encryptedData: {
-          foo: "bar"
-        }
-      }
-    });
+    },
   });
 
   it("should set apiVersion", () => {
@@ -34,13 +30,13 @@ describe("SealedSecret", () => {
       apiVersion: "bitnami.com/v1alpha1",
       kind: "SealedSecret",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         encryptedData: {
-          foo: "bar"
-        }
-      }
+          foo: "bar",
+        },
+      },
     });
   });
 });

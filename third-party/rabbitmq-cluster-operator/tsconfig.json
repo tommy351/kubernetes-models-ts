@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": "gen",
     "sourceMap": false
   },
-  "include": ["gen"]
+  "include": [
+    "gen"
+  ]
 }

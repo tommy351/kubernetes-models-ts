@@ -1,5 +1,5 @@
-import { readJSON, writeJSON } from "fs-extra";
-import { join } from "path";
+import { readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export interface PrePackArguments {
   cwd: string;
@@ -8,19 +8,22 @@ export interface PrePackArguments {
 export async function prePack(args: PrePackArguments): Promise<void> {
   const rootPkgJsonPath = join(args.cwd, "package.json");
   const distPkgJsonPath = join(args.cwd, "dist/package.json");
-  const rootPkgJson = await readJSON(rootPkgJsonPath);
-  const distPkgJson = await readJSON(distPkgJsonPath);
+  const rootPkgJson = JSON.parse(await readFile(rootPkgJsonPath, "utf-8"));
+  const distPkgJson = JSON.parse(await readFile(distPkgJsonPath, "utf-8"));
 
-  await writeJSON(
+  await writeFile(
     distPkgJsonPath,
-    {
-      ...distPkgJson,
-      version: rootPkgJson.version,
-      dependencies: rootPkgJson.dependencies,
-      devDependencies: rootPkgJson.devDependencies,
-      peerDependencies: rootPkgJson.peerDependencies
-    },
-    { spaces: 2 }
+    JSON.stringify(
+      {
+        ...distPkgJson,
+        version: rootPkgJson.version,
+        dependencies: rootPkgJson.dependencies,
+        devDependencies: rootPkgJson.devDependencies,
+        peerDependencies: rootPkgJson.peerDependencies,
+      },
+      null,
+      2,
+    ),
   );
   console.log("Updated package.json dependencies");
 }

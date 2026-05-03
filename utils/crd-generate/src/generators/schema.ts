@@ -1,10 +1,10 @@
 import {
-  Generator,
+  type Generator,
   transformSchema,
   compileSchema,
-  OutputFile
+  type OutputFile,
 } from "@kubernetes-models/generate";
-import { getSchemaPath } from "../utils";
+import { getSchemaPath } from "../utils.js";
 import { trimSuffix } from "@kubernetes-models/string-util";
 
 const generateSchemas: Generator = async (definitions) => {
@@ -18,14 +18,14 @@ const generateSchemas: Generator = async (definitions) => {
         path: getSchemaPath(def.schemaId),
         content: await compileSchema(schema, {
           "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta":
-            "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta"
-        })
+            "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta",
+        }),
       },
       // TODO: Move this to @kubernetes-models/generate
       {
         path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
-        content: `export function validate(data: unknown): boolean;`
-      }
+        content: `export function validate(data: unknown): boolean;`,
+      },
     );
   }
 
