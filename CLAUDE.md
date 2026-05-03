@@ -53,6 +53,26 @@ pnpm --filter @kubernetes-models/<pkg> build
 
 `scripts/new-crd-package.ts` scaffolds `package.json`, `tsconfig.json`, and a changeset. It only creates packages under `third-party/`.
 
+### Updating a third-party CRD package
+
+For each package, work one at a time and only commit if every step succeeds:
+
+1. Find the latest upstream tag (e.g. `gh api repos/<owner>/<repo>/tags --jq '.[].name'` filtered for the relevant prefix).
+2. Edit the version pin(s) in `third-party/<pkg>/package.json` `crd-generate.input`. Keep historical anchor URLs that intentionally pin earlier API versions (see e.g. `cert-manager`, `contour`).
+3. `pnpm run build` from the repo root (so generated `gen/` is up to date) and `pnpm run lint`.
+4. `pnpm test --run third-party/<pkg>` — if test fixtures fail because the upstream schema got stricter (new required fields, regex patterns, etc.), the bump is breaking; revert and skip.
+5. Run `pnpm diff-crd-inputs --base master --package third-party/<pkg>`. The tool reports any CRD kinds/versions that exist on `master` but not in the working tree. If it reports removals, **keep the old YAML URL and add the new YAML URL alongside it** so consumers of removed kinds/versions are not broken. Re-run the build/test/diff after appending.
+6. List the upstream CRD directory (`gh api repos/<owner>/<repo>/contents/<path>?ref=<tag> --jq '.[].name'`) and add any extra files whose top-level `kind` is `CustomResourceDefinition`. Skip kustomization/install/RBAC manifests and any kinds already covered by URLs from a sibling subproject in the same `package.json`.
+7. Add a changeset:
+   ```md
+   ---
+   "@kubernetes-models/<pkg>": minor
+   ---
+
+   Update CRDs to v<X.Y.Z>.
+   ```
+8. Commit as `feat(<pkg>): Update CRDs to v<X.Y.Z>`.
+
 ## Build Pipeline (publish-scripts)
 
 `internal/publish-scripts/src/build.ts` is the per-package build for every publishable package. It assumes a generator has already produced `gen/` and:
