@@ -4,7 +4,7 @@ import {
   ClientTrafficPolicy,
   EnvoyPatchPolicy,
   EnvoyProxy,
-  SecurityPolicy
+  SecurityPolicy,
 } from "../gen/gateway.envoyproxy.io/v1alpha1/index.js";
 import * as v05 from "../gen/config.gateway.envoyproxy.io/v1alpha1/index.js";
 
@@ -12,22 +12,22 @@ describe("BackendTrafficPolicy", () => {
   const policy = new BackendTrafficPolicy({
     metadata: {
       namespace: "envoy-gateway",
-      name: "target-gateway-1"
+      name: "target-gateway-1",
     },
     spec: {
       targetRef: {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway"
-      }
-    }
+        namespace: "envoy-gateway",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(policy).toHaveProperty(
       "apiVersion",
-      "gateway.envoyproxy.io/v1alpha1"
+      "gateway.envoyproxy.io/v1alpha1",
     );
   });
 
@@ -45,16 +45,16 @@ describe("BackendTrafficPolicy", () => {
       kind: "BackendTrafficPolicy",
       metadata: {
         namespace: "envoy-gateway",
-        name: "target-gateway-1"
+        name: "target-gateway-1",
       },
       spec: {
         targetRef: {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway"
-        }
-      }
+          namespace: "envoy-gateway",
+        },
+      },
     });
   });
 });
@@ -63,22 +63,22 @@ describe("ClientTrafficPolicy", () => {
   const policy = new ClientTrafficPolicy({
     metadata: {
       namespace: "envoy-gateway",
-      name: "target-gateway-1"
+      name: "target-gateway-1",
     },
     spec: {
       targetRef: {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway"
-      }
-    }
+        namespace: "envoy-gateway",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(policy).toHaveProperty(
       "apiVersion",
-      "gateway.envoyproxy.io/v1alpha1"
+      "gateway.envoyproxy.io/v1alpha1",
     );
   });
 
@@ -96,16 +96,16 @@ describe("ClientTrafficPolicy", () => {
       kind: "ClientTrafficPolicy",
       metadata: {
         namespace: "envoy-gateway",
-        name: "target-gateway-1"
+        name: "target-gateway-1",
       },
       spec: {
         targetRef: {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway"
-        }
-      }
+          namespace: "envoy-gateway",
+        },
+      },
     });
   });
 });
@@ -114,7 +114,7 @@ describe("EnvoyPatchPolicy", () => {
   const policy = new EnvoyPatchPolicy({
     metadata: {
       namespace: "envoy-gateway-2",
-      name: "edit-conn-buffer-bytes"
+      name: "edit-conn-buffer-bytes",
     },
     spec: {
       type: "JSONPatch",
@@ -122,7 +122,7 @@ describe("EnvoyPatchPolicy", () => {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway"
+        namespace: "envoy-gateway",
       },
       jsonPatches: [
         {
@@ -131,17 +131,17 @@ describe("EnvoyPatchPolicy", () => {
           operation: {
             op: "replace",
             path: "/per_connection_buffer_limit_bytes",
-            value: "1024"
-          }
-        }
-      ]
-    }
+            value: "1024",
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
     expect(policy).toHaveProperty(
       "apiVersion",
-      "gateway.envoyproxy.io/v1alpha1"
+      "gateway.envoyproxy.io/v1alpha1",
     );
   });
 
@@ -159,7 +159,7 @@ describe("EnvoyPatchPolicy", () => {
       kind: "EnvoyPatchPolicy",
       metadata: {
         namespace: "envoy-gateway-2",
-        name: "edit-conn-buffer-bytes"
+        name: "edit-conn-buffer-bytes",
       },
       spec: {
         type: "JSONPatch",
@@ -167,7 +167,7 @@ describe("EnvoyPatchPolicy", () => {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway"
+          namespace: "envoy-gateway",
         },
         jsonPatches: [
           {
@@ -176,11 +176,11 @@ describe("EnvoyPatchPolicy", () => {
             operation: {
               op: "replace",
               path: "/per_connection_buffer_limit_bytes",
-              value: "1024"
-            }
-          }
-        ]
-      }
+              value: "1024",
+            },
+          },
+        ],
+      },
     });
   });
 });
@@ -189,7 +189,7 @@ describe("EnvoyProxy", () => {
   const proxy = new EnvoyProxy({
     metadata: {
       namespace: "envoy-gateway-system",
-      name: "test"
+      name: "test",
     },
     spec: {
       telemetry: {
@@ -200,28 +200,28 @@ describe("EnvoyProxy", () => {
                 type: "JSON",
                 json: {
                   protocol: "%PROTOCOL%",
-                  duration: "%DURATION%"
-                }
+                  duration: "%DURATION%",
+                },
               },
               sinks: [
                 {
                   type: "File",
                   file: {
-                    path: "/dev/stdout"
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      }
-    }
+                    path: "/dev/stdout",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(proxy).toHaveProperty(
       "apiVersion",
-      "gateway.envoyproxy.io/v1alpha1"
+      "gateway.envoyproxy.io/v1alpha1",
     );
   });
 
@@ -239,7 +239,7 @@ describe("EnvoyProxy", () => {
       kind: "EnvoyProxy",
       metadata: {
         namespace: "envoy-gateway-system",
-        name: "test"
+        name: "test",
       },
       spec: {
         telemetry: {
@@ -250,22 +250,22 @@ describe("EnvoyProxy", () => {
                   type: "JSON",
                   json: {
                     protocol: "%PROTOCOL%",
-                    duration: "%DURATION%"
-                  }
+                    duration: "%DURATION%",
+                  },
                 },
                 sinks: [
                   {
                     type: "File",
                     file: {
-                      path: "/dev/stdout"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      }
+                      path: "/dev/stdout",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
     });
   });
 });
@@ -274,22 +274,22 @@ describe("SecurityPolicy", () => {
   const policy = new SecurityPolicy({
     metadata: {
       namespace: "envoy-gateway",
-      name: "target-gateway-1"
+      name: "target-gateway-1",
     },
     spec: {
       targetRef: {
         group: "gateway.networking.k8s.io",
         kind: "Gateway",
         name: "gateway-1",
-        namespace: "envoy-gateway"
-      }
-    }
+        namespace: "envoy-gateway",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(policy).toHaveProperty(
       "apiVersion",
-      "gateway.envoyproxy.io/v1alpha1"
+      "gateway.envoyproxy.io/v1alpha1",
     );
   });
 
@@ -307,16 +307,16 @@ describe("SecurityPolicy", () => {
       kind: "SecurityPolicy",
       metadata: {
         namespace: "envoy-gateway",
-        name: "target-gateway-1"
+        name: "target-gateway-1",
       },
       spec: {
         targetRef: {
           group: "gateway.networking.k8s.io",
           kind: "Gateway",
           name: "gateway-1",
-          namespace: "envoy-gateway"
-        }
-      }
+          namespace: "envoy-gateway",
+        },
+      },
     });
   });
 });
@@ -329,7 +329,7 @@ describe("v0.5.0", () => {
       proxy = new v05.EnvoyProxy({
         metadata: {
           namespace: "envoy-gateway-system",
-          name: "test"
+          name: "test",
         },
         spec: {
           telemetry: {
@@ -340,29 +340,29 @@ describe("v0.5.0", () => {
                     type: "JSON",
                     json: {
                       protocol: "%PROTOCOL%",
-                      duration: "%DURATION%"
-                    }
+                      duration: "%DURATION%",
+                    },
                   },
                   sinks: [
                     {
                       type: "File",
                       file: {
-                        path: "/dev/stdout"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        }
+                        path: "/dev/stdout",
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
       });
     });
 
     it("should set apiVersion", () => {
       expect(proxy).toHaveProperty(
         "apiVersion",
-        "config.gateway.envoyproxy.io/v1alpha1"
+        "config.gateway.envoyproxy.io/v1alpha1",
       );
     });
 
@@ -380,7 +380,7 @@ describe("v0.5.0", () => {
         kind: "EnvoyProxy",
         metadata: {
           namespace: "envoy-gateway-system",
-          name: "test"
+          name: "test",
         },
         spec: {
           telemetry: {
@@ -391,22 +391,22 @@ describe("v0.5.0", () => {
                     type: "JSON",
                     json: {
                       protocol: "%PROTOCOL%",
-                      duration: "%DURATION%"
-                    }
+                      duration: "%DURATION%",
+                    },
                   },
                   sinks: [
                     {
                       type: "File",
                       file: {
-                        path: "/dev/stdout"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        }
+                        path: "/dev/stdout",
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
       });
     });
   });

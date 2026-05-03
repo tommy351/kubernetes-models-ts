@@ -9,7 +9,7 @@ const CRDS = [
   "clickhouseinstallations.clickhouse",
   "clickhouseinstallationtemplates.clickhouse",
   "clickhousekeeperinstallations.clickhouse-keeper",
-  "clickhouseoperatorconfigurations.clickhouse"
+  "clickhouseoperatorconfigurations.clickhouse",
 ];
 
 const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
@@ -17,7 +17,7 @@ const output: any[] = [];
 
 for (const crd of CRDS) {
   const content = await readInput(
-    `https://raw.githubusercontent.com/Altinity/clickhouse-operator/refs/tags/release-${VERSION}/deploy/helm/clickhouse-operator/crds/CustomResourceDefinition-${crd}.altinity.com.yaml`
+    `https://raw.githubusercontent.com/Altinity/clickhouse-operator/refs/tags/release-${VERSION}/deploy/helm/clickhouse-operator/crds/CustomResourceDefinition-${crd}.altinity.com.yaml`,
   );
 
   output.push(yaml.load(content.replace(/!!merge */g, "")));

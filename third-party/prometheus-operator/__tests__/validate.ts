@@ -8,15 +8,15 @@ describe("validate", () => {
         spec: {
           selector: {
             matchLabels: {
-              app: "some-app"
-            }
+              app: "some-app",
+            },
           },
           endpoints: [
             {
-              port: "web"
-            }
-          ]
-        }
+              port: "web",
+            },
+          ],
+        },
       });
 
       expect(() => config.validate()).not.toThrow();
@@ -29,12 +29,12 @@ describe("validate", () => {
         spec: {
           // @ts-expect-error
           selector: "some-app",
-          endpoints: []
-        }
+          endpoints: [],
+        },
       });
 
       expect(() => config.validate()).toThrow(
-        "data/spec/selector must be object"
+        "data/spec/selector must be object",
       );
     });
   });

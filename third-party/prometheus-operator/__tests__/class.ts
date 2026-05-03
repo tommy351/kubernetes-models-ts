@@ -4,20 +4,20 @@ import { ServiceMonitor } from "../gen/monitoring.coreos.com/v1/ServiceMonitor.j
 describe("ServiceMonitor", () => {
   const config = new ServiceMonitor({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       selector: {
         matchLabels: {
-          app: "some-app"
-        }
+          app: "some-app",
+        },
       },
       endpoints: [
         {
-          port: "web"
-        }
-      ]
-    }
+          port: "web",
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -37,20 +37,20 @@ describe("ServiceMonitor", () => {
       apiVersion: "monitoring.coreos.com/v1",
       kind: "ServiceMonitor",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         selector: {
           matchLabels: {
-            app: "some-app"
-          }
+            app: "some-app",
+          },
         },
         endpoints: [
           {
-            port: "web"
-          }
-        ]
-      }
+            port: "web",
+          },
+        ],
+      },
     });
   });
 });

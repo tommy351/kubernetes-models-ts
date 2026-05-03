@@ -8,7 +8,7 @@ const keyword: KeywordDefinition = {
   schemaType: "string",
   error: {
     message: ({ schemaCode }) => str`must match pattern "${schemaCode}"`,
-    params: ({ schemaCode }) => _`{pattern: ${schemaCode}}`
+    params: ({ schemaCode }) => _`{pattern: ${schemaCode}}`,
   },
   code(cxt) {
     const { data, schema, it, gen } = cxt;
@@ -20,23 +20,23 @@ const keyword: KeywordDefinition = {
       pattern = gen.scopeValue("pattern", {
         key: schema,
         ref: re,
-        code: _`new RegExp(${schema}, ${u})`
+        code: _`new RegExp(${schema}, ${u})`,
       });
     } catch {
       const re = new RE2(schema, u);
       const func = gen.scopeValue("func", {
         ref: RE2,
-        code: _`require("ajv/dist/runtime/re2").default`
+        code: _`require("ajv/dist/runtime/re2").default`,
       });
       pattern = gen.scopeValue("pattern", {
         key: schema,
         ref: re,
-        code: _`new ${func}(${schema}, ${u})`
+        code: _`new ${func}(${schema}, ${u})`,
       });
     }
 
     cxt.fail(_`!${pattern}.test(${data})`);
-  }
+  },
 };
 
 export default keyword;

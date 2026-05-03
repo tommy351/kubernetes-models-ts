@@ -4,7 +4,7 @@ import { Workflow } from "../gen/argoproj.io/v1alpha1/Workflow.js";
 describe("Workflow", () => {
   const workflow = new Workflow({
     metadata: {
-      name: "workflows-demo"
+      name: "workflows-demo",
     },
     spec: {
       entrypoint: "hello",
@@ -13,11 +13,11 @@ describe("Workflow", () => {
           name: "hello",
           container: {
             image: "alpine:latest",
-            command: ["echo", "Hello, Argo!"]
-          }
-        }
-      ]
-    }
+            command: ["echo", "Hello, Argo!"],
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -37,7 +37,7 @@ describe("Workflow", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "Workflow",
       metadata: {
-        name: "workflows-demo"
+        name: "workflows-demo",
       },
       spec: {
         entrypoint: "hello",
@@ -46,11 +46,11 @@ describe("Workflow", () => {
             name: "hello",
             container: {
               image: "alpine:latest",
-              command: ["echo", "Hello, Argo!"]
-            }
-          }
-        ]
-      }
+              command: ["echo", "Hello, Argo!"],
+            },
+          },
+        ],
+      },
     });
   });
 });

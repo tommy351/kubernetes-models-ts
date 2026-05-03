@@ -6,7 +6,7 @@ import { runValidateFunc } from "../validate.js";
 const ajv = new Ajv({
   strictTypes: false,
   allErrors: true,
-  verbose: true
+  verbose: true,
 });
 
 describe("number", () => {
@@ -19,7 +19,7 @@ describe("number", () => {
   it("failed", () => {
     expect(() => runValidateFunc(validate, false)).toThrowWithMessage(
       ValidationError,
-      "data must be number"
+      "data must be number",
     );
   });
 });
@@ -30,8 +30,8 @@ describe("object", () => {
     properties: {
       a: { type: "string" },
       b: { type: "number" },
-      c: { type: "boolean" }
-    }
+      c: { type: "boolean" },
+    },
   });
 
   it("success", () => {
@@ -39,8 +39,8 @@ describe("object", () => {
       runValidateFunc(validate, {
         a: "abc",
         b: 3.14,
-        c: true
-      })
+        c: true,
+      }),
     ).not.toThrow();
   });
 
@@ -49,11 +49,11 @@ describe("object", () => {
       runValidateFunc(validate, {
         a: true,
         b: 3.14,
-        c: "abc"
-      })
+        c: "abc",
+      }),
     ).toThrowWithMessage(
       ValidationError,
-      "data/a must be string, data/c must be boolean"
+      "data/a must be string, data/c must be boolean",
     );
   });
 });

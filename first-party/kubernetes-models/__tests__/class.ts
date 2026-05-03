@@ -9,8 +9,8 @@ import { PodSpec } from "../gen/v1/PodSpec.js";
 describe("Deployment apps/v1", () => {
   const deployment = new DeploymentV1({
     metadata: {
-      name: "test"
-    }
+      name: "test",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -30,8 +30,8 @@ describe("Deployment apps/v1", () => {
       apiVersion: "apps/v1",
       kind: "Deployment",
       metadata: {
-        name: "test"
-      }
+        name: "test",
+      },
     });
   });
 });
@@ -39,8 +39,8 @@ describe("Deployment apps/v1", () => {
 describe("Deployment apps/v1beta1", () => {
   const deployment = new DeploymentV1Beta1({
     metadata: {
-      name: "test"
-    }
+      name: "test",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -60,8 +60,8 @@ describe("Deployment apps/v1beta1", () => {
       apiVersion: "extensions/v1beta1",
       kind: "Deployment",
       metadata: {
-        name: "test"
-      }
+        name: "test",
+      },
     });
   });
 });
@@ -108,17 +108,17 @@ describe("PodSpec", () => {
     containers: [
       {
         name: "busybox",
-        image: "busybox"
-      }
-    ]
+        image: "busybox",
+      },
+    ],
   });
 
   it("should set containers", () => {
     expect(spec).toHaveProperty("containers", [
       {
         name: "busybox",
-        image: "busybox"
-      }
+        image: "busybox",
+      },
     ]);
   });
 });

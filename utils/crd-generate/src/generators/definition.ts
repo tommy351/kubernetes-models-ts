@@ -6,7 +6,7 @@ import {
   getAPIVersion,
   type GroupVersionKind,
   type Import,
-  type OutputFile
+  type OutputFile,
 } from "@kubernetes-models/generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import { getRelativePath, getSchemaPath } from "../utils.js";
@@ -19,7 +19,7 @@ function getFieldType(key: string[]): string | undefined {
 
 function generateDefinition(
   gvk: GroupVersionKind,
-  def: Definition
+  def: Definition,
 ): OutputFile {
   const apiVersion = getAPIVersion(gvk);
   const className = gvk.kind;
@@ -27,7 +27,7 @@ function generateDefinition(
   const imports: Import[] = [];
   const interfaceContent = generateInterface(def.schema, {
     includeDescription: true,
-    getFieldType
+    getFieldType,
   });
   const path = `${apiVersion}/${className}.ts`;
   let classContent = generateInterface(def.schema, {
@@ -35,7 +35,7 @@ function generateDefinition(
       if (key.length === 1) {
         return `${interfaceName}${JSON.stringify(key)}`;
       }
-    }
+    },
   });
   let comment = "";
 
@@ -43,7 +43,7 @@ function generateDefinition(
     trimSuffix(classContent, "}") +
     `
 static apiVersion: ${interfaceName}["apiVersion"] = ${JSON.stringify(
-      apiVersion
+      apiVersion,
     )};
 static kind: ${interfaceName}["kind"] = ${JSON.stringify(gvk.kind)};
 static is = createTypeMetaGuard<${interfaceName}>(${className});
@@ -62,42 +62,42 @@ constructor(data?: ModelData<${interfaceName}>) {
 
   imports.push({
     name: "IObjectMeta",
-    path: "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta"
+    path: "@kubernetes-models/apimachinery/apis/meta/v1/ObjectMeta",
   });
 
   imports.push({
     name: "Model",
-    path: "@kubernetes-models/base"
+    path: "@kubernetes-models/base",
   });
 
   imports.push({
     name: "ModelData",
-    path: "@kubernetes-models/base"
+    path: "@kubernetes-models/base",
   });
 
   imports.push({
     name: "setValidateFunc",
-    path: "@kubernetes-models/base"
+    path: "@kubernetes-models/base",
   });
 
   imports.push({
     name: "createTypeMetaGuard",
-    path: "@kubernetes-models/base"
+    path: "@kubernetes-models/base",
   });
 
   imports.push({
     name: "ValidateFunc",
-    path: "@kubernetes-models/validate"
+    path: "@kubernetes-models/validate",
   });
 
   imports.push({
     name: "validate",
-    path: getRelativePath(path, getSchemaPath(def.schemaId))
+    path: getRelativePath(path, getSchemaPath(def.schemaId)),
   });
 
   if (def.schema.description) {
     comment = formatComment(def.schema.description, {
-      deprecated: /^deprecated/i.test(def.schema.description)
+      deprecated: /^deprecated/i.test(def.schema.description),
     });
   }
 
@@ -110,7 +110,7 @@ ${comment}export interface ${interfaceName} ${interfaceContent}
 ${comment}export class ${className} extends Model<${interfaceName}> implements ${interfaceName} ${classContent}
 
 setValidateFunc(${className}, validate as ValidateFunc<${interfaceName}>);
-`
+`,
   };
 }
 

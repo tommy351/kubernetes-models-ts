@@ -5,5 +5,5 @@ export {
   lowerFirst,
   camelCase,
   trimPrefix,
-  trimSuffix
+  trimSuffix,
 } from "./string.js";

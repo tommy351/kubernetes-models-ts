@@ -2,16 +2,16 @@ import { describe, it, expect } from "vitest";
 import {
   SubnamespaceAnchor,
   HierarchyConfiguration,
-  HierarchicalResourceQuota
+  HierarchicalResourceQuota,
 } from "../gen/hnc.x-k8s.io/v1alpha2/index.js";
 
 describe("SubnamespaceAnchor", () => {
   const subns = new SubnamespaceAnchor({
     metadata: {
       name: "child-ns",
-      namespace: "parent-ns"
+      namespace: "parent-ns",
     },
-    spec: {}
+    spec: {},
   });
 
   it("should set apiVersion", () => {
@@ -32,9 +32,9 @@ describe("SubnamespaceAnchor", () => {
       kind: "SubnamespaceAnchor",
       metadata: {
         name: "child-ns",
-        namespace: "parent-ns"
+        namespace: "parent-ns",
       },
-      spec: {}
+      spec: {},
     });
   });
 });
@@ -42,17 +42,17 @@ describe("SubnamespaceAnchor", () => {
 describe("HierarchyConfiguration", () => {
   const hc = new HierarchyConfiguration({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       labels: [
         {
           key: "foo",
-          value: "bar"
-        }
+          value: "bar",
+        },
       ],
-      parent: "parent-ns"
-    }
+      parent: "parent-ns",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -72,17 +72,17 @@ describe("HierarchyConfiguration", () => {
       apiVersion: "hnc.x-k8s.io/v1alpha2",
       kind: "HierarchyConfiguration",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         labels: [
           {
             key: "foo",
-            value: "bar"
-          }
+            value: "bar",
+          },
         ],
-        parent: "parent-ns"
-      }
+        parent: "parent-ns",
+      },
     });
   });
 });
@@ -90,13 +90,13 @@ describe("HierarchyConfiguration", () => {
 describe("HierarchicalResourceQuota", () => {
   const hrq = new HierarchicalResourceQuota({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       hard: {
-        "count/pods": "100"
-      }
-    }
+        "count/pods": "100",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -116,13 +116,13 @@ describe("HierarchicalResourceQuota", () => {
       apiVersion: "hnc.x-k8s.io/v1alpha2",
       kind: "HierarchicalResourceQuota",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         hard: {
-          "count/pods": "100"
-        }
-      }
+          "count/pods": "100",
+        },
+      },
     });
   });
 });

@@ -5,21 +5,21 @@ import { HTTPRoute as HTTPRouteV1Beta1 } from "../gen/gateway.networking.k8s.io/
 describe("HTTPRoute", () => {
   const route = new HTTPRoute({
     metadata: {
-      name: "http-route"
+      name: "http-route",
     },
     spec: {
       parentRefs: [
         {
           kind: "Gateway",
-          name: "foo-gateway"
-        }
+          name: "foo-gateway",
+        },
       ],
       rules: [
         {
-          backendRefs: [{ name: "foo-svc", port: 8080 }]
-        }
-      ]
-    }
+          backendRefs: [{ name: "foo-svc", port: 8080 }],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -39,21 +39,21 @@ describe("HTTPRoute", () => {
       apiVersion: "gateway.networking.k8s.io/v1",
       kind: "HTTPRoute",
       metadata: {
-        name: "http-route"
+        name: "http-route",
       },
       spec: {
         parentRefs: [
           {
             kind: "Gateway",
-            name: "foo-gateway"
-          }
+            name: "foo-gateway",
+          },
         ],
         rules: [
           {
-            backendRefs: [{ name: "foo-svc", port: 8080 }]
-          }
-        ]
-      }
+            backendRefs: [{ name: "foo-svc", port: 8080 }],
+          },
+        ],
+      },
     });
   });
 });
@@ -61,27 +61,27 @@ describe("HTTPRoute", () => {
 describe("HTTPRoute v1beta1", () => {
   const route = new HTTPRouteV1Beta1({
     metadata: {
-      name: "http-route"
+      name: "http-route",
     },
     spec: {
       parentRefs: [
         {
           kind: "Gateway",
-          name: "foo-gateway"
-        }
+          name: "foo-gateway",
+        },
       ],
       rules: [
         {
-          backendRefs: [{ name: "foo-svc", port: 8080 }]
-        }
-      ]
-    }
+          backendRefs: [{ name: "foo-svc", port: 8080 }],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
     expect(route).toHaveProperty(
       "apiVersion",
-      "gateway.networking.k8s.io/v1beta1"
+      "gateway.networking.k8s.io/v1beta1",
     );
   });
 
@@ -98,21 +98,21 @@ describe("HTTPRoute v1beta1", () => {
       apiVersion: "gateway.networking.k8s.io/v1beta1",
       kind: "HTTPRoute",
       metadata: {
-        name: "http-route"
+        name: "http-route",
       },
       spec: {
         parentRefs: [
           {
             kind: "Gateway",
-            name: "foo-gateway"
-          }
+            name: "foo-gateway",
+          },
         ],
         rules: [
           {
-            backendRefs: [{ name: "foo-svc", port: 8080 }]
-          }
-        ]
-      }
+            backendRefs: [{ name: "foo-svc", port: 8080 }],
+          },
+        ],
+      },
     });
   });
 });

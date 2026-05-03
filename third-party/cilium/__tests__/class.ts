@@ -5,29 +5,29 @@ import { CiliumClusterwideNetworkPolicy } from "../gen/cilium.io/v2/CiliumCluste
 describe("CiliumLocalRedirectPolicy", () => {
   const lrp = new CiliumLocalRedirectPolicy({
     metadata: {
-      name: "lrp"
+      name: "lrp",
     },
     spec: {
       redirectFrontend: {
         serviceMatcher: {
           serviceName: "my-service",
-          namespace: "default"
-        }
+          namespace: "default",
+        },
       },
       redirectBackend: {
         localEndpointSelector: {
           matchLabels: {
-            name: "proxy"
-          }
+            name: "proxy",
+          },
         },
         toPorts: [
           {
             port: "8080",
-            protocol: "TCP"
-          }
-        ]
-      }
-    }
+            protocol: "TCP",
+          },
+        ],
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -51,29 +51,29 @@ describe("CiliumLocalRedirectPolicy", () => {
       apiVersion: "cilium.io/v2",
       kind: "CiliumLocalRedirectPolicy",
       metadata: {
-        name: "lrp"
+        name: "lrp",
       },
       spec: {
         redirectFrontend: {
           serviceMatcher: {
             serviceName: "my-service",
-            namespace: "default"
-          }
+            namespace: "default",
+          },
         },
         redirectBackend: {
           localEndpointSelector: {
             matchLabels: {
-              name: "proxy"
-            }
+              name: "proxy",
+            },
           },
           toPorts: [
             {
               port: "8080",
-              protocol: "TCP"
-            }
-          ]
-        }
-      }
+              protocol: "TCP",
+            },
+          ],
+        },
+      },
     });
   });
 });
@@ -81,13 +81,13 @@ describe("CiliumLocalRedirectPolicy", () => {
 describe("CiliumClusterwideNetworkPolicy", () => {
   const policy = new CiliumClusterwideNetworkPolicy({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       endpointSelector: { matchLabels: { app: "service" } },
       ingress: [
         {
-          fromEndpoints: [{ matchLabels: { env: "prod" } }]
+          fromEndpoints: [{ matchLabels: { env: "prod" } }],
         },
         {
           toPorts: [
@@ -97,15 +97,15 @@ describe("CiliumClusterwideNetworkPolicy", () => {
                 http: [
                   {
                     method: "GET",
-                    path: "/public"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    }
+                    path: "/public",
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -129,13 +129,13 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       apiVersion: "cilium.io/v2",
       kind: "CiliumClusterwideNetworkPolicy",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         endpointSelector: { matchLabels: { app: "service" } },
         ingress: [
           {
-            fromEndpoints: [{ matchLabels: { env: "prod" } }]
+            fromEndpoints: [{ matchLabels: { env: "prod" } }],
           },
           {
             toPorts: [
@@ -145,15 +145,15 @@ describe("CiliumClusterwideNetworkPolicy", () => {
                   http: [
                     {
                       method: "GET",
-                      path: "/public"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      }
+                      path: "/public",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
     });
   });
 });

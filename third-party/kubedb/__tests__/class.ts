@@ -11,11 +11,11 @@ describe("Postgres", () => {
         storageClassName: "standard",
         accessModes: ["ReadWriteOnce"],
         resources: {
-          requests: { storage: "1Gi" }
-        }
+          requests: { storage: "1Gi" },
+        },
       },
-      terminationPolicy: "DoNotTerminate"
-    }
+      terminationPolicy: "DoNotTerminate",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -42,11 +42,11 @@ describe("Postgres", () => {
           storageClassName: "standard",
           accessModes: ["ReadWriteOnce"],
           resources: {
-            requests: { storage: "1Gi" }
-          }
+            requests: { storage: "1Gi" },
+          },
         },
-        terminationPolicy: "DoNotTerminate"
-      }
+        terminationPolicy: "DoNotTerminate",
+      },
     });
   });
 });

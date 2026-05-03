@@ -4,15 +4,15 @@ import { VerticalPodAutoscaler } from "../gen/autoscaling.k8s.io/v1/VerticalPodA
 describe("VerticalPodAutoscaler", () => {
   const vpa = new VerticalPodAutoscaler({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       targetRef: {
         apiVersion: "apps/v1",
         kind: "Deployment",
-        name: "my-app"
-      }
-    }
+        name: "my-app",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -36,15 +36,15 @@ describe("VerticalPodAutoscaler", () => {
       apiVersion: "autoscaling.k8s.io/v1",
       kind: "VerticalPodAutoscaler",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         targetRef: {
           apiVersion: "apps/v1",
           kind: "Deployment",
-          name: "my-app"
-        }
-      }
+          name: "my-app",
+        },
+      },
     });
   });
 });

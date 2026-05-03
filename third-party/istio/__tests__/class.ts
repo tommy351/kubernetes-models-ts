@@ -4,21 +4,21 @@ import { Gateway } from "../gen/networking.istio.io/v1beta1/Gateway.js";
 describe("Gateway", () => {
   const gateway = new Gateway({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       selector: {
-        app: "istio"
+        app: "istio",
       },
       servers: [
         {
           port: {
-            number: 80
+            number: 80,
           },
-          hosts: ["*"]
-        }
-      ]
-    }
+          hosts: ["*"],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -38,21 +38,21 @@ describe("Gateway", () => {
       apiVersion: "networking.istio.io/v1beta1",
       kind: "Gateway",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         selector: {
-          app: "istio"
+          app: "istio",
         },
         servers: [
           {
             port: {
-              number: 80
+              number: 80,
             },
-            hosts: ["*"]
-          }
-        ]
-      }
+            hosts: ["*"],
+          },
+        ],
+      },
     });
   });
 });

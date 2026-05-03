@@ -12,15 +12,15 @@ const rootDir = fileURLToPath(new URL("..", import.meta.url));
     .option("name", {
       type: "string",
       demandOption: true,
-      description: "Package name"
+      description: "Package name",
     })
     .option("description", {
       type: "string",
-      description: "Package description"
+      description: "Package description",
     })
     .option("author", {
       type: "string",
-      description: "Package author"
+      description: "Package author",
     })
     .parse();
 
@@ -39,7 +39,7 @@ const rootDir = fileURLToPath(new URL("..", import.meta.url));
     description: args.description,
     repository: {
       type: "git",
-      url: "https://github.com/tommy351/kubernetes-models-ts.git"
+      url: "https://github.com/tommy351/kubernetes-models-ts.git",
     },
     homepage: `https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/${args.name}`,
     author: args.author,
@@ -50,40 +50,40 @@ const rootDir = fileURLToPath(new URL("..", import.meta.url));
     sideEffects: false,
     scripts: {
       build: "crd-generate && publish-scripts build",
-      prepack: "publish-scripts prepack"
+      prepack: "publish-scripts prepack",
     },
     publishConfig: {
       access: "public",
       directory: "dist",
-      linkDirectory: true
+      linkDirectory: true,
     },
     keywords: ["kubernetes", "kubernetes-models", args.name],
     engines: {
-      node: ">=14"
+      node: ">=14",
     },
     dependencies: {
       "@kubernetes-models/apimachinery": "workspace:^",
       "@kubernetes-models/base": "workspace:^",
       "@kubernetes-models/validate": "workspace:^",
-      "@swc/helpers": "^0.5.8"
+      "@swc/helpers": "^0.5.8",
     },
     devDependencies: {
       "@kubernetes-models/crd-generate": "workspace:^",
-      "@kubernetes-models/publish-scripts": "workspace:^"
+      "@kubernetes-models/publish-scripts": "workspace:^",
     },
     "crd-generate": {
       input: [],
-      output: "./gen"
-    }
+      output: "./gen",
+    },
   };
 
   const tsConfig = {
     extends: "../../tsconfig.build.json",
     compilerOptions: {
       outDir: "dist",
-      sourceMap: false
+      sourceMap: false,
     },
-    include: ["gen"]
+    include: ["gen"],
   };
 
   console.log("Creating the package directory:", pkgDir);
@@ -92,19 +92,19 @@ const rootDir = fileURLToPath(new URL("..", import.meta.url));
   console.log("Writing package.json");
   await writeFile(
     join(pkgDir, "package.json"),
-    JSON.stringify(pkgJson, null, "  ")
+    JSON.stringify(pkgJson, null, "  "),
   );
 
   console.log("Writing tsconfig.json");
   await writeFile(
     join(pkgDir, "tsconfig.json"),
-    JSON.stringify(tsConfig, null, "  ")
+    JSON.stringify(tsConfig, null, "  "),
   );
 
   console.log("Writing changeset");
   const changesetId = humanId({
     separator: "-",
-    capitalize: false
+    capitalize: false,
   });
 
   await writeFile(
@@ -114,7 +114,7 @@ const rootDir = fileURLToPath(new URL("..", import.meta.url));
 ---
 
 First release.
-`
+`,
   );
 
   console.log("New package %s is created at %s", pkgJson.name, pkgDir);
@@ -122,7 +122,7 @@ First release.
   console.log("Running pnpm install");
   const { exitCode } = await execa("pnpm", ["install"], {
     stdio: "inherit",
-    reject: false
+    reject: false,
   });
   process.exitCode = exitCode;
 })().catch((err) => {

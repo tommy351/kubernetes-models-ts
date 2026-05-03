@@ -9,12 +9,12 @@ describe("validate", () => {
           targetRef: {
             apiVersion: "apps/v1",
             kind: "Deployment",
-            name: "my-app"
+            name: "my-app",
           },
           updatePolicy: {
-            updateMode: "Off"
-          }
-        }
+            updateMode: "Off",
+          },
+        },
       });
 
       expect(() => config.validate()).not.toThrow();
@@ -28,21 +28,21 @@ describe("validate", () => {
           targetRef: {
             apiVersion: "apps/v1",
             kind: "Deployment",
-            name: "my-app"
+            name: "my-app",
           },
           resourcePolicy: {
             containerPolicies: [
               {
                 // @ts-expect-error
-                mode: "foo"
-              }
-            ]
-          }
-        }
+                mode: "foo",
+              },
+            ],
+          },
+        },
       });
 
       expect(() => config.validate()).toThrow(
-        "data/spec/resourcePolicy/containerPolicies/0/mode must be equal to one of the allowed values"
+        "data/spec/resourcePolicy/containerPolicies/0/mode must be equal to one of the allowed values",
       );
     });
   });

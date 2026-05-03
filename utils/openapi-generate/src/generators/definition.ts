@@ -5,12 +5,12 @@ import {
   Generator,
   getAPIVersion,
   Import,
-  Schema
+  Schema,
 } from "@kubernetes-models/generate";
 import {
   formatComment,
   trimPrefix,
-  trimSuffix
+  trimSuffix,
 } from "@kubernetes-models/string-util";
 import { mapValues, omit } from "es-toolkit";
 import { Context } from "../context.js";
@@ -19,13 +19,13 @@ import {
   getInterfaceName,
   getShortClassName,
   getShortInterfaceName,
-  trimRefPrefix
+  trimRefPrefix,
 } from "../string.js";
 import {
   getRelativePath,
   getSchemaPath,
   isAPIMachineryID,
-  trimExtname
+  trimExtname,
 } from "../utils.js";
 
 function omitTypeMetaDescription(schema: Schema): Schema {
@@ -40,13 +40,13 @@ function omitTypeMetaDescription(schema: Schema): Schema {
       }
 
       return prop;
-    })
+    }),
   };
 }
 
 export default function ({
   getDefinitionPath,
-  externalAPIMachinery
+  externalAPIMachinery,
 }: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
@@ -63,8 +63,8 @@ export default function ({
         gvk ? omitTypeMetaDescription(def.schema) : def.schema,
         {
           getRefType,
-          includeDescription: true
-        }
+          includeDescription: true,
+        },
       );
       const path = getDefinitionPath(def.schemaId);
       const schemaPath = getRelativePath(path, getSchemaPath(def.schemaId));
@@ -84,7 +84,7 @@ export default function ({
 
       if (def.schema.description) {
         comment = formatComment(def.schema.description, {
-          deprecated: /deprecated/i.test(def.schema.description)
+          deprecated: /deprecated/i.test(def.schema.description),
         });
       }
 
@@ -96,16 +96,17 @@ export default function ({
             name,
             path: `@kubernetes-models/apimachinery/${trimPrefix(
               ref,
-              "io.k8s.apimachinery.pkg."
+              "io.k8s.apimachinery.pkg.",
             )
               .split(".")
-              .join("/")}`
+              .join("/")}`,
           });
         } else {
           imports.push({
             name,
             path:
-              getRelativePath(path, trimExtname(getDefinitionPath(ref))) + ".js"
+              getRelativePath(path, trimExtname(getDefinitionPath(ref))) +
+              ".js",
           });
         }
       }
@@ -120,28 +121,28 @@ export default function ({
               case "kind":
                 return `${shortInterfaceName}["${key[0]}"]`;
             }
-          }
+          },
         });
 
         imports.push({
           name: "ModelData",
-          path: "@kubernetes-models/base"
+          path: "@kubernetes-models/base",
         });
 
         if (gvk) {
           imports.push({
             name: "TypeMeta",
-            path: "@kubernetes-models/base"
+            path: "@kubernetes-models/base",
           });
 
           imports.push({
             name: "createTypeMetaGuard",
-            path: "@kubernetes-models/base"
+            path: "@kubernetes-models/base",
           });
 
           classContent = `${trimSuffix(classContent, "}")}
 static apiVersion: ${shortInterfaceName}["apiVersion"] = "${getAPIVersion(
-            gvk
+            gvk,
           )}";
 static kind: ${shortInterfaceName}["kind"] = "${gvk.kind}";
 static is = createTypeMetaGuard<${shortInterfaceName}>(${shortClassName});
@@ -169,11 +170,11 @@ constructor(data?: ModelData<${shortInterfaceName}>) {
         imports.push({ name: "Model", path: "@kubernetes-models/base" });
         imports.push({
           name: "setValidateFunc",
-          path: "@kubernetes-models/base"
+          path: "@kubernetes-models/base",
         });
         imports.push({
           name: "ValidateFunc",
-          path: "@kubernetes-models/validate"
+          path: "@kubernetes-models/validate",
         });
         imports.push({ name: "validate", path: schemaPath });
 
@@ -207,7 +208,7 @@ export type {
 
       return {
         path,
-        content
+        content,
       };
     });
   };

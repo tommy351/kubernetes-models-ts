@@ -4,13 +4,13 @@ import { SealedSecret } from "../gen/bitnami.com/v1alpha1/SealedSecret.js";
 describe("SealedSecret", () => {
   const secret = new SealedSecret({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       encryptedData: {
-        foo: "bar"
-      }
-    }
+        foo: "bar",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -30,13 +30,13 @@ describe("SealedSecret", () => {
       apiVersion: "bitnami.com/v1alpha1",
       kind: "SealedSecret",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         encryptedData: {
-          foo: "bar"
-        }
-      }
+          foo: "bar",
+        },
+      },
     });
   });
 });

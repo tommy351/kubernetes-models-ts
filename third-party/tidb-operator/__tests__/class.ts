@@ -4,7 +4,7 @@ import { TidbCluster } from "../gen/pingcap.com/v1alpha1/TidbCluster.js";
 describe("TidbCluster", () => {
   const cluster = new TidbCluster({
     metadata: {
-      name: "cluster-sample"
+      name: "cluster-sample",
     },
     spec: {
       version: "v6.5.0",
@@ -14,16 +14,16 @@ describe("TidbCluster", () => {
       configUpdateStrategy: "RollingUpdate",
       discovery: {},
       helper: {
-        image: "alpine:3.16.0"
+        image: "alpine:3.16.0",
       },
       pd: {
         baseImage: "pingcap/pd",
         maxFailoverCount: 0,
         replicas: 1,
         requests: {
-          storage: "1Gi"
+          storage: "1Gi",
         },
-        config: {}
+        config: {},
       },
       tikv: {
         baseImage: "pingcap/tikv",
@@ -31,21 +31,21 @@ describe("TidbCluster", () => {
         evictLeaderTimeout: "1m",
         replicas: 1,
         requests: {
-          storage: "1Gi"
+          storage: "1Gi",
         },
         config: {
           storage: {
-            "reserve-space": "0MB"
+            "reserve-space": "0MB",
           },
           rocksdb: {
-            "max-open-files": 256
+            "max-open-files": 256,
           },
           raftdb: {
-            "max-open-files": 256
-          }
-        }
-      }
-    }
+            "max-open-files": 256,
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -65,7 +65,7 @@ describe("TidbCluster", () => {
       apiVersion: "pingcap.com/v1alpha1",
       kind: "TidbCluster",
       metadata: {
-        name: "cluster-sample"
+        name: "cluster-sample",
       },
       spec: {
         version: "v6.5.0",
@@ -75,16 +75,16 @@ describe("TidbCluster", () => {
         configUpdateStrategy: "RollingUpdate",
         discovery: {},
         helper: {
-          image: "alpine:3.16.0"
+          image: "alpine:3.16.0",
         },
         pd: {
           baseImage: "pingcap/pd",
           maxFailoverCount: 0,
           replicas: 1,
           requests: {
-            storage: "1Gi"
+            storage: "1Gi",
           },
-          config: {}
+          config: {},
         },
         tikv: {
           baseImage: "pingcap/tikv",
@@ -92,21 +92,21 @@ describe("TidbCluster", () => {
           evictLeaderTimeout: "1m",
           replicas: 1,
           requests: {
-            storage: "1Gi"
+            storage: "1Gi",
           },
           config: {
             storage: {
-              "reserve-space": "0MB"
+              "reserve-space": "0MB",
             },
             rocksdb: {
-              "max-open-files": 256
+              "max-open-files": 256,
             },
             raftdb: {
-              "max-open-files": 256
-            }
-          }
-        }
-      }
+              "max-open-files": 256,
+            },
+          },
+        },
+      },
     });
   });
 });

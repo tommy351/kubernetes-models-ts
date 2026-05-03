@@ -20,17 +20,17 @@ export async function run(): Promise<void> {
       type: "array",
       describe: "Path of the input file or URL",
       string: true,
-      demandOption: true
+      demandOption: true,
     })
     .option("output", {
       type: "string",
       describe: "Path of output files",
-      demandOption: true
+      demandOption: true,
     })
     .option("yamlVersion", {
       type: "string",
       describe: "YAML version.",
-      choices: ["1.0", "1.1", "1.2"]
+      choices: ["1.0", "1.1", "1.2"],
     })
     .parse();
 
@@ -38,7 +38,7 @@ export async function run(): Promise<void> {
     await generate({
       input: await readFiles(args.input),
       outputPath: args.output,
-      yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"]
+      yamlVersion: args.yamlVersion as GenerateOptions["yamlVersion"],
     });
   } catch (err) {
     console.error(err);

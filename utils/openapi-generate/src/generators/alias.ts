@@ -4,7 +4,7 @@ import { posix } from "node:path";
 import {
   type Generator,
   getAPIVersion,
-  type OutputFile
+  type OutputFile,
 } from "@kubernetes-models/generate";
 import { Context } from "../context.js";
 import { getRelativePath } from "../utils.js";
@@ -40,7 +40,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
 
           output.push({
             path: aliasPath,
-            content: `export * from "${getRelativePath(aliasPath, defPath)}/index.js";`
+            content: `export * from "${getRelativePath(aliasPath, defPath)}/index.js";`,
           });
         }
       }
@@ -63,7 +63,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
     for (const [key, values] of kindPathMap) {
       output.push({
         path: getIndexPath(key),
-        content: values.map((v) => `export * from "./${v}.js";`).join("\n")
+        content: values.map((v) => `export * from "./${v}.js";`).join("\n"),
       });
     }
 
@@ -76,7 +76,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
 
             return `export * as ${exportedName} from "./${v}/index.js";`;
           })
-          .join("\n")
+          .join("\n"),
       });
     }
 

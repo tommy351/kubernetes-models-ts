@@ -4,7 +4,7 @@ import { IngressRoute } from "../gen/traefik.containo.us/v1alpha1/IngressRoute.j
 describe("IngressRoute", () => {
   const ingressRoute = new IngressRoute({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       entryPoints: ["web"],
@@ -15,18 +15,18 @@ describe("IngressRoute", () => {
           services: [
             {
               name: "test",
-              port: 80
-            }
-          ]
-        }
-      ]
-    }
+              port: 80,
+            },
+          ],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
     expect(ingressRoute).toHaveProperty(
       "apiVersion",
-      "traefik.containo.us/v1alpha1"
+      "traefik.containo.us/v1alpha1",
     );
   });
 
@@ -43,7 +43,7 @@ describe("IngressRoute", () => {
       apiVersion: "traefik.containo.us/v1alpha1",
       kind: "IngressRoute",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         entryPoints: ["web"],
@@ -54,12 +54,12 @@ describe("IngressRoute", () => {
             services: [
               {
                 name: "test",
-                port: 80
-              }
-            ]
-          }
-        ]
-      }
+                port: 80,
+              },
+            ],
+          },
+        ],
+      },
     });
   });
 });

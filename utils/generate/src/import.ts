@@ -25,7 +25,7 @@ export function generateImports(imports: readonly Import[]): string {
   return [...importMap.entries()]
     .map(
       ([path, names]) =>
-        `import { ${[...names].join(", ")} } from ${JSON.stringify(path)};`
+        `import { ${[...names].join(", ")} } from ${JSON.stringify(path)};`,
     )
     .join("\n");
 }

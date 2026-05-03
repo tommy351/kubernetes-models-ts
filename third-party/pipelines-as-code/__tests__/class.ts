@@ -4,17 +4,17 @@ import { Repository } from "../gen/pipelinesascode.tekton.dev/v1alpha1/Repositor
 describe("Repository", () => {
   const repository = new Repository({
     metadata: {
-      name: "test-repository"
+      name: "test-repository",
     },
     spec: {
-      url: "https://github.com/linda/project"
-    }
+      url: "https://github.com/linda/project",
+    },
   });
 
   it("should set apiVersion", () => {
     expect(repository).toHaveProperty(
       "apiVersion",
-      "pipelinesascode.tekton.dev/v1alpha1"
+      "pipelinesascode.tekton.dev/v1alpha1",
     );
   });
 
@@ -31,11 +31,11 @@ describe("Repository", () => {
       apiVersion: "pipelinesascode.tekton.dev/v1alpha1",
       kind: "Repository",
       metadata: {
-        name: "test-repository"
+        name: "test-repository",
       },
       spec: {
-        url: "https://github.com/linda/project"
-      }
+        url: "https://github.com/linda/project",
+      },
     });
   });
 
@@ -59,13 +59,13 @@ describe("Repository", () => {
         { name: "company", value: "My Beautiful Company" },
         {
           name: "company",
-          secret_ref: { name: "my-secret", key: "companyname" }
+          secret_ref: { name: "my-secret", key: "companyname" },
         },
         {
           name: "company",
           value: "My Beautiful Company",
-          filter: 'pac.event_type == "pull_request"'
-        }
+          filter: 'pac.event_type == "pull_request"',
+        },
       ];
     }
     expect(() => repository.validate()).not.toThrow();
@@ -74,7 +74,7 @@ describe("Repository", () => {
   it("should support settings", () => {
     if (repository.spec) {
       repository.spec.settings = {
-        github_app_token_scope_repos: ["owner/project", "owner1/project1"]
+        github_app_token_scope_repos: ["owner/project", "owner1/project1"],
       };
     }
     expect(() => repository.validate()).not.toThrow();
@@ -86,12 +86,12 @@ describe("Repository", () => {
         user: "bot",
         secret: {
           name: "my-secret",
-          key: "repo-secret"
+          key: "repo-secret",
         },
         webhook_secret: {
           name: "my-secret",
-          key: "webhook-secret"
-        }
+          key: "webhook-secret",
+        },
       };
     }
     expect(() => repository.validate()).not.toThrow();

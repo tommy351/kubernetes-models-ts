@@ -5,7 +5,7 @@ import { getClassName } from "./string.js";
 export function mergeOpenAPISpecs<
   T extends {
     definitions?: Record<string, unknown>;
-  }
+  },
 >(specs: readonly T[]): T {
   let result: T = {} as T;
 
@@ -14,8 +14,8 @@ export function mergeOpenAPISpecs<
       ...spec,
       definitions: {
         ...result.definitions,
-        ...spec.definitions
-      }
+        ...spec.definitions,
+      },
     };
   }
 

@@ -6,7 +6,7 @@ import {
   type GroupVersionKind,
   writeOutputFiles,
   type Schema,
-  getAPIVersion
+  getAPIVersion,
 } from "@kubernetes-models/generate";
 import generateDefinitions from "./generators/definition.js";
 import generateAliases from "./generators/alias.js";
@@ -63,15 +63,15 @@ function formatSchema(schema: Schema): Schema {
         ...schema,
         properties: mapValues(properties, (prop) => formatSchema(prop)),
         ...(additionalProperties && {
-          additionalProperties: formatSchema(additionalProperties)
-        })
+          additionalProperties: formatSchema(additionalProperties),
+        }),
       };
     }
 
     case "array":
       return {
         ...schema,
-        ...(schema.items && { items: formatSchema(schema.items) })
+        ...(schema.items && { items: formatSchema(schema.items) }),
       };
   }
 
@@ -80,7 +80,7 @@ function formatSchema(schema: Schema): Schema {
 
 function generateDefinition(
   gvk: GroupVersionKind,
-  validation: CustomResourceDefinitionValidation
+  validation: CustomResourceDefinitionValidation,
 ): Definition {
   const {
     properties = {},
@@ -93,16 +93,16 @@ function generateDefinition(
     apiVersion: {
       ...properties.apiVersion,
       type: "string",
-      enum: [getAPIVersion(gvk)]
+      enum: [getAPIVersion(gvk)],
     },
     kind: {
       ...properties.kind,
       type: "string",
-      enum: [gvk.kind]
+      enum: [gvk.kind],
     },
     metadata: {
-      $ref: "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#"
-    }
+      $ref: "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta#",
+    },
   };
 
   schema.required = [...new Set([...required, "apiVersion", "kind"])];
@@ -110,7 +110,7 @@ function generateDefinition(
   return {
     gvk: [gvk],
     schemaId: `${gvk.group}.${gvk.version}.${gvk.kind}`,
-    schema
+    schema,
   };
 }
 
@@ -137,7 +137,7 @@ function dedupeDefinitions(definitions: readonly Definition[]): Definition[] {
 const generator = composeGenerators([
   generateDefinitions,
   generateSchemas,
-  generateAliases
+  generateAliases,
 ]);
 
 export interface GenerateOptions {
@@ -148,14 +148,14 @@ export interface GenerateOptions {
 
 export async function generate(options: GenerateOptions): Promise<void> {
   const data: CustomResourceDefinition[] = parseAllDocuments(options.input, {
-    version: options.yamlVersion ?? "1.2"
+    version: options.yamlVersion ?? "1.2",
   })
     .map((doc) => doc.toJSON())
     .filter((x) => x != null && typeof x === "object")
     .filter(({ apiVersion }: { apiVersion: string }) =>
       ["apiextensions.k8s.io/v1beta1", "apiextensions.k8s.io/v1"].includes(
-        apiVersion
-      )
+        apiVersion,
+      ),
     )
     .filter(({ kind }) => kind === "CustomResourceDefinition");
   const definitions: Definition[] = [];
@@ -170,7 +170,7 @@ export async function generate(options: GenerateOptions): Promise<void> {
         const gvk = {
           group,
           version: version.name,
-          kind
+          kind,
         };
 
         if (validation) {
@@ -182,7 +182,7 @@ export async function generate(options: GenerateOptions): Promise<void> {
       const gvk = {
         group,
         kind,
-        version: crd.spec.version
+        version: crd.spec.version,
       };
 
       if (validation) {

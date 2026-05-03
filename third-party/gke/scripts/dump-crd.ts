@@ -21,7 +21,7 @@ const CRDS: readonly string[] = [
   "serviceimportconfigs.net.gke.io",
   "serviceimports.net.gke.io",
   "servicenetworkendpointgroups.networking.gke.io",
-  "updateinfos.nodemanagement.gke.io"
+  "updateinfos.nodemanagement.gke.io",
 ];
 
 const CRD_DIR = fileURLToPath(new URL("../crd", import.meta.url));
@@ -31,9 +31,9 @@ function formatCRD(data: any): any {
     apiVersion: data.apiVersion,
     kind: data.kind,
     metadata: {
-      name: data.metadata.name
+      name: data.metadata.name,
     },
-    spec: data.spec
+    spec: data.spec,
   };
 }
 

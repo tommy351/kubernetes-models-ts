@@ -7,18 +7,18 @@ import { HTTPRoute } from "../gen/policy.linkerd.io/v1beta3/HTTPRoute.js";
 describe("ServiceProfile", () => {
   const profile = new ServiceProfile({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       routes: [
         {
           name: "test",
           condition: {
-            method: "GET"
-          }
-        }
-      ]
-    }
+            method: "GET",
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -39,10 +39,10 @@ describe("ServiceProfile", () => {
         {
           name: "test",
           condition: {
-            method: "GET"
-          }
-        }
-      ]
+            method: "GET",
+          },
+        },
+      ],
     });
   });
 
@@ -51,18 +51,18 @@ describe("ServiceProfile", () => {
       apiVersion: "linkerd.io/v1alpha2",
       kind: "ServiceProfile",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         routes: [
           {
             name: "test",
             condition: {
-              method: "GET"
-            }
-          }
-        ]
-      }
+              method: "GET",
+            },
+          },
+        ],
+      },
     });
   });
 });
@@ -70,17 +70,17 @@ describe("ServiceProfile", () => {
 describe("Link", () => {
   const link = new Link({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
-      targetClusterName: "test"
-    }
+      targetClusterName: "test",
+    },
   });
 
   it("should set apiVersion", () => {
     expect(link).toHaveProperty(
       "apiVersion",
-      "multicluster.linkerd.io/v1alpha1"
+      "multicluster.linkerd.io/v1alpha1",
     );
   });
 
@@ -94,7 +94,7 @@ describe("Link", () => {
 
   it("should set spec", () => {
     expect(link.spec).toEqual({
-      targetClusterName: "test"
+      targetClusterName: "test",
     });
   });
 
@@ -103,11 +103,11 @@ describe("Link", () => {
       apiVersion: "multicluster.linkerd.io/v1alpha1",
       kind: "Link",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
-        targetClusterName: "test"
-      }
+        targetClusterName: "test",
+      },
     });
   });
 });
@@ -115,15 +115,15 @@ describe("Link", () => {
 describe("HTTPRoute", () => {
   const route = new HTTPRoute({
     metadata: {
-      name: "test"
+      name: "test",
     },
     spec: {
       rules: [
         {
-          matches: [{ method: "GET" }]
-        }
-      ]
-    }
+          matches: [{ method: "GET" }],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -142,9 +142,9 @@ describe("HTTPRoute", () => {
     expect(route.spec).toEqual({
       rules: [
         {
-          matches: [{ method: "GET" }]
-        }
-      ]
+          matches: [{ method: "GET" }],
+        },
+      ],
     });
   });
 
@@ -153,15 +153,15 @@ describe("HTTPRoute", () => {
       apiVersion: "policy.linkerd.io/v1beta3",
       kind: "HTTPRoute",
       metadata: {
-        name: "test"
+        name: "test",
       },
       spec: {
         rules: [
           {
-            matches: [{ method: "GET" }]
-          }
-        ]
-      }
+            matches: [{ method: "GET" }],
+          },
+        ],
+      },
     });
   });
 });

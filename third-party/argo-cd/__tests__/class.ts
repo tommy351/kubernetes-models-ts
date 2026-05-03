@@ -6,20 +6,20 @@ import { AppProject } from "../gen/argoproj.io/v1alpha1/AppProject.js";
 describe("Application", () => {
   const app = new Application({
     metadata: {
-      name: "guestbook"
+      name: "guestbook",
     },
     spec: {
       project: "default",
       source: {
         repoURL: "https://github.com/argoproj/argocd-example-apps.git",
         targetRevision: "HEAD",
-        path: "guestbook"
+        path: "guestbook",
       },
       destination: {
         server: "https://kubernetes.default.svc",
-        namespace: "guestbook"
-      }
-    }
+        namespace: "guestbook",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -39,20 +39,20 @@ describe("Application", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "Application",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
         project: "default",
         source: {
           repoURL: "https://github.com/argoproj/argocd-example-apps.git",
           targetRevision: "HEAD",
-          path: "guestbook"
+          path: "guestbook",
         },
         destination: {
           server: "https://kubernetes.default.svc",
-          namespace: "guestbook"
-        }
-      }
+          namespace: "guestbook",
+        },
+      },
     });
   });
 });
@@ -60,7 +60,7 @@ describe("Application", () => {
 describe("ApplicationSet", () => {
   const app = new ApplicationSet({
     metadata: {
-      name: "guestbook"
+      name: "guestbook",
     },
     spec: {
       generators: [
@@ -69,27 +69,27 @@ describe("ApplicationSet", () => {
             elements: [
               {
                 cluster: "engineering-dev",
-                url: "https://1.2.3.4"
-              }
-            ]
-          }
-        }
+                url: "https://1.2.3.4",
+              },
+            ],
+          },
+        },
       ],
       template: {
         metadata: {
-          name: "{{cluster}}-guestbook"
+          name: "{{cluster}}-guestbook",
         },
         spec: {
           project: "default",
           source: {
-            repoURL: "https://github.com/argoproj/argo-cd.git"
+            repoURL: "https://github.com/argoproj/argo-cd.git",
           },
           destination: {
-            server: "{{url}}"
-          }
-        }
-      }
-    }
+            server: "{{url}}",
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -109,7 +109,7 @@ describe("ApplicationSet", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "ApplicationSet",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
         generators: [
@@ -118,27 +118,27 @@ describe("ApplicationSet", () => {
               elements: [
                 {
                   cluster: "engineering-dev",
-                  url: "https://1.2.3.4"
-                }
-              ]
-            }
-          }
+                  url: "https://1.2.3.4",
+                },
+              ],
+            },
+          },
         ],
         template: {
           metadata: {
-            name: "{{cluster}}-guestbook"
+            name: "{{cluster}}-guestbook",
           },
           spec: {
             project: "default",
             source: {
-              repoURL: "https://github.com/argoproj/argo-cd.git"
+              repoURL: "https://github.com/argoproj/argo-cd.git",
             },
             destination: {
-              server: "{{url}}"
-            }
-          }
-        }
-      }
+              server: "{{url}}",
+            },
+          },
+        },
+      },
     });
   });
 });
@@ -146,11 +146,11 @@ describe("ApplicationSet", () => {
 describe("AppProject", () => {
   const app = new AppProject({
     metadata: {
-      name: "guestbook"
+      name: "guestbook",
     },
     spec: {
-      description: "Example project"
-    }
+      description: "Example project",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -170,11 +170,11 @@ describe("AppProject", () => {
       apiVersion: "argoproj.io/v1alpha1",
       kind: "AppProject",
       metadata: {
-        name: "guestbook"
+        name: "guestbook",
       },
       spec: {
-        description: "Example project"
-      }
+        description: "Example project",
+      },
     });
   });
 });

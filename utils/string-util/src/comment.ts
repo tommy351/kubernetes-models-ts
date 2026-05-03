@@ -1,6 +1,6 @@
 export function formatComment(
   content: string,
-  props: { [key: string]: boolean } = {}
+  props: { [key: string]: boolean } = {},
 ): string {
   let output = "/**\n";
 

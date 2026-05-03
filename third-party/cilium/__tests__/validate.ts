@@ -7,29 +7,29 @@ describe("CiliumLocalRedirectPolicy", () => {
     it("should pass", () => {
       const lrp = new CiliumLocalRedirectPolicy({
         metadata: {
-          name: "lrp"
+          name: "lrp",
         },
         spec: {
           redirectFrontend: {
             serviceMatcher: {
               serviceName: "my-service",
-              namespace: "default"
-            }
+              namespace: "default",
+            },
           },
           redirectBackend: {
             localEndpointSelector: {
               matchLabels: {
-                name: "proxy"
-              }
+                name: "proxy",
+              },
             },
             toPorts: [
               {
                 port: "8080",
-                protocol: "TCP"
-              }
-            ]
-          }
-        }
+                protocol: "TCP",
+              },
+            ],
+          },
+        },
       });
 
       expect(() => lrp.validate()).not.toThrow();
@@ -40,20 +40,20 @@ describe("CiliumLocalRedirectPolicy", () => {
     it("should throw an error", () => {
       const lrp = new CiliumLocalRedirectPolicy({
         metadata: {
-          name: "lrp"
+          name: "lrp",
         },
         spec: {
           // @ts-expect-error
           redirectFrontend: {},
           redirectBackend: {
             localEndpointSelector: {},
-            toPorts: []
-          }
-        }
+            toPorts: [],
+          },
+        },
       });
 
       expect(() => lrp.validate()).toThrow(
-        `data/spec/redirectFrontend must have required property addressMatcher, data/spec/redirectFrontend must have required property serviceMatcher, data/spec/redirectFrontend must match exactly one schema in "oneOf"`
+        `data/spec/redirectFrontend must have required property addressMatcher, data/spec/redirectFrontend must have required property serviceMatcher, data/spec/redirectFrontend must match exactly one schema in "oneOf"`,
       );
     });
   });
@@ -65,8 +65,8 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       const policy = new CiliumClusterwideNetworkPolicy({
         metadata: { name: "test" },
         spec: {
-          endpointSelector: {}
-        }
+          endpointSelector: {},
+        },
       });
 
       expect(() => policy.validate()).not.toThrow();
@@ -78,8 +78,8 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       const policy = new CiliumClusterwideNetworkPolicy({
         metadata: { name: "test" },
         spec: {
-          nodeSelector: {}
-        }
+          nodeSelector: {},
+        },
       });
 
       expect(() => policy.validate()).not.toThrow();
@@ -92,12 +92,12 @@ describe("CiliumClusterwideNetworkPolicy", () => {
         metadata: { name: "test" },
         spec: {
           endpointSelector: {},
-          nodeSelector: {}
-        }
+          nodeSelector: {},
+        },
       });
 
       expect(() => policy.validate()).toThrow(
-        `data/spec must match exactly one schema in "oneOf"`
+        `data/spec must match exactly one schema in "oneOf"`,
       );
     });
   });
@@ -107,11 +107,11 @@ describe("CiliumClusterwideNetworkPolicy", () => {
       const policy = new CiliumClusterwideNetworkPolicy({
         metadata: { name: "test" },
         // @ts-expect-error
-        spec: {}
+        spec: {},
       });
 
       expect(() => policy.validate()).toThrow(
-        `data/spec must have required property endpointSelector, data/spec must have required property nodeSelector, data/spec must match exactly one schema in "oneOf"`
+        `data/spec must have required property endpointSelector, data/spec must have required property nodeSelector, data/spec must match exactly one schema in "oneOf"`,
       );
     });
   });

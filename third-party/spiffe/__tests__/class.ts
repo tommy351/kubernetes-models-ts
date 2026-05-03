@@ -4,16 +4,16 @@ import { SpiffeID } from "../gen/spiffeid.spiffe.io/v1beta1/SpiffeID.js";
 describe("SpiffeID", () => {
   const id = new SpiffeID({
     metadata: {
-      name: "test-id"
+      name: "test-id",
     },
     spec: {
       parentId: "spiffe://example.org/spire/server",
       spiffeId: "spiffe://example.org/test",
       selector: {
         namespace: "default",
-        podName: "test-pod"
-      }
-    }
+        podName: "test-pod",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -33,16 +33,16 @@ describe("SpiffeID", () => {
       apiVersion: "spiffeid.spiffe.io/v1beta1",
       kind: "SpiffeID",
       metadata: {
-        name: "test-id"
+        name: "test-id",
       },
       spec: {
         parentId: "spiffe://example.org/spire/server",
         spiffeId: "spiffe://example.org/test",
         selector: {
           namespace: "default",
-          podName: "test-pod"
-        }
-      }
+          podName: "test-pod",
+        },
+      },
     });
   });
 });

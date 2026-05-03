@@ -4,14 +4,14 @@ import { Cluster } from "../gen/postgresql.cnpg.io/v1/Cluster.js";
 describe("Application", () => {
   const cluster = new Cluster({
     metadata: {
-      name: "cluster-example"
+      name: "cluster-example",
     },
     spec: {
       instances: 3,
       storage: {
-        size: "1Gi"
-      }
-    }
+        size: "1Gi",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -31,14 +31,14 @@ describe("Application", () => {
       apiVersion: "postgresql.cnpg.io/v1",
       kind: "Cluster",
       metadata: {
-        name: "cluster-example"
+        name: "cluster-example",
       },
       spec: {
         instances: 3,
         storage: {
-          size: "1Gi"
-        }
-      }
+          size: "1Gi",
+        },
+      },
     });
   });
 });

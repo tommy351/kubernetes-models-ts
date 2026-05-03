@@ -61,7 +61,7 @@ function allowNull(schema: Schema): Schema {
 
   return {
     ...schema,
-    properties: newProps
+    properties: newProps,
   };
 }
 
@@ -94,13 +94,13 @@ function setExclusiveNumber(schema: Schema): Schema {
       : { exclusiveMinimum, minimum }),
     ...(exclusiveMaximum === true
       ? { exclusiveMaximum: maximum }
-      : { exclusiveMaximum, maximum })
+      : { exclusiveMaximum, maximum }),
   };
 }
 
 function doTransformSchema(
   schema: Schema,
-  transformers: readonly SchemaTransformer[]
+  transformers: readonly SchemaTransformer[],
 ): Schema {
   const output: Schema = {};
 
@@ -128,7 +128,7 @@ function doTransformSchema(
  */
 export function transformSchema(
   schema: Schema,
-  transformers: readonly SchemaTransformer[] = []
+  transformers: readonly SchemaTransformer[] = [],
 ): Schema {
   const output = doTransformSchema(schema, [
     omitDescription,
@@ -136,7 +136,7 @@ export function transformSchema(
     allowNull,
     uniqEnum,
     setExclusiveNumber,
-    ...transformers
+    ...transformers,
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -171,7 +171,7 @@ function splitSchema(ajv: Ajv, schema: Schema): void {
   if (schema.additionalProperties) {
     schema.additionalProperties = addChildSchema(
       ajv,
-      schema.additionalProperties
+      schema.additionalProperties,
     );
   }
 
@@ -228,7 +228,7 @@ function removeDirectives(ast: ParseResult<t.File>): void {
   traverse(ast, {
     Program(path) {
       path.node.directives = [];
-    }
+    },
   });
 }
 
@@ -239,7 +239,7 @@ function removeDefaultExport(ast: ParseResult<t.File>): void {
   traverse(ast, {
     ExportDefaultDeclaration(path) {
       path.remove();
-    }
+    },
   });
 }
 
@@ -249,7 +249,7 @@ function removeDefaultExport(ast: ParseResult<t.File>): void {
 function replaceValidateFunction(
   ast: ParseResult<t.File>,
   names: Map<string, string>,
-  refs: Record<string, string>
+  refs: Record<string, string>,
 ): void {
   traverse(ast, {
     FunctionDeclaration(path) {
@@ -266,13 +266,13 @@ function replaceValidateFunction(
           [
             t.importSpecifier(
               t.identifier(path.node.id.name),
-              t.identifier("validate")
-            )
+              t.identifier("validate"),
+            ),
           ],
-          t.stringLiteral(ref)
-        )
+          t.stringLiteral(ref),
+        ),
       );
-    }
+    },
   });
 }
 
@@ -309,13 +309,13 @@ function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
             [
               init.property.name === "default"
                 ? t.importDefaultSpecifier(id)
-                : t.importSpecifier(id, init.property)
+                : t.importSpecifier(id, init.property),
             ],
             t.stringLiteral(
               "@kubernetes-models/validate/runtime/" +
-                importPath.substring(AJV_RUNTIME_PREFIX.length)
-            )
-          )
+                importPath.substring(AJV_RUNTIME_PREFIX.length),
+            ),
+          ),
         );
       }
 
@@ -328,7 +328,7 @@ function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
       } else {
         path.remove();
       }
-    }
+    },
   });
 }
 
@@ -355,23 +355,23 @@ function replaceFormatRequire(ast: ParseResult<t.File>): void {
               [
                 t.importSpecifier(
                   t.identifier("formats"),
-                  t.identifier("formats")
-                )
+                  t.identifier("formats"),
+                ),
               ],
-              t.stringLiteral("@kubernetes-models/validate")
-            )
+              t.stringLiteral("@kubernetes-models/validate"),
+            ),
           );
         }
 
         path.replaceWith(t.identifier("formats"));
       }
-    }
+    },
   });
 }
 
 export async function compileSchema(
   schema: Schema,
-  refs: Record<string, string>
+  refs: Record<string, string>,
 ): Promise<string> {
   const ajv = new Ajv({
     strictTypes: false,
@@ -380,15 +380,15 @@ export async function compileSchema(
       source: true,
       esm: true,
       formats: _`require("FORMATS")`,
-      lines: true
+      lines: true,
     },
     inlineRefs: false,
     keywords: [
       // example keyword is used by grafana-operator
-      "example"
+      "example",
     ],
     formats,
-    messages: false
+    messages: false,
   });
 
   // Override the default pattern keyword to support RE2.

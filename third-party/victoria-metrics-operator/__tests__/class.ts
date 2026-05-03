@@ -7,15 +7,15 @@ describe("VMCluster", () => {
     spec: {
       retentionPeriod: "12",
       vmstorage: {
-        replicaCount: 2
-      }
-    }
+        replicaCount: 2,
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(cluster).toHaveProperty(
       "apiVersion",
-      "operator.victoriametrics.com/v1beta1"
+      "operator.victoriametrics.com/v1beta1",
     );
   });
 
@@ -35,9 +35,9 @@ describe("VMCluster", () => {
       spec: {
         retentionPeriod: "12",
         vmstorage: {
-          replicaCount: 2
-        }
-      }
+          replicaCount: 2,
+        },
+      },
     });
   });
 });

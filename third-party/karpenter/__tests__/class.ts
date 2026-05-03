@@ -8,8 +8,8 @@ describe("EC2NodeClass", () => {
     spec: {
       amiFamily: "AL2",
       subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
-      securityGroupSelectorTerms: [{ name: "test" }]
-    }
+      securityGroupSelectorTerms: [{ name: "test" }],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -36,8 +36,8 @@ describe("EC2NodeClass", () => {
       spec: {
         amiFamily: "AL2",
         subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
-        securityGroupSelectorTerms: [{ name: "test" }]
-      }
+        securityGroupSelectorTerms: [{ name: "test" }],
+      },
     });
   });
 });
@@ -47,16 +47,16 @@ describe("NodeClaim", () => {
     metadata: { name: "test" },
     spec: {
       nodeClassRef: {
-        name: "test"
+        name: "test",
       },
       requirements: [
         {
           key: "karpenter.sh/instance-type",
           operator: "In",
-          values: ["m5.large"]
-        }
-      ]
-    }
+          values: ["m5.large"],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -82,16 +82,16 @@ describe("NodeClaim", () => {
       metadata: { name: "test" },
       spec: {
         nodeClassRef: {
-          name: "test"
+          name: "test",
         },
         requirements: [
           {
             key: "karpenter.sh/instance-type",
             operator: "In",
-            values: ["m5.large"]
-          }
-        ]
-      }
+            values: ["m5.large"],
+          },
+        ],
+      },
     });
   });
 });
@@ -107,12 +107,12 @@ describe("NodePool", () => {
             {
               key: "karpenter.sh/instance-type",
               operator: "In",
-              values: ["m5.large"]
-            }
-          ]
-        }
-      }
-    }
+              values: ["m5.large"],
+            },
+          ],
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -144,12 +144,12 @@ describe("NodePool", () => {
               {
                 key: "karpenter.sh/instance-type",
                 operator: "In",
-                values: ["m5.large"]
-              }
-            ]
-          }
-        }
-      }
+                values: ["m5.large"],
+              },
+            ],
+          },
+        },
+      },
     });
   });
 });

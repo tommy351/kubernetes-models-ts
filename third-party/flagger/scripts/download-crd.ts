@@ -8,7 +8,7 @@ const VERSION = "1.31.0";
 
 const outputPath = fileURLToPath(new URL("../crds/crd.yaml", import.meta.url));
 const content = await readInput(
-  `https://raw.githubusercontent.com/fluxcd/flagger/v${VERSION}/artifacts/flagger/crd.yaml`
+  `https://raw.githubusercontent.com/fluxcd/flagger/v${VERSION}/artifacts/flagger/crd.yaml`,
 );
 const manifests: any[] = yaml.loadAll(content);
 

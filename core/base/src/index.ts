@@ -2,10 +2,10 @@ export {
   Model,
   type ModelData,
   type ModelConstructor,
-  setValidateFunc
+  setValidateFunc,
 } from "./model.js";
 export {
   type TypeMeta,
   type TypeMetaGuard,
-  createTypeMetaGuard
+  createTypeMetaGuard,
 } from "./meta.js";

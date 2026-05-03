@@ -11,19 +11,19 @@ describe("Jaeger", () => {
         resources: {
           limits: {
             cpu: "100m",
-            memory: "128Mi"
-          }
-        }
+            memory: "128Mi",
+          },
+        },
       },
       storage: {
         type: "elasticsearch",
         options: {
           es: {
-            "server-urls": "http://elasticsearch:9200"
-          }
-        }
-      }
-    }
+            "server-urls": "http://elasticsearch:9200",
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -50,19 +50,19 @@ describe("Jaeger", () => {
           resources: {
             limits: {
               cpu: "100m",
-              memory: "128Mi"
-            }
-          }
+              memory: "128Mi",
+            },
+          },
         },
         storage: {
           type: "elasticsearch",
           options: {
             es: {
-              "server-urls": "http://elasticsearch:9200"
-            }
-          }
-        }
-      }
+              "server-urls": "http://elasticsearch:9200",
+            },
+          },
+        },
+      },
     });
   });
 });

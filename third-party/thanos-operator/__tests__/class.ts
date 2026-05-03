@@ -7,14 +7,14 @@ describe("Thanos", () => {
     spec: {
       query: {},
       rule: {},
-      storeGateway: {}
-    }
+      storeGateway: {},
+    },
   });
 
   it("should set apiVersion", () => {
     expect(thanos).toHaveProperty(
       "apiVersion",
-      "monitoring.banzaicloud.io/v1alpha1"
+      "monitoring.banzaicloud.io/v1alpha1",
     );
   });
 
@@ -34,8 +34,8 @@ describe("Thanos", () => {
       spec: {
         query: {},
         rule: {},
-        storeGateway: {}
-      }
+        storeGateway: {},
+      },
     });
   });
 });

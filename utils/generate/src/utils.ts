@@ -35,7 +35,7 @@ export function composeGenerators(generators: readonly Generator[]): Generator {
 
 export async function writeOutputFiles(
   outDir: string,
-  files: readonly OutputFile[]
+  files: readonly OutputFile[],
 ): Promise<void> {
   for (const f of files) {
     console.log("Writing:", f.path);

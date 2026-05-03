@@ -7,15 +7,15 @@ describe("Redis", () => {
     metadata: { name: "example" },
     spec: {
       kubernetesConfig: {
-        image: "quay.io/opstree/redis:v7.0.5"
-      }
-    }
+        image: "quay.io/opstree/redis:v7.0.5",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(redis).toHaveProperty(
       "apiVersion",
-      "redis.redis.opstreelabs.in/v1beta1"
+      "redis.redis.opstreelabs.in/v1beta1",
     );
   });
 
@@ -34,9 +34,9 @@ describe("Redis", () => {
       metadata: { name: "example" },
       spec: {
         kubernetesConfig: {
-          image: "quay.io/opstree/redis:v7.0.5"
-        }
-      }
+          image: "quay.io/opstree/redis:v7.0.5",
+        },
+      },
     });
   });
 });
@@ -49,15 +49,15 @@ describe("RedisCluster", () => {
       clusterVersion: "v7",
       persistenceEnabled: true,
       kubernetesConfig: {
-        image: "quay.io/opstree/redis:v7.0.5"
-      }
-    }
+        image: "quay.io/opstree/redis:v7.0.5",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(cluster).toHaveProperty(
       "apiVersion",
-      "redis.redis.opstreelabs.in/v1beta1"
+      "redis.redis.opstreelabs.in/v1beta1",
     );
   });
 
@@ -79,9 +79,9 @@ describe("RedisCluster", () => {
         clusterVersion: "v7",
         persistenceEnabled: true,
         kubernetesConfig: {
-          image: "quay.io/opstree/redis:v7.0.5"
-        }
-      }
+          image: "quay.io/opstree/redis:v7.0.5",
+        },
+      },
     });
   });
 });

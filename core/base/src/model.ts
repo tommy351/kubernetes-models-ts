@@ -1,7 +1,7 @@
 import { isPlainObject } from "es-toolkit/predicate";
 import {
   type ValidateFunc,
-  runValidateFunc
+  runValidateFunc,
 } from "@kubernetes-models/validate";
 import { type TypeMeta } from "./meta.js";
 
@@ -62,7 +62,7 @@ export class Model<T> {
 
 export function setValidateFunc<T>(
   ctor: ModelConstructor<T>,
-  fn: ValidateFunc<T>
+  fn: ValidateFunc<T>,
 ): void {
   ctor.prototype.validate = function () {
     runValidateFunc(fn, this);

@@ -11,7 +11,7 @@ const output: any[] = [];
 
 for (const version of VERSIONS) {
   const content = await readInput(
-    `https://github.com/envoyproxy/gateway/releases/download/v${version}/install.yaml`
+    `https://github.com/envoyproxy/gateway/releases/download/v${version}/install.yaml`,
   );
   const manifests: any[] = yaml.loadAll(content);
 

@@ -4,21 +4,21 @@ import { RabbitmqCluster } from "../gen/rabbitmq.com/v1beta1/RabbitmqCluster.js"
 describe("RabbitmqCluster", () => {
   const cluster = new RabbitmqCluster({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       replicas: 2,
       service: {
-        type: "ClusterIP"
+        type: "ClusterIP",
       },
       persistence: {
         storageClassName: "standard",
-        storage: "10Gi"
+        storage: "10Gi",
       },
       rabbitmq: {
-        additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
-      }
-    }
+        additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -38,21 +38,21 @@ describe("RabbitmqCluster", () => {
       apiVersion: "rabbitmq.com/v1beta1",
       kind: "RabbitmqCluster",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         replicas: 2,
         service: {
-          type: "ClusterIP"
+          type: "ClusterIP",
         },
         persistence: {
           storageClassName: "standard",
-          storage: "10Gi"
+          storage: "10Gi",
         },
         rabbitmq: {
-          additionalPlugins: ["rabbitmq_peer_discovery_k8s"]
-        }
-      }
+          additionalPlugins: ["rabbitmq_peer_discovery_k8s"],
+        },
+      },
     });
   });
 });

@@ -15,8 +15,8 @@ export default [
       "**/coverage/",
       "**/node_modules/",
       "**/gen/",
-      "examples/"
-    ]
+      "examples/",
+    ],
   },
   js.configs.recommended,
   ...tsConfigs.recommendedTypeChecked,
@@ -27,18 +27,18 @@ export default [
       sourceType: "module",
       parserOptions: {
         projectService: {
-          allowDefaultProject: [".vitest/setup.ts"]
+          allowDefaultProject: [".vitest/setup.ts"],
         },
-        tsconfigRootDir: fileURLToPath(new URL("./", import.meta.url))
+        tsconfigRootDir: fileURLToPath(new URL("./", import.meta.url)),
       },
       globals: {
-        ...globals.node
-      }
-    }
+        ...globals.node,
+      },
+    },
   },
   {
     files: ["**/*.{js,cjs,mjs}"],
-    ...tsConfigs.disableTypeChecked
+    ...tsConfigs.disableTypeChecked,
   },
   importX.flatConfigs.recommended,
   importX.flatConfigs.typescript,
@@ -47,7 +47,7 @@ export default [
     rules: {
       "n/no-unsupported-features/es-syntax": [
         "error",
-        { ignores: ["modules"] }
+        { ignores: ["modules"] },
       ],
       "n/no-missing-import": "off",
       "n/no-unpublished-bin": "off",
@@ -56,12 +56,12 @@ export default [
         {
           name: "lodash",
           message:
-            "Do not use lodash because it doesn't support ES modules. Please use es-toolkit instead."
+            "Do not use lodash because it doesn't support ES modules. Please use es-toolkit instead.",
         },
         {
           name: "lodash-es",
-          message: "Please use es-toolkit instead."
-        }
+          message: "Please use es-toolkit instead.",
+        },
       ],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-parameter-properties": "off",
@@ -72,10 +72,10 @@ export default [
       "@typescript-eslint/no-unsafe-argument": "off",
       "@typescript-eslint/explicit-function-return-type": [
         "warn",
-        { allowExpressions: true }
+        { allowExpressions: true },
       ],
-      "n/prefer-node-protocol": "error"
-    }
+      "n/prefer-node-protocol": "error",
+    },
   },
   {
     files: ["**/__tests__/**/*.{js,mjs,ts}"],
@@ -83,14 +83,14 @@ export default [
     rules: {
       ...vitest.configs.recommended.rules,
       "@typescript-eslint/ban-ts-comment": "off",
-      "n/no-unpublished-import": "off"
-    }
+      "n/no-unpublished-import": "off",
+    },
   },
   {
     files: ["first-party/*/scripts/**/*.ts", "third-party/*/scripts/**/*.ts"],
     rules: {
-      "n/no-unpublished-import": "off"
-    }
+      "n/no-unpublished-import": "off",
+    },
   },
-  prettier
+  prettier,
 ];

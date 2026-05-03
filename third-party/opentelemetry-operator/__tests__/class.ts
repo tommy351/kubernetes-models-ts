@@ -15,25 +15,25 @@ describe("OpenTelemetryCollector", () => {
           otlp: {
             protocols: {
               grpc: {},
-              http: {}
-            }
-          }
+              http: {},
+            },
+          },
         },
         exporters: {
           prometheus: {
-            endpoint: "0.0.0.0:8889"
-          }
+            endpoint: "0.0.0.0:8889",
+          },
         },
         service: {
           pipelines: {
             metrics: {
               receivers: ["otlp"],
-              exporters: ["prometheus"]
-            }
-          }
-        }
-      }
-    }
+              exporters: ["prometheus"],
+            },
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -63,25 +63,25 @@ describe("OpenTelemetryCollector", () => {
             otlp: {
               protocols: {
                 grpc: {},
-                http: {}
-              }
-            }
+                http: {},
+              },
+            },
           },
           exporters: {
             prometheus: {
-              endpoint: "0.0.0.0:8889"
-            }
+              endpoint: "0.0.0.0:8889",
+            },
           },
           service: {
             pipelines: {
               metrics: {
                 receivers: ["otlp"],
-                exporters: ["prometheus"]
-              }
-            }
-          }
-        }
-      }
+                exporters: ["prometheus"],
+              },
+            },
+          },
+        },
+      },
     });
   });
 });
@@ -95,27 +95,27 @@ describe("Instrumentation", () => {
         metadata: { name: "my-instrumentation" },
         spec: {
           exporter: {
-            endpoint: "http://my-collector-collector:4318"
+            endpoint: "http://my-collector-collector:4318",
           },
           propagators: ["tracecontext", "baggage"],
           sampler: {
             type: "parentbased_traceidratio",
-            argument: "0.25"
+            argument: "0.25",
           },
           nodejs: {
-            image: "auto"
+            image: "auto",
           },
           java: {
-            image: "auto"
-          }
-        }
+            image: "auto",
+          },
+        },
       });
     });
 
     it("should set apiVersion", () => {
       expect(instrumentation).toHaveProperty(
         "apiVersion",
-        "opentelemetry.io/v1alpha1"
+        "opentelemetry.io/v1alpha1",
       );
     });
 
@@ -134,20 +134,20 @@ describe("Instrumentation", () => {
         metadata: { name: "my-instrumentation" },
         spec: {
           exporter: {
-            endpoint: "http://my-collector-collector:4318"
+            endpoint: "http://my-collector-collector:4318",
           },
           propagators: ["tracecontext", "baggage"],
           sampler: {
             type: "parentbased_traceidratio",
-            argument: "0.25"
+            argument: "0.25",
           },
           nodejs: {
-            image: "auto"
+            image: "auto",
           },
           java: {
-            image: "auto"
-          }
-        }
+            image: "auto",
+          },
+        },
       });
     });
   });
@@ -158,45 +158,45 @@ describe("Instrumentation", () => {
         metadata: { name: "all-languages" },
         spec: {
           exporter: {
-            endpoint: "http://otel-collector:4317"
+            endpoint: "http://otel-collector:4317",
           },
           propagators: ["tracecontext", "baggage", "b3"],
           sampler: {
-            type: "always_on"
+            type: "always_on",
           },
           nodejs: {
-            image: "auto"
+            image: "auto",
           },
           python: {
-            image: "auto"
+            image: "auto",
           },
           java: {
             image: "auto",
             env: [
               {
                 name: "OTEL_JAVAAGENT_DEBUG",
-                value: "true"
-              }
-            ]
+                value: "true",
+              },
+            ],
           },
           dotnet: {
-            image: "auto"
+            image: "auto",
           },
           resource: {
             addK8sUIDAttributes: true,
             resourceAttributes: {
               "service.namespace": "monitoring",
-              "deployment.environment": "production"
-            }
-          }
-        }
+              "deployment.environment": "production",
+            },
+          },
+        },
       });
     });
 
     it("should set apiVersion", () => {
       expect(instrumentation).toHaveProperty(
         "apiVersion",
-        "opentelemetry.io/v1alpha1"
+        "opentelemetry.io/v1alpha1",
       );
     });
 
@@ -215,38 +215,38 @@ describe("Instrumentation", () => {
         metadata: { name: "all-languages" },
         spec: {
           exporter: {
-            endpoint: "http://otel-collector:4317"
+            endpoint: "http://otel-collector:4317",
           },
           propagators: ["tracecontext", "baggage", "b3"],
           sampler: {
-            type: "always_on"
+            type: "always_on",
           },
           nodejs: {
-            image: "auto"
+            image: "auto",
           },
           python: {
-            image: "auto"
+            image: "auto",
           },
           java: {
             image: "auto",
             env: [
               {
                 name: "OTEL_JAVAAGENT_DEBUG",
-                value: "true"
-              }
-            ]
+                value: "true",
+              },
+            ],
           },
           dotnet: {
-            image: "auto"
+            image: "auto",
           },
           resource: {
             addK8sUIDAttributes: true,
             resourceAttributes: {
               "service.namespace": "monitoring",
-              "deployment.environment": "production"
-            }
-          }
-        }
+              "deployment.environment": "production",
+            },
+          },
+        },
       });
     });
   });

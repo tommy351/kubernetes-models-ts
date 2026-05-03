@@ -10,17 +10,17 @@ describe("GrafanaAgent", () => {
       metrics: {
         instanceSelector: {
           matchLabels: {
-            agent: "grafana-agent-metrics"
-          }
-        }
-      }
-    }
+            agent: "grafana-agent-metrics",
+          },
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(agent).toHaveProperty(
       "apiVersion",
-      "monitoring.grafana.com/v1alpha1"
+      "monitoring.grafana.com/v1alpha1",
     );
   });
 
@@ -43,11 +43,11 @@ describe("GrafanaAgent", () => {
         metrics: {
           instanceSelector: {
             matchLabels: {
-              agent: "grafana-agent-metrics"
-            }
-          }
-        }
-      }
+              agent: "grafana-agent-metrics",
+            },
+          },
+        },
+      },
     });
   });
 });

@@ -12,14 +12,14 @@ void yargs(process.argv.slice(2))
           type: "string",
           default: process.cwd(),
           defaultDescription: "CWD",
-          description: "Current working directory."
+          description: "Current working directory.",
         })
         .option("include-hidden", {
           type: "boolean",
-          description: "Include hidden files in the export map."
+          description: "Include hidden files in the export map.",
         });
     },
-    build
+    build,
   )
   .command<PrePackArguments>(
     "prepack",
@@ -29,10 +29,10 @@ void yargs(process.argv.slice(2))
         type: "string",
         default: process.cwd(),
         defaultDescription: "CWD",
-        description: "Current working directory."
+        description: "Current working directory.",
       });
     },
-    prePack
+    prePack,
   )
   .demandCommand()
   .showHelpOnFail(false).argv;

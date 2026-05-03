@@ -8,16 +8,16 @@ describe("Elasticsearch", () => {
       version: "8.9.2",
       nodeSets: [
         {
-          name: "hello-world"
-        }
-      ]
-    }
+          name: "hello-world",
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
     expect(elasticsearch).toHaveProperty(
       "apiVersion",
-      "elasticsearch.k8s.elastic.co/v1"
+      "elasticsearch.k8s.elastic.co/v1",
     );
   });
 
@@ -38,10 +38,10 @@ describe("Elasticsearch", () => {
         version: "8.9.2",
         nodeSets: [
           {
-            name: "hello-world"
-          }
-        ]
-      }
+            name: "hello-world",
+          },
+        ],
+      },
     });
   });
 });

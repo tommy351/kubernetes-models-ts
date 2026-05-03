@@ -19,11 +19,11 @@ export async function prePack(args: PrePackArguments): Promise<void> {
         version: rootPkgJson.version,
         dependencies: rootPkgJson.dependencies,
         devDependencies: rootPkgJson.devDependencies,
-        peerDependencies: rootPkgJson.peerDependencies
+        peerDependencies: rootPkgJson.peerDependencies,
       },
       null,
-      2
-    )
+      2,
+    ),
   );
   console.log("Updated package.json dependencies");
 }

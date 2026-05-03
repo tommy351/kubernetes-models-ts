@@ -11,7 +11,7 @@ const ESM_EXT = ".js";
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
-    a[0].localeCompare(b[0])
+    a[0].localeCompare(b[0]),
   );
 
   return Object.fromEntries(entries) as T;
@@ -20,20 +20,20 @@ function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
 function generateExportEntry(name: string): Record<string, string> {
   return {
     types: name + DTS_EXT,
-    import: name + ESM_EXT
+    import: name + ESM_EXT,
   };
 }
 
 async function generateExportMap(
-  args: BuildArguments
+  args: BuildArguments,
 ): Promise<Record<string, unknown>> {
   const paths = await glob(["**/*.{js,ts}"], {
     cwd: join(args.cwd, "gen"),
-    ...(!args["include-hidden"] && { ignore: ["!_**/*"] })
+    ...(!args["include-hidden"] && { ignore: ["!_**/*"] }),
   });
 
   const exportMap: Record<string, unknown> = {
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
   };
 
   for (const path of paths) {
@@ -53,7 +53,7 @@ async function generateExportMap(
 
 async function compileDts(cwd: string): Promise<void> {
   const tscBin = fileURLToPath(
-    new URL("../node_modules/.bin/tsc", import.meta.url)
+    new URL("../node_modules/.bin/tsc", import.meta.url),
   );
 
   console.log("Generating declaration files");
@@ -63,7 +63,7 @@ async function compileDts(cwd: string): Promise<void> {
 async function writeJs({
   ast,
   module,
-  path
+  path,
 }: {
   ast: swc.Module;
   module: "es6" | "commonjs";
@@ -73,19 +73,19 @@ async function writeJs({
     jsc: {
       target: `es${ECMA_VERSION}`,
       externalHelpers: true,
-      loose: true
+      loose: true,
     },
-    module: { type: module }
+    module: { type: module },
   });
 
   const minifyResult = await swc.minify(transformResult.code, {
     compress: {
       toplevel: true,
-      ecma: ECMA_VERSION
+      ecma: ECMA_VERSION,
     },
     mangle: false,
     ecma: ECMA_VERSION,
-    module: module === "es6"
+    module: module === "es6",
   });
 
   await mkdir(dirname(path), { recursive: true });
@@ -115,8 +115,8 @@ function rewriteImportPath(ast: swc.Module, ext: string): swc.Module {
       source: {
         ...stmt.source,
         value: newValue,
-        raw: JSON.stringify(newValue)
-      }
+        raw: JSON.stringify(newValue),
+      },
     };
   }
 
@@ -140,7 +140,7 @@ async function compileJs(cwd: string): Promise<void> {
   const distDir = join(cwd, "dist");
   const srcPaths = await glob(["**/*.{js,ts}"], {
     cwd: genDir,
-    ignore: ["**/*.d.ts"]
+    ignore: ["**/*.d.ts"],
   });
 
   for (const path of srcPaths) {
@@ -151,13 +151,13 @@ async function compileJs(cwd: string): Promise<void> {
     console.log("Transforming:", `gen/${path}`);
 
     const ast = await swc.parseFile(srcPath, {
-      syntax: ext === ".ts" ? "typescript" : "ecmascript"
+      syntax: ext === ".ts" ? "typescript" : "ecmascript",
     });
 
     await writeJs({
       ast: rewriteImportPath(ast, ESM_EXT),
       module: "es6",
-      path: join(distDir, name + ESM_EXT)
+      path: join(distDir, name + ESM_EXT),
     });
   }
 }
@@ -193,14 +193,14 @@ async function copyDistFiles(cwd: string): Promise<void> {
 
 async function writePkgJson(args: BuildArguments): Promise<void> {
   const pkgJson = JSON.parse(
-    await readFile(join(args.cwd, "package.json"), "utf-8")
+    await readFile(join(args.cwd, "package.json"), "utf-8"),
   );
 
   pkgJson.exports = await generateExportMap(args);
 
   await writeFile(
     join(args.cwd, "dist/package.json"),
-    JSON.stringify(pkgJson, null, 2)
+    JSON.stringify(pkgJson, null, 2),
   );
 }
 

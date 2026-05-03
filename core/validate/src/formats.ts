@@ -15,10 +15,10 @@ const rBinarySI = /[KMGTPE]i/;
 const rDecimalSI = /(?:[YZEPTGMkhdcmunpfazy]|da)/;
 const rDecimalExponent = new RegExp(`[eE]${rSignedNumber.source}`);
 const rQuantitySuffix = new RegExp(
-  `(?:${rBinarySI.source}|${rDecimalSI.source}|${rDecimalExponent.source})?`
+  `(?:${rBinarySI.source}|${rDecimalSI.source}|${rDecimalExponent.source})?`,
 );
 const rQuantity = new RegExp(
-  `^${rSignedNumber.source}${rQuantitySuffix.source}$`
+  `^${rSignedNumber.source}${rQuantitySuffix.source}$`,
 );
 
 export const formats: Record<string, Format> = {
@@ -26,21 +26,21 @@ export const formats: Record<string, Format> = {
   ...draft2019Formats,
   byte: {
     type: "string",
-    validate: (value: string) => rBase64.test(value)
+    validate: (value: string) => rBase64.test(value),
   },
   quantity: {
     type: "string",
-    validate: rQuantity
+    validate: rQuantity,
   },
   // This format is used in Istio.
   string: {
     type: "string",
-    validate: (value: unknown) => typeof value === "string"
+    validate: (value: unknown) => typeof value === "string",
   },
   cidr: {
     type: "string",
-    validate: (value: string) => isCidr(value) !== 0
-  }
+    validate: (value: string) => isCidr(value) !== 0,
+  },
 };
 
 export function addFormats(ajv: Ajv): void {

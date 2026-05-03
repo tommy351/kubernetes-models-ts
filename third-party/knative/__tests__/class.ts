@@ -12,12 +12,12 @@ describe("Service", () => {
           containers: [
             {
               image: "gcr.io/knative-samples/helloworld-go",
-              ports: [{ containerPort: 8080 }]
-            }
-          ]
-        }
-      }
-    }
+              ports: [{ containerPort: 8080 }],
+            },
+          ],
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -44,12 +44,12 @@ describe("Service", () => {
             containers: [
               {
                 image: "gcr.io/knative-samples/helloworld-go",
-                ports: [{ containerPort: 8080 }]
-              }
-            ]
-          }
-        }
-      }
+                ports: [{ containerPort: 8080 }],
+              },
+            ],
+          },
+        },
+      },
     });
   });
 });
@@ -59,8 +59,8 @@ describe("Trigger", () => {
     metadata: {
       name: "cloudevents-trigger",
       annotations: {
-        "knative-eventing-injection": "enabled"
-      }
+        "knative-eventing-injection": "enabled",
+      },
     },
     spec: {
       broker: "example-broker",
@@ -68,10 +68,10 @@ describe("Trigger", () => {
         ref: {
           apiVersion: "serving.knative.dev/v1",
           kind: "Service",
-          name: "cloudevents-player"
-        }
-      }
-    }
+          name: "cloudevents-player",
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -93,8 +93,8 @@ describe("Trigger", () => {
       metadata: {
         name: "cloudevents-trigger",
         annotations: {
-          "knative-eventing-injection": "enabled"
-        }
+          "knative-eventing-injection": "enabled",
+        },
       },
       spec: {
         broker: "example-broker",
@@ -102,10 +102,10 @@ describe("Trigger", () => {
           ref: {
             apiVersion: "serving.knative.dev/v1",
             kind: "Service",
-            name: "cloudevents-player"
-          }
-        }
-      }
+            name: "cloudevents-player",
+          },
+        },
+      },
     });
   });
 });

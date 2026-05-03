@@ -11,13 +11,13 @@ describe("App", () => {
           git: {
             url: "https://github.com/vmware-tanzu/carvel-simple-app-on-kubernetes",
             ref: "origin/develop",
-            subPath: "config-step-2-template"
-          }
-        }
+            subPath: "config-step-2-template",
+          },
+        },
       ],
       template: [{ ytt: {} }],
-      deploy: [{ kapp: {} }]
-    }
+      deploy: [{ kapp: {} }],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -44,13 +44,13 @@ describe("App", () => {
             git: {
               url: "https://github.com/vmware-tanzu/carvel-simple-app-on-kubernetes",
               ref: "origin/develop",
-              subPath: "config-step-2-template"
-            }
-          }
+              subPath: "config-step-2-template",
+            },
+          },
         ],
         template: [{ ytt: {} }],
-        deploy: [{ kapp: {} }]
-      }
+        deploy: [{ kapp: {} }],
+      },
     });
   });
 });

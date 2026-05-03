@@ -3,7 +3,7 @@ import ValidationError from "./runtime/validation_error.js";
 import localizeEnMod from "ajv-i18n/localize/en/index.js";
 
 const localizeEn = localizeEnMod as unknown as (
-  errors?: ErrorObject[] | null
+  errors?: ErrorObject[] | null,
 ) => void;
 
 function generateErrorMessage(errors: ErrorObject[]): string {
@@ -21,7 +21,7 @@ export interface ValidateFunc<T> {
 
 export function runValidateFunc<T>(
   fn: ValidateFunc<T>,
-  data: unknown
+  data: unknown,
 ): asserts data is T {
   if (!fn(data) && fn.errors) {
     const errors = fn.errors;

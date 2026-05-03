@@ -5,11 +5,11 @@ import { HTTPProxy } from "../gen/projectcontour.io/v1/HTTPProxy.js";
 describe("IngressRoute", () => {
   const route = new IngressRoute({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       virtualhost: {
-        fqdn: "foo.example.com"
+        fqdn: "foo.example.com",
       },
       routes: [
         {
@@ -17,12 +17,12 @@ describe("IngressRoute", () => {
           services: [
             {
               name: "foo",
-              port: 80
-            }
-          ]
-        }
-      ]
-    }
+              port: 80,
+            },
+          ],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -42,11 +42,11 @@ describe("IngressRoute", () => {
       apiVersion: "contour.heptio.com/v1beta1",
       kind: "IngressRoute",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         virtualhost: {
-          fqdn: "foo.example.com"
+          fqdn: "foo.example.com",
         },
         routes: [
           {
@@ -54,12 +54,12 @@ describe("IngressRoute", () => {
             services: [
               {
                 name: "foo",
-                port: 80
-              }
-            ]
-          }
-        ]
-      }
+                port: 80,
+              },
+            ],
+          },
+        ],
+      },
     });
   });
 });
@@ -67,28 +67,28 @@ describe("IngressRoute", () => {
 describe("HTTPProxy", () => {
   const proxy = new HTTPProxy({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       virtualhost: {
-        fqdn: "foo.example.com"
+        fqdn: "foo.example.com",
       },
       routes: [
         {
           conditions: [
             {
-              prefix: "/"
-            }
+              prefix: "/",
+            },
           ],
           services: [
             {
               name: "foo",
-              port: 80
-            }
-          ]
-        }
-      ]
-    }
+              port: 80,
+            },
+          ],
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -108,28 +108,28 @@ describe("HTTPProxy", () => {
       apiVersion: "projectcontour.io/v1",
       kind: "HTTPProxy",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         virtualhost: {
-          fqdn: "foo.example.com"
+          fqdn: "foo.example.com",
         },
         routes: [
           {
             conditions: [
               {
-                prefix: "/"
-              }
+                prefix: "/",
+              },
             ],
             services: [
               {
                 name: "foo",
-                port: 80
-              }
-            ]
-          }
-        ]
-      }
+                port: 80,
+              },
+            ],
+          },
+        ],
+      },
     });
   });
 });

@@ -9,13 +9,13 @@ describe("K8ssandraCluster", () => {
         datacenters: [
           {
             metadata: {
-              name: "hello"
+              name: "hello",
             },
-            size: 3
-          }
-        ]
-      }
-    }
+            size: 3,
+          },
+        ],
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -40,13 +40,13 @@ describe("K8ssandraCluster", () => {
           datacenters: [
             {
               metadata: {
-                name: "hello"
+                name: "hello",
               },
-              size: 3
-            }
-          ]
-        }
-      }
+              size: 3,
+            },
+          ],
+        },
+      },
     });
   });
 });

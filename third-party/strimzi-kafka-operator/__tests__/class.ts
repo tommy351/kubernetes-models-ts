@@ -7,8 +7,8 @@ describe("Kafka", () => {
       name: "my-cluster",
       annotations: {
         "strimzi.io/node-pools": "enabled",
-        "strimzi.io/kraft": "enabled"
-      }
+        "strimzi.io/kraft": "enabled",
+      },
     },
     spec: {
       kafka: {
@@ -16,17 +16,17 @@ describe("Kafka", () => {
         metadataVersion: "4.0-IV3",
         listeners: [
           { name: "plain", port: 9092, type: "internal", tls: false },
-          { name: "tls", port: 9093, type: "internal", tls: true }
+          { name: "tls", port: 9093, type: "internal", tls: true },
         ],
         config: {
           "offsets.topic.replication.factor": 1,
           "transaction.state.log.replication.factor": 1,
           "transaction.state.log.min.isr": 1,
           "default.replication.factor": 1,
-          "min.insync.replicas": 1
-        }
-      }
-    }
+          "min.insync.replicas": 1,
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -49,8 +49,8 @@ describe("Kafka", () => {
         name: "my-cluster",
         annotations: {
           "strimzi.io/node-pools": "enabled",
-          "strimzi.io/kraft": "enabled"
-        }
+          "strimzi.io/kraft": "enabled",
+        },
       },
       spec: {
         kafka: {
@@ -58,17 +58,17 @@ describe("Kafka", () => {
           metadataVersion: "4.0-IV3",
           listeners: [
             { name: "plain", port: 9092, type: "internal", tls: false },
-            { name: "tls", port: 9093, type: "internal", tls: true }
+            { name: "tls", port: 9093, type: "internal", tls: true },
           ],
           config: {
             "offsets.topic.replication.factor": 1,
             "transaction.state.log.replication.factor": 1,
             "transaction.state.log.min.isr": 1,
             "default.replication.factor": 1,
-            "min.insync.replicas": 1
-          }
-        }
-      }
+            "min.insync.replicas": 1,
+          },
+        },
+      },
     });
   });
 });

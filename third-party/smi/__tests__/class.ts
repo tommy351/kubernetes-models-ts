@@ -8,15 +8,15 @@ describe("TrafficSplit", () => {
       service: "example",
       backends: [
         { service: "example-v1", weight: 90 },
-        { service: "example-v2", weight: 10 }
-      ]
-    }
+        { service: "example-v2", weight: 10 },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
     expect(repository).toHaveProperty(
       "apiVersion",
-      "split.smi-spec.io/v1alpha4"
+      "split.smi-spec.io/v1alpha4",
     );
   });
 
@@ -37,9 +37,9 @@ describe("TrafficSplit", () => {
         service: "example",
         backends: [
           { service: "example-v1", weight: 90 },
-          { service: "example-v2", weight: 10 }
-        ]
-      }
+          { service: "example-v2", weight: 10 },
+        ],
+      },
     });
   });
 });

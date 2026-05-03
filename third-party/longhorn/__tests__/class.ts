@@ -4,15 +4,15 @@ import { Backup } from "../gen/longhorn.io/v1beta1/Backup.js";
 describe("Application", () => {
   const backup = new Backup({
     metadata: {
-      name: "backup"
+      name: "backup",
     },
     spec: {
       backupMode: "incremental",
       snapshotName: "snapshot-name-example",
       labels: {
-        app: "test"
-      }
-    }
+        app: "test",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -32,15 +32,15 @@ describe("Application", () => {
       apiVersion: "longhorn.io/v1beta1",
       kind: "Backup",
       metadata: {
-        name: "backup"
+        name: "backup",
       },
       spec: {
         backupMode: "incremental",
         snapshotName: "snapshot-name-example",
         labels: {
-          app: "test"
-        }
-      }
+          app: "test",
+        },
+      },
     });
   });
 });

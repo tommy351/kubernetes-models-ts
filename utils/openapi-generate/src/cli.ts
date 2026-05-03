@@ -23,19 +23,19 @@ export async function run(): Promise<void> {
       type: "array",
       describe: "Path of the input file or URL",
       demandOption: true,
-      string: true
+      string: true,
     })
     .option("output", {
       type: "string",
       describe: "Path of output files",
-      demandOption: true
+      demandOption: true,
     })
     .parse();
 
   try {
     await generate({
       input: await readFiles(args.input),
-      outputPath: args.output
+      outputPath: args.output,
     });
   } catch (err) {
     console.error(err);

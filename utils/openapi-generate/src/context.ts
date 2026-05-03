@@ -19,7 +19,7 @@ export interface ContextOptions {
 
 export function buildContext(
   definitions: readonly Definition[],
-  { rewriteDefinitionPath = identity, externalAPIMachinery }: ContextOptions
+  { rewriteDefinitionPath = identity, externalAPIMachinery }: ContextOptions,
 ): Context {
   const apiVersionMap = new Map<string, string>();
 
@@ -31,7 +31,7 @@ export function buildContext(
 
       if (existingValue && existingValue !== apiVersion) {
         throw new Error(
-          `API version of "${idPrefix}" has already been set as ${existingValue}, but the definition ID "${def.schemaId}" has different API version "${apiVersion}"`
+          `API version of "${idPrefix}" has already been set as ${existingValue}, but the definition ID "${def.schemaId}" has different API version "${apiVersion}"`,
         );
       }
 
@@ -51,6 +51,6 @@ export function buildContext(
       const path = trimPrefix(id, "io.k8s.").split(".").join("/") + ".ts";
 
       return rewriteDefinitionPath(path);
-    }
+    },
   };
 }

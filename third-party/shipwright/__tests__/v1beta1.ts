@@ -8,23 +8,23 @@ describe("Build", () => {
   const build = new Build({
     metadata: {
       namespace: "my-namespace",
-      name: "buildah-golang-build"
+      name: "buildah-golang-build",
     },
     spec: {
       strategy: {
         kind: "ClusterBuildStrategy",
-        name: "buildah"
+        name: "buildah",
       },
       source: {
         git: {
-          url: "https://github.com/shipwright-io/sample-go"
+          url: "https://github.com/shipwright-io/sample-go",
         },
-        contextDir: "docker-build"
+        contextDir: "docker-build",
       },
       output: {
-        image: "registry/namespace/image:latest"
-      }
-    }
+        image: "registry/namespace/image:latest",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -45,23 +45,23 @@ describe("Build", () => {
       kind: "Build",
       metadata: {
         namespace: "my-namespace",
-        name: "buildah-golang-build"
+        name: "buildah-golang-build",
       },
       spec: {
         strategy: {
           kind: "ClusterBuildStrategy",
-          name: "buildah"
+          name: "buildah",
         },
         source: {
           git: {
-            url: "https://github.com/shipwright-io/sample-go"
+            url: "https://github.com/shipwright-io/sample-go",
           },
-          contextDir: "docker-build"
+          contextDir: "docker-build",
         },
         output: {
-          image: "registry/namespace/image:latest"
-        }
-      }
+          image: "registry/namespace/image:latest",
+        },
+      },
     });
   });
 });
@@ -70,11 +70,11 @@ describe("BuildRun", () => {
   const buildRun = new BuildRun({
     metadata: {
       namespace: "my-namespace",
-      generateName: "test-buildrun-"
+      generateName: "test-buildrun-",
     },
     spec: {
-      build: {}
-    }
+      build: {},
+    },
   });
 
   it("should set apiVersion", () => {
@@ -95,17 +95,17 @@ describe("BuildRun", () => {
       kind: "BuildRun",
       metadata: {
         namespace: "my-namespace",
-        generateName: "test-buildrun-"
+        generateName: "test-buildrun-",
       },
       spec: {
-        build: {}
-      }
+        build: {},
+      },
     });
   });
 
   it("should accept a build-ref", () => {
     buildRun.spec.build = {
-      name: "buildah-golang-build"
+      name: "buildah-golang-build",
     };
     expect(() => buildRun.validate()).not.toThrow();
   });
@@ -115,18 +115,18 @@ describe("BuildRun", () => {
       spec: {
         strategy: {
           kind: "ClusterBuildStrategy",
-          name: "buildah"
+          name: "buildah",
         },
         source: {
           git: {
-            url: "https://github.com/shipwright-io/sample-go"
+            url: "https://github.com/shipwright-io/sample-go",
           },
-          contextDir: "docker-build"
+          contextDir: "docker-build",
         },
         output: {
-          image: "registry/namespace/image:latest"
-        }
-      }
+          image: "registry/namespace/image:latest",
+        },
+      },
     };
     expect(() => buildRun.validate()).not.toThrow();
   });
@@ -136,7 +136,7 @@ describe("BuildStrategy", () => {
   const buildStrategy = new BuildStrategy({
     metadata: {
       namespace: "my-namespace",
-      name: "namespaced-build-strategy"
+      name: "namespaced-build-strategy",
     },
     spec: {
       parameters: [
@@ -145,8 +145,8 @@ describe("BuildStrategy", () => {
           name: "secrets",
           description: "Some secrets",
           type: "array",
-          defaults: []
-        }
+          defaults: [],
+        },
       ],
       steps: [
         {
@@ -157,21 +157,21 @@ describe("BuildStrategy", () => {
           command: ["/bin/bash"],
           args: ["-c", "echo hello world"],
           securityContext: {
-            privileged: false
+            privileged: false,
           },
           resources: {
             requests: {
               cpu: "250m",
-              memory: "100Mi"
+              memory: "100Mi",
             },
             limits: {
               cpu: "500m",
-              memory: "1Gi"
-            }
-          }
-        }
-      ]
-    }
+              memory: "1Gi",
+            },
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -192,7 +192,7 @@ describe("BuildStrategy", () => {
       kind: "BuildStrategy",
       metadata: {
         namespace: "my-namespace",
-        name: "namespaced-build-strategy"
+        name: "namespaced-build-strategy",
       },
       spec: {
         parameters: [
@@ -201,8 +201,8 @@ describe("BuildStrategy", () => {
             name: "secrets",
             description: "Some secrets",
             type: "array",
-            defaults: []
-          }
+            defaults: [],
+          },
         ],
         steps: [
           {
@@ -213,21 +213,21 @@ describe("BuildStrategy", () => {
             command: ["/bin/bash"],
             args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false
+              privileged: false,
             },
             resources: {
               requests: {
                 cpu: "250m",
-                memory: "100Mi"
+                memory: "100Mi",
               },
               limits: {
                 cpu: "500m",
-                memory: "1Gi"
-              }
-            }
-          }
-        ]
-      }
+                memory: "1Gi",
+              },
+            },
+          },
+        ],
+      },
     });
   });
 });
@@ -235,7 +235,7 @@ describe("BuildStrategy", () => {
 describe("ClusterBuildStrategy", () => {
   const buildStrategy = new ClusterBuildStrategy({
     metadata: {
-      name: "namespaced-build-strategy"
+      name: "namespaced-build-strategy",
     },
     spec: {
       parameters: [
@@ -244,8 +244,8 @@ describe("ClusterBuildStrategy", () => {
           name: "secrets",
           description: "Some secrets",
           type: "array",
-          defaults: []
-        }
+          defaults: [],
+        },
       ],
       steps: [
         {
@@ -256,21 +256,21 @@ describe("ClusterBuildStrategy", () => {
           command: ["/bin/bash"],
           args: ["-c", "echo hello world"],
           securityContext: {
-            privileged: false
+            privileged: false,
           },
           resources: {
             requests: {
               cpu: "250m",
-              memory: "100Mi"
+              memory: "100Mi",
             },
             limits: {
               cpu: "500m",
-              memory: "1Gi"
-            }
-          }
-        }
-      ]
-    }
+              memory: "1Gi",
+            },
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -290,7 +290,7 @@ describe("ClusterBuildStrategy", () => {
       apiVersion: "shipwright.io/v1beta1",
       kind: "ClusterBuildStrategy",
       metadata: {
-        name: "namespaced-build-strategy"
+        name: "namespaced-build-strategy",
       },
       spec: {
         parameters: [
@@ -299,8 +299,8 @@ describe("ClusterBuildStrategy", () => {
             name: "secrets",
             description: "Some secrets",
             type: "array",
-            defaults: []
-          }
+            defaults: [],
+          },
         ],
         steps: [
           {
@@ -311,21 +311,21 @@ describe("ClusterBuildStrategy", () => {
             command: ["/bin/bash"],
             args: ["-c", "echo hello world"],
             securityContext: {
-              privileged: false
+              privileged: false,
             },
             resources: {
               requests: {
                 cpu: "250m",
-                memory: "100Mi"
+                memory: "100Mi",
               },
               limits: {
                 cpu: "500m",
-                memory: "1Gi"
-              }
-            }
-          }
-        ]
-      }
+                memory: "1Gi",
+              },
+            },
+          },
+        ],
+      },
     });
   });
 });

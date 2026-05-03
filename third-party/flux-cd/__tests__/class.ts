@@ -4,21 +4,21 @@ import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1beta1/GitReposi
 describe("Application", () => {
   const repo = new GitRepository({
     metadata: {
-      name: "webapp"
+      name: "webapp",
     },
     spec: {
       interval: "60m",
       url: "https://github.com/tommy351/kubernetes-models-ts",
       ref: {
-        branch: "master"
-      }
-    }
+        branch: "master",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(repo).toHaveProperty(
       "apiVersion",
-      "source.toolkit.fluxcd.io/v1beta1"
+      "source.toolkit.fluxcd.io/v1beta1",
     );
   });
 
@@ -35,15 +35,15 @@ describe("Application", () => {
       apiVersion: "source.toolkit.fluxcd.io/v1beta1",
       kind: "GitRepository",
       metadata: {
-        name: "webapp"
+        name: "webapp",
       },
       spec: {
         interval: "60m",
         url: "https://github.com/tommy351/kubernetes-models-ts",
         ref: {
-          branch: "master"
-        }
-      }
+          branch: "master",
+        },
+      },
     });
   });
 });

@@ -16,11 +16,11 @@ describe("PostgresCluster", () => {
             accessModes: ["ReadWriteOnce"],
             resources: {
               requests: {
-                storage: "1Gi"
-              }
-            }
-          }
-        }
+                storage: "1Gi",
+              },
+            },
+          },
+        },
       ],
       backups: {
         pgbackrest: {
@@ -34,22 +34,22 @@ describe("PostgresCluster", () => {
                   accessModes: ["ReadWriteOnce"],
                   resources: {
                     requests: {
-                      storage: "1Gi"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
+                      storage: "1Gi",
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(cluster).toHaveProperty(
       "apiVersion",
-      "postgres-operator.crunchydata.com/v1beta1"
+      "postgres-operator.crunchydata.com/v1beta1",
     );
   });
 
@@ -77,11 +77,11 @@ describe("PostgresCluster", () => {
               accessModes: ["ReadWriteOnce"],
               resources: {
                 requests: {
-                  storage: "1Gi"
-                }
-              }
-            }
-          }
+                  storage: "1Gi",
+                },
+              },
+            },
+          },
         ],
         backups: {
           pgbackrest: {
@@ -95,16 +95,16 @@ describe("PostgresCluster", () => {
                     accessModes: ["ReadWriteOnce"],
                     resources: {
                       requests: {
-                        storage: "1Gi"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      }
+                        storage: "1Gi",
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
     });
   });
 });
@@ -112,27 +112,27 @@ describe("PostgresCluster", () => {
 describe("postgresql", () => {
   const cluster = new postgresql({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       teamId: "acid",
       volume: {
-        size: "1Gi"
+        size: "1Gi",
       },
       numberOfInstances: 2,
       users: {
-        zalando: ["superuser", "createdb"]
+        zalando: ["superuser", "createdb"],
       },
       databases: {
-        foo: "zalando"
+        foo: "zalando",
       },
       preparedDatabases: {
-        bar: {}
+        bar: {},
       },
       postgresql: {
-        version: "14"
-      }
-    }
+        version: "14",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -152,27 +152,27 @@ describe("postgresql", () => {
       apiVersion: "acid.zalan.do/v1",
       kind: "postgresql",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         teamId: "acid",
         volume: {
-          size: "1Gi"
+          size: "1Gi",
         },
         numberOfInstances: 2,
         users: {
-          zalando: ["superuser", "createdb"]
+          zalando: ["superuser", "createdb"],
         },
         databases: {
-          foo: "zalando"
+          foo: "zalando",
         },
         preparedDatabases: {
-          bar: {}
+          bar: {},
         },
         postgresql: {
-          version: "14"
-        }
-      }
+          version: "14",
+        },
+      },
     });
   });
 });

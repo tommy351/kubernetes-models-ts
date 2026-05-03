@@ -14,10 +14,10 @@ describe("GrafanaV4", () => {
       config: {
         log: {
           mode: "console",
-          level: "error"
-        }
-      }
-    }
+          level: "error",
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -41,10 +41,10 @@ describe("GrafanaV4", () => {
         config: {
           log: {
             mode: "console",
-            level: "error"
-          }
-        }
-      }
+            level: "error",
+          },
+        },
+      },
     });
   });
 });
@@ -54,10 +54,10 @@ describe("GrafanaDashboardV4", () => {
     metadata: { name: "example" },
     spec: {
       json: JSON.stringify({
-        title: "Simple Dashboard"
+        title: "Simple Dashboard",
       }),
-      plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }]
-    }
+      plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -79,10 +79,10 @@ describe("GrafanaDashboardV4", () => {
       metadata: { name: "example" },
       spec: {
         json: JSON.stringify({
-          title: "Simple Dashboard"
+          title: "Simple Dashboard",
         }),
-        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }]
-      }
+        plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
+      },
     });
   });
 });
@@ -100,10 +100,10 @@ describe("GrafanaDataSourceV4", () => {
           url: "http://prometheus:9090",
           isDefault: true,
           version: 1,
-          editable: true
-        }
-      ]
-    }
+          editable: true,
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -133,10 +133,10 @@ describe("GrafanaDataSourceV4", () => {
             url: "http://prometheus:9090",
             isDefault: true,
             version: 1,
-            editable: true
-          }
-        ]
-      }
+            editable: true,
+          },
+        ],
+      },
     });
   });
 });
@@ -148,16 +148,16 @@ describe("GrafanaV5", () => {
       config: {
         log: {
           mode: "console",
-          level: "error"
-        }
-      }
-    }
+          level: "error",
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
     expect(grafana).toHaveProperty(
       "apiVersion",
-      "grafana.integreatly.org/v1beta1"
+      "grafana.integreatly.org/v1beta1",
     );
   });
 
@@ -178,10 +178,10 @@ describe("GrafanaV5", () => {
         config: {
           log: {
             mode: "console",
-            level: "error"
-          }
-        }
-      }
+            level: "error",
+          },
+        },
+      },
     });
   });
 });
@@ -191,17 +191,17 @@ describe("GrafanaDashboardV5", () => {
     metadata: { name: "example" },
     spec: {
       json: JSON.stringify({
-        title: "Simple Dashboard"
+        title: "Simple Dashboard",
       }),
       plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
-      instanceSelector: {}
-    }
+      instanceSelector: {},
+    },
   });
 
   it("should set apiVersion", () => {
     expect(dashboard).toHaveProperty(
       "apiVersion",
-      "grafana.integreatly.org/v1beta1"
+      "grafana.integreatly.org/v1beta1",
     );
   });
 
@@ -220,11 +220,11 @@ describe("GrafanaDashboardV5", () => {
       metadata: { name: "example" },
       spec: {
         json: JSON.stringify({
-          title: "Simple Dashboard"
+          title: "Simple Dashboard",
         }),
         plugins: [{ name: "grafana-piechart-panel", version: "1.5.0" }],
-        instanceSelector: {}
-      }
+        instanceSelector: {},
+      },
     });
   });
 });
@@ -239,16 +239,16 @@ describe("GrafanaDatasourceV5", () => {
         access: "proxy",
         url: "http://prometheus:9090",
         isDefault: true,
-        editable: true
+        editable: true,
       },
-      instanceSelector: {}
-    }
+      instanceSelector: {},
+    },
   });
 
   it("should set apiVersion", () => {
     expect(source).toHaveProperty(
       "apiVersion",
-      "grafana.integreatly.org/v1beta1"
+      "grafana.integreatly.org/v1beta1",
     );
   });
 
@@ -272,10 +272,10 @@ describe("GrafanaDatasourceV5", () => {
           access: "proxy",
           url: "http://prometheus:9090",
           isDefault: true,
-          editable: true
+          editable: true,
         },
-        instanceSelector: {}
-      }
+        instanceSelector: {},
+      },
     });
   });
 });

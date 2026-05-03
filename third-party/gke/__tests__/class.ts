@@ -5,8 +5,8 @@ import { SpannerInstance } from "../gen/spanner.cnrm.cloud.google.com/v1beta1/Sp
 describe("BackendConfig", () => {
   const config = new BackendConfig({
     metadata: {
-      name: "test"
-    }
+      name: "test",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -26,8 +26,8 @@ describe("BackendConfig", () => {
       apiVersion: "cloud.google.com/v1beta1",
       kind: "BackendConfig",
       metadata: {
-        name: "test"
-      }
+        name: "test",
+      },
     });
   });
 });
@@ -35,19 +35,19 @@ describe("BackendConfig", () => {
 describe("SpannerInstance", () => {
   const instance = new SpannerInstance({
     metadata: {
-      name: "spanner-example"
+      name: "spanner-example",
     },
     spec: {
       config: "regional-us-west1",
       displayName: "Spanner Example",
-      numNodes: 1
-    }
+      numNodes: 1,
+    },
   });
 
   it("should set apiVersion", () => {
     expect(instance).toHaveProperty(
       "apiVersion",
-      "spanner.cnrm.cloud.google.com/v1beta1"
+      "spanner.cnrm.cloud.google.com/v1beta1",
     );
   });
 
@@ -63,7 +63,7 @@ describe("SpannerInstance", () => {
     expect(instance.spec).toEqual({
       config: "regional-us-west1",
       displayName: "Spanner Example",
-      numNodes: 1
+      numNodes: 1,
     });
   });
 
@@ -72,13 +72,13 @@ describe("SpannerInstance", () => {
       apiVersion: "spanner.cnrm.cloud.google.com/v1beta1",
       kind: "SpannerInstance",
       metadata: {
-        name: "spanner-example"
+        name: "spanner-example",
       },
       spec: {
         config: "regional-us-west1",
         displayName: "Spanner Example",
-        numNodes: 1
-      }
+        numNodes: 1,
+      },
     });
   });
 });

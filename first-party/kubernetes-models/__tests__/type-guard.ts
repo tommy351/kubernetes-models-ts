@@ -37,7 +37,7 @@ describe("With GVK", () => {
     // Class with incorrect apiVersion
     [new Deployment(), false],
     // Class with incorrect kind
-    [new Service(), false]
+    [new Service(), false],
   ])("Pod.is(%p)", (value, expected) => {
     it(`should return ${expected}`, () => {
       expect(Pod.is(value)).toEqual(expected);

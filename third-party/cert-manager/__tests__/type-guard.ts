@@ -13,9 +13,9 @@ describe.each([
     {
       apiVersion: "cert-manager.io/v1",
       kind: "Certificate",
-      metadata: { name: "test" }
+      metadata: { name: "test" },
     },
-    true
+    true,
   ],
   // Interface with invalid data (it doesn't matter anyway)
   [{ apiVersion: "cert-manager.io/v1", kind: "Certificate", foo: "bar" }, true],
@@ -41,13 +41,13 @@ describe.each([
       metadata: { name: "test" },
       spec: {
         issuerRef: {
-          name: ""
+          name: "",
         },
-        secretName: ""
-      }
+        secretName: "",
+      },
     }),
-    true
-  ]
+    true,
+  ],
 ])("Certificate.is(%p)", (value, expected) => {
   it(`should return ${expected}`, () => {
     expect(Certificate.is(value)).toEqual(expected);

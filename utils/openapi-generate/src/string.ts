@@ -1,7 +1,7 @@
 import {
   upperFirst,
   camelCase,
-  trimPrefix
+  trimPrefix,
 } from "@kubernetes-models/string-util";
 
 export function getClassName(s: string): string {

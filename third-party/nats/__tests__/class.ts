@@ -9,8 +9,8 @@ describe("Stream", () => {
       name: "mystream",
       subjects: ["orders.*"],
       storage: "memory",
-      maxAge: "1h"
-    }
+      maxAge: "1h",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -34,8 +34,8 @@ describe("Stream", () => {
         name: "mystream",
         subjects: ["orders.*"],
         storage: "memory",
-        maxAge: "1h"
-      }
+        maxAge: "1h",
+      },
     });
   });
 });
@@ -53,15 +53,15 @@ describe("Consumer", () => {
           deliverSubject: "my-push-consumer.orders",
           deliverPolicy: "last",
           ackPolicy: "none",
-          replayPolicy: "instant"
-        }
+          replayPolicy: "instant",
+        },
       });
     });
 
     it("should set apiVersion", () => {
       expect(consumer).toHaveProperty(
         "apiVersion",
-        "jetstream.nats.io/v1beta2"
+        "jetstream.nats.io/v1beta2",
       );
     });
 
@@ -84,8 +84,8 @@ describe("Consumer", () => {
           deliverSubject: "my-push-consumer.orders",
           deliverPolicy: "last",
           ackPolicy: "none",
-          replayPolicy: "instant"
-        }
+          replayPolicy: "instant",
+        },
       });
     });
   });
@@ -100,15 +100,15 @@ describe("Consumer", () => {
           deliverPolicy: "all",
           filterSubject: "orders.received",
           maxDeliver: 20,
-          ackPolicy: "explicit"
-        }
+          ackPolicy: "explicit",
+        },
       });
     });
 
     it("should set apiVersion", () => {
       expect(consumer).toHaveProperty(
         "apiVersion",
-        "jetstream.nats.io/v1beta2"
+        "jetstream.nats.io/v1beta2",
       );
     });
 
@@ -131,8 +131,8 @@ describe("Consumer", () => {
           deliverPolicy: "all",
           filterSubject: "orders.received",
           maxDeliver: 20,
-          ackPolicy: "explicit"
-        }
+          ackPolicy: "explicit",
+        },
       });
     });
   });

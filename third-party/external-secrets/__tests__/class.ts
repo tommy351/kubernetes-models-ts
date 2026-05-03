@@ -4,17 +4,17 @@ import { ExternalSecret } from "../gen/external-secrets.io/v1beta1/ExternalSecre
 describe("ExternalSecret", () => {
   const secret = new ExternalSecret({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       refreshInterval: "1h",
       secretStoreRef: {
         name: "secret-store-sample",
-        kind: "SecretStore"
+        kind: "SecretStore",
       },
       target: {
         name: "secret-to-be-created",
-        creationPolicy: "Owner"
+        creationPolicy: "Owner",
       },
       data: [
         {
@@ -22,16 +22,16 @@ describe("ExternalSecret", () => {
           remoteRef: {
             key: "provider-key",
             version: "provider-key-version",
-            property: "provider-key-property"
-          }
-        }
+            property: "provider-key-property",
+          },
+        },
       ],
       dataFrom: [
         {
-          extract: { key: "remote-key-in-the-provider" }
-        }
-      ]
-    }
+          extract: { key: "remote-key-in-the-provider" },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -51,17 +51,17 @@ describe("ExternalSecret", () => {
       apiVersion: "external-secrets.io/v1beta1",
       kind: "ExternalSecret",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         refreshInterval: "1h",
         secretStoreRef: {
           name: "secret-store-sample",
-          kind: "SecretStore"
+          kind: "SecretStore",
         },
         target: {
           name: "secret-to-be-created",
-          creationPolicy: "Owner"
+          creationPolicy: "Owner",
         },
         data: [
           {
@@ -69,16 +69,16 @@ describe("ExternalSecret", () => {
             remoteRef: {
               key: "provider-key",
               version: "provider-key-version",
-              property: "provider-key-property"
-            }
-          }
+              property: "provider-key-property",
+            },
+          },
         ],
         dataFrom: [
           {
-            extract: { key: "remote-key-in-the-provider" }
-          }
-        ]
-      }
+            extract: { key: "remote-key-in-the-provider" },
+          },
+        ],
+      },
     });
   });
 });

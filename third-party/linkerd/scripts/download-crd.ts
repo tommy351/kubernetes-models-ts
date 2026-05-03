@@ -18,7 +18,7 @@ async function render(name: string, version: string): Promise<string> {
     name,
     name,
     "--version",
-    version
+    version,
   ]);
 
   return result.stdout;
@@ -26,7 +26,7 @@ async function render(name: string, version: string): Promise<string> {
 
 const commands = [
   await render("linkerd-crds", "2024.11.8"),
-  await render("linkerd-multicluster", "2024.11.8")
+  await render("linkerd-multicluster", "2024.11.8"),
 ];
 const manifests = yaml.loadAll(commands.join("---\n"));
 const chunks: string[] = [];

@@ -7,22 +7,22 @@ import {
   KubernetesWatchTrigger,
   MessageQueueTrigger,
   Package,
-  TimeTrigger
+  TimeTrigger,
 } from "../gen/fission.io/v1/index.js";
 
 describe("CanaryConfig", () => {
   const canaryConfig = new CanaryConfig({
     metadata: {
-      name: "example"
+      name: "example",
     },
     status: {
-      status: "active"
+      status: "active",
     },
     spec: {
       newfunction: "new",
       oldfunction: "old",
-      trigger: "trigger"
-    }
+      trigger: "trigger",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -42,16 +42,16 @@ describe("CanaryConfig", () => {
       kind: "CanaryConfig",
       apiVersion: "fission.io/v1",
       metadata: {
-        name: "example"
+        name: "example",
       },
       status: {
-        status: "active"
+        status: "active",
       },
       spec: {
         newfunction: "new",
         oldfunction: "old",
-        trigger: "trigger"
-      }
+        trigger: "trigger",
+      },
     });
   });
 });
@@ -59,14 +59,14 @@ describe("CanaryConfig", () => {
 describe("Environment", () => {
   const environment = new Environment({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       version: 0,
       runtime: {
-        image: "fission/node-env"
-      }
-    }
+        image: "fission/node-env",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -86,14 +86,14 @@ describe("Environment", () => {
       apiVersion: "fission.io/v1",
       kind: "Environment",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         runtime: {
-          image: "fission/node-env"
+          image: "fission/node-env",
         },
-        version: 0
-      }
+        version: 0,
+      },
     });
   });
 });
@@ -101,20 +101,20 @@ describe("Environment", () => {
 describe("Function", () => {
   const fn = new Function({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       environment: {
         name: "nodejs",
-        namespace: "fission-function"
+        namespace: "fission-function",
       },
       package: {},
       InvokeStrategy: {
         ExecutionStrategy: {
-          ExecutorType: "poolmgr"
-        }
-      }
-    }
+          ExecutorType: "poolmgr",
+        },
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -134,20 +134,20 @@ describe("Function", () => {
       apiVersion: "fission.io/v1",
       kind: "Function",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         environment: {
           name: "nodejs",
-          namespace: "fission-function"
+          namespace: "fission-function",
         },
         package: {},
         InvokeStrategy: {
           ExecutionStrategy: {
-            ExecutorType: "poolmgr"
-          }
-        }
-      }
+            ExecutorType: "poolmgr",
+          },
+        },
+      },
     });
   });
 });
@@ -155,14 +155,14 @@ describe("Function", () => {
 describe("HTTPTrigger", () => {
   const httpTrigger = new HTTPTrigger({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       functionref: {
         name: "example",
-        type: "name"
-      }
-    }
+        type: "name",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -182,14 +182,14 @@ describe("HTTPTrigger", () => {
       apiVersion: "fission.io/v1",
       kind: "HTTPTrigger",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         functionref: {
           name: "example",
-          type: "name"
-        }
-      }
+          type: "name",
+        },
+      },
     });
   });
 });
@@ -197,29 +197,29 @@ describe("HTTPTrigger", () => {
 describe("KubernetesWatchTrigger", () => {
   const kubernetesWatchTrigger = new KubernetesWatchTrigger({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       functionref: {
         name: "example",
-        type: "name"
+        type: "name",
       },
       namespace: "fission-function",
-      type: "application/json"
-    }
+      type: "application/json",
+    },
   });
 
   it("should set apiVersion", () => {
     expect(kubernetesWatchTrigger).toHaveProperty(
       "apiVersion",
-      "fission.io/v1"
+      "fission.io/v1",
     );
   });
 
   it("should set kind", () => {
     expect(kubernetesWatchTrigger).toHaveProperty(
       "kind",
-      "KubernetesWatchTrigger"
+      "KubernetesWatchTrigger",
     );
   });
 
@@ -232,16 +232,16 @@ describe("KubernetesWatchTrigger", () => {
       apiVersion: "fission.io/v1",
       kind: "KubernetesWatchTrigger",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         functionref: {
           name: "example",
-          type: "name"
+          type: "name",
         },
         namespace: "fission-function",
-        type: "application/json"
-      }
+        type: "application/json",
+      },
     });
   });
 });
@@ -249,15 +249,15 @@ describe("KubernetesWatchTrigger", () => {
 describe("MessageQueueTrigger", () => {
   const messageQueueTrigger = new MessageQueueTrigger({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       functionref: {
         name: "example",
-        type: "name"
+        type: "name",
       },
-      topic: "example"
-    }
+      topic: "example",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -277,15 +277,15 @@ describe("MessageQueueTrigger", () => {
       apiVersion: "fission.io/v1",
       kind: "MessageQueueTrigger",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         functionref: {
           name: "example",
-          type: "name"
+          type: "name",
         },
-        topic: "example"
-      }
+        topic: "example",
+      },
     });
   });
 });
@@ -293,18 +293,18 @@ describe("MessageQueueTrigger", () => {
 describe("Package", () => {
   const pkg = new Package({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       environment: {
         name: "nodejs",
-        namespace: "fission-function"
+        namespace: "fission-function",
       },
       deployment: {
         type: "literal",
-        literal: "console.log('Hello, World!')"
-      }
-    }
+        literal: "console.log('Hello, World!')",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -324,18 +324,18 @@ describe("Package", () => {
       apiVersion: "fission.io/v1",
       kind: "Package",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         environment: {
           name: "nodejs",
-          namespace: "fission-function"
+          namespace: "fission-function",
         },
         deployment: {
           type: "literal",
-          literal: "console.log('Hello, World!')"
-        }
-      }
+          literal: "console.log('Hello, World!')",
+        },
+      },
     });
   });
 });
@@ -343,15 +343,15 @@ describe("Package", () => {
 describe("TimeTrigger", () => {
   const timeTrigger = new TimeTrigger({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       functionref: {
         name: "example",
-        type: "name"
+        type: "name",
       },
-      cron: "0 0 * * *"
-    }
+      cron: "0 0 * * *",
+    },
   });
 
   it("should set apiVersion", () => {
@@ -371,15 +371,15 @@ describe("TimeTrigger", () => {
       apiVersion: "fission.io/v1",
       kind: "TimeTrigger",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         functionref: {
           name: "example",
-          type: "name"
+          type: "name",
         },
-        cron: "0 0 * * *"
-      }
+        cron: "0 0 * * *",
+      },
     });
   });
 });

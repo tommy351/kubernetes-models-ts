@@ -7,7 +7,7 @@ import { Certificate as CertificateV1 } from "../gen/cert-manager.io/v1/Certific
 describe("Certificate v1alpha1", () => {
   const cert = new CertificateV1Alpha1({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       secretName: "foo-secret",
@@ -15,15 +15,15 @@ describe("Certificate v1alpha1", () => {
       acme: {
         config: [
           {
-            domains: ["foo.example.com"]
-          }
-        ]
+            domains: ["foo.example.com"],
+          },
+        ],
       },
       issuerRef: {
         name: "letsencrypt-prod",
-        kind: "Issuer"
-      }
-    }
+        kind: "Issuer",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -43,7 +43,7 @@ describe("Certificate v1alpha1", () => {
       apiVersion: "certmanager.k8s.io/v1alpha1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
@@ -51,15 +51,15 @@ describe("Certificate v1alpha1", () => {
         acme: {
           config: [
             {
-              domains: ["foo.example.com"]
-            }
-          ]
+              domains: ["foo.example.com"],
+            },
+          ],
         },
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
@@ -67,16 +67,16 @@ describe("Certificate v1alpha1", () => {
 describe("Certificate v1alpha3", () => {
   const cert = new CertificateV1Alpha3({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       secretName: "foo-secret",
       dnsNames: ["foo.example.com"],
       issuerRef: {
         name: "letsencrypt-prod",
-        kind: "Issuer"
-      }
-    }
+        kind: "Issuer",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -96,16 +96,16 @@ describe("Certificate v1alpha3", () => {
       apiVersion: "cert-manager.io/v1alpha3",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
@@ -113,16 +113,16 @@ describe("Certificate v1alpha3", () => {
 describe("Certificate v1beta1", () => {
   const cert = new CertificateV1Beta1({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       secretName: "foo-secret",
       dnsNames: ["foo.example.com"],
       issuerRef: {
         name: "letsencrypt-prod",
-        kind: "Issuer"
-      }
-    }
+        kind: "Issuer",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -142,16 +142,16 @@ describe("Certificate v1beta1", () => {
       apiVersion: "cert-manager.io/v1beta1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });
@@ -159,16 +159,16 @@ describe("Certificate v1beta1", () => {
 describe("Certificate v1", () => {
   const cert = new CertificateV1({
     metadata: {
-      name: "foo"
+      name: "foo",
     },
     spec: {
       secretName: "foo-secret",
       dnsNames: ["foo.example.com"],
       issuerRef: {
         name: "letsencrypt-prod",
-        kind: "Issuer"
-      }
-    }
+        kind: "Issuer",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -188,16 +188,16 @@ describe("Certificate v1", () => {
       apiVersion: "cert-manager.io/v1",
       kind: "Certificate",
       metadata: {
-        name: "foo"
+        name: "foo",
       },
       spec: {
         secretName: "foo-secret",
         dnsNames: ["foo.example.com"],
         issuerRef: {
           name: "letsencrypt-prod",
-          kind: "Issuer"
-        }
-      }
+          kind: "Issuer",
+        },
+      },
     });
   });
 });

@@ -1,7 +1,7 @@
 import {
   generate,
   mergeOpenAPISpecs,
-  isAPIMachineryID
+  isAPIMachineryID,
 } from "@kubernetes-models/openapi-generate";
 import { readInput } from "@kubernetes-models/read-input";
 import { OpenAPIV2 } from "openapi-types";
@@ -26,7 +26,7 @@ const VERSIONS = [
   "1.29.5",
   "1.32.0",
   // Latest version
-  "1.33.0"
+  "1.33.0",
 ];
 
 async function fetchSpec(): Promise<Document> {
@@ -46,7 +46,7 @@ function omitAPIMachineryDefinitions(doc: Document): void {
   if (!doc.definitions) return;
 
   doc.definitions = Object.fromEntries(
-    Object.entries(doc.definitions).filter(([key]) => !isAPIMachineryID(key))
+    Object.entries(doc.definitions).filter(([key]) => !isAPIMachineryID(key)),
   );
 }
 
@@ -71,5 +71,5 @@ patchStatefulSetSpec(spec);
 await generate({
   input: JSON.stringify(spec),
   outputPath: fileURLToPath(new URL("../gen", import.meta.url)),
-  externalAPIMachinery: true
+  externalAPIMachinery: true,
 });

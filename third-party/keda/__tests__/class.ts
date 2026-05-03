@@ -7,7 +7,7 @@ import { ClusterTriggerAuthentication } from "../gen/keda.sh/v1alpha1/ClusterTri
 describe("ScaledJob", () => {
   const job = new ScaledJob({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       jobTargetRef: {
@@ -16,22 +16,22 @@ describe("ScaledJob", () => {
             containers: [
               {
                 name: "example",
-                image: "example.com/example:latest"
-              }
-            ]
-          }
-        }
+                image: "example.com/example:latest",
+              },
+            ],
+          },
+        },
       },
       triggers: [
         {
           type: "cpu",
           metadata: {
             type: "Utilization",
-            value: "70"
-          }
-        }
-      ]
-    }
+            value: "70",
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -51,7 +51,7 @@ describe("ScaledJob", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ScaledJob",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         jobTargetRef: {
@@ -60,22 +60,22 @@ describe("ScaledJob", () => {
               containers: [
                 {
                   name: "example",
-                  image: "example.com/example:latest"
-                }
-              ]
-            }
-          }
+                  image: "example.com/example:latest",
+                },
+              ],
+            },
+          },
         },
         triggers: [
           {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70"
-            }
-          }
-        ]
-      }
+              value: "70",
+            },
+          },
+        ],
+      },
     });
   });
 });
@@ -83,22 +83,22 @@ describe("ScaledJob", () => {
 describe("ScaledObject", () => {
   const object = new ScaledObject({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       scaleTargetRef: {
-        name: "example"
+        name: "example",
       },
       triggers: [
         {
           type: "cpu",
           metadata: {
             type: "Utilization",
-            value: "70"
-          }
-        }
-      ]
-    }
+            value: "70",
+          },
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -118,22 +118,22 @@ describe("ScaledObject", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ScaledObject",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         scaleTargetRef: {
-          name: "example"
+          name: "example",
         },
         triggers: [
           {
             type: "cpu",
             metadata: {
               type: "Utilization",
-              value: "70"
-            }
-          }
-        ]
-      }
+              value: "70",
+            },
+          },
+        ],
+      },
     });
   });
 });
@@ -141,17 +141,17 @@ describe("ScaledObject", () => {
 describe("TriggerAuthentication", () => {
   const auth = new TriggerAuthentication({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       secretTargetRef: [
         {
           parameter: "example",
           name: "example",
-          key: "example"
-        }
-      ]
-    }
+          key: "example",
+        },
+      ],
+    },
   });
 
   it("should set apiVersion", () => {
@@ -171,17 +171,17 @@ describe("TriggerAuthentication", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "TriggerAuthentication",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         secretTargetRef: [
           {
             parameter: "example",
             name: "example",
-            key: "example"
-          }
-        ]
-      }
+            key: "example",
+          },
+        ],
+      },
     });
   });
 });
@@ -189,13 +189,13 @@ describe("TriggerAuthentication", () => {
 describe("ClusterTriggerAuthentication", () => {
   const auth = new ClusterTriggerAuthentication({
     metadata: {
-      name: "example"
+      name: "example",
     },
     spec: {
       podIdentity: {
-        provider: "gcp"
-      }
-    }
+        provider: "gcp",
+      },
+    },
   });
 
   it("should set apiVersion", () => {
@@ -215,13 +215,13 @@ describe("ClusterTriggerAuthentication", () => {
       apiVersion: "keda.sh/v1alpha1",
       kind: "ClusterTriggerAuthentication",
       metadata: {
-        name: "example"
+        name: "example",
       },
       spec: {
         podIdentity: {
-          provider: "gcp"
-        }
-      }
+          provider: "gcp",
+        },
+      },
     });
   });
 });

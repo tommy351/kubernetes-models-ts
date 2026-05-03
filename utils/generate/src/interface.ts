@@ -15,7 +15,7 @@ export interface GenerateInterfaceOptions {
 function _generateInterface(
   schema: Schema,
   options: GenerateInterfaceOptions,
-  parentKeys: string[]
+  parentKeys: string[],
 ): string {
   const { getRefType, getFieldType, includeDescription } = options;
 
@@ -38,11 +38,11 @@ function _generateInterface(
     return `Exclude<${_generateInterface(
       omit(schema, ["not"]),
       options,
-      parentKeys
+      parentKeys,
     )}, ${_generateInterface(
       { ...omit(schema, ["not"]), ...schema.not },
       options,
-      parentKeys
+      parentKeys,
     )}>`;
   }
 
@@ -71,7 +71,7 @@ function _generateInterface(
           output += `[key: string]: ${_generateInterface(
             additionalProperties,
             options,
-            [...parentKeys, WILDCARD_FIELD]
+            [...parentKeys, WILDCARD_FIELD],
           )};\n`;
         }
 
@@ -98,7 +98,7 @@ function _generateInterface(
         if (schema.items) {
           return `Array<${_generateInterface(schema.items, options, [
             ...parentKeys,
-            WILDCARD_FIELD
+            WILDCARD_FIELD,
           ])}>`;
         }
 
@@ -119,10 +119,10 @@ function _generateInterface(
           _generateInterface(
             { ...omit(schema, ["oneOf"]), ...x },
             options,
-            parentKeys
-          )
+            parentKeys,
+          ),
         )
-        .join(" | ")
+        .join(" | "),
     );
   }
 
@@ -134,10 +134,10 @@ function _generateInterface(
           _generateInterface(
             { ...omit(schema, ["anyOf"]), ...x },
             options,
-            parentKeys
-          )
+            parentKeys,
+          ),
         )
-        .join(" | ")
+        .join(" | "),
     );
   }
 
@@ -149,10 +149,10 @@ function _generateInterface(
           _generateInterface(
             { ...omit(schema, ["allOf"]), ...x },
             options,
-            parentKeys
-          )
+            parentKeys,
+          ),
         )
-        .join(" & ")
+        .join(" & "),
     );
   }
 
@@ -169,7 +169,7 @@ function intersectType(base: string, patch: string): string {
 
 export function generateInterface(
   schema: Schema,
-  options: GenerateInterfaceOptions = {}
+  options: GenerateInterfaceOptions = {},
 ): string {
   return _generateInterface(schema, options, []);
 }

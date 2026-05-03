@@ -13,7 +13,7 @@ const keyword: KeywordDefinition = {
     gen.if(_`${data} !== null`);
     ref.code(cxt);
     gen.endIf();
-  }
+  },
 };
 
 export default keyword;
