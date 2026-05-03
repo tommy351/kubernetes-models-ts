@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/VictoriaMetrics/operator/releases/download/v0.49.1/crd.yaml"
+      "https://github.com/VictoriaMetrics/operator/releases/download/v0.69.0/crd.yaml"
     ],
     "output": "./gen"
   }

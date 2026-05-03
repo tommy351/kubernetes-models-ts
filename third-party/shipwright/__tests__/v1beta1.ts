@@ -16,6 +16,7 @@ describe("Build", () => {
         name: "buildah",
       },
       source: {
+        type: "Git",
         git: {
           url: "https://github.com/shipwright-io/sample-go",
         },
@@ -53,6 +54,7 @@ describe("Build", () => {
           name: "buildah",
         },
         source: {
+          type: "Git",
           git: {
             url: "https://github.com/shipwright-io/sample-go",
           },
@@ -118,6 +120,7 @@ describe("BuildRun", () => {
           name: "buildah",
         },
         source: {
+          type: "Git",
           git: {
             url: "https://github.com/shipwright-io/sample-go",
           },

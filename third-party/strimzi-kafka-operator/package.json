@@ -41,7 +41,8 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.49.0/strimzi-crds-0.49.0.yaml"
+      "https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.49.0/strimzi-crds-0.49.0.yaml",
+      "https://github.com/strimzi/strimzi-kafka-operator/releases/download/1.0.0/strimzi-crds-1.0.0.yaml"
     ],
     "output": "./gen"
   }

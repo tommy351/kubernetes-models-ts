@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/k8ssandra/k8ssandra-operator/release/1.13/charts/k8ssandra-operator/crds/k8ssandra-operator-crds.yaml"
+      "https://raw.githubusercontent.com/k8ssandra/k8ssandra-operator/release/1.32/charts/k8ssandra-operator/crds/k8ssandra-operator-crds.yaml"
     ],
     "output": "./gen"
   }

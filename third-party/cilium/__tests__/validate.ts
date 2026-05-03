@@ -66,6 +66,7 @@ describe("CiliumClusterwideNetworkPolicy", () => {
         metadata: { name: "test" },
         spec: {
           endpointSelector: {},
+          ingress: [],
         },
       });
 
@@ -79,6 +80,7 @@ describe("CiliumClusterwideNetworkPolicy", () => {
         metadata: { name: "test" },
         spec: {
           nodeSelector: {},
+          ingress: [],
         },
       });
 

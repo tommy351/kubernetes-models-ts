@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://raw.githubusercontent.com/rabbitmq/cluster-operator/v2.0.0/config/crd/bases/rabbitmq.com_rabbitmqclusters.yaml"
+      "https://raw.githubusercontent.com/rabbitmq/cluster-operator/v2.20.1/config/crd/bases/rabbitmq.com_rabbitmqclusters.yaml"
     ],
     "output": "./gen"
   }

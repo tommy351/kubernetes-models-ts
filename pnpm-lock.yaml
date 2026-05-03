@@ -17,6 +17,9 @@ importers:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.2.1)
+      '@kubernetes-models/diff-crd-inputs':
+        specifier: workspace:*
+        version: link:internal/diff-crd-inputs
       '@tsconfig/node22':
         specifier: ^22.0.5
         version: 22.0.5
@@ -222,6 +225,28 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
+
+  internal/diff-crd-inputs:
+    dependencies:
+      '@kubernetes-models/generate':
+        specifier: workspace:^
+        version: link:../../utils/generate
+      '@kubernetes-models/read-input':
+        specifier: workspace:^
+        version: link:../../utils/read-input
+      execa:
+        specifier: ^9.6.1
+        version: 9.6.1
+      yaml:
+        specifier: ^2.2.2
+        version: 2.8.3
+      yargs:
+        specifier: ^18.0.0
+        version: 18.0.0
+    devDependencies:
+      '@types/yargs':
+        specifier: ^17.0.13
+        version: 17.0.35
 
   internal/publish-scripts:
     dependencies:

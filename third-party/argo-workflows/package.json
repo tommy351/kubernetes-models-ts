@@ -40,7 +40,7 @@
   },
   "crd-generate": {
     "input": [
-      "https://github.com/argoproj/argo-workflows/releases/download/v3.5.7/install.yaml"
+      "https://github.com/argoproj/argo-workflows/releases/download/v4.0.5/install.yaml"
     ],
     "output": "./gen"
   }
