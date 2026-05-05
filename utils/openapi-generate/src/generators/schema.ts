@@ -5,7 +5,7 @@ import {
   type OutputFile,
   type Schema,
   transformSchema as baseTransformSchema,
-  compileSchema,
+  compileSchemas,
 } from "@kubernetes-models/generate";
 import { trimSuffix } from "@kubernetes-models/string-util";
 import { type Context } from "../context.js";
@@ -58,8 +58,7 @@ export default function ({ externalAPIMachinery }: Context): Generator {
 
   return async (definitions) => {
     const files: OutputFile[] = [];
-
-    for (const def of definitions) {
+    const tasks = definitions.map((def) => {
       const schema = transformSchema(def);
       const refIds = collectRefs(def.schema)
         .map(trimRefPrefix)
@@ -68,13 +67,21 @@ export default function ({ externalAPIMachinery }: Context): Generator {
         refIds.map((ref) => [ref, getSchemaImportPath(ref)]),
       );
 
+      return { schema, refs: refPaths };
+    });
+    const schemas = await compileSchemas(tasks);
+
+    for (let i = 0; i < definitions.length; i++) {
+      const def = definitions[i];
+      const path = getSchemaPath(def.schemaId);
+
       files.push(
         {
-          path: getSchemaPath(def.schemaId),
-          content: await compileSchema(schema, refPaths),
+          path,
+          content: schemas[i],
         },
         {
-          path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
+          path: trimSuffix(path, ".js") + ".d.ts",
           content: `export function validate(data: unknown): boolean;`,
         },
       );

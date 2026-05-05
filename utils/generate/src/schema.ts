@@ -12,6 +12,7 @@ import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
 import { serialize, digest } from "ohash";
 import nullableRef from "./nullable-ref.js";
 import pattern from "./pattern.js";
+import { Worker } from "node:worker_threads";
 
 const ajv = new Ajv();
 const standaloneCode =
@@ -19,6 +20,23 @@ const standaloneCode =
 const traverse = traverseMod.default;
 
 const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
+const SCHEMA_COMPILE_CONCURRENCY = 4;
+const PARALLEL_SCHEMA_THRESHOLD = 32;
+
+export interface CompileSchemaTask {
+  schema: Schema;
+  refs: Record<string, string>;
+}
+
+interface WorkerMessage {
+  id: number;
+  code?: string;
+  error?: {
+    message: string;
+    name?: string;
+    stack?: string;
+  };
+}
 
 export function collectRefs(data: Record<string, unknown>): string[] {
   const refs = Object.keys(data).map((key) => {
@@ -399,4 +417,98 @@ export async function compileSchema(
   const result = generate(ast, {}, code);
 
   return result.code;
+}
+
+async function compileSchemasSequentially(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  const output: string[] = [];
+
+  for (const task of tasks) {
+    output.push(await compileSchema(task.schema, task.refs));
+  }
+
+  return output;
+}
+
+function deserializeWorkerError(error: WorkerMessage["error"]): Error {
+  const err = new Error(error?.message ?? "Schema worker failed");
+
+  err.name = error?.name ?? "Error";
+  err.stack = error?.stack;
+
+  return err;
+}
+
+function compileSchemaInWorker(
+  worker: Worker,
+  id: number,
+  task: CompileSchemaTask,
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    function cleanup(): void {
+      worker.off("message", onMessage);
+      worker.off("error", onError);
+    }
+
+    function onMessage(message: WorkerMessage): void {
+      if (message.id !== id) return;
+
+      cleanup();
+
+      if (message.error) {
+        reject(deserializeWorkerError(message.error));
+      } else if (message.code !== undefined) {
+        resolve(message.code);
+      } else {
+        reject(new Error("Schema worker returned an empty response"));
+      }
+    }
+
+    function onError(err: Error): void {
+      cleanup();
+      reject(err);
+    }
+
+    worker.on("message", onMessage);
+    worker.on("error", onError);
+    worker.postMessage({ id, ...task });
+  });
+}
+
+export async function compileSchemas(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  if (tasks.length < PARALLEL_SCHEMA_THRESHOLD) {
+    return compileSchemasSequentially(tasks);
+  }
+
+  const workers = Array.from(
+    {
+      length: Math.min(SCHEMA_COMPILE_CONCURRENCY, tasks.length),
+    },
+    () => new Worker(new URL("./schema-worker.js", import.meta.url)),
+  );
+  const output = new Array<string>(tasks.length);
+  let nextIndex = 0;
+
+  try {
+    await Promise.all(
+      workers.map(async (worker) => {
+        while (nextIndex < tasks.length) {
+          const index = nextIndex++;
+
+          output[index] = await compileSchemaInWorker(
+            worker,
+            index,
+            tasks[index],
+          );
+        }
+      }),
+    );
+  } finally {
+    await Promise.all(workers.map((worker) => worker.terminate()));
+  }
+
+  return output;
 }
