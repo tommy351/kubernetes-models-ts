@@ -1,5 +1,6 @@
 import type { Generator, GroupVersionKind, OutputFile } from "./types.js";
 import { outputFile } from "fs-extra";
+import { rm } from "node:fs/promises";
 import { join } from "node:path";
 
 export class PathConflictError extends Error {
@@ -37,6 +38,8 @@ export async function writeOutputFiles(
   outDir: string,
   files: readonly OutputFile[],
 ): Promise<void> {
+  await rm(outDir, { recursive: true, force: true });
+
   for (const f of files) {
     console.log("Writing:", f.path);
     await outputFile(join(outDir, f.path), f.content);
