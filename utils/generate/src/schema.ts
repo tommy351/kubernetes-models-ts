@@ -434,6 +434,9 @@ export async function compileSchema(
       esm: true,
       formats: _`require("FORMATS")`,
       lines: true,
+      // SWC minifies published validators later; skipping Ajv's optimizer speeds
+      // generation with negligible minified output size impact.
+      optimize: 0,
     },
     inlineRefs: false,
     keywords: [
@@ -442,8 +445,9 @@ export async function compileSchema(
     ],
     formats,
     messages: false,
-    // transformSchema already validates generator input. Avoid validating the
-    // same schemas again while Ajv compiles the split validator graph.
+    // transformSchema already validates generator input. Avoid adding meta
+    // schemas or validating the same split validator graph during compilation.
+    meta: false,
     validateSchema: false,
   });
 
