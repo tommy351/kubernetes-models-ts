@@ -4,12 +4,12 @@ import { generate } from "./generate.js";
 import { mergeOpenAPISpecs } from "./utils.js";
 
 async function readFiles(paths: string[]): Promise<string> {
-  const contents: string[] = [];
-
-  for (const path of paths) {
-    console.log("Reading:", path);
-    contents.push(await readInput(path));
-  }
+  const contents = await Promise.all(
+    paths.map(async (path) => {
+      console.log("Reading:", path);
+      return readInput(path);
+    }),
+  );
 
   const spec = mergeOpenAPISpecs(contents.map((x) => JSON.parse(x)));
 

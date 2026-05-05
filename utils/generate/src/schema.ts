@@ -221,37 +221,24 @@ function collectValidateNames(refs: SchemaRefs): Map<string, string> {
   return names;
 }
 
-/**
- * Remove `"use strict"` directive.
- */
-function removeDirectives(ast: ParseResult<t.File>): void {
-  traverse(ast, {
-    Program(path) {
-      path.node.directives = [];
-    },
-  });
-}
-
-/**
- * Remove `export default` declaration.
- */
-function removeDefaultExport(ast: ParseResult<t.File>): void {
-  traverse(ast, {
-    ExportDefaultDeclaration(path) {
-      path.remove();
-    },
-  });
-}
-
-/**
- * Replace validate function of referenced schemas with import statement.
- */
-function replaceValidateFunction(
+function rewriteStandaloneCode(
   ast: ParseResult<t.File>,
   names: Map<string, string>,
   refs: Record<string, string>,
 ): void {
+  let formatsImported = false;
+
   traverse(ast, {
+    noScope: true,
+
+    Program(path) {
+      path.node.directives = [];
+    },
+
+    ExportDefaultDeclaration(path) {
+      path.remove();
+    },
+
     FunctionDeclaration(path) {
       if (!path.node.id) return;
 
@@ -273,14 +260,7 @@ function replaceValidateFunction(
         ),
       );
     },
-  });
-}
 
-/**
- * Replace `const func = require("ajv/dist/runtime/*")` with import statement.
- */
-function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
-  traverse(ast, {
     VariableDeclaration(path) {
       const filtered = new Set<number>();
 
@@ -329,16 +309,7 @@ function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
         path.remove();
       }
     },
-  });
-}
 
-/**
- * Replace `require("FORMATS")` with import statement.
- */
-function replaceFormatRequire(ast: ParseResult<t.File>): void {
-  let formatsImported = false;
-
-  traverse(ast, {
     CallExpression(path) {
       if (
         t.isIdentifier(path.node.callee) &&
@@ -423,11 +394,7 @@ export async function compileSchema(
   const code = standaloneCode(ajv, validate);
   const ast = parse(code, { sourceType: "module" });
 
-  removeDirectives(ast);
-  removeDefaultExport(ast);
-  replaceValidateFunction(ast, validateNames, refs);
-  replaceRuntimeRequire(ast);
-  replaceFormatRequire(ast);
+  rewriteStandaloneCode(ast, validateNames, refs);
 
   const result = generate(ast, {}, code);
 

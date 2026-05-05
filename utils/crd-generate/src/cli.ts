@@ -3,12 +3,12 @@ import { readInput } from "@kubernetes-models/read-input";
 import { generate, type GenerateOptions } from "./generate.js";
 
 async function readFiles(paths: string[]): Promise<string> {
-  const documents: string[] = [];
-
-  for (const path of paths) {
-    console.log("Reading:", path);
-    documents.push(await readInput(path));
-  }
+  const documents = await Promise.all(
+    paths.map(async (path) => {
+      console.log("Reading:", path);
+      return readInput(path);
+    }),
+  );
 
   return documents.join("\n---\n");
 }
