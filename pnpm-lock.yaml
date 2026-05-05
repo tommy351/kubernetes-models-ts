@@ -259,6 +259,9 @@ importers:
       fast-glob:
         specifier: ^3.2.12
         version: 3.3.3
+      p-map:
+        specifier: ^7.0.4
+        version: 7.0.4
       tslib:
         specifier: ^2.4.0
         version: 2.8.1
