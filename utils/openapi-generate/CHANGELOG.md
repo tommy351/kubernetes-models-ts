@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.0.1
+
+### Patch Changes
+
+- [#261](https://github.com/tommy351/kubernetes-models-ts/pull/261) [`69380e4`](https://github.com/tommy351/kubernetes-models-ts/commit/69380e4bcc1ffbcfbcad19da91cf26788d0cd1c8) Thanks [@tommy351](https://github.com/tommy351)! - Fix relative schema import path.
+
 ## 6.0.0
 
 ### Major Changes
