@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.1
+
+### Patch Changes
+
+- [#263](https://github.com/tommy351/kubernetes-models-ts/pull/263) [`9ec6784`](https://github.com/tommy351/kubernetes-models-ts/commit/9ec6784fb11e750e321e7b060867357b0829be1d) Thanks [@tommy351](https://github.com/tommy351)! - Fix runtime exports.
+
 ## 5.0.0
 
 ### Major Changes
