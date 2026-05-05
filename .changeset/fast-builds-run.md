@@ -5,4 +5,4 @@
 "@kubernetes-models/openapi-generate": patch
 ---
 
-Speed up model generation by reducing Babel traversal work and reading multiple generator inputs concurrently.
+Speed up model generation by reducing Babel traversal work, reading multiple generator inputs concurrently, and writing generated files with bounded parallelism.

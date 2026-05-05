@@ -1621,15 +1621,15 @@ importers:
       es-toolkit:
         specifier: ^1.46.0
         version: 1.46.0
-      fs-extra:
-        specifier: ^11.3.4
-        version: 11.3.4
       indent-string:
         specifier: ^5.0.0
         version: 5.0.0
       ohash:
         specifier: ^2.0.11
         version: 2.0.11
+      p-map:
+        specifier: ^7.0.4
+        version: 7.0.4
       re2-wasm:
         specifier: ^1.0.2
         version: 1.0.2
@@ -1643,9 +1643,6 @@ importers:
       '@types/babel__traverse':
         specifier: ^7.20.5
         version: 7.28.0
-      '@types/fs-extra':
-        specifier: ^11.0.4
-        version: 11.0.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
