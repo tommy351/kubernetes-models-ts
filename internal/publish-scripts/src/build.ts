@@ -70,15 +70,20 @@ async function writeJs({
   srcPath: string;
   dstPath: string;
 }): Promise<void> {
-  const transformResult = await swc.transformFile(srcPath, {
-    jsc: {
-      target: `es${ECMA_VERSION}`,
-      loose: true,
-    },
-    module: { type: "nodenext" },
-  });
+  const code =
+    extname(srcPath) === JS_EXT
+      ? await readFile(srcPath, "utf8")
+      : (
+          await swc.transformFile(srcPath, {
+            jsc: {
+              target: `es${ECMA_VERSION}`,
+              loose: true,
+            },
+            module: { type: "nodenext" },
+          })
+        ).code;
 
-  const minifyResult = await swc.minify(transformResult.code, {
+  const minifyResult = await swc.minify(code, {
     compress: {
       toplevel: true,
       ecma: ECMA_VERSION,
