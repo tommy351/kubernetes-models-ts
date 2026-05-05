@@ -1,6 +1,6 @@
 {
   "name": "kubernetes-models",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "type": "module",
   "description": "Kubernetes models",
   "repository": {
