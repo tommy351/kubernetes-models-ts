@@ -442,6 +442,9 @@ export async function compileSchema(
     ],
     formats,
     messages: false,
+    // transformSchema already validates generator input. Avoid validating the
+    // same schemas again while Ajv compiles the split validator graph.
+    validateSchema: false,
   });
 
   // Override the default pattern keyword to support RE2.
