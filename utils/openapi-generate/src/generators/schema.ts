@@ -53,7 +53,7 @@ export default function ({ externalAPIMachinery }: Context): Generator {
       )}`;
     }
 
-    return `./${getClassName(ref)}`;
+    return `./${getClassName(ref)}.js`;
   }
 
   return async (definitions) => {
