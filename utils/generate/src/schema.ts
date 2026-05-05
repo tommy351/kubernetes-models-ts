@@ -1,5 +1,5 @@
 import type { Schema, SchemaTransformer } from "./types.js";
-import { omit, omitBy, uniq } from "es-toolkit";
+import { escapeRegExp, omit, omitBy, uniq } from "es-toolkit";
 import { Ajv, _ } from "ajv";
 import standaloneCodeMod from "ajv/dist/standalone/index.js";
 import assert from "node:assert";
@@ -9,6 +9,7 @@ import { serialize, digest } from "ohash";
 import nullableRef from "./nullable-ref.js";
 import pattern from "./pattern.js";
 import { Worker } from "node:worker_threads";
+import { availableParallelism } from "node:os";
 
 const ajv = new Ajv();
 const standaloneCode =
@@ -16,22 +17,11 @@ const standaloneCode =
 
 const FORMAT_IMPORT = `import { formats } from "@kubernetes-models/validate";\n`;
 const FORMAT_REQUIRE = `require("FORMATS")`;
-const SCHEMA_COMPILE_CONCURRENCY = 4;
 const PARALLEL_SCHEMA_THRESHOLD = 32;
 
 export interface CompileSchemaTask {
   schema: Schema;
   refs: Record<string, string>;
-}
-
-interface WorkerMessage {
-  id: number;
-  code?: string;
-  error?: {
-    message: string;
-    name?: string;
-    stack?: string;
-  };
 }
 
 export function collectRefs(data: Record<string, unknown>): string[] {
@@ -235,33 +225,36 @@ function collectValidateNames(refs: SchemaRefs): Map<string, string> {
   return names;
 }
 
-function escapeRegExp(input: string): string {
-  return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+interface Range {
+  start: number;
+  end: number;
 }
 
-// Ajv standalone output is predictable, so a small scanner is enough here and
-// avoids parsing every generated validator with Babel.
+interface Replacement extends Range {
+  value: string;
+}
+
+// Ajv standalone validator params never contain `)` (only identifiers,
+// destructuring with simple defaults, and the trailing `={}`), so `[^)]*`
+// reliably spans them and the regex captures the full head through the body's
+// opening `{`. Body braces still need balanced scanning.
 function findFunctionDeclaration(
   code: string,
   name: string,
-): { start: number; end: number } | undefined {
-  const re = new RegExp(`(^|\\n)function ${escapeRegExp(name)}\\(`);
+): Range | undefined {
+  const re = new RegExp(
+    `(^|\\n)function ${escapeRegExp(name)}\\([^)]*\\)\\s*\\{`,
+  );
   const match = re.exec(code);
-
   if (!match) return;
 
   const start = match.index + match[1].length;
-  const paramsStart = code.indexOf("(", start);
-  if (paramsStart < 0) return;
-
-  const paramsEnd = findMatchingDelimiter(code, paramsStart, "(", ")");
-  if (paramsEnd < 0) return;
-
-  const bodyStart = code.indexOf("{", paramsEnd);
-  if (bodyStart < 0) return;
-
+  const bodyStart = match.index + match[0].length - 1;
   const bodyEnd = findMatchingDelimiter(code, bodyStart, "{", "}");
-  if (bodyEnd < 0) return;
+
+  if (bodyEnd < 0) {
+    throw new Error(`Malformed function declaration: ${name}`);
+  }
 
   return {
     start,
@@ -269,6 +262,9 @@ function findFunctionDeclaration(
   };
 }
 
+// Returns the index of the matching `close` delimiter starting from `start`,
+// or -1 if unmatched. Skips delimiters inside double-quoted strings — the only
+// construct in Ajv-standalone helper-validator bodies that can embed braces.
 function findMatchingDelimiter(
   code: string,
   start: number,
@@ -276,55 +272,12 @@ function findMatchingDelimiter(
   close: string,
 ): number {
   let depth = 0;
-  let quote: string | undefined;
-  let escaped = false;
-  let lineComment = false;
-  let blockComment = false;
 
   for (let i = start; i < code.length; i++) {
     const char = code[i];
-    const next = code[i + 1];
 
-    if (lineComment) {
-      if (char === "\n") lineComment = false;
-      continue;
-    }
-
-    if (blockComment) {
-      if (char === "*" && next === "/") {
-        blockComment = false;
-        i++;
-      }
-
-      continue;
-    }
-
-    if (quote) {
-      if (escaped) {
-        escaped = false;
-      } else if (char === "\\") {
-        escaped = true;
-      } else if (char === quote) {
-        quote = undefined;
-      }
-
-      continue;
-    }
-
-    if (char === "/" && next === "/") {
-      lineComment = true;
-      i++;
-      continue;
-    }
-
-    if (char === "/" && next === "*") {
-      blockComment = true;
-      i++;
-      continue;
-    }
-
-    if (char === '"' || char === "'" || char === "`") {
-      quote = char;
+    if (char === '"') {
+      i = skipString(code, i);
       continue;
     }
 
@@ -332,7 +285,6 @@ function findMatchingDelimiter(
       depth++;
     } else if (char === close) {
       depth--;
-
       if (depth === 0) return i;
     }
   }
@@ -340,16 +292,24 @@ function findMatchingDelimiter(
   return -1;
 }
 
+function skipString(code: string, start: number): number {
+  for (let i = start + 1; i < code.length; i++) {
+    if (code[i] === "\\") {
+      i++;
+      continue;
+    }
+    if (code[i] === '"') return i;
+  }
+
+  return code.length;
+}
+
 function replaceFunctionDeclarations(
   code: string,
   names: Map<string, string>,
   refs: Record<string, string>,
 ): string {
-  const replacements: Array<{
-    start: number;
-    end: number;
-    value: string;
-  }> = [];
+  const replacements: Replacement[] = [];
 
   for (const [name, id] of names) {
     const ref = refs[id];
@@ -371,7 +331,7 @@ function replaceFunctionDeclarations(
 
 function applyReplacements(
   code: string,
-  replacements: readonly { start: number; end: number; value: string }[],
+  replacements: readonly Replacement[],
 ): string {
   let output = "";
   let index = 0;
@@ -379,7 +339,11 @@ function applyReplacements(
   for (const replacement of [...replacements].sort(
     (a, b) => a.start - b.start,
   )) {
-    if (replacement.start < index) continue;
+    if (replacement.start < index) {
+      throw new Error(
+        `Overlapping replacement at offset ${replacement.start} (previous ended at ${index})`,
+      );
+    }
 
     output += code.slice(index, replacement.start) + replacement.value;
     index = replacement.end;
@@ -497,11 +461,21 @@ async function compileSchemasSequentially(
   return output;
 }
 
+interface WorkerMessage {
+  id: number;
+  code?: string;
+  error?: {
+    message: string;
+    name?: string;
+    stack?: string;
+  };
+}
+
 function deserializeWorkerError(error: WorkerMessage["error"]): Error {
   const err = new Error(error?.message ?? "Schema worker failed");
 
-  err.name = error?.name ?? "Error";
-  err.stack = error?.stack;
+  if (error?.name) err.name = error.name;
+  if (error?.stack) err.stack = error.stack;
 
   return err;
 }
@@ -542,19 +516,21 @@ function compileSchemaInWorker(
   });
 }
 
-export async function compileSchemas(
-  tasks: readonly CompileSchemaTask[],
-): Promise<string[]> {
-  if (tasks.length < PARALLEL_SCHEMA_THRESHOLD) {
-    return compileSchemasSequentially(tasks);
-  }
-
-  const workers = Array.from(
-    {
-      length: Math.min(SCHEMA_COMPILE_CONCURRENCY, tasks.length),
-    },
+function spawnWorkers(count: number): Worker[] {
+  return Array.from(
+    { length: count },
     () => new Worker(new URL("./schema-worker.js", import.meta.url)),
   );
+}
+
+async function compileSchemasInParallel(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  const workerCount = Math.min(
+    Math.max(availableParallelism() - 1, 1),
+    tasks.length,
+  );
+  const workers = spawnWorkers(workerCount);
   const output = new Array<string>(tasks.length);
   let nextIndex = 0;
 
@@ -563,7 +539,6 @@ export async function compileSchemas(
       workers.map(async (worker) => {
         while (nextIndex < tasks.length) {
           const index = nextIndex++;
-
           output[index] = await compileSchemaInWorker(
             worker,
             index,
@@ -577,4 +552,12 @@ export async function compileSchemas(
   }
 
   return output;
+}
+
+export async function compileSchemas(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  return tasks.length < PARALLEL_SCHEMA_THRESHOLD
+    ? compileSchemasSequentially(tasks)
+    : compileSchemasInParallel(tasks);
 }

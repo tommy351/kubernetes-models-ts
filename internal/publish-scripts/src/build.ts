@@ -70,6 +70,8 @@ async function writeJs({
   srcPath: string;
   dstPath: string;
 }): Promise<void> {
+  // Generators emit standalone validators as plain JS already; only TS sources
+  // need SWC's transform pass before minification.
   const code =
     extname(srcPath) === JS_EXT
       ? await readFile(srcPath, "utf8")
