@@ -4,10 +4,6 @@ import { Ajv, _ } from "ajv";
 import standaloneCodeMod from "ajv/dist/standalone/index.js";
 import assert from "node:assert";
 import { formats } from "@kubernetes-models/validate";
-import { ParseResult, parse } from "@babel/parser";
-import traverseMod from "@babel/traverse";
-import * as t from "@babel/types";
-import { generate } from "@babel/generator";
 import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
 import { serialize, digest } from "ohash";
 import nullableRef from "./nullable-ref.js";
@@ -17,9 +13,9 @@ import { Worker } from "node:worker_threads";
 const ajv = new Ajv();
 const standaloneCode =
   standaloneCodeMod as unknown as typeof standaloneCodeMod.default;
-const traverse = traverseMod.default;
 
-const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
+const FORMAT_IMPORT = `import { formats } from "@kubernetes-models/validate";\n`;
+const FORMAT_REQUIRE = `require("FORMATS")`;
 const SCHEMA_COMPILE_CONCURRENCY = 4;
 const PARALLEL_SCHEMA_THRESHOLD = 32;
 
@@ -239,123 +235,191 @@ function collectValidateNames(refs: SchemaRefs): Map<string, string> {
   return names;
 }
 
-function rewriteStandaloneCode(
-  ast: ParseResult<t.File>,
+function escapeRegExp(input: string): string {
+  return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// Ajv standalone output is predictable, so a small scanner is enough here and
+// avoids parsing every generated validator with Babel.
+function findFunctionDeclaration(
+  code: string,
+  name: string,
+): { start: number; end: number } | undefined {
+  const re = new RegExp(`(^|\\n)function ${escapeRegExp(name)}\\(`);
+  const match = re.exec(code);
+
+  if (!match) return;
+
+  const start = match.index + match[1].length;
+  const paramsStart = code.indexOf("(", start);
+  if (paramsStart < 0) return;
+
+  const paramsEnd = findMatchingDelimiter(code, paramsStart, "(", ")");
+  if (paramsEnd < 0) return;
+
+  const bodyStart = code.indexOf("{", paramsEnd);
+  if (bodyStart < 0) return;
+
+  const bodyEnd = findMatchingDelimiter(code, bodyStart, "{", "}");
+  if (bodyEnd < 0) return;
+
+  return {
+    start,
+    end: code[bodyEnd + 1] === "\n" ? bodyEnd + 2 : bodyEnd + 1,
+  };
+}
+
+function findMatchingDelimiter(
+  code: string,
+  start: number,
+  open: string,
+  close: string,
+): number {
+  let depth = 0;
+  let quote: string | undefined;
+  let escaped = false;
+  let lineComment = false;
+  let blockComment = false;
+
+  for (let i = start; i < code.length; i++) {
+    const char = code[i];
+    const next = code[i + 1];
+
+    if (lineComment) {
+      if (char === "\n") lineComment = false;
+      continue;
+    }
+
+    if (blockComment) {
+      if (char === "*" && next === "/") {
+        blockComment = false;
+        i++;
+      }
+
+      continue;
+    }
+
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = undefined;
+      }
+
+      continue;
+    }
+
+    if (char === "/" && next === "/") {
+      lineComment = true;
+      i++;
+      continue;
+    }
+
+    if (char === "/" && next === "*") {
+      blockComment = true;
+      i++;
+      continue;
+    }
+
+    if (char === '"' || char === "'" || char === "`") {
+      quote = char;
+      continue;
+    }
+
+    if (char === open) {
+      depth++;
+    } else if (char === close) {
+      depth--;
+
+      if (depth === 0) return i;
+    }
+  }
+
+  return -1;
+}
+
+function replaceFunctionDeclarations(
+  code: string,
   names: Map<string, string>,
   refs: Record<string, string>,
-): void {
-  let formatsImported = false;
+): string {
+  const replacements: Array<{
+    start: number;
+    end: number;
+    value: string;
+  }> = [];
 
-  traverse(ast, {
-    noScope: true,
+  for (const [name, id] of names) {
+    const ref = refs[id];
+    if (!ref) continue;
 
-    Program(path) {
-      path.node.directives = [];
-    },
+    const declaration = findFunctionDeclaration(code, name);
+    if (!declaration) {
+      throw new Error(`Cannot find validation function: ${name}`);
+    }
 
-    ExportDefaultDeclaration(path) {
-      path.remove();
-    },
+    replacements.push({
+      ...declaration,
+      value: `import { validate as ${name} } from ${JSON.stringify(ref)};\n`,
+    });
+  }
 
-    FunctionDeclaration(path) {
-      if (!path.node.id) return;
+  return applyReplacements(code, replacements);
+}
 
-      const id = names.get(path.node.id.name);
-      if (!id) return;
+function applyReplacements(
+  code: string,
+  replacements: readonly { start: number; end: number; value: string }[],
+): string {
+  let output = "";
+  let index = 0;
 
-      const ref = refs[id];
-      if (!ref) return;
+  for (const replacement of [...replacements].sort(
+    (a, b) => a.start - b.start,
+  )) {
+    if (replacement.start < index) continue;
 
-      path.replaceWith(
-        t.importDeclaration(
-          [
-            t.importSpecifier(
-              t.identifier(path.node.id.name),
-              t.identifier("validate"),
-            ),
-          ],
-          t.stringLiteral(ref),
-        ),
-      );
-    },
+    output += code.slice(index, replacement.start) + replacement.value;
+    index = replacement.end;
+  }
 
-    VariableDeclaration(path) {
-      const filtered = new Set<number>();
+  return output + code.slice(index);
+}
 
-      for (let i = 0; i < path.node.declarations.length; i++) {
-        const { id, init } = path.node.declarations[i];
+function rewriteRuntimeImports(code: string): string {
+  return code.replace(
+    /^const ([A-Za-z_$][\w$]*) = require\("ajv\/dist\/runtime\/([^"]+)"\)\.([A-Za-z_$][\w$]*);\n?/gm,
+    (_, name: string, runtimePath: string, property: string) => {
+      const importPath = "@kubernetes-models/validate/runtime/" + runtimePath;
 
-        if (
-          !t.isIdentifier(id) ||
-          !t.isMemberExpression(init) ||
-          !t.isCallExpression(init.object) ||
-          !t.isIdentifier(init.property) ||
-          !t.isIdentifier(init.object.callee) ||
-          init.object.callee.name !== "require" ||
-          init.object.arguments.length !== 1 ||
-          !t.isStringLiteral(init.object.arguments[0])
-        ) {
-          continue;
-        }
-
-        const importPath = init.object.arguments[0].value;
-        if (!importPath.startsWith(AJV_RUNTIME_PREFIX)) continue;
-
-        filtered.add(i);
-        path.insertBefore(
-          t.importDeclaration(
-            [
-              init.property.name === "default"
-                ? t.importDefaultSpecifier(id)
-                : t.importSpecifier(id, init.property),
-            ],
-            t.stringLiteral(
-              "@kubernetes-models/validate/runtime/" +
-                importPath.substring(AJV_RUNTIME_PREFIX.length),
-            ),
-          ),
-        );
+      if (property === "default") {
+        return `import ${name} from ${JSON.stringify(importPath)};\n`;
       }
 
-      if (!filtered.size) return;
-
-      const vars = path.node.declarations.filter((_, i) => !filtered.has(i));
-
-      if (vars.length) {
-        path.replaceWith(t.variableDeclaration(path.node.kind, vars));
-      } else {
-        path.remove();
-      }
+      return `import { ${property} as ${name} } from ${JSON.stringify(
+        importPath,
+      )};\n`;
     },
+  );
+}
 
-    CallExpression(path) {
-      if (
-        t.isIdentifier(path.node.callee) &&
-        path.node.callee.name === "require" &&
-        path.node.arguments.length === 1 &&
-        t.isStringLiteral(path.node.arguments[0]) &&
-        path.node.arguments[0].value === "FORMATS"
-      ) {
-        if (!formatsImported) {
-          formatsImported = true;
+function rewriteStandaloneCode(
+  code: string,
+  names: Map<string, string>,
+  refs: Record<string, string>,
+): string {
+  const usesFormats = code.includes(FORMAT_REQUIRE);
+  let output = code;
 
-          ast.program.body.unshift(
-            t.importDeclaration(
-              [
-                t.importSpecifier(
-                  t.identifier("formats"),
-                  t.identifier("formats"),
-                ),
-              ],
-              t.stringLiteral("@kubernetes-models/validate"),
-            ),
-          );
-        }
+  output = output.replace(/^"use strict";\n?/, "");
+  output = output.replace(/^export default [A-Za-z_$][\w$]*;\n?/m, "");
+  output = rewriteRuntimeImports(output);
+  output = replaceFunctionDeclarations(output, names, refs);
+  output = output.replaceAll(FORMAT_REQUIRE, "formats");
 
-        path.replaceWith(t.identifier("formats"));
-      }
-    },
-  });
+  return usesFormats ? FORMAT_IMPORT + output : output;
 }
 
 export async function compileSchema(
@@ -410,13 +474,8 @@ export async function compileSchema(
 
   // Generate standalone code
   const code = standaloneCode(ajv, validate);
-  const ast = parse(code, { sourceType: "module" });
 
-  rewriteStandaloneCode(ast, validateNames, refs);
-
-  const result = generate(ast, {}, code);
-
-  return result.code;
+  return rewriteStandaloneCode(code, validateNames, refs);
 }
 
 async function compileSchemasSequentially(

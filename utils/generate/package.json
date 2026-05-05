@@ -33,10 +33,6 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@babel/generator": "^7.29.1",
-    "@babel/parser": "^7.29.2",
-    "@babel/traverse": "^7.29.0",
-    "@babel/types": "^7.29.0",
     "@kubernetes-models/string-util": "workspace:^",
     "@kubernetes-models/validate": "workspace:^",
     "ajv": "^8.12.0",
@@ -48,8 +44,6 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@types/babel__generator": "^7.6.8",
-    "@types/babel__traverse": "^7.20.5",
     "typescript": "^6.0.3"
   }
 }
