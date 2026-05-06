@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/argo-rollouts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Argo Rollouts models",
   "repository": {

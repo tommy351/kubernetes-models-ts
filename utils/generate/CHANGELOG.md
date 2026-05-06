@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.1.0
+
+### Minor Changes
+
+- [#265](https://github.com/tommy351/kubernetes-models-ts/pull/265) [`6ee2377`](https://github.com/tommy351/kubernetes-models-ts/commit/6ee2377f7a0596fb04b78e8cbc1bad575f645916) Thanks [@tommy351](https://github.com/tommy351)! - - Remove destination folder before writing output files.
+  - Expose a new `compileSchemas(tasks)` API (and `CompileSchemaTask` type) that compiles a batch of schemas, dispatching to worker threads above an internal threshold.
+  - Speed up model generation by tuning Ajv for standalone validator generation, rewriting generated validator imports without Babel, skipping repeated schema validation during validator compilation, and writing generated files with bounded parallelism.
+
 ## 3.0.0
 
 ### Major Changes

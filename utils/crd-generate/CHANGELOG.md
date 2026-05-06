@@ -1,5 +1,16 @@
 # Change Log
 
+## 6.1.0
+
+### Minor Changes
+
+- [#265](https://github.com/tommy351/kubernetes-models-ts/pull/265) [`8d48ea5`](https://github.com/tommy351/kubernetes-models-ts/commit/8d48ea533dd01efd46d4e929f1b0141f264bfd47) Thanks [@tommy351](https://github.com/tommy351)! - Speed up model generation by reading multiple generator inputs concurrently.
+
+### Patch Changes
+
+- Updated dependencies [[`6ee2377`](https://github.com/tommy351/kubernetes-models-ts/commit/6ee2377f7a0596fb04b78e8cbc1bad575f645916)]:
+  - @kubernetes-models/generate@3.1.0
+
 ## 6.0.0
 
 ### Major Changes
