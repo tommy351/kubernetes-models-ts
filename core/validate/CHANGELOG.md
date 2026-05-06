@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.2
+
+### Patch Changes
+
+- [`b0e92b1`](https://github.com/tommy351/kubernetes-models-ts/commit/b0e92b1d3940d8b2df5c042fa395a50c42d2a8e5) Thanks [@tommy351](https://github.com/tommy351)! - Remove tslib.
+
 ## 5.0.1
 
 ### Patch Changes
