@@ -31,9 +31,6 @@
   "engines": {
     "node": ">=22"
   },
-  "dependencies": {
-    "tslib": "^2.4.0"
-  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }

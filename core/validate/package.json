@@ -43,8 +43,7 @@
     "ajv-formats": "^3.0.1",
     "ajv-formats-draft2019": "^1.6.1",
     "ajv-i18n": "^4.2.0",
-    "is-cidr": "^6.0.4",
-    "tslib": "^2.4.0"
+    "is-cidr": "^6.0.4"
   },
   "devDependencies": {
     "typescript": "^6.0.3",

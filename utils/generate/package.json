@@ -40,8 +40,7 @@
     "indent-string": "^5.0.0",
     "ohash": "^2.0.11",
     "p-map": "^7.0.4",
-    "re2-wasm": "^1.0.2",
-    "tslib": "^2.4.0"
+    "re2-wasm": "^1.0.2"
   },
   "devDependencies": {
     "typescript": "^6.0.3"
