@@ -1,24 +1,28 @@
 import type { Schema, SchemaTransformer } from "./types.js";
-import { omit, omitBy, uniq } from "es-toolkit";
+import { escapeRegExp, omit, omitBy, uniq } from "es-toolkit";
 import { Ajv, _ } from "ajv";
 import standaloneCodeMod from "ajv/dist/standalone/index.js";
 import assert from "node:assert";
 import { formats } from "@kubernetes-models/validate";
-import { ParseResult, parse } from "@babel/parser";
-import traverseMod from "@babel/traverse";
-import * as t from "@babel/types";
-import { generate } from "@babel/generator";
 import { SchemaEnv, type SchemaRefs } from "ajv/dist/compile/index.js";
 import { serialize, digest } from "ohash";
 import nullableRef from "./nullable-ref.js";
 import pattern from "./pattern.js";
+import { Worker } from "node:worker_threads";
+import { availableParallelism } from "node:os";
 
 const ajv = new Ajv();
 const standaloneCode =
   standaloneCodeMod as unknown as typeof standaloneCodeMod.default;
-const traverse = traverseMod.default;
 
-const AJV_RUNTIME_PREFIX = "ajv/dist/runtime/";
+const FORMAT_IMPORT = `import { formats } from "@kubernetes-models/validate";\n`;
+const FORMAT_REQUIRE = `require("FORMATS")`;
+const PARALLEL_SCHEMA_THRESHOLD = 32;
+
+export interface CompileSchemaTask {
+  schema: Schema;
+  refs: Record<string, string>;
+}
 
 export function collectRefs(data: Record<string, unknown>): string[] {
   const refs = Object.keys(data).map((key) => {
@@ -221,152 +225,165 @@ function collectValidateNames(refs: SchemaRefs): Map<string, string> {
   return names;
 }
 
-/**
- * Remove `"use strict"` directive.
- */
-function removeDirectives(ast: ParseResult<t.File>): void {
-  traverse(ast, {
-    Program(path) {
-      path.node.directives = [];
-    },
-  });
+interface Range {
+  start: number;
+  end: number;
 }
 
-/**
- * Remove `export default` declaration.
- */
-function removeDefaultExport(ast: ParseResult<t.File>): void {
-  traverse(ast, {
-    ExportDefaultDeclaration(path) {
-      path.remove();
-    },
-  });
+interface Replacement extends Range {
+  value: string;
 }
 
-/**
- * Replace validate function of referenced schemas with import statement.
- */
-function replaceValidateFunction(
-  ast: ParseResult<t.File>,
+// Ajv standalone validator params never contain `)` (only identifiers,
+// destructuring with simple defaults, and the trailing `={}`), so `[^)]*`
+// reliably spans them and the regex captures the full head through the body's
+// opening `{`. Body braces still need balanced scanning.
+function findFunctionDeclaration(
+  code: string,
+  name: string,
+): Range | undefined {
+  const re = new RegExp(
+    `(^|\\n)function ${escapeRegExp(name)}\\([^)]*\\)\\s*\\{`,
+  );
+  const match = re.exec(code);
+  if (!match) return;
+
+  const start = match.index + match[1].length;
+  const bodyStart = match.index + match[0].length - 1;
+  const bodyEnd = findMatchingDelimiter(code, bodyStart, "{", "}");
+
+  if (bodyEnd < 0) {
+    throw new Error(`Malformed function declaration: ${name}`);
+  }
+
+  return {
+    start,
+    end: code[bodyEnd + 1] === "\n" ? bodyEnd + 2 : bodyEnd + 1,
+  };
+}
+
+// Returns the index of the matching `close` delimiter starting from `start`,
+// or -1 if unmatched. Skips delimiters inside double-quoted strings — the only
+// construct in Ajv-standalone helper-validator bodies that can embed braces.
+function findMatchingDelimiter(
+  code: string,
+  start: number,
+  open: string,
+  close: string,
+): number {
+  let depth = 0;
+
+  for (let i = start; i < code.length; i++) {
+    const char = code[i];
+
+    if (char === '"') {
+      i = skipString(code, i);
+      continue;
+    }
+
+    if (char === open) {
+      depth++;
+    } else if (char === close) {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+
+  return -1;
+}
+
+function skipString(code: string, start: number): number {
+  for (let i = start + 1; i < code.length; i++) {
+    if (code[i] === "\\") {
+      i++;
+      continue;
+    }
+    if (code[i] === '"') return i;
+  }
+
+  return code.length;
+}
+
+function replaceFunctionDeclarations(
+  code: string,
   names: Map<string, string>,
   refs: Record<string, string>,
-): void {
-  traverse(ast, {
-    FunctionDeclaration(path) {
-      if (!path.node.id) return;
+): string {
+  const replacements: Replacement[] = [];
 
-      const id = names.get(path.node.id.name);
-      if (!id) return;
+  for (const [name, id] of names) {
+    const ref = refs[id];
+    if (!ref) continue;
 
-      const ref = refs[id];
-      if (!ref) return;
+    const declaration = findFunctionDeclaration(code, name);
+    if (!declaration) {
+      throw new Error(`Cannot find validation function: ${name}`);
+    }
 
-      path.replaceWith(
-        t.importDeclaration(
-          [
-            t.importSpecifier(
-              t.identifier(path.node.id.name),
-              t.identifier("validate"),
-            ),
-          ],
-          t.stringLiteral(ref),
-        ),
+    replacements.push({
+      ...declaration,
+      value: `import { validate as ${name} } from ${JSON.stringify(ref)};\n`,
+    });
+  }
+
+  return applyReplacements(code, replacements);
+}
+
+function applyReplacements(
+  code: string,
+  replacements: readonly Replacement[],
+): string {
+  let output = "";
+  let index = 0;
+
+  for (const replacement of [...replacements].sort(
+    (a, b) => a.start - b.start,
+  )) {
+    if (replacement.start < index) {
+      throw new Error(
+        `Overlapping replacement at offset ${replacement.start} (previous ended at ${index})`,
       );
-    },
-  });
+    }
+
+    output += code.slice(index, replacement.start) + replacement.value;
+    index = replacement.end;
+  }
+
+  return output + code.slice(index);
 }
 
-/**
- * Replace `const func = require("ajv/dist/runtime/*")` with import statement.
- */
-function replaceRuntimeRequire(ast: ParseResult<t.File>): void {
-  traverse(ast, {
-    VariableDeclaration(path) {
-      const filtered = new Set<number>();
+function rewriteRuntimeImports(code: string): string {
+  return code.replace(
+    /^const ([A-Za-z_$][\w$]*) = require\("ajv\/dist\/runtime\/([^"]+)"\)\.([A-Za-z_$][\w$]*);\n?/gm,
+    (_, name: string, runtimePath: string, property: string) => {
+      const importPath = "@kubernetes-models/validate/runtime/" + runtimePath;
 
-      for (let i = 0; i < path.node.declarations.length; i++) {
-        const { id, init } = path.node.declarations[i];
-
-        if (
-          !t.isIdentifier(id) ||
-          !t.isMemberExpression(init) ||
-          !t.isCallExpression(init.object) ||
-          !t.isIdentifier(init.property) ||
-          !t.isIdentifier(init.object.callee) ||
-          init.object.callee.name !== "require" ||
-          init.object.arguments.length !== 1 ||
-          !t.isStringLiteral(init.object.arguments[0])
-        ) {
-          continue;
-        }
-
-        const importPath = init.object.arguments[0].value;
-        if (!importPath.startsWith(AJV_RUNTIME_PREFIX)) continue;
-
-        filtered.add(i);
-        path.insertBefore(
-          t.importDeclaration(
-            [
-              init.property.name === "default"
-                ? t.importDefaultSpecifier(id)
-                : t.importSpecifier(id, init.property),
-            ],
-            t.stringLiteral(
-              "@kubernetes-models/validate/runtime/" +
-                importPath.substring(AJV_RUNTIME_PREFIX.length),
-            ),
-          ),
-        );
+      if (property === "default") {
+        return `import ${name} from ${JSON.stringify(importPath)};\n`;
       }
 
-      if (!filtered.size) return;
-
-      const vars = path.node.declarations.filter((_, i) => !filtered.has(i));
-
-      if (vars.length) {
-        path.replaceWith(t.variableDeclaration(path.node.kind, vars));
-      } else {
-        path.remove();
-      }
+      return `import { ${property} as ${name} } from ${JSON.stringify(
+        importPath,
+      )};\n`;
     },
-  });
+  );
 }
 
-/**
- * Replace `require("FORMATS")` with import statement.
- */
-function replaceFormatRequire(ast: ParseResult<t.File>): void {
-  let formatsImported = false;
+function rewriteStandaloneCode(
+  code: string,
+  names: Map<string, string>,
+  refs: Record<string, string>,
+): string {
+  const usesFormats = code.includes(FORMAT_REQUIRE);
+  let output = code;
 
-  traverse(ast, {
-    CallExpression(path) {
-      if (
-        t.isIdentifier(path.node.callee) &&
-        path.node.callee.name === "require" &&
-        path.node.arguments.length === 1 &&
-        t.isStringLiteral(path.node.arguments[0]) &&
-        path.node.arguments[0].value === "FORMATS"
-      ) {
-        if (!formatsImported) {
-          formatsImported = true;
+  output = output.replace(/^"use strict";\n?/, "");
+  output = output.replace(/^export default [A-Za-z_$][\w$]*;\n?/m, "");
+  output = rewriteRuntimeImports(output);
+  output = replaceFunctionDeclarations(output, names, refs);
+  output = output.replaceAll(FORMAT_REQUIRE, "formats");
 
-          ast.program.body.unshift(
-            t.importDeclaration(
-              [
-                t.importSpecifier(
-                  t.identifier("formats"),
-                  t.identifier("formats"),
-                ),
-              ],
-              t.stringLiteral("@kubernetes-models/validate"),
-            ),
-          );
-        }
-
-        path.replaceWith(t.identifier("formats"));
-      }
-    },
-  });
+  return usesFormats ? FORMAT_IMPORT + output : output;
 }
 
 export async function compileSchema(
@@ -381,6 +398,9 @@ export async function compileSchema(
       esm: true,
       formats: _`require("FORMATS")`,
       lines: true,
+      // SWC minifies published validators later; skipping Ajv's optimizer speeds
+      // generation with negligible minified output size impact.
+      optimize: 0,
     },
     inlineRefs: false,
     keywords: [
@@ -389,6 +409,10 @@ export async function compileSchema(
     ],
     formats,
     messages: false,
+    // transformSchema already validates generator input. Avoid adding meta
+    // schemas or validating the same split validator graph during compilation.
+    meta: false,
+    validateSchema: false,
   });
 
   // Override the default pattern keyword to support RE2.
@@ -421,15 +445,119 @@ export async function compileSchema(
 
   // Generate standalone code
   const code = standaloneCode(ajv, validate);
-  const ast = parse(code, { sourceType: "module" });
 
-  removeDirectives(ast);
-  removeDefaultExport(ast);
-  replaceValidateFunction(ast, validateNames, refs);
-  replaceRuntimeRequire(ast);
-  replaceFormatRequire(ast);
+  return rewriteStandaloneCode(code, validateNames, refs);
+}
 
-  const result = generate(ast, {}, code);
+async function compileSchemasSequentially(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  const output: string[] = [];
 
-  return result.code;
+  for (const task of tasks) {
+    output.push(await compileSchema(task.schema, task.refs));
+  }
+
+  return output;
+}
+
+interface WorkerMessage {
+  id: number;
+  code?: string;
+  error?: {
+    message: string;
+    name?: string;
+    stack?: string;
+  };
+}
+
+function deserializeWorkerError(error: WorkerMessage["error"]): Error {
+  const err = new Error(error?.message ?? "Schema worker failed");
+
+  if (error?.name) err.name = error.name;
+  if (error?.stack) err.stack = error.stack;
+
+  return err;
+}
+
+function compileSchemaInWorker(
+  worker: Worker,
+  id: number,
+  task: CompileSchemaTask,
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    function cleanup(): void {
+      worker.off("message", onMessage);
+      worker.off("error", onError);
+    }
+
+    function onMessage(message: WorkerMessage): void {
+      if (message.id !== id) return;
+
+      cleanup();
+
+      if (message.error) {
+        reject(deserializeWorkerError(message.error));
+      } else if (message.code !== undefined) {
+        resolve(message.code);
+      } else {
+        reject(new Error("Schema worker returned an empty response"));
+      }
+    }
+
+    function onError(err: Error): void {
+      cleanup();
+      reject(err);
+    }
+
+    worker.on("message", onMessage);
+    worker.on("error", onError);
+    worker.postMessage({ id, ...task });
+  });
+}
+
+function spawnWorkers(count: number): Worker[] {
+  return Array.from(
+    { length: count },
+    () => new Worker(new URL("./schema-worker.js", import.meta.url)),
+  );
+}
+
+async function compileSchemasInParallel(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  const workerCount = Math.min(
+    Math.max(availableParallelism() - 1, 1),
+    tasks.length,
+  );
+  const workers = spawnWorkers(workerCount);
+  const output = new Array<string>(tasks.length);
+  let nextIndex = 0;
+
+  try {
+    await Promise.all(
+      workers.map(async (worker) => {
+        while (nextIndex < tasks.length) {
+          const index = nextIndex++;
+          output[index] = await compileSchemaInWorker(
+            worker,
+            index,
+            tasks[index],
+          );
+        }
+      }),
+    );
+  } finally {
+    await Promise.all(workers.map((worker) => worker.terminate()));
+  }
+
+  return output;
+}
+
+export async function compileSchemas(
+  tasks: readonly CompileSchemaTask[],
+): Promise<string[]> {
+  return tasks.length < PARALLEL_SCHEMA_THRESHOLD
+    ? compileSchemasSequentially(tasks)
+    : compileSchemasInParallel(tasks);
 }

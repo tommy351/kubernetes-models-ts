@@ -30,14 +30,14 @@ const VERSIONS = [
 ];
 
 async function fetchSpec(): Promise<Document> {
-  const specs: OpenAPIV2.Document[] = [];
+  const specs = await Promise.all(
+    VERSIONS.map(async (ver) => {
+      const url = `https://raw.githubusercontent.com/tommy351/kubernetes-openapi-spec/main/openapi/${ver}.json`;
 
-  for (const ver of VERSIONS) {
-    const url = `https://raw.githubusercontent.com/tommy351/kubernetes-openapi-spec/main/openapi/${ver}.json`;
-
-    console.log("Reading:", url);
-    specs.push(JSON.parse(await readInput(url)));
-  }
+      console.log("Reading:", url);
+      return JSON.parse(await readInput(url)) as OpenAPIV2.Document;
+    }),
+  );
 
   return mergeOpenAPISpecs<Document>(specs);
 }

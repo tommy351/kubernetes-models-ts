@@ -1,7 +1,7 @@
 import {
   type Generator,
   transformSchema,
-  compileSchema,
+  compileSchemas,
   type OutputFile,
 } from "@kubernetes-models/generate";
 import { getSchemaPath } from "../utils.js";
@@ -9,21 +9,27 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 
 const generateSchemas: Generator = async (definitions) => {
   const files: OutputFile[] = [];
+  const tasks = definitions.map((def) => ({
+    schema: { ...transformSchema(def.schema), $id: def.schemaId },
+    refs: {
+      "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta":
+        "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta",
+    },
+  }));
+  const schemas = await compileSchemas(tasks);
 
-  for (const def of definitions) {
-    const schema = { ...transformSchema(def.schema), $id: def.schemaId };
+  for (let i = 0; i < definitions.length; i++) {
+    const def = definitions[i];
+    const path = getSchemaPath(def.schemaId);
 
     files.push(
       {
-        path: getSchemaPath(def.schemaId),
-        content: await compileSchema(schema, {
-          "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta":
-            "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkgApisMetaV1ObjectMeta",
-        }),
+        path,
+        content: schemas[i],
       },
       // TODO: Move this to @kubernetes-models/generate
       {
-        path: trimSuffix(getSchemaPath(def.schemaId), ".js") + ".d.ts",
+        path: trimSuffix(path, ".js") + ".d.ts",
         content: `export function validate(data: unknown): boolean;`,
       },
     );

@@ -5,10 +5,12 @@ import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { execa } from "execa";
 import * as swc from "@swc/core";
 import { fileURLToPath } from "node:url";
+import pMap from "p-map";
 
 const ECMA_VERSION = 2024;
 const DTS_EXT = ".d.ts";
 const JS_EXT = ".js";
+const CONCURRENCY = 4;
 
 function sortObjectByKey<T extends Record<string, unknown>>(input: T): T {
   const entries = Object.entries(input).sort((a, b) =>
@@ -68,15 +70,22 @@ async function writeJs({
   srcPath: string;
   dstPath: string;
 }): Promise<void> {
-  const transformResult = await swc.transformFile(srcPath, {
-    jsc: {
-      target: `es${ECMA_VERSION}`,
-      loose: true,
-    },
-    module: { type: "nodenext" },
-  });
+  // Generators emit standalone validators as plain JS already; only TS sources
+  // need SWC's transform pass before minification.
+  const code =
+    extname(srcPath) === JS_EXT
+      ? await readFile(srcPath, "utf8")
+      : (
+          await swc.transformFile(srcPath, {
+            jsc: {
+              target: `es${ECMA_VERSION}`,
+              loose: true,
+            },
+            module: { type: "nodenext" },
+          })
+        ).code;
 
-  const minifyResult = await swc.minify(transformResult.code, {
+  const minifyResult = await swc.minify(code, {
     compress: {
       toplevel: true,
       ecma: ECMA_VERSION,
@@ -98,33 +107,45 @@ async function compileJs(cwd: string): Promise<void> {
     ignore: ["**/*.d.ts"],
   });
 
-  for (const path of srcPaths) {
-    const srcPath = join(genDir, path);
-    const ext = extname(path);
-    const name = path.substring(0, path.length - ext.length);
+  await pMap(
+    srcPaths,
+    async (path) => {
+      const srcPath = join(genDir, path);
+      const ext = extname(path);
+      const name = path.substring(0, path.length - ext.length);
 
-    console.log("Transforming:", `gen/${path}`);
+      console.log("Transforming:", `gen/${path}`);
 
-    await writeJs({
-      srcPath,
-      dstPath: join(distDir, name + JS_EXT),
-    });
-  }
+      await writeJs({
+        srcPath,
+        dstPath: join(distDir, name + JS_EXT),
+      });
+    },
+    {
+      concurrency: CONCURRENCY,
+    },
+  );
 }
 
 async function copySchemaDts(cwd: string): Promise<void> {
   const genDir = join(cwd, "gen");
   const paths = await glob(["_schemas/**/*.d.ts"], { cwd: genDir });
 
-  for (const path of paths) {
-    const src = join(genDir, path);
-    const dst = join(cwd, "dist", path);
+  await pMap(
+    paths,
+    async (path) => {
+      const src = join(genDir, path);
+      const dst = join(cwd, "dist", path);
 
-    console.log("Copying:", path);
+      console.log("Copying:", path);
 
-    await mkdir(dirname(dst), { recursive: true });
-    await copyFile(src, dst);
-  }
+      await mkdir(dirname(dst), { recursive: true });
+      await copyFile(src, dst);
+    },
+    {
+      concurrency: CONCURRENCY,
+    },
+  );
 }
 
 async function copyDistFiles(cwd: string): Promise<void> {
@@ -161,8 +182,7 @@ export interface BuildArguments {
 
 export async function build(args: BuildArguments): Promise<void> {
   await rm(join(args.cwd, "dist"), { recursive: true, force: true });
-  await compileDts(args.cwd);
-  await compileJs(args.cwd);
+  await Promise.all([compileDts(args.cwd), compileJs(args.cwd)]);
 
   if (args["include-hidden"]) {
     await copySchemaDts(args.cwd);
