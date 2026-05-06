@@ -1,4 +1,3 @@
-import { isPlainObject } from "es-toolkit/predicate";
 import {
   type ValidateFunc,
   runValidateFunc,
@@ -16,6 +15,31 @@ function setDefinedProps<D extends object>(src: object, dst: D): D {
   }
 
   return dst;
+}
+
+/**
+ * Returns true if the value is a plain object.
+ *
+ * Copied from: https://github.com/toss/es-toolkit/blob/0e8656da6afbe08952e78dcf2cd53d326d12c2f6/src/predicate/isPlainObject.ts#L43
+ */
+function isPlainObject(value: unknown): value is Record<PropertyKey, any> {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const proto = Object.getPrototypeOf(value) as typeof Object.prototype | null;
+
+  const hasObjectPrototype =
+    proto === null ||
+    proto === Object.prototype ||
+    // Required to support node:vm.runInNewContext({})
+    Object.getPrototypeOf(proto) === null;
+
+  if (!hasObjectPrototype) {
+    return false;
+  }
+
+  return Object.prototype.toString.call(value) === "[object Object]";
 }
 
 function filterUndefinedValues(data: unknown): unknown {
