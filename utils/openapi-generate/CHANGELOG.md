@@ -1,5 +1,16 @@
 # Change Log
 
+## 6.1.1
+
+### Patch Changes
+
+- [`b0e92b1`](https://github.com/tommy351/kubernetes-models-ts/commit/b0e92b1d3940d8b2df5c042fa395a50c42d2a8e5) Thanks [@tommy351](https://github.com/tommy351)! - Remove tslib.
+
+- Updated dependencies [[`b0e92b1`](https://github.com/tommy351/kubernetes-models-ts/commit/b0e92b1d3940d8b2df5c042fa395a50c42d2a8e5)]:
+  - @kubernetes-models/string-util@4.0.1
+  - @kubernetes-models/read-input@4.0.1
+  - @kubernetes-models/generate@3.1.1
+
 ## 6.1.0
 
 ### Minor Changes

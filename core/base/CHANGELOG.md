@@ -1,5 +1,16 @@
 # Change Log
 
+## 6.0.1
+
+### Patch Changes
+
+- [`b0e92b1`](https://github.com/tommy351/kubernetes-models-ts/commit/b0e92b1d3940d8b2df5c042fa395a50c42d2a8e5) Thanks [@tommy351](https://github.com/tommy351)! - Remove tslib.
+
+- [`0573eb5`](https://github.com/tommy351/kubernetes-models-ts/commit/0573eb53fd90e93c34e8b44d3ffb8c7e9ec81c39) Thanks [@tommy351](https://github.com/tommy351)! - Remove es-toolkit dependency.
+
+- Updated dependencies [[`b0e92b1`](https://github.com/tommy351/kubernetes-models-ts/commit/b0e92b1d3940d8b2df5c042fa395a50c42d2a8e5)]:
+  - @kubernetes-models/validate@5.0.2
+
 ## 6.0.0
 
 ### Major Changes
