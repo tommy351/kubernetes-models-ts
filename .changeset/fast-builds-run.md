@@ -1,8 +1,6 @@
 ---
-"kubernetes-models": patch
-"@kubernetes-models/crd-generate": patch
-"@kubernetes-models/generate": patch
-"@kubernetes-models/openapi-generate": patch
+"@kubernetes-models/crd-generate": minor
+"@kubernetes-models/openapi-generate": minor
 ---
 
-Speed up model generation by reading multiple generator inputs concurrently, compiling schema validators with worker threads, tuning Ajv for standalone validator generation, rewriting generated validator imports without Babel, skipping repeated schema validation during validator compilation, and writing generated files with bounded parallelism.
+Speed up model generation by reading multiple generator inputs concurrently.
