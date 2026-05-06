@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/prometheus-operator",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "type": "module",
   "description": "Kubernetes prometheus-operator models",
   "repository": {

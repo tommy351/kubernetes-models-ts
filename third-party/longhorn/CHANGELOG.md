@@ -1,5 +1,14 @@
 # @kubernetes-models/longhorn
 
+## 1.0.1
+
+### Patch Changes
+
+- [`211b982`](https://github.com/tommy351/kubernetes-models-ts/commit/211b9824d8d4ccfd7e42bfea7522faa4a6b59dcb) Thanks [@tommy351](https://github.com/tommy351)! - Bump version to avoid using deprecated dependencies.
+
+- Updated dependencies [[`211b982`](https://github.com/tommy351/kubernetes-models-ts/commit/211b9824d8d4ccfd7e42bfea7522faa4a6b59dcb)]:
+  - @kubernetes-models/apimachinery@3.0.2
+
 ## 1.0.0
 
 ### Major Changes

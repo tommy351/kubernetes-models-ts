@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/apimachinery",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "type": "module",
   "description": "Types for Kubernetes API objects",
   "repository": {
