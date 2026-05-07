@@ -1,4 +1,4 @@
-import type { Generator, GroupVersionKind, OutputFile } from "./types.js";
+import type { Generator, GroupVersion, OutputFile } from "./types.js";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import pMap from "p-map";
@@ -61,6 +61,6 @@ export async function writeOutputFiles(
   );
 }
 
-export function getAPIVersion({ group, version }: GroupVersionKind): string {
+export function getAPIVersion({ group, version }: GroupVersion): string {
   return group ? `${group}/${version}` : version;
 }

@@ -236,6 +236,25 @@ importers:
         specifier: ^17.0.13
         version: 17.0.35
 
+  internal/go-generate:
+    dependencies:
+      '@kubernetes-models/generate':
+        specifier: workspace:^
+        version: link:../../utils/generate
+      '@kubernetes-models/string-util':
+        specifier: workspace:^
+        version: link:../../utils/string-util
+      execa:
+        specifier: ^9.6.1
+        version: 9.6.1
+      yargs:
+        specifier: ^18.0.0
+        version: 18.0.0
+    devDependencies:
+      '@types/yargs':
+        specifier: ^17.0.13
+        version: 17.0.35
+
   internal/publish-scripts:
     dependencies:
       '@swc/core':
@@ -1192,10 +1211,13 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-    devDependencies:
-      '@kubernetes-models/crd-generate':
+      kubernetes-models:
         specifier: workspace:^
-        version: link:../../utils/crd-generate
+        version: link:../../first-party/kubernetes-models/dist
+    devDependencies:
+      '@kubernetes-models/go-generate':
+        specifier: workspace:^
+        version: link:../../internal/go-generate
       '@kubernetes-models/publish-scripts':
         specifier: workspace:^
         version: link:../../internal/publish-scripts
