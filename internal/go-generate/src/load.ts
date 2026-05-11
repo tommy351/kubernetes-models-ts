@@ -5,9 +5,11 @@ import { fileURLToPath } from "node:url";
 export interface Context {
   schemata: Record<string, Schema>;
   packages: Record<string, Package>;
+  roots: string[];
 }
 
 export interface Package extends GroupVersion {
+  goPath: string;
   kinds?: string[];
 }
 

@@ -5,6 +5,7 @@ import {
   transformSchema,
   type Generator,
 } from "@kubernetes-models/generate";
+import type { Context } from "../load.js";
 import {
   getQualifiedClassName,
   getRelativePath,
@@ -17,6 +18,10 @@ const externalSchemaDirs: { prefix: string; dir: string }[] = [
   {
     prefix: "io.k8s.apimachinery.pkg.",
     dir: "@kubernetes-models/apimachinery/_schemas",
+  },
+  {
+    prefix: "io.k8s.sigs.gateway-api.",
+    dir: "@kubernetes-models/gateway-api/_schemas",
   },
   { prefix: "io.k8s.", dir: "kubernetes-models/_schemas" },
 ];
@@ -31,37 +36,37 @@ function getExternalSchemaPath(ref: string): string {
   return ref;
 }
 
-const generateSchema: Generator = async (definitions) => {
-  const tasks = definitions.map((def): CompileSchemaTask => {
-    const schema = transformSchema(def.schema);
-    const refIds = collectRefs(def.schema);
-    const refPaths = Object.fromEntries(
-      refIds.map((ref) => [
-        ref,
-        isExternalRef(ref)
-          ? getExternalSchemaPath(ref)
-          : getRelativePath(getSchemaPath(def.schemaId), getSchemaPath(ref)),
-      ]),
-    );
+export default function generateSchema(ctx: Context): Generator {
+  return async (definitions) => {
+    const tasks = definitions.map((def): CompileSchemaTask => {
+      const schema = transformSchema(def.schema);
+      const refIds = collectRefs(def.schema);
+      const refPaths = Object.fromEntries(
+        refIds.map((ref) => [
+          ref,
+          isExternalRef(ctx, ref)
+            ? getExternalSchemaPath(ref)
+            : getRelativePath(getSchemaPath(def.schemaId), getSchemaPath(ref)),
+        ]),
+      );
 
-    return { schema, refs: refPaths };
-  });
-  const schemas = await compileSchemas(tasks);
+      return { schema, refs: refPaths };
+    });
+    const schemas = await compileSchemas(tasks);
 
-  return definitions.flatMap((def, i) => {
-    const path = getSchemaPath(def.schemaId);
+    return definitions.flatMap((def, i) => {
+      const path = getSchemaPath(def.schemaId);
 
-    return [
-      {
-        path,
-        content: schemas[i],
-      },
-      {
-        path: trimSuffix(path, ".js") + ".d.ts",
-        content: "export function validate(data: unknown): boolean;",
-      },
-    ];
-  });
-};
-
-export default generateSchema;
+      return [
+        {
+          path,
+          content: schemas[i],
+        },
+        {
+          path: trimSuffix(path, ".js") + ".d.ts",
+          content: "export function validate(data: unknown): boolean;",
+        },
+      ];
+    });
+  };
+}

@@ -154,14 +154,21 @@ func (r *Runner) Run() error {
 	}
 
 	inlineSchemata := collectInlineEnums(parser, roots)
+	addBuiltinInlines(inlineSchemata)
 
 	output := Output{
 		Schemata: map[string]extv1.JSONSchemaProps{},
 		Packages: map[string]Package{},
+		Roots:    make([]string, 0, len(roots)),
+	}
+
+	for _, root := range roots {
+		output.Roots = append(output.Roots, openapiutil.ToRESTFriendlyName(root.ID))
 	}
 
 	for pkg, gv := range parser.GroupVersions {
 		output.Packages[openapiutil.ToRESTFriendlyName(pkg.ID)] = Package{
+			GoPath:  pkg.ID,
 			Group:   gv.Group,
 			Version: gv.Version,
 			Kinds:   pkgKinds[pkg.ID],

@@ -33,11 +33,11 @@ export async function generate(options: GenerateOptions): Promise<void> {
   const ctx = await load(options.input);
   const generator = composeGenerators([
     generateDefinition(ctx),
-    generateSchema,
+    generateSchema(ctx),
     generateAlias(ctx),
   ]);
   const definitions = Object.entries(ctx.schemata)
-    .filter(([id]) => !isExternalRef(id))
+    .filter(([id]) => !isExternalRef(ctx, id))
     .map(([id, schema]): Definition => {
       const gvk = getGVK(ctx, id);
 

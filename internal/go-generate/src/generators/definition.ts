@@ -35,6 +35,10 @@ const externalRefReplacements: {
     prefix: "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.",
     replacement: "kubernetes-models/apiextensions.k8s.io/",
   },
+  {
+    prefix: "io.k8s.sigs.gateway-api.apis.",
+    replacement: "@kubernetes-models/gateway-api/gateway.networking.k8s.io/",
+  },
 ];
 
 function getExternalDefinitionPath(ref: string): string {
@@ -142,7 +146,7 @@ export default function generateDefinition(ctx: Context): Generator {
       for (const ref of refs) {
         imports.push({
           name: getQualifiedInterfaceName(ref),
-          path: isExternalRef(ref)
+          path: isExternalRef(ctx, ref)
             ? getExternalDefinitionPath(ref)
             : getRelativePath(path, getInternalDefinitionPath(ctx, ref)) +
               ".js",

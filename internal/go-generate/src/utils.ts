@@ -29,17 +29,26 @@ const externalRefPrefixes = [
   "io.k8s.apimachinery.",
   "io.k8s.api.",
   "io.k8s.apiextensions-apiserver.",
+  "io.k8s.sigs.gateway-api.",
 ];
 
-export function isExternalRef(ref: string): boolean {
+function getPackageId(ref: string): string {
+  const index = ref.lastIndexOf(".");
+  return index === -1 ? "" : ref.slice(0, index);
+}
+
+export function isExternalRef(ctx: Context, ref: string): boolean {
+  // Refs whose package is one of our generation inputs stay internal even
+  // when their prefix matches an external library (a library generating
+  // its own types).
+  if (ctx.roots.includes(getPackageId(ref))) return false;
   return externalRefPrefixes.some((p) => ref.startsWith(p));
 }
 
 export function getPackage(ctx: Context, id: string): Package | undefined {
-  const index = id.lastIndexOf(".");
-  if (index === -1) return;
-
-  return ctx.packages[id.slice(0, index)];
+  const pkgId = getPackageId(id);
+  if (!pkgId) return;
+  return ctx.packages[pkgId];
 }
 
 export function getKind(id: string): string {
@@ -49,5 +58,8 @@ export function getKind(id: string): string {
 export function getInternalDefinitionPath(ctx: Context, ref: string): string {
   const pkg = getPackage(ctx, ref);
   if (!pkg) return ref;
-  return `${getAPIVersion(pkg)}/${getKind(ref)}`;
+  // Packages without a GroupVersion fall back to their Go import path so
+  // transitively-loaded helpers stay grouped instead of polluting gen root.
+  const dir = pkg.group || pkg.version ? getAPIVersion(pkg) : pkg.goPath;
+  return `${dir}/${getKind(ref)}`;
 }
