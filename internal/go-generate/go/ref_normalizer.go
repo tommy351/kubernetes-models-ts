@@ -12,18 +12,14 @@ var _ crd.SchemaVisitor = (*refNormalizer)(nil)
 type refNormalizer struct{}
 
 func (r *refNormalizer) Visit(schema *extv1.JSONSchemaProps) crd.SchemaVisitor {
-	if schema == nil {
+	if schema == nil || schema.Ref == nil {
 		return r
 	}
 
-	if ref := schema.Ref; ref != nil {
-		if typ, pkgName, err := crd.RefParts(*ref); err == nil {
-			newRef := fmt.Sprintf("%s/%s", pkgName, typ)
-			schema.Ref = &newRef
-		}
-
-		return nil
+	if typ, pkgName, err := crd.RefParts(*schema.Ref); err == nil {
+		newRef := fmt.Sprintf("%s/%s", pkgName, typ)
+		schema.Ref = &newRef
 	}
 
-	return r
+	return nil
 }

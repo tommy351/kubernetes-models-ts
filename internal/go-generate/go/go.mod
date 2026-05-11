@@ -3,7 +3,6 @@ module github.com/tommy351/kubernetes-models-ts/internal/go-generate/go
 go 1.26
 
 require (
-	github.com/samber/lo v1.53.0
 	k8s.io/apiextensions-apiserver v0.35.2
 	sigs.k8s.io/controller-tools v0.20.1
 )

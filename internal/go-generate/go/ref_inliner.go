@@ -12,18 +12,17 @@ type refInliner struct {
 }
 
 func (r *refInliner) Visit(schema *extv1.JSONSchemaProps) crd.SchemaVisitor {
-	if schema == nil {
+	if schema == nil || schema.Ref == nil {
 		return r
 	}
 
-	if ref := schema.Ref; ref != nil {
-		if typ, pkgName, err := crd.RefParts(*ref); err == nil {
-			if types, ok := r.Schemata[pkgName]; ok {
-				if s, ok := types[typ]; ok {
-					s.DeepCopyInto(schema)
-				}
-			}
-		}
+	typ, pkgName, err := crd.RefParts(*schema.Ref)
+	if err != nil {
+		return r
+	}
+
+	if s, ok := r.Schemata[pkgName][typ]; ok {
+		s.DeepCopyInto(schema)
 	}
 
 	return r

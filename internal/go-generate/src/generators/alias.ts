@@ -8,10 +8,23 @@ function getIndexPath(key: string): string {
   return key ? `${key}/index.ts` : "index.ts";
 }
 
+function addTo(
+  map: Map<string, Set<string>>,
+  key: string,
+  value: string,
+): void {
+  let set = map.get(key);
+  if (!set) {
+    set = new Set();
+    map.set(key, set);
+  }
+  set.add(value);
+}
+
 export default function generateAlias(ctx: Context): Generator {
   return async (definitions) => {
-    const kindPathMap = new Map<string, string[]>();
-    const indexPathMap = new Map<string, string[]>();
+    const kindPathMap = new Map<string, Set<string>>();
+    const indexPathMap = new Map<string, Set<string>>();
     const output: OutputFile[] = [];
 
     for (const def of definitions) {
@@ -19,12 +32,7 @@ export default function generateAlias(ctx: Context): Generator {
       const dir = posix.dirname(defPath);
       const kind = posix.basename(defPath);
       const dirKey = dir === "." ? "" : dir;
-      const values = kindPathMap.get(dirKey) ?? [];
-
-      if (!values.includes(kind)) {
-        values.push(kind);
-        kindPathMap.set(dirKey, values);
-      }
+      addTo(kindPathMap, dirKey, kind);
     }
 
     for (const key of kindPathMap.keys()) {
@@ -33,13 +41,7 @@ export default function generateAlias(ctx: Context): Generator {
 
       for (let i = 0; i < segments.length; i++) {
         const parent = segments.slice(0, i).join("/");
-        const child = segments[i];
-        const values = indexPathMap.get(parent) ?? [];
-
-        if (!values.includes(child)) {
-          values.push(child);
-          indexPathMap.set(parent, values);
-        }
+        addTo(indexPathMap, parent, segments[i]);
       }
     }
 

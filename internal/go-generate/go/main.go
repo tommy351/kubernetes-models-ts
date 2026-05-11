@@ -38,8 +38,7 @@ func exitErr(format string, args ...any) {
 }
 
 type Runner struct {
-	RootDir string
-	Input   []string
+	Input []string
 }
 
 func (r *Runner) Run() error {
@@ -88,7 +87,6 @@ func (r *Runner) Run() error {
 			}
 
 			for _, name := range []string{kind.Kind, kind.Kind + "List"} {
-				// Skip non-existent types
 				if parser.LookupType(pkg, name) == nil {
 					continue
 				}
@@ -122,19 +120,13 @@ func (r *Runner) Run() error {
 		var copied extv1.JSONSchemaProps
 		schema.DeepCopyInto(&copied)
 
-		// Replace TypeMeta with the actual GVK from the parser.
 		crd.EditSchema(&copied, &typeMetaReplacer{
 			APIVersion: gv.String(),
 			Kind:       id.Name,
 		})
-
-		// Add package name to references if not specified.
 		crd.EditSchema(&copied, &refPackageAdder{Fallback: id.Package.ID})
-
-		// Inline references in the schema because some types are not generated in the kubernetes-models package.
+		// Inline refs whose targets the TS side doesn't emit a standalone module for.
 		crd.EditSchema(&copied, &refInliner{Schemata: inlineSchemata})
-
-		// Normalize references to `${pkg}/${type}`.
 		crd.EditSchema(&copied, &refNormalizer{})
 
 		output.Schemata[id.Package.ID+"/"+id.Name] = copied

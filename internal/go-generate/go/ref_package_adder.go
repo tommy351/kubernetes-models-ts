@@ -12,20 +12,14 @@ type refPackageAdder struct {
 }
 
 func (r *refPackageAdder) Visit(schema *extv1.JSONSchemaProps) crd.SchemaVisitor {
-	if schema == nil {
+	if schema == nil || schema.Ref == nil {
 		return r
 	}
 
-	if ref := schema.Ref; ref != nil {
-		if typ, pkgName, err := crd.RefParts(*ref); err == nil {
-			if pkgName == "" {
-				newRef := crd.TypeRefLink(r.Fallback, typ)
-				schema.Ref = &newRef
-			}
-		}
-
-		return nil
+	if typ, pkgName, err := crd.RefParts(*schema.Ref); err == nil && pkgName == "" {
+		newRef := crd.TypeRefLink(r.Fallback, typ)
+		schema.Ref = &newRef
 	}
 
-	return r
+	return nil
 }

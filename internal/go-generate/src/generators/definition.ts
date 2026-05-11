@@ -16,7 +16,7 @@ import {
   isExternalRef,
 } from "../utils.js";
 import assert from "node:assert";
-import { Context } from "../load.js";
+import type { Context } from "../load.js";
 
 const externalRefReplacements: {
   prefix: string;
@@ -171,10 +171,10 @@ export default function generateDefinition(ctx: Context): Generator {
         ...(flatSchema ? collectRefs(flatSchema) : []),
       ]);
       const refNames = buildRefNameMap(refs);
-      const getRefType = (ref: string): string =>
-        refNames.get(ref)?.alias ??
-        refNames.get(ref)?.name ??
-        getInterfaceName(ref);
+      const getRefType = (ref: string): string => {
+        const entry = refNames.get(ref);
+        return entry?.alias ?? entry?.name ?? getInterfaceName(ref);
+      };
       let content = "";
       let comment = "";
 
