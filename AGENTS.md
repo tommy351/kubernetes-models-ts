@@ -84,7 +84,7 @@ Per-package wiring:
 
 - `package.json` declares `"build": "go-generate && publish-scripts build"`, adds `@kubernetes-models/go-generate` as a devDependency and `kubernetes-models` as a regular dep (core K8s types are imported from there, `metav1.ObjectMeta` from `@kubernetes-models/apimachinery`), and lists Go package paths under `go-generate.input` (e.g. `sigs.k8s.io/gateway-api/apis/v1`).
 - A `go.mod` in the package root pins the upstream module and declares each input under `tool (...)`; `go mod tidy` fills the rest. The package directory is then added to the workspace's root `go.work` so a single `go run` from the helper resolves both.
-- Building requires Go on PATH (the `install-deps` GitHub Action sets this up). The helper at `internal/go-generate/go` is invoked with `go run`; its stdout JSON is piped into the TS generator at `internal/go-generate/src/generate.ts`.
+- Building requires Go on PATH (the `setup-go` GitHub Action sets this up). The helper at `internal/go-generate/go` is invoked with `go run`; its stdout JSON is piped into the TS generator at `internal/go-generate/src/generate.ts`.
 
 To bump the upstream Go module, edit the `require` line in the package's `go.mod`, `go mod tidy`, `pnpm run build --filter <pkg> --force`, `pnpm test --run third-party/<pkg>`. Add the changeset and commit as `feat(<pkg>): Update <module> to v<X.Y.Z>`.
 
