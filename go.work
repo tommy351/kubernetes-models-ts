@@ -4,6 +4,7 @@ use (
 	./internal/go-generate/go
 	./third-party/autoscaler
 	./third-party/cert-manager
+	./third-party/envoy-gateway
 	./third-party/gateway-api
 	./third-party/prometheus-operator
 )
