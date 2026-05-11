@@ -24,11 +24,11 @@ fi
 
 mapfile -t modules < <(go work edit -json | jq -r '.Use[].DiskPath')
 
+go work sync
+
 for dir in "${modules[@]}"; do
   (cd "$dir" && go mod tidy)
 done
-
-go work sync
 
 paths=(go.work go.work.sum)
 for dir in "${modules[@]}"; do

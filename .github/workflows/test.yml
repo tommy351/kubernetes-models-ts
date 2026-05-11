@@ -18,12 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-go
-      - name: Check go workspace is synced
-        shell: bash
-        run: |
-          set -euo pipefail
-          go work sync
-          git diff --exit-code
       - name: Check go.mod files are tidy
         shell: bash
         run: |
