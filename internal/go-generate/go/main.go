@@ -153,8 +153,7 @@ func (r *Runner) Run() error {
 		}
 	}
 
-	inlineSchemata := collectInlineEnums(parser, roots)
-	addBuiltinInlines(inlineSchemata)
+	inlineSchemata := collectInlineSchemata(parser, roots)
 
 	output := Output{
 		Schemata: map[string]extv1.JSONSchemaProps{},
