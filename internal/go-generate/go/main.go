@@ -8,6 +8,7 @@ import (
 	"os"
 
 	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	openapiutil "k8s.io/kube-openapi/pkg/util"
 	"sigs.k8s.io/controller-tools/pkg/crd"
 	crdmarkers "sigs.k8s.io/controller-tools/pkg/crd/markers"
 	"sigs.k8s.io/controller-tools/pkg/loader"
@@ -108,7 +109,7 @@ func (r *Runner) Run() error {
 	}
 
 	for pkg, gv := range parser.GroupVersions {
-		output.Packages[pkg.ID] = Package{
+		output.Packages[openapiutil.ToRESTFriendlyName(pkg.ID)] = Package{
 			Group:   gv.Group,
 			Version: gv.Version,
 			Kinds:   pkgKinds[pkg.ID],
@@ -131,7 +132,7 @@ func (r *Runner) Run() error {
 		crd.EditSchema(&copied, &refInliner{Schemata: inlineSchemata})
 		crd.EditSchema(&copied, &refNormalizer{})
 
-		output.Schemata[id.Package.ID+"/"+id.Name] = copied
+		output.Schemata[openapiutil.ToRESTFriendlyName(id.Package.ID+"."+id.Name)] = copied
 	}
 
 	encoder := json.NewEncoder(os.Stdout)

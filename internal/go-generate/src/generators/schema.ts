@@ -15,10 +15,10 @@ import { trimSuffix } from "@kubernetes-models/string-util";
 
 const externalSchemaDirs: { prefix: string; dir: string }[] = [
   {
-    prefix: "k8s.io/apimachinery/pkg/",
+    prefix: "io.k8s.apimachinery.pkg.",
     dir: "@kubernetes-models/apimachinery/_schemas",
   },
-  { prefix: "k8s.io/", dir: "kubernetes-models/_schemas" },
+  { prefix: "io.k8s.", dir: "kubernetes-models/_schemas" },
 ];
 
 function getExternalSchemaPath(ref: string): string {

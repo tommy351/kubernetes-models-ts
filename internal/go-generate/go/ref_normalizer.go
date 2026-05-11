@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
-
 	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	openapiutil "k8s.io/kube-openapi/pkg/util"
 	"sigs.k8s.io/controller-tools/pkg/crd"
 )
 
@@ -17,7 +16,7 @@ func (r *refNormalizer) Visit(schema *extv1.JSONSchemaProps) crd.SchemaVisitor {
 	}
 
 	if typ, pkgName, err := crd.RefParts(*schema.Ref); err == nil {
-		newRef := fmt.Sprintf("%s/%s", pkgName, typ)
+		newRef := openapiutil.ToRESTFriendlyName(pkgName + "." + typ)
 		schema.Ref = &newRef
 	}
 

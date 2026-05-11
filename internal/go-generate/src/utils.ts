@@ -4,14 +4,7 @@ import { camelCase, upperFirst } from "@kubernetes-models/string-util";
 import type { Context, Package } from "./load.js";
 
 export function getQualifiedClassName(id: string): string {
-  const slash = id.indexOf("/");
-  const normalized =
-    slash === -1
-      ? id
-      : id.slice(0, slash).split(".").reverse().join(".") +
-        "/" +
-        id.slice(slash + 1);
-  return upperFirst(camelCase(normalized, "./-"));
+  return upperFirst(camelCase(id, ".-"));
 }
 
 export function getQualifiedInterfaceName(id: string): string {
@@ -33,19 +26,18 @@ export function getRelativePath(from: string, to: string): string {
 }
 
 export function isExternalRef(ref: string): boolean {
-  return ref.startsWith("k8s.io/");
+  return ref.startsWith("io.k8s.");
 }
 
 export function getPackage(ctx: Context, id: string): Package | undefined {
-  const index = id.lastIndexOf("/");
+  const index = id.lastIndexOf(".");
   if (index === -1) return;
 
-  const pkg = ctx.packages[id.slice(0, index)];
-  return pkg;
+  return ctx.packages[id.slice(0, index)];
 }
 
 export function getKind(id: string): string {
-  return id.slice(id.lastIndexOf("/") + 1);
+  return id.slice(id.lastIndexOf(".") + 1);
 }
 
 export function getInternalDefinitionPath(ctx: Context, ref: string): string {

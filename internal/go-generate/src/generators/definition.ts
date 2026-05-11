@@ -11,6 +11,7 @@ import {
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import {
   getInternalDefinitionPath,
+  getKind,
   getQualifiedClassName,
   getQualifiedInterfaceName,
   getRelativePath,
@@ -25,30 +26,21 @@ const externalRefReplacements: {
   replacement: string;
 }[] = [
   {
-    prefix: "k8s.io/apimachinery/pkg/",
+    prefix: "io.k8s.apimachinery.pkg.",
     replacement: "@kubernetes-models/apimachinery/",
   },
-  { prefix: "k8s.io/api/core/", replacement: "kubernetes-models/" },
-  { prefix: "k8s.io/api/", replacement: "kubernetes-models/" },
+  { prefix: "io.k8s.api.core.", replacement: "kubernetes-models/" },
+  { prefix: "io.k8s.api.", replacement: "kubernetes-models/" },
   {
-    prefix: "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/",
+    prefix: "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.",
     replacement: "kubernetes-models/apiextensions.k8s.io/",
   },
 ];
 
-function getClassName(id: string): string {
-  const index = id.lastIndexOf("/");
-  return index === -1 ? id : id.slice(index + 1);
-}
-
-function getInterfaceName(id: string): string {
-  return "I" + getClassName(id);
-}
-
 function getExternalDefinitionPath(ref: string): string {
   for (const { prefix, replacement } of externalRefReplacements) {
     if (ref.startsWith(prefix)) {
-      return replacement + ref.substring(prefix.length);
+      return replacement + ref.substring(prefix.length).split(".").join("/");
     }
   }
 
@@ -122,8 +114,8 @@ function flattenEmbedded(ctx: Context, schema: Schema): Schema {
 export default function generateDefinition(ctx: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
-      const interfaceName = getInterfaceName(def.schemaId);
-      const className = getClassName(def.schemaId);
+      const className = getKind(def.schemaId);
+      const interfaceName = "I" + className;
       const qualifiedInterfaceName = getQualifiedInterfaceName(def.schemaId);
       const qualifiedClassName = getQualifiedClassName(def.schemaId);
       const gvk = def.gvk?.[0];
