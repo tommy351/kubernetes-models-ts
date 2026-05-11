@@ -37,33 +37,17 @@ func exitErr(format string, args ...any) {
 	os.Exit(1)
 }
 
-func stringEnum(values ...string) extv1.JSONSchemaProps {
-	enum := make([]extv1.JSON, len(values))
-	for i, v := range values {
-		raw, _ := json.Marshal(v)
-		enum[i] = extv1.JSON{Raw: raw}
-	}
-	return extv1.JSONSchemaProps{Type: "string", Enum: enum}
-}
-
-// inlineSchemata holds schemata that should be inlined at every ref site
-// because the TS side does not emit a standalone module for them.
-// Curated to include enum values that controller-tools cannot infer from
-// Go const declarations, so generated TS retains literal-union types.
-var inlineSchemata = map[string]map[string]extv1.JSONSchemaProps{
-	"k8s.io/api/core/v1": {
-		"PullPolicy":                    stringEnum("Always", "IfNotPresent", "Never"),
-		"NodeInclusionPolicy":           stringEnum("Honor", "Ignore"),
-		"UnsatisfiableConstraintAction": stringEnum("DoNotSchedule", "ScheduleAnyway"),
-	},
-}
-
 type Runner struct {
 	RootDir string
 	Input   []string
 }
 
 func (r *Runner) Run() error {
+	inlineSchemata, err := buildInlineSchemata()
+	if err != nil {
+		return fmt.Errorf("build inline schemata: %w", err)
+	}
+
 	roots, err := loader.LoadRoots(r.Input...)
 	if err != nil {
 		return fmt.Errorf("load roots: %w", err)
