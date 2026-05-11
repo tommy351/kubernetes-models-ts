@@ -60,8 +60,7 @@ function allowNull(schema: Schema): Schema {
     } else if (v.type) {
       newProps[k] = { ...v, nullable: true };
     } else if (v.$ref) {
-      const { $ref, ...rest } = v;
-      newProps[k] = { ...rest, nullableRef: $ref };
+      newProps[k] = { ...omit(v, ["$ref", "nullable"]), nullableRef: v.$ref };
     } else {
       newProps[k] = v;
     }
