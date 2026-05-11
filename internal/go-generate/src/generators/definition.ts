@@ -8,7 +8,12 @@ import {
   generateInterface,
   getAPIVersion,
 } from "@kubernetes-models/generate";
-import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
+import {
+  camelCase,
+  formatComment,
+  trimSuffix,
+  upperFirst,
+} from "@kubernetes-models/string-util";
 import {
   getInternalDefinitionPath,
   getRelativePath,
@@ -43,41 +48,19 @@ function getInterfaceName(id: string): string {
   return "I" + getClassName(id);
 }
 
-function getQualifiedInterfaceName(ref: string): string {
-  return (
-    "I" +
-    ref
-      .split(/[/.-]/g)
-      .filter(Boolean)
-      .map((s) => s[0].toUpperCase() + s.slice(1))
-      .join("")
-  );
+function getQualifiedClassName(id: string): string {
+  const slash = id.indexOf("/");
+  const normalized =
+    slash === -1
+      ? id
+      : id.slice(0, slash).split(".").reverse().join(".") +
+        "/" +
+        id.slice(slash + 1);
+  return upperFirst(camelCase(normalized, "./-"));
 }
 
-function buildRefNameMap(refs: Iterable<string>): Map<string, Import> {
-  const groups = new Map<string, string[]>();
-  for (const ref of refs) {
-    const base = getInterfaceName(ref);
-    const list = groups.get(base) ?? [];
-    list.push(ref);
-    groups.set(base, list);
-  }
-
-  const map = new Map<string, Import>();
-  for (const [base, group] of groups) {
-    if (group.length === 1) {
-      map.set(group[0], { name: base, path: "" });
-    } else {
-      for (const ref of group) {
-        map.set(ref, {
-          name: base,
-          alias: getQualifiedInterfaceName(ref),
-          path: "",
-        });
-      }
-    }
-  }
-  return map;
+function getQualifiedInterfaceName(id: string): string {
+  return "I" + getQualifiedClassName(id);
 }
 
 function getExternalDefinitionPath(ref: string): string {
@@ -159,6 +142,8 @@ export default function generateDefinition(ctx: Context): Generator {
     return definitions.map((def) => {
       const interfaceName = getInterfaceName(def.schemaId);
       const className = getClassName(def.schemaId);
+      const qualifiedInterfaceName = getQualifiedInterfaceName(def.schemaId);
+      const qualifiedClassName = getQualifiedClassName(def.schemaId);
       const gvk = def.gvk?.[0];
       const imports: Import[] = [];
       const path = "./" + getInternalDefinitionPath(ctx, def.schemaId) + ".ts";
@@ -170,11 +155,7 @@ export default function generateDefinition(ctx: Context): Generator {
         ...collectRefs(def.schema),
         ...(flatSchema ? collectRefs(flatSchema) : []),
       ]);
-      const refNames = buildRefNameMap(refs);
-      const getRefType = (ref: string): string => {
-        const entry = refNames.get(ref);
-        return entry?.alias ?? entry?.name ?? getInterfaceName(ref);
-      };
+      const getRefType = getQualifiedInterfaceName;
       let content = "";
       let comment = "";
 
@@ -185,10 +166,8 @@ export default function generateDefinition(ctx: Context): Generator {
       }
 
       for (const ref of refs) {
-        const entry = refNames.get(ref)!;
         imports.push({
-          name: entry.name,
-          ...(entry.alias && { alias: entry.alias }),
+          name: getQualifiedInterfaceName(ref),
           path: isExternalRef(ref)
             ? getExternalDefinitionPath(ref)
             : getRelativePath(path, getInternalDefinitionPath(ctx, ref)) +
@@ -278,6 +257,13 @@ ${comment}export type ${interfaceName} = ${typing};
 export type ${className} = ${interfaceName};
       `;
       }
+
+      content += `
+export type {
+  ${interfaceName} as ${qualifiedInterfaceName},
+  ${className} as ${qualifiedClassName}
+};
+`;
 
       if (imports.length) {
         content = generateImports(imports) + "\n" + content;
