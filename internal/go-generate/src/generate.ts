@@ -7,6 +7,7 @@ import {
 import { type Context, load } from "./load.js";
 import generateDefinition from "./generators/definition.js";
 import generateSchema from "./generators/schema.js";
+import generateAlias from "./generators/alias.js";
 import { getKind, getPackage, isExternalRef } from "./utils.js";
 
 function getGVK(ctx: Context, id: string): GroupVersionKind | undefined {
@@ -33,6 +34,7 @@ export async function generate(options: GenerateOptions): Promise<void> {
   const generator = composeGenerators([
     generateDefinition(ctx),
     generateSchema,
+    generateAlias(ctx),
   ]);
   const definitions = Object.entries(ctx.schemata)
     .filter(([id]) => !isExternalRef(id))

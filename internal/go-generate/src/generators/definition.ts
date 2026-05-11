@@ -10,8 +10,7 @@ import {
 } from "@kubernetes-models/generate";
 import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import {
-  getKind,
-  getPackage,
+  getInternalDefinitionPath,
   getRelativePath,
   getSchemaPath,
   isExternalRef,
@@ -89,12 +88,6 @@ function getExternalDefinitionPath(ref: string): string {
   }
 
   return ref;
-}
-
-function getInternalDefinitionPath(ctx: Context, ref: string): string {
-  const pkg = getPackage(ctx, ref);
-  if (!pkg) return ref;
-  return `${getAPIVersion(pkg)}/${getKind(ref)}`;
 }
 
 /**
