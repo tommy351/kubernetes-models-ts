@@ -30,8 +30,8 @@ This file provides guidance to coding agents when working with code in this repo
 ```sh
 pnpm install                 # bootstrap (Node >=22, pnpm >=11 required)
 pnpm run build               # turbo build across workspace (concurrency 4)
-pnpm run build -- --filter <pkg>    # build a single package (Turbo --filter)
-pnpm run build -- --force           # force rebuild, bypass Turbo cache
+pnpm run build --filter <pkg>    # build a single package (Turbo --filter)
+pnpm run build --force           # force rebuild, bypass Turbo cache
 pnpm run clean               # remove dist/, gen/, *.tsbuildinfo from every package
 pnpm test                    # run vitest across the repo
 pnpm vitest path/to/file     # run a single test file
@@ -41,7 +41,7 @@ pnpm exec syncpack fix-mismatches   # align cross-workspace dep versions
 pnpm changeset               # add a changelog entry (Conventional Commits style)
 ```
 
-Always build from the repo root via `pnpm run build` so Turbo orders dependencies correctly; pass `-- --filter <pkg>` to scope to one package and `-- --force` to bypass the Turbo cache. A typical third-party package's `build` script is `crd-generate && publish-scripts build`; `kubernetes-models` runs `node scripts/generate.ts && publish-scripts build` instead.
+Always build from the repo root via `pnpm run build` so Turbo orders dependencies correctly; pass `--filter <pkg>` to scope to one package and `--force` to bypass the Turbo cache. A typical third-party package's `build` script is `crd-generate && publish-scripts build`; `kubernetes-models` runs `node scripts/generate.ts && publish-scripts build` instead.
 
 ### Adding a new third-party CRD package
 
@@ -49,7 +49,7 @@ Always build from the repo root via `pnpm run build` so Turbo orders dependencie
 pnpm run new-crd-package --name '<pkg>' --description '...' --author 'Name <email>'
 pnpm install
 # edit third-party/<pkg>/package.json: fill crd-generate.input with CRD URLs/paths
-pnpm run build -- --filter @kubernetes-models/<pkg>
+pnpm run build --filter @kubernetes-models/<pkg>
 # add README.md and __tests__/ (see existing packages)
 ```
 
