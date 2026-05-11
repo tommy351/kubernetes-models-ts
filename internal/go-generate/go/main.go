@@ -42,11 +42,6 @@ type Runner struct {
 }
 
 func (r *Runner) Run() error {
-	inlineSchemata, err := buildInlineSchemata()
-	if err != nil {
-		return fmt.Errorf("build inline schemata: %w", err)
-	}
-
 	roots, err := loader.LoadRoots(r.Input...)
 	if err != nil {
 		return fmt.Errorf("load roots: %w", err)
@@ -56,6 +51,10 @@ func (r *Runner) Run() error {
 
 	if err := crdmarkers.Register(registry); err != nil {
 		return fmt.Errorf("register crd markers: %w", err)
+	}
+
+	if err := registry.Define(enumMarker, markers.DescribesType, struct{}{}); err != nil {
+		return fmt.Errorf("register enum marker: %w", err)
 	}
 
 	parser := &crd.Parser{
@@ -101,6 +100,8 @@ func (r *Runner) Run() error {
 		}
 	}
 
+	inlineSchemata := collectInlineEnums(parser, roots)
+
 	output := Output{
 		Schemata: map[string]extv1.JSONSchemaProps{},
 		Packages: map[string]Package{},
@@ -125,7 +126,8 @@ func (r *Runner) Run() error {
 			Kind:       id.Name,
 		})
 		crd.EditSchema(&copied, &refPackageAdder{Fallback: id.Package.ID})
-		// Inline refs whose targets the TS side doesn't emit a standalone module for.
+		// Inline refs to external `+enum` types — the TS side doesn't
+		// emit standalone modules for them.
 		crd.EditSchema(&copied, &refInliner{Schemata: inlineSchemata})
 		crd.EditSchema(&copied, &refNormalizer{})
 

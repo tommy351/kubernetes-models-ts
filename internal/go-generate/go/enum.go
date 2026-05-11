@@ -2,14 +2,18 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"go/constant"
 	"go/types"
 	"sort"
 
 	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	"sigs.k8s.io/controller-tools/pkg/crd"
 	"sigs.k8s.io/controller-tools/pkg/loader"
 )
+
+// enumMarker is the kubernetes-convention doc marker (`// +enum`) that
+// flags a named type as a string-enum.
+const enumMarker = "enum"
 
 func stringEnum(values []string) extv1.JSONSchemaProps {
 	enum := make([]extv1.JSON, len(values))
@@ -18,14 +22,6 @@ func stringEnum(values []string) extv1.JSONSchemaProps {
 		enum[i] = extv1.JSON{Raw: raw}
 	}
 	return extv1.JSONSchemaProps{Type: "string", Enum: enum}
-}
-
-// inlineEnumTypes lists named string-enum types whose schemata should be
-// inlined at every ref site because the TS side does not emit a standalone
-// module for them. Values are collected from the package's Go const decls at
-// runtime so the schema stays in sync with upstream additions.
-var inlineEnumTypes = map[string][]string{
-	"k8s.io/api/core/v1": {"PullPolicy", "NodeInclusionPolicy", "UnsatisfiableConstraintAction"},
 }
 
 // collectStringEnum returns a string-enum JSON schema built from every
@@ -62,32 +58,41 @@ func collectStringEnum(pkg *loader.Package, typeName string) (extv1.JSONSchemaPr
 	return stringEnum(values), true
 }
 
-func buildInlineSchemata() (map[string]map[string]extv1.JSONSchemaProps, error) {
-	out := map[string]map[string]extv1.JSONSchemaProps{}
-
-	for pkgID, typeNames := range inlineEnumTypes {
-		roots, err := loader.LoadRoots(pkgID)
-		if err != nil {
-			return nil, fmt.Errorf("load %s: %w", pkgID, err)
-		}
-
-		if len(roots) == 0 {
-			return nil, fmt.Errorf("package %s not found", pkgID)
-		}
-
-		pkgOut := map[string]extv1.JSONSchemaProps{}
-
-		for _, typeName := range typeNames {
-			schema, ok := collectStringEnum(roots[0], typeName)
-			if !ok {
-				return nil, fmt.Errorf("no string consts found for %s.%s", pkgID, typeName)
-			}
-
-			pkgOut[typeName] = schema
-		}
-
-		out[pkgID] = pkgOut
+// collectInlineEnums scans every type indexed by the parser for the
+// `+enum` marker and returns a map of inline schemata keyed by package
+// import path and type name. Types declared in one of the input root
+// packages are skipped — the TS side emits standalone modules for those
+// already; only enums from transitively-loaded external packages need
+// to be inlined.
+func collectInlineEnums(parser *crd.Parser, roots []*loader.Package) map[string]map[string]extv1.JSONSchemaProps {
+	rootSet := make(map[*loader.Package]struct{}, len(roots))
+	for _, root := range roots {
+		rootSet[root] = struct{}{}
 	}
 
-	return out, nil
+	out := map[string]map[string]extv1.JSONSchemaProps{}
+
+	for id, info := range parser.Types {
+		if info.Markers.Get(enumMarker) == nil {
+			continue
+		}
+
+		if _, isRoot := rootSet[id.Package]; isRoot {
+			continue
+		}
+
+		schema, ok := collectStringEnum(id.Package, info.Name)
+		if !ok {
+			continue
+		}
+
+		pkgOut, ok := out[id.Package.ID]
+		if !ok {
+			pkgOut = map[string]extv1.JSONSchemaProps{}
+			out[id.Package.ID] = pkgOut
+		}
+		pkgOut[info.Name] = schema
+	}
+
+	return out
 }
