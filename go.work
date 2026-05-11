@@ -2,5 +2,6 @@ go 1.26.2
 
 use (
 	./internal/go-generate/go
+	./third-party/gateway-api
 	./third-party/prometheus-operator
 )

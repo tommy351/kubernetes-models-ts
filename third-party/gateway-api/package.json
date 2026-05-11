@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,22 +31,21 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.6.2/standard-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/experimental-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml",
-      "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/experimental-install.yaml"
+      "sigs.k8s.io/gateway-api/apis/v1",
+      "sigs.k8s.io/gateway-api/apis/v1alpha2",
+      "sigs.k8s.io/gateway-api/apis/v1alpha3",
+      "sigs.k8s.io/gateway-api/apis/v1beta1",
+      "sigs.k8s.io/gateway-api/apisx/v1alpha1"
     ],
     "output": "./gen"
   }

@@ -25,8 +25,14 @@ export function getRelativePath(from: string, to: string): string {
   return path;
 }
 
+const externalRefPrefixes = [
+  "io.k8s.apimachinery.",
+  "io.k8s.api.",
+  "io.k8s.apiextensions-apiserver.",
+];
+
 export function isExternalRef(ref: string): boolean {
-  return ref.startsWith("io.k8s.");
+  return externalRefPrefixes.some((p) => ref.startsWith(p));
 }
 
 export function getPackage(ctx: Context, id: string): Package | undefined {
