@@ -6,6 +6,7 @@ use (
 	./third-party/cert-manager
 	./third-party/envoy-gateway
 	./third-party/gateway-api
+	./third-party/keda
 	./third-party/knative
 	./third-party/prometheus-operator
 )
