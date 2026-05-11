@@ -8,14 +8,11 @@ import {
   generateInterface,
   getAPIVersion,
 } from "@kubernetes-models/generate";
-import {
-  camelCase,
-  formatComment,
-  trimSuffix,
-  upperFirst,
-} from "@kubernetes-models/string-util";
+import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import {
   getInternalDefinitionPath,
+  getQualifiedClassName,
+  getQualifiedInterfaceName,
   getRelativePath,
   getSchemaPath,
   isExternalRef,
@@ -46,21 +43,6 @@ function getClassName(id: string): string {
 
 function getInterfaceName(id: string): string {
   return "I" + getClassName(id);
-}
-
-function getQualifiedClassName(id: string): string {
-  const slash = id.indexOf("/");
-  const normalized =
-    slash === -1
-      ? id
-      : id.slice(0, slash).split(".").reverse().join(".") +
-        "/" +
-        id.slice(slash + 1);
-  return upperFirst(camelCase(normalized, "./-"));
-}
-
-function getQualifiedInterfaceName(id: string): string {
-  return "I" + getQualifiedClassName(id);
 }
 
 function getExternalDefinitionPath(ref: string): string {

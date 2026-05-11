@@ -5,35 +5,26 @@ import {
   transformSchema,
   type Generator,
 } from "@kubernetes-models/generate";
-import { getRelativePath, getSchemaPath, isExternalRef } from "../utils.js";
+import {
+  getQualifiedClassName,
+  getRelativePath,
+  getSchemaPath,
+  isExternalRef,
+} from "../utils.js";
 import { trimSuffix } from "@kubernetes-models/string-util";
 
-const externalRefReplacements: {
-  prefix: string;
-  replacement: string;
-}[] = [
+const externalSchemaDirs: { prefix: string; dir: string }[] = [
   {
     prefix: "k8s.io/apimachinery/pkg/",
-    replacement:
-      "@kubernetes-models/apimachinery/_schemas/IoK8sApimachineryPkg",
+    dir: "@kubernetes-models/apimachinery/_schemas",
   },
-  {
-    prefix: "k8s.io/",
-    replacement: "kubernetes-models/_schemas/IoK8s",
-  },
+  { prefix: "k8s.io/", dir: "kubernetes-models/_schemas" },
 ];
 
-function camelCasePath(path: string): string {
-  return path
-    .split("/")
-    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-    .join("");
-}
-
 function getExternalSchemaPath(ref: string): string {
-  for (const { prefix, replacement } of externalRefReplacements) {
+  for (const { prefix, dir } of externalSchemaDirs) {
     if (ref.startsWith(prefix)) {
-      return replacement + camelCasePath(ref.substring(prefix.length));
+      return `${dir}/${getQualifiedClassName(ref)}`;
     }
   }
 

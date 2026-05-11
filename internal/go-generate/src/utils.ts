@@ -1,14 +1,25 @@
 import { posix } from "node:path";
 import { getAPIVersion } from "@kubernetes-models/generate";
+import { camelCase, upperFirst } from "@kubernetes-models/string-util";
 import type { Context, Package } from "./load.js";
 
-export function getSchemaPath(id: string): string {
-  const name = id
-    .split(/[-/.]/g)
-    .map((s) => s[0].toUpperCase() + s.slice(1))
-    .join("");
+export function getQualifiedClassName(id: string): string {
+  const slash = id.indexOf("/");
+  const normalized =
+    slash === -1
+      ? id
+      : id.slice(0, slash).split(".").reverse().join(".") +
+        "/" +
+        id.slice(slash + 1);
+  return upperFirst(camelCase(normalized, "./-"));
+}
 
-  return `_schemas/${name}.js`;
+export function getQualifiedInterfaceName(id: string): string {
+  return "I" + getQualifiedClassName(id);
+}
+
+export function getSchemaPath(id: string): string {
+  return `_schemas/${getQualifiedClassName(id)}.js`;
 }
 
 export function getRelativePath(from: string, to: string): string {
