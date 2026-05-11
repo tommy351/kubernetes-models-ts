@@ -16,7 +16,7 @@ This file provides guidance to coding agents when working with code in this repo
 - `first-party/` — Kubernetes API models.
   - `first-party/apimachinery`: shared `apimachinery` types.
   - `first-party/kubernetes-models`: top-level `kubernetes-models` package; built by `scripts/generate.ts` against the upstream OpenAPI schema using `@kubernetes-models/openapi-generate`.
-- `third-party/` — one package per third-party CRD set (Argo, Cilium, Istio, …). Each package has a `crd-generate.input` array of CRD URLs/paths in its `package.json` and is built by `crd-generate`.
+- `third-party/` — one package per third-party CRD set (Argo, Cilium, Istio, …). Most have a `crd-generate.input` array of CRD URLs/paths in `package.json` and are built by `crd-generate`; a few (`prometheus-operator`, `gateway-api`) use `go-generate` instead — see "Generating from Go sources" below.
 - `utils/` — generators and helpers used at build time.
   - `crd-generate`, `openapi-generate`: the two code generators that emit `gen/`.
   - `generate`: shared types/utilities the generators import.
@@ -24,6 +24,7 @@ This file provides guidance to coding agents when working with code in this repo
 - `internal/` — private (unpublished) tooling.
   - `publish-scripts`: the `publish-scripts build` / `publish-scripts prepack` CLI used by generated model packages (see "Generated model build pipeline").
   - `diff-crd-inputs`: dev tool for diffing CRD input lists.
+  - `go-generate`: alternative model generator (`go-generate` CLI) that extracts schemata from upstream Go API packages instead of CRD YAML. See "Generating from Go sources".
 
 ## Common Commands
 
@@ -41,7 +42,7 @@ pnpm exec syncpack fix-mismatches   # align cross-workspace dep versions
 pnpm changeset               # add a changelog entry (Conventional Commits style)
 ```
 
-Always build from the repo root via `pnpm run build` so Turbo orders dependencies correctly; pass `--filter <pkg>` to scope to one package and `--force` to bypass the Turbo cache. A typical third-party package's `build` script is `crd-generate && publish-scripts build`; `kubernetes-models` runs `node scripts/generate.ts && publish-scripts build` instead.
+Always build from the repo root via `pnpm run build` so Turbo orders dependencies correctly; pass `--filter <pkg>` to scope to one package and `--force` to bypass the Turbo cache. A typical third-party package's `build` script is `crd-generate && publish-scripts build`; packages on go-generate use `go-generate && publish-scripts build`; `kubernetes-models` runs `node scripts/generate.ts && publish-scripts build` instead.
 
 ### Adding a new third-party CRD package
 
@@ -74,6 +75,20 @@ For each package, work one at a time and only commit if every step succeeds:
    Update CRDs to v<X.Y.Z>.
    ```
 8. Commit as `feat(<pkg>): Update CRDs to v<X.Y.Z>`.
+
+### Generating from Go sources (go-generate)
+
+`@kubernetes-models/go-generate` is an alternative to `crd-generate` that reads schemata directly from a project's Go API packages via controller-tools, instead of post-CRD YAML. It produces the same `gen/` layout (`gen/<group>/<version>/<Kind>.ts` plus `gen/_schemas/`) so `publish-scripts build` consumes it identically. Prefer this when upstream ships Go types (e.g. operators using `+kubebuilder` markers) — non-CRD root types and shared structs surface as named TypeScript interfaces (`IFooSpec`) instead of being reachable only via `IFoo['spec']`.
+
+Per-package wiring:
+
+- `package.json` declares `"build": "go-generate && publish-scripts build"`, adds `@kubernetes-models/go-generate` as a devDependency and `kubernetes-models` as a regular dep (core K8s types are imported from there, `metav1.ObjectMeta` from `@kubernetes-models/apimachinery`), and lists Go package paths under `go-generate.input` (e.g. `sigs.k8s.io/gateway-api/apis/v1`).
+- A `go.mod` in the package root pins the upstream module and declares each input under `tool (...)`; `go mod tidy` fills the rest. The package directory is then added to the workspace's root `go.work` so a single `go run` from the helper resolves both.
+- Building requires Go on PATH (the `install-deps` GitHub Action sets this up). The helper at `internal/go-generate/go` is invoked with `go run`; its stdout JSON is piped into the TS generator at `internal/go-generate/src/generate.ts`.
+
+To bump the upstream Go module, edit the `require` line in the package's `go.mod`, `go mod tidy`, `pnpm run build --filter <pkg> --force`, `pnpm test --run third-party/<pkg>`. Add the changeset and commit as `feat(<pkg>): Update <module> to v<X.Y.Z>`.
+
+To migrate a `crd-generate` package to `go-generate`: swap the `build` script and `crd-generate` → `go-generate` config block in `package.json`; add `kubernetes-models` to deps and `@kubernetes-models/go-generate` to devDeps; create `go.mod` with the upstream module and `tool` directives; append the package path to `go.work`; rerun `pnpm install` and `go mod tidy`. The migration is a major bump (field-type names change from indexed access to `I<Kind><Field>` aliases).
 
 ## Generated Model Build Pipeline (publish-scripts)
 
