@@ -124,7 +124,7 @@ export default function generateDefinition(ctx: Context): Generator {
       const qualifiedClassName = getQualifiedClassName(def.schemaId);
       const gvk = def.gvk?.[0];
       const imports: Import[] = [];
-      const path = "./" + getInternalDefinitionPath(ctx, def.schemaId) + ".ts";
+      const path = getInternalDefinitionPath(ctx, def.schemaId) + ".ts";
       const schemaPath = getRelativePath(path, getSchemaPath(def.schemaId));
       // Map-alias schemas (`type Foo map[K]V` → object with only
       // `additionalProperties`) must emit as a type alias; their index
