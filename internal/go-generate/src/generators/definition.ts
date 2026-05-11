@@ -126,9 +126,16 @@ export default function generateDefinition(ctx: Context): Generator {
       const imports: Import[] = [];
       const path = "./" + getInternalDefinitionPath(ctx, def.schemaId) + ".ts";
       const schemaPath = getRelativePath(path, getSchemaPath(def.schemaId));
+      // Map-alias schemas (`type Foo map[K]V` → object with only
+      // `additionalProperties`) must emit as a type alias; their index
+      // signature is incompatible with the methods Model adds to the class.
+      const shouldEmitClass =
+        def.schema.type === "object" &&
+        (def.schema.properties || def.schema.allOf || gvk);
       // Schema embeddings must be flattened to implement the interface.
-      const flatSchema =
-        def.schema.type === "object" ? flattenEmbedded(ctx, def.schema) : null;
+      const flatSchema = shouldEmitClass
+        ? flattenEmbedded(ctx, def.schema)
+        : null;
       const refs = new Set([
         ...collectRefs(def.schema),
         ...(flatSchema ? collectRefs(flatSchema) : []),
