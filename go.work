@@ -16,6 +16,7 @@ use (
 	./third-party/grafana-agent-operator
 	./third-party/grafana-operator
 	./third-party/hierarchical-namespaces
+	./third-party/jaeger-operator
 	./third-party/keda
 	./third-party/knative
 	./third-party/prometheus-operator
