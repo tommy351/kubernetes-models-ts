@@ -1,2 +1,2 @@
 pnpm lint-staged
-scripts/go-tidy-sync.sh
+node scripts/go-tidy-sync.ts
