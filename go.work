@@ -10,6 +10,7 @@ use (
 	./third-party/contour
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
+	./third-party/external-secrets
 	./third-party/gateway-api
 	./third-party/keda
 	./third-party/knative
