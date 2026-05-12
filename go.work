@@ -6,6 +6,7 @@ use (
 	./third-party/autoscaler
 	./third-party/cert-manager
 	./third-party/cilium
+	./third-party/cloudnative-pg
 	./third-party/envoy-gateway
 	./third-party/gateway-api
 	./third-party/keda
