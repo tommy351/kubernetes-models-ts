@@ -13,7 +13,7 @@ jobs:
       - uses: ./.github/actions/build-packages
       - name: Lint files
         run: pnpm run lint
-  go-check:
+  go-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -27,11 +27,6 @@ jobs:
             (cd "$dir" && go mod tidy -diff)
             echo "::endgroup::"
           done
-  go-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-go
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v8
         with:
