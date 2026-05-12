@@ -21,5 +21,6 @@ use (
 	./third-party/keda
 	./third-party/knative
 	./third-party/longhorn
+	./third-party/milvus-operator
 	./third-party/prometheus-operator
 )
