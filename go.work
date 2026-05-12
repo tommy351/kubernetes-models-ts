@@ -28,4 +28,5 @@ use (
 	./third-party/rabbitmq-cluster-operator
 	./third-party/rabbitmq-messaging-topology-operator
 	./third-party/seldon-core-operator
+	./third-party/smi
 )
