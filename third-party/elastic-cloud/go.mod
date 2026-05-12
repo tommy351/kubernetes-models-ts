@@ -28,7 +28,7 @@ tool (
 )
 
 require (
-	github.com/armon/go-radix v1.0.0 // indirect
+	github.com/armon/go-radix v1.0.1-0.20221118154546-54df44f2176c // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/elastic/cloud-on-k8s/v3 v3.3.2 // indirect
