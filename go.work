@@ -31,4 +31,5 @@ use (
 	./third-party/smi
 	./third-party/spicedb
 	./third-party/spiffe
+	./third-party/thanos-operator
 )
