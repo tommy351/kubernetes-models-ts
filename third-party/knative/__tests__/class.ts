@@ -11,6 +11,7 @@ describe("Service", () => {
         spec: {
           containers: [
             {
+              name: "user-container",
               image: "gcr.io/knative-samples/helloworld-go",
               ports: [{ containerPort: 8080 }],
             },
@@ -43,6 +44,7 @@ describe("Service", () => {
           spec: {
             containers: [
               {
+                name: "user-container",
                 image: "gcr.io/knative-samples/helloworld-go",
                 ports: [{ containerPort: 8080 }],
               },

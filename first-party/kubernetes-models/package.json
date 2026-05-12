@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "node scripts/generate.ts && publish-scripts build",
+    "build": "node scripts/generate.ts && publish-scripts build --include-hidden",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {

@@ -1,7 +1,10 @@
-export interface GroupVersionKind {
+export interface GroupVersion {
   group: string;
-  kind: string;
   version: string;
+}
+
+export interface GroupVersionKind extends GroupVersion {
+  kind: string;
 }
 
 export interface Schema {

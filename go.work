@@ -1,0 +1,12 @@
+go 1.26.2
+
+use (
+	./internal/go-generate/go
+	./third-party/autoscaler
+	./third-party/cert-manager
+	./third-party/envoy-gateway
+	./third-party/gateway-api
+	./third-party/keda
+	./third-party/knative
+	./third-party/prometheus-operator
+)

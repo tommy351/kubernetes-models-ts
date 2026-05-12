@@ -1,0 +1,9 @@
+name: Set up Go
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-go@v6
+      with:
+        go-version-file: go.work
+        cache-dependency-path: "**/go.sum"

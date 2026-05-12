@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,23 +31,35 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://github.com/knative/serving/releases/download/knative-v1.10.1/serving-crds.yaml",
-      "https://github.com/knative/eventing/releases/download/knative-v1.10.0/eventing-crds.yaml",
-      "https://github.com/knative/operator/releases/download/knative-v1.10.0/operator.yaml",
-      "https://github.com/knative/serving/releases/download/knative-v1.22.0/serving-crds.yaml",
-      "https://github.com/knative/eventing/releases/download/knative-v1.22.0/eventing-crds.yaml",
-      "https://github.com/knative/operator/releases/download/knative-v1.22.0/operator.yaml"
+      "knative.dev/serving/pkg/apis/serving/v1",
+      "knative.dev/serving/pkg/apis/serving/v1alpha1",
+      "knative.dev/serving/pkg/apis/serving/v1beta1",
+      "knative.dev/serving/pkg/apis/autoscaling/v1alpha1",
+      "knative.dev/eventing/pkg/apis/eventing/v1",
+      "knative.dev/eventing/pkg/apis/eventing/v1alpha1",
+      "knative.dev/eventing/pkg/apis/eventing/v1beta1",
+      "knative.dev/eventing/pkg/apis/eventing/v1beta2",
+      "knative.dev/eventing/pkg/apis/eventing/v1beta3",
+      "knative.dev/eventing/pkg/apis/flows/v1",
+      "knative.dev/eventing/pkg/apis/messaging/v1",
+      "knative.dev/eventing/pkg/apis/sinks/v1alpha1",
+      "knative.dev/eventing/pkg/apis/sources/v1",
+      "knative.dev/eventing/pkg/apis/sources/v1alpha1",
+      "knative.dev/eventing/pkg/apis/sources/v1beta2",
+      "knative.dev/operator/pkg/apis/operator/v1beta1",
+      "knative.dev/networking/pkg/apis/networking/v1alpha1",
+      "knative.dev/caching/pkg/apis/caching/v1alpha1"
     ],
-    "output": "./gen",
-    "yamlVersion": "1.1"
+    "output": "./gen"
   }
 }

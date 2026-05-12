@@ -1,0 +1,24 @@
+{
+  "name": "@kubernetes-models/go-generate",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "go-generate": "./bin/go-generate.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/generate": "workspace:^",
+    "@kubernetes-models/string-util": "workspace:^",
+    "execa": "^9.6.1",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.13"
+  }
+}

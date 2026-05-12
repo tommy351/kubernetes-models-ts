@@ -32,7 +32,11 @@ export function collectRefs(data: Record<string, unknown>): string[] {
       return [val];
     }
 
-    if (typeof val === "object" && !Array.isArray(val)) {
+    if (Array.isArray(val)) {
+      return val.flatMap(collectRefs);
+    }
+
+    if (typeof val === "object") {
       return collectRefs(val as Record<string, unknown>);
     }
 
@@ -56,8 +60,7 @@ function allowNull(schema: Schema): Schema {
     } else if (v.type) {
       newProps[k] = { ...v, nullable: true };
     } else if (v.$ref) {
-      const { $ref, ...rest } = v;
-      newProps[k] = { ...rest, nullableRef: $ref };
+      newProps[k] = { ...omit(v, ["$ref", "nullable"]), nullableRef: v.$ref };
     } else {
       newProps[k] = v;
     }

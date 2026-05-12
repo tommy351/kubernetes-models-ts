@@ -1,4 +1,4 @@
-name: Install Node.js dependencies
+name: Set up Node.js
 
 inputs:
   node-version:
