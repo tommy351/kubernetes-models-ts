@@ -1,5 +1,18 @@
 # @kubernetes-models/knative
 
+## 4.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`91661f4`](https://github.com/tommy351/kubernetes-models-ts/commit/91661f424db7e155da1e115047f04aa9620551f6) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — knative.dev/serving v0.49.0, knative.dev/eventing v0.49.0, knative.dev/operator v0.49.1 (plus untagged knative.dev/networking and knative.dev/caching).
+
+  Field types are now easier to reference: instead of `IService['spec']`, use `IServiceSpec`.
+
+### Patch Changes
+
+- Updated dependencies [[`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - kubernetes-models@5.1.0
+
 ## 3.0.1
 
 ### Patch Changes

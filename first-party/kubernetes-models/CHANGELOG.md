@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.1.0
+
+### Minor Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105) Thanks [@tommy351](https://github.com/tommy351)! - Export schema files.
+
 ## 5.0.2
 
 ### Patch Changes

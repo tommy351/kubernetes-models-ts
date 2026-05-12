@@ -1,5 +1,18 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`9d63206`](https://github.com/tommy351/kubernetes-models-ts/commit/9d63206caa0494bf8807292b11f4dda93b28b9f3) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — prometheus-operator v0.91.0.
+
+  Field types are now easier to reference: instead of `IPrometheus['spec']`, use `IPrometheusSpec`.
+
+### Patch Changes
+
+- Updated dependencies [[`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - kubernetes-models@5.1.0
+
 ## 5.0.1
 
 ### Patch Changes

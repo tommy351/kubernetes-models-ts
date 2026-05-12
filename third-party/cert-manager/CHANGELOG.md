@@ -1,5 +1,21 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`703965b`](https://github.com/tommy351/kubernetes-models-ts/commit/703965be00591e311bc8290f2463f37cc5ae3a1e) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — cert-manager v1.20.2, trust-manager v0.22.1, approver-policy v0.25.1, aws-privateca-issuer v1.8.1.
+
+  Breaking: legacy apiVersions are no longer emitted (`certmanager.k8s.io/v1alpha1`, `cert-manager.io/{v1alpha2,v1alpha3,v1beta1}`, `acme.cert-manager.io/{v1alpha2,v1alpha3,v1beta1}`). Only the current API versions remain.
+
+  Field types are now easier to reference: instead of `ICertificate['spec']`, use `ICertificateSpec`.
+
+### Patch Changes
+
+- Updated dependencies [[`ef8ac07`](https://github.com/tommy351/kubernetes-models-ts/commit/ef8ac076dbcc120411506285a3a066820f014160), [`9d63206`](https://github.com/tommy351/kubernetes-models-ts/commit/9d63206caa0494bf8807292b11f4dda93b28b9f3), [`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - @kubernetes-models/gateway-api@2.0.0
+  - kubernetes-models@5.1.0
+
 ## 5.0.1
 
 ### Patch Changes
