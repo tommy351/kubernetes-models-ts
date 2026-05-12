@@ -12,6 +12,7 @@ import { formatComment, trimSuffix } from "@kubernetes-models/string-util";
 import {
   getInternalDefinitionPath,
   getKind,
+  getPackage,
   getQualifiedClassName,
   getQualifiedInterfaceName,
   getRelativePath,
@@ -41,7 +42,19 @@ const externalRefReplacements: {
   },
 ];
 
-function getExternalDefinitionPath(ref: string): string {
+function getExternalDefinitionPath(ctx: Context, ref: string): string {
+  // K8s API groups like `networking.k8s.io` collapse in the Go schema id
+  // (`io.k8s.api.networking.v1.X`) but `kubernetes-models` publishes them
+  // under the full group/version path (`networking.k8s.io/v1/X`). When the
+  // package exposes a `.k8s.io` group, prefer it over the prefix-stripped
+  // path so the import resolves.
+  if (ref.startsWith("io.k8s.api.")) {
+    const pkg = getPackage(ctx, ref);
+    if (pkg?.group && pkg.version && pkg.group.endsWith(".k8s.io")) {
+      return `kubernetes-models/${pkg.group}/${pkg.version}/${getKind(ref)}`;
+    }
+  }
+
   for (const { prefix, replacement } of externalRefReplacements) {
     if (ref.startsWith(prefix)) {
       return replacement + ref.substring(prefix.length).split(".").join("/");
@@ -154,7 +167,7 @@ export default function generateDefinition(ctx: Context): Generator {
         imports.push({
           name: getQualifiedInterfaceName(ref),
           path: isExternalRef(ctx, ref)
-            ? getExternalDefinitionPath(ref)
+            ? getExternalDefinitionPath(ctx, ref)
             : getRelativePath(path, getInternalDefinitionPath(ctx, ref)) +
               ".js",
         });

@@ -14,6 +14,7 @@ use (
 	./third-party/fission
 	./third-party/gateway-api
 	./third-party/grafana-agent-operator
+	./third-party/grafana-operator
 	./third-party/keda
 	./third-party/knative
 	./third-party/prometheus-operator
