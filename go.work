@@ -33,4 +33,5 @@ use (
 	./third-party/spiffe
 	./third-party/thanos-operator
 	./third-party/traefik
+	./third-party/traefik/dynamic-ext
 )

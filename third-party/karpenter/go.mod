@@ -11,6 +11,8 @@ tool (
 require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.296.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/iam v1.53.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.8 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.22 // indirect
 	github.com/aws/karpenter-provider-aws v1.12.1 // indirect
 	github.com/aws/smithy-go v1.25.1 // indirect
 	github.com/awslabs/operatorpkg v0.0.0-20251222193911-34e9a1898737 // indirect
@@ -43,8 +45,8 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grafana/regexp v0.0.0-20250905093917-f7b3be9d1853 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.18.4 // indirect
+	github.com/json-iterator/go v1.1.13-0.20220915233716-71ac16282d12 // indirect
+	github.com/klauspost/compress v1.18.5 // indirect
 	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
