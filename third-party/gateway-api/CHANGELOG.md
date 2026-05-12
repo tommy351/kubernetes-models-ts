@@ -1,5 +1,22 @@
 # @kubernetes-models/gateway-api
 
+## 2.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`9d63206`](https://github.com/tommy351/kubernetes-models-ts/commit/9d63206caa0494bf8807292b11f4dda93b28b9f3) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — gateway-api v1.5.1.
+
+  Field types are now easier to reference: instead of `IHTTPRoute['spec']`, use `IHTTPRouteSpec`.
+
+### Minor Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`ef8ac07`](https://github.com/tommy351/kubernetes-models-ts/commit/ef8ac076dbcc120411506285a3a066820f014160) Thanks [@tommy351](https://github.com/tommy351)! - Build with `--include-hidden` so that `_schemas/*` validators are exposed in the published `exports` map. This is required so downstream packages (e.g. `@kubernetes-models/envoy-gateway`, `@kubernetes-models/cert-manager`) can import `@kubernetes-models/gateway-api/_schemas/...` at runtime to validate kinds that reference Gateway API types.
+
+### Patch Changes
+
+- Updated dependencies [[`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - kubernetes-models@5.1.0
+
 ## 1.0.1
 
 ### Patch Changes

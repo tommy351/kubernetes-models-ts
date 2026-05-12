@@ -1,5 +1,20 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`01e50d9`](https://github.com/tommy351/kubernetes-models-ts/commit/01e50d915867231b16aa1f1f0d2ae7c1633d4ac9) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — vertical-pod-autoscaler v1.6.0.
+
+  Field types are now easier to reference: instead of `IVerticalPodAutoscaler['spec']`, use `IVerticalPodAutoscalerSpec`.
+
+  Breaking: `autoscaling.k8s.io/v1beta1` models are no longer emitted. Upstream VPA disabled that API version in 0.5.0 and marks the pinned Go package with `+kubebuilder:skip`, so go-generate now emits only `v1` and `v1beta2`.
+
+### Patch Changes
+
+- Updated dependencies [[`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - kubernetes-models@5.1.0
+
 ## 4.0.1
 
 ### Patch Changes

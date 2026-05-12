@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/autoscaler",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "type": "module",
   "description": "Kubernetes Autoscaler models",
   "repository": {

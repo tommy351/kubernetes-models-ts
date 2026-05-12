@@ -1,5 +1,18 @@
 # @kubernetes-models/keda
 
+## 2.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`103c891`](https://github.com/tommy351/kubernetes-models-ts/commit/103c89113ac8f2276eb861774c416f12e3cb1231) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go module github.com/kedacore/keda v2.19.0.
+
+  Field types are now easier to reference: instead of `IScaledObject['spec']`, use `IScaledObjectSpec`.
+
+### Patch Changes
+
+- Updated dependencies [[`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - kubernetes-models@5.1.0
+
 ## 1.0.1
 
 ### Patch Changes

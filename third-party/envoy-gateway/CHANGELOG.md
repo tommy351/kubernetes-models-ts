@@ -1,5 +1,19 @@
 # @kubernetes-models/envoy-gateway
 
+## 2.0.0
+
+### Major Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`5c965a6`](https://github.com/tommy351/kubernetes-models-ts/commit/5c965a67cb5efd0f45a62218305fcc93958127dd) Thanks [@tommy351](https://github.com/tommy351)! - Switch to go-generate. Types now sourced from upstream Go packages — envoy-gateway v1.7.3.
+
+  Field types are now easier to reference: instead of `IBackendTrafficPolicy['spec']`, use `IBackendTrafficPolicySpec`.
+
+### Patch Changes
+
+- Updated dependencies [[`ef8ac07`](https://github.com/tommy351/kubernetes-models-ts/commit/ef8ac076dbcc120411506285a3a066820f014160), [`9d63206`](https://github.com/tommy351/kubernetes-models-ts/commit/9d63206caa0494bf8807292b11f4dda93b28b9f3), [`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105)]:
+  - @kubernetes-models/gateway-api@2.0.0
+  - kubernetes-models@5.1.0
+
 ## 1.0.1
 
 ### Patch Changes

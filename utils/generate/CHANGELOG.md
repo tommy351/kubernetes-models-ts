@@ -1,5 +1,15 @@
 # Change Log
 
+## 3.2.0
+
+### Minor Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`b45af70`](https://github.com/tommy351/kubernetes-models-ts/commit/b45af7057b4748ca49f28a6d00290e840e752105) Thanks [@tommy351](https://github.com/tommy351)! - Add `GroupVersion` type.
+
+### Patch Changes
+
+- [#260](https://github.com/tommy351/kubernetes-models-ts/pull/260) [`01e50d9`](https://github.com/tommy351/kubernetes-models-ts/commit/01e50d915867231b16aa1f1f0d2ae7c1633d4ac9) Thanks [@tommy351](https://github.com/tommy351)! - Strip redundant `nullable` keyword when converting `$ref` properties to `nullableRef` in `allowNull`. Previously, a property like `{$ref, nullable: true}` (emitted for `+nullable` Go fields) left `nullable: true` alongside `nullableRef`, which ajv rejects ("nullable cannot be used without type").
+
 ## 3.1.1
 
 ### Patch Changes
