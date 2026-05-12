@@ -29,4 +29,5 @@ use (
 	./third-party/rabbitmq-messaging-topology-operator
 	./third-party/seldon-core-operator
 	./third-party/smi
+	./third-party/spicedb
 )
