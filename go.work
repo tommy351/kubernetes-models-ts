@@ -24,4 +24,5 @@ use (
 	./third-party/milvus-operator
 	./third-party/opentelemetry-operator
 	./third-party/prometheus-operator
+	./third-party/pulsar-resources-operator
 )
