@@ -20,5 +20,6 @@ use (
 	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
+	./third-party/longhorn
 	./third-party/prometheus-operator
 )
