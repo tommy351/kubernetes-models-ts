@@ -25,4 +25,5 @@ use (
 	./third-party/opentelemetry-operator
 	./third-party/prometheus-operator
 	./third-party/pulsar-resources-operator
+	./third-party/rabbitmq-cluster-operator
 )
