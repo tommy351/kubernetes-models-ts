@@ -8,6 +8,7 @@ use (
 	./third-party/cilium
 	./third-party/cloudnative-pg
 	./third-party/contour
+	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/gateway-api
 	./third-party/keda

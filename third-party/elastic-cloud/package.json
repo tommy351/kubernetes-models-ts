@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,16 +31,32 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://download.elastic.co/downloads/eck/3.3.2/crds.yaml"
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/agent/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/apm/v1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/apm/v1beta1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/autoops/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/autoscaling/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/beat/v1beta1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/elasticsearch/v1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/elasticsearch/v1beta1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/enterprisesearch/v1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/enterprisesearch/v1beta1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/kibana/v1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/kibana/v1beta1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/logstash/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/maps/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/packageregistry/v1alpha1",
+      "github.com/elastic/cloud-on-k8s/v3/pkg/apis/stackconfigpolicy/v1alpha1"
     ],
     "output": "./gen"
   }
