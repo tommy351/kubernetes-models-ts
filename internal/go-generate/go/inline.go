@@ -102,7 +102,15 @@ func deriveInlineSchema(pkg *loader.Package, info *markers.TypeInfo) (extv1.JSON
 	if obj == nil {
 		return extv1.JSONSchemaProps{}, false
 	}
-	named, ok := obj.Type().(*types.Named)
+	// Resolve Go type aliases (`type Foo = Bar`) to their underlying named
+	// type. Otherwise an alias of an upstream enum (e.g.
+	// `ServiceExternalTrafficPolicyType = ServiceExternalTrafficPolicy`)
+	// emits a $ref to the alias name that the consumer side can't import.
+	t := obj.Type()
+	if alias, ok := t.(*types.Alias); ok {
+		t = types.Unalias(alias)
+	}
+	named, ok := t.(*types.Named)
 	if !ok {
 		return extv1.JSONSchemaProps{}, false
 	}
