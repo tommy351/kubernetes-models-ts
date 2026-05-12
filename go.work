@@ -28,6 +28,7 @@ use (
 	./third-party/pulsar-resources-operator
 	./third-party/rabbitmq-cluster-operator
 	./third-party/rabbitmq-messaging-topology-operator
+	./third-party/sealed-secrets
 	./third-party/seldon-core-operator
 	./third-party/smi
 	./third-party/spicedb
