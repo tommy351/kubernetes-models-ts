@@ -11,6 +11,7 @@ use (
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/external-secrets
+	./third-party/fission
 	./third-party/gateway-api
 	./third-party/keda
 	./third-party/knative
