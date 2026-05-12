@@ -22,5 +22,6 @@ use (
 	./third-party/knative
 	./third-party/longhorn
 	./third-party/milvus-operator
+	./third-party/opentelemetry-operator
 	./third-party/prometheus-operator
 )
