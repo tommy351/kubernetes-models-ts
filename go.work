@@ -30,4 +30,5 @@ use (
 	./third-party/seldon-core-operator
 	./third-party/smi
 	./third-party/spicedb
+	./third-party/spiffe
 )
