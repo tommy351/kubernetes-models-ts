@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/autoscaler
 
-go 1.26.1
+go 1.26.2
 
 tool (
 	k8s.io/autoscaler/vertical-pod-autoscaler/pkg/apis/autoscaling.k8s.io/v1

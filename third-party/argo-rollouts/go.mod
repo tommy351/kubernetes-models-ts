@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/argo-rollouts
 
-go 1.26.1
+go 1.26.2
 
 tool github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1
 
@@ -23,6 +23,8 @@ require (
 	github.com/go-openapi/swag/stringutils v0.25.5 // indirect
 	github.com/go-openapi/swag/typeutils v0.25.5 // indirect
 	github.com/go-openapi/swag/yamlutils v0.25.5 // indirect
+	github.com/go-openapi/testify/enable/yaml/v2 v2.4.1 // indirect
+	github.com/go-openapi/testify/v2 v2.4.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect

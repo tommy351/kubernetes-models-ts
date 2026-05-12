@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/gateway-api
 
-go 1.26.1
+go 1.26.2
 
 tool (
 	sigs.k8s.io/gateway-api/apis/v1

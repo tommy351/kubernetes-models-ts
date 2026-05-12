@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/keda
 
-go 1.26.1
+go 1.26.2
 
 replace (
 	k8s.io/api => k8s.io/api v0.34.3

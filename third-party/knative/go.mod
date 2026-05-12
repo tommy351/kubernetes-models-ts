@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/knative
 
-go 1.26.1
+go 1.26.2
 
 tool (
 	knative.dev/caching/pkg/apis/caching/v1alpha1
@@ -54,7 +54,7 @@ require (
 	github.com/go-openapi/swag/yamlutils v0.25.5 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-containerregistry v0.20.6 // indirect
+	github.com/google/go-containerregistry v0.20.7 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grafana/regexp v0.0.0-20250905093917-f7b3be9d1853 // indirect
 	github.com/hashicorp/golang-lru v1.0.2 // indirect

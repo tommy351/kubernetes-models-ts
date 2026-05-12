@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/internal/go-generate/go
 
-go 1.26.1
+go 1.26.2
 
 require (
 	k8s.io/apiextensions-apiserver v0.36.0

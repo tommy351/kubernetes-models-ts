@@ -1,19 +1,20 @@
 import { describe, it, expect } from "vitest";
-import { EC2NodeClass } from "../gen/karpenter.k8s.aws/v1beta1/index.js";
-import { NodeClaim, NodePool } from "../gen/karpenter.sh/v1beta1/index.js";
+import { EC2NodeClass } from "../gen/karpenter.k8s.aws/v1/index.js";
+import { NodeClaim, NodePool } from "../gen/karpenter.sh/v1/index.js";
 
 describe("EC2NodeClass", () => {
   const nodeClass = new EC2NodeClass({
     metadata: { name: "test" },
     spec: {
       amiFamily: "AL2",
+      amiSelectorTerms: [{ alias: "al2@latest" }],
       subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
       securityGroupSelectorTerms: [{ name: "test" }],
     },
   });
 
   it("should set apiVersion", () => {
-    expect(nodeClass).toHaveProperty("apiVersion", "karpenter.k8s.aws/v1beta1");
+    expect(nodeClass).toHaveProperty("apiVersion", "karpenter.k8s.aws/v1");
   });
 
   it("should set kind", () => {
@@ -30,11 +31,12 @@ describe("EC2NodeClass", () => {
 
   it("toJSON", () => {
     expect(nodeClass.toJSON()).toEqual({
-      apiVersion: "karpenter.k8s.aws/v1beta1",
+      apiVersion: "karpenter.k8s.aws/v1",
       kind: "EC2NodeClass",
       metadata: { name: "test" },
       spec: {
         amiFamily: "AL2",
+        amiSelectorTerms: [{ alias: "al2@latest" }],
         subnetSelectorTerms: [{ tags: { "aws-cdk:subnet-name": "private" } }],
         securityGroupSelectorTerms: [{ name: "test" }],
       },
@@ -47,6 +49,8 @@ describe("NodeClaim", () => {
     metadata: { name: "test" },
     spec: {
       nodeClassRef: {
+        group: "karpenter.k8s.aws",
+        kind: "EC2NodeClass",
         name: "test",
       },
       requirements: [
@@ -60,7 +64,7 @@ describe("NodeClaim", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(nodeClaim).toHaveProperty("apiVersion", "karpenter.sh/v1beta1");
+    expect(nodeClaim).toHaveProperty("apiVersion", "karpenter.sh/v1");
   });
 
   it("should set kind", () => {
@@ -77,11 +81,13 @@ describe("NodeClaim", () => {
 
   it("toJSON", () => {
     expect(nodeClaim.toJSON()).toEqual({
-      apiVersion: "karpenter.sh/v1beta1",
+      apiVersion: "karpenter.sh/v1",
       kind: "NodeClaim",
       metadata: { name: "test" },
       spec: {
         nodeClassRef: {
+          group: "karpenter.k8s.aws",
+          kind: "EC2NodeClass",
           name: "test",
         },
         requirements: [
@@ -102,7 +108,11 @@ describe("NodePool", () => {
     spec: {
       template: {
         spec: {
-          nodeClassRef: { name: "test" },
+          nodeClassRef: {
+            group: "karpenter.k8s.aws",
+            kind: "EC2NodeClass",
+            name: "test",
+          },
           requirements: [
             {
               key: "karpenter.sh/instance-type",
@@ -116,7 +126,7 @@ describe("NodePool", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(nodePool).toHaveProperty("apiVersion", "karpenter.sh/v1beta1");
+    expect(nodePool).toHaveProperty("apiVersion", "karpenter.sh/v1");
   });
 
   it("should set kind", () => {
@@ -133,13 +143,17 @@ describe("NodePool", () => {
 
   it("toJSON", () => {
     expect(nodePool.toJSON()).toEqual({
-      apiVersion: "karpenter.sh/v1beta1",
+      apiVersion: "karpenter.sh/v1",
       kind: "NodePool",
       metadata: { name: "test" },
       spec: {
         template: {
           spec: {
-            nodeClassRef: { name: "test" },
+            nodeClassRef: {
+              group: "karpenter.k8s.aws",
+              kind: "EC2NodeClass",
+              name: "test",
+            },
             requirements: [
               {
                 key: "karpenter.sh/instance-type",

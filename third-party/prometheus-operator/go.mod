@@ -1,6 +1,6 @@
 module github.com/tommy351/kubernetes-models-ts/third-party/prometheus-operator
 
-go 1.26.1
+go 1.26.2
 
 tool (
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring/v1
