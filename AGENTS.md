@@ -39,6 +39,7 @@ pnpm vitest path/to/file     # run a single test file
 pnpm vitest -t "name"        # run tests matching a name
 pnpm run lint                # eslint + syncpack
 pnpm exec syncpack fix-mismatches   # align cross-workspace dep versions
+(cd internal/go-generate/go && golangci-lint run ./...)   # lint Go sources
 pnpm changeset               # add a changelog entry (Conventional Commits style)
 ```
 
