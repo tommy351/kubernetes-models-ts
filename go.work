@@ -23,6 +23,7 @@ use (
 	./third-party/longhorn
 	./third-party/milvus-operator
 	./third-party/opentelemetry-operator
+	./third-party/pipelines-as-code
 	./third-party/prometheus-operator
 	./third-party/pulsar-resources-operator
 	./third-party/rabbitmq-cluster-operator
