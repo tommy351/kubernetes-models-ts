@@ -795,10 +795,13 @@ importers:
       '@kubernetes-models/validate':
         specifier: workspace:^
         version: link:../../core/validate
-    devDependencies:
-      '@kubernetes-models/crd-generate':
+      kubernetes-models:
         specifier: workspace:^
-        version: link:../../utils/crd-generate
+        version: link:../../first-party/kubernetes-models/dist
+    devDependencies:
+      '@kubernetes-models/go-generate':
+        specifier: workspace:^
+        version: link:../../internal/go-generate
       '@kubernetes-models/publish-scripts':
         specifier: workspace:^
         version: link:../../internal/publish-scripts
