@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,22 +31,19 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v0.35.4/pkg/apis/crds/karpenter.sh_nodepools.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v0.35.4/pkg/apis/crds/karpenter.k8s.aws_ec2nodeclasses.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v0.35.4/pkg/apis/crds/karpenter.sh_nodeclaims.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v1.12.0/pkg/apis/crds/karpenter.sh_nodepools.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v1.12.0/pkg/apis/crds/karpenter.k8s.aws_ec2nodeclasses.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v1.12.0/pkg/apis/crds/karpenter.sh_nodeclaims.yaml",
-      "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v1.12.0/pkg/apis/crds/karpenter.sh_nodeoverlays.yaml"
+      "github.com/aws/karpenter-provider-aws/pkg/apis/v1",
+      "sigs.k8s.io/karpenter/pkg/apis/v1",
+      "sigs.k8s.io/karpenter/pkg/apis/v1alpha1"
     ],
     "output": "./gen"
   }

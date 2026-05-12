@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { IngressRoute } from "../gen/traefik.containo.us/v1alpha1/IngressRoute.js";
+import { IngressRoute } from "../gen/traefik.io/v1alpha1/IngressRoute.js";
 
 describe("IngressRoute", () => {
   const ingressRoute = new IngressRoute({
@@ -24,10 +24,7 @@ describe("IngressRoute", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(ingressRoute).toHaveProperty(
-      "apiVersion",
-      "traefik.containo.us/v1alpha1",
-    );
+    expect(ingressRoute).toHaveProperty("apiVersion", "traefik.io/v1alpha1");
   });
 
   it("should set kind", () => {
@@ -40,7 +37,7 @@ describe("IngressRoute", () => {
 
   it("toJSON", () => {
     expect(ingressRoute.toJSON()).toEqual({
-      apiVersion: "traefik.containo.us/v1alpha1",
+      apiVersion: "traefik.io/v1alpha1",
       kind: "IngressRoute",
       metadata: {
         name: "test",

@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,23 +31,17 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.coreos.com_podmonitors.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.coreos.com_probes.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.coreos.com_servicemonitors.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.grafana.com_grafanaagents.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.grafana.com_integrations.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.grafana.com_logsinstances.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.grafana.com_metricsinstances.yaml",
-      "https://raw.githubusercontent.com/grafana/agent/v0.39.2/production/operator/crds/monitoring.grafana.com_podlogs.yaml"
+      "github.com/grafana/agent/pkg/operator/apis/monitoring/v1alpha1"
     ],
     "output": "./gen"
   }

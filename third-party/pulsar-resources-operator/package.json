@@ -11,7 +11,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -30,34 +30,17 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_apikeys.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_computeflinkdeployments.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_computeworkspaces.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarconnections.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarfunctions.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsargeoreplications.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarnamespaces.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarnsisolationpolicies.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarpackages.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarpermissions.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarsinks.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsarsources.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsartenants.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_pulsartopics.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_secrets.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_serviceaccountbindings.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_serviceaccounts.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_streamnativecloudconnections.yaml",
-      "https://raw.githubusercontent.com/streamnative/pulsar-resources-operator/refs/tags/v0.19.0/charts/pulsar-resources-operator/crds/resource.streamnative.io_rolebindings.yaml"
+      "github.com/streamnative/pulsar-resources-operator/api/v1alpha1"
     ],
     "output": "./gen"
   }

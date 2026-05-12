@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,23 +31,17 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_canaryconfigs.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_environments.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_functions.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_httptriggers.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_kuberneteswatchtriggers.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_messagequeuetriggers.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_packages.yaml",
-      "https://github.com/fission/fission/raw/v1.22.0/crds/v1/fission.io_timetriggers.yaml"
+      "github.com/fission/fission/pkg/apis/core/v1"
     ],
     "output": "./gen"
   }

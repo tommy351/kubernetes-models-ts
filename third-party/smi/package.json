@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,21 +31,28 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/access.smi-spec.io_identitybindings.yaml",
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/access.smi-spec.io_traffictargets.yaml",
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_httproutegroups.yaml",
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_tcproutes.yaml",
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/specs.smi-spec.io_udproutes.yaml",
-      "https://raw.githubusercontent.com/servicemeshinterface/smi-controller-sdk/4cbed06a67893f8220096ba09c1b4d52c0a2468d/config/crd/bases/split.smi-spec.io_trafficsplits.yaml"
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha1",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha2",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha3",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/access/v1alpha4",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/specs/v1alpha1",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/specs/v1alpha2",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/specs/v1alpha3",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/specs/v1alpha4",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/split/v1alpha1",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/split/v1alpha2",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/split/v1alpha3",
+      "github.com/servicemeshinterface/smi-controller-sdk/apis/split/v1alpha4"
     ],
     "output": "./gen"
   }

@@ -6,4 +6,8 @@ runs:
     - uses: actions/setup-go@v6
       with:
         go-version-file: go.work
-        cache-dependency-path: "**/go.sum"
+        cache-dependency-path: |
+          go.work.sum
+          internal/go-generate/go/go.sum
+          third-party/*/go.sum
+          third-party/traefik/dynamic-ext/go.sum

@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,17 +31,19 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/gateway-api": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/grafana-operator/grafana-operator/v4.8.0/deploy/manifests/v4.8.0/crds.yaml",
-      "https://raw.githubusercontent.com/grafana/grafana-operator/v5.22.2/deploy/kustomize/base/crds.yaml"
+      "github.com/grafana-operator/grafana-operator/v4/api/integreatly/v1alpha1",
+      "github.com/grafana/grafana-operator/v5/api/v1beta1"
     ],
     "output": "./gen"
   }

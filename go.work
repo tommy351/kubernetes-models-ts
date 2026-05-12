@@ -2,11 +2,38 @@ go 1.26.2
 
 use (
 	./internal/go-generate/go
+	./third-party/argo-rollouts
 	./third-party/autoscaler
 	./third-party/cert-manager
+	./third-party/cilium
+	./third-party/cloudnative-pg
+	./third-party/contour
+	./third-party/elastic-cloud
 	./third-party/envoy-gateway
+	./third-party/external-secrets
+	./third-party/fission
 	./third-party/gateway-api
+	./third-party/grafana-agent-operator
+	./third-party/grafana-operator
+	./third-party/hierarchical-namespaces
+	./third-party/jaeger-operator
+	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
+	./third-party/longhorn
+	./third-party/milvus-operator
+	./third-party/opentelemetry-operator
+	./third-party/pipelines-as-code
 	./third-party/prometheus-operator
+	./third-party/pulsar-resources-operator
+	./third-party/rabbitmq-cluster-operator
+	./third-party/rabbitmq-messaging-topology-operator
+	./third-party/sealed-secrets
+	./third-party/seldon-core-operator
+	./third-party/smi
+	./third-party/spicedb
+	./third-party/spiffe
+	./third-party/thanos-operator
+	./third-party/traefik
+	./third-party/traefik/dynamic-ext
 )

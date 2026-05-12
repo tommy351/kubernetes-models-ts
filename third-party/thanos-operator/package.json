@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,21 +31,17 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_objectstores.yaml",
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_receivers.yaml",
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_storeendpoints.yaml",
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_thanos.yaml",
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_thanosendpoints.yaml",
-      "https://raw.githubusercontent.com/banzaicloud/thanos-operator/0.3.7/config/crd/bases/monitoring.banzaicloud.io_thanospeers.yaml"
+      "github.com/banzaicloud/thanos-operator/pkg/sdk/api/v1alpha1"
     ],
     "output": "./gen"
   }

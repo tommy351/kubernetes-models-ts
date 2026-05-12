@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Backup } from "../gen/longhorn.io/v1beta1/Backup.js";
+import { Backup } from "../gen/longhorn.io/v1beta2/Backup.js";
 
 describe("Application", () => {
   const backup = new Backup({
@@ -16,7 +16,7 @@ describe("Application", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(backup).toHaveProperty("apiVersion", "longhorn.io/v1beta1");
+    expect(backup).toHaveProperty("apiVersion", "longhorn.io/v1beta2");
   });
 
   it("should set kind", () => {
@@ -29,7 +29,7 @@ describe("Application", () => {
 
   it("toJSON", () => {
     expect(backup.toJSON()).toEqual({
-      apiVersion: "longhorn.io/v1beta1",
+      apiVersion: "longhorn.io/v1beta2",
       kind: "Backup",
       metadata: {
         name: "backup",
