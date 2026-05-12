@@ -2,4 +2,4 @@
 "@kubernetes-models/generate": minor
 ---
 
-Add `GroupVersion` kind.
+Add `GroupVersion` type.
