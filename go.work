@@ -26,4 +26,5 @@ use (
 	./third-party/prometheus-operator
 	./third-party/pulsar-resources-operator
 	./third-party/rabbitmq-cluster-operator
+	./third-party/rabbitmq-messaging-topology-operator
 )

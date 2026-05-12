@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,28 +31,18 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_bindings.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_exchanges.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_federations.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_permissions.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_policies.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_queues.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_schemareplications.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_shovels.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_superstreams.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_topicpermissions.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_users.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_vhosts.yaml",
-      "https://github.com/rabbitmq/messaging-topology-operator/raw/v1.19.1/config/crd/bases/rabbitmq.com_operatorpolicies.yaml"
+      "github.com/rabbitmq/messaging-topology-operator/api/v1alpha1",
+      "github.com/rabbitmq/messaging-topology-operator/api/v1beta1"
     ],
     "output": "./gen"
   }
