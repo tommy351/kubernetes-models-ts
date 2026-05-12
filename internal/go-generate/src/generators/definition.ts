@@ -96,6 +96,10 @@ function generateObjectInterface(
   return (exts.length ? `extends ${exts.join(", ")} ` : "") + content;
 }
 
+function hasTopLevelValidationBranches(schema: Schema): boolean {
+  return Boolean(schema.anyOf || schema.oneOf);
+}
+
 function flattenEmbedded(ctx: Context, schema: Schema): Schema {
   function resolveRef(s: Schema): Schema {
     let cur = s;
@@ -142,9 +146,12 @@ export default function generateDefinition(ctx: Context): Generator {
       // Map-alias schemas (`type Foo map[K]V` → object with only
       // `additionalProperties`) must emit as a type alias; their index
       // signature is incompatible with the methods Model adds to the class.
+      // Non-GVK objects with top-level `oneOf`/`anyOf` also emit as type aliases
+      // because TypeScript interfaces/classes cannot represent that union body.
       const shouldEmitClass =
         def.schema.type === "object" &&
-        (def.schema.properties || def.schema.allOf || gvk);
+        (def.schema.properties || def.schema.allOf || gvk) &&
+        Boolean(gvk || !hasTopLevelValidationBranches(def.schema));
       // Schema embeddings must be flattened to implement the interface.
       const flatSchema = shouldEmitClass
         ? flattenEmbedded(ctx, def.schema)

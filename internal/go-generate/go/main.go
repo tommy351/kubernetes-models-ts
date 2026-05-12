@@ -106,6 +106,10 @@ func (r *Runner) Run() error {
 		return fmt.Errorf("register crd markers: %w", err)
 	}
 
+	if err := registerLegacyValidationMarkers(registry); err != nil {
+		return fmt.Errorf("register legacy validation markers: %w", err)
+	}
+
 	if err := registry.Define(enumMarker, markers.DescribesType, struct{}{}); err != nil {
 		return fmt.Errorf("register enum marker: %w", err)
 	}
@@ -189,6 +193,7 @@ func (r *Runner) Run() error {
 			schema.DeepCopyInto(&copied)
 		}
 
+		applyLegacyValidationMarkers(&copied, parser.Types[id])
 		crd.EditSchema(&copied, &typeMetaReplacer{
 			APIVersion: gv.String(),
 			Kind:       id.Name,

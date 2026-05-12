@@ -37,19 +37,32 @@ describe("CiliumLocalRedirectPolicy", () => {
   });
 
   describe("when validation failed", () => {
-    it("should throw an error", () => {
+    it("should require one redirectFrontend matcher", () => {
       const lrp = new CiliumLocalRedirectPolicy({
         metadata: {
           name: "lrp",
         },
-        // @ts-expect-error
         spec: {
+          // @ts-expect-error
           redirectFrontend: {},
+          redirectBackend: {
+            localEndpointSelector: {
+              matchLabels: {
+                name: "proxy",
+              },
+            },
+            toPorts: [
+              {
+                port: "8080",
+                protocol: "TCP",
+              },
+            ],
+          },
         },
       });
 
       expect(() => lrp.validate()).toThrow(
-        `data/spec must have required property redirectBackend`,
+        `data/spec/redirectFrontend must have required property addressMatcher, data/spec/redirectFrontend must have required property serviceMatcher, data/spec/redirectFrontend must match exactly one schema in "oneOf"`,
       );
     });
   });
@@ -57,7 +70,7 @@ describe("CiliumLocalRedirectPolicy", () => {
 
 describe("CiliumClusterwideNetworkPolicy", () => {
   describe("when endpointSelector and nodeSelector are defined", () => {
-    it("should pass", () => {
+    it("should throw an error", () => {
       const policy = new CiliumClusterwideNetworkPolicy({
         metadata: { name: "test" },
         spec: {
@@ -67,39 +80,37 @@ describe("CiliumClusterwideNetworkPolicy", () => {
         },
       });
 
+      expect(() => policy.validate()).toThrow(
+        `data/spec must match exactly one schema in "oneOf"`,
+      );
+    });
+  });
+
+  describe("when endpointSelector is defined", () => {
+    it("should pass", () => {
+      const policy = new CiliumClusterwideNetworkPolicy({
+        metadata: { name: "test" },
+        spec: {
+          endpointSelector: {},
+          ingress: [],
+        },
+      });
+
       expect(() => policy.validate()).not.toThrow();
     });
   });
 
-  describe("when endpointSelector is missing", () => {
-    it("should throw an error", () => {
+  describe("when nodeSelector is defined", () => {
+    it("should pass", () => {
       const policy = new CiliumClusterwideNetworkPolicy({
         metadata: { name: "test" },
-        // @ts-expect-error
         spec: {
           nodeSelector: {},
+          ingress: [],
         },
       });
 
-      expect(() => policy.validate()).toThrow(
-        `data/spec must have required property endpointSelector`,
-      );
-    });
-  });
-
-  describe("when nodeSelector is missing", () => {
-    it("should throw an error", () => {
-      const policy = new CiliumClusterwideNetworkPolicy({
-        metadata: { name: "test" },
-        // @ts-expect-error
-        spec: {
-          endpointSelector: {},
-        },
-      });
-
-      expect(() => policy.validate()).toThrow(
-        `data/spec must have required property nodeSelector`,
-      );
+      expect(() => policy.validate()).not.toThrow();
     });
   });
 });
