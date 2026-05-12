@@ -25,7 +25,8 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,cjs,mjs}": "eslint --fix"
+    "*.{js,ts,cjs,mjs}": "eslint --fix",
+    "*.go": "bash -c 'cd internal/go-generate/go && golangci-lint run --fix ./...' --"
   },
   "engines": {
     "node": ">=22",

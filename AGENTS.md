@@ -120,7 +120,7 @@ Implication: source under `gen/` is generator output and should not be edited by
 ## Conventions Worth Knowing
 
 - Use Conventional Commits (`feat:`, `fix:`, `chore:`, …); CRD bumps use `feat(<pkg>): Update CRDs to <version>` (see recent commits).
-- Don't run Prettier manually — the pre-commit git hook runs `lint-staged`, which applies `eslint --fix` to staged JS/TS files.
+- Don't run Prettier manually — the pre-commit git hook runs `lint-staged`, which applies `eslint --fix` to staged JS/TS files and `golangci-lint run --fix` when any Go file is staged.
 - `lodash`/`lodash-es` are blocked by ESLint; use `es-toolkit` instead.
 - `@typescript-eslint/explicit-function-return-type` is `warn` with `allowExpressions: true` — top-level functions need explicit return types.
 - `n/prefer-node-protocol` is on: import Node built-ins as `node:fs`, `node:path`, etc.
