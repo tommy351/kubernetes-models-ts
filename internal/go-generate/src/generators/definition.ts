@@ -136,7 +136,12 @@ function flattenEmbedded(ctx: Context, schema: Schema): Schema {
 export default function generateDefinition(ctx: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
-      const className = getKind(def.schemaId);
+      // When the case-collision pass renamed this file, use the renamed
+      // kind for the class/interface too — otherwise sibling renamed
+      // files would all export the same `ImageRef` symbol and the
+      // package-level `export * from` re-exports collide.
+      const className =
+        ctx.pathRenames?.[def.schemaId] ?? getKind(def.schemaId);
       const interfaceName = "I" + className;
       const qualifiedInterfaceName = getQualifiedInterfaceName(def.schemaId);
       const qualifiedClassName = getQualifiedClassName(def.schemaId);
