@@ -9,6 +9,7 @@ use (
 	./third-party/cert-manager
 	./third-party/cilium
 	./third-party/cloudnative-pg
+	./third-party/cluster-api
 	./third-party/contour
 	./third-party/crossplane
 	./third-party/elastic-cloud
