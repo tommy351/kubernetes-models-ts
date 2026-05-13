@@ -1,4 +1,4 @@
-# @kubernetes-models/gatekeeper
+# @kubernetes-models/opa-gatekeeper
 
 [OPA Gatekeeper](https://open-policy-agent.github.io/gatekeeper/) models.
 
@@ -7,13 +7,13 @@
 Install with npm.
 
 ```sh
-npm install @kubernetes-models/gatekeeper
+npm install @kubernetes-models/opa-gatekeeper
 ```
 
 ## Usage
 
 ```js
-import { ConstraintTemplate } from "@kubernetes-models/gatekeeper/templates.gatekeeper.sh/v1/ConstraintTemplate";
+import { ConstraintTemplate } from "@kubernetes-models/opa-gatekeeper/templates.gatekeeper.sh/v1/ConstraintTemplate";
 
 // Create a new ConstraintTemplate
 const template = new ConstraintTemplate({

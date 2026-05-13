@@ -1,5 +1,5 @@
 {
-  "name": "@kubernetes-models/gatekeeper",
+  "name": "@kubernetes-models/opa-gatekeeper",
   "version": "0.0.0",
   "type": "module",
   "description": "OPA Gatekeeper models",
@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/tommy351/kubernetes-models-ts.git"
   },
-  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/gatekeeper",
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/opa-gatekeeper",
   "author": "Tommy Chen <tommy@dcard.cc>",
   "license": "MIT",
   "sideEffects": false,

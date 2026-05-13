@@ -1,5 +1,5 @@
 ---
-"@kubernetes-models/gatekeeper": minor
+"@kubernetes-models/opa-gatekeeper": minor
 ---
 
 Initial release.
