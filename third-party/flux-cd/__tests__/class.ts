@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1beta1/GitRepository.js";
+import { GitRepository } from "../gen/source.toolkit.fluxcd.io/v1/GitRepository.js";
 
 describe("Application", () => {
   const repo = new GitRepository({
@@ -16,10 +16,7 @@ describe("Application", () => {
   });
 
   it("should set apiVersion", () => {
-    expect(repo).toHaveProperty(
-      "apiVersion",
-      "source.toolkit.fluxcd.io/v1beta1",
-    );
+    expect(repo).toHaveProperty("apiVersion", "source.toolkit.fluxcd.io/v1");
   });
 
   it("should set kind", () => {
@@ -32,7 +29,7 @@ describe("Application", () => {
 
   it("toJSON", () => {
     expect(repo.toJSON()).toEqual({
-      apiVersion: "source.toolkit.fluxcd.io/v1beta1",
+      apiVersion: "source.toolkit.fluxcd.io/v1",
       kind: "GitRepository",
       metadata: {
         name: "webapp",

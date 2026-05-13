@@ -19,7 +19,6 @@ import {
   getSchemaPath,
   isExternalRef,
 } from "../utils.js";
-import assert from "node:assert";
 import type { Context } from "../load.js";
 
 const externalRefReplacements: {
@@ -84,7 +83,9 @@ function generateObjectInterface(
   }
 
   for (const s of allOf ?? []) {
-    assert(typeof s.$ref === "string", "allOf item must have $ref");
+    // Non-$ref allOf entries (e.g. inline `x-kubernetes-preserve-unknown-fields: true`
+    // from a `+kubebuilder:validation:Schemaless` field) carry no TS type info.
+    if (typeof s.$ref !== "string") continue;
     exts.push(getRefType(s.$ref));
   }
 
@@ -135,27 +136,42 @@ function flattenEmbedded(ctx: Context, schema: Schema): Schema {
 export default function generateDefinition(ctx: Context): Generator {
   return async (definitions) => {
     return definitions.map((def) => {
-      const className = getKind(def.schemaId);
+      // When the case-collision pass renamed this file, use the renamed
+      // kind for the class/interface too — otherwise sibling renamed
+      // files would all export the same `ImageRef` symbol and the
+      // package-level `export * from` re-exports collide.
+      const className =
+        ctx.pathRenames?.[def.schemaId] ?? getKind(def.schemaId);
       const interfaceName = "I" + className;
       const qualifiedInterfaceName = getQualifiedInterfaceName(def.schemaId);
       const qualifiedClassName = getQualifiedClassName(def.schemaId);
       const gvk = def.gvk?.[0];
       const imports: Import[] = [];
       const path = getInternalDefinitionPath(ctx, def.schemaId) + ".ts";
-      const schemaPath = getRelativePath(path, getSchemaPath(def.schemaId));
+      const schemaPath = getRelativePath(
+        path,
+        getSchemaPath(ctx, def.schemaId),
+      );
       // Map-alias schemas (`type Foo map[K]V` → object with only
       // `additionalProperties`) must emit as a type alias; their index
       // signature is incompatible with the methods Model adds to the class.
       // Non-GVK objects with top-level `oneOf`/`anyOf` also emit as type aliases
       // because TypeScript interfaces/classes cannot represent that union body.
-      const shouldEmitClass =
+      const objectClassCandidate =
         def.schema.type === "object" &&
         (def.schema.properties || def.schema.allOf || gvk) &&
         Boolean(gvk || !hasTopLevelValidationBranches(def.schema));
       // Schema embeddings must be flattened to implement the interface.
-      const flatSchema = shouldEmitClass
+      const candidateFlatSchema = objectClassCandidate
         ? flattenEmbedded(ctx, def.schema)
         : null;
+      // Non-GVK helpers whose flattened body has a top-level `validate`
+      // property would shadow the inherited `Model.validate()` method. Fall
+      // back to a plain type alias so the field stays usable as data.
+      const shouldEmitClass =
+        candidateFlatSchema !== null &&
+        Boolean(gvk || !candidateFlatSchema.properties?.validate);
+      const flatSchema = shouldEmitClass ? candidateFlatSchema : null;
       const refs = new Set([
         ...collectRefs(def.schema),
         ...(flatSchema ? collectRefs(flatSchema) : []),

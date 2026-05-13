@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { Redis } from "../gen/redis.redis.opstreelabs.in/v1beta1/Redis.js";
-import { RedisCluster } from "../gen/redis.redis.opstreelabs.in/v1beta1/RedisCluster.js";
+import { Redis } from "../gen/redis.redis.opstreelabs.in/v1beta2/Redis.js";
+import { RedisCluster } from "../gen/redis.redis.opstreelabs.in/v1beta2/RedisCluster.js";
 
 describe("Redis", () => {
   const redis = new Redis({
@@ -15,7 +15,7 @@ describe("Redis", () => {
   it("should set apiVersion", () => {
     expect(redis).toHaveProperty(
       "apiVersion",
-      "redis.redis.opstreelabs.in/v1beta1",
+      "redis.redis.opstreelabs.in/v1beta2",
     );
   });
 
@@ -29,7 +29,7 @@ describe("Redis", () => {
 
   it("toJSON", () => {
     expect(redis.toJSON()).toEqual({
-      apiVersion: "redis.redis.opstreelabs.in/v1beta1",
+      apiVersion: "redis.redis.opstreelabs.in/v1beta2",
       kind: "Redis",
       metadata: { name: "example" },
       spec: {
@@ -57,7 +57,7 @@ describe("RedisCluster", () => {
   it("should set apiVersion", () => {
     expect(cluster).toHaveProperty(
       "apiVersion",
-      "redis.redis.opstreelabs.in/v1beta1",
+      "redis.redis.opstreelabs.in/v1beta2",
     );
   });
 
@@ -71,7 +71,7 @@ describe("RedisCluster", () => {
 
   it("toJSON", () => {
     expect(cluster.toJSON()).toEqual({
-      apiVersion: "redis.redis.opstreelabs.in/v1beta1",
+      apiVersion: "redis.redis.opstreelabs.in/v1beta2",
       kind: "RedisCluster",
       metadata: { name: "example" },
       spec: {

@@ -11,7 +11,11 @@ export function getQualifiedInterfaceName(id: string): string {
   return "I" + getQualifiedClassName(id);
 }
 
-export function getSchemaPath(id: string): string {
+export function getSchemaPath(ctx: Context, id: string): string {
+  const renamed = ctx.pathRenames?.[id];
+  if (renamed) {
+    return `_schemas/${getQualifiedClassName(`${getPackageId(id)}.${renamed}`)}.js`;
+  }
   return `_schemas/${getQualifiedClassName(id)}.js`;
 }
 
@@ -61,5 +65,11 @@ export function getInternalDefinitionPath(ctx: Context, ref: string): string {
   // Packages without a GroupVersion fall back to their Go import path so
   // transitively-loaded helpers stay grouped instead of polluting gen root.
   const dir = pkg.group || pkg.version ? getAPIVersion(pkg) : pkg.goPath;
-  return `${dir}/${getKind(ref)}`;
+  const kind = ctx.pathRenames?.[ref] ?? getKind(ref);
+  return `${dir}/${kind}`;
+}
+
+export function isRootKind(ctx: Context, ref: string): boolean {
+  const pkg = getPackage(ctx, ref);
+  return Boolean(pkg?.kinds?.includes(getKind(ref)));
 }

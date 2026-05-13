@@ -12,6 +12,7 @@ describe("Workflow", () => {
         {
           name: "hello",
           container: {
+            name: "main",
             image: "alpine:latest",
             command: ["echo", "Hello, Argo!"],
           },
@@ -45,6 +46,7 @@ describe("Workflow", () => {
           {
             name: "hello",
             container: {
+              name: "main",
               image: "alpine:latest",
               command: ["echo", "Hello, Argo!"],
             },
