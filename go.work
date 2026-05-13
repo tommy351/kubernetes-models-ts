@@ -12,6 +12,7 @@ use (
 	./third-party/cluster-api
 	./third-party/contour
 	./third-party/crossplane
+	./third-party/dapr
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/external-secrets
