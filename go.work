@@ -37,4 +37,5 @@ use (
 	./third-party/thanos-operator
 	./third-party/traefik
 	./third-party/traefik/dynamic-ext
+	./third-party/victoria-metrics-operator
 )
