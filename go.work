@@ -10,6 +10,7 @@ use (
 	./third-party/cilium
 	./third-party/cloudnative-pg
 	./third-party/contour
+	./third-party/crossplane
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/external-secrets

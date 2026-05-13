@@ -1,0 +1,57 @@
+{
+  "name": "@kubernetes-models/crossplane",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Crossplane models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/crossplane",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "go-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "crossplane"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/go-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "go-generate": {
+    "input": [
+      "github.com/crossplane/crossplane/v2/apis/apiextensions/v1",
+      "github.com/crossplane/crossplane/v2/apis/apiextensions/v1beta1",
+      "github.com/crossplane/crossplane/v2/apis/apiextensions/v2",
+      "github.com/crossplane/crossplane/v2/apis/ops/v1alpha1",
+      "github.com/crossplane/crossplane/v2/apis/pkg/v1",
+      "github.com/crossplane/crossplane/v2/apis/pkg/v1beta1",
+      "github.com/crossplane/crossplane/v2/apis/pkg/meta/v1",
+      "github.com/crossplane/crossplane/v2/apis/pkg/meta/v1alpha1",
+      "github.com/crossplane/crossplane/v2/apis/pkg/meta/v1beta1",
+      "github.com/crossplane/crossplane/v2/apis/protection/v1beta1"
+    ],
+    "output": "./gen"
+  }
+}
