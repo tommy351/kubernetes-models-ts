@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -31,41 +31,19 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v1.6.3/manifests/crd.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_backups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_backupschedules.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_compactbackups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_restores.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_tibrgcs.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/br.pingcap.com_tibrs.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_clusters.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_pdgroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_pds.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_schedulergroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_schedulers.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_schedulinggroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_schedulings.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_ticdcgroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_ticdcs.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tidbgroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tidbs.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tiflashes.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tiflashgroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tikvgroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tikvs.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tiproxies.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tiproxygroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tsogroups.yaml",
-      "https://raw.githubusercontent.com/pingcap/tidb-operator/v2.0.1/manifests/crd/core.pingcap.com_tsos.yaml"
+      "github.com/pingcap/tidb-operator/pkg/apis/pingcap/v1alpha1",
+      "github.com/pingcap/tidb-operator/api/v2/br/v1alpha1",
+      "github.com/pingcap/tidb-operator/api/v2/core/v1alpha1"
     ],
     "output": "./gen"
   }
