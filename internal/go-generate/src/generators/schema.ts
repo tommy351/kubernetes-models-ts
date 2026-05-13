@@ -46,7 +46,10 @@ export default function generateSchema(ctx: Context): Generator {
           ref,
           isExternalRef(ctx, ref)
             ? getExternalSchemaPath(ref)
-            : getRelativePath(getSchemaPath(def.schemaId), getSchemaPath(ref)),
+            : getRelativePath(
+                getSchemaPath(ctx, def.schemaId),
+                getSchemaPath(ctx, ref),
+              ),
         ]),
       );
 
@@ -55,7 +58,7 @@ export default function generateSchema(ctx: Context): Generator {
     const schemas = await compileSchemas(tasks);
 
     return definitions.flatMap((def, i) => {
-      const path = getSchemaPath(def.schemaId);
+      const path = getSchemaPath(ctx, def.schemaId);
 
       return [
         {
