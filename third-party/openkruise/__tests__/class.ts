@@ -86,9 +86,7 @@ describe("SidecarSet", () => {
       },
       containers: [
         {
-          name: "sidecar",
-          image: "busybox:1.36",
-          command: ["sleep", "999d"],
+          podInjectPolicy: "BeforeAppContainer",
         },
       ],
     },
