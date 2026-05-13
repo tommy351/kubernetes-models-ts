@@ -50,14 +50,24 @@ var inlineExcluded = map[string]map[string]bool{
 // packages.
 var inlineIncludeStructs = map[string]map[string]bool{
 	"k8s.io/apimachinery/pkg/apis/meta/v1": {
-		"GroupKind": true,
-		"Timestamp": true,
+		"GroupKind":            true,
+		"GroupVersionKind":     true,
+		"GroupVersionResource": true,
+		"Timestamp":            true,
 	},
 	"k8s.io/api/core/v1": {
 		"VolumeSource": true,
 	},
+	"k8s.io/api/admission/v1": {
+		// AdmissionReview webhook payload type — defined in k8s.io/api but
+		// never surfaced through the API server's OpenAPI spec, so
+		// `kubernetes-models` doesn't publish it.
+		"AdmissionRequest": true,
+	},
 	"k8s.io/api/admissionregistration/v1alpha1": {
-		"Mutation": true,
+		"ApplyConfiguration": true,
+		"JSONPatch":          true,
+		"Mutation":           true,
 	},
 }
 
