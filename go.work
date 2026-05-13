@@ -24,6 +24,7 @@ use (
 	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
+	./third-party/kyverno
 	./third-party/longhorn
 	./third-party/milvus-operator
 	./third-party/opentelemetry-operator
