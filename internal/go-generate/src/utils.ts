@@ -61,5 +61,11 @@ export function getInternalDefinitionPath(ctx: Context, ref: string): string {
   // Packages without a GroupVersion fall back to their Go import path so
   // transitively-loaded helpers stay grouped instead of polluting gen root.
   const dir = pkg.group || pkg.version ? getAPIVersion(pkg) : pkg.goPath;
-  return `${dir}/${getKind(ref)}`;
+  const kind = ctx.pathRenames?.[ref] ?? getKind(ref);
+  return `${dir}/${kind}`;
+}
+
+export function isRootKind(ctx: Context, ref: string): boolean {
+  const pkg = getPackage(ctx, ref);
+  return Boolean(pkg?.kinds?.includes(getKind(ref)));
 }
