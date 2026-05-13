@@ -14,8 +14,7 @@ export function getQualifiedInterfaceName(id: string): string {
 export function getSchemaPath(ctx: Context, id: string): string {
   const renamed = ctx.pathRenames?.[id];
   if (renamed) {
-    const pkgPrefix = id.slice(0, id.lastIndexOf("."));
-    return `_schemas/${getQualifiedClassName(`${pkgPrefix}.${renamed}`)}.js`;
+    return `_schemas/${getQualifiedClassName(`${getPackageId(id)}.${renamed}`)}.js`;
   }
   return `_schemas/${getQualifiedClassName(id)}.js`;
 }

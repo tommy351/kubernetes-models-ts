@@ -59,9 +59,6 @@ var inlineIncludeStructs = map[string]map[string]bool{
 		"VolumeSource": true,
 	},
 	"k8s.io/api/admission/v1": {
-		// AdmissionReview webhook payload type — defined in k8s.io/api but
-		// never surfaced through the API server's OpenAPI spec, so
-		// `kubernetes-models` doesn't publish it.
 		"AdmissionRequest": true,
 	},
 	"k8s.io/api/admissionregistration/v1alpha1": {
