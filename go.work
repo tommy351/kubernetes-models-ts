@@ -31,6 +31,7 @@ use (
 	./third-party/kueue
 	./third-party/kyverno
 	./third-party/longhorn
+	./third-party/metallb
 	./third-party/milvus-operator
 	./third-party/opentelemetry-operator
 	./third-party/pipelines-as-code
