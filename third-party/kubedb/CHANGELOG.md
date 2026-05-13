@@ -1,5 +1,11 @@
 # @kubernetes-models/kubedb
 
+## 2.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`eff0632`](https://github.com/tommy351/kubernetes-models-ts/commit/eff063263a26fa237b3d59dedafa1efed64903f3) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate. The `corev1.VolumeSource` external-import blocker (`MemcachedSpec`, `ScriptSourceSpec` etc.) is resolved by the inline-include-structs allowlist added in earlier `@kubernetes-models/go-generate` commits.
+
 ## 1.0.1
 
 ### Patch Changes

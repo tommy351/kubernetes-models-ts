@@ -1,5 +1,11 @@
 # @kubernetes-models/cilium
 
+## 4.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`5821ec6`](https://github.com/tommy351/kubernetes-models-ts/commit/5821ec6e02814b83ba21a278c75d54c00ad7d7be) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

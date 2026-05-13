@@ -1,5 +1,11 @@
 # @kubernetes-models/kyverno
 
+## 2.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`ffa228f`](https://github.com/tommy351/kubernetes-models-ts/commit/ffa228f35f2708ebc1388eed958184a78810400a) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

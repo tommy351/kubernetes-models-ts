@@ -1,5 +1,11 @@
 # @kubernetes-models/spicedb
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`cfa8550`](https://github.com/tommy351/kubernetes-models-ts/commit/cfa8550bca15ce3c28d65b3e01825036bdd47f6c) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

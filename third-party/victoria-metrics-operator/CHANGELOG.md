@@ -1,5 +1,11 @@
 # @kubernetes-models/victoria-metrics-operator
 
+## 4.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`2ed2cc5`](https://github.com/tommy351/kubernetes-models-ts/commit/2ed2cc5d16147e45945f04e9c98148f2bae3d6ce) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

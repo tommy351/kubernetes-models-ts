@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`6448637`](https://github.com/tommy351/kubernetes-models-ts/commit/6448637f646566e377e9793879a83a086530b350) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 5.0.1
 
 ### Patch Changes

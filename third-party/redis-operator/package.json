@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/redis-operator",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "type": "module",
   "description": "Redis operator models",
   "repository": {

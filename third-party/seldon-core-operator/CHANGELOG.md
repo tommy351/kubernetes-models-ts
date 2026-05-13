@@ -1,5 +1,11 @@
 # @kubernetes-models/seldon-core-operator
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`1826e86`](https://github.com/tommy351/kubernetes-models-ts/commit/1826e86eaf534b99fe2424222c16aed250a1227a) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

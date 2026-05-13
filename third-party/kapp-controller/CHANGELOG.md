@@ -1,5 +1,11 @@
 # @kubernetes-models/kapp-controller
 
+## 4.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`6a8f454`](https://github.com/tommy351/kubernetes-models-ts/commit/6a8f454128101574bdfb2f073fcee315ce9da300) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

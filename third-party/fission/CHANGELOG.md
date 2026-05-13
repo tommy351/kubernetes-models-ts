@@ -1,5 +1,11 @@
 # @kubernetes-models/fission
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`0430236`](https://github.com/tommy351/kubernetes-models-ts/commit/04302367fdb64bb855112ee32fa9ce52522cfef5) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

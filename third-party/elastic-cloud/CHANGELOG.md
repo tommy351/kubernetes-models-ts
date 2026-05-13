@@ -1,5 +1,11 @@
 # @kubernetes-models/elastic-cloud
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`be75e96`](https://github.com/tommy351/kubernetes-models-ts/commit/be75e96f56d5bdeab73ca36a435e3891a898db17) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

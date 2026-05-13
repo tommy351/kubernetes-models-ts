@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/sealed-secrets",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "type": "module",
   "description": "Kubernetes sealed-secrets models",
   "repository": {

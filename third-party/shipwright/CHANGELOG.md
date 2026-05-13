@@ -1,5 +1,11 @@
 # @kubernetes-models/shipwright
 
+## 2.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`388ed4e`](https://github.com/tommy351/kubernetes-models-ts/commit/388ed4e737484303384862b38a51dbfd5344ac06) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes
