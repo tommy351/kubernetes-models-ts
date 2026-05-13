@@ -2,6 +2,7 @@ go 1.26.2
 
 use (
 	./internal/go-generate/go
+	./third-party/argo-cd
 	./third-party/argo-rollouts
 	./third-party/argo-workflows
 	./third-party/autoscaler
