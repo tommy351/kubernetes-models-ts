@@ -38,6 +38,29 @@ var inlineExcluded = map[string]map[string]bool{
 	},
 }
 
+// inlineIncludeStructs lists struct-shaped upstream types whose JSON
+// shape has no standalone module on the consumer side. They are inlined
+// upstream into another type (corev1.VolumeSource lives inside Volume),
+// absent from the OpenAPI swagger (metav1.GroupKind, metav1.Timestamp),
+// or in a not-yet-republished alpha group. Without this list, the TS
+// generator emits imports against module paths that don't resolve, and
+// `tsc --emitDeclarationOnly` fails with TS2307.
+//
+// Grow this list as new external-ref blockers surface in third-party
+// packages.
+var inlineIncludeStructs = map[string]map[string]bool{
+	"k8s.io/apimachinery/pkg/apis/meta/v1": {
+		"GroupKind": true,
+		"Timestamp": true,
+	},
+	"k8s.io/api/core/v1": {
+		"VolumeSource": true,
+	},
+	"k8s.io/api/admissionregistration/v1alpha1": {
+		"Mutation": true,
+	},
+}
+
 func isInlineEligible(pkgID string) bool {
 	for _, p := range inlineEligiblePrefixes {
 		if strings.HasPrefix(pkgID, p) {
@@ -58,6 +81,8 @@ func isInlineEligible(pkgID string) bool {
 //     Quantity, Time, MicroTime, IntOrString upstream) → `{type,
 //     format}`.
 //  3. Underlying Go shape — Basic / Map / Slice — derived recursively.
+//  4. Struct types listed in `inlineIncludeStructs` → the parser's
+//     already-computed schema (deep-copied).
 //
 // Types in input roots, outside `inlineEligiblePrefixes`, or listed in
 // `inlineExcluded` are skipped.
@@ -77,7 +102,14 @@ func collectInlineSchemata(parser *crd.Parser, roots []*loader.Package) map[stri
 
 		schema, ok := deriveInlineSchema(id.Package, info)
 		if !ok {
-			continue
+			if !inlineIncludeStructs[id.Package.ID][id.Name] {
+				continue
+			}
+			existing, exists := parser.Schemata[id]
+			if !exists {
+				continue
+			}
+			existing.DeepCopyInto(&schema)
 		}
 
 		pkgID := id.Package.ID
