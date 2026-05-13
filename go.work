@@ -3,6 +3,7 @@ go 1.26.2
 use (
 	./internal/go-generate/go
 	./third-party/argo-rollouts
+	./third-party/argo-workflows
 	./third-party/autoscaler
 	./third-party/cert-manager
 	./third-party/cilium
