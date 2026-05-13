@@ -35,6 +35,7 @@ use (
 	./third-party/longhorn
 	./third-party/metallb
 	./third-party/milvus-operator
+	./third-party/openkruise
 	./third-party/opentelemetry-operator
 	./third-party/pipelines-as-code
 	./third-party/prometheus-operator
