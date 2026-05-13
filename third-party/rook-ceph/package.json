@@ -1,0 +1,53 @@
+{
+  "name": "@kubernetes-models/rook-ceph",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Rook Ceph models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/rook-ceph",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "node scripts/download-crd.ts && crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "rook",
+    "ceph"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "@kubernetes-models/read-input": "workspace:^",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^25.6.0",
+    "js-yaml": "^4.1.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "./crds/crd.yaml"
+    ],
+    "output": "./gen"
+  }
+}
