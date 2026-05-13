@@ -1,0 +1,65 @@
+{
+  "name": "@kubernetes-models/openkruise",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "OpenKruise models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/openkruise",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "openkruise",
+    "kruise"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_advancedcronjobs.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_broadcastjobs.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_clonesets.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_containerrecreaterequests.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_daemonsets.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_ephemeraljobs.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_imagelistpulljobs.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_imagepulljobs.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_nodeimages.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_nodepodprobes.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_persistentpodstates.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_podprobemarkers.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_resourcedistributions.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_sidecarsets.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_statefulsets.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_uniteddeployments.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/apps.kruise.io_workloadspreads.yaml",
+      "https://raw.githubusercontent.com/openkruise/kruise/v1.8.3/config/crd/bases/policy.kruise.io_podunavailablebudgets.yaml"
+    ],
+    "output": "./gen"
+  }
+}
