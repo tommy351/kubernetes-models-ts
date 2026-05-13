@@ -19,7 +19,6 @@ import {
   getSchemaPath,
   isExternalRef,
 } from "../utils.js";
-import assert from "node:assert";
 import type { Context } from "../load.js";
 
 const externalRefReplacements: {
@@ -84,7 +83,9 @@ function generateObjectInterface(
   }
 
   for (const s of allOf ?? []) {
-    assert(typeof s.$ref === "string", "allOf item must have $ref");
+    // Non-$ref allOf entries (e.g. inline `x-kubernetes-preserve-unknown-fields: true`
+    // from a `+kubebuilder:validation:Schemaless` field) carry no TS type info.
+    if (typeof s.$ref !== "string") continue;
     exts.push(getRefType(s.$ref));
   }
 
