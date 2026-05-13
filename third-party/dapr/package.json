@@ -1,0 +1,51 @@
+{
+  "name": "@kubernetes-models/dapr",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Dapr models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/dapr",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "dapr"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/dapr/dapr/v1.17.6/charts/dapr/crds/components.yaml",
+      "https://raw.githubusercontent.com/dapr/dapr/v1.17.6/charts/dapr/crds/configuration.yaml",
+      "https://raw.githubusercontent.com/dapr/dapr/v1.17.6/charts/dapr/crds/httpendpoints.yaml",
+      "https://raw.githubusercontent.com/dapr/dapr/v1.17.6/charts/dapr/crds/resiliency.yaml",
+      "https://raw.githubusercontent.com/dapr/dapr/v1.17.6/charts/dapr/crds/subscription.yaml"
+    ],
+    "output": "./gen"
+  }
+}
