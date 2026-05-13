@@ -25,6 +25,7 @@ use (
 	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
+	./third-party/kubedb
 	./third-party/kyverno
 	./third-party/longhorn
 	./third-party/milvus-operator
