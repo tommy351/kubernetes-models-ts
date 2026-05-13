@@ -35,6 +35,7 @@ use (
 	./third-party/rabbitmq-messaging-topology-operator
 	./third-party/sealed-secrets
 	./third-party/seldon-core-operator
+	./third-party/shipwright
 	./third-party/smi
 	./third-party/spicedb
 	./third-party/spiffe

@@ -110,6 +110,11 @@ func collectInlineSchemata(parser *crd.Parser, roots []*loader.Package) map[stri
 				continue
 			}
 			existing.DeepCopyInto(&schema)
+			// Same-package field refs in the parser's schema are
+			// unqualified. Qualify them now so refNormalizer can map them
+			// to `io.k8s.api.core.v1.*` form; otherwise they leak into the
+			// consumer as bare type names with empty package segments.
+			crd.EditSchema(&schema, &refPackageAdder{Fallback: id.Package.ID})
 		}
 
 		pkgID := id.Package.ID
