@@ -15,6 +15,7 @@ use (
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/external-secrets
+	./third-party/external-snapshotter
 	./third-party/fission
 	./third-party/flux-cd
 	./third-party/gateway-api
