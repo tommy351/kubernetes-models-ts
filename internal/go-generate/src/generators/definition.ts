@@ -157,14 +157,21 @@ export default function generateDefinition(ctx: Context): Generator {
       // signature is incompatible with the methods Model adds to the class.
       // Non-GVK objects with top-level `oneOf`/`anyOf` also emit as type aliases
       // because TypeScript interfaces/classes cannot represent that union body.
-      const shouldEmitClass =
+      const objectClassCandidate =
         def.schema.type === "object" &&
         (def.schema.properties || def.schema.allOf || gvk) &&
         Boolean(gvk || !hasTopLevelValidationBranches(def.schema));
       // Schema embeddings must be flattened to implement the interface.
-      const flatSchema = shouldEmitClass
+      const candidateFlatSchema = objectClassCandidate
         ? flattenEmbedded(ctx, def.schema)
         : null;
+      // Non-GVK helpers whose flattened body has a top-level `validate`
+      // property would shadow the inherited `Model.validate()` method. Fall
+      // back to a plain type alias so the field stays usable as data.
+      const shouldEmitClass =
+        candidateFlatSchema !== null &&
+        Boolean(gvk || !candidateFlatSchema.properties?.validate);
+      const flatSchema = shouldEmitClass ? candidateFlatSchema : null;
       const refs = new Set([
         ...collectRefs(def.schema),
         ...(flatSchema ? collectRefs(flatSchema) : []),
