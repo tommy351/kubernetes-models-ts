@@ -14,6 +14,7 @@ use (
 	./third-party/envoy-gateway
 	./third-party/external-secrets
 	./third-party/fission
+	./third-party/flux-cd
 	./third-party/gateway-api
 	./third-party/grafana-agent-operator
 	./third-party/grafana-operator

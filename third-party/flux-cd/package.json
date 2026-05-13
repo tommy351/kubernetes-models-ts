@@ -12,7 +12,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "crd-generate && publish-scripts build",
+    "build": "go-generate && publish-scripts build",
     "prepack": "publish-scripts prepack"
   },
   "publishConfig": {
@@ -32,27 +32,27 @@
   "dependencies": {
     "@kubernetes-models/apimachinery": "workspace:^",
     "@kubernetes-models/base": "workspace:^",
-    "@kubernetes-models/validate": "workspace:^"
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
   },
   "devDependencies": {
-    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/go-generate": "workspace:^",
     "@kubernetes-models/publish-scripts": "workspace:^",
     "vitest": "^4.1.5"
   },
-  "crd-generate": {
+  "go-generate": {
     "input": [
-      "https://github.com/fluxcd/source-controller/releases/download/v1.2.4/source-controller.crds.yaml",
-      "https://github.com/fluxcd/kustomize-controller/releases/download/v1.2.2/kustomize-controller.crds.yaml",
-      "https://github.com/fluxcd/helm-controller/releases/download/v0.37.4/helm-controller.crds.yaml",
-      "https://github.com/fluxcd/notification-controller/releases/download/v1.2.4/notification-controller.crds.yaml",
-      "https://github.com/fluxcd/image-reflector-controller/releases/download/v0.31.2/image-reflector-controller.crds.yaml",
-      "https://github.com/fluxcd/image-automation-controller/releases/download/v0.37.1/image-automation-controller.crds.yaml",
-      "https://github.com/fluxcd/source-controller/releases/download/v1.8.3/source-controller.crds.yaml",
-      "https://github.com/fluxcd/kustomize-controller/releases/download/v1.8.4/kustomize-controller.crds.yaml",
-      "https://github.com/fluxcd/helm-controller/releases/download/v1.5.4/helm-controller.crds.yaml",
-      "https://github.com/fluxcd/notification-controller/releases/download/v1.8.4/notification-controller.crds.yaml",
-      "https://github.com/fluxcd/image-reflector-controller/releases/download/v1.1.1/image-reflector-controller.crds.yaml",
-      "https://github.com/fluxcd/image-automation-controller/releases/download/v1.1.2/image-automation-controller.crds.yaml"
+      "github.com/fluxcd/source-controller/api/v1",
+      "github.com/fluxcd/source-controller/api/v1beta2",
+      "github.com/fluxcd/kustomize-controller/api/v1",
+      "github.com/fluxcd/kustomize-controller/api/v1beta2",
+      "github.com/fluxcd/helm-controller/api/v2",
+      "github.com/fluxcd/notification-controller/api/v1",
+      "github.com/fluxcd/notification-controller/api/v1beta2",
+      "github.com/fluxcd/image-reflector-controller/api/v1",
+      "github.com/fluxcd/image-reflector-controller/api/v1beta2",
+      "github.com/fluxcd/image-automation-controller/api/v1",
+      "github.com/fluxcd/image-automation-controller/api/v1beta2"
     ],
     "output": "./gen"
   }
