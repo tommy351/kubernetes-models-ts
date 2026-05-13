@@ -47,5 +47,6 @@ use (
 	./third-party/tidb-operator
 	./third-party/traefik
 	./third-party/traefik/dynamic-ext
+	./third-party/velero
 	./third-party/victoria-metrics-operator
 )

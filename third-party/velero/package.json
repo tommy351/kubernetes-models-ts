@@ -1,0 +1,49 @@
+{
+  "name": "@kubernetes-models/velero",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Velero models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/velero",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "go-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "velero"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/go-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "go-generate": {
+    "input": [
+      "github.com/vmware-tanzu/velero/pkg/apis/velero/v1",
+      "github.com/vmware-tanzu/velero/pkg/apis/velero/v2alpha1"
+    ],
+    "output": "./gen"
+  }
+}
