@@ -24,6 +24,7 @@ use (
 	./third-party/jaeger-operator
 	./third-party/k8ssandra-operator
 	./third-party/kapp-controller
+	./third-party/karmada
 	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
