@@ -19,6 +19,7 @@ use (
 	./third-party/grafana-operator
 	./third-party/hierarchical-namespaces
 	./third-party/jaeger-operator
+	./third-party/k8ssandra-operator
 	./third-party/kapp-controller
 	./third-party/karpenter
 	./third-party/keda
