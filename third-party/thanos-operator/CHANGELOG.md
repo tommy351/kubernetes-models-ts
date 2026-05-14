@@ -1,5 +1,11 @@
 # @kubernetes-models/thanos-operator
 
+## 4.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`f5e8a7d`](https://github.com/tommy351/kubernetes-models-ts/commit/f5e8a7d1d3ec9b48abaaabf50ed7d36d5a9eac53) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

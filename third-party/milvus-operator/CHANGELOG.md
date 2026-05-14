@@ -1,5 +1,11 @@
 # @kubernetes-models/milvus-operator
 
+## 1.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`77028d2`](https://github.com/tommy351/kubernetes-models-ts/commit/77028d27bda8798513b0818c7694175badcc45b4) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 0.1.1
 
 ### Patch Changes

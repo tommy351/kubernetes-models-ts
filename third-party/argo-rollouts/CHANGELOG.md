@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-rollouts
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`fccd586`](https://github.com/tommy351/kubernetes-models-ts/commit/fccd5865ccf9207ce956932d565cf6f6159349d3) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

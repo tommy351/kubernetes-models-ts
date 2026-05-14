@@ -1,7 +1,7 @@
 {
   "name": "@kubernetes-models/tidb-operator",
   "description": "TiDB Operator models",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "type": "module",
   "repository": {
     "type": "git",

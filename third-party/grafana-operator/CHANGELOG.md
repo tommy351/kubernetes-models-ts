@@ -1,5 +1,11 @@
 # @kubernetes-models/grafana-operator
 
+## 4.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`7920965`](https://github.com/tommy351/kubernetes-models-ts/commit/792096588df674c9d3bb36ecf8661b4b66e77de9) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

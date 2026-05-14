@@ -1,5 +1,11 @@
 # @kubernetes-models/opentelemetry-operator
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`fc53978`](https://github.com/tommy351/kubernetes-models-ts/commit/fc539784d482a93ef7b96bbfc5e13dbf674561df) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

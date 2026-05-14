@@ -1,5 +1,11 @@
 # @kubernetes-models/longhorn
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`99b9db1`](https://github.com/tommy351/kubernetes-models-ts/commit/99b9db104e3e5ece7323e9613a9bcb88604b24a7) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

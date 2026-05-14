@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/elastic-cloud",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "type": "module",
   "description": "You Know, for Search.",
   "repository": {

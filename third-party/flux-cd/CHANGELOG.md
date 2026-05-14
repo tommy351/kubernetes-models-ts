@@ -1,5 +1,11 @@
 # @kubernetes-models/flux-cd
 
+## 4.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`0d674ae`](https://github.com/tommy351/kubernetes-models-ts/commit/0d674aee003390cbe20218fb9096d49c9e95b3ee) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate. The v1beta1 versions of source/kustomize/notification/image controllers are not part of the upstream Go API submodules at the targeted versions and have been dropped — current Flux versions consume v1 and v1beta2.
+
 ## 3.0.1
 
 ### Patch Changes

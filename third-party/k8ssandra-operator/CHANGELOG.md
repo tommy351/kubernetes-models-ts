@@ -1,5 +1,11 @@
 # @kubernetes-models/k8ssandra-operator
 
+## 2.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`08eaa0c`](https://github.com/tommy351/kubernetes-models-ts/commit/08eaa0cb765af56e72d61e4be387e8f0b634cb4c) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

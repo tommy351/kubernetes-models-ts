@@ -1,5 +1,11 @@
 # @kubernetes-models/pipelines-as-code
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`9037c13`](https://github.com/tommy351/kubernetes-models-ts/commit/9037c13cb22d56209e7152938fda775de90da223) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

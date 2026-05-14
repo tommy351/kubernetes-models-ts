@@ -1,5 +1,11 @@
 # @kubernetes-models/karpenter
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`03786a4`](https://github.com/tommy351/kubernetes-models-ts/commit/03786a462bddb7a5f6bc45a60e8df96cd5fc7346) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

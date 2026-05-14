@@ -1,5 +1,11 @@
 # @kubernetes-models/jaeger-operator
 
+## 4.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`a3572e7`](https://github.com/tommy351/kubernetes-models-ts/commit/a3572e7893fc3d69090ded6a160ddc0d9a8caa9b) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

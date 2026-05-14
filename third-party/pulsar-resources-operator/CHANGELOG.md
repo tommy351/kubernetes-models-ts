@@ -1,5 +1,11 @@
 # @kubernetes-models/pulsar-resources-operator
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`ab9a128`](https://github.com/tommy351/kubernetes-models-ts/commit/ab9a1288280ec924844181fe3c38b54a556f12d9) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

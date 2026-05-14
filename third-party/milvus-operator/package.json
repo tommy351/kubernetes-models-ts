@@ -1,6 +1,6 @@
 {
   "name": "@kubernetes-models/milvus-operator",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "type": "module",
   "description": "milvus-operator (Milvus Vector Database) models",
   "repository": {

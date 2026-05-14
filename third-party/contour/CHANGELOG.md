@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`5ed710b`](https://github.com/tommy351/kubernetes-models-ts/commit/5ed710bb038342ed63d3f6fc9f2a7e6e15c3057f) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate. This removes old CRD-generated APIs that are not present in the current Contour Go API packages, including `contour.heptio.com/v1beta1/IngressRoute`.
+
 ## 5.0.1
 
 ### Patch Changes

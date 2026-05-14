@@ -1,5 +1,11 @@
 # @kubernetes-models/smi
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`ff86cd1`](https://github.com/tommy351/kubernetes-models-ts/commit/ff86cd105b0e20dea65e085ef2fc61de77339080) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

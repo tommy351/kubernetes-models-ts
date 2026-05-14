@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-workflows
 
+## 2.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`34c8271`](https://github.com/tommy351/kubernetes-models-ts/commit/34c827177d4f59cf287c572dbf7d4928541d6772) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

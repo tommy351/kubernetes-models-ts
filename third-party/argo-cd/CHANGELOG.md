@@ -1,5 +1,11 @@
 # @kubernetes-models/argo-cd
 
+## 4.0.0
+
+### Major Changes
+
+- [#271](https://github.com/tommy351/kubernetes-models-ts/pull/271) [`0b2ea32`](https://github.com/tommy351/kubernetes-models-ts/commit/0b2ea321c37c825f42537c3b35484e649c0949a7) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 3.0.1
 
 ### Patch Changes

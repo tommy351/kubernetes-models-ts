@@ -1,5 +1,11 @@
 # @kubernetes-models/cloudnative-pg
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`264c76e`](https://github.com/tommy351/kubernetes-models-ts/commit/264c76ea5382871e7a925e7992c3c07493b52b29) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @kubernetes-models/hierarchical-namespaces
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`941e4f7`](https://github.com/tommy351/kubernetes-models-ts/commit/941e4f7a0c007e78b2eb3d0f7acf3d7d28b6e7f8) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes

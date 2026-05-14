@@ -1,5 +1,11 @@
 # @kubernetes-models/spiffe
 
+## 3.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`a1c2293`](https://github.com/tommy351/kubernetes-models-ts/commit/a1c2293d56832b1217aa63f1392af5be70a51fbb) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 2.0.1
 
 ### Patch Changes

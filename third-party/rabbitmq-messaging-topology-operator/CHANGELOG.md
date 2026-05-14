@@ -1,5 +1,11 @@
 # @kubernetes-models/rabbitmq-messaging-topology-operator
 
+## 2.0.0
+
+### Major Changes
+
+- [#269](https://github.com/tommy351/kubernetes-models-ts/pull/269) [`1ecb94c`](https://github.com/tommy351/kubernetes-models-ts/commit/1ecb94c75766da5ed48d8a9c7c0ba18fc11ca8d2) Thanks [@tommy351](https://github.com/tommy351)! - Migrate from crd-generate to go-generate.
+
 ## 1.0.1
 
 ### Patch Changes
