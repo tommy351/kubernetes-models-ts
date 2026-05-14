@@ -1,0 +1,50 @@
+{
+  "name": "@kubernetes-models/nvidia-gpu-operator",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "NVIDIA GPU Operator models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/nvidia-gpu-operator",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "nvidia",
+    "gpu",
+    "gpu-operator"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/NVIDIA/gpu-operator/v26.3.1/config/crd/bases/nvidia.com_clusterpolicies.yaml",
+      "https://raw.githubusercontent.com/NVIDIA/gpu-operator/v26.3.1/config/crd/bases/nvidia.com_nvidiadrivers.yaml"
+    ],
+    "output": "./gen"
+  }
+}

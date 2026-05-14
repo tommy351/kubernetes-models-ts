@@ -1,0 +1,65 @@
+{
+  "name": "@kubernetes-models/opa-gatekeeper",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "OPA Gatekeeper models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/opa-gatekeeper",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "gatekeeper",
+    "opa"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/assign-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/assignimage-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/assignmetadata-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/config-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/configpodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/connection-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/connectionpodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/constraintpodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/constrainttemplate-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/constrainttemplatepodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/expansiontemplate-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/expansiontemplatepodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/modifyset-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/mutatorpodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/provider-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/providerpodstatus-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/charts/gatekeeper/crds/syncset-customresourcedefinition.yaml",
+      "https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.22.2/config/crd/bases/gvkmanifest.gatekeeper.sh_gvkmanifests.yaml"
+    ],
+    "output": "./gen"
+  }
+}

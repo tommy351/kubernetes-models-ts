@@ -1,0 +1,70 @@
+{
+  "name": "@kubernetes-models/chaos-mesh",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Chaos Mesh models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/chaos-mesh",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "chaos-mesh",
+    "chaos-engineering"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_awschaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_azurechaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_blockchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_dnschaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_gcpchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_httpchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_iochaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_jvmchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_kernelchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_networkchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_physicalmachinechaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_physicalmachines.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_podchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_podhttpchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_podiochaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_podnetworkchaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_remoteclusters.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_schedules.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_statuschecks.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_stresschaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_timechaos.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_workflownodes.yaml",
+      "https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/v2.8.2/config/crd/bases/chaos-mesh.org_workflows.yaml"
+    ],
+    "output": "./gen"
+  }
+}

@@ -9,10 +9,14 @@ use (
 	./third-party/cert-manager
 	./third-party/cilium
 	./third-party/cloudnative-pg
+	./third-party/cluster-api
 	./third-party/contour
+	./third-party/crossplane
+	./third-party/dapr
 	./third-party/elastic-cloud
 	./third-party/envoy-gateway
 	./third-party/external-secrets
+	./third-party/external-snapshotter
 	./third-party/fission
 	./third-party/flux-cd
 	./third-party/gateway-api
@@ -22,13 +26,17 @@ use (
 	./third-party/jaeger-operator
 	./third-party/k8ssandra-operator
 	./third-party/kapp-controller
+	./third-party/karmada
 	./third-party/karpenter
 	./third-party/keda
 	./third-party/knative
 	./third-party/kubedb
+	./third-party/kueue
 	./third-party/kyverno
 	./third-party/longhorn
+	./third-party/metallb
 	./third-party/milvus-operator
+	./third-party/openkruise
 	./third-party/opentelemetry-operator
 	./third-party/pipelines-as-code
 	./third-party/prometheus-operator
@@ -46,5 +54,7 @@ use (
 	./third-party/tidb-operator
 	./third-party/traefik
 	./third-party/traefik/dynamic-ext
+	./third-party/vault-secrets-operator
+	./third-party/velero
 	./third-party/victoria-metrics-operator
 )

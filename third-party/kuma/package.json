@@ -1,0 +1,99 @@
+{
+  "name": "@kubernetes-models/kuma",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Kuma models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/kuma",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "kuma",
+    "service-mesh"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_circuitbreakers.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_containerpatches.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_dataplaneinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_dataplanes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_externalservices.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_faultinjections.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_healthchecks.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_hostnamegenerators.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshaccesslogs.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshcircuitbreakers.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshexternalservices.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshfaultinjections.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshgatewayconfigs.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshgatewayinstances.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshgatewayroutes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshgateways.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshhealthchecks.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshhttproutes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshidentities.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshloadbalancingstrategies.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshmetrics.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshmultizoneservices.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshpassthroughs.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshproxypatches.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshratelimits.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshretries.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshservices.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtcproutes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtimeouts.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtlses.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtraces.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtrafficpermissions.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_meshtrusts.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_proxytemplates.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_ratelimits.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_retries.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_serviceinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_timeouts.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_trafficlogs.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_trafficpermissions.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_trafficroutes.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_traffictraces.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_virtualoutbounds.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_workloads.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zoneegresses.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zoneegressinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zoneingresses.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zoneingressinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zoneinsights.yaml",
+      "https://raw.githubusercontent.com/kumahq/kuma/v2.13.5/deployments/charts/kuma/crds/kuma.io_zones.yaml"
+    ],
+    "output": "./gen"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "@kubernetes-models/tekton-pipelines",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Tekton Pipelines models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/tekton-pipelines",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "tekton",
+    "tekton-pipelines"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-customrun.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-pipeline.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-pipelinerun.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-resolutionrequest.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-stepaction.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-task.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-taskrun.yaml",
+      "https://raw.githubusercontent.com/tektoncd/pipeline/v1.12.0/config/300-crds/300-verificationpolicy.yaml"
+    ],
+    "output": "./gen"
+  }
+}

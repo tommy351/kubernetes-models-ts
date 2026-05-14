@@ -1,0 +1,61 @@
+{
+  "name": "@kubernetes-models/cluster-api",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Cluster API models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/cluster-api",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "go-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "cluster-api",
+    "capi"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/go-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "go-generate": {
+    "input": [
+      "sigs.k8s.io/cluster-api/api/core/v1beta1",
+      "sigs.k8s.io/cluster-api/api/core/v1beta2",
+      "sigs.k8s.io/cluster-api/api/addons/v1beta1",
+      "sigs.k8s.io/cluster-api/api/addons/v1beta2",
+      "sigs.k8s.io/cluster-api/api/ipam/v1alpha1",
+      "sigs.k8s.io/cluster-api/api/ipam/v1beta1",
+      "sigs.k8s.io/cluster-api/api/ipam/v1beta2",
+      "sigs.k8s.io/cluster-api/api/runtime/v1alpha1",
+      "sigs.k8s.io/cluster-api/api/runtime/v1beta2",
+      "sigs.k8s.io/cluster-api/api/bootstrap/kubeadm/v1beta1",
+      "sigs.k8s.io/cluster-api/api/bootstrap/kubeadm/v1beta2",
+      "sigs.k8s.io/cluster-api/api/controlplane/kubeadm/v1beta1",
+      "sigs.k8s.io/cluster-api/api/controlplane/kubeadm/v1beta2"
+    ],
+    "output": "./gen"
+  }
+}

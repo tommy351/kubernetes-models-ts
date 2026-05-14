@@ -1,0 +1,58 @@
+{
+  "name": "@kubernetes-models/karmada",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Karmada models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/karmada",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "go-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "karmada",
+    "multi-cluster"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/go-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "go-generate": {
+    "input": [
+      "github.com/karmada-io/karmada/pkg/apis/apps/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/autoscaling/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/cluster/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/config/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/networking/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/policy/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/remedy/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/search/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/work/v1alpha1",
+      "github.com/karmada-io/karmada/pkg/apis/work/v1alpha2"
+    ],
+    "output": "./gen"
+  }
+}

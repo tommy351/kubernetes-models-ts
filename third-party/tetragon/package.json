@@ -1,0 +1,52 @@
+{
+  "name": "@kubernetes-models/tetragon",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Tetragon CRD models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/tetragon",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "tetragon",
+    "cilium",
+    "ebpf",
+    "security"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/cilium/tetragon/v1.7.0/install/kubernetes/tetragon/crds-yaml/cilium.io_tracingpolicies.yaml",
+      "https://raw.githubusercontent.com/cilium/tetragon/v1.7.0/install/kubernetes/tetragon/crds-yaml/cilium.io_tracingpoliciesnamespaced.yaml",
+      "https://raw.githubusercontent.com/cilium/tetragon/v1.7.0/install/kubernetes/tetragon/crds-yaml/cilium.io_podinfo.yaml"
+    ],
+    "output": "./gen"
+  }
+}

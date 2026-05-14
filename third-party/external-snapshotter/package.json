@@ -1,0 +1,52 @@
+{
+  "name": "@kubernetes-models/external-snapshotter",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Kubernetes CSI external-snapshotter models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/external-snapshotter",
+  "author": "Tommy Chen <tommy@dcard.cc>",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "go-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": true
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "external-snapshotter",
+    "csi",
+    "volume-snapshot"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "kubernetes-models": "workspace:^"
+  },
+  "devDependencies": {
+    "@kubernetes-models/go-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^",
+    "vitest": "^4.1.5"
+  },
+  "go-generate": {
+    "input": [
+      "github.com/kubernetes-csi/external-snapshotter/client/v8/apis/volumesnapshot/v1",
+      "github.com/kubernetes-csi/external-snapshotter/client/v8/apis/volumegroupsnapshot/v1beta1",
+      "github.com/kubernetes-csi/external-snapshotter/client/v8/apis/volumegroupsnapshot/v1beta2"
+    ],
+    "output": "./gen"
+  }
+}
