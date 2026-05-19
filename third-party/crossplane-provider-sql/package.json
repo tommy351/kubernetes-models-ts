@@ -1,0 +1,63 @@
+{
+  "name": "@kubernetes-models/crossplane-provider-sql",
+  "version": "0.7.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kubernetes-models-ts.git"
+  },
+  "homepage": "https://github.com/tommy351/kubernetes-models-ts/tree/master/third-party/crossplane-provider-sql",
+  "author": "Alex Bowers",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "crd-generate && publish-scripts build",
+    "prepack": "publish-scripts prepack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "kubernetes",
+    "kubernetes-models",
+    "crossplane-provider-sql"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@kubernetes-models/apimachinery": "workspace:^",
+    "@kubernetes-models/base": "workspace:^",
+    "@kubernetes-models/validate": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@kubernetes-models/crd-generate": "workspace:^",
+    "@kubernetes-models/publish-scripts": "workspace:^"
+  },
+  "crd-generate": {
+    "input": [
+      "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crossplane.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mssql.sql.crossplane.io_databases.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mssql.sql.crossplane.io_grants.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mssql.sql.crossplane.io_providerconfigs.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mssql.sql.crossplane.io_providerconfigusages.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mssql.sql.crossplane.io_users.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mysql.sql.crossplane.io_databases.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mysql.sql.crossplane.io_grants.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mysql.sql.crossplane.io_providerconfigs.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mysql.sql.crossplane.io_providerconfigusages.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/mysql.sql.crossplane.io_users.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_databases.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_extensions.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_grants.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_providerconfigs.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_providerconfigusages.yaml",
+        "https://raw.githubusercontent.com/crossplane-contrib/provider-sql/v0.7.0/package/crds/postgresql.sql.crossplane.io_roles.yaml"
+    ],
+    "output": "./gen"
+  }
+}
