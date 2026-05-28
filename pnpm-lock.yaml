@@ -84,8 +84,8 @@ importers:
         specifier: ^14.3.0
         version: 14.3.0
       turbo:
-        specifier: ^2.2.3
-        version: 2.9.6
+        specifier: ^2.9.14
+        version: 2.9.14
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -113,7 +113,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
 
   core/validate:
     dependencies:
@@ -138,7 +138,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     optionalDependencies:
       re2-wasm:
         specifier: ^1.0.2
@@ -211,7 +211,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   internal/diff-crd-inputs:
@@ -306,7 +306,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/argo-rollouts:
@@ -332,7 +332,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/argo-workflows:
@@ -358,7 +358,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/autoscaler:
@@ -384,7 +384,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/cert-manager:
@@ -413,7 +413,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/cilium:
@@ -439,7 +439,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/clickhouse:
@@ -477,7 +477,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/cloudnative-pg:
@@ -503,7 +503,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/contour:
@@ -529,7 +529,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/elastic-cloud:
@@ -555,7 +555,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/envoy-gateway:
@@ -584,7 +584,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/external-secrets:
@@ -610,7 +610,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/fission:
@@ -636,7 +636,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/flagger:
@@ -674,7 +674,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/flink:
@@ -697,7 +697,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/flux-cd:
@@ -723,7 +723,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/gateway-api:
@@ -749,7 +749,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/gke:
@@ -787,7 +787,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
       yaml:
         specifier: ^2.2.2
         version: 2.8.3
@@ -816,7 +816,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/grafana-operator:
@@ -845,7 +845,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/hierarchical-namespaces:
@@ -871,7 +871,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/istio:
@@ -894,7 +894,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/jaeger-operator:
@@ -920,7 +920,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/k8ssandra-operator:
@@ -946,7 +946,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/kapp-controller:
@@ -972,7 +972,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/karpenter:
@@ -998,7 +998,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/keda:
@@ -1024,7 +1024,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/knative:
@@ -1050,7 +1050,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/kubedb:
@@ -1076,7 +1076,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/kyverno:
@@ -1102,7 +1102,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/linkerd:
@@ -1143,7 +1143,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/longhorn:
@@ -1169,7 +1169,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/milvus-operator:
@@ -1195,7 +1195,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/nats:
@@ -1218,7 +1218,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/opentelemetry-operator:
@@ -1244,7 +1244,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/pipelines-as-code:
@@ -1270,7 +1270,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/postgres-operator:
@@ -1293,7 +1293,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/prometheus-operator:
@@ -1319,7 +1319,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/pulsar-resources-operator:
@@ -1345,7 +1345,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/rabbitmq-cluster-operator:
@@ -1371,7 +1371,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/rabbitmq-messaging-topology-operator:
@@ -1397,7 +1397,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/redis-operator:
@@ -1423,7 +1423,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/sealed-secrets:
@@ -1449,7 +1449,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/seldon-core-operator:
@@ -1475,7 +1475,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/shipwright:
@@ -1501,7 +1501,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/smi:
@@ -1527,7 +1527,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/spicedb:
@@ -1553,7 +1553,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/spiffe:
@@ -1579,7 +1579,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/strimzi-kafka-operator:
@@ -1602,7 +1602,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/thanos-operator:
@@ -1628,7 +1628,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/tidb-operator:
@@ -1654,7 +1654,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/traefik:
@@ -1680,7 +1680,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   third-party/victoria-metrics-operator:
@@ -1709,7 +1709,7 @@ importers:
         version: link:../../internal/publish-scripts
       vitest:
         specifier: ^4.1.5
-        version: 4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3))
+        version: 4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
     publishDirectory: dist
 
   utils/crd-generate:
@@ -2026,6 +2026,9 @@ packages:
   '@oxc-project/types@0.127.0':
     resolution: {integrity: sha512-aIYXQBo4lCbO4z0R3FHeucQHpF46l2LbMdxRvqvuRuW2OxdnSkcng5B8+K12spgLDj93rtN3+J2Vac/TIO+ciQ==}
 
+  '@oxc-project/types@0.132.0':
+    resolution: {integrity: sha512-FESMOxil5Se014ui/Eq8fT5uHJo6nIRwH0PfJrZJXs6Gek3ZVFOrpUv3YIZT20m+extU98Hg1Ym72U58rlsxUQ==}
+
   '@package-json/types@0.0.12':
     resolution: {integrity: sha512-uu43FGU34B5VM9mCNjXCwLaGHYjXdNincqKLaraaCW+7S2+SmiBg1Nv8bPnmschrIfZmfKNY9f3fC376MRrObw==}
 
@@ -2039,8 +2042,20 @@ packages:
     cpu: [arm64]
     os: [android]
 
+  '@rolldown/binding-android-arm64@1.0.2':
+    resolution: {integrity: sha512-ZS4D1JPGn/MYQN/SYDWftIE/nVsM8j/AFOYEzAoOE2O3NktQOZru+/vYXGbR/qtdLdIfGCP0lcoJiYVzsEz+iQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [android]
+
   '@rolldown/binding-darwin-arm64@1.0.0-rc.17':
     resolution: {integrity: sha512-4ksWc9n0mhlZpZ9PMZgTGjeOPRu8MB1Z3Tz0Mo02eWfWCHMW1zN82Qz/pL/rC+yQa+8ZnutMF0JjJe7PjwasYw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rolldown/binding-darwin-arm64@1.0.2':
+    resolution: {integrity: sha512-vdFA9+C/rekyGce7WqHs/xoT0ioZEWaOFyZLIV1mEeNFaFDUQrPIo8Vs2GvJ6eetb3rzDUtUBgzto3ExpXJB3w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
@@ -2051,8 +2066,20 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@rolldown/binding-darwin-x64@1.0.2':
+    resolution: {integrity: sha512-BewSOwTHazv77DTYiAZXSqqKZ4KP/KonFisDMVU7PImxoWfB2aepnPhd2E4SWz3zDzYgDNbs6jBmTdgNnF02GA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [darwin]
+
   '@rolldown/binding-freebsd-x64@1.0.0-rc.17':
     resolution: {integrity: sha512-hwnz3nw9dbJ05EDO/PvcjaaewqqDy7Y1rn1UO81l8iIK1GjenME75dl16ajbvSSMfv66WXSRCYKIqfgq2KCfxw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@rolldown/binding-freebsd-x64@1.0.2':
+    resolution: {integrity: sha512-m41o7M0YWtUdqk61Tb+jnKb2rN++iRdIASlExkUoKfIAH30DOHCB8fVLzSUpbWHHU8esmEioY62PxzexE8MBuA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
@@ -2063,8 +2090,21 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.2':
+    resolution: {integrity: sha512-jcojB9H7W/jS29pMKWAK1N+fU99vXodHDTatS3b3y/XSOCiHo0kkA74pL3jJmkoQtYpOCxDvaKs1fo2Ij/1X5w==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
   '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.17':
     resolution: {integrity: sha512-e6usGaHKW5BMNZOymS1UcEYGowQMWcgZ71Z17Sl/h2+ZziNJ1a9n3Zvcz6LdRyIW5572wBCTH/Z+bKuZouGk9Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rolldown/binding-linux-arm64-gnu@1.0.2':
+    resolution: {integrity: sha512-1jn6qDU5iiOgFgygDzKUuKP0maTi0/f1+sBLgvij/76C77Nm3ts6ufz9Bjg5q5dduxiUIxtq86JIoBvo1xQ4Ig==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
@@ -2077,8 +2117,22 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@rolldown/binding-linux-arm64-musl@1.0.2':
+    resolution: {integrity: sha512-QVLO/czFMdoMFSqlX3bcswcJNm/23r+qoa/jgtmFc/qEp6/jXmIkDjF/XIo8dPfGaiwy1xfQn8o77L79GeXFgw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.17':
     resolution: {integrity: sha512-4EII1iNGRUN5WwGbF/kOh/EIkoDN9HsupgLQoXfY+D1oyJm7/F4t5PYU5n8SWZgG0FEwakyM8pGgwcBYruGTlA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rolldown/binding-linux-ppc64-gnu@1.0.2':
+    resolution: {integrity: sha512-hgO5Abm0w5UL6FEa2iFnZqo2KlK7TQ5QhV5x09hujBf7t5KzHQ1VmfPuTpqRy/rNlSxua3eWH374xxiVrP+lcA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
@@ -2091,8 +2145,22 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@rolldown/binding-linux-s390x-gnu@1.0.2':
+    resolution: {integrity: sha512-fy8rXxuYEu602abC8MUNaPjYLIFzReOaEIEMKMUa0rFEUxNpVXhs15KSSQ4qlqSaM7B6rcj9rDZgADh/IGDzLQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.17':
     resolution: {integrity: sha512-cLnjV3xfo7KslbU41Z7z8BH/E1y5mzUYzAqih1d1MDaIGZRCMqTijqLv76/P7fyHuvUcfGsIpqCdddbxLLK9rA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rolldown/binding-linux-x64-gnu@1.0.2':
+    resolution: {integrity: sha512-0+bOkiQ779+r1WpoHOWHqncvyySci0vKph+myNDYb+im6meJAzHQXay6oEgnkHuUGouM1LKTZwqKpBow6Kj7CQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -2105,8 +2173,21 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@rolldown/binding-linux-x64-musl@1.0.2':
+    resolution: {integrity: sha512-mjSkrzZK5Qsl0a9d1JgILOiuZOSDTVdKENcSXBoqbzSrspLR/4/IRVDo5wd2GgZjNss/viBFJdeq+j7qH2nypw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@rolldown/binding-openharmony-arm64@1.0.0-rc.17':
     resolution: {integrity: sha512-0ag/hEgXOwgw4t8QyQvUCxvEg+V0KBcA6YuOx9g0r02MprutRF5dyljgm3EmR02O292UX7UeS6HzWHAl6KgyhA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
+  '@rolldown/binding-openharmony-arm64@1.0.2':
+    resolution: {integrity: sha512-1v5vHasdfQAZoEHakBV72LIFAC9JjnymsiKxp+GEr/ma3+NJCPSaYK+qavInOovJkgwFrs7GccX2d6IgDA3Z5w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
@@ -2116,8 +2197,19 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [wasm32]
 
+  '@rolldown/binding-wasm32-wasi@1.0.2':
+    resolution: {integrity: sha512-mb1VobWn6NheziTk5/WEaR6AKVbrwT5sOi6C7zk3gy/pD1qtJfU1j4PgTo2NJnOtbL9Dl3Aeei8w9jJ7qC2jZQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [wasm32]
+
   '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.17':
     resolution: {integrity: sha512-gUmyzBl3SPMa6hrqFUth9sVfcLBlYsbMzBx5PlexMroZStgzGqlZ26pYG89rBb45Mnia+oil6YAIFeEWGWhoZA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rolldown/binding-win32-arm64-msvc@1.0.2':
+    resolution: {integrity: sha512-SqKonF56vA/L2yHwHYcEp2P34URpOZ7d1fS635cTkpDnUtEGdUbhI6NzsPdqeSWvAAeGDrxjWjNmibDIdFf9/A==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [win32]
@@ -2128,8 +2220,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@rolldown/binding-win32-x64-msvc@1.0.2':
+    resolution: {integrity: sha512-v7qRI7gXLRINcOGXt+7YmAZ6iFuyZVMIoXAxhd8oP+DR9dLfL9GfNIx7PLMxmhZdvq8waUJBQiWN9EKNy+TRBQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
   '@rolldown/pluginutils@1.0.0-rc.17':
     resolution: {integrity: sha512-n8iosDOt6Ig1UhJ2AYqoIhHWh/isz0xpicHTzpKBeotdVsTEcxsSA/i3EVM7gQAj0rU27OLAxCjzlj15IWY7bg==}
+
+  '@rolldown/pluginutils@1.0.1':
+    resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -2240,33 +2341,33 @@ packages:
   '@tsconfig/node22@22.0.5':
     resolution: {integrity: sha512-hLf2ld+sYN/BtOJjHUWOk568dvjFQkHnLNa6zce25GIH+vxKfvTgm3qpaH6ToF5tu/NN0IH66s+Bb5wElHrLcw==}
 
-  '@turbo/darwin-64@2.9.6':
-    resolution: {integrity: sha512-X/56SnVXIQZBLKwniGTwEQTGmtE5brSACnKMBWpY3YafuxVYefrC2acamfjgxP7BG5w3I+6jf0UrLoSzgPcSJg==}
+  '@turbo/darwin-64@2.9.14':
+    resolution: {integrity: sha512-t7QiPflaEyBE4oayeZtSmu4mEfjgIrcNlNNl1z1dmIVPqEdtA7+CfTf8d7KXsOGPh6aNgWjKxyvQg9uGfDQF+A==}
     cpu: [x64]
     os: [darwin]
 
-  '@turbo/darwin-arm64@2.9.6':
-    resolution: {integrity: sha512-aalBeSl4agT/QtYGDyf/XLajedWzUC9Vg/pm/YO6QQ93vkQ91Vz5uK1ta5RbVRDozQSz4njxUNqRNmOXDzW+qw==}
+  '@turbo/darwin-arm64@2.9.14':
+    resolution: {integrity: sha512-d23147mC9BsCPA9mJ0h/ubcpbRgcJBXbcG3+Vq7YLhjz3IXuvQsJ1UXH8f4MD76ZjJ4m/E4aRdJV+MW88CDfbw==}
     cpu: [arm64]
     os: [darwin]
 
-  '@turbo/linux-64@2.9.6':
-    resolution: {integrity: sha512-YKi05jnNHaD7vevgYwahpzGwbsNNTwzU2c7VZdmdFm7+cGDP4oREUWSsainiMfRqjRuolQxBwRn8wf1jmu+YZA==}
+  '@turbo/linux-64@2.9.14':
+    resolution: {integrity: sha512-P3ZKB5tuUDdDQWuAsACGUR1qv9W7BNWxdxqVJ0kZNuNNPRaVYTPPikLcp79+GiEcW3npsR+KyP38lnQiBc5aSA==}
     cpu: [x64]
     os: [linux]
 
-  '@turbo/linux-arm64@2.9.6':
-    resolution: {integrity: sha512-02o/ZS69cOYEDczXvOB2xmyrtzjQ2hVFtWZK1iqxXUfzMmTjZK4UumrfNnjckSg+gqeBfnPRHa0NstA173Ik3g==}
+  '@turbo/linux-arm64@2.9.14':
+    resolution: {integrity: sha512-ZRTlzcUMrrPv9ZuDzRF9n60Ym13bKeG9jDB8WjxyLhWNzV+AJQN+zdpIk3NJYf2zQsGUm1mNar2P0elRzLw25g==}
     cpu: [arm64]
     os: [linux]
 
-  '@turbo/windows-64@2.9.6':
-    resolution: {integrity: sha512-wVdQjvnBI15wB6JrA+43CtUtagjIMmX6XYO758oZHAsCNSxqRlJtdyujih0D8OCnwCRWiGWGI63zAxR0hO6s9g==}
+  '@turbo/windows-64@2.9.14':
+    resolution: {integrity: sha512-exanwN6sIduZwykYeiTQj8kCmOhazP5WOz3bvXMcYtjhL6Z3iRWLewKrXCBq0bqwSP3iBMb/AerRCnHI4lx46A==}
     cpu: [x64]
     os: [win32]
 
-  '@turbo/windows-arm64@2.9.6':
-    resolution: {integrity: sha512-1XUUyWW0W6FTSqGEhU8RHVqb2wP1SPkr7hIvBlMEwH9jr+sJQK5kqeosLJ/QaUv4ecSAd1ZhIrLoW7qslAzT4A==}
+  '@turbo/windows-arm64@2.9.14':
+    resolution: {integrity: sha512-fVdCsnmYoKICsycbWuuGp6Jvi51/3G/UluFWuAUCvR8PIW5IJkAk5BM9UF8PSm0Q2IphWHFZjYEgjHsh3B9y/g==}
     cpu: [arm64]
     os: [win32]
 
@@ -3659,6 +3760,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@3.3.12:
+    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
   napi-postinstall@0.3.4:
     resolution: {integrity: sha512-PHI5f1O0EP5xJ9gQmFGMS6IZcrVvTjpXjz7Na41gTE7eE2hK11lg04CECCYEEjdc17EV4DO+fkGEtt7TpTaTiQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
@@ -3848,6 +3954,10 @@ packages:
     resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
+    engines: {node: ^10 || ^12 || >=14}
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -3951,6 +4061,11 @@ packages:
 
   rolldown@1.0.0-rc.17:
     resolution: {integrity: sha512-ZrT53oAKrtA4+YtBWPQbtPOxIbVDbxT0orcYERKd63VJTF13zPcgXTvD4843L8pcsI7M6MErt8QtON6lrB9tyA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+
+  rolldown@1.0.2:
+    resolution: {integrity: sha512-oZx5zVDtVB44AW3eaifgDml1gWRDZGvjcfdxonE4swNPG98PrrXjaO/KrnUjzlMnztCCRVlUueA1kCXhARGk6g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -4256,8 +4371,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  turbo@2.9.6:
-    resolution: {integrity: sha512-+v2QJey7ZUeUiuigkU+uFfklvNUyPI2VO2vBpMYJA+a1hKFLFiKtUYlRHdb3P9CrAvMzi0upbjI4WT+zKtqkBg==}
+  turbo@2.9.14:
+    resolution: {integrity: sha512-BQqXRr4UoWI3UPFrtznCLykYHxwxWh53iCB57x092jPMjIlW1wnm3N895g5irpiXmnxUhREBB0n6+y8BHhs4nw==}
     hasBin: true
 
   type-check@0.4.0:
@@ -4327,6 +4442,49 @@ packages:
     peerDependencies:
       '@types/node': ^20.19.0 || >=22.12.0
       '@vitejs/devtools': ^0.1.0
+      esbuild: ^0.27.0 || ^0.28.0
+      jiti: '>=1.21.0'
+      less: ^4.0.0
+      sass: ^1.70.0
+      sass-embedded: ^1.70.0
+      stylus: '>=0.54.8'
+      sugarss: ^5.0.0
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      '@vitejs/devtools':
+        optional: true
+      esbuild:
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
+  vite@8.0.14:
+    resolution: {integrity: sha512-s4BJJ+5y1pYL6Otw51FHhVJQhPnuRinKig64g/1+EUNaJsd3gCKdD31IPFvswUgW9/60QT9oFHbZHbQK5imcxw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^20.19.0 || >=22.12.0
+      '@vitejs/devtools': ^0.1.18
       esbuild: ^0.27.0 || ^0.28.0
       jiti: '>=1.21.0'
       less: ^4.0.0
@@ -4783,6 +4941,8 @@ snapshots:
 
   '@oxc-project/types@0.127.0': {}
 
+  '@oxc-project/types@0.132.0': {}
+
   '@package-json/types@0.0.12': {}
 
   '@pkgr/core@0.2.9': {}
@@ -4790,37 +4950,73 @@ snapshots:
   '@rolldown/binding-android-arm64@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-android-arm64@1.0.2':
+    optional: true
+
   '@rolldown/binding-darwin-arm64@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-darwin-arm64@1.0.2':
     optional: true
 
   '@rolldown/binding-darwin-x64@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-darwin-x64@1.0.2':
+    optional: true
+
   '@rolldown/binding-freebsd-x64@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-freebsd-x64@1.0.2':
     optional: true
 
   '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.2':
+    optional: true
+
   '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-linux-arm64-gnu@1.0.2':
     optional: true
 
   '@rolldown/binding-linux-arm64-musl@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-linux-arm64-musl@1.0.2':
+    optional: true
+
   '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-linux-ppc64-gnu@1.0.2':
     optional: true
 
   '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-linux-s390x-gnu@1.0.2':
+    optional: true
+
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-linux-x64-gnu@1.0.2':
     optional: true
 
   '@rolldown/binding-linux-x64-musl@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-linux-x64-musl@1.0.2':
+    optional: true
+
   '@rolldown/binding-openharmony-arm64@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-openharmony-arm64@1.0.2':
     optional: true
 
   '@rolldown/binding-wasm32-wasi@1.0.0-rc.17':
@@ -4830,13 +5026,28 @@ snapshots:
       '@napi-rs/wasm-runtime': 1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     optional: true
 
+  '@rolldown/binding-wasm32-wasi@1.0.2':
+    dependencies:
+      '@emnapi/core': 1.10.0
+      '@emnapi/runtime': 1.10.0
+      '@napi-rs/wasm-runtime': 1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+    optional: true
+
   '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.17':
+    optional: true
+
+  '@rolldown/binding-win32-arm64-msvc@1.0.2':
     optional: true
 
   '@rolldown/binding-win32-x64-msvc@1.0.0-rc.17':
     optional: true
 
+  '@rolldown/binding-win32-x64-msvc@1.0.2':
+    optional: true
+
   '@rolldown/pluginutils@1.0.0-rc.17': {}
+
+  '@rolldown/pluginutils@1.0.1': {}
 
   '@sec-ant/readable-stream@0.4.1': {}
 
@@ -4908,22 +5119,22 @@ snapshots:
 
   '@tsconfig/node22@22.0.5': {}
 
-  '@turbo/darwin-64@2.9.6':
+  '@turbo/darwin-64@2.9.14':
     optional: true
 
-  '@turbo/darwin-arm64@2.9.6':
+  '@turbo/darwin-arm64@2.9.14':
     optional: true
 
-  '@turbo/linux-64@2.9.6':
+  '@turbo/linux-64@2.9.14':
     optional: true
 
-  '@turbo/linux-arm64@2.9.6':
+  '@turbo/linux-arm64@2.9.14':
     optional: true
 
-  '@turbo/windows-64@2.9.6':
+  '@turbo/windows-64@2.9.14':
     optional: true
 
-  '@turbo/windows-arm64@2.9.6':
+  '@turbo/windows-arm64@2.9.14':
     optional: true
 
   '@tybys/wasm-util@0.10.1':
@@ -5162,6 +5373,14 @@ snapshots:
       magic-string: 0.30.21
     optionalDependencies:
       vite: 8.0.10(@types/node@25.6.0)(yaml@2.8.3)
+
+  '@vitest/mocker@4.1.5(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))':
+    dependencies:
+      '@vitest/spy': 4.1.5
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 8.0.14(@types/node@25.6.0)(yaml@2.8.3)
 
   '@vitest/pretty-format@4.1.5':
     dependencies:
@@ -6375,6 +6594,8 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  nanoid@3.3.12: {}
+
   napi-postinstall@0.3.4: {}
 
   natural-compare@1.4.0: {}
@@ -6542,6 +6763,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  postcss@8.5.15:
+    dependencies:
+      nanoid: 3.3.12
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   prelude-ls@1.2.1: {}
 
   prettier-linter-helpers@1.0.1:
@@ -6658,6 +6885,27 @@ snapshots:
       '@rolldown/binding-wasm32-wasi': 1.0.0-rc.17
       '@rolldown/binding-win32-arm64-msvc': 1.0.0-rc.17
       '@rolldown/binding-win32-x64-msvc': 1.0.0-rc.17
+
+  rolldown@1.0.2:
+    dependencies:
+      '@oxc-project/types': 0.132.0
+      '@rolldown/pluginutils': 1.0.1
+    optionalDependencies:
+      '@rolldown/binding-android-arm64': 1.0.2
+      '@rolldown/binding-darwin-arm64': 1.0.2
+      '@rolldown/binding-darwin-x64': 1.0.2
+      '@rolldown/binding-freebsd-x64': 1.0.2
+      '@rolldown/binding-linux-arm-gnueabihf': 1.0.2
+      '@rolldown/binding-linux-arm64-gnu': 1.0.2
+      '@rolldown/binding-linux-arm64-musl': 1.0.2
+      '@rolldown/binding-linux-ppc64-gnu': 1.0.2
+      '@rolldown/binding-linux-s390x-gnu': 1.0.2
+      '@rolldown/binding-linux-x64-gnu': 1.0.2
+      '@rolldown/binding-linux-x64-musl': 1.0.2
+      '@rolldown/binding-openharmony-arm64': 1.0.2
+      '@rolldown/binding-wasm32-wasi': 1.0.2
+      '@rolldown/binding-win32-arm64-msvc': 1.0.2
+      '@rolldown/binding-win32-x64-msvc': 1.0.2
 
   run-parallel@1.2.0:
     dependencies:
@@ -6966,14 +7214,14 @@ snapshots:
   tslib@2.8.1:
     optional: true
 
-  turbo@2.9.6:
+  turbo@2.9.14:
     optionalDependencies:
-      '@turbo/darwin-64': 2.9.6
-      '@turbo/darwin-arm64': 2.9.6
-      '@turbo/linux-64': 2.9.6
-      '@turbo/linux-arm64': 2.9.6
-      '@turbo/windows-64': 2.9.6
-      '@turbo/windows-arm64': 2.9.6
+      '@turbo/darwin-64': 2.9.14
+      '@turbo/darwin-arm64': 2.9.14
+      '@turbo/linux-64': 2.9.14
+      '@turbo/linux-arm64': 2.9.14
+      '@turbo/windows-64': 2.9.14
+      '@turbo/windows-arm64': 2.9.14
 
   type-check@0.4.0:
     dependencies:
@@ -7085,6 +7333,18 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.8.3
 
+  vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3):
+    dependencies:
+      lightningcss: 1.32.0
+      picomatch: 4.0.4
+      postcss: 8.5.15
+      rolldown: 1.0.2
+      tinyglobby: 0.2.16
+    optionalDependencies:
+      '@types/node': 25.6.0
+      fsevents: 2.3.3
+      yaml: 2.8.3
+
   vitest@4.1.5(@types/node@25.6.0)(vite@8.0.10(@types/node@25.6.0)(yaml@2.8.3)):
     dependencies:
       '@vitest/expect': 4.1.5
@@ -7106,6 +7366,33 @@ snapshots:
       tinyglobby: 0.2.16
       tinyrainbow: 3.1.0
       vite: 8.0.10(@types/node@25.6.0)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 25.6.0
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.5(@types/node@25.6.0)(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.5
+      '@vitest/mocker': 4.1.5(vite@8.0.14(@types/node@25.6.0)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.5
+      '@vitest/runner': 4.1.5
+      '@vitest/snapshot': 4.1.5
+      '@vitest/spy': 4.1.5
+      '@vitest/utils': 4.1.5
+      es-module-lexer: 2.1.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.1.1
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.0.14(@types/node@25.6.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.6.0
