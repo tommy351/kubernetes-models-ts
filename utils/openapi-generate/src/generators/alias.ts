@@ -7,7 +7,7 @@ import {
   type OutputFile,
 } from "@kubernetes-models/generate";
 import { Context } from "../context.js";
-import { getRelativePath } from "../utils.js";
+import { getRelativePath, trimExtname } from "../utils.js";
 
 function getIndexPath(key: string): string {
   return [key, "index.ts"].filter(Boolean).join("/");
@@ -40,7 +40,7 @@ export default function ({ getDefinitionPath }: Context): Generator {
 
           output.push({
             path: aliasPath,
-            content: `export * from "${getRelativePath(aliasPath, defPath)}/index.js";`,
+            content: `export * from "${getRelativePath(aliasPath, trimExtname(defPath))}.js";`,
           });
         }
       }
